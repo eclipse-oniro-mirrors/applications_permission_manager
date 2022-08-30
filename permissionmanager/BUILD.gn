@@ -1,15 +1,16 @@
 import("//build/ohos.gni")
 
-ohos_hap("pm_really") {
+ohos_hap("permission_manager") {
   hap_profile = "src/main/module.json"
   deps = [
     ":permission_manager_js_assets",
     ":permission_manager_resources",
   ]
-  certificate_profile = "../signature/pm_5.p7b"
-  hap_name = "pm_really"
+  certificate_profile = "../signature/pm.p7b"
+  hap_name = "permission_manager"
   part_name = "prebuilt_hap"
   subsystem_name = "applications"
+  js_build_mode = "debug"
 }
 
 ohos_app_scope("permission_manager_app_profile") {

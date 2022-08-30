@@ -6,10 +6,11 @@ ohos_hap("pm") {
     ":permission_manager_js_assets",
     ":permission_manager_resources",
   ]
-  certificate_profile = "signature/pm_5.p7b"
+  certificate_profile = "signature/pm.p7b"
   hap_name = "pm"
   part_name = "prebuilt_hap"
   subsystem_name = "applications"
+  js_build_mode = "debug"
 }
 
 ohos_app_scope("permission_manager_app_profile") {

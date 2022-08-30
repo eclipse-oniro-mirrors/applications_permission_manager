@@ -26,15 +26,6 @@
     "signingConfigs": [
       {
         "name": "default",
-        "material": {
-          "storePassword": "00000018696E371C175AF00C64950E33E3CC1A8BAF912DDF5AFF91F37C54F75068F765867F383828",
-          "certpath": "C:/Users/shuling/Desktop/pm/pm/pm.cer",
-          "keyAlias": "pm",
-          "keyPassword": "0000001838E443A71A0A95663A34E7D49B8D1BF20E20A97E8F11050CE5E3C5FFD11CBF738EBDA6B9",
-          "profile": "C:/Users/shuling/Desktop/pm/pm/pm_5.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:/Users/shuling/Desktop/pm/pm/pm.p12"
-        }
       }
     ]
   },

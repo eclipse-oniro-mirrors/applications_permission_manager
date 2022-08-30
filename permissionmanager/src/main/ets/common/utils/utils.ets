@@ -26,10 +26,9 @@ import Constants from '../utils/constant';
  */
 export function getAppLabel(labelId, bundleName) {
   return new Promise((resolve) => {
-    Resmgr.getResourceManager(globalThis.context, bundleName).then(item => {
-      item.getString(labelId, (error, value) => {
-        resolve(value);
-      })
+    let context = globalThis.context.createBundleContext(bundleName)
+    context.resourceManager.getString(labelId).then(value => {
+      resolve(value);
     }).catch(error => {
       console.error('Resmgr.getResourceManager failed. Cause: ' + JSON.stringify(error));
     })
@@ -43,10 +42,9 @@ export function getAppLabel(labelId, bundleName) {
  */
 export function getAppIcon(iconId, bundleName) {
   return new Promise((resolve) => {
-    Resmgr.getResourceManager(globalThis.context, bundleName).then(item => {
-      item.getMediaBase64(iconId, (error, value) => {
-        resolve(value);
-      })
+    let context = globalThis.context.createBundleContext(bundleName)
+    context.resourceManager.getMediaBase64(iconId).then(value => {
+      resolve(value);
     }).catch(error => {
       console.error('Resmgr.getResourceManager failed. Cause: ' + JSON.stringify(error));
     })
