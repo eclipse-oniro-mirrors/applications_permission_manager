@@ -1,0 +1,58 @@
+
+
+{
+    "module": {
+        "name": "permissionmanager",
+        "type": "feature",
+        "srcEntrance": "./ets/Application/AbilityStage.ts",
+        "description": "$string:permissionmanager_desc",
+        "mainElement": "MainAbility",
+        "deviceTypes": [
+            "phone"
+        ],
+        "deliveryWithInstall": true,
+        "installationFree": false,
+        "pages": "$profile:main_pages",
+        "uiSyntax": "ets",
+        "abilities": [
+            {
+                "name": "com.ohos.permissionmanager.MainAbility",
+                "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+                "description": "$string:MainAbility_desc",
+                "icon": "$media:icon",
+                "label": "$string:MainAbility_label",
+                "visible": true,
+                "launchType": "standard"
+            }
+        ],
+        "extensionAbilities": [
+            {
+                "icon": "$media:icon",
+                "name": "com.ohos.permissionmanager.GrantAbility",
+                "srcEntrance": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
+                "type": "service",
+                "visible": true
+            }
+        ],
+        "requestPermissions": [
+            {
+                "name": "ohos.permission.GET_SENSITIVE_PERMISSIONS"
+            },
+            {
+                "name": "ohos.permission.GRANT_SENSITIVE_PERMISSIONS"
+            },
+            {
+                "name": "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS"
+            },
+            {
+                "name": "ohos.permission.GET_BUNDLE_INFO_PRIVILEGED"
+            },
+            {
+                "name": "ohos.permission.GET_BUNDLE_INFO"
+            },
+            {
+                "name": "ohos.permission.PERMISSION_USED_STATS"
+            }
+        ]
+    }
+}

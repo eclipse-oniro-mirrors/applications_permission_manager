@@ -1,0 +1,29 @@
+import("//build/ohos.gni")
+
+ohos_hap("pm_really") {
+  hap_profile = "src/main/module.json"
+  deps = [
+    ":permission_manager_js_assets",
+    ":permission_manager_resources",
+  ]
+  certificate_profile = "../signature/pm_5.p7b"
+  hap_name = "pm_really"
+  part_name = "prebuilt_hap"
+  subsystem_name = "applications"
+}
+
+ohos_app_scope("permission_manager_app_profile") {
+  app_profile = "../AppScope/app.json"
+  sources = [ "../AppScope/resources" ]
+}
+
+ohos_js_assets("permission_manager_js_assets") {
+  ets2abc = true
+  source_dir = "src/main/ets"
+}
+
+ohos_resources("permission_manager_resources") {
+  sources = [ "src/main/resources" ]
+  deps = [ ":permission_manager_app_profile" ]
+  hap_profile = "src/main/module.json"
+}

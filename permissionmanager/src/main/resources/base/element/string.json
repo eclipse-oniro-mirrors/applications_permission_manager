@@ -1,0 +1,92 @@
+{
+  "string": [
+    {
+      "name": "permissionmanager_desc",
+      "value": "permissionmanager"
+    },
+    {
+      "name": "MainAbility_desc",
+      "value": "manage the permissions of all applications from the permission and application dimensions"
+    },
+    {
+      "name": "MainAbility_label",
+      "value": "permission manage"
+    },
+    {
+      "name": "no_permission",
+      "value": "no permission"
+    },
+    {
+      "name": "access_permission",
+      "value": "access permission"
+    },
+    {
+      "name": "permission_access_record",
+      "value": "permission access record"
+    },
+    {
+      "name": "authority_management",
+      "value": "authority management"
+    },
+    {
+      "name": "other_permissions",
+      "value": "other permissions"
+    },
+    {
+      "name": "application",
+      "value": "application"
+    },
+    {
+      "name": "authority",
+      "value": "authority"
+    },
+    {
+      "name": "textInput_placeholder",
+      "value": "search application"
+    },
+    {
+      "name": "allowed",
+      "value": "allowed"
+    },
+    {
+      "name": "banned",
+      "value": "banned"
+    },
+    {
+      "name": "Authorization_failed",
+      "value": "Authorization failure！"
+    },
+    {
+      "name": "reason_suffix",
+      "value": " and other permissions."
+    },
+    {
+      "name": "separator",
+      "value": ","
+    },
+    {
+      "name": "visits",
+      "value": "Number of visits:"
+    },
+    {
+      "name": "recent_visit",
+      "value": ";Recent visits:"
+    },
+    {
+      "name": "morning",
+      "value": "am"
+    },
+    {
+      "name": "afternoon",
+      "value": "pm"
+    },
+    {
+      "name": "no_record",
+      "value": "No permission access record"
+    },
+    {
+      "name": "record_time_limit",
+      "value": "Access records in the last 7 days"
+    }
+  ]
+}
