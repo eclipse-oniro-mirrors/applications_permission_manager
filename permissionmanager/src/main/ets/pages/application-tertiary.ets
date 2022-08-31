@@ -18,7 +18,6 @@ import router from '@system.router';
 import bundle from "@ohos.bundle";
 import { getAppLabel, getAppIcon } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import Resmgr from '@ohos.resourceManager'
 import { authorizeDialog } from "../common/components/dialog";
 import { permissionGroups, showSubpermissionsGrop, polymorphismGroup } from "../common/model/permissionGroup";
 import Constants from '../common/utils/constant';
@@ -40,13 +39,13 @@ class MeidaDocObj {
   name: string
   index: number
   groupName: string
-  accessTokenId: any
+  accessTokenId: number
   permissions: []
   constructor(
     name: string,
     index: number,
     groupName: string,
-    accessTokenId: any,
+    accessTokenId: number,
     permissions: []
   ) {
     this.name = name
@@ -185,8 +184,7 @@ struct mediaDocumentItem {
       Promise.all([globalThis.context.resourceManager.getString($r("app.string.separator").id),
       globalThis.context.resourceManager.getString($r("app.string.reason_suffix").id)])
         .then(values => {
-          reason = reason.join(values[0])
-          reason += values[1]
+          reason = reason.join(values[0]) + values[1]
         })
     }else {
       reason = ''
@@ -241,11 +239,11 @@ struct mediaDocumentItem {
       this.mediaListItem = new MediaListObj('', '', '');
       this.mediaDocListItem.push(
         new MeidaDocObj(Constants.RADIO_ALLOW_NAME, Constants.RADIO_ALLOW_INDEX,
-          Constants.RADIO_ALLOW_GROUP_NAME, '', permissions)
+          Constants.RADIO_ALLOW_GROUP_NAME, 0, permissions)
       );
       this.mediaDocListItem.push(
         new MeidaDocObj(Constants.RADIO_BAN_NAME, Constants.RADIO_BAN_INDEX,
-          Constants.RADIO_BAN_GROUP_NAME, '', permissions)
+          Constants.RADIO_BAN_GROUP_NAME, 0, permissions)
       );
     })
     // Get permission status

@@ -26,8 +26,7 @@ import Constants from '../utils/constant';
  */
 export function getAppLabel(labelId, bundleName) {
   return new Promise((resolve) => {
-    let context = globalThis.context.createBundleContext(bundleName)
-    context.resourceManager.getString(labelId).then(value => {
+    globalThis.context.createBundleContext(bundleName).resourceManager.getString(labelId).then(value => {
       resolve(value);
     }).catch(error => {
       console.error('Resmgr.getResourceManager failed. Cause: ' + JSON.stringify(error));
@@ -42,8 +41,7 @@ export function getAppLabel(labelId, bundleName) {
  */
 export function getAppIcon(iconId, bundleName) {
   return new Promise((resolve) => {
-    let context = globalThis.context.createBundleContext(bundleName)
-    context.resourceManager.getMediaBase64(iconId).then(value => {
+    globalThis.context.createBundleContext(bundleName).resourceManager.getMediaBase64(iconId).then(value => {
       resolve(value);
     }).catch(error => {
       console.error('Resmgr.getResourceManager failed. Cause: ' + JSON.stringify(error));

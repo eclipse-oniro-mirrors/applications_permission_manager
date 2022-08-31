@@ -441,16 +441,16 @@ struct permissionRecordPage {
       }
 
       let  context = globalThis.context.createBundleContext(info.name)
-      await context.resourceManager.getString(info.appInfo['labelId'], (error, value) => {
+      await context.resourceManager.getString(info.appInfo.labelId, (error, value) => {
         if (value == undefined) {
-          appInfo['groupName'] = info.appInfo.label;
+          appInfo.groupName = info.appInfo.label;
         } else {
-          appInfo['groupName'] = value;
+          appInfo.groupName = value;
         }
       })
 
-      await context.resourceManager.getMediaBase64(info.appInfo['iconId'], (error, value) => {
-        appInfo['icon'] = value;
+      await context.resourceManager.getMediaBase64(info.appInfo.iconId, (error, value) => {
+        appInfo.icon = value;
       })
 
       appInfo.name = info.appInfo.name
@@ -474,9 +474,9 @@ struct permissionRecordPage {
     let request = {
       "tokenId": 0,
       "isRemote": false,
+      "deviceId": '',
+      "bundleName": '',
       "permissionNames": [],
-      "deviceId":'',
-      "bundleName":'',
       "beginTime": 0,
       "endTime": 0,
       "flag": 1

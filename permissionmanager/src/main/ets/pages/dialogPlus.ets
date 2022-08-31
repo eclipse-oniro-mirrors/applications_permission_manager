@@ -340,8 +340,7 @@ struct dialogPlusPage {
             Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
             globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id)])
               .then(values => {
-                group.description = group.description.join(values[0])
-                group.description += values[1]
+                group.description = group.description.join(values[0]) + values[1]
                 this.getReason(group, bundleInfo, data)
               })
           }else {

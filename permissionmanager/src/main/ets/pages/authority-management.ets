@@ -410,11 +410,11 @@ struct authorityManagementPage {
       return;
     }
     var info = this.allApplicationPermissions[index];
-    context.resourceManager.getString(info['labelId'], (error, value) => {
+    context.resourceManager.getString(info.labelId, (error, value) => {
       if (value == undefined) {
-        info['labelId'] = labelName;
+        info.labelId = labelName;
       } else {
-        info['labelId'] = value;
+        info.labelId = value;
       }
     })
   }
@@ -430,8 +430,8 @@ struct authorityManagementPage {
       return;
     }
     var info = this.allApplicationPermissions[index];
-    context.resourceManager.getMediaBase64(info['iconId'], (error, value) => {
-      info['iconId'] = value;
+    context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
+      info.iconId = value;
     })
   }
 
