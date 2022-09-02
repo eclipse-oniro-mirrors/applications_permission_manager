@@ -190,6 +190,48 @@ export const permissionGroups: any[] = [
         "label": "多设备协同",
         "description": "发现并访问其他设备。",
         "groupId": 11
+    },
+    {
+        "permissionName": "ohos.permission.READ_IMAGEVIDEO",
+        "groupName": "IMAGE_AND_VIDEOS",
+        "label": $r('sys.string.ohos_desc_read_imagevideo'),
+        "description": "允许应用读取用户公共目录的图片或视频文件。",
+        "groupId": 12
+    },
+    {
+        "permissionName": "ohos.permission.WRITE_IMAGEVIDEO",
+        "groupName": "IMAGE_AND_VIDEOS",
+        "label": $r('sys.string.ohos_desc_write_imagevideo'),
+        "description": "允许应用修改用户公共目录的图片或视频文件。",
+        "groupId": 12
+    },
+    {
+        "permissionName": "ohos.permission.READ_AUDIO",
+        "groupName": "AUDIOS",
+        "label": $r('sys.string.ohos_desc_read_audio'),
+        "description": "允许应用读取用户公共目录的音频文件。",
+        "groupId": 13
+    },
+    {
+        "permissionName": "ohos.permission.WRITE_AUDIO",
+        "groupName": "AUDIOS",
+        "label": $r('sys.string.ohos_desc_write_audio'),
+        "description": "允许应用修改用户公共目录的音频文件。",
+        "groupId": 13
+    },
+    {
+        "permissionName": "ohos.permission.READ_DOCUMENT",
+        "groupName": "DOCUMENTS",
+        "label": $r('sys.string.ohos_desc_read_document'),
+        "description": "允许应用读取用户公共目录的文档。",
+        "groupId": 14
+    },
+    {
+        "permissionName": "ohos.permission.WRITE_DOCUMENT",
+        "groupName": "DOCUMENTS",
+        "label": $r('sys.string.ohos_desc_write_document'),
+        "description": "允许应用修改用户公共目录的文档。",
+        "groupId": 14
     }
 ]
 
@@ -337,6 +379,42 @@ export const groups: any[] = [
             "ohos.permission.DISTRIBUTED_DATASYNC"
         ],
         "isShow":false
+    },
+    {
+        "name": "IMAGE_AND_VIDEOS",
+        "groupName": $r('sys.string.ohos_lab_read_imagevideo'),
+        "icon": $r('app.media.ic_public_folder'),
+        "label": "访问图片和视频？",
+        "description": "",
+        "permissions": [
+            "ohos.permission.READ_IMAGEVIDEO",
+            "ohos.permission.WRITE_IMAGEVIDEO"
+        ],
+        "isShow":false
+    },
+    {
+        "name": "AUDIOS",
+        "groupName": $r('sys.string.ohos_lab_read_audio'),
+        "icon": $r('app.media.ic_public_folder'),
+        "label": "访问音乐和音频？",
+        "description": "",
+        "permissions": [
+            "ohos.permission.READ_AUDIO",
+            "ohos.permission.WRITE_AUDIO"
+        ],
+        "isShow":false
+    },
+    {
+        "name": "DOCUMENTS",
+        "groupName": $r('sys.string.ohos_lab_read_document'),
+        "icon": $r('app.media.ic_public_folder'),
+        "label": "访问文件？",
+        "description": "",
+        "permissions": [
+            "ohos.permission.READ_DOCUMENT",
+            "ohos.permission.WRITE_DOCUMENT"
+        ],
+        "isShow":false
     }
 ];
 
@@ -389,6 +467,18 @@ export const permissionGroupPermissions: object = {
     ],
     "OTHER": [
         "ohos.permission.DISTRIBUTED_DATASYNC"
+    ],
+    "IMAGE_AND_VIDEOS": [
+        "ohos.permission.READ_IMAGEVIDEO",
+        "ohos.permission.WRITE_IMAGEVIDEO"
+    ],
+    "AUDIOS": [
+        "ohos.permission.READ_AUDIO",
+        "ohos.permission.WRITE_AUDIO"
+    ],
+    "DOCUMENTS": [
+        "ohos.permission.READ_DOCUMENT",
+        "ohos.permission.WRITE_DOCUMENT"
     ]
 };
 
@@ -418,7 +508,13 @@ export const userGrantPermissions: string[] = [
     "ohos.permission.WRITE_CALENDAR",
     "ohos.permission.ACTIVITY_MOTION",
     "ohos.permission.READ_HEALTH_DATA",
-    "ohos.permission.DISTRIBUTED_DATASYNC"
+    "ohos.permission.DISTRIBUTED_DATASYNC",
+    "ohos.permission.READ_IMAGEVIDEO",
+    "ohos.permission.WRITE_IMAGEVIDEO",
+    "ohos.permission.READ_AUDIO",
+    "ohos.permission.WRITE_AUDIO",
+    "ohos.permission.READ_DOCUMENT",
+    "ohos.permission.WRITE_DOCUMENT"
 ];
 
 export const permissionGroupIds: object = {
@@ -446,7 +542,13 @@ export const permissionGroupIds: object = {
     "ohos.permission.WRITE_CALENDAR": "8",
     "ohos.permission.ACTIVITY_MOTION": "9",
     "ohos.permission.READ_HEALTH_DATA": "10",
-    "ohos.permission.DISTRIBUTED_DATASYNC": "11"
+    "ohos.permission.DISTRIBUTED_DATASYNC": "11",
+    "ohos.permission.READ_IMAGEVIDEO": "12",
+    "ohos.permission.WRITE_IMAGEVIDEO": "12",
+    "ohos.permission.READ_AUDIO": "13",
+    "ohos.permission.WRITE_AUDIO": "13",
+    "ohos.permission.READ_DOCUMENT": "14",
+    "ohos.permission.WRITE_DOCUMENT": "14"
 };
 
 export const noNeedDisplayApp: string[] = [
