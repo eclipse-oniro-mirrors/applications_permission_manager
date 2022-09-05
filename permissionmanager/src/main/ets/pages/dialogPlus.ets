@@ -208,7 +208,7 @@ struct dialogPlusPage {
       if((this.locationFlag == Constants.LOCATION_UPGRADE) ||
       (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)) {
         await acManager.grantUserGrantedPermission(accessTokenId, PRECISE_LOCATION_PERMISSION, userFixedFlag)
-        var preciseIndex = permissionList.indexOf(FUZZY_LOCATION_PERMISSION)
+        var preciseIndex = permissionList.indexOf(PRECISE_LOCATION_PERMISSION)
         this.result[preciseIndex] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
       }
     }
