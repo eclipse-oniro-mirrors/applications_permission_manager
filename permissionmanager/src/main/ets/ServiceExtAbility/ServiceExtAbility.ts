@@ -18,7 +18,7 @@ import window from '@ohos.window';
 import display from '@ohos.display';
 
 var TAG = "PermissionManager_Log:";
-const BG_COLOR = '#33000000'
+const BG_COLOR = '#00000000'
 
 export default class ServiceExtensionAbility extends extension {
     /**

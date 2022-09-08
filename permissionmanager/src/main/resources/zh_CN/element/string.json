@@ -89,6 +89,10 @@
       "value": "近7天访问记录"
     },
     {
+      "name": "number_of_authorized_applications",
+      "value": "个应用获取此权限"
+    },
+    {
       "name": "allow",
       "value": "允许"
     },

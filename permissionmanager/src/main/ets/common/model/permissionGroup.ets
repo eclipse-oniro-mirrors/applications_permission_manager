@@ -556,11 +556,11 @@ export const noNeedDisplayApp: string[] = [
 ]
 
 export const showSubpermissionsGrop: string[] = [
-    "电话",
-    "日历",
-    "信息",
-    "通讯录",
-    "通话记录"
+    "PHONE",
+    "CALENDAR",
+    "SMS",
+    "CONTACTS",
+    "CALL_LOG"
 ];
 
 export const polymorphismGroup: string[] = [

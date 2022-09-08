@@ -308,7 +308,11 @@ struct applicationItem {
         Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
           Column() {
             Flex({ justifyContent: FlexAlign.Start }) {
-              Text(this.permissionNum + '个应用获取此权限')
+              Text(String(this.permissionNum))
+                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontColor($r('app.color.secondary_font_color'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+              Text($r('app.string.number_of_authorized_applications'))
                 .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
                 .fontColor($r('app.color.secondary_font_color'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })

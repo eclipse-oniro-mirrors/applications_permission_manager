@@ -89,6 +89,10 @@
       "value": "Access records in the last 7 days"
     },
     {
+      "name": "number_of_authorized_applications",
+      "value": " applications have this permission"
+    },
+    {
       "name": "allow",
       "value": "allow"
     },
@@ -118,7 +122,7 @@
     },
     {
       "name": "whether_to_allow",
-      "value": "Whether to allow"
+      "value": "Whether to allow "
     },
     {
       "name": "access_general_location",
