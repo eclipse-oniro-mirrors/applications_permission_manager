@@ -56,7 +56,6 @@ interface groupPermission {
   'isShow':boolean
 };
 
-let bundleInfosList: any[] = []; // Permission information array
 let textInput_placeholder: any = ''
 
 @Entry
@@ -116,12 +115,7 @@ struct authorityManagementPage {
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
   }
 
-  @State allApplicationPermissions: applicationPermissions[] = []; // All permissions apply
-  @State allPermissions: string[] = []; // All permissions
-  @State allSystemPermissions: string[] = []; // All system permissions
-  @State allUserPermissions: string[] = []; // All user rights
   @State allPermissionApplications: permissionApplications [] = [] // All app permissions
-  @State allGroups: string[] = [] // All groups
   @State allGroupPermission: groupPermission[] = [] // All group permissions
   @State currentIndex: number = 0
   @Builder TabBuilder(index: number) {
@@ -174,23 +168,19 @@ struct authorityManagementPage {
 
   /**
    * Get all app permission information
-   * @param {Array} allPermissions All permissions
-   * @param {Object} allApplicationPermissions All app permissions
    */
-  getAllBundlePermissions(allPermissions: string[], allApplicationPermissions: applicationPermissions[]) {
-    bundle.getAllBundleInfo(Constants.PARMETER_BUNDLE_FLAG).then(async(res) => {
-      const bundleInfos = res;
-      var count = bundleInfos.length;
-      if (count <= 0) {
+  getAllBundlePermissions() {
+    bundle.getAllBundleInfo(Constants.PARMETER_BUNDLE_FLAG).then(async(bundleInfos) => {
+      if (bundleInfos.length <= 0) {
         console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
         return;
       }
       var infoIndex = 0;
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < bundleInfos.length; i++) {
         var info = bundleInfos[i];
         // Filter blank icon icon and text label resources
         try {
-          const ret = await bundle.queryAbilityByWant({
+          await bundle.queryAbilityByWant({
             bundleName: info.name,
             action: "action.system.home",
             entities: ["entity.system.home"]
@@ -203,17 +193,16 @@ struct authorityManagementPage {
         if (noNeedDisplayApp.indexOf(info.name) != -1) {
           continue;
         }
-        await this.deduplicationPermissions(info, allPermissions, allApplicationPermissions);
+        await this.deduplicationPermissions(info);
         this.updateAppLabel(infoIndex, info.name, info.appInfo.label);
         this.updateAppIcon(infoIndex, info.name);
         infoIndex = infoIndex + 1;
       }
+      this.getAllGroupPermission();
       this.getAllPermissionApplications();
       let orderSort = this.orderDict(userGrantPermissions);
       this.allPermissionApplications.sort(this.compare('permission', orderSort));
-      this.getAllGroupPermission();
-      bundleInfosList = this.allApplicationPermissions;
-      bundleInfosList.forEach((item) => {
+      globalThis.allBundleInfo.forEach((item) => {
         if (!isNaN(item.labelId)) {
           item.alphabeticalIndex = '';
         } else {
@@ -244,27 +233,17 @@ struct authorityManagementPage {
    */
   getAllPermissionApplications() {
     const this_ = this;
-    var leng = this_.allPermissions.length;
-    if (leng > 0) {
-      for (let i = 0; i < leng; i++) {
-        if (userGrantPermissions.indexOf(this_.allPermissions[i]) == -1) {
-          this_.allSystemPermissions.push(this_.allPermissions[i]);
-        } else {
-          this_.allUserPermissions.push(this_.allPermissions[i]);
-        }
-      }
-    }
-    for (let i = 0; i < this_.allUserPermissions.length; i++) {
-      var permissionGroup = this_.getPermissionGroupByPermission(this_.allUserPermissions[i]);
+    for (let i = 0; i < globalThis.allUserPermissions.length; i++) {
+      var permissionGroup = this_.getPermissionGroupByPermission(globalThis.allUserPermissions[i]);
       var icon: string = permissionGroup.icon;
       var bundleNames: string[] = [];
-      for (let j = 0; j < this_.allApplicationPermissions.length; j++) {
-        if (this_.allApplicationPermissions[j].permissions.indexOf(this_.allUserPermissions[i]) != -1) {
-          bundleNames.push(this_.allApplicationPermissions[j].bundleName);
+      for (let j = 0; j < globalThis.allBundleInfo.length; j++) {
+        if (globalThis.allBundleInfo[j].permissions.indexOf(globalThis.allUserPermissions[i]) != -1) {
+          bundleNames.push(globalThis.allBundleInfo[j].bundleName);
         }
       }
       var pa: permissionApplications = {
-        'permission': this_.allUserPermissions[i],
+        'permission': globalThis.allUserPermissions[i],
         'groupName': permissionGroup.name,
         'bundleNames': bundleNames,
         'icon': icon
@@ -278,56 +257,21 @@ struct authorityManagementPage {
    */
   getAllGroupPermission() {
     const this_ = this;
-    var temp1 = [];
-    temp1 = ["LOCATION","CAMERA","MICROPHONE","MEDIA","CALENDAR","SPORT","HEALTH"];
     groups.forEach((item) => {
-      if (temp1.indexOf(item.name) > -1) {
-        var gp: groupPermission = {
-          "group": item.name,
-          "permissions": item.permissions,
-          'groupName': item.groupName,
-          'icon': item.icon,
-          'isShow': item.isShow
-        };
-        this_.allGroupPermission.push(gp);
+      if (item.isShow) {
+        globalThis.allGroups.push(item.name);
       }
     })
-    let temp2 = [];
-    groups.forEach((item) => {
-      if (item.isShow && temp1.indexOf(item.name) === -1) {
-        var gp: groupPermission = {
-          "group": item.name,
-          "permissions": item.permissions,
-          'groupName': item.groupName,
-          'icon': item.icon,
-          'isShow': item.isShow
-        };
-        temp2.push(item.name);
-        this_.allGroupPermission.push(gp);
+    globalThis.allUserPermissions.forEach(userPermission => {
+      if (globalThis.allGroups.indexOf(groups[permissionGroupIds[userPermission]].name) == -1) {
+        globalThis.allGroups.push(groups[permissionGroupIds[userPermission]].name);
       }
     })
-    for (let i = 0; i < this_.allPermissionApplications.length; i++) {
-        if (this_.allGroups.indexOf(this_.allPermissionApplications[i].groupName) == -1
-        && temp1.indexOf(this_.allPermissionApplications[i].groupName) == -1) {
-          this_.allGroups.push(this_.allPermissionApplications[i].groupName);
-        }
-    }
     // Permission layout
-    var temp = this_.allGroups;
-    temp = temp.filter(function(item) {
-      return temp1.indexOf(item) == -1 && temp2.indexOf(item) == -1;
-    });
-    if (temp.indexOf("OTHER") > -1) {
-      temp.splice(temp.indexOf("OTHER"),1);
-      temp.push("OTHER");
-    }else {
-      temp.push("OTHER");
-    }
-    this_.allGroups = temp;
-    for (let i = 0; i < this_.allGroups.length; i++) {
-      var permissions: string[] = permissionGroupPermissions[this_.allGroups[i]];
+    for (let i = 0; i < globalThis.allGroups.length; i++) {
+      var permissions: string[] = permissionGroupPermissions[globalThis.allGroups[i]];
       var gp: groupPermission = {
-        "group": this_.allGroups[i],
+        "group": globalThis.allGroups[i],
         "permissions": permissions,
         'groupName': '',
         'icon': '',
@@ -349,10 +293,8 @@ struct authorityManagementPage {
   /**
    * Deduplicate permission information and permission group information
    * @param {Object} info bundleInfos Application Information
-   * @param {Array} allPermissions All permissions
-   * @param {Array} allApplicationPermissions All permissions apply
    */
-  async deduplicationPermissions(info, allPermissions, allApplicationPermissions) {
+  async deduplicationPermissions(info) {
     var reqPermissionsLen = info.reqPermissions.length;
     var reqUserPermissions: string[] = [];
     var acManager = abilityAccessCtrl.createAtManager()
@@ -363,20 +305,16 @@ struct authorityManagementPage {
         if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
           continue
         }
-        if (allPermissions.indexOf(permission) == -1) {
-          allPermissions.push(permission);
-        }
         if (userGrantPermissions.indexOf(permission) != -1) {
           reqUserPermissions.push(permission);
+          if (globalThis.allUserPermissions.indexOf(permission) == -1) {
+            globalThis.allUserPermissions.push(permission);
+          }
         }
       }
     }
-    let dePermissions = [];
     let groupIds = [];
     for (let i = 0; i < reqUserPermissions.length; i++) {
-      if(dePermissions.indexOf(groups[permissionGroupIds[reqUserPermissions[i]]].name) == -1){
-        dePermissions.push(groups[permissionGroupIds[reqUserPermissions[i]]].name);
-      }
       if(groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1){
         groupIds.push(permissionGroupIds[reqUserPermissions[i]]);
       }
@@ -395,7 +333,7 @@ struct authorityManagementPage {
       'permissions': reqUserPermissions,
       'groupId': groupIds
     };
-    allApplicationPermissions.push(ap);
+    globalThis.allBundleInfo.push(ap)
   }
 
   /**
@@ -406,10 +344,10 @@ struct authorityManagementPage {
    */
   updateAppLabel(index, bundleName, labelName) {
     let context = globalThis.context.createBundleContext(bundleName)
-    if (index >= this.allApplicationPermissions.length) {
+    if (index >= globalThis.allBundleInfo.length) {
       return;
     }
-    var info = this.allApplicationPermissions[index];
+    var info = globalThis.allBundleInfo[index];
     context.resourceManager.getString(info.labelId, (error, value) => {
       if (value == undefined) {
         info.labelId = labelName;
@@ -426,10 +364,10 @@ struct authorityManagementPage {
    */
   updateAppIcon(index, bundleName) {
     let context = globalThis.context.createBundleContext(bundleName)
-    if (index >= this.allApplicationPermissions.length) {
+    if (index >= globalThis.allBundleInfo.length) {
       return;
     }
-    var info = this.allApplicationPermissions[index];
+    var info = globalThis.allBundleInfo[index];
     context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
       info.iconId = value;
     })
@@ -440,7 +378,7 @@ struct authorityManagementPage {
    */
   aboutToAppear() {
     console.log(TAG + 'on aboutToAppear, version 1.01');
-    this.getAllBundlePermissions(this.allPermissions, this.allApplicationPermissions);
+    this.getAllBundlePermissions();
     globalThis.context.resourceManager.getString($r("app.string.textInput_placeholder").id).then(val => {
       textInput_placeholder = val
     })
@@ -595,8 +533,8 @@ struct authorityManagementPage {
 
 @Component
 struct applicationItem {
-  @State applicationItem: any[] = bundleInfosList // application info array
-  @State oldApplicationItem: any[] = bundleInfosList // Original application information array
+  @State applicationItem: any[] = globalThis.allBundleInfo // application info array
+  @State oldApplicationItem: any[] = globalThis.allBundleInfo // Original application information array
   @State searchResult: boolean = true // search results
 
   @Builder ListItemLayout(item, index) {

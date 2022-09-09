@@ -21,13 +21,14 @@ export default class MainAbility extends Ability {
     onCreate(want, launchParam) {
         console.log(TAG + "MainAbility onCreate, ability name is " + want.abilityName + ".");
         globalThis.context = this.context;
+        globalThis.allBundleInfo = [];
+        globalThis.allUserPermissions = []
+        globalThis.allGroups = []
     }
 
     onWindowStageCreate(windowStage) {
         // Main window is created, set main page for this ability
         console.log(TAG + "MainAbility onWindowStageCreate.");
-
-        globalThis.context = this.context;
 
         windowStage.setUIContent(this.context, "pages/authority-management", null);
     }
