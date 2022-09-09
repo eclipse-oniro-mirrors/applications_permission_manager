@@ -36,13 +36,13 @@ let reason = null  // Authorized reason
 let bundleInfo: any = {}
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 class MeidaDocObj {
-  name: string
+  name: Resource
   index: number
   groupName: string
   accessTokenId: number
   permissions: []
   constructor(
-    name: string,
+    name: Resource,
     index: number,
     groupName: string,
     accessTokenId: number,
@@ -172,7 +172,7 @@ struct mediaDocumentItem {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-    if(showSubpermissionsGrop.indexOf(backTitle) != -1) {
+    if(showSubpermissionsGrop.indexOf(globalThis.currentPermissionGroup) != -1) {
       reason = []
       permissions.forEach(permission => {
         permissionGroups.forEach(permissionGroup => {
@@ -218,7 +218,7 @@ struct mediaDocumentItem {
         })
       this.mediaDocListItem.push(
         new MeidaDocObj(
-          Constants.RADIO_ALLOW_NAME,
+          $r('app.string.allow'),
           Constants.RADIO_ALLOW_INDEX,
           Constants.RADIO_ALLOW_GROUP_NAME,
           res.appInfo.accessTokenId,
@@ -227,7 +227,7 @@ struct mediaDocumentItem {
       );
       this.mediaDocListItem.push(
         new MeidaDocObj(
-          Constants.RADIO_BAN_NAME,
+          $r('app.string.ban'),
           Constants.RADIO_BAN_INDEX,
           Constants.RADIO_BAN_GROUP_NAME,
           res.appInfo.accessTokenId,
@@ -238,11 +238,11 @@ struct mediaDocumentItem {
       console.error(TAG + 'bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
       this.mediaListItem = new MediaListObj('', '', '');
       this.mediaDocListItem.push(
-        new MeidaDocObj(Constants.RADIO_ALLOW_NAME, Constants.RADIO_ALLOW_INDEX,
+        new MeidaDocObj($r('app.string.allow'), Constants.RADIO_ALLOW_INDEX,
           Constants.RADIO_ALLOW_GROUP_NAME, 0, permissions)
       );
       this.mediaDocListItem.push(
-        new MeidaDocObj(Constants.RADIO_BAN_NAME, Constants.RADIO_BAN_INDEX,
+        new MeidaDocObj($r('app.string.ban'), Constants.RADIO_BAN_INDEX,
           Constants.RADIO_BAN_GROUP_NAME, 0, permissions)
       );
     })

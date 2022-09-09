@@ -15,7 +15,6 @@
 
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundle from '@ohos.bundle';
-import Resmgr from '@ohos.resourceManager'
 import rpc from '@ohos.rpc';
 import { Log, getPermissionGroup } from '../common/utils/utils'
 import Constants from '../common/utils/constant'
@@ -37,6 +36,22 @@ const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 @Entry
 @Component
 struct dialogPlusPage {
+  privacyDialogController: CustomDialogController = new CustomDialogController({
+    builder: PermissionDialog(),
+    autoCancel: false,
+    alignment: DialogAlignment.Center,
+    customStyle: true
+  })
+
+  build() {}
+
+  aboutToAppear() {
+    this.privacyDialogController.open()
+  }
+}
+
+@CustomDialog
+struct PermissionDialog {
   @State count: number = 0
   @State result: Array<any> = []
   @State accessTokenId: number = 0
@@ -49,6 +64,7 @@ struct dialogPlusPage {
   @State proxy: any = ''
   @State locationFlag: number = Constants.LOCATION_NONE
   @State resource: any = {}
+  controller: CustomDialogController
 
   build() {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
@@ -214,7 +230,7 @@ struct dialogPlusPage {
     }
     group.permissions.forEach(async permission => {
       let result
-      if(showSubpermissionsGrop.indexOf(group.groupName) == -1) {
+      if(showSubpermissionsGrop.indexOf(group.name) == -1) {
         result = await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag)
       }else {
         if(permissionList.includes(permission)) {
@@ -250,7 +266,7 @@ struct dialogPlusPage {
     }
     group.permissions.forEach(async permission => {
       let result
-      if(showSubpermissionsGrop.indexOf(group.groupName) == -1) {
+      if(showSubpermissionsGrop.indexOf(group.name) == -1) {
         result = await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
       }else {
         if(permissionList.includes(permission)) {
@@ -288,7 +304,7 @@ struct dialogPlusPage {
         }else {
           var exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name)
           //判断是否为需要展示子权限的权限组
-          if(showSubpermissionsGrop.indexOf(group.groupName) != -1) {
+          if(showSubpermissionsGrop.indexOf(group.name) != -1) {
             var permissionDetail
             permissionGroups.forEach(permissionGroup => {
               if(permissionGroup.permissionName == permission) {
