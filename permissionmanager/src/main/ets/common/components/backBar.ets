@@ -25,7 +25,7 @@ export struct backBar {
   build() {
     Column() {
       Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
-        Image($r('app.media.left'))
+        Image($r('app.media.ic_public_back'))
           .objectFit(ImageFit.Contain)
           .height(Constants.BACKBAR_IMAGE_HEIGHT)
           .width(Constants.BACKBAR_IMAGE_WIDTH)

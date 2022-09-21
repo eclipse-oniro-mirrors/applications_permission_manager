@@ -75,7 +75,7 @@ struct authorityManagementPage {
                 .fontWeight(FontWeight.Medium)
                 .fontColor($r('app.color.label_color'))
                 .flexGrow(Constants.FLEX_GROW)
-              Image($r('app.media.rightarrow'))
+              Image($r('app.media.ic_public_arrow_right'))
                 .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
             }
             .width(Constants.FULL_WIDTH)
@@ -554,7 +554,7 @@ struct applicationItem {
                 .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_lighter'))
                 .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
-              Image($r('app.media.rightarrow'))
+              Image($r('app.media.ic_public_arrow_right'))
                 .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
             }
             .width(Constants.FULL_WIDTH)
