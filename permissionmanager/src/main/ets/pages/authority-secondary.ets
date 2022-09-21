@@ -106,7 +106,7 @@ struct appNameItem {
                 .fontColor($r('app.color.label_color'))
                 .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
-              Image($r('app.media.rightarrow'))
+              Image($r('app.media.ic_public_arrow_right'))
                 .objectFit(ImageFit.Contain)
                 .height(Constants.IMAGE_HEIGHT)
                 .width(Constants.IMAGE_WIDTH)

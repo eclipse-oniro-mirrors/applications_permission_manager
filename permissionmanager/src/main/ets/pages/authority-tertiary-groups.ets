@@ -240,7 +240,7 @@ struct applicationItem {
                 .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_light'))
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
-                Image($r('app.media.rightarrow'))
+                Image($r('app.media.ic_public_arrow_right'))
                   .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
               }
             }

@@ -52,7 +52,7 @@ export struct textInput {
           })
           .onEditChanged((isEditing) => {
           })
-        Image($r('app.media.search'))
+        Image($r('app.media.ic_public_search_filled'))
           .objectFit(ImageFit.Contain)
           .width(Constants.TEXTINPUT_IMAGE_WIDTH)
           .height(Constants.TEXTINPUT_IMAGE_HEIGHT)
