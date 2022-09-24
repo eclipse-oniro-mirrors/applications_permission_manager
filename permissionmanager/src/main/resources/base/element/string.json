@@ -131,6 +131,74 @@
     {
       "name": "fuzzy_to_exact",
       "value": " position access to change from \"APPROXIMATE POSITION\" to \"EXACT POSITION\"?"
+    },
+    {
+      "name": "cancel",
+      "value": "cancel"
+    },
+    {
+      "name": "open",
+      "value": "open"
+    },
+    {
+      "name": "close",
+      "value": "close"
+    },
+    {
+      "name": "camera",
+      "value": "camera"
+    },
+    {
+      "name": "microphone",
+      "value": "microphone"
+    },
+    {
+      "name": "close_camera",
+      "value": "Turn off the camera"
+    },
+    {
+      "name": "close_microphone",
+      "value": "Turn off the microphone"
+    },
+    {
+      "name": "global_title_camera",
+      "value": "The camera is disabled"
+    },
+    {
+      "name": "global_title_microphone",
+      "value": "Microphone not turned on"
+    },
+    {
+      "name": "global_title_camera_and_microphone",
+      "value": "The camera and microphone are disabled"
+    },
+    {
+      "name": "global_desc_camera",
+      "value": "An application is accessing the camera. Click \"Open\" to resume normal use."
+    },
+    {
+      "name": "global_desc_microphone",
+      "value": "An application is accessing the microphone. Click \"Open\" to resume normal use."
+    },
+    {
+      "name": "global_desc_camera_and_microphone",
+      "value": "An application is accessing the camera and microphone. Click \"Open\" to resume normal use."
+    },
+    {
+      "name": "microphone_is_off",
+      "value": "The microphone is turned off. No application can use the microphone to record audio."
+    },
+    {
+      "name": "camera_is_off",
+      "value": "The camera is turned off and no apps can currently use the camera to take photos and videos."
+    },
+    {
+      "name": "close_microphone_desc",
+      "value": "After the microphone is disabled, all application services cannot use the microphone to make calls, record audio, or voice wake up. To restore data, turn on the microphone switch."
+    },
+    {
+      "name": "close_camera_desc",
+      "value": "After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
     }
   ]
 }

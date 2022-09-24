@@ -95,10 +95,12 @@ export default class Constants {
     static LAYOUT_WEIGHT = 1;
     static FLEX_GROW = 1;
     static TEXT_DECORATION_HEIGHT = 1;
+    static TEXT_BIG_FONT_SIZE = 20;
     static TEXT_MIDDLE_FONT_SIZE = 16;
     static TEXT_SMAL_FONT_SIZE = 14;
     static TEXT_SMALLER_FONT_SIZE = 12;
     static TEXT_LINE_HEIGHT = 22;
+    static TEXT_BIG_LINE_HEIGHT = 28;
     static TEXT_SMALL_LINE_HEIGHT = 19;
     static CONSTRAINTSIZE_MINHEIGHT = 48;
     static LISTITEM_ROW_HEIGHT = 48;
@@ -128,6 +130,9 @@ export default class Constants {
     static TAB_DECORATION_POSITION_Y = 46;
     static DEFAULT_PADDING_START = 12;
     static DEFAULT_PADDING_END = 12;
+    static DEFAULT_SLIDER_WIDTH = 36;
+    static DEFAULT_SLIDER_HEIGHT = 20;
+    static OFFSET = 100;
 
     // application-secondary, authority-secondary
     static FLEX_MARGIN_TOP = 8;
@@ -368,6 +373,10 @@ export default class Constants {
     static PASS_OPER = 0
     static DYNAMIC_OPER = 1
     static INVALID_OPER = 2
+
+    //global dialog
+    static ROW_HEIGHT = 56
+    static DIALOG_MARGIN_BOTTOM = 12
 
     //
     static INITIAL_INDEX = 10

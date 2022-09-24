@@ -19,7 +19,8 @@ import { textInput } from "../common/components/search";
 import router from '@system.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import { groups, userGrantPermissions, permissionGroupPermissions, noNeedDisplayApp } from "../common/model/permissionGroup";
+import audio from '@ohos.multimedia.audio'
+import { groups, userGrantPermissions, permissionGroupPermissions, noNeedDisplayApp, globalGroup } from "../common/model/permissionGroup";
 import { permissionGroups, permissionGroupIds } from "../common/model/permissionGroup";
 import { makePy } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
@@ -105,10 +106,20 @@ struct authorityManagementPage {
             })
 
             globalThis.currentPermissionGroup = item.group
-            router.push({
-              uri: 'pages/authority-tertiary-groups',
-              params: { routerData: dataList, backTitle: item.groupName  }
-            })
+            if(globalGroup.indexOf(item.group) == -1) {
+              router.push({
+                uri: 'pages/authority-tertiary-groups',
+                params: { routerData: dataList, backTitle: item.groupName  }
+              })
+            }else {
+              var audioManager = audio.getAudioManager();
+              audioManager.isMicrophoneMute().then(value => {
+                router.push({
+                  uri: 'pages/authority-tertiary-groups',
+                  params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
+                })
+              })
+            }
           }
         })
       }
@@ -301,9 +312,14 @@ struct authorityManagementPage {
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < info.reqPermissions.length; j++) {
         var permission = info.reqPermissions[j];
-        var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
-        if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
-          continue
+        try {
+          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
+          if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
+            continue
+          }
+        }
+        catch(err) {
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
         }
         if (userGrantPermissions.indexOf(permission) != -1) {
           reqUserPermissions.push(permission);
@@ -379,6 +395,10 @@ struct authorityManagementPage {
   aboutToAppear() {
     console.log(TAG + 'on aboutToAppear, version 1.01');
     this.getAllBundlePermissions();
+    var acManager = abilityAccessCtrl.createAtManager()
+    bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
+      acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2)
+    })
     globalThis.context.resourceManager.getString($r("app.string.textInput_placeholder").id).then(val => {
       textInput_placeholder = val
     })
