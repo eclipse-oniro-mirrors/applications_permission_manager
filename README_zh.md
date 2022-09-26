@@ -6,8 +6,10 @@
 
 ## 简介<a name="section11660541593"></a>
 
-​		权限管理应用是OpenHarmony中预置的系统系统应用，为用户提供运行时权限弹框、权限管理设置和权限使用记录展示等功能。
+权限管理应用是OpenHarmony中预置的系统系统应用，为用户提供运行时权限弹框、权限管理设置和权限使用记录展示等功能。
 
+权限管理应用的架构图如下所示：
+![](figures/application-framework.png)
 ## 目录<a name="section161941989596"></a>
 
 ```
@@ -25,6 +27,10 @@
 ├── signature                          # 证书文件目录
 └── LICENSE                            # 许可文件
 ```
+
+## 使用说明<a name="section123459000"></a>
+
+参见使用说明 [使用说明](https://gitee.com/openharmony/docs/blob/master/zh-cn/application-dev/security/accesstoken-guidelines.md)
 
 ## 相关仓<a name="section1371113476307"></a>
 
