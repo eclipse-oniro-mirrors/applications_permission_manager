@@ -360,6 +360,10 @@ struct mediaDocumentItem {
                             }
                           } else {
                             this.revokeUserGrantedPermission(item.accessTokenId, permission)
+                            if(this.accurateIsOn) {
+                              this.revokeUserGrantedPermission(item.accessTokenId, PRECISE_LOCATION_PERMISSION)
+                              this.accurateIsOn = false
+                            }
                             if (nowRevokeResult != Constants.PERMISSION_INDEX) {
                               RevokeResultFlag.push(-1)
                               this.authorizeDialogController.open();
@@ -433,12 +437,10 @@ struct mediaDocumentItem {
                   var acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
                     acManager.grantUserGrantedPermission(bundleInfo.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
-                      .then((res) => { res == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ? this.accurateIsOn = true : this.accurateIsOn = false })
-                      .catch(() => { this.accurateIsOn = false })
+                      .then((res) => { res == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ? this.accurateIsOn = true : '' })
                   } else {
                     acManager.revokeUserGrantedPermission(bundleInfo.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
                       .then(() => { this.accurateIsOn = false })
-                      .catch(() => { this.accurateIsOn = true })
                   }
                 })
                 .padding({ right: 0 })
