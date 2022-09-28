@@ -360,7 +360,7 @@ struct mediaDocumentItem {
                             }
                           } else {
                             this.revokeUserGrantedPermission(item.accessTokenId, permission)
-                            if(this.accurateIsOn) {
+                            if(this.accurateIsOn && globalThis.currentPermissionGroup == 'LOCATION') {
                               this.revokeUserGrantedPermission(item.accessTokenId, PRECISE_LOCATION_PERMISSION)
                               this.accurateIsOn = false
                             }
