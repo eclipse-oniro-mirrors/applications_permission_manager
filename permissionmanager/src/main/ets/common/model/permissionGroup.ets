@@ -22,13 +22,6 @@ export const permissionGroups: any[] = [
         "groupId": 0
     },
     {
-        "permissionName": "ohos.permission.APPROXIMATELY_LOCATION",
-        "groupName": "LOCATION",
-        "label": "模糊位置权限",
-        "description": "允许应用获取模糊位置信息。",
-        "groupId": 0
-    },
-    {
         "permissionName": "ohos.permission.LOCATION",
         "groupName": "LOCATION",
         "label": "前台定位权限",
@@ -244,9 +237,8 @@ export const groups: any[] = [
 	      "label": "访问位置信息？",
         "permissions": [
             "ohos.permission.LOCATION_IN_BACKGROUND",
-            "ohos.permission.APPROXIMATELY_LOCATION"
+            "ohos.permission.LOCATION"
         ],
-        "specialPermission": 'ohos.permission.LOCATION',
         "isShow":true
     },
     {
@@ -421,7 +413,6 @@ export const groups: any[] = [
 export const permissionGroupPermissions: object = {
     "LOCATION": [
         "ohos.permission.LOCATION_IN_BACKGROUND",
-        "ohos.permission.APPROXIMATELY_LOCATION",
         "ohos.permission.LOCATION"
     ],
     "CAMERA": [
@@ -485,7 +476,6 @@ export const permissionGroupPermissions: object = {
 
 export const userGrantPermissions: string[] = [
     "ohos.permission.LOCATION_IN_BACKGROUND",
-    "ohos.permission.APPROXIMATELY_LOCATION",
     "ohos.permission.LOCATION",
     "ohos.permission.CAMERA",
     "ohos.permission.MICROPHONE",
@@ -519,7 +509,6 @@ export const userGrantPermissions: string[] = [
 
 export const permissionGroupIds: object = {
     "ohos.permission.LOCATION_IN_BACKGROUND": "0",
-    "ohos.permission.APPROXIMATELY_LOCATION": "0",
     "ohos.permission.LOCATION": "0",
     "ohos.permission.CAMERA": "1",
     "ohos.permission.MICROPHONE": "2",

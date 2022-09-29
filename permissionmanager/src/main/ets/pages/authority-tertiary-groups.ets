@@ -35,6 +35,8 @@ var TAG = 'PermissionManager_MainAbility:'
 
 let routerData: any = router.getParams().routerData; // Routing jump data
 let backTitle = router.getParams().backTitle; // return title name
+const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 
 class ApplicationObj {
   labelId: string
@@ -129,7 +131,10 @@ struct locationInfoPage {
           // 0: have permission; -1: no permission
           this.polymorphismIsOn[index] = true
           for (let j = 0; j < routerData.length; j++) {
-            if (routerData[j].permission == 'ohos.permission.LOCATION') {
+            if ((routerData[j].permission == PRECISE_LOCATION_PERMISSION) && (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
+              continue
+            }
+            if ((routerData[j].permission == FUZZY_LOCATION_PERMISSION) && (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
               continue
             }
             if (res.reqPermissions.indexOf(routerData[j].permission) == -1) {
