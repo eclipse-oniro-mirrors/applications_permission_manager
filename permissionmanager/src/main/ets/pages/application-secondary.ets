@@ -23,6 +23,7 @@ var TAG = 'PermissionManager_MainAbility:'
 
 const allowedStatus = 0; // Status: Allowed
 const bannedStatus = 1; // Status: Banned
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 class permissionObj {
   groupName: string;
   permission: string[];
@@ -150,6 +151,9 @@ struct appNamePlusPage {
       let isGranted = true;
       for (let i = 0; i < groupReqPermissons.length; i++) {
         let permission = groupReqPermissons[i]
+        if(this.routerData.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
+          continue
+        }
         let res = await abilityAccessCtrl.createAtManager().verifyAccessToken(
           this.routerData.tokenId, permission);
         if (res != 0) {

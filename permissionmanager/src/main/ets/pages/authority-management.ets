@@ -34,6 +34,7 @@ var TAG = 'PermissionManager_MainAbility:'
 
 interface applicationPermissions {
   'bundleName': string,
+  'api': number,
   'iconId': string,
   'permissions': string[],
   'labelId': string,
@@ -57,6 +58,7 @@ interface groupPermission {
 };
 
 let textInput_placeholder: any = ''
+const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
 
 @Entry
 @Component
@@ -301,6 +303,9 @@ struct authorityManagementPage {
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < info.reqPermissions.length; j++) {
         var permission = info.reqPermissions[j];
+        if((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
+          continue
+        }
         var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
         if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
           continue
@@ -327,6 +332,7 @@ struct authorityManagementPage {
 
     var ap: applicationPermissions = {
       'bundleName': info.name,
+      'api': info.targetVersion,
       'tokenId': info.appInfo.accessTokenId,
       'iconId': info.appInfo.iconId,
       'labelId': info.appInfo.labelId,
