@@ -301,9 +301,14 @@ struct authorityManagementPage {
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < info.reqPermissions.length; j++) {
         var permission = info.reqPermissions[j];
-        var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
-        if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
-          continue
+        try {
+          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
+          if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
+            continue
+          }
+        }
+        catch(err) {
+          console.log(TAG + 'getPermissionFlags error: ' +JSON.stringify(err))
         }
         if (userGrantPermissions.indexOf(permission) != -1) {
           reqUserPermissions.push(permission);
