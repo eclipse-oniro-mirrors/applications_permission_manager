@@ -566,3 +566,7 @@ export const showSubpermissionsGrop: string[] = [
 export const polymorphismGroup: string[] = [
     "LOCATION"
 ]
+
+export const globalGroup: string[] = [
+    "MICROPHONE"
+]

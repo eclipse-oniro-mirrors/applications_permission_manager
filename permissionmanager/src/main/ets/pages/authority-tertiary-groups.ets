@@ -19,11 +19,12 @@ import { textInput } from "../common/components/search";
 import router from '@system.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import audio from '@ohos.multimedia.audio'
 import { getAppLabel, getAppIcon, verifyAccessToken} from "../common/utils/utils";
 import { makePy } from "../common/utils/utils";
-import { authorizeDialog } from "../common/components/dialog";
+import { authorizeDialog, globalDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
-import { polymorphismGroup } from "../common/model/permissionGroup";
+import { polymorphismGroup, globalGroup } from "../common/model/permissionGroup";
 
 var TAG = 'PermissionManager_MainAbility:'
 
@@ -37,6 +38,7 @@ let routerData: any = router.getParams().routerData; // Routing jump data
 let backTitle = router.getParams().backTitle; // return title name
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
+let globalIsOn: any = router.getParams().globalIsOn; // return title name
 
 class ApplicationObj {
   labelId: string
@@ -164,6 +166,14 @@ struct applicationItem {
   @State placeholder: string = ''
   @State bundleNameGroup: Array<string> = []
   @Link polymorphismIsOn: any
+  @State globalIsOn: boolean = true
+
+  privacyDialogController: CustomDialogController = new CustomDialogController({
+    builder: globalDialog({ globalIsOn: $globalIsOn }),
+    autoCancel: false,
+    alignment: DialogAlignment.Center,
+    customStyle: true
+  })
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -409,6 +419,9 @@ struct applicationItem {
         console.log(TAG + bundleNames[i] + "getBundleInfo failed, cause: " + JSON.stringify(error));
       })
     }
+    if(globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
+      this.globalIsOn = globalIsOn
+    }
   }
 
   build() {
@@ -427,15 +440,51 @@ struct applicationItem {
       Row() {
         Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
           Column() {
+            if(globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
+              Row() {
+                Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                  Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera') : $r('app.string.microphone'))
+                    .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('app.color.label_color'))
+                  Row() {
+                    Toggle({ type: ToggleType.Switch, isOn: this.globalIsOn })
+                      .selectedColor($r('app.color.button_color'))
+                      .switchPointColor($r('app.color.selected_Color'))
+                      .padding({ right: 0 })
+                      .onChange((isOn: boolean) => {
+                        if(isOn) {
+                          var audioManager = audio.getAudioManager();
+                          audioManager.setMicrophoneMute(false).then(() => {
+                            this.globalIsOn = isOn
+                          })
+                        }
+                      })
+                    Row().onClick(() => { this.privacyDialogController.open() })
+                      .width(Constants.DEFAULT_SLIDER_WIDTH).height(Constants.DEFAULT_SLIDER_HEIGHT)
+                      .position({ x: this.globalIsOn ? 0 : Constants.OFFSET, y: 0 })
+                  }.clip(true)
+                }.height(Constants.LISTITEM_ROW_HEIGHT)
+                .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+              }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+              .backgroundColor($r('app.color.default_background_color'))
+              .borderRadius(Constants.BORDER_RADIUS)
+              .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
+            }
             Flex({ justifyContent: FlexAlign.Start }) {
-              Text(String(this.getGrantApplicationNumber()))
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
-                .fontColor($r('app.color.secondary_font_color'))
-                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-              Text($r('app.string.number_of_authorized_applications'))
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
-                .fontColor($r('app.color.secondary_font_color'))
-                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+              if(this.globalIsOn) {
+                Text(String(this.getGrantApplicationNumber()))
+                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                  .fontColor($r('app.color.secondary_font_color'))
+                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+                Text($r('app.string.number_of_authorized_applications'))
+                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                  .fontColor($r('app.color.secondary_font_color'))
+                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+              }else {
+                Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera_is_off') : $r('app.string.microphone_is_off'))
+                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                  .fontColor($r('app.color.secondary_font_color'))
+                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+              }
             }
             Scroll() {
               Row() {

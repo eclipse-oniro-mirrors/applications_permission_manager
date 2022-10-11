@@ -33,6 +33,13 @@
                 "srcEntrance": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
                 "type": "service",
                 "visible": true
+            },
+            {
+                "icon": "$media:icon",
+                "name": "com.ohos.permissionmanager.GlobalExtAbility",
+                "srcEntrance": "./ets/GlobalExtAbility/GlobalExtAbility.ts",
+                "type": "service",
+                "visible": true
             }
         ],
         "requestPermissions": [
@@ -53,6 +60,12 @@
             },
             {
                 "name": "ohos.permission.PERMISSION_USED_STATS"
+            },
+            {
+                "name": "ohos.permission.MANAGE_AUDIO_CONFIG"
+            },
+            {
+                "name": "ohos.permission.MICROPHONE"
             }
         ]
     }

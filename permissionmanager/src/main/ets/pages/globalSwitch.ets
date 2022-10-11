@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,8 +13,13 @@
  * limitations under the License.
  */
 
-import Constants from '../utils/constant';
+import Constants from '../common/utils/constant';
 import audio from '@ohos.multimedia.audio'
+import bundle from '@ohos.bundle';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+
+const MICROPHONE = 'microphone'
+const CAMERA = 'camera'
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('app.color.default_background_color'))
@@ -24,46 +29,42 @@ import audio from '@ohos.multimedia.audio'
   .width(Constants.BUTTON_WIDTH)
 }
 
-@CustomDialog
-export struct authorizeDialog {
-  controller: CustomDialogController;
-  cancel: () => void;
-  confirm: () => void;
+@Entry
+@Component
+export struct globalSwitch {
+  privacyDialogController: CustomDialogController = new CustomDialogController({
+    builder: globalDialog(),
+    autoCancel: false,
+    alignment: DialogAlignment.Center,
+    customStyle: true
+  })
 
-  build() {
-    Column() {
-      Row() {
-        Flex({ justifyContent: FlexAlign.Center }) {
-          Text($r("app.string.Authorization_failed")).fontSize(Constants.DIALOG_TEXT_FONT_SIZE)
-            .margin({
-              top: Constants.DIALOG_TEXT_MARGIN_TOP
-            })
-        }
-      }
-    }
-    .backgroundColor($r('app.color.default_background_color'))
-    .borderRadius(Constants.DIALOG_BORDER_RADIUS)
-    .height(Constants.DIALOG_HEIGHT)
-    .width(Constants.DIALOG_WIDTH)
+  build() {}
+
+  aboutToAppear() {
+    this.privacyDialogController.open()
   }
 }
 
 @CustomDialog
-export struct globalDialog {
-  @Link globalIsOn: boolean
-  controller: CustomDialogController;
+struct globalDialog {
+  controller: CustomDialogController
 
   build() {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.End }) {
       Column() {
-        Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
+        Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
+            globalThis.globalState == CAMERA ? $r('app.string.global_title_camera') :
+          $r('app.string.global_title_camera_and_microphone'))
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
           .fontColor($r('app.color.label_color'))
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
           .height(Constants.ROW_HEIGHT)
           .width(Constants.FULL_WIDTH)
           .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
-        Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera_desc') : $r('app.string.close_microphone_desc'))
+        Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_desc_microphone') :
+            globalThis.globalState == CAMERA ? $r('app.string.global_desc_camera') :
+          $r('app.string.global_desc_camera_and_microphone'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontColor($r('app.color.label_color'))
           .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -79,10 +80,10 @@ export struct globalDialog {
               }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
             Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('app.color.divider_color'))
               .margin({ top: Constants.BUTTON_MARGIN_TOP })
-            Button($r('app.string.close'))
+            Button($r('app.string.open'))
               .fontSize(Constants.BUTTON_FONT_SIZE)
               .onClick(() => {
-                this.confirm()
+                this.accept()
               }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
           }.height(Constants.ROW_HEIGHT)
         }
@@ -95,15 +96,22 @@ export struct globalDialog {
     .height(Constants.FULL_HEIGHT)
   }
 
-  confirm() {
+  accept() {
     var audioManager = audio.getAudioManager();
-    audioManager.setMicrophoneMute(true).then(() => {
-      this.globalIsOn = false
-      this.controller.close()
+    audioManager.setMicrophoneMute(false).then(() => {
+      globalThis.globalContext.terminateSelf()
     })
   }
 
   cancel() {
-    this.controller.close()
+    globalThis.globalContext.terminateSelf()
   }
+
+  aboutToAppear() {
+    var acManager = abilityAccessCtrl.createAtManager()
+    bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
+      acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2)
+    })
+  }
+
 }

@@ -146,7 +146,7 @@ struct mediaDocumentItem {
   grantUserGrantedPermission(accessTokenId, permission) {
     abilityAccessCtrl.createAtManager().grantUserGrantedPermission(
       accessTokenId, permission, Constants.PERMISSION_FLAG).then((result) => {
-      nowGrantResult = result;
+      nowGrantResult = Constants.PERMISSION_INDEX;
     })
     .catch((error) => {
       console.error(TAG + 'grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
@@ -161,7 +161,7 @@ struct mediaDocumentItem {
   revokeUserGrantedPermission(accessTokenId, permission) {
     abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
       accessTokenId, permission, Constants.PERMISSION_FLAG).then((result) => {
-      nowRevokeResult = result;
+      nowRevokeResult = Constants.PERMISSION_INDEX;
     })
       .catch((error) => {
         console.error(TAG + 'revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
@@ -441,7 +441,7 @@ struct mediaDocumentItem {
                   var acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
                     acManager.grantUserGrantedPermission(bundleInfo.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
-                      .then((res) => { res == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ? this.accurateIsOn = true : '' })
+                      .then((res) => { this.accurateIsOn = true })
                   } else {
                     acManager.revokeUserGrantedPermission(bundleInfo.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
                       .then(() => { this.accurateIsOn = false })
