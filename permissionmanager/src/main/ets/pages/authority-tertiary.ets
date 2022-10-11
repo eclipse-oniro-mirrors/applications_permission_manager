@@ -184,15 +184,7 @@ struct applicationItem {
     abilityAccessCtrl.createAtManager().grantUserGrantedPermission(
       accessTokenId, permission, Constants.PERMISSION_FLAG).then(result => {
       // result: 0 Authorization succeeded; result: -1 Authorization failed
-      if (result !== Constants.PERMISSION_INDEX) {
-        this.authorizeDialogController.open();
-        this.toggleIsOn[index] = false;
-        setTimeout(()=> {
-          this.authorizeDialogController.close();
-        }, Constants.DELAY_TIME)
-      } else {
-        this.toggleIsOn[index] = true;
-      }
+      this.toggleIsOn[index] = true;
       let num = Constants.PERMISSION_NUM;
       for(let key in this.toggleIsOn){
         if(this.toggleIsOn[key]){
@@ -201,6 +193,11 @@ struct applicationItem {
       }
       this.permissionNum = num;
     }).catch(error => {
+        this.authorizeDialogController.open();
+        this.toggleIsOn[index] = false;
+        setTimeout(()=> {
+          this.authorizeDialogController.close();
+        }, Constants.DELAY_TIME)
       console.error(TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
     })
   }
@@ -215,15 +212,7 @@ struct applicationItem {
     abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
       accessTokenId, permission, Constants.PERMISSION_FLAG).then(result => {
       // result: 0 successfully cancel the authorization; result: -1 cancel the authorization failed
-      if (result !== Constants.PERMISSION_INDEX) {
-        this.authorizeDialogController.open();
-        this.toggleIsOn[index] = true;
-        setTimeout(()=> {
-          this.authorizeDialogController.close();
-        }, Constants.DELAY_TIME)
-      } else {
-        this.toggleIsOn[index] = false;
-      }
+      this.toggleIsOn[index] = false;
       let num = Constants.PERMISSION_NUM;
       for(let key in this.toggleIsOn){
         if(this.toggleIsOn[key]){
@@ -231,6 +220,12 @@ struct applicationItem {
         }
       }
       this.permissionNum = num;
+    }).catch(error => {
+        this.authorizeDialogController.open();
+        this.toggleIsOn[index] = true;
+        setTimeout(()=> {
+          this.authorizeDialogController.close();
+        }, Constants.DELAY_TIME)
     })
   }
 
