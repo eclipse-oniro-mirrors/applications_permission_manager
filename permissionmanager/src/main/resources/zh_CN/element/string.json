@@ -131,6 +131,74 @@
     {
       "name": "fuzzy_to_exact",
       "value": "的位置访问权限从“大致位置”改为“精确位置”？"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "open",
+      "value": "开启"
+    },
+    {
+      "name": "close",
+      "value": "关闭"
+    },
+    {
+      "name": "camera",
+      "value": "摄像头"
+    },
+    {
+      "name": "microphone",
+      "value": "麦克风"
+    },
+    {
+      "name": "close_camera",
+      "value": "关闭摄像头"
+    },
+    {
+      "name": "close_microphone",
+      "value": "关闭麦克风"
+    },
+    {
+      "name": "global_title_camera",
+      "value": "摄像头未开启"
+    },
+    {
+      "name": "global_title_microphone",
+      "value": "麦克风未开启"
+    },
+    {
+      "name": "global_title_camera_and_microphone",
+      "value": "摄像头和麦克风未开启"
+    },
+    {
+      "name": "global_desc_camera",
+      "value": "有应用正在访问摄像头，点击“开启”后即可恢复正常使用。"
+    },
+    {
+      "name": "global_desc_microphone",
+      "value": "有应用正在访问麦克风，点击“开启”后即可恢复正常使用。"
+    },
+    {
+      "name": "global_desc_camera_and_microphone",
+      "value": "有应用正在访问摄像头和麦克风，点击“开启”后即可恢复正常使用。"
+    },
+    {
+      "name": "microphone_is_off",
+      "value": "麦克风已关闭，当前没有应用可以使用麦克风录制音频。"
+    },
+    {
+      "name": "camera_is_off",
+      "value": "摄像头已关闭，当前没有应用可以使用相机拍摄照片和视频。"
+    },
+    {
+      "name": "close_microphone_desc",
+      "value": "关闭后，所有应用服务都将无法正常使用麦克风通话、录制音频或进行语音唤醒。如需恢复，请打开麦克风开关。"
+    },
+    {
+      "name": "close_camera_desc",
+      "value": "关闭后，所有应用服务都将无法正常使用摄像头拍摄照片、视频或进行人脸识别。如需恢复，请打开摄像头开关。"
     }
   ]
 }
