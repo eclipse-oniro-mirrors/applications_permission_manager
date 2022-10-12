@@ -130,7 +130,7 @@ struct mediaDocumentItem {
   }; // application info array
   @State isCheckList: boolean[] = []; // Permission status array
   @State accurateIsOn: boolean = true;
-  @State reqPermissions: any = []
+  @State api: number = 0;
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -191,7 +191,7 @@ struct mediaDocumentItem {
     }
     let hasReason = false
     bundle.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(res => {
-      this.reqPermissions = res.reqPermissions
+      this.api = res.targetVersion
       bundleInfo = res
       permissions.forEach(permission => {
         res.reqPermissionDetails.forEach(reqPermissionDetail => {
@@ -348,10 +348,10 @@ struct mediaDocumentItem {
                     .height(Constants.LISTITEM_ROW_HEIGHT)
                     .onClick(() => {
                         item.permissions.forEach((permission) => {
-                          if(permission == PRECISE_LOCATION_PERMISSION) {
-                            return false
-                          }
                           if (!item.index) {
+                            if((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
+                              return false
+                            }
                             this.grantUserGrantedPermission(item.accessTokenId, permission)
                             if (nowGrantResult != Constants.PERMISSION_INDEX) {
                               GrantResultFlag.push(-1)
@@ -359,11 +359,15 @@ struct mediaDocumentItem {
                               GrantResultFlag.push(0)
                             }
                           } else {
-                            this.revokeUserGrantedPermission(item.accessTokenId, permission)
-                            if(this.accurateIsOn && globalThis.currentPermissionGroup == 'LOCATION') {
-                              this.revokeUserGrantedPermission(item.accessTokenId, PRECISE_LOCATION_PERMISSION)
-                              this.accurateIsOn = false
+                            if((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
+                              if(this.accurateIsOn) {
+                                this.revokeUserGrantedPermission(item.accessTokenId, permission)
+                                this.accurateIsOn = false
+                              }
+                            }else {
+                              this.revokeUserGrantedPermission(item.accessTokenId, permission)
                             }
+
                             if (nowRevokeResult != Constants.PERMISSION_INDEX) {
                               RevokeResultFlag.push(-1)
                               this.authorizeDialogController.open();
@@ -422,7 +426,7 @@ struct mediaDocumentItem {
           top: Constants.TERTIARY_LIST_PADDING_TOP, bottom: Constants.TERTIARY_LIST_PADDING_BOTTOM
         })
 
-        if ((polymorphismGroup.indexOf(globalThis.currentPermissionGroup) !== -1) && (this.reqPermissions.includes(PRECISE_LOCATION_PERMISSION))) {
+        if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permissions.includes(PRECISE_LOCATION_PERMISSION))) {
           Column() {
             Row() {
               Text($r('app.string.precise_location'))

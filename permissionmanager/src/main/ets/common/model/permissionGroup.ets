@@ -244,9 +244,9 @@ export const groups: any[] = [
 	      "label": "访问位置信息？",
         "permissions": [
             "ohos.permission.LOCATION_IN_BACKGROUND",
-            "ohos.permission.APPROXIMATELY_LOCATION"
+            "ohos.permission.APPROXIMATELY_LOCATION",
+            "ohos.permission.LOCATION"
         ],
-        "specialPermission": 'ohos.permission.LOCATION',
         "isShow":true
     },
     {
