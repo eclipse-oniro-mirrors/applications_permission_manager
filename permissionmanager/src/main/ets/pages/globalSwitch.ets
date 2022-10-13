@@ -31,7 +31,7 @@ const CAMERA = 'camera'
 
 @Entry
 @Component
-export struct globalSwitch {
+struct globalSwitch {
   privacyDialogController: CustomDialogController = new CustomDialogController({
     builder: globalDialog(),
     autoCancel: false,
@@ -58,6 +58,7 @@ struct globalDialog {
           $r('app.string.global_title_camera_and_microphone'))
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
           .fontColor($r('app.color.label_color'))
+          .fontWeight(FontWeight.Medium)
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
           .height(Constants.ROW_HEIGHT)
           .width(Constants.FULL_WIDTH)
