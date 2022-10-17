@@ -20,6 +20,7 @@ import router from '@system.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
+import camera from '@ohos.multimedia.camera'
 import { groups, userGrantPermissions, permissionGroupPermissions, noNeedDisplayApp, globalGroup } from "../common/model/permissionGroup";
 import { permissionGroups, permissionGroupIds } from "../common/model/permissionGroup";
 import { makePy } from "../common/utils/utils";
@@ -114,13 +115,23 @@ struct authorityManagementPage {
                 params: { routerData: dataList, backTitle: item.groupName  }
               })
             }else {
-              var audioManager = audio.getAudioManager();
-              audioManager.isMicrophoneMute().then(value => {
-                router.push({
-                  uri: 'pages/authority-tertiary-groups',
-                  params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
+              if(item.group == 'MICROPHONE') {
+                var audioManager = audio.getAudioManager();
+                audioManager.isMicrophoneMute().then(value => {
+                  router.push({
+                    uri: 'pages/authority-tertiary-groups',
+                    params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
+                  })
                 })
-              })
+              }else {
+                camera.getCameraManager(globalThis.context).then(cameraManager => {
+                  let mute = cameraManager.isCameraMuted()
+                  router.push({
+                    uri: 'pages/authority-tertiary-groups',
+                    params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !mute }
+                  })
+                })
+              }
             }
           }
         })

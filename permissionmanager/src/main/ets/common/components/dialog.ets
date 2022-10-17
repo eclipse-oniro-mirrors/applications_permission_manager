@@ -15,6 +15,7 @@
 
 import Constants from '../utils/constant';
 import audio from '@ohos.multimedia.audio'
+import camera from '@ohos.multimedia.camera'
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('app.color.default_background_color'))
@@ -97,11 +98,19 @@ export struct globalDialog {
   }
 
   confirm() {
-    var audioManager = audio.getAudioManager();
-    audioManager.setMicrophoneMute(true).then(() => {
-      this.globalIsOn = false
-      this.controller.close()
-    })
+    if(globalThis.currentPermissionGroup == 'CAMERA') {
+      camera.getCameraManager(globalThis.context).then(cameraManager => {
+        cameraManager.muteCamera(true)
+        this.globalIsOn = false
+        this.controller.close()
+      })
+    }else {
+      var audioManager = audio.getAudioManager();
+      audioManager.setMicrophoneMute(true).then(() => {
+        this.globalIsOn = false
+        this.controller.close()
+      })
+    }
   }
 
   cancel() {

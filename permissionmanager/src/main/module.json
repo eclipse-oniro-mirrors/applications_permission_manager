@@ -8,7 +8,8 @@
         "description": "$string:permissionmanager_desc",
         "mainElement": "MainAbility",
         "deviceTypes": [
-            "default"
+            "default",
+            "tablet"
         ],
         "deliveryWithInstall": true,
         "installationFree": false,
@@ -66,6 +67,9 @@
             },
             {
                 "name": "ohos.permission.MICROPHONE"
+            },
+            {
+                "name": "ohos.permission.MANAGE_CAMERA_CONFIG"
             }
         ]
     }
