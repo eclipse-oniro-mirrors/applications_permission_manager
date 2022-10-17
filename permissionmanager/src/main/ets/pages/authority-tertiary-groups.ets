@@ -20,6 +20,7 @@ import router from '@system.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
+import camera from '@ohos.multimedia.camera'
 import { getAppLabel, getAppIcon, verifyAccessToken} from "../common/utils/utils";
 import { makePy } from "../common/utils/utils";
 import { authorizeDialog, globalDialog } from "../common/components/dialog";
@@ -452,10 +453,17 @@ struct applicationItem {
                       .padding({ right: 0 })
                       .onChange((isOn: boolean) => {
                         if(isOn) {
-                          var audioManager = audio.getAudioManager();
-                          audioManager.setMicrophoneMute(false).then(() => {
-                            this.globalIsOn = isOn
-                          })
+                          if(globalThis.currentPermissionGroup == "CAMERA") {
+                            camera.getCameraManager(globalThis.context).then(cameraManager => {
+                              cameraManager.muteCamera(false)
+                              this.globalIsOn = isOn
+                            })
+                          }else {
+                            var audioManager = audio.getAudioManager();
+                            audioManager.setMicrophoneMute(false).then(() => {
+                              this.globalIsOn = isOn
+                            })
+                          }
                         }
                       })
                     Row().onClick(() => { this.privacyDialogController.open() })
