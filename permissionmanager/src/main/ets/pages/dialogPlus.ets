@@ -96,7 +96,8 @@ struct PermissionDialog {
                   .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
                   .margin({
                     top: Constants.DIALOG_REQ_MARGIN_TOP,
-                    left: Constants.DIALOG_REQ_MARGIN_LEFT
+                    left: Constants.DIALOG_REQ_MARGIN_LEFT,
+                    right: Constants.DIALOG_REQ_MARGIN_RIGHT
                   })
               }
             }

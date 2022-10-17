@@ -302,6 +302,7 @@ export default class Constants {
     static DIALOG_REQ_FONT_SIZE = 16;
     static DIALOG_REQ_MARGIN_TOP = 16;
     static DIALOG_REQ_MARGIN_LEFT = 24;
+    static DIALOG_REQ_MARGIN_RIGHT = 24;
     static DIALOG_REQ_LINE_HEIGHT = 22;
 
     // description text of dialog
