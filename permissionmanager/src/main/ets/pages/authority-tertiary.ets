@@ -139,7 +139,8 @@ struct applicationItem {
                 .fontColor($r('app.color.label_color'))
                 .flexGrow(Constants.FLEX_GROW)
               Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
-                .selectedColor($r('app.color.toggle_color'))
+                .selectedColor($r('app.color.button_color'))
+                .padding({ right: 0 })
                 .width(Constants.AUTHORITY_TOGGLE_WIDTH)
                 .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
                 .onChange((isOn: boolean) => {

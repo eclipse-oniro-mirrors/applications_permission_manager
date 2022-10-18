@@ -59,6 +59,7 @@ export struct globalDialog {
         Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
           .fontColor($r('app.color.label_color'))
+          .fontWeight(FontWeight.Medium)
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
           .height(Constants.ROW_HEIGHT)
           .width(Constants.FULL_WIDTH)

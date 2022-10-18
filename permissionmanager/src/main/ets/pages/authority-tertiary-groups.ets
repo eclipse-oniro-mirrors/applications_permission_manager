@@ -193,10 +193,12 @@ struct applicationItem {
               Text(item.labelId)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontColor($r('app.color.text_color'))
+                .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
               if (polymorphismGroup.indexOf(globalThis.currentPermissionGroup) == -1) {
                 Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
-                  .selectedColor($r('app.color.toggle_color'))
+                  .selectedColor($r('app.color.button_color'))
+                  .padding({ right: 0 })
                   .width(Constants.AUTHORITY_TOGGLE_WIDTH)
                   .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
                   .onChange((isOn: boolean) => {
@@ -445,6 +447,7 @@ struct applicationItem {
                 Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                   Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera') : $r('app.string.microphone'))
                     .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('app.color.label_color'))
+                    .fontWeight(FontWeight.Medium)
                   Row() {
                     Toggle({ type: ToggleType.Switch, isOn: this.globalIsOn })
                       .selectedColor($r('app.color.button_color'))
