@@ -392,9 +392,14 @@ struct permissionRecordPage {
       var appInfo: any = {}
       for (let j = 0; j < record.permissionRecords.length; j++) {
         var permission = record.permissionRecords[j].permissionName;
-        var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
-        if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
-          continue
+        try {
+          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
+          if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
+            continue
+          }
+        }
+        catch(err) {
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
         }
         if (userGrantPermissions.indexOf(permission) != -1) {
           reqUserRecords.push(record.permissionRecords[j])
@@ -402,9 +407,14 @@ struct permissionRecordPage {
       }
       for (let k = 0; k < info.reqPermissions.length; k++) {
         var reqPermission = info.reqPermissions[k];
-        var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission)
-        if(reqFlag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
-          continue
+        try {
+          var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission)
+          if(reqFlag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
+            continue
+          }
+        }
+        catch(err) {
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
         }
         if (userGrantPermissions.indexOf(reqPermission) != -1) {
           reqUserPermissions.push(reqPermission);
