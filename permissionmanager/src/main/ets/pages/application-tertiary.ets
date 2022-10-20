@@ -16,6 +16,7 @@
 import { backBar } from "../common/components/backBar";
 import router from '@system.router';
 import bundle from "@ohos.bundle";
+import bundleManager from '@ohos.bundle.bundleManager';
 import { getAppLabel, getAppIcon } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { authorizeDialog } from "../common/components/dialog";
@@ -190,22 +191,24 @@ struct mediaDocumentItem {
       reason = ''
     }
     let hasReason = false
-    bundle.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(res => {
-      this.api = res.targetVersion
-      bundleInfo = res
+    bundleManager.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(info => {
       permissions.forEach(permission => {
-        res.reqPermissionDetails.forEach(reqPermissionDetail => {
+        info.reqPermissionDetails.forEach(reqPermissionDetail => {
           if(reqPermissionDetail.name == permission) {
             let context = globalThis.context.createBundleContext(routerData)
             context.resourceManager.getString(reqPermissionDetail.reasonId).then(value => {
-                if (value !== undefined && !hasReason) {
-                  reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
-                  hasReason = true
-                }
+              if (value !== undefined && !hasReason) {
+                reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
+                hasReason = true
+              }
             })
           }
         })
       })
+    })
+    bundle.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(res => {
+      this.api = res.targetVersion
+      bundleInfo = res
       var acManager = abilityAccessCtrl.createAtManager()
       acManager.verifyAccessToken(res.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION).then(accurateStatus => {
         accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ? this.accurateIsOn = true : this.accurateIsOn = false
