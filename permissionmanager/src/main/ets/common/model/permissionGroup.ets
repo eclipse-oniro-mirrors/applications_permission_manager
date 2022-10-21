@@ -568,5 +568,6 @@ export const polymorphismGroup: string[] = [
 ]
 
 export const globalGroup: string[] = [
-    "MICROPHONE"
+    "MICROPHONE",
+    "CAMERA"
 ]
