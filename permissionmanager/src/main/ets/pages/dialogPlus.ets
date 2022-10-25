@@ -229,14 +229,20 @@ struct PermissionDialog {
         if(group.name == 'LOCATION' && this.bundleInfo.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
           if(!(((this.locationFlag == Constants.LOCATION_BOTH_FUZZY) || (this.locationFlag == Constants.LOCATION_FUZZY))
             && (permission == PRECISE_LOCATION_PERMISSION))) {
-            result = await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+            await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
+              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+            })
           }
         }else {
-          result = await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+          await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
+            result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+          })
         }
       }else {
         if(permissionList.includes(permission)) {
-          result = await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+          await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
+            result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+          })
         }
       }
       num ++
@@ -260,15 +266,14 @@ struct PermissionDialog {
   async privacyCancel(group, accessTokenId, permissionList, userFixedFlag) {
     var acManager = abilityAccessCtrl.createAtManager()
     group.permissions.forEach(async permission => {
-      let result
       if(showSubpermissionsGrop.indexOf(group.name) == -1) {
-        result = await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+        await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
       }else {
         if(permissionList.includes(permission)) {
-          result = await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+          await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
         }
       }
-      Log.info("revoke permission result:" + result + "permission" + permission);
+      Log.info("revoke permission " + permission);
     })
     this.count ++
   }
