@@ -15,8 +15,10 @@
 
 import Constants from '../common/utils/constant';
 import audio from '@ohos.multimedia.audio'
+import camera from '@ohos.multimedia.camera';
 import bundle from '@ohos.bundle';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import { Log } from '../common/utils/utils'
 
 const MICROPHONE = 'microphone'
 const CAMERA = 'camera'
@@ -98,13 +100,31 @@ struct globalDialog {
   }
 
   accept() {
-    var audioManager = audio.getAudioManager();
-    audioManager.setMicrophoneMute(false).then(() => {
-      globalThis.globalContext.terminateSelf()
-    })
+    Log.info('global accept')
+    if(globalThis.globalState == MICROPHONE) {
+      var audioManager = audio.getAudioManager();
+      audioManager.setMicrophoneMute(false).then(() => {
+        globalThis.globalContext.terminateSelf()
+      })
+    }else if(globalThis.globalState == CAMERA) {
+      camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
+        cameraManager.muteCamera(false)
+        globalThis.globalContext.terminateSelf()
+      })
+    }else {
+      camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
+        cameraManager.muteCamera(false)
+        var audioManager = audio.getAudioManager();
+        audioManager.setMicrophoneMute(false).then(() => {
+          globalThis.globalContext.terminateSelf()
+        })
+      })
+    }
+
   }
 
   cancel() {
+    Log.info('global cancel')
     globalThis.globalContext.terminateSelf()
   }
 
