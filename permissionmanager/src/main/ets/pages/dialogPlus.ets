@@ -15,6 +15,7 @@
 
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundle from '@ohos.bundle';
+import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
 import { Log, getPermissionGroup } from '../common/utils/utils'
 import Constants from '../common/utils/constant'
@@ -350,17 +351,19 @@ struct PermissionDialog {
       Log.error("applicationInfo error :" + err)
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED
     })
-    this.grantGroups.forEach((group) => {
-      if(group.description) {
-        Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
-        globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id)])
-          .then(values => {
-            group.description = group.description.join(values[0]) + values[1]
-            this.getReason(group, this.bundleInfo, bundleName)
-          })
-      }else {
-        this.getReason(group, this.bundleInfo, bundleName)
-      }
+    bundleManager.getBundleInfo(bundleName, Constants.PARMETER_BUNDLE_FLAG).then(info => {
+      this.grantGroups.forEach((group) => {
+        if(group.description) {
+          Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
+          globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id)])
+            .then(values => {
+              group.description = group.description.join(values[0]) + values[1]
+              this.getReason(group, info, bundleName)
+            })
+        }else {
+          this.getReason(group, info, bundleName)
+        }
+      })
     })
   }
 
