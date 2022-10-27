@@ -129,6 +129,9 @@ struct globalDialog {
   }
 
   aboutToAppear() {
+    setTimeout(function() {
+      globalThis.globalContext.terminateSelf()
+    }, 1000 * 60)
     var acManager = abilityAccessCtrl.createAtManager()
     bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
       acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2)
