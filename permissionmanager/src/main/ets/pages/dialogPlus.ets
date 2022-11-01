@@ -267,7 +267,9 @@ struct PermissionDialog {
     var acManager = abilityAccessCtrl.createAtManager()
     group.permissions.forEach(async permission => {
       if(showSubpermissionsGrop.indexOf(group.name) == -1) {
-        await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+        if(!(this.locationFlag == Constants.LOCATION_UPGRADE && group.name == 'LOCATION') || permission == PRECISE_LOCATION_PERMISSION) {
+          await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+        }
       }else {
         if(permissionList.includes(permission)) {
           await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)

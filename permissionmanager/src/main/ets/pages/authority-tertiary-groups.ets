@@ -349,6 +349,7 @@ struct applicationItem {
    */
   aboutToAppear() {
     var bundleNames = []
+    this.applicationList = []
     routerData.forEach(permissionmanager => {
       permissionmanager.bundleNames.forEach( bundleName => {
         if (bundleNames.indexOf(bundleName) == -1) {
