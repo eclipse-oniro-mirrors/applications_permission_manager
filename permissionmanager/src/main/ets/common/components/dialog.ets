@@ -16,6 +16,7 @@
 import Constants from '../utils/constant';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
+import deviceInfo from '@ohos.deviceInfo'
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('app.color.default_background_color'))
@@ -55,7 +56,7 @@ export struct globalDialog {
   controller: CustomDialogController;
 
   build() {
-    Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.End }) {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE ? ItemAlign.End : ItemAlign.Center }) {
       Column() {
         Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
