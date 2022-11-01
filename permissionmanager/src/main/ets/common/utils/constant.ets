@@ -212,7 +212,6 @@ export default class Constants {
     static MANAGEMENT_ROW_PADDING_RIGHT = 12;
     static MANAGEMENT_ROW_PADDING_TOP = 8;
     static MANAGEMENT_ROW_MARGIN_TOP = 12;
-    static MANAGEMENT_TRANSPARENCY = 0.8;
     static APPLICATION_IMAGE_WIDTH = 40;
     static APPLICATION_IMAGE_HEIGHT = 40;
     static APPLICATION_IMAGE_MARGIN_RIGHT = 16;
@@ -283,6 +282,10 @@ export default class Constants {
     static PRE_AUTHORIZATION_NOT_MODIFIED = 4;
 
     static BUNDLE_NAME = 'com.ohos.permissionmanager'
+
+    static DEFAULT_DEVICE_TYPE = 'default'
+    static TABLET_DEVICE_TYPE = 'tablet'
+    static PERMISSION_DIALOG_MARGIN_BOTTOM = 62
 
     static START_SUBSCRIPT = 0
     static END_SUBSCRIPT = 500
