@@ -19,6 +19,7 @@ import camera from '@ohos.multimedia.camera';
 import bundle from '@ohos.bundle';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { Log } from '../common/utils/utils'
+import deviceInfo from '@ohos.deviceInfo'
 
 const MICROPHONE = 'microphone'
 const CAMERA = 'camera'
@@ -53,7 +54,7 @@ struct globalDialog {
   controller: CustomDialogController
 
   build() {
-    Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.End }) {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE ? ItemAlign.End : ItemAlign.Center }) {
       Column() {
         Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
             globalThis.globalState == CAMERA ? $r('app.string.global_title_camera') :

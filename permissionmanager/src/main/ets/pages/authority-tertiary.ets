@@ -104,7 +104,6 @@ struct locationInfoPage {
       .height(Constants.FULL_HEIGHT)
       .width(Constants.FULL_WIDTH)
       .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
-      .opacity(Constants.MANAGEMENT_TRANSPARENCY)
     }
   }
 }
@@ -312,7 +311,7 @@ struct applicationItem {
                 .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
                 .fontColor($r('app.color.secondary_font_color'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-            }
+            }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
             Scroll() {
               Row() {
                 Column() {
