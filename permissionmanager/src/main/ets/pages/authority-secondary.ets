@@ -83,7 +83,6 @@ struct appNamePage {
       .height(Constants.FULL_HEIGHT)
       .width(Constants.FULL_WIDTH)
       .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
-      .opacity(Constants.MANAGEMENT_TRANSPARENCY)
     }
   }
 }

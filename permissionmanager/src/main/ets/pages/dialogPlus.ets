@@ -17,6 +17,7 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundle from '@ohos.bundle';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
+import deviceInfo from '@ohos.deviceInfo';
 import { Log, getPermissionGroup } from '../common/utils/utils'
 import Constants from '../common/utils/constant'
 import { BundleFlag } from '../common/model/bundle'
@@ -69,7 +70,7 @@ struct PermissionDialog {
   controller: CustomDialogController
 
   build() {
-    Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE ? ItemAlign.End : ItemAlign.Center }) {
       Column() {
         if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
           Image(this.grantGroups[this.count].icon)
@@ -144,6 +145,7 @@ struct PermissionDialog {
       .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
       .width(Constants.DIALOG_PRIVACY_WIDTH)
       .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })
+      .margin({ bottom: Constants.PERMISSION_DIALOG_MARGIN_BOTTOM })
     }.width(Constants.FULL_WIDTH)
     .height(Constants.FULL_HEIGHT)
   }
