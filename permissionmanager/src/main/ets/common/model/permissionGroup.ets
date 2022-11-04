@@ -225,6 +225,18 @@ export const permissionGroups: any[] = [
         "label": $r('sys.string.ohos_desc_write_document'),
         "description": "允许应用修改用户公共目录的文档。",
         "groupId": 14
+    },
+    {
+        "permissionName": "ohos.permission.READ_WHOLE_CALENDAR",
+        "groupName": "CALENDAR_ALL",
+        "label": $r('sys.string.ohos_lab_read_whole_calendar'),
+        "groupId": 15
+    },
+    {
+        "permissionName": "ohos.permission.WRITE_WHOLE_CALENDAR",
+        "groupName": "CALENDAR_ALL",
+        "label": $r('sys.string.ohos_lab_write_whole_calendar'),
+        "groupId": 15
     }
 ]
 
@@ -407,6 +419,18 @@ export const groups: any[] = [
             "ohos.permission.WRITE_DOCUMENT"
         ],
         "isShow":false
+    },
+    {
+        "name": "CALENDAR_ALL",
+        "groupName": '全部日历',
+        "icon": $r('app.media.ic_public_calendar'),
+        "label": "访问全部日历？",
+        "description": "",
+        "permissions": [
+            "ohos.permission.READ_WHOLE_CALENDAR",
+            "ohos.permission.WRITE_WHOLE_CALENDAR"
+        ],
+        "isShow":false
     }
 ];
 
@@ -470,6 +494,10 @@ export const permissionGroupPermissions: object = {
     "DOCUMENTS": [
         "ohos.permission.READ_DOCUMENT",
         "ohos.permission.WRITE_DOCUMENT"
+    ],
+    "CALENDAR_ALL": [
+        "ohos.permission.READ_WHOLE_CALENDAR",
+        "ohos.permission.WRITE_WHOLE_CALENDAR"
     ]
 };
 
@@ -504,7 +532,9 @@ export const userGrantPermissions: string[] = [
     "ohos.permission.READ_AUDIO",
     "ohos.permission.WRITE_AUDIO",
     "ohos.permission.READ_DOCUMENT",
-    "ohos.permission.WRITE_DOCUMENT"
+    "ohos.permission.WRITE_DOCUMENT",
+    "ohos.permission.READ_WHOLE_CALENDAR",
+    "ohos.permission.WRITE_WHOLE_CALENDAR"
 ];
 
 export const permissionGroupIds: object = {
@@ -537,7 +567,9 @@ export const permissionGroupIds: object = {
     "ohos.permission.READ_AUDIO": "13",
     "ohos.permission.WRITE_AUDIO": "13",
     "ohos.permission.READ_DOCUMENT": "14",
-    "ohos.permission.WRITE_DOCUMENT": "14"
+    "ohos.permission.WRITE_DOCUMENT": "14",
+    "ohos.permission.READ_WHOLE_CALENDAR": "15",
+    "ohos.permission.WRITE_WHOLE_CALENDAR": "15"
 };
 
 export const noNeedDisplayApp: string[] = [
