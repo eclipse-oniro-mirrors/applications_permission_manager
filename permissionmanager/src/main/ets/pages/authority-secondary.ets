@@ -22,13 +22,11 @@ import Constants from '../common/utils/constant';
 class CalendarObj {
   permissionName: string
   groupName: string
-  description: string
   label: string
   index: number
-  constructor(permissionName: string, groupName: string, description: string, label: string, index: number) {
+  constructor(permissionName: string, groupName: string, label: string, index: number) {
     this.permissionName = permissionName
     this.groupName = groupName
-    this.description = description
     this.label = label
     this.index = index
   }
@@ -92,7 +90,7 @@ struct appNameItem {
   @State calendarListItem: CalendarObj[] = []; // Permission management secondary interface data array
   private routerData: any = router.getParams().routerData; // Routing jump data
   private backTitle = router.getParams().backTitle; // return title name
-  private allPermissionApplications = router.getParams().allPermissionApplications; // Array of all app permission names
+  private group = router.getParams().group;
 
   @Builder ListItemLayout(item, index) {
     ListItem() {
@@ -139,13 +137,13 @@ struct appNameItem {
    */
   aboutToAppear() {
     var permissionsList = groups.filter((item) => {
-      return item.groupName === this.backTitle
+      return item.name === this.group
     })
     for (let i = 0; i < permissionsList[0].permissions.length; i++) {
       permissionGroups.forEach((item) => {
         if (item.permissionName === permissionsList[0].permissions[i]) {
           this.calendarListItem.push(
-            new CalendarObj(item.permissionName, item.groupName, item.description, item.label, i)
+            new CalendarObj(item.permissionName, item.groupName, item.label, i)
           )
         }
       })

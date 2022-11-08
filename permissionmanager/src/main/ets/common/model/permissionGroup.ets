@@ -17,220 +17,189 @@ export const permissionGroups: any[] = [
     {
         "permissionName": "ohos.permission.LOCATION_IN_BACKGROUND",
         "groupName": "LOCATION",
-        "label": "后台定位权限",
-        "description": "允许应用在后台运行时获取位置信息。",
+        "label": $r("sys.string.ohos_lab_location_in_background"),
         "groupId": 0
     },
     {
         "permissionName": "ohos.permission.APPROXIMATELY_LOCATION",
         "groupName": "LOCATION",
-        "label": "模糊位置权限",
-        "description": "允许应用获取模糊位置信息。",
+        "label": $r("sys.string.ohos_lab_approximately_location"),
         "groupId": 0
     },
     {
         "permissionName": "ohos.permission.LOCATION",
         "groupName": "LOCATION",
-        "label": "前台定位权限",
-        "description": "允许应用在前台运行时获取位置信息。",
+        "label": $r("sys.string.ohos_lab_location"),
         "groupId": 0
     },
     {
         "permissionName": "ohos.permission.CAMERA",
         "groupName": "CAMERA",
-        "label": "拍摄照片和录制视频",
-        "description": "允许应用拍摄照片和视频。",
+        "label": $r("sys.string.ohos_lab_camera"),
         "groupId": 1
     },
     {
         "permissionName": "ohos.permission.MICROPHONE",
         "groupName": "MICROPHONE",
-        "label": "录制音频",
-        "description": "允许应用打开或关闭录音通路。",
+        "label": $r("sys.string.ohos_lab_microphone"),
         "groupId": 2
     },
     {
         "permissionName": "ohos.permission.ANSWER_CALL",
         "groupName": "PHONE",
-        "label": "接听电话",
-        "description": "允许应用接听电话。",
+        "label": $r("sys.string.ohos_lab_answer_call"),
         "groupId": 3
     },
     {
         "permissionName": "ohos.permission.MANAGE_VOICEMAIL",
         "groupName": "PHONE",
-        "label": "语音信箱",
-        "description": "允许应用管理语音信箱。",
+        "label": $r("sys.string.ohos_lab_manage_voicemail"),
         "groupId": 3
     },
     {
         "permissionName": "ohos.permission.READ_CELL_MESSAGES",
         "groupName": "SMS",
-        "label": "读取小区广播",
-        "description": "允许应用读取设备接收的小区广播信息。",
+        "label": $r("sys.string.ohos_lab_read_cell_messages"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.READ_MESSAGES",
         "groupName": "SMS",
-        "label": "读取短彩信",
-        "description": "允许应用读取设备接收的短彩信信息。",
+        "label": $r("sys.string.ohos_lab_read_messages"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.RECEIVE_MMS",
         "groupName": "SMS",
-        "label": "接收彩信",
-        "description": "允许应用接收彩信。",
+        "label": $r("sys.string.ohos_lab_receive_mms"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.RECEIVE_SMS",
         "groupName": "SMS",
-        "label": "接收短信",
-        "description": "允许应用接收短信。",
+        "label": $r("sys.string.ohos_lab_receive_sms"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.RECEIVE_WAP_MESSAGES",
         "groupName": "SMS",
-        "label": "接收WAP消息",
-        "description": "允许应用接收和处理WAP消息。",
+        "label": $r("sys.string.ohos_lab_receive_wap_messages"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.SEND_MESSAGES",
         "groupName": "SMS",
-        "label": "发送短彩信",
-        "description": "允许应用发送短彩信",
+        "label": $r("sys.string.ohos_lab_send_messages"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.READ_CONTACTS",
         "groupName": "CONTACTS",
-        "label": "读取通讯录",
-        "description": "允许应用读取设备上存储的联系人信息。",
+        "label": $r("sys.string.ohos_lab_read_contacts"),
         "groupId": 5
     },
     {
         "permissionName": "ohos.permission.WRITE_CONTACTS",
         "groupName": "CONTACTS",
-        "label": "新建/修改/删除通讯录",
-        "description": "允许应用新建/修改/删除设备上存储的联系人信息。",
+        "label": $r("sys.string.ohos_lab_write_contacts"),
         "groupId": 5
     },
     {
         "permissionName": "ohos.permission.READ_CALL_LOG",
         "groupName": "CALL_LOG",
-        "label": "读取通话记录",
-        "description": "允许应用读取设备上的通话记录信息。",
+        "label": $r("sys.string.ohos_lab_read_call_log"),
         "groupId": 6
     },
     {
         "permissionName": "ohos.permission.WRITE_CALL_LOG",
         "groupName": "CALL_LOG",
-        "label": "新建/修改/删除通话记录",
-        "description": "允许新建/修改/删除设备上的通话记录信息。",
+        "label": $r("sys.string.ohos_lab_write_call_log"),
         "groupId": 6
     },
     {
         "permissionName": "ohos.permission.MEDIA_LOCATION",
         "groupName": "MEDIA",
-        "label": "允许应用访问拍摄位置",
-        "description": "应用访问用户媒体文件中的拍摄位置信息如经纬度信息。",
+        "label": $r("sys.string.ohos_lab_media_location"),
         "groupId": 7
     },
     {
         "permissionName": "ohos.permission.READ_MEDIA",
         "groupName": "MEDIA",
-        "label": "允许应用读取媒体文件",
-        "description": "允许应用访问户媒体文件，如视频、音频、图片等。",
+        "label": $r("sys.string.ohos_lab_read_media"),
         "groupId": 7
     },
     {
         "permissionName": "ohos.permission.WRITE_MEDIA",
         "groupName": "MEDIA",
-        "label": "允许应用读写媒体文件",
-        "description": "允许应用读写户媒体文件，如视频、音频、图片等。",
+        "label": $r("sys.string.ohos_lab_write_media"),
         "groupId": 7
     },
     {
         "permissionName": "ohos.permission.READ_CALENDAR",
         "groupName": "CALENDAR",
-        "label": "读取日历",
-        "description": "允许应用读取日历。",
+        "label": $r("sys.string.ohos_lab_read_calendar"),
         "groupId": 8
     },
     {
         "permissionName": "ohos.permission.WRITE_CALENDAR",
         "groupName": "CALENDAR",
-        "label": "新建/修改/删除日历",
-        "description": "允许应用新建/修改/删除日历。",
+        "label": $r("sys.string.ohos_lab_write_calendar"),
         "groupId": 8
     },
     {
         "permissionName": "ohos.permission.ACTIVITY_MOTION",
         "groupName": "SPORT",
-        "label": "读取用户的运动状态",
-        "description": "允许应用程序读取用户的运动状态。",
+        "label": $r("sys.string.ohos_lab_activity_motion"),
         "groupId": 9
     },
     {
         "permissionName": "ohos.permission.READ_HEALTH_DATA",
         "groupName": "HEALTH",
-        "label": "读取用户的健康数据",
-        "description": "允许应用程序读取用户的健康数据。",
+        "label": $r("sys.string.ohos_lab_read_health_data"),
         "groupId": 10
     },
     {
         "permissionName": "ohos.permission.DISTRIBUTED_DATASYNC",
         "groupName": "OTHER",
         "icon": $r("app.media.ic_multi_device_vector"),
-        "text": "使用多设备协同？",
-        "label": "多设备协同",
-        "description": "发现并访问其他设备。",
+        "text": $r("app.string.group_label_distributed_datasync"),
+        "label": $r("app.string.multi_device_collaboration"),
         "groupId": 11
     },
     {
         "permissionName": "ohos.permission.READ_IMAGEVIDEO",
         "groupName": "IMAGE_AND_VIDEOS",
         "label": $r('sys.string.ohos_desc_read_imagevideo'),
-        "description": "允许应用读取用户公共目录的图片或视频文件。",
         "groupId": 12
     },
     {
         "permissionName": "ohos.permission.WRITE_IMAGEVIDEO",
         "groupName": "IMAGE_AND_VIDEOS",
         "label": $r('sys.string.ohos_desc_write_imagevideo'),
-        "description": "允许应用修改用户公共目录的图片或视频文件。",
         "groupId": 12
     },
     {
         "permissionName": "ohos.permission.READ_AUDIO",
         "groupName": "AUDIOS",
         "label": $r('sys.string.ohos_desc_read_audio'),
-        "description": "允许应用读取用户公共目录的音频文件。",
         "groupId": 13
     },
     {
         "permissionName": "ohos.permission.WRITE_AUDIO",
         "groupName": "AUDIOS",
         "label": $r('sys.string.ohos_desc_write_audio'),
-        "description": "允许应用修改用户公共目录的音频文件。",
         "groupId": 13
     },
     {
         "permissionName": "ohos.permission.READ_DOCUMENT",
         "groupName": "DOCUMENTS",
         "label": $r('sys.string.ohos_desc_read_document'),
-        "description": "允许应用读取用户公共目录的文档。",
         "groupId": 14
     },
     {
         "permissionName": "ohos.permission.WRITE_DOCUMENT",
         "groupName": "DOCUMENTS",
         "label": $r('sys.string.ohos_desc_write_document'),
-        "description": "允许应用修改用户公共目录的文档。",
         "groupId": 14
     },
     {
@@ -250,10 +219,10 @@ export const permissionGroups: any[] = [
 export const groups: any[] = [
     {
         "name": "LOCATION",
-        "groupName": "位置信息",
+        "groupName": $r("app.string.groupName_location"),
         "icon": $r('app.media.ic_public_gps'),
         "description": "",
-	      "label": "访问位置信息？",
+        "label": $r("app.string.group_label_location"),
         "permissions": [
             "ohos.permission.LOCATION_IN_BACKGROUND",
             "ohos.permission.APPROXIMATELY_LOCATION",
@@ -263,9 +232,9 @@ export const groups: any[] = [
     },
     {
         "name": "CAMERA",
-        "groupName": "相机",
+        "groupName": $r("app.string.groupName_camera"),
         "icon": $r('app.media.ic_public_camera'),
-	      "label": "使用相机？",
+        "label": $r("app.string.group_label_camera"),
         "description": "",
         "permissions": [
             "ohos.permission.CAMERA"
@@ -274,9 +243,9 @@ export const groups: any[] = [
     },
     {
         "name": "MICROPHONE",
-        "groupName": "麦克风",
+        "groupName": $r("app.string.groupName_microphone"),
         "icon": $r('app.media.ic_public_voice'),
-	      "label": "使用麦克风？",
+        "label": $r("app.string.group_label_microphone"),
         "description": "",
         "permissions": [
             "ohos.permission.MICROPHONE"
@@ -285,9 +254,9 @@ export const groups: any[] = [
     },
     {
         "name": "PHONE",
-        "groupName": "电话",
+        "groupName": $r("app.string.groupName_phone"),
         "icon": $r('app.media.ic_public_phone'),
-	      "label": "使用拨打电话？",
+        "label": $r("app.string.group_label_phone"),
         "description": "",
         "permissions": [
             "ohos.permission.ANSWER_CALL",
@@ -297,10 +266,10 @@ export const groups: any[] = [
     },
     {
         "name": "SMS",
-        "groupName": "信息",
+        "groupName": $r("app.string.groupName_sms"),
         "icon": $r('app.media.ic_public_message'),
-        "label": "访问信息？",
-	      "description": "",
+        "label": $r("app.string.group_label_sms"),
+        "description": "",
         "permissions": [
             "ohos.permission.READ_CELL_MESSAGES",
             "ohos.permission.READ_MESSAGES",
@@ -313,10 +282,10 @@ export const groups: any[] = [
     },
     {
         "name": "CONTACTS",
-        "groupName": "通讯录",
+        "groupName": $r("app.string.groupName_contacts"),
         "icon": $r('app.media.ic_public_contacts_group'),
-        "label": "访问通讯录？",
-	      "description": "",
+        "label": $r("app.string.group_label_contacts"),
+        "description": "",
         "permissions": [
             "ohos.permission.READ_CONTACTS",
             "ohos.permission.WRITE_CONTACTS"
@@ -325,10 +294,10 @@ export const groups: any[] = [
     },
     {
         "name": "CALL_LOG",
-        "groupName": "通话记录",
+        "groupName": $r("app.string.groupName_call_log"),
         "icon": $r('app.media.ic_call_logs'),
-	      "label": "访问通话记录？",
-	      "description": "",
+        "label": $r("app.string.group_label_call_log"),
+        "description": "",
         "permissions": [
             "ohos.permission.READ_CALL_LOG",
             "ohos.permission.WRITE_CALL_LOG"
@@ -337,10 +306,10 @@ export const groups: any[] = [
     },
     {
         "name": "MEDIA",
-        "groupName": "媒体和文件",
+        "groupName": $r("app.string.groupName_media"),
         "icon": $r('app.media.ic_public_folder'),
         "description": "",
-	      "label": "访问媒体和文件？",
+        "label": $r("app.string.group_label_media"),
         "permissions": [
             "ohos.permission.MEDIA_LOCATION",
             "ohos.permission.READ_MEDIA",
@@ -350,10 +319,10 @@ export const groups: any[] = [
     },
     {
         "name": "CALENDAR",
-        "groupName": "日历",
+        "groupName": $r("app.string.groupName_calendar"),
         "icon": $r('app.media.ic_public_calendar'),
-        "label": "访问日历？",
-	      "description": "",
+        "label": $r("app.string.group_label_calendar"),
+        "description": "",
         "permissions": [
             "ohos.permission.READ_CALENDAR",
             "ohos.permission.WRITE_CALENDAR"
@@ -362,9 +331,9 @@ export const groups: any[] = [
     },
     {
         "name": "SPORT",
-        "groupName": "健身运动",
+        "groupName": $r("app.string.groupName_sport"),
         "icon": $r('app.media.ic_sport'),
-	      "label": "访问健身运动？",
+        "label": $r("app.string.group_label_sport"),
         "description": "",
         "permissions": [
             "ohos.permission.ACTIVITY_MOTION"
@@ -373,9 +342,9 @@ export const groups: any[] = [
     },
     {
         "name": "HEALTH",
-        "groupName": "身体传感器",
+        "groupName": $r("app.string.groupName_health"),
         "icon": $r('app.media.ic_ssensor'),
-	      "label": "使用身体传感器？",
+        "label": $r("app.string.group_label_health"),
         "description": "",
         "permissions": [
             "ohos.permission.READ_HEALTH_DATA"
@@ -384,7 +353,7 @@ export const groups: any[] = [
     },
     {
         "name": "OTHER",
-        "groupName": "其他权限",
+        "groupName": $r("app.string.groupName_other"),
         "icon": $r('app.media.ic_more'),
         "description": "",
         "permissions": [
@@ -396,7 +365,7 @@ export const groups: any[] = [
         "name": "IMAGE_AND_VIDEOS",
         "groupName": $r('sys.string.ohos_lab_read_imagevideo'),
         "icon": $r('app.media.ic_public_folder'),
-        "label": "访问图片和视频？",
+        "label": $r("app.string.group_label_image_and_videos"),
         "description": "",
         "permissions": [
             "ohos.permission.READ_IMAGEVIDEO",
@@ -408,7 +377,7 @@ export const groups: any[] = [
         "name": "AUDIOS",
         "groupName": $r('sys.string.ohos_lab_read_audio'),
         "icon": $r('app.media.ic_public_folder'),
-        "label": "访问音乐和音频？",
+        "label": $r("app.string.group_label_audios"),
         "description": "",
         "permissions": [
             "ohos.permission.READ_AUDIO",
@@ -420,7 +389,7 @@ export const groups: any[] = [
         "name": "DOCUMENTS",
         "groupName": $r('sys.string.ohos_lab_read_document'),
         "icon": $r('app.media.ic_public_folder'),
-        "label": "访问文件？",
+        "label": $r("app.string.group_label_document"),
         "description": "",
         "permissions": [
             "ohos.permission.READ_DOCUMENT",
@@ -430,9 +399,9 @@ export const groups: any[] = [
     },
     {
         "name": "CALENDAR_ALL",
-        "groupName": '全部日历',
+        "groupName": $r("app.string.groupName_calendar_all"),
         "icon": $r('app.media.ic_public_calendar'),
-        "label": "访问全部日历？",
+        "label": $r("app.string.group_label_calendar_all"),
         "description": "",
         "permissions": [
             "ohos.permission.READ_WHOLE_CALENDAR",

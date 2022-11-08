@@ -22,7 +22,7 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import { groups, userGrantPermissions, permissionGroupPermissions, noNeedDisplayApp, globalGroup } from "../common/model/permissionGroup";
-import { permissionGroups, permissionGroupIds } from "../common/model/permissionGroup";
+import { permissionGroups, permissionGroupIds, showSubpermissionsGrop } from "../common/model/permissionGroup";
 import { makePy } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
@@ -97,11 +97,10 @@ struct authorityManagementPage {
             }
           }
         }.onClick(() => {
-          if (item.groupName === '其他权限' || item.groupName === '电话' || item.groupName === '通讯录' || item.groupName === '信息'
-          || item.groupName === '通话记录' || item.groupName === '日历') {
+          if (item.group === 'OTHER' || showSubpermissionsGrop.indexOf(item.group) !== -1) {
             router.push({
               uri: 'pages/authority-secondary',
-              params: { routerData: this.allPermissionApplications, backTitle: item.groupName }
+              params: { routerData: this.allPermissionApplications, backTitle: item.groupName, group: item.group }
             })
           } else {
             var dataList = this.allPermissionApplications.filter((ele) => {
@@ -233,6 +232,7 @@ struct authorityManagementPage {
           item.alphabeticalIndex = makePy(item.labelId)[0].slice(0, 1); // Get the first letter in the returned initials array
         }
       })
+      this.getPermissionLabel()
     })
       .catch((error) => {
         console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
@@ -250,6 +250,21 @@ struct authorityManagementPage {
         return groups[permissionGroups[i].groupId];
       }
     }
+  }
+
+  /**
+   * Get all permission label
+   */
+  getPermissionLabel() {
+    globalThis.allUserPermissions.forEach(userPermission => {
+      permissionGroups.forEach(permissionInfo => {
+        if(userPermission == permissionInfo.permissionName) {
+          globalThis.context.resourceManager.getString(permissionInfo.label.id).then(val => {
+            globalThis.permissionLabels[userPermission] = val
+          })
+        }
+      })
+    })
   }
 
   /**

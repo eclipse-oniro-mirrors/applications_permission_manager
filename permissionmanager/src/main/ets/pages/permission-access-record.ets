@@ -338,7 +338,7 @@ struct permissionRecordPage {
    * @param {Number} The time stamp
    */
   getTime(time, format='MM月DD日 NNHH:mm') {
-    if(this.strings.morning == 'am') { format = 'MM/DD HH:mm NN' }
+    if(this.strings.morning == 'am') { format = 'HH:mm NN MM/DD' }
     let date = new Date(time * 1000)
     let config = {
       MM: date.getMonth() + 1,
