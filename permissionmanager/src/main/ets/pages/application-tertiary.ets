@@ -175,11 +175,7 @@ struct mediaDocumentItem {
     if(showSubpermissionsGrop.indexOf(globalThis.currentPermissionGroup) != -1) {
       reason = []
       permissions.forEach(permission => {
-        permissionGroups.forEach(permissionGroup => {
-          if(permissionGroup.permissionName == permission) {
-            reason.push(permissionGroup.label)
-          }
-        })
+        reason.push(globalThis.permissionLabels[permission])
       })
       Promise.all([globalThis.context.resourceManager.getString($r("app.string.separator").id),
       globalThis.context.resourceManager.getString($r("app.string.reason_suffix").id)])
