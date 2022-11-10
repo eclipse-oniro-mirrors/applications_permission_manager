@@ -380,6 +380,8 @@ export default class Constants {
 
     //global dialog
     static ROW_HEIGHT = 56
+    static ROW_PADDING_TOP = 14
+    static ROW_PADDING_BOTTOM = 14
     static DIALOG_MARGIN_BOTTOM = 12
 
     //

@@ -63,9 +63,9 @@ struct globalDialog {
           .fontColor($r('app.color.label_color'))
           .fontWeight(FontWeight.Medium)
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
-          .height(Constants.ROW_HEIGHT)
           .width(Constants.FULL_WIDTH)
-          .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
+          .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT,
+                      top: Constants.ROW_PADDING_TOP, bottom: Constants.ROW_PADDING_BOTTOM})
         Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_desc_microphone') :
             globalThis.globalState == CAMERA ? $r('app.string.global_desc_camera') :
           $r('app.string.global_desc_camera_and_microphone'))

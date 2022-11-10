@@ -18,7 +18,7 @@
     },
     {
       "name": "access_permission",
-      "value": "access permission"
+      "value": " access permission"
     },
     {
       "name": "permission_access_record",
@@ -58,19 +58,19 @@
     },
     {
       "name": "reason_suffix",
-      "value": " and other permissions."
+      "value": " and other permissions. "
     },
     {
       "name": "separator",
-      "value": ","
+      "value": ", "
     },
     {
       "name": "visits",
-      "value": "Number of visits:"
+      "value": "Number of visits: "
     },
     {
       "name": "recent_visit",
-      "value": ";Recent visits:"
+      "value": "; Recent visits: "
     },
     {
       "name": "morning",
@@ -199,6 +199,126 @@
     {
       "name": "close_camera_desc",
       "value": "After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
+    },
+    {
+      "name": "groupName_location",
+      "value": "Location information"
+    },
+    {
+      "name": "groupName_camera",
+      "value": "Camera"
+    },
+    {
+      "name": "groupName_microphone",
+      "value": "Microphone"
+    },
+    {
+      "name": "groupName_phone",
+      "value": "Phone"
+    },
+    {
+      "name": "groupName_sms",
+      "value": "Information"
+    },
+    {
+      "name": "groupName_contacts",
+      "value": "Address book"
+    },
+    {
+      "name": "groupName_call_log",
+      "value": "Call log"
+    },
+    {
+      "name": "groupName_media",
+      "value": "Media & Documents"
+    },
+    {
+      "name": "groupName_calendar",
+      "value": "Calendar"
+    },
+    {
+      "name": "groupName_sport",
+      "value": "Fitness"
+    },
+    {
+      "name": "groupName_health",
+      "value": "Body sensor"
+    },
+    {
+      "name": "groupName_other",
+      "value": "Other rights"
+    },
+    {
+      "name": "groupName_calendar_all",
+      "value": "All of the calendar"
+    },
+    {
+      "name": "multi_device_collaboration",
+      "value": "Multi-device collaboration"
+    },
+    {
+      "name": "group_label_location",
+      "value": " access location information?"
+    },
+    {
+      "name": "group_label_camera",
+      "value": " using a camera?"
+    },
+    {
+      "name": "group_label_microphone",
+      "value": " using a microphone?"
+    },
+    {
+      "name": "group_label_phone",
+      "value": " use to dial a phone?"
+    },
+    {
+      "name": "group_label_sms",
+      "value": " access to information?"
+    },
+    {
+      "name": "group_label_contacts",
+      "value": " access the address book?"
+    },
+    {
+      "name": "group_label_call_log",
+      "value": " access to call records?"
+    },
+    {
+      "name": "group_label_media",
+      "value": " access to media and files?"
+    },
+    {
+      "name": "group_label_calendar",
+      "value": " access to the calendar?"
+    },
+    {
+      "name": "group_label_sport",
+      "value": " visit the gym?"
+    },
+    {
+      "name": "group_label_health",
+      "value": " use body sensors?"
+    },
+    {
+      "name": "group_label_distributed_datasync",
+      "value": " use multiple device collaboration?"
+    },
+    {
+      "name": "group_label_image_and_videos",
+      "value": " access to pictures and videos?"
+    },
+    {
+      "name": "group_label_audios",
+      "value": " access to music and audio?"
+    },
+    {
+      "name": "group_label_document",
+      "value": " access to files?"
+    },
+    {
+      "name": "group_label_calendar_all",
+      "value": " access the entire calendar?"
     }
   ]
 }

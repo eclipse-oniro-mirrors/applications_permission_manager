@@ -35,6 +35,8 @@ import { LocationCanvas } from '../common/components/location'
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 
+let permissionLabels: Object = {}
+
 @Entry
 @Component
 struct dialogPlusPage {
@@ -311,20 +313,12 @@ struct PermissionDialog {
           var exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name)
           //判断是否为需要展示子权限的权限组
           if(showSubpermissionsGrop.indexOf(group.name) != -1) {
-            var permissionDetail
-            permissionGroups.forEach(permissionGroup => {
-              if(permissionGroup.permissionName == permission) {
-                //获取授权的权限信息
-                permissionDetail = permissionGroup
-              }
-            })
-            //权限组已存在的情况
             if(!exist) {
-              group.description = [permissionDetail.label]
+              group.description = [permissionLabels[permission]]
               this.grantGroups.push(group)
             }else {
-              if(exist.description.indexOf(permissionDetail.label) == -1) {
-                exist.description.push(permissionDetail.label)
+              if(exist.description.indexOf(permissionLabels[permission]) == -1) {
+                exist.description.push(permissionLabels[permission])
               }
             }
           }else {
@@ -357,6 +351,9 @@ struct PermissionDialog {
     })
     bundleManager.getBundleInfo(bundleName, Constants.PARMETER_BUNDLE_FLAG).then(info => {
       this.grantGroups.forEach((group) => {
+        globalThis.extensionContext.resourceManager.getString(group.label.id, (err, val) => {
+          group.label = val
+        })
         if(group.description) {
           Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
           globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id)])
@@ -399,6 +396,15 @@ struct PermissionDialog {
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.fuzzy_to_exact").id, (err, val) => {
       this.resource.fuzzy_to_exact = val
+    })
+    this.reqPerms.forEach(reqPerm => {
+      permissionGroups.forEach(permissionInfo => {
+        if(reqPerm == permissionInfo.permissionName) {
+          globalThis.extensionContext.resourceManager.getString(permissionInfo.label.id).then(val => {
+            permissionLabels[reqPerm] = val
+          })
+        }
+      })
     })
   }
 

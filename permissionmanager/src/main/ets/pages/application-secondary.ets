@@ -72,7 +72,7 @@ struct appNamePlusPage {
         }.onClick(() => {
           globalThis.currentPermissionGroup = item.group
           if (status === 'allow') {
-            if (item.groupName == "其他权限") {
+            if (item.group == "OTHER") {
               router.push({
                 uri: 'pages/other-permissions',
                 params: {
@@ -96,7 +96,7 @@ struct appNamePlusPage {
             }
           }
           else if (status === 'banned') {
-            if (item.groupName == "其他权限") {
+            if (item.group == "OTHER") {
               router.push({
                 uri: 'pages/other-permissions',
                 params: {
