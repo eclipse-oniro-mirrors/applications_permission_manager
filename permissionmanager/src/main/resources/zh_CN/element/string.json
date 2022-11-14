@@ -199,6 +199,126 @@
     {
       "name": "close_camera_desc",
       "value": "关闭后，所有应用服务都将无法正常使用摄像头拍摄照片、视频或进行人脸识别。若需恢复，请打开摄像头开关。"
+    },
+    {
+      "name": "groupName_location",
+      "value": "位置信息"
+    },
+    {
+      "name": "groupName_camera",
+      "value": "相机"
+    },
+    {
+      "name": "groupName_microphone",
+      "value": "麦克风"
+    },
+    {
+      "name": "groupName_phone",
+      "value": "电话"
+    },
+    {
+      "name": "groupName_sms",
+      "value": "信息"
+    },
+    {
+      "name": "groupName_contacts",
+      "value": "通讯录"
+    },
+    {
+      "name": "groupName_call_log",
+      "value": "通话记录"
+    },
+    {
+      "name": "groupName_media",
+      "value": "媒体和文件"
+    },
+    {
+      "name": "groupName_calendar",
+      "value": "日历"
+    },
+    {
+      "name": "groupName_sport",
+      "value": "健身运动"
+    },
+    {
+      "name": "groupName_health",
+      "value": "身体传感器"
+    },
+    {
+      "name": "groupName_other",
+      "value": "其他权限"
+    },
+    {
+      "name": "groupName_calendar_all",
+      "value": "全部日历"
+    },
+    {
+      "name": "multi_device_collaboration",
+      "value": "多设备协同"
+    },
+    {
+      "name": "group_label_location",
+      "value": "访问位置信息？"
+    },
+    {
+      "name": "group_label_camera",
+      "value": "使用相机？"
+    },
+    {
+      "name": "group_label_microphone",
+      "value": "使用麦克风？"
+    },
+    {
+      "name": "group_label_phone",
+      "value": "使用拨打电话？"
+    },
+    {
+      "name": "group_label_sms",
+      "value": "访问信息？"
+    },
+    {
+      "name": "group_label_contacts",
+      "value": "访问通讯录？"
+    },
+    {
+      "name": "group_label_call_log",
+      "value": "访问通话记录？"
+    },
+    {
+      "name": "group_label_media",
+      "value": "访问媒体和文件？"
+    },
+    {
+      "name": "group_label_calendar",
+      "value": "访问日历？"
+    },
+    {
+      "name": "group_label_sport",
+      "value": "访问健身运动？"
+    },
+    {
+      "name": "group_label_health",
+      "value": "使用身体传感器？"
+    },
+    {
+      "name": "group_label_distributed_datasync",
+      "value": "使用多设备协同？"
+    },
+    {
+      "name": "group_label_image_and_videos",
+      "value": "访问图片和视频？"
+    },
+    {
+      "name": "group_label_audios",
+      "value": "访问音乐和音频？"
+    },
+    {
+      "name": "group_label_document",
+      "value": "访问文件？"
+    },
+    {
+      "name": "group_label_calendar_all",
+      "value": "访问全部日历？"
     }
   ]
 }

@@ -24,6 +24,7 @@ export default class MainAbility extends Ability {
         globalThis.allBundleInfo = [];
         globalThis.allUserPermissions = []
         globalThis.allGroups = []
+        globalThis.permissionLabels = {}
     }
 
     onWindowStageCreate(windowStage) {
