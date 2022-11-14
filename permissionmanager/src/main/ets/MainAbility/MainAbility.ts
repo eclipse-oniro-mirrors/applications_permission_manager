@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import Ability from '@ohos.application.Ability';
+import UIAbility from '@ohos.app.ability.UIAbility'
 
 var TAG = "PermissionManager_MainAbility:";
 
-export default class MainAbility extends Ability {
+export default class MainAbility extends UIAbility {
     onCreate(want, launchParam) {
         console.log(TAG + "MainAbility onCreate, ability name is " + want.abilityName + ".");
         globalThis.context = this.context;
