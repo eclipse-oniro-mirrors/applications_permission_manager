@@ -14,7 +14,7 @@
  */
 
 import bundle from '@ohos.bundle';
-import router from '@system.router';
+import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager'
 import { backBar } from "../common/components/backBar";
@@ -153,8 +153,8 @@ struct permissionRecordPage {
                 }
               }.height(Constants.LISTITEM_HEIGHT_APPLICATION)
               .onClick(() => {
-                router.push({
-                  uri: 'pages/application-secondary',
+                router.pushUrl({
+                  url: 'pages/application-secondary',
                   params: { routerData: {
                     'bundleName': permissionApplication.name,
                     'tokenId': permissionApplication.accessTokenId,
@@ -196,8 +196,8 @@ struct permissionRecordPage {
                 }
               }.height(Constants.LISTITEM_HEIGHT_PERMISSION)
               .onClick(() => {
-                router.push({
-                  uri: 'pages/application-secondary',
+                router.pushUrl({
+                  url: 'pages/application-secondary',
                   params: { routerData: {
                     'bundleName': item.name,
                     'tokenId': item.accessTokenId,

@@ -16,7 +16,7 @@
 import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
-import router from '@system.router';
+import router from '@ohos.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { getAppLabel, getAppIcon, verifyAccessToken } from "../common/utils/utils";
@@ -32,8 +32,8 @@ var TAG = 'PermissionManager_MainAbility:'
   .height(height)
 }
 
-let routerData: any = router.getParams().routerData; // Routing jump data
-let backTitle = router.getParams().backTitle; // return title name
+let routerData: any = router.getParams()['routerData']; // Routing jump data
+let backTitle = router.getParams()['backTitle']; // return title name
 class ApplicationObj {
   labelId: string
   iconId: string
@@ -182,7 +182,7 @@ struct applicationItem {
    */
   grantUserGrantedPermission(accessTokenId, permission, index) {
     abilityAccessCtrl.createAtManager().grantUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then(result => {
+      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
       // result: 0 Authorization succeeded; result: -1 Authorization failed
       this.toggleIsOn[index] = true;
       let num = Constants.PERMISSION_NUM;
@@ -210,7 +210,7 @@ struct applicationItem {
    */
   revokeUserGrantedPermission(accessTokenId, permission, index) {
     abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then(result => {
+      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
       // result: 0 successfully cancel the authorization; result: -1 cancel the authorization failed
       this.toggleIsOn[index] = false;
       let num = Constants.PERMISSION_NUM;
@@ -220,7 +220,7 @@ struct applicationItem {
         }
       }
       this.permissionNum = num;
-    }).catch(error => {
+    }).catch(() => {
         this.authorizeDialogController.open();
         this.toggleIsOn[index] = true;
         setTimeout(()=> {
