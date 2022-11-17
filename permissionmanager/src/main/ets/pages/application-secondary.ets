@@ -14,7 +14,7 @@
  */
 
 import { backBar } from "../common/components/backBar";
-import router from '@system.router';
+import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { groups } from "../common/model/permissionGroup";
 import Constants from '../common/utils/constant';
@@ -40,7 +40,7 @@ class permissionObj {
 struct appNamePlusPage {
   @State allowedListItem: permissionObj[] = []; // Array of allowed permissions
   @State bannedListItem: permissionObj[] = []; // array of forbidden permissions
-  private routerData: any = router.getParams().routerData; // Routing jump data
+  private routerData: any = router.getParams()['routerData']; // Routing jump data
 
   @Builder ListItemLayout(item, index, status) {
     ListItem() {
@@ -73,8 +73,8 @@ struct appNamePlusPage {
           globalThis.currentPermissionGroup = item.group
           if (status === 'allow') {
             if (item.group == "OTHER") {
-              router.push({
-                uri: 'pages/other-permissions',
+              router.pushUrl({
+                url: 'pages/other-permissions',
                 params: {
                   routerData: this.routerData.bundleName,
                   backTitle: item.groupName,
@@ -84,8 +84,8 @@ struct appNamePlusPage {
                 }
               });
             } else {
-              router.push({
-                uri: 'pages/application-tertiary',
+              router.pushUrl({
+                url: 'pages/application-tertiary',
                 params: {
                   routerData: this.routerData.bundleName,
                   backTitle: item.groupName,
@@ -97,8 +97,8 @@ struct appNamePlusPage {
           }
           else if (status === 'banned') {
             if (item.group == "OTHER") {
-              router.push({
-                uri: 'pages/other-permissions',
+              router.pushUrl({
+                url: 'pages/other-permissions',
                 params: {
                   routerData: this.routerData.bundleName,
                   backTitle: item.groupName,
@@ -108,8 +108,8 @@ struct appNamePlusPage {
                 }
               });
             } else {
-              router.push({
-                uri: 'pages/application-tertiary',
+              router.pushUrl({
+                url: 'pages/application-tertiary',
                 params: {
                   routerData: this.routerData.bundleName,
                   backTitle: item.groupName,

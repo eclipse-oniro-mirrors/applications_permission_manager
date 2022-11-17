@@ -16,7 +16,7 @@
 import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
-import router from '@system.router';
+import router from '@ohos.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
@@ -98,8 +98,8 @@ struct authorityManagementPage {
           }
         }.onClick(() => {
           if (item.group === 'OTHER' || showSubpermissionsGrop.indexOf(item.group) !== -1) {
-            router.push({
-              uri: 'pages/authority-secondary',
+            router.pushUrl({
+              url: 'pages/authority-secondary',
               params: { routerData: this.allPermissionApplications, backTitle: item.groupName, group: item.group }
             })
           } else {
@@ -109,24 +109,24 @@ struct authorityManagementPage {
 
             globalThis.currentPermissionGroup = item.group
             if(globalGroup.indexOf(item.group) == -1) {
-              router.push({
-                uri: 'pages/authority-tertiary-groups',
+              router.pushUrl({
+                url: 'pages/authority-tertiary-groups',
                 params: { routerData: dataList, backTitle: item.groupName  }
               })
             }else {
               if(item.group == 'MICROPHONE') {
                 var audioManager = audio.getAudioManager();
                 audioManager.isMicrophoneMute().then(value => {
-                  router.push({
-                    uri: 'pages/authority-tertiary-groups',
+                  router.pushUrl({
+                    url: 'pages/authority-tertiary-groups',
                     params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
                   })
                 })
               }else {
                 camera.getCameraManager(globalThis.context).then(cameraManager => {
                   let mute = cameraManager.isCameraMuted()
-                  router.push({
-                    uri: 'pages/authority-tertiary-groups',
+                  router.pushUrl({
+                    url: 'pages/authority-tertiary-groups',
                     params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !mute }
                   })
                 })
@@ -625,8 +625,8 @@ struct applicationItem {
             }
           }
         }.onClick(() => {
-          router.push({
-            uri: 'pages/application-secondary',
+          router.pushUrl({
+            url: 'pages/application-secondary',
             params: { routerData: item }
           });
         })

@@ -104,8 +104,12 @@ struct globalDialog {
     Log.info('global accept')
     if(globalThis.globalState == MICROPHONE) {
       var audioManager = audio.getAudioManager();
-      audioManager.setMicrophoneMute(false).then(() => {
-        globalThis.globalContext.terminateSelf()
+      let audioVolumeManager = audioManager.getVolumeManager();
+      let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
+      audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+        audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
+          globalThis.globalContext.terminateSelf()
+        })
       })
     }else if(globalThis.globalState == CAMERA) {
       camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
@@ -116,8 +120,12 @@ struct globalDialog {
       camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
         cameraManager.muteCamera(false)
         var audioManager = audio.getAudioManager();
-        audioManager.setMicrophoneMute(false).then(() => {
-          globalThis.globalContext.terminateSelf()
+        let audioVolumeManager = audioManager.getVolumeManager();
+        let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
+        audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+          audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
+            globalThis.globalContext.terminateSelf()
+          })
         })
       })
     }

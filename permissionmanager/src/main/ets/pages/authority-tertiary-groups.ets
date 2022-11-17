@@ -16,7 +16,7 @@
 import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
-import router from '@system.router';
+import router from '@ohos.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
@@ -35,11 +35,11 @@ var TAG = 'PermissionManager_MainAbility:'
   .height(height)
 }
 
-let routerData: any = router.getParams().routerData; // Routing jump data
-let backTitle = router.getParams().backTitle; // return title name
+let routerData: any = router.getParams()['routerData']; // Routing jump data
+let backTitle = router.getParams()['backTitle']; // return title name
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
-let globalIsOn: any = router.getParams().globalIsOn; // return title name
+let globalIsOn: any = router.getParams()['globalIsOn']; // return title name
 
 class ApplicationObj {
   labelId: string
@@ -282,8 +282,8 @@ struct applicationItem {
             routerData.forEach(item => {
               permissions.push(item.permission)
             })
-            router.push({
-              uri: 'pages/application-tertiary',
+            router.pushUrl({
+              url: 'pages/application-tertiary',
               params: {
                 routerData: this.bundleNameGroup[item.index],
                 backTitle,
@@ -463,8 +463,12 @@ struct applicationItem {
                             })
                           }else {
                             var audioManager = audio.getAudioManager();
-                            audioManager.setMicrophoneMute(false).then(() => {
-                              this.globalIsOn = isOn
+                            let audioVolumeManager = audioManager.getVolumeManager();
+                            let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
+                            audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+                              audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
+                                this.globalIsOn = isOn
+                              })
                             })
                           }
                         }
