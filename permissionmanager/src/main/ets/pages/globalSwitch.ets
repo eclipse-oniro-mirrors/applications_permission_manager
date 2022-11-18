@@ -16,7 +16,7 @@
 import Constants from '../common/utils/constant';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera';
-import bundle from '@ohos.bundle';
+import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { Log } from '../common/utils/utils'
 import deviceInfo from '@ohos.deviceInfo'
@@ -139,7 +139,7 @@ struct globalDialog {
 
   aboutToAppear() {
     var acManager = abilityAccessCtrl.createAtManager()
-    bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
+    bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
       acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2)
     })
   }

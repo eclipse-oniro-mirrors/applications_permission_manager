@@ -58,32 +58,19 @@ export default class Constants {
     static TEXTINPUT_IMAGE_MARGIN_TOP = 12;
 
     // grid useSizeType
-    static GRID_MARGIN = '0vp';
     static GUTTER = 0;
-    static LEFT_XS_SPAN = 0;
-    static LEFT_XS_OFFSET = 0;
-    static LEFT_SM_SPAN = 0;
-    static LEFT_SM_OFFSET = 0;
-    static LEFT_MD_SPAN = 0;
-    static LEFT_MD_OFFSET = 0;
-    static LEFT_LG_SPAN = 2;
-    static LEFT_LG_OFFSET = 0;
-    static MIDDLE_XS_SPAN = 2;
-    static MIDDLE_XS_OFFSET = 0;
-    static MIDDLE_SM_SPAN = 4;
-    static MIDDLE_SM_OFFSET = 0;
-    static MIDDLE_MD_SPAN = 8;
-    static MIDDLE_MD_OFFSET = 0;
-    static MIDDLE_LG_SPAN = 8;
-    static MIDDLE_LG_OFFSET = 2;
-    static RIGHT_XS_SPAN = 0;
-    static RIGHT_XS_OFFSET = 2;
-    static RIGHT_SM_SPAN = 0;
-    static RIGHT_SM_OFFSET = 4;
-    static RIGHT_MD_SPAN = 0;
-    static RIGHT_MD_OFFSET = 8;
-    static RIGHT_LG_SPAN = 2;
-    static RIGHT_LG_OFFSET = 10;
+    static XS_COLUMNS = 2;
+    static XS_SPAN = 2;
+    static XS_OFFSET = 0;
+    static SM_COLUMNS = 4;
+    static SM_SPAN = 4;
+    static SM_OFFSET = 0;
+    static MD_COLUMNS = 8;
+    static MD_SPAN = 8;
+    static MD_OFFSET = 0;
+    static LG_COLUMNS = 12;
+    static LG_SPAN = 8;
+    static LG_OFFSET = 2;
 
     // 100% width,height
     static FULL_WIDTH = '100%';
