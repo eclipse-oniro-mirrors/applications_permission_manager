@@ -55,12 +55,8 @@ export function getAppIcon(iconId, bundleName) {
  */
 export function verifyAccessToken(accessTokenId, permission) {
   return new Promise((resolve) => {
-    abilityAccessCtrl.createAtManager().verifyAccessToken(accessTokenId, permission).then((res) => {
-      return resolve(res);
-    })
-    .catch((error) => {
-      console.error('verifyAccessToken failed. Cause: ' + JSON.stringify(error));
-    })
+    let data = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(accessTokenId, permission)
+    resolve(data)
   })
 }
 

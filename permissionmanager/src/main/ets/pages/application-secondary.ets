@@ -127,7 +127,7 @@ struct appNamePlusPage {
   /**
    * Initialize permission status information and group permission information
    */
-  async initialPermissions() {
+  initialPermissions() {
     var reqPermissions = this.routerData.permissions;
     var reqGroupIds = this.routerData.groupId;
 
@@ -154,9 +154,8 @@ struct appNamePlusPage {
         if(this.routerData.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
           continue
         }
-        let res = await abilityAccessCtrl.createAtManager().verifyAccessToken(
-          this.routerData.tokenId, permission);
-        if (res != 0) {
+        let res = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(this.routerData.tokenId, permission);
+        if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
           isGranted = false;
         }
       }
@@ -190,16 +189,10 @@ struct appNamePlusPage {
 
   build() {
     Column(){
-      GridContainer({ gutter: Constants.GUTTER, margin: Constants.GRID_MARGIN }) {
-        Row({}) {
-          Row()
-            .useSizeType({
-              xs: { span: Constants.LEFT_XS_SPAN, offset: Constants.LEFT_XS_OFFSET },
-              sm: { span: Constants.LEFT_SM_SPAN, offset: Constants.LEFT_SM_OFFSET },
-              md: { span: Constants.LEFT_MD_SPAN, offset: Constants.LEFT_MD_OFFSET },
-              lg: { span: Constants.LEFT_LG_SPAN, offset: Constants.LEFT_LG_OFFSET }
-            })
-            .height(Constants.FULL_HEIGHT)
+      GridRow({ gutter: Constants.GUTTER, columns: {
+        xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
+        GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+          offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
           Row() {
             Column() {
               Row() {
@@ -321,25 +314,10 @@ struct appNamePlusPage {
               .layoutWeight(Constants.LAYOUT_WEIGHT)
             }
           }
-          .useSizeType({
-            xs: { span: Constants.MIDDLE_XS_SPAN, offset: Constants.MIDDLE_XS_OFFSET },
-            sm: { span: Constants.MIDDLE_SM_SPAN, offset: Constants.MIDDLE_SM_OFFSET },
-            md: { span: Constants.MIDDLE_MD_SPAN, offset: Constants.MIDDLE_MD_OFFSET },
-            lg: { span: Constants.MIDDLE_LG_SPAN, offset: Constants.MIDDLE_LG_OFFSET }
-          })
           .height(Constants.FULL_HEIGHT)
-          Row()
-            .useSizeType({
-              xs: { span: Constants.RIGHT_XS_SPAN, offset: Constants.RIGHT_XS_OFFSET },
-              sm: { span: Constants.RIGHT_SM_SPAN, offset: Constants.RIGHT_SM_OFFSET },
-              md: { span: Constants.RIGHT_MD_SPAN, offset: Constants.RIGHT_MD_OFFSET },
-              lg: { span: Constants.RIGHT_LG_SPAN, offset: Constants.RIGHT_LG_OFFSET }
-            })
-            .height(Constants.FULL_HEIGHT)
+          .width(Constants.FULL_WIDTH)
+          .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
         }
-        .height(Constants.FULL_HEIGHT)
-        .width(Constants.FULL_WIDTH)
-        .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
       }
     }
   }
