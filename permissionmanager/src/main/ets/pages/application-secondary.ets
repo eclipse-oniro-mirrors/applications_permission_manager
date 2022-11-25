@@ -318,7 +318,7 @@ struct appNamePlusPage {
           .width(Constants.FULL_WIDTH)
           .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
         }
-      }
+      }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
     }
   }
 }
