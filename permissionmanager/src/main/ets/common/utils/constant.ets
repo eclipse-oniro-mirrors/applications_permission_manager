@@ -271,6 +271,7 @@ export default class Constants {
     static BUNDLE_NAME = 'com.ohos.permissionmanager'
 
     static DEFAULT_DEVICE_TYPE = 'default'
+    static PHONE_DEVICE_TYPE = 'phone'
     static TABLET_DEVICE_TYPE = 'tablet'
     static PERMISSION_DIALOG_MARGIN_BOTTOM = 62
 
