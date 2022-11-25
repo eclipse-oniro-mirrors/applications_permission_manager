@@ -72,7 +72,8 @@ struct PermissionDialog {
   controller: CustomDialogController
 
   build() {
-    Flex({ justifyContent: FlexAlign.Center, alignItems: deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE ? ItemAlign.End : ItemAlign.Center }) {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: ((deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE)
+            || (deviceInfo.deviceType == Constants.PHONE_DEVICE_TYPE)) ? ItemAlign.End : ItemAlign.Center }) {
       Column() {
         if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
           Image(this.grantGroups[this.count].icon)
