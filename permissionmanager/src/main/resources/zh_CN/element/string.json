@@ -122,15 +122,19 @@
     },
     {
       "name": "whether_to_allow",
-      "value": "是否允许"
+      "value": "是否允许“"
+    },
+    {
+      "name": "quotes",
+      "value": "”"
     },
     {
       "name": "access_general_location",
-      "value": "访问大致位置？"
+      "value": "”访问大致位置？"
     },
     {
       "name": "fuzzy_to_exact",
-      "value": "的位置访问权限从“大致位置”改为“精确位置”？"
+      "value": "”的位置访问权限从“大致位置”改为“精确位置”？"
     },
     {
       "name": "cancel",
