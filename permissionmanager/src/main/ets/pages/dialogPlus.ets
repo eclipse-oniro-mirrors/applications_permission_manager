@@ -161,7 +161,7 @@ struct PermissionDialog {
         return this.resource.whether_to_allow + this.appName + this.resource.fuzzy_to_exact
       }
     }
-    return this.resource.whether_to_allow + this.appName + this.grantGroups[this.count].label
+    return this.resource.whether_to_allow + this.appName + this.resource.quotes + this.grantGroups[this.count].label
   }
 
   showReason() {
@@ -390,6 +390,9 @@ struct PermissionDialog {
   getStrings() {
     globalThis.extensionContext.resourceManager.getString($r("app.string.whether_to_allow").id, (err, val) => {
       this.resource.whether_to_allow = val
+    })
+    globalThis.extensionContext.resourceManager.getString($r("app.string.quotes").id, (err, val) => {
+      this.resource.quotes = val
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.access_general_location").id, (err, val) => {
       this.resource.access_general_location = val
