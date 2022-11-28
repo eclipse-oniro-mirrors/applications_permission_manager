@@ -54,7 +54,8 @@ struct globalDialog {
   controller: CustomDialogController
 
   build() {
-    Flex({ justifyContent: FlexAlign.Center, alignItems: deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE ? ItemAlign.End : ItemAlign.Center }) {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: ((deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE)
+            || (deviceInfo.deviceType == Constants.PHONE_DEVICE_TYPE)) ? ItemAlign.End : ItemAlign.Center }) {
       Column() {
         Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
             globalThis.globalState == CAMERA ? $r('app.string.global_title_camera') :
