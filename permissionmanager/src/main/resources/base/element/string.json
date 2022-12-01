@@ -65,6 +65,18 @@
       "value": ", "
     },
     {
+      "name": "and",
+      "value": " and "
+    },
+    {
+      "name": "period",
+      "value": "."
+    },
+    {
+      "name": "comma",
+      "value": ","
+    },
+    {
       "name": "visits",
       "value": "Number of visits: "
     },

@@ -65,6 +65,18 @@
       "value": "、"
     },
     {
+      "name": "and",
+      "value": "和"
+    },
+    {
+      "name": "period",
+      "value": "。"
+    },
+    {
+      "name": "comma",
+      "value": "，"
+    },
+    {
       "name": "visits",
       "value": "访问次数："
     },

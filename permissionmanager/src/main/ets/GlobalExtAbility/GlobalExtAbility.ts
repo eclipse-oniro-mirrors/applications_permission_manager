@@ -16,9 +16,11 @@
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
+import deviceInfo from '@ohos.deviceInfo';
 
 var TAG = "PermissionManager_Log:";
 const BG_COLOR = '#00000000'
+let bottomPopoverTypes = ['default', 'phone']
 
 export default class GlobalExtensionAbility extends extension {
     /**
@@ -39,6 +41,8 @@ export default class GlobalExtensionAbility extends extension {
                 width: dis.width,
                 height: dis.height
             }
+            let isVertical = dis.width > dis.height ? false : true
+            globalThis.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical
             this.createWindow("globalDialog", window.WindowType.TYPE_KEYGUARD, navigationBarRect)
         } catch (exception) {
             console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
