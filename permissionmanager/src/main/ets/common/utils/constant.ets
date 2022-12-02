@@ -84,6 +84,26 @@ export default class Constants {
     static RIGHT_MD_OFFSET = 8;
     static RIGHT_LG_SPAN = 2;
     static RIGHT_LG_OFFSET = 10;
+    static XS_COLUMNS = 2;
+    static XS_SPAN = 2;
+    static XS_OFFSET = 0;
+    static SM_COLUMNS = 4;
+    static SM_SPAN = 4;
+    static SM_OFFSET = 0;
+    static MD_COLUMNS = 8;
+    static MD_SPAN = 8;
+    static MD_OFFSET = 0;
+    static LG_COLUMNS = 12;
+    static LG_SPAN = 8;
+    static LG_OFFSET = 2;
+
+    static DIALOG_GUTTER = 16;
+    static DIALOG_MARGIN = 16;
+    static DIALOG_MARGIN_VERTICAL = 12;
+    static DIALOG_MD_SPAN = 4;
+    static DIALOG_MD_OFFSET = 2;
+    static DIALOG_LG_SPAN = 4;
+    static DIALOG_LG_OFFSET = 4;
 
     // 100% width,height
     static FULL_WIDTH = '100%';
@@ -332,7 +352,6 @@ export default class Constants {
     static BUTTON_WIDTH = 177;
 
     static DIALOG_PRIVACY_BORDER_RADIUS = 32;
-    static DIALOG_PRIVACY_WIDTH = 395;
     static DIALOG_PADDING_BOTTOM = 16;
 
     // initial check status

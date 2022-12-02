@@ -17,7 +17,6 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundle from '@ohos.bundle';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
-import deviceInfo from '@ohos.deviceInfo';
 import { Log, getPermissionGroup } from '../common/utils/utils'
 import Constants from '../common/utils/constant'
 import { BundleFlag } from '../common/model/bundle'
@@ -72,85 +71,92 @@ struct PermissionDialog {
   controller: CustomDialogController
 
   build() {
-    Flex({ justifyContent: FlexAlign.Center, alignItems: ((deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE)
-            || (deviceInfo.deviceType == Constants.PHONE_DEVICE_TYPE)) ? ItemAlign.End : ItemAlign.Center }) {
-      Column() {
-        if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
-          Image(this.grantGroups[this.count].icon)
-            .width(Constants.DIALOG_ICON_WIDTH)
-            .height(Constants.DIALOG_ICON_HEIGHT)
-            .fillColor($r("app.color.first_font_color"))
-            .margin({
-              top: Constants.DIALOG_ICON_MARGIN_TOP
-            })
-          Text(`${this.count + 1} / ${this.grantGroups.length}`)
-            .fontSize(Constants.DIALOG_LABEL_FONT_SIZE)
-            .fontColor($r('app.color.text_secondary_color'))
-            .lineHeight(Constants.DIALOG_LABEL_LINE_HEIGHT)
-            .margin({
-              top: Constants.DIALOG_LABEL_MARGIN_TOP
-            })
+    GridRow({ columns: { xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS }, gutter: Constants.DIALOG_GUTTER }) {
+      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN },
+        offset: {xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.DIALOG_MD_OFFSET, lg: Constants.DIALOG_LG_OFFSET} }) {
+        Flex({ justifyContent: FlexAlign.Center, alignItems: globalThis.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
           Column() {
-            Row() {
-              Flex({ justifyContent: FlexAlign.Start }) {
-                Text(this.showTitle())
-                  .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                  .fontColor($r('app.color.first_font_color'))
-                  .fontWeight(FontWeight.Medium)
-                  .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                  .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
-                  .margin({
-                    top: Constants.DIALOG_REQ_MARGIN_TOP,
-                    left: Constants.DIALOG_REQ_MARGIN_LEFT,
-                    right: Constants.DIALOG_REQ_MARGIN_RIGHT
-                  })
-              }
-            }
-
-            Row() {
-              Flex({ justifyContent: FlexAlign.Start }) {
-                Text(this.showReason())
-                  .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
+            if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
+              Image(this.grantGroups[this.count].icon)
+                .width(Constants.DIALOG_ICON_WIDTH)
+                .height(Constants.DIALOG_ICON_HEIGHT)
+                .fillColor($r("app.color.first_font_color"))
+                .margin({
+                  top: Constants.DIALOG_ICON_MARGIN_TOP
+                })
+              if(this.grantGroups.length > 1) {
+                Text(`${this.count + 1} / ${this.grantGroups.length}`)
+                  .fontSize(Constants.DIALOG_LABEL_FONT_SIZE)
                   .fontColor($r('app.color.text_secondary_color'))
-                  .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
-                  .lineHeight(Constants.DIALOG_DESP_LINE_HEIGHT)
+                  .lineHeight(Constants.DIALOG_LABEL_LINE_HEIGHT)
                   .margin({
-                    top: Constants.DIALOG_DESP_MARGIN_TOP,
-                    left: Constants.DIALOG_DESP_MARGIN_LEFT,
-                    right: Constants.DIALOG_DESP_MARGIN_RIGHT,
-                    bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM
+                    top: Constants.DIALOG_LABEL_MARGIN_TOP
                   })
               }
-            }
+              Column() {
+                Row() {
+                  Flex({ justifyContent: FlexAlign.Start }) {
+                    Text(this.showTitle())
+                      .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
+                      .fontColor($r('app.color.first_font_color'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
+                      .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
+                      .margin({
+                        top: Constants.DIALOG_REQ_MARGIN_TOP,
+                        left: Constants.DIALOG_REQ_MARGIN_LEFT,
+                        right: Constants.DIALOG_REQ_MARGIN_RIGHT
+                      })
+                  }
+                }
 
-            if(this.locationFlag > Constants.LOCATION_NONE) {
-              LocationCanvas({ locationFlag: $locationFlag })
+                Row() {
+                  Flex({ justifyContent: FlexAlign.Start }) {
+                    Text(this.showReason())
+                      .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
+                      .fontColor($r('app.color.text_secondary_color'))
+                      .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
+                      .lineHeight(Constants.DIALOG_DESP_LINE_HEIGHT)
+                      .margin({
+                        top: Constants.DIALOG_DESP_MARGIN_TOP,
+                        left: Constants.DIALOG_DESP_MARGIN_LEFT,
+                        right: Constants.DIALOG_DESP_MARGIN_RIGHT,
+                        bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM
+                      })
+                  }
+                }
+
+                if(this.locationFlag > Constants.LOCATION_NONE) {
+                  LocationCanvas({ locationFlag: $locationFlag })
+                }
+              }
+            }
+            Row() {
+              Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                Button($r('app.string.ban'))
+                  .fontSize(Constants.BUTTON_FONT_SIZE)
+                  .onClick(() => {
+                    this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
+                  }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
+                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('app.color.divider_color'))
+                Button($r('app.string.allow'))
+                  .fontSize(Constants.BUTTON_FONT_SIZE)
+                  .onClick(() => {
+                    this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
+                  }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
+              }
             }
           }
-        }
-        Row() {
-          Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-            Button($r('app.string.ban'))
-              .fontSize(Constants.BUTTON_FONT_SIZE)
-              .onClick(() => {
-                this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
-              }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-            Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('app.color.divider_color'))
-            Button($r('app.string.allow'))
-              .fontSize(Constants.BUTTON_FONT_SIZE)
-              .onClick(() => {
-                this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
-              }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
-          }
-        }
+          .backgroundColor($r('app.color.default_background_color'))
+          .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
+          .width(Constants.FULL_WIDTH)
+          .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })
+          .margin({ bottom: Constants.PERMISSION_DIALOG_MARGIN_BOTTOM })
+        }.width(Constants.FULL_WIDTH)
+        .height(Constants.FULL_HEIGHT)
       }
-      .backgroundColor($r('app.color.default_background_color'))
-      .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
-      .width(Constants.DIALOG_PRIVACY_WIDTH)
-      .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })
-      .margin({ bottom: Constants.PERMISSION_DIALOG_MARGIN_BOTTOM })
-    }.width(Constants.FULL_WIDTH)
-    .height(Constants.FULL_HEIGHT)
+    }.margin({ left: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
+      right: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN })
   }
 
   showTitle() {
@@ -357,9 +363,11 @@ struct PermissionDialog {
         })
         if(group.description) {
           Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
-          globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id)])
+          globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id),
+          globalThis.extensionContext.resourceManager.getString($r("app.string.and").id),
+          globalThis.extensionContext.resourceManager.getString($r("app.string.period").id)])
             .then(values => {
-              group.description = group.description.join(values[0]) + values[1]
+              group.description = group.name == 'SMS' ? (group.description.join(values[0]) + values[1]) : (group.description.join(values[2]) + values[3])
               this.getReason(group, info, bundleName)
             })
         }else {
@@ -378,6 +386,7 @@ struct PermissionDialog {
             context.resourceManager.getString(reqPermissionDetail.reasonId, (err, value) => {
               this.initStatus = Constants.INIT_NEED_TO_REFRESH
               if (value !== undefined && !group.hasReason) {
+                group.description = group.description.replace(this.resource.period, this.resource.comma)
                 group.description += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
                 group.hasReason = true
               }
@@ -400,6 +409,12 @@ struct PermissionDialog {
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.fuzzy_to_exact").id, (err, val) => {
       this.resource.fuzzy_to_exact = val
+    })
+    globalThis.extensionContext.resourceManager.getString($r("app.string.comma").id, (err, val) => {
+      this.resource.comma = val
+    })
+    globalThis.extensionContext.resourceManager.getString($r("app.string.period").id, (err, val) => {
+      this.resource.period = val
     })
     this.reqPerms.forEach(reqPerm => {
       permissionGroups.forEach(permissionInfo => {
