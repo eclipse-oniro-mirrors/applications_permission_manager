@@ -110,6 +110,7 @@ struct mediaDocumentItem {
   @State isCheckList: boolean[] = []; // Permission status array
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
+  @State resource: any = {}
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -157,9 +158,14 @@ struct mediaDocumentItem {
         reason.push(globalThis.permissionLabels[permission])
       })
       Promise.all([globalThis.context.resourceManager.getString($r("app.string.separator").id),
-      globalThis.context.resourceManager.getString($r("app.string.reason_suffix").id)])
+      globalThis.context.resourceManager.getString($r("app.string.reason_suffix").id),
+      globalThis.context.resourceManager.getString($r("app.string.and").id),
+      globalThis.context.resourceManager.getString($r("app.string.period").id),
+      globalThis.context.resourceManager.getString($r("app.string.comma").id)])
         .then(values => {
-          reason = reason.join(values[0]) + values[1]
+          this.resource.period = values[3]
+          this.resource.comma = values[4]
+          reason = globalThis.currentPermissionGroup == 'SMS' ? (reason.join(values[0]) + values[1]) : (reason.join(values[2]) + values[3])
         })
     }else {
       reason = ''
@@ -172,6 +178,7 @@ struct mediaDocumentItem {
             let context = globalThis.context.createBundleContext(routerData)
             context.resourceManager.getString(reqPermissionDetail.reasonId).then(value => {
               if (value !== undefined && !hasReason) {
+                reason = reason.replace(this.resource.period, this.resource.comma)
                 reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
                 hasReason = true
               }

@@ -557,7 +557,6 @@ export const noNeedDisplayApp: string[] = [
 ]
 
 export const showSubpermissionsGrop: string[] = [
-    "PHONE",
     "CALENDAR",
     "SMS",
     "CONTACTS",

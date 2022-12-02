@@ -19,7 +19,6 @@ import camera from '@ohos.multimedia.camera';
 import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { Log } from '../common/utils/utils'
-import deviceInfo from '@ohos.deviceInfo'
 
 const MICROPHONE = 'microphone'
 const CAMERA = 'camera'
@@ -54,51 +53,56 @@ struct globalDialog {
   controller: CustomDialogController
 
   build() {
-    Flex({ justifyContent: FlexAlign.Center, alignItems: ((deviceInfo.deviceType == Constants.DEFAULT_DEVICE_TYPE)
-            || (deviceInfo.deviceType == Constants.PHONE_DEVICE_TYPE)) ? ItemAlign.End : ItemAlign.Center }) {
-      Column() {
-        Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
-            globalThis.globalState == CAMERA ? $r('app.string.global_title_camera') :
-          $r('app.string.global_title_camera_and_microphone'))
-          .fontSize(Constants.TEXT_BIG_FONT_SIZE)
-          .fontColor($r('app.color.label_color'))
-          .fontWeight(FontWeight.Medium)
-          .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
+    GridRow({ columns: { xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS }, gutter: Constants.DIALOG_GUTTER }) {
+      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN },
+        offset: {xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.DIALOG_MD_OFFSET, lg: Constants.DIALOG_LG_OFFSET} }) {
+        Flex({ justifyContent: FlexAlign.Center, alignItems: globalThis.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
+          Column() {
+            Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
+                globalThis.globalState == CAMERA ? $r('app.string.global_title_camera') :
+              $r('app.string.global_title_camera_and_microphone'))
+              .fontSize(Constants.TEXT_BIG_FONT_SIZE)
+              .fontColor($r('app.color.label_color'))
+              .fontWeight(FontWeight.Medium)
+              .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
+              .width(Constants.FULL_WIDTH)
+              .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT,
+                          top: Constants.ROW_PADDING_TOP, bottom: Constants.ROW_PADDING_BOTTOM})
+            Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_desc_microphone') :
+                globalThis.globalState == CAMERA ? $r('app.string.global_desc_camera') :
+              $r('app.string.global_desc_camera_and_microphone'))
+              .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+              .fontColor($r('app.color.label_color'))
+              .lineHeight(Constants.TEXT_LINE_HEIGHT)
+              .width(Constants.FULL_WIDTH)
+              .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
+              .margin({ bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM })
+            Row() {
+              Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Start }) {
+                Button($r('app.string.cancel'))
+                  .fontSize(Constants.BUTTON_FONT_SIZE)
+                  .onClick(() => {
+                    this.cancel()
+                  }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
+                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('app.color.divider_color'))
+                  .margin({ top: Constants.BUTTON_MARGIN_TOP })
+                Button($r('app.string.open'))
+                  .fontSize(Constants.BUTTON_FONT_SIZE)
+                  .onClick(() => {
+                    this.accept()
+                  }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
+              }.height(Constants.ROW_HEIGHT)
+            }
+          }
+          .backgroundColor($r('app.color.default_background_color'))
+          .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
-          .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT,
-                      top: Constants.ROW_PADDING_TOP, bottom: Constants.ROW_PADDING_BOTTOM})
-        Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_desc_microphone') :
-            globalThis.globalState == CAMERA ? $r('app.string.global_desc_camera') :
-          $r('app.string.global_desc_camera_and_microphone'))
-          .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-          .fontColor($r('app.color.label_color'))
-          .lineHeight(Constants.TEXT_LINE_HEIGHT)
-          .width(Constants.FULL_WIDTH)
-          .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
-          .margin({ bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM })
-        Row() {
-          Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Start }) {
-            Button($r('app.string.cancel'))
-              .fontSize(Constants.BUTTON_FONT_SIZE)
-              .onClick(() => {
-                this.cancel()
-              }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-            Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('app.color.divider_color'))
-              .margin({ top: Constants.BUTTON_MARGIN_TOP })
-            Button($r('app.string.open'))
-              .fontSize(Constants.BUTTON_FONT_SIZE)
-              .onClick(() => {
-                this.accept()
-              }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
-          }.height(Constants.ROW_HEIGHT)
-        }
+          .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
+        }.width(Constants.FULL_WIDTH)
+        .height(Constants.FULL_HEIGHT)
       }
-      .backgroundColor($r('app.color.default_background_color'))
-      .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
-      .width(Constants.DIALOG_PRIVACY_WIDTH)
-      .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
-    }.width(Constants.FULL_WIDTH)
-    .height(Constants.FULL_HEIGHT)
+    }.margin({ left: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
+      right: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN })
   }
 
   accept() {
