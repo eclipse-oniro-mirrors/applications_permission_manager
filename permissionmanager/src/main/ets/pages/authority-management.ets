@@ -21,7 +21,7 @@ import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
-import { groups, userGrantPermissions, permissionGroupPermissions, noNeedDisplayApp, globalGroup } from "../common/model/permissionGroup";
+import { groups, userGrantPermissions, permissionGroupPermissions, globalGroup } from "../common/model/permissionGroup";
 import { permissionGroups, permissionGroupIds, showSubpermissionsGrop } from "../common/model/permissionGroup";
 import { makePy } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
@@ -141,6 +141,7 @@ struct authorityManagementPage {
   @State allPermissionApplications: permissionApplications [] = [] // All app permissions
   @State allGroupPermission: groupPermission[] = [] // All group permissions
   @State currentIndex: number = 0
+  @State @Watch("getLabelAndIcon") ready: boolean = false
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
       Text(index ? $r('app.string.application') : $r('app.string.authority'))
@@ -192,51 +193,15 @@ struct authorityManagementPage {
   /**
    * Get all app permission information
    */
-  getAllBundlePermissions() {
-    bundle.getAllBundleInfo(Constants.PARMETER_BUNDLE_FLAG).then(async(bundleInfos) => {
-      if (bundleInfos.length <= 0) {
-        console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
-        return;
-      }
-      var infoIndex = 0;
-      for (let i = 0; i < bundleInfos.length; i++) {
-        var info = bundleInfos[i];
-        // Filter blank icon icon and text label resources
-        try {
-          await bundle.queryAbilityByWant({
-            bundleName: info.name,
-            action: "action.system.home",
-            entities: ["entity.system.home"]
-          }, bundle.BundleFlag.GET_ABILITY_INFO_WITH_APPLICATION, Constants.USERID);
-        } catch(e) {
-          console.log(TAG + 'queryAbilityByWant catch error: ' + JSON.stringify(e))
-          continue;
-        }
-
-        if (noNeedDisplayApp.indexOf(info.name) != -1) {
-          continue;
-        }
-        await this.deduplicationPermissions(info);
-        this.updateAppLabel(infoIndex, info.name, info.appInfo.label);
-        this.updateAppIcon(infoIndex, info.name);
-        infoIndex = infoIndex + 1;
+  async getAllBundlePermissions() {
+      for (let i = 0; i < globalThis.initialGroups.length; i++) {
+        await this.deduplicationPermissions(globalThis.initialGroups[i]);
       }
       this.getAllGroupPermission();
       this.getAllPermissionApplications();
       let orderSort = this.orderDict(userGrantPermissions);
       this.allPermissionApplications.sort(this.compare('permission', orderSort));
-      globalThis.allBundleInfo.forEach((item) => {
-        if (!isNaN(item.labelId)) {
-          item.alphabeticalIndex = '';
-        } else {
-          item.alphabeticalIndex = makePy(item.labelId)[0].slice(0, 1); // Get the first letter in the returned initials array
-        }
-      })
       this.getPermissionLabel()
-    })
-      .catch((error) => {
-        console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
-      })
   }
 
   /**
@@ -265,6 +230,20 @@ struct authorityManagementPage {
         }
       })
     })
+  }
+
+  /**
+   * Get all permission label
+   */
+  getLabelAndIcon() {
+    const this_ = this
+    setTimeout(function() {
+      globalThis.allBundleInfo.forEach(bundleInfo => {
+        let context = globalThis.context.createBundleContext(bundleInfo.bundleName)
+        this_.updateAppLabel(bundleInfo, context)
+        this_.updateAppIcon(bundleInfo, context)
+      })
+    }, 100)
   }
 
   /**
@@ -390,18 +369,14 @@ struct authorityManagementPage {
    * @param {String} bundleName Package names
    * @param {String} labelName Application Name
    */
-  updateAppLabel(index, bundleName, labelName) {
-    let context = globalThis.context.createBundleContext(bundleName)
-    if (index >= globalThis.allBundleInfo.length) {
-      return;
-    }
-    var info = globalThis.allBundleInfo[index];
+  updateAppLabel(info, context) {
     context.resourceManager.getString(info.labelId, (error, value) => {
-      if (value == undefined) {
-        info.labelId = labelName;
-      } else {
         info.labelId = value;
-      }
+        if (!isNaN(info.labelId)) {
+          info.alphabeticalIndex = '';
+        } else {
+          info.alphabeticalIndex = makePy(info.labelId)[0].slice(0, 1); // Get the first letter in the returned initials array
+        }
     })
   }
 
@@ -410,12 +385,7 @@ struct authorityManagementPage {
    * @param {Number} index index of all app permissions array
    * @param {String} bundleName Package names
    */
-  updateAppIcon(index, bundleName) {
-    let context = globalThis.context.createBundleContext(bundleName)
-    if (index >= globalThis.allBundleInfo.length) {
-      return;
-    }
-    var info = globalThis.allBundleInfo[index];
+  updateAppIcon(info, context) {
     context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
       info.iconId = value;
     })
@@ -459,6 +429,12 @@ struct authorityManagementPage {
     }else if(order == Constants.OTHER_GROUP) {
       return otherGroup
     }
+  }
+
+  LoadLabelAndIcon() {
+    const this_ = this
+    setTimeout(function() { this_.ready = true }, 100)
+    return true
   }
 
   build() {
@@ -520,6 +496,7 @@ struct authorityManagementPage {
                                     }
 
                                     ListItem() {
+                                      if(this.LoadLabelAndIcon()) {}
                                       List() {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP), (item) => {
                                           this.ListItemLayout(item, Constants.SLICE_END_INDEX)
