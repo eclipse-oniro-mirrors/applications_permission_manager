@@ -117,20 +117,18 @@ struct globalDialog {
         })
       })
     }else if(globalThis.globalState == CAMERA) {
-      camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
-        cameraManager.muteCamera(false)
-        globalThis.globalContext.terminateSelf()
-      })
+      let cameraManager = camera.getCameraManager(globalThis.globalContext);
+      cameraManager.muteCamera(false);
+      globalThis.globalContext.terminateSelf();
     }else {
-      camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
-        cameraManager.muteCamera(false)
-        var audioManager = audio.getAudioManager();
-        let audioVolumeManager = audioManager.getVolumeManager();
-        let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
-        audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-          audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
-            globalThis.globalContext.terminateSelf()
-          })
+      let cameraManager = camera.getCameraManager(globalThis.globalContext);
+      cameraManager.muteCamera(false);
+      var audioManager = audio.getAudioManager();
+      let audioVolumeManager = audioManager.getVolumeManager();
+      let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
+      audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+        audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
+          globalThis.globalContext.terminateSelf()
         })
       })
     }

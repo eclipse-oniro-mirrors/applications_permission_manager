@@ -123,12 +123,11 @@ struct authorityManagementPage {
                   })
                 })
               }else {
-                camera.getCameraManager(globalThis.context).then(cameraManager => {
-                  let mute = cameraManager.isCameraMuted()
-                  router.pushUrl({
-                    url: 'pages/authority-tertiary-groups',
-                    params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !mute }
-                  })
+                let cameraManager = camera.getCameraManager(globalThis.context);
+                let mute = cameraManager.isCameraMuted();
+                router.pushUrl({
+                  url: 'pages/authority-tertiary-groups',
+                  params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !mute }
                 })
               }
             }
