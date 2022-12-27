@@ -113,17 +113,15 @@ struct globalDialog {
         globalThis.globalContext.terminateSelf()
       })
     }else if(globalThis.globalState == CAMERA) {
-      camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
-        cameraManager.muteCamera(false)
-        globalThis.globalContext.terminateSelf()
-      })
+      let cameraManager = camera.getCameraManager(globalThis.globalContext);
+      cameraManager.muteCamera(false);
+      globalThis.globalContext.terminateSelf();
     }else {
-      camera.getCameraManager(globalThis.globalContext).then(cameraManager => {
-        cameraManager.muteCamera(false)
-        var audioManager = audio.getAudioManager();
-        audioManager.setMicrophoneMute(false).then(() => {
-          globalThis.globalContext.terminateSelf()
-        })
+      let cameraManager = camera.getCameraManager(globalThis.globalContext);
+      cameraManager.muteCamera(false)
+      var audioManager = audio.getAudioManager();
+      audioManager.setMicrophoneMute(false).then(() => {
+        globalThis.globalContext.terminateSelf()
       })
     }
 
