@@ -436,10 +436,9 @@ struct applicationItem {
                       .onChange((isOn: boolean) => {
                         if(isOn) {
                           if(globalThis.currentPermissionGroup == "CAMERA") {
-                            camera.getCameraManager(globalThis.context).then(cameraManager => {
-                              cameraManager.muteCamera(false)
-                              this.globalIsOn = isOn
-                            })
+                            let cameraManager = camera.getCameraManager(globalThis.context);
+                            cameraManager.muteCamera(false);
+                            this.globalIsOn = isOn;
                           }else {
                             var audioManager = audio.getAudioManager();
                             let audioVolumeManager = audioManager.getVolumeManager();
