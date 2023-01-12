@@ -374,6 +374,9 @@ struct PermissionDialog {
           this.getReason(group, info, bundleName)
         }
       })
+    }).catch(err => {
+      Log.error("bundleManager.getBundleInfo error :" + err)
+      this.initStatus = Constants.INIT_NEED_TO_TERMINATED
     })
   }
 
@@ -450,6 +453,9 @@ struct PermissionDialog {
         this.bundleInfo = bundleInfo
         this.getgrantGroups(globalThis.abilityWant.parameters['ohos.user.grant.permission.state']);
         this.getApplicationName(data, uid)
+      }).catch(err => {
+        Log.error("getBundleInfo error :" + JSON.stringify(err))
+        this.initStatus = Constants.INIT_NEED_TO_TERMINATED
       })
     }).catch(err => {
       Log.error("getNameForUid error :" + JSON.stringify(err))

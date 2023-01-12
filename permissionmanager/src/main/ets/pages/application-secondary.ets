@@ -16,10 +16,11 @@
 import { backBar } from "../common/components/backBar";
 import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import { groups } from "../common/model/permissionGroup";
+import { groups, permissionGroups, userGrantPermissions, permissionGroupIds } from "../common/model/permissionGroup";
 import Constants from '../common/utils/constant';
 
 var TAG = 'PermissionManager_MainAbility:'
+const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
 
 const allowedStatus = 0; // Status: Allowed
 const bannedStatus = 1; // Status: Banned
@@ -40,7 +41,7 @@ class permissionObj {
 struct appNamePlusPage {
   @State allowedListItem: permissionObj[] = []; // Array of allowed permissions
   @State bannedListItem: permissionObj[] = []; // array of forbidden permissions
-  private routerData: any = router.getParams()['routerData']; // Routing jump data
+  @State routerData: any = globalThis.applicationInfo; // Routing jump data
 
   @Builder ListItemLayout(item, index, status) {
     ListItem() {
@@ -124,18 +125,56 @@ struct appNamePlusPage {
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
   }
 
+  async initApplicationInfo(info) {
+    let context = globalThis.context.createBundleContext(info.bundleName)
+    context.resourceManager.getString(info.labelId, (error, value) => {
+      info.labelId = value;
+    })
+    var reqUserPermissions: string[] = [];
+    var acManager = abilityAccessCtrl.createAtManager()
+    if (info.permissions.length > 0) {
+      for (let j = 0; j < info.permissions.length; j++) {
+        var permission = info.permissions[j];
+        if(userGrantPermissions.indexOf(permission) == -1) {
+          continue
+        }
+        if((info.api < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
+          continue
+        }
+        try {
+          var flag = await acManager.getPermissionFlags(info.tokenId, permission)
+          if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
+            continue
+          }
+        }
+        catch(err) {
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
+        }
+        reqUserPermissions.push(permission);
+      }
+    }
+    let groupIds = [];
+    for (let i = 0; i < reqUserPermissions.length; i++) {
+      if(groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1){
+        groupIds.push(permissionGroupIds[reqUserPermissions[i]]);
+      }
+    }
+    info.permissions = reqUserPermissions
+    info.groupId = groupIds
+  }
+
   /**
    * Initialize permission status information and group permission information
    */
-  initialPermissions() {
+  async initialPermissions() {
+    if(globalThis.bundleName && !this.routerData.groupId.length) {
+      await this.initApplicationInfo(this.routerData)
+    }
     var reqPermissions = this.routerData.permissions;
     var reqGroupIds = this.routerData.groupId;
 
-    if (!reqGroupIds.length) {
-      this.allowedListItem = [];
-      this.bannedListItem = [];
-      return;
-    }
+    this.allowedListItem = [];
+    this.bannedListItem = [];
 
     for (let i = 0; i < reqGroupIds.length; i++) {
       let id = reqGroupIds[i];
@@ -185,6 +224,20 @@ struct appNamePlusPage {
       this.allowedListItem = [];
       this.bannedListItem = [];
     }, Constants.DELAY_TIME)
+  }
+
+  aboutToAppear() {
+    if(globalThis.bundleName) {
+      globalThis.applicationInfo.permissions.forEach(userPermission => {
+        permissionGroups.forEach(permissionInfo => {
+          if(userPermission == permissionInfo.permissionName) {
+            globalThis.context.resourceManager.getString(permissionInfo.label.id).then(val => {
+              globalThis.permissionLabels[userPermission] = val
+            })
+          }
+        })
+      })
+    }
   }
 
   build() {
