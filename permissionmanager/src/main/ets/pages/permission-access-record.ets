@@ -384,7 +384,7 @@ struct permissionRecordPage {
         }
       }
       for (let k = 0; k < info.reqPermissions.length; k++) {
-        var reqPermission = info.reqPermissions[k];
+        var reqPermission: any = info.reqPermissions[k];
         try {
           var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission)
           if(reqFlag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {

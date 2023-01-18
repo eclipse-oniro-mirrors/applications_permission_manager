@@ -17,7 +17,7 @@ import UIAbility from '@ohos.app.ability.UIAbility'
 import bundle from "@ohos.bundle";
 
 var TAG = "PermissionManager_MainAbility:";
-const PARMETER_BUNDLE_FLAG = 16;
+const PARAMETER_BUNDLE_FLAG = 16;
 const USERID = 100;
 const noNeedDisplayApp: string[] = [
     "com.ohos.launcher"
@@ -32,13 +32,32 @@ export default class MainAbility extends UIAbility {
         globalThis.allGroups = []
         globalThis.permissionLabels = {}
         globalThis.initialGroups = []
+        globalThis.bundleName = want.parameters['bundleName']
+        globalThis.applicationInfo = {}
     }
 
     onWindowStageCreate(windowStage) {
         // Main window is created, set main page for this ability
         console.log(TAG + "MainAbility onWindowStageCreate.");
 
-        bundle.getAllBundleInfo(PARMETER_BUNDLE_FLAG).then(async(bundleInfos) => {
+        if(globalThis.bundleName) {
+            bundle.getBundleInfo(globalThis.bundleName, PARAMETER_BUNDLE_FLAG).then(bundleInfo => {
+                let info = {
+                    'bundleName': bundleInfo.name,
+                    'api': bundleInfo.targetVersion,
+                    'tokenId': bundleInfo.appInfo.accessTokenId,
+                    'iconId': bundleInfo.appInfo.iconId,
+                    'labelId': bundleInfo.appInfo.labelId,
+                    'permissions': bundleInfo.reqPermissions,
+                    'groupId': [],
+                }
+                globalThis.applicationInfo = info
+                windowStage.setUIContent(this.context, "pages/application-secondary", null);
+            })
+            return
+        }
+
+        bundle.getAllBundleInfo(PARAMETER_BUNDLE_FLAG).then(async(bundleInfos) => {
             if (bundleInfos.length <= 0) {
                 console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
                 return;
