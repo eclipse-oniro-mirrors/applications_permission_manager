@@ -53,6 +53,8 @@ export default class MainAbility extends UIAbility {
                 }
                 globalThis.applicationInfo = info
                 windowStage.setUIContent(this.context, "pages/application-secondary", null);
+            }).catch(() => {
+                this.context.terminateSelf()
             })
             return
         }
