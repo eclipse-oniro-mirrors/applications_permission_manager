@@ -112,7 +112,6 @@ export struct globalDialog {
     if(globalThis.currentPermissionGroup == 'CAMERA') {
       let cameraManager = camera.getCameraManager(globalThis.context);
       cameraManager.muteCamera(true);
-      this.globalIsOn = false;
       this.controller.close();
     }else {
       var audioManager = audio.getAudioManager();
@@ -120,7 +119,6 @@ export struct globalDialog {
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.setMicrophoneMute(true).then(() => {
-          this.globalIsOn = false
           this.controller.close()
         })
       })

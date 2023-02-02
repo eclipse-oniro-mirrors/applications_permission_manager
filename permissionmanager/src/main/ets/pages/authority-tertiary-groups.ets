@@ -403,6 +403,21 @@ struct applicationItem {
     }
     if(globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
       this.globalIsOn = globalIsOn
+      if(globalThis.currentPermissionGroup == "CAMERA") {
+        let cameraManager = camera.getCameraManager(globalThis.context);
+        cameraManager.on('cameraMute', curMuted => {
+          this.globalIsOn = !curMuted
+        })
+      }else {
+        var audioManager = audio.getAudioManager();
+        let audioVolumeManager = audioManager.getVolumeManager();
+        let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
+        audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+          audioVolumeGroupManager.on('micStateChange', micStateChange => {
+            this.globalIsOn = !micStateChange.mute
+          })
+        })
+      }
     }
   }
 
@@ -438,15 +453,12 @@ struct applicationItem {
                           if(globalThis.currentPermissionGroup == "CAMERA") {
                             let cameraManager = camera.getCameraManager(globalThis.context);
                             cameraManager.muteCamera(false);
-                            this.globalIsOn = isOn;
                           }else {
                             var audioManager = audio.getAudioManager();
                             let audioVolumeManager = audioManager.getVolumeManager();
                             let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
                             audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-                              audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
-                                this.globalIsOn = isOn
-                              })
+                              audioVolumeGroupManager.setMicrophoneMute(false)
                             })
                           }
                         }
