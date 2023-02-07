@@ -469,7 +469,7 @@ struct permissionRecordPage {
       "endTime": 0,
       "flag": 1
     }
-    privacyManager.getPermissionUsedRecords(request).then(async records => {
+    privacyManager.getPermissionUsedRecord(request).then(async records => {
       console.info(TAG + "records: " + JSON.stringify(records.bundleRecords))
       var groupArray: any[] = []
       for (let i = 0; i < records.bundleRecords.length; i++) {
