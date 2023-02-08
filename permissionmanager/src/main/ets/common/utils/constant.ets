@@ -236,6 +236,7 @@ export default class Constants {
     static FIXED_GROUP = 1;
     static CHANGE_GROUP = 2;
     static OTHER_GROUP = 3;
+    static EXTRA_GROUP = 4;
 
     // tabBar
     static BAR_WIDTH = 285;
