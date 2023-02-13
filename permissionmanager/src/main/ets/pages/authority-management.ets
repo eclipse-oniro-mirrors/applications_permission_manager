@@ -61,6 +61,7 @@ interface groupPermission {
 
 let textInput_placeholder: any = ''
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 
 @Entry
 @Component
@@ -319,6 +320,9 @@ struct authorityManagementPage {
       for (let j = 0; j < info.reqPermissions.length; j++) {
         var permission = info.reqPermissions[j];
         if((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
+          continue
+        }
+        if((info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION) && !info.reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
           continue
         }
         try {
