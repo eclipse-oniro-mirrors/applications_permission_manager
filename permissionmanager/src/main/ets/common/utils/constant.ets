@@ -275,7 +275,9 @@ export default class Constants {
     static PERMISSION_FLAG = 2;
     static API_VERSION_SUPPORT_STAGE = 9;
 
-    static PRE_AUTHORIZATION_NOT_MODIFIED = 4;
+    // permission flag
+    static PERMISSION_SYSTEM_FIXED = 4;
+    static PERMISSION_COMPONENT_SET = 16;
 
     static BUNDLE_NAME = 'com.ohos.permissionmanager'
 
