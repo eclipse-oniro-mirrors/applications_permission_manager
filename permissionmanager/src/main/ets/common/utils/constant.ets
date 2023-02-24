@@ -92,7 +92,7 @@ export default class Constants {
     static TEXT_DECORATION_HEIGHT = 1;
     static TEXT_BIG_FONT_SIZE = 20;
     static TEXT_MIDDLE_FONT_SIZE = 16;
-    static TEXT_SMAL_FONT_SIZE = 14;
+    static TEXT_SMALL_FONT_SIZE = 14;
     static TEXT_SMALLER_FONT_SIZE = 12;
     static TEXT_LINE_HEIGHT = 22;
     static TEXT_BIG_LINE_HEIGHT = 28;
@@ -125,6 +125,12 @@ export default class Constants {
     static TAB_DECORATION_POSITION_Y = 46;
     static DEFAULT_PADDING_START = 12;
     static DEFAULT_PADDING_END = 12;
+    static DEFAULT_PADDING_TOP = 12;
+    static DEFAULT_PADDING_BOTTOM = 12;
+    static DEFAULT_MARGIN_START = 12;
+    static DEFAULT_MARGIN_END = 12;
+    static DEFAULT_MARGIN_TOP = 12;
+    static DEFAULT_MARGIN_BOTTOM = 12;
     static DEFAULT_SLIDER_WIDTH = 36;
     static DEFAULT_SLIDER_HEIGHT = 20;
     static OFFSET = 100;
@@ -276,6 +282,7 @@ export default class Constants {
     static API_VERSION_SUPPORT_STAGE = 9;
 
     static PRE_AUTHORIZATION_NOT_MODIFIED = 4;
+    static PERMISSION_POLICY_FIXED = 32;
 
     static BUNDLE_NAME = 'com.ohos.permissionmanager'
 

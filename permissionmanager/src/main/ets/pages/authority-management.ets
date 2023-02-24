@@ -573,7 +573,7 @@ struct applicationItem {
                 .fontColor($r('app.color.label_color'))
                 .flexGrow(Constants.FLEX_GROW)
               Text(item.groupId.length + '项权限')
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_lighter'))
                 .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
               Image($r('app.media.ic_public_arrow_right'))

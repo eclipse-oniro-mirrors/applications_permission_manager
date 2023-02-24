@@ -291,7 +291,7 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               Text($r('app.string.allowed'))
-                                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                                 .fontColor($r('app.color.label_color_light'))
                                 .fontWeight(FontWeight.Medium)
                                 .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
@@ -326,7 +326,7 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               Text($r('app.string.banned'))
-                                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                                 .fontColor($r('app.color.label_color_light'))
                                 .fontWeight(FontWeight.Medium)
                                 .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
