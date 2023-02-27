@@ -370,7 +370,7 @@ struct permissionRecordPage {
         var permission = record.permissionRecords[j].permissionName;
         try {
           var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
-          if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
+          if(flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue
           }
         }
@@ -385,7 +385,7 @@ struct permissionRecordPage {
         var reqPermission: any = info.reqPermissions[k];
         try {
           var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission)
-          if(reqFlag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
+          if(reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue
           }
         }
