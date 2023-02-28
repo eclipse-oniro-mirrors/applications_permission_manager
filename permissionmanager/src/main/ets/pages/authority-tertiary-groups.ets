@@ -48,19 +48,22 @@ class ApplicationObj {
   accessTokenId: number
   permission: string
   alphabeticalIndex: string
+  isRisk: boolean
   constructor(
     labelId: string,
     iconId: string,
     index: number,
     accessTokenId: number,
     permission: string,
-    alphabeticalIndex: string) {
+    alphabeticalIndex: string,
+    isRisk: boolean) {
     this.labelId = labelId
     this.iconId = iconId
     this.index = index
     this.accessTokenId = accessTokenId
     this.permission = permission
     this.alphabeticalIndex = alphabeticalIndex
+    this.isRisk = isRisk
   }
 } // application information
 
@@ -169,11 +172,18 @@ struct applicationItem {
               Image(item.iconId)
                 .customizeImage(Constants.AUTHORITY_IMAGE_WIDTH, Constants.AUTHORITY_IMAGE_HEIGHT)
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
-              Text(item.labelId)
-                .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('app.color.text_color'))
-                .fontWeight(FontWeight.Medium)
-                .flexGrow(Constants.FLEX_GROW)
+              Column() {
+                Text(item.labelId)
+                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+                  .fontWeight(FontWeight.Medium)
+                  .fontColor($r('app.color.label_color'))
+                if(item.isRisk) {
+                  Text($r('app.string.risk_warning'))
+                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                    .fontColor($r('app.color.label_color_lighter'))
+                }
+              }.flexGrow(Constants.FLEX_GROW)
+              .alignItems(HorizontalAlign.Start)
               if (polymorphismGroup.indexOf(globalThis.currentPermissionGroup) == -1) {
                 Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
                   .selectedColor($r('app.color.button_color'))
@@ -233,7 +243,7 @@ struct applicationItem {
                   })
               }else {
                 Text(this.polymorphismIsOn[item.index] ? $r('app.string.allow') : $r('app.string.ban'))
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_light'))
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
                 Image($r('app.media.ic_public_arrow_right'))
@@ -274,6 +284,8 @@ struct applicationItem {
         })
       }
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+    .enabled(!item.isRisk)
+    .opacity(item.isRisk ? $r('sys.float.ohos_id_alpha_disabled') : 1)
   }
 
   /**
@@ -343,18 +355,19 @@ struct applicationItem {
     // initial then fill values when sync return which may cause sync panic
     for (let i = 0; i < bundleNames.length; i++) {
       this.applicationList.push(
-        new ApplicationObj('', '', i, 0, '', ''));
+        new ApplicationObj('', '', i, 0, '', '', false));
       this.oldApplicationItem.push(
-        new ApplicationObj('', '', i, 0, '', ''));
+        new ApplicationObj('', '', i, 0, '', '', false));
       this.bundleNameGroup.push(bundleNames[i])
     }
 
+    let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
       // Get BundleInfo based on bundle name
       bundle.getBundleInfo(bundleNames[i], Constants.PARMETER_BUNDLE_FLAG).then(res => {
         Promise.all([getAppLabel(res.appInfo.labelId, res.name),
-        getAppIcon(res.appInfo.iconId, res.name)
-        ])
+        getAppIcon(res.appInfo.iconId, res.name),
+        atManager.getPermissionFlags(res.appInfo.accessTokenId, routerData[0].permission)])
           .then((values) => {
             this.applicationList[i] = (
               new ApplicationObj(
@@ -363,7 +376,8 @@ struct applicationItem {
                 i,
                 res.appInfo.accessTokenId,
                 routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1)) // Get the first letter in the returned initials array
+              makePy(values[0])[0].slice(0, 1),
+              values[2] == Constants.PERMISSION_POLICY_FIXED ? true : false) // Get the first letter in the returned initials array
             );
             this.oldApplicationItem[i] = (
               new ApplicationObj(
@@ -372,7 +386,8 @@ struct applicationItem {
                 i,
                 res.appInfo.accessTokenId,
                 routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1)) // Get the first letter in the returned initials array
+              makePy(values[0])[0].slice(0, 1),
+              values[2] == Constants.PERMISSION_POLICY_FIXED ? true : false) // Get the first letter in the returned initials array
             );
             this.bundleNameGroup[i] = bundleNames[i]
           });
@@ -477,16 +492,16 @@ struct applicationItem {
             Flex({ justifyContent: FlexAlign.Start }) {
               if(this.globalIsOn) {
                 Text(String(this.getGrantApplicationNumber()))
-                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                  .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                   .fontColor($r('app.color.secondary_font_color'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
                 Text($r('app.string.number_of_authorized_applications'))
-                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                  .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                   .fontColor($r('app.color.secondary_font_color'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
               }else {
                 Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera_is_off') : $r('app.string.microphone_is_off'))
-                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                  .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                   .fontColor($r('app.color.secondary_font_color'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
               }

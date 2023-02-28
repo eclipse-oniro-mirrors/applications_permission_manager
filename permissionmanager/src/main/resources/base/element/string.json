@@ -343,6 +343,10 @@
     {
       "name": "group_label_ADS",
       "value": " access AD tracking?"
+    },
+    {
+      "name": "risk_warning",
+      "value": "Risk application does not obtain this permission"
     }
   ]
 }

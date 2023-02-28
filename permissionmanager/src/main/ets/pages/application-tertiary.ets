@@ -111,6 +111,7 @@ struct mediaDocumentItem {
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
   @State resource: any = {}
+  @State isRisk: boolean = false // Whether it is a risky application
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -193,6 +194,14 @@ struct mediaDocumentItem {
       var acManager = abilityAccessCtrl.createAtManager()
       let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION)
       this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false
+      try {
+        acManager.getPermissionFlags(res.appInfo.accessTokenId, permissions[0]).then((data) => {
+          console.log(TAG + `getPermissionFlags success, data->${JSON.stringify(data)}`);
+          this.isRisk = (data == Constants.PERMISSION_POLICY_FIXED) ? true : false
+        })
+      } catch(err) {
+        console.log(TAG + 'acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
+      }
       Promise.all([getAppLabel(res.appInfo.labelId, res.name),
       getAppIcon(res.appInfo.iconId, res.name)])
         .then((values) => {
@@ -257,7 +266,7 @@ struct mediaDocumentItem {
             .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
             Row() {
               Text(this.mediaListItem.versionName)
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_light'))
                 .textAlign(TextAlign.Start)
             }
@@ -270,23 +279,42 @@ struct mediaDocumentItem {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
               Text(reason)
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_light'))
                 .textAlign(TextAlign.Start)
             }.margin({ left: Constants.TERTIARY_IMAGE_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
           }
         }
-        .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP, left: Constants.TERTIARY_MARGIN_LEFT })
+        .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP, left: Constants.DEFAULT_MARGIN_START, bottom: Constants.DEFAULT_MARGIN_BOTTOM })
+      }
+      if(this.isRisk) {
+        Row() {
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Row() {
+              Image($r('app.media.ic_public_fail'))
+                .width(Constants.TERTIARY_RADIO_IMAGE_WIDTH)
+                .height(Constants.TERTIARY_RADIO_IMAGE_HEIGHT)
+                .margin({ right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
+              Text($r('app.string.risk_warning'))
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontSize($r('sys.float.ohos_id_text_size_body1'))
+                .fontWeight(FontWeight.Regular)
+            }.margin({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+          }
+        }.backgroundColor($r('sys.color.ohos_id_color_click_effect'))
+        .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
+        .padding({ top: Constants.DEFAULT_PADDING_TOP, bottom: Constants.DEFAULT_PADDING_BOTTOM })
+        .margin({ left: Constants.DEFAULT_MARGIN_START, right: Constants.DEFAULT_MARGIN_END })
       }
       Row() {
         Text(backTitle)
-          .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+          .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
           .fontColor($r('app.color.label_color_light'))
           .fontWeight(FontWeight.Medium)
           .textAlign(TextAlign.Start)
           .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
         Text($r('app.string.access_permission'))
-          .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+          .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
           .fontColor($r('app.color.label_color_light'))
           .fontWeight(FontWeight.Medium)
           .textAlign(TextAlign.Start)
@@ -295,7 +323,6 @@ struct mediaDocumentItem {
       .constraintSize({ minHeight: Constants.SUBTITLE_MIN_HEIGHT })
       .padding({ top: Constants.SUBTITLE_PADDING_TOP, bottom: Constants.SUBTITLE_PADDING_BOTTOM,
         left: Constants.TERTIARY_TEXT_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT})
-      .margin({ top: Constants.TERTIARY_PERMISSION_ROW_MARGIN_TOP })
       Column() {
         List() {
           ForEach(this.mediaDocListItem, (item) => {
@@ -446,7 +473,7 @@ struct mediaDocumentItem {
 
           Row() {
             Text($r('app.string.get_the_exact_position'))
-              .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+              .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
               .fontColor($r('app.color.label_color_light'))
               .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
           }.width(Constants.FULL_WIDTH)
@@ -462,6 +489,8 @@ struct mediaDocumentItem {
       })
       .width(Constants.FULL_WIDTH)
       .height(Constants.FULL_HEIGHT)
+      .enabled(!this.isRisk)
+      .opacity(this.isRisk ? $r('sys.float.ohos_id_alpha_disabled') : 1)
     }
     .width(Constants.FULL_WIDTH)
   }

@@ -78,7 +78,7 @@ struct permissionRecordPage {
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                 if(dimension) {
                   Text(this.strings.visits + item.sum)
-                    .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                     .fontColor($r('app.color.label_color_light'))
                     .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                 }else {
@@ -145,7 +145,7 @@ struct permissionRecordPage {
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text(this.strings.visits + this.getAppRecords(permissionApplication, item.groupName, true) +
                         this.strings.recent_visit + this.getTime(this.getAppRecords(permissionApplication, item.groupName, false)))
-                      .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                      .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('app.color.label_color_light'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
@@ -187,7 +187,7 @@ struct permissionRecordPage {
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text(this.strings.visits + permission['count' + item.accessTokenId]
                         + this.strings.recent_visit + this.getTime(permission['lastTime' + item.accessTokenId]))
-                      .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                      .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('app.color.label_color_light'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
@@ -233,7 +233,7 @@ struct permissionRecordPage {
                   Flex({ justifyContent: FlexAlign.Start }) {
                     Text($r('app.string.record_time_limit'))
                       .margin({ left: Constants.BACKBAR_IMAGE_MARGIN_LEFT })
-                      .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                      .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('app.color.label_color_light'))
                       .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
                   }.constraintSize({ minHeight: Constants.SUBTITLE_MIN_HEIGHT })
@@ -292,7 +292,7 @@ struct permissionRecordPage {
                         .customizeImage(Constants.NORECORD_IMAGE_WIDTH, Constants.NORECORD_IMAGE_HEIGHT)
                         .margin({ left: Constants.NORECORD_IMAGE_MARGIN_LEFT })
                       Text($r('app.string.no_record')).margin({ top: Constants.DIALOG_REQ_MARGIN_TOP })
-                        .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                        .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                         .fontColor($r('app.color.label_color_light'))
                     }.width(Constants.FULL_WIDTH).height(Constants.FULL_HEIGHT)
                     .padding({ bottom: Constants.RECORD_PADDING_BOTTOM })

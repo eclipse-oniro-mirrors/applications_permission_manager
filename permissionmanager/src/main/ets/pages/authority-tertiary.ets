@@ -41,19 +41,22 @@ class ApplicationObj {
   accessTokenId: number
   permission: string
   alphabeticalIndex: string
+  isRisk: boolean
   constructor(
     labelId: string,
     iconId: string,
     index: number,
     accessTokenId: number,
     permission: string,
-    alphabeticalIndex: string) {
+    alphabeticalIndex: string,
+    isRisk: boolean) {
     this.labelId = labelId
     this.iconId = iconId
     this.index = index
     this.accessTokenId = accessTokenId
     this.permission = permission
     this.alphabeticalIndex = alphabeticalIndex
+    this.isRisk = isRisk
   }
 } // application information
 
@@ -111,11 +114,18 @@ struct applicationItem {
               Image(item.iconId)
                 .customizeImage(Constants.AUTHORITY_IMAGE_WIDTH, Constants.AUTHORITY_IMAGE_HEIGHT)
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
-              Text(item.labelId)
-                .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontWeight(FontWeight.Medium)
-                .fontColor($r('app.color.label_color'))
-                .flexGrow(Constants.FLEX_GROW)
+              Column() {
+                Text(item.labelId)
+                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+                  .fontWeight(FontWeight.Medium)
+                  .fontColor($r('app.color.label_color'))
+                if(item.isRisk) {
+                  Text($r('app.string.risk_warning'))
+                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                    .fontColor($r('app.color.label_color_lighter'))
+                }
+              }.flexGrow(Constants.FLEX_GROW)
+              .alignItems(HorizontalAlign.Start)
               Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
                 .selectedColor($r('app.color.button_color'))
                 .padding({ right: 0 })
@@ -151,6 +161,8 @@ struct applicationItem {
         })
       }
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+    .enabled(!item.isRisk)
+    .opacity(item.isRisk ? $r('sys.float.ohos_id_alpha_disabled') : 1)
   }
 
   /**
@@ -221,17 +233,19 @@ struct applicationItem {
     // initial then fill values when sync return which may cause sync panic
     for (let i = 0; i < bundleNames.length; i++) {
       this.applicationList.push(
-        new ApplicationObj('', '', i, 0, '', ''));
+        new ApplicationObj('', '', i, 0, '', '', false));
       this.oldApplicationItem.push(
-        new ApplicationObj('', '', i, 0, '', ''));
+        new ApplicationObj('', '', i, 0, '', '', false));
     }
 
+    let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
       // Get BundleInfo based on bundle name
       bundle.getBundleInfo(bundleNames[i], Constants.PARMETER_BUNDLE_FLAG).then(res => {
         Promise.all([getAppLabel(res.appInfo.labelId, res.name),
           getAppIcon(res.appInfo.iconId, res.name),
-          verifyAccessToken(res.appInfo.accessTokenId, routerData[0].permission)])
+          verifyAccessToken(res.appInfo.accessTokenId, routerData[0].permission),
+          atManager.getPermissionFlags(res.appInfo.accessTokenId, routerData[0].permission)])
           .then((values) => {
           this.applicationList[i] = (
             new ApplicationObj(
@@ -240,7 +254,8 @@ struct applicationItem {
               i,
               res.appInfo.accessTokenId,
               routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1)) // Get the first letter in the returned initials array
+              makePy(values[0])[0].slice(0, 1),
+              values[3] == Constants.PERMISSION_POLICY_FIXED ? true : false) // Get the first letter in the returned initials array
           );
           this.oldApplicationItem[i] = (
             new ApplicationObj(
@@ -249,7 +264,8 @@ struct applicationItem {
               i,
               res.appInfo.accessTokenId,
               routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1)) // Get the first letter in the returned initials array
+              makePy(values[0])[0].slice(0, 1),
+              values[3] == Constants.PERMISSION_POLICY_FIXED ? true : false) // Get the first letter in the returned initials array
           );
           // 0: have permission; -1: no permission
           if (values[2] === Constants.PERMISSION_INDEX) {
@@ -283,11 +299,11 @@ struct applicationItem {
           Column() {
             Flex({ justifyContent: FlexAlign.Start }) {
               Text(String(this.permissionNum))
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.secondary_font_color'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
               Text($r('app.string.number_of_authorized_applications'))
-                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.secondary_font_color'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
             }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
