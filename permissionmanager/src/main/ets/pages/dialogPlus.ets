@@ -240,20 +240,35 @@ struct PermissionDialog {
         if(group.name == 'LOCATION' && this.bundleInfo.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
           if(!(((this.locationFlag == Constants.LOCATION_BOTH_FUZZY) || (this.locationFlag == Constants.LOCATION_FUZZY))
             && (permission == PRECISE_LOCATION_PERMISSION))) {
+            try {
+              await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
+                result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+              })
+            }
+            catch(err) {
+              Log.error("failed to grant permission:" + permission + " ret:" + result)
+            }
+          }
+        }else {
+          try {
             await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
               result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
             })
           }
-        }else {
-          await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-            result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
-          })
+          catch(err) {
+            Log.error("failed to grant permission:" + permission + " ret:" + result)
+          }
         }
       }else {
         if(permissionList.includes(permission)) {
-          await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-            result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
-          })
+          try {
+            await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
+              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+            })
+          }
+          catch(err) {
+            Log.error("failed to grant permission:" + permission + " ret:" + result)
+          }
         }
       }
       num ++
@@ -279,11 +294,21 @@ struct PermissionDialog {
     group.permissions.forEach(async permission => {
       if(showSubpermissionsGrop.indexOf(group.name) == -1) {
         if(!(this.locationFlag == Constants.LOCATION_UPGRADE && group.name == 'LOCATION') || permission == PRECISE_LOCATION_PERMISSION) {
-          await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+          try {
+            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+          }
+          catch(err) {
+            Log.error("failed to revoke permission:" + permission)
+          }
         }
       }else {
         if(permissionList.includes(permission)) {
-          await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+          try {
+            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+          }
+          catch(err) {
+            Log.error("failed to revoke permission:" + permission)
+          }
         }
       }
       Log.info("revoke permission " + permission);
