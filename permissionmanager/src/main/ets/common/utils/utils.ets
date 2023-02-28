@@ -55,25 +55,8 @@ export function getAppIcon(iconId, bundleName) {
  */
 export function verifyAccessToken(accessTokenId, permission) {
   return new Promise((resolve) => {
-    let atManager = abilityAccessCtrl.createAtManager();
-    let data = atManager.verifyAccessTokenSync(accessTokenId, permission)
-    if(data == abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
-      resolve(data)
-    }else {
-      try {
-        atManager.getPermissionFlags(accessTokenId, permission).then(flag => {
-          if(flag == Constants.PERMISSION_COMPONENT_SET) {
-            resolve(abilityAccessCtrl.GrantStatus.PERMISSION_DENIED)
-          }else {
-            resolve(data)
-          }
-        })
-      }
-      catch(err) {
-        console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
-        resolve(data)
-      }
-    }
+    let data = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(accessTokenId, permission)
+    resolve(data)
   })
 }
 

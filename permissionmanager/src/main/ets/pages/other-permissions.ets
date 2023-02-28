@@ -17,7 +17,6 @@ import { backBar } from "../common/components/backBar";
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup'
-import { verifyAccessToken } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
 
 var TAG = 'PermissionManager_MainAbility:'
@@ -70,7 +69,7 @@ struct appNamePage {
   onPageShow() {
     console.log(TAG + 'onPageShow other-permissions')
     permissions.forEach(permission => {
-      verifyAccessToken(tokenId, permission).then(data => status = data)
+      status = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(tokenId, permission)
     })
   }
 }

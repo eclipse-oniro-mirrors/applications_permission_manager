@@ -327,7 +327,7 @@ struct authorityManagementPage {
         }
         try {
           var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
-          if(flag == Constants.PERMISSION_SYSTEM_FIXED) {
+          if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
             continue
           }
         }

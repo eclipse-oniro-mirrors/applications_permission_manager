@@ -18,7 +18,6 @@ import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { groups, permissionGroups, userGrantPermissions, permissionGroupIds } from "../common/model/permissionGroup";
 import Constants from '../common/utils/constant';
-import { verifyAccessToken } from "../common/utils/utils";
 
 var TAG = 'PermissionManager_MainAbility:'
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
@@ -144,7 +143,7 @@ struct appNamePlusPage {
         }
         try {
           var flag = await acManager.getPermissionFlags(info.tokenId, permission)
-          if(flag == Constants.PERMISSION_SYSTEM_FIXED) {
+          if(flag == Constants.PRE_AUTHORIZATION_NOT_MODIFIED) {
             continue
           }
         }
@@ -194,7 +193,7 @@ struct appNamePlusPage {
         if(this.routerData.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
           continue
         }
-        let res = await verifyAccessToken(this.routerData.tokenId, permission);
+        let res = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(this.routerData.tokenId, permission);
         if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
           isGranted = false;
         }
