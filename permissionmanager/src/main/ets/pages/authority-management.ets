@@ -313,12 +313,14 @@ struct authorityManagementPage {
    * @param {Object} info bundleInfos Application Information
    */
   async deduplicationPermissions(info) {
+    console.log(TAG + 'allBundleInfo start: ' + info.name)
     var reqPermissionsLen = info.reqPermissions.length;
     var reqUserPermissions: string[] = [];
     var acManager = abilityAccessCtrl.createAtManager()
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < info.reqPermissions.length; j++) {
         var permission = info.reqPermissions[j];
+        console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name)
         if((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
           continue
         }
@@ -327,6 +329,7 @@ struct authorityManagementPage {
         }
         try {
           var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
+          console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name + 'flag: ' + flag)
           if(flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue
           }
@@ -350,8 +353,9 @@ struct authorityManagementPage {
     }
 
     // adapt different api
-    if (info.compatibleVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
-      info.appInfo.iconId = info.hapModuleInfos[0].abilityInfo[0].iconId;
+    if ((info.compatibleVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (info.hapModuleInfos.length > 0)) {
+      console.log(TAG + 'app.compatibleVersion: ' + info.name)
+      info.hapModuleInfos[0].abilityInfo.length > 0 ? info.appInfo.iconId = info.hapModuleInfos[0].abilityInfo[0].iconId : ''
     }
 
     var ap: applicationPermissions = {
@@ -363,6 +367,7 @@ struct authorityManagementPage {
       'permissions': reqUserPermissions,
       'groupId': groupIds
     };
+    console.log(TAG + 'allBundleInfo.push: ' + info.name)
     globalThis.allBundleInfo.push(ap)
   }
 
