@@ -32,32 +32,11 @@ export default class MainAbility extends UIAbility {
         globalThis.allGroups = []
         globalThis.permissionLabels = {}
         globalThis.initialGroups = []
-        globalThis.bundleName = want.parameters['bundleName']
-        globalThis.applicationInfo = {}
     }
 
     onWindowStageCreate(windowStage) {
         // Main window is created, set main page for this ability
         console.log(TAG + "MainAbility onWindowStageCreate.");
-
-        if(globalThis.bundleName) {
-            bundle.getBundleInfo(globalThis.bundleName, PARAMETER_BUNDLE_FLAG).then(bundleInfo => {
-                let info = {
-                    'bundleName': bundleInfo.name,
-                    'api': bundleInfo.targetVersion,
-                    'tokenId': bundleInfo.appInfo.accessTokenId,
-                    'iconId': bundleInfo.appInfo.iconId,
-                    'labelId': bundleInfo.appInfo.labelId,
-                    'permissions': bundleInfo.reqPermissions,
-                    'groupId': [],
-                }
-                globalThis.applicationInfo = info
-                windowStage.setUIContent(this.context, "pages/application-secondary", null);
-            }).catch(() => {
-                this.context.terminateSelf()
-            })
-            return
-        }
 
         bundle.getAllBundleInfo(PARAMETER_BUNDLE_FLAG).then(async(bundleInfos) => {
             if (bundleInfos.length <= 0) {

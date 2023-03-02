@@ -347,6 +347,14 @@
     {
       "name": "risk_warning",
       "value": "风险应用禁止获取该权限"
+    },
+    {
+      "name": "SpecificAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "SpecificAbility_label",
+      "value": "label"
     }
   ]
 }

@@ -30,7 +30,18 @@
                 "icon": "$media:icon",
                 "label": "$string:MainAbility_label",
                 "visible": true,
-                "launchType": "standard"
+                "launchType": "singleton"
+            },
+            {
+              "name": "com.ohos.permissionmanager.SpecificAbility",
+              "srcEntrance": "./ets/SpecificAbility/SpecificAbility.ts",
+              "description": "$string:SpecificAbility_desc",
+              "icon": "$media:icon",
+              "label": "$string:SpecificAbility_label",
+              "startWindowIcon": "$media:icon",
+              "startWindowBackground": "$color:default_background_color",
+              "visible": true,
+              "launchType": "standard"
             }
         ],
         "extensionAbilities": [
