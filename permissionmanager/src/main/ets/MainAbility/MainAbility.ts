@@ -97,8 +97,6 @@ export default class MainAbility extends UIAbility {
     onBackground() {
         // Ability has back to background
         console.log(TAG + "MainAbility onBackground.");
-
-//        this.context.terminateSelf();
     }
 
     onDestroy() {
