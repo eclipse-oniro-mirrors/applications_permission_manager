@@ -15,7 +15,7 @@
 
 import { backBar } from "../common/components/backBar";
 import { permissionGroups, groups } from "../common/model/permissionGroup";
-import router from '@system.router';
+import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 
 
@@ -35,7 +35,7 @@ class CalendarObj {
 @Entry
 @Component
 struct appNamePage {
-  private backTitle = router.getParams().backTitle; // return title name
+  private backTitle = router.getParams()['backTitle']; // return title name
 
   build() {
     GridContainer({ gutter: Constants.GUTTER, margin: Constants.GRID_MARGIN }) {
@@ -88,9 +88,8 @@ struct appNamePage {
 @Component
 struct appNameItem {
   @State calendarListItem: CalendarObj[] = []; // Permission management secondary interface data array
-  private routerData: any = router.getParams().routerData; // Routing jump data
-  private backTitle = router.getParams().backTitle; // return title name
-  private group = router.getParams().group;
+  private routerData: any = router.getParams()['routerData']; // Routing jump data
+  private group = router.getParams()['group'];
 
   @Builder ListItemLayout(item, index) {
     ListItem() {
@@ -123,8 +122,8 @@ struct appNameItem {
           var dataList = this.routerData.filter((ele) => {
             return ele.groupName === item.groupName;
           })
-          router.push({
-            uri: 'pages/authority-tertiary',
+          router.pushUrl({
+            url: 'pages/authority-tertiary',
             params: { routerData: dataList[item.index] ? [dataList[item.index]] : [], backTitle: item.label }
           });
         })

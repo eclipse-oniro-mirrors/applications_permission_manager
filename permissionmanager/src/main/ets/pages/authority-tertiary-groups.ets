@@ -16,14 +16,14 @@
 import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
-import router from '@system.router';
+import router from '@ohos.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import { getAppLabel, getAppIcon, verifyAccessToken} from "../common/utils/utils";
 import { makePy } from "../common/utils/utils";
-import { authorizeDialog, globalDialog } from "../common/components/dialog";
+import { globalDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup } from "../common/model/permissionGroup";
 
@@ -35,11 +35,11 @@ var TAG = 'PermissionManager_MainAbility:'
   .height(height)
 }
 
-let routerData: any = router.getParams().routerData; // Routing jump data
-let backTitle = router.getParams().backTitle; // return title name
+let routerData: any = router.getParams()['routerData']; // Routing jump data
+let backTitle = router.getParams()['backTitle']; // return title name
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
-let globalIsOn: any = router.getParams().globalIsOn; // return title name
+let globalIsOn: any = router.getParams()['globalIsOn']; // return title name
 
 class ApplicationObj {
   labelId: string
@@ -175,12 +175,6 @@ struct applicationItem {
     customStyle: true
   })
 
-  authorizeDialogController: CustomDialogController = new CustomDialogController({
-    builder: authorizeDialog({ }),
-    autoCancel: true,
-    alignment: DialogAlignment.Center
-  });
-
   @Builder ListItemLayout(item, index) {
     ListItem() {
       Row() {
@@ -210,16 +204,8 @@ struct applicationItem {
                       let promises = routerData.map(it => new Promise((resolve) => {
                         _this.grantUserGrantedPermission(item.accessTokenId, it.permission, item.index, resolve);
                       }));
-                      Promise.all(promises).then(function(results) {
-                        if(results.indexOf(-1) != -1) {
-                          _this.authorizeDialogController.open();
-                          _this.toggleIsOn[item.index] = false;
-                          setTimeout(()=> {
-                            _this.authorizeDialogController.close();
-                          }, Constants.DELAY_TIME)
-                        } else {
-                          _this.toggleIsOn[item.index] = true;
-                        }
+                      Promise.all(promises).then(function() {
+                        _this.toggleIsOn[item.index] = true;
                         let num = Constants.PERMISSION_NUM;
                         for(let key in _this.toggleIsOn){
                           if(_this.toggleIsOn[key]){
@@ -232,16 +218,8 @@ struct applicationItem {
                       let promises = routerData.map(it => new Promise((resolve) => {
                         _this.revokeUserGrantedPermission(item.accessTokenId, it.permission, item.index, resolve);
                       }));
-                      Promise.all(promises).then(function(results) {
-                        if(results.indexOf(-1) != -1) {
-                          _this.authorizeDialogController.open();
-                          _this.toggleIsOn[item.index] = true;
-                          setTimeout(()=> {
-                            _this.authorizeDialogController.close();
-                          }, Constants.DELAY_TIME)
-                        } else {
-                          _this.toggleIsOn[item.index] = false;
-                        }
+                      Promise.all(promises).then(function() {
+                        _this.toggleIsOn[item.index] = false;
                         let num = Constants.PERMISSION_NUM;
                         for(let key in _this.toggleIsOn){
                           if(_this.toggleIsOn[key]){
@@ -282,8 +260,8 @@ struct applicationItem {
             routerData.forEach(item => {
               permissions.push(item.permission)
             })
-            router.push({
-              uri: 'pages/application-tertiary',
+            router.pushUrl({
+              url: 'pages/application-tertiary',
               params: {
                 routerData: this.bundleNameGroup[item.index],
                 backTitle,
@@ -440,104 +418,103 @@ struct applicationItem {
         left: Constants.AUTHORITY_TEXTINPUT_PADDING_LEFT,
         right: Constants.AUTHORITY_TEXTINPUT_PADDING_RIGHT
       })
-      Row() {
-        Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
-          Column() {
-            if(globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
-              Row() {
-                Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                  Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera') : $r('app.string.microphone'))
-                    .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('app.color.label_color'))
-                    .fontWeight(FontWeight.Medium)
-                  Row() {
-                    Toggle({ type: ToggleType.Switch, isOn: this.globalIsOn })
-                      .selectedColor($r('app.color.button_color'))
-                      .switchPointColor($r('app.color.selected_Color'))
-                      .padding({ right: 0 })
-                      .onChange((isOn: boolean) => {
-                        if(isOn) {
-                          if(globalThis.currentPermissionGroup == "CAMERA") {
-                            let cameraManager = camera.getCameraManager(globalThis.context);
-                            cameraManager.muteCamera(false);
-                            this.globalIsOn = isOn;
-                          }else {
-                            var audioManager = audio.getAudioManager();
-                            audioManager.setMicrophoneMute(false).then(() => {
-                              this.globalIsOn = isOn
-                            })
-                          }
+      Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
+        Column() {
+          if(globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
+            Row() {
+              Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera') : $r('app.string.microphone'))
+                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('app.color.label_color'))
+                  .fontWeight(FontWeight.Medium)
+                Row() {
+                  Toggle({ type: ToggleType.Switch, isOn: this.globalIsOn })
+                    .selectedColor($r('app.color.button_color'))
+                    .switchPointColor($r('app.color.selected_Color'))
+                    .padding({ right: 0 })
+                    .onChange((isOn: boolean) => {
+                      if(isOn) {
+                        if(globalThis.currentPermissionGroup == "CAMERA") {
+                          let cameraManager = camera.getCameraManager(globalThis.context);
+                          cameraManager.muteCamera(false);
+                          this.globalIsOn = isOn;
+                        }else {
+                          var audioManager = audio.getAudioManager();
+                          audioManager.setMicrophoneMute(false).then(() => {
+                            this.globalIsOn = isOn
+                          })
                         }
-                      })
-                    Row().onClick(() => { this.privacyDialogController.open() })
-                      .width(Constants.DEFAULT_SLIDER_WIDTH).height(Constants.DEFAULT_SLIDER_HEIGHT)
-                      .position({ x: this.globalIsOn ? 0 : Constants.OFFSET, y: 0 })
-                  }.clip(true)
-                }.height(Constants.LISTITEM_ROW_HEIGHT)
-                .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
-              }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-              .backgroundColor($r('app.color.default_background_color'))
-              .borderRadius(Constants.BORDER_RADIUS)
-              .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
+                      }
+                    })
+                  Row().onClick(() => { this.privacyDialogController.open() })
+                    .width(Constants.DEFAULT_SLIDER_WIDTH).height(Constants.DEFAULT_SLIDER_HEIGHT)
+                    .position({ x: this.globalIsOn ? 0 : Constants.OFFSET, y: 0 })
+                }.clip(true)
+              }.height(Constants.LISTITEM_ROW_HEIGHT)
+              .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+            }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+            .backgroundColor($r('app.color.default_background_color'))
+            .borderRadius(Constants.BORDER_RADIUS)
+            .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
+          }
+          Flex({ justifyContent: FlexAlign.Start }) {
+            if(this.globalIsOn) {
+              Text(String(this.getGrantApplicationNumber()))
+                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontColor($r('app.color.secondary_font_color'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+              Text($r('app.string.number_of_authorized_applications'))
+                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontColor($r('app.color.secondary_font_color'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+            }else {
+              Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera_is_off') : $r('app.string.microphone_is_off'))
+                .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
+                .fontColor($r('app.color.secondary_font_color'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
             }
-            Flex({ justifyContent: FlexAlign.Start }) {
-              if(this.globalIsOn) {
-                Text(String(this.getGrantApplicationNumber()))
-                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
-                  .fontColor($r('app.color.secondary_font_color'))
-                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-                Text($r('app.string.number_of_authorized_applications'))
-                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
-                  .fontColor($r('app.color.secondary_font_color'))
-                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-              }else {
-                Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera_is_off') : $r('app.string.microphone_is_off'))
-                  .fontSize(Constants.TEXT_SMAL_FONT_SIZE)
-                  .fontColor($r('app.color.secondary_font_color'))
-                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-              }
-            }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
-            Scroll() {
-              Row() {
-                Column() {
-                  if (!this.applicationList.length) {
-                    if (this.searchResult) {
-                      Row() {
-                      }.margin({ top: Constants.AUTHORITY_ROW_MARGIN_TOP })
-                    } else {
-                      Row() {
-                        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
-                          Image($r('app.media.searchnoresult'))
-                            .customizeImage(Constants.SEARCHNORESULT_IMAGE_WIDTH, Constants.SEARCHNORESULT_IMAGE_HEIGHT)
-                        }
-                      }.margin({ top: Constants.AUTHORITY_ROW_MARGIN_TOP })
-                    }
+          }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+          .margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
+          Scroll() {
+            Row() {
+              Column() {
+                if (!this.applicationList.length) {
+                  if (this.searchResult) {
+                    Row() {}
                   } else {
                     Row() {
-                      List() {
-                        ForEach(this.applicationList.slice(Constants.SLICE_START, this.applicationList.length - 1),
-                        (item) => {
-                          this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-                        }, item => item.toString())
-                        ForEach(this.applicationList.slice(Constants.SLICE_END), (item) => {
-                          this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-                        }, item => item.toString())
+                      Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+                        Image($r('app.media.searchnoresult'))
+                          .customizeImage(Constants.SEARCHNORESULT_IMAGE_WIDTH, Constants.SEARCHNORESULT_IMAGE_HEIGHT)
                       }
-                      .backgroundColor($r('app.color.default_background_color'))
-                      .borderRadius(Constants.BORDER_RADIUS)
-                      .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-                    }.margin({ top: Constants.AUTHORITY_ROW_MARGIN_TOP })
+                    }
                   }
-                }.width(Constants.FULL_WIDTH)
-                .height(Constants.AUTHORITY_COLUMN_HEIGHT)
-              }
+                } else {
+                  Row() {
+                    List() {
+                      ForEach(this.applicationList.slice(Constants.SLICE_START, this.applicationList.length - 1),
+                      (item) => {
+                        this.ListItemLayout(item, Constants.SLICE_START_INDEX)
+                      }, item => item.toString())
+                      ForEach(this.applicationList.slice(Constants.SLICE_END), (item) => {
+                        this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+                      }, item => item.toString())
+                    }
+                    .backgroundColor($r('app.color.default_background_color'))
+                    .borderRadius(Constants.BORDER_RADIUS)
+                    .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                  }
+                }
+              }.width(Constants.FULL_WIDTH)
+              .margin({ bottom: globalGroup.includes(globalThis.currentPermissionGroup) ? Constants.AUTHORITY_LIST_MARGIN_BOTTOM_GLOBAL : Constants.AUTHORITY_LIST_MARGIN_BOTTOM })
             }
-          }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
-          Column() {
-            alphabetIndexerComponent({ applicationItem: $applicationList, oldApplicationItem: $oldApplicationItem })
-          }.width(Constants.AUTHORITY_ALPHABETINDEX_WIDTH)
-           .padding({ top: Constants.AUTHORITY_ALPHABETINDEX_PADDING_TOP })
-        }
-      }
-    }
+          }.scrollBar(BarState.Off)
+          .borderRadius(Constants.BORDER_RADIUS)
+        }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
+        Column() {
+          alphabetIndexerComponent({ applicationItem: $applicationList, oldApplicationItem: $oldApplicationItem })
+        }.width(Constants.AUTHORITY_ALPHABETINDEX_WIDTH)
+         .padding({ top: Constants.AUTHORITY_ALPHABETINDEX_PADDING_TOP })
+      }.flexGrow(Constants.FLEX_GROW)
+    }.height(Constants.FULL_HEIGHT)
   }
 }

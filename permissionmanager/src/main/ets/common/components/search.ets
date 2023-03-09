@@ -48,10 +48,6 @@ export struct textInput {
               this.searchResult = false;
             }
           })
-          .onSubmit((enterKey) => {
-          })
-          .onEditChanged((isEditing) => {
-          })
         Image($r('app.media.ic_public_search_filled'))
           .objectFit(ImageFit.Contain)
           .width(Constants.TEXTINPUT_IMAGE_WIDTH)

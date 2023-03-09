@@ -14,21 +14,21 @@
  */
 
 import { backBar } from "../common/components/backBar";
-import router from '@system.router';
+import router from '@ohos.router';
 import bundle from "@ohos.bundle";
 import bundleManager from '@ohos.bundle.bundleManager';
 import { getAppLabel, getAppIcon } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { authorizeDialog } from "../common/components/dialog";
-import { permissionGroups, showSubpermissionsGrop, polymorphismGroup } from "../common/model/permissionGroup";
+import { showSubpermissionsGrop } from "../common/model/permissionGroup";
 import Constants from '../common/utils/constant';
 
 var TAG = 'PermissionManager_MainAbility:'
 
-let routerData: any = router.getParams().routerData; // Routing jump data
-let backTitle: any = router.getParams().backTitle; // return title name
-let status = router.getParams().status; // Status: Allowed, Forbidden
-let permissions: any = router.getParams().permission; // permissions name
+let routerData: any = router.getParams()['routerData']; // Routing jump data
+let backTitle: any = router.getParams()['backTitle']; // return title name
+let status = router.getParams()['status']; // Status: Allowed, Forbidden
+let permissions: any = router.getParams()['permission']; // permissions name
 let nowGrantResult = Constants.PERMISSION_NUM; // Authorization results now
 let nowRevokeResult = Constants.PERMISSION_NUM; // Now deauthorize results
 let GrantResultFlag = []; // Authorization result Flag
@@ -146,7 +146,7 @@ struct mediaDocumentItem {
    */
   grantUserGrantedPermission(accessTokenId, permission) {
     abilityAccessCtrl.createAtManager().grantUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then((result) => {
+      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
       nowGrantResult = Constants.PERMISSION_INDEX;
     })
     .catch((error) => {
@@ -161,7 +161,7 @@ struct mediaDocumentItem {
    */
   revokeUserGrantedPermission(accessTokenId, permission) {
     abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then((result) => {
+      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
       nowRevokeResult = Constants.PERMISSION_INDEX;
     })
       .catch((error) => {
@@ -446,7 +446,7 @@ struct mediaDocumentItem {
                   var acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
                     acManager.grantUserGrantedPermission(bundleInfo.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
-                      .then((res) => { this.accurateIsOn = true })
+                      .then(() => { this.accurateIsOn = true })
                   } else {
                     acManager.revokeUserGrantedPermission(bundleInfo.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
                       .then(() => { this.accurateIsOn = false })

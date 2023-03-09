@@ -33,7 +33,8 @@ export default class GlobalExtensionAbility extends extension {
         globalThis.globalState = want.parameters['ohos.sensitive.resource']
         console.info(TAG + "want: " + JSON.stringify(want))
 
-        display.getDefaultDisplay().then(dis => {
+        try {
+            let dis = display.getDefaultDisplaySync();
             let navigationBarRect = {
                 left: 0,
                 top: 0,
@@ -43,7 +44,9 @@ export default class GlobalExtensionAbility extends extension {
             let isVertical = dis.width > dis.height ? false : true
             globalThis.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical
             this.createWindow("globalDialog", window.WindowType.TYPE_KEYGUARD, navigationBarRect)
-        })
+        } catch (exception) {
+            console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+        };
     }
 
     /**
@@ -64,13 +67,13 @@ export default class GlobalExtensionAbility extends extension {
     private async createWindow(name: string, windowType: number, rect) {
         console.info(TAG + "create window")
         try {
-            const win = await window.create(globalThis.globalContext, name, windowType)
+            const win = await window.createWindow({ ctx: globalThis.globalContext, name, windowType })
             globalThis.globalWin = win
-            await win.moveTo(rect.left, rect.top)
-            await win.resetSize(rect.width, rect.height)
-            await win.loadContent('pages/globalSwitch')
-            await win.setBackgroundColor(BG_COLOR)
-            await win.show()
+            await win.moveWindowTo(rect.left, rect.top)
+            await win.resize(rect.width, rect.height)
+            await win.setUIContent('pages/globalSwitch')
+            await win.setWindowBackgroundColor(BG_COLOR)
+            await win.showWindow()
         } catch {
             console.info(TAG + "window create failed!")
         }

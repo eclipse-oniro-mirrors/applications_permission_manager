@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import Resmgr from '@ohos.resourceManager';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 
 import { permissionGroups, groups } from "../model/permissionGroup";

@@ -41,7 +41,8 @@ export default class ServiceExtensionAbility extends extension {
         console.info(TAG + "ServiceExtensionAbility onRequest. start id is " + startId);
         console.info(TAG + "want: " + JSON.stringify(want))
 
-        display.getDefaultDisplay().then(dis => {
+        try {
+            let dis = display.getDefaultDisplaySync();
             let navigationBarRect = {
                 left: 0,
                 top: 0,
@@ -51,7 +52,9 @@ export default class ServiceExtensionAbility extends extension {
             let isVertical = dis.width > dis.height ? false : true
             globalThis.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical
             this.createWindow("permissionDialog" + startId, window.WindowType.TYPE_DIALOG, navigationBarRect)
-        })
+        } catch (exception) {
+            console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+        };
     }
 
     /**
@@ -64,18 +67,18 @@ export default class ServiceExtensionAbility extends extension {
     private async createWindow(name: string, windowType: number, rect) {
         console.info(TAG + "create window")
         try {
-            const win = await window.create(globalThis.extensionContext, name, windowType)
+            const win = await window.createWindow({ ctx: globalThis.extensionContext, name, windowType })
             globalThis.extensionWin = win
             await win.bindDialogTarget(globalThis.abilityWant.parameters['ohos.ability.params.token'].value, () => {
-                win.destroy()
+                win.destroyWindow()
                 globalThis.windowNum --
                 if(globalThis.windowNum == 0) this.context.terminateSelf()
             })
-            await win.moveTo(rect.left, rect.top)
-            await win.resetSize(rect.width, rect.height)
-            await win.loadContent('pages/dialogPlus')
-            await win.setBackgroundColor(BG_COLOR)
-            await win.show()
+            await win.moveWindowTo(rect.left, rect.top)
+            await win.resize(rect.width, rect.height)
+            await win.setUIContent('pages/dialogPlus')
+            await win.setWindowBackgroundColor(BG_COLOR)
+            await win.showWindow()
             globalThis.windowNum ++
         } catch {
             console.info(TAG + "window create failed!")
