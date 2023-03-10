@@ -347,6 +347,14 @@
     {
       "name": "risk_warning",
       "value": "Risk application does not obtain this permission"
+    },
+    {
+      "name": "SpecificAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "SpecificAbility_label",
+      "value": "label"
     }
   ]
 }

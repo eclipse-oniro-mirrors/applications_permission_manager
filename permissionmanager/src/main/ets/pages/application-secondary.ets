@@ -216,17 +216,6 @@ struct appNamePlusPage {
     this.initialPermissions();
   }
 
-  /**
-   * Lifecycle function, triggered once when this page disappears
-   */
-  onPageHide() {
-    console.log(TAG + 'onPageHide application-secondary')
-    setTimeout(()=> {
-      this.allowedListItem = [];
-      this.bannedListItem = [];
-    }, Constants.DELAY_TIME)
-  }
-
   aboutToAppear() {
     if(globalThis.bundleName) {
       globalThis.applicationInfo.permissions.forEach(userPermission => {
