@@ -294,61 +294,60 @@ struct applicationItem {
         left: Constants.AUTHORITY_TEXTINPUT_PADDING_LEFT,
         right: Constants.AUTHORITY_TEXTINPUT_PADDING_RIGHT
       })
-      Row() {
-        Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
-          Column() {
-            Flex({ justifyContent: FlexAlign.Start }) {
-              Text(String(this.permissionNum))
-                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.secondary_font_color'))
-                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-              Text($r('app.string.number_of_authorized_applications'))
-                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.secondary_font_color'))
-                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-            }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
-            Scroll() {
-              Row() {
-                Column() {
-                  if (!this.applicationList.length) {
-                    if (this.searchResult) {
-                      Row() {
-                      }.margin({ top: Constants.AUTHORITY_ROW_MARGIN_TOP })
-                    } else {
-                      Row() {
-                        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
-                          Image($r('app.media.searchnoresult'))
-                            .customizeImage(Constants.SEARCHNORESULT_IMAGE_WIDTH, Constants.SEARCHNORESULT_IMAGE_HEIGHT)
-                        }
-                      }.margin({ top: Constants.AUTHORITY_ROW_MARGIN_TOP })
-                    }
+      Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
+        Column() {
+          Flex({ justifyContent: FlexAlign.Start }) {
+            Text(String(this.permissionNum))
+              .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+              .fontColor($r('app.color.secondary_font_color'))
+              .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+            Text($r('app.string.number_of_authorized_applications'))
+              .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+              .fontColor($r('app.color.secondary_font_color'))
+              .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+          }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+          .margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
+          Scroll() {
+            Row() {
+              Column() {
+                if (!this.applicationList.length) {
+                  if (this.searchResult) {
+                    Row() {}
                   } else {
                     Row() {
-                      List() {
-                        ForEach(this.applicationList.slice(Constants.SLICE_START, this.applicationList.length - 1),
-                        (item) => {
-                          this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-                        }, item => item.toString())
-                        ForEach(this.applicationList.slice(Constants.SLICE_END), (item) => {
-                          this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-                        }, item => item.toString())
+                      Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+                        Image($r('app.media.searchnoresult'))
+                          .customizeImage(Constants.SEARCHNORESULT_IMAGE_WIDTH, Constants.SEARCHNORESULT_IMAGE_HEIGHT)
                       }
-                      .backgroundColor($r('app.color.default_background_color'))
-                      .borderRadius(Constants.BORDER_RADIUS)
-                      .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-                    }.margin({ top: Constants.AUTHORITY_ROW_MARGIN_TOP })
+                    }
                   }
-                }.width(Constants.FULL_WIDTH)
-                .height(Constants.AUTHORITY_COLUMN_HEIGHT)
-              }
+                } else {
+                  Row() {
+                    List() {
+                      ForEach(this.applicationList.slice(Constants.SLICE_START, this.applicationList.length - 1),
+                      (item) => {
+                        this.ListItemLayout(item, Constants.SLICE_START_INDEX)
+                      }, item => item.toString())
+                      ForEach(this.applicationList.slice(Constants.SLICE_END), (item) => {
+                        this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+                      }, item => item.toString())
+                    }
+                    .backgroundColor($r('app.color.default_background_color'))
+                    .borderRadius(Constants.BORDER_RADIUS)
+                    .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                  }
+                }
+              }.width(Constants.FULL_WIDTH)
+              .margin({ bottom: Constants.AUTHORITY_LIST_MARGIN_BOTTOM })
             }
-          }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
-          Column() {
-            alphabetIndexerComponent({ applicationItem: $applicationList, oldApplicationItem: $oldApplicationItem })
-          }.width(Constants.AUTHORITY_ALPHABETINDEX_WIDTH)
-           .padding({ top: Constants.AUTHORITY_ALPHABETINDEX_PADDING_TOP })
-        }
-      }
-    }
+          }.scrollBar(BarState.Off)
+          .borderRadius(Constants.BORDER_RADIUS)
+        }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
+        Column() {
+          alphabetIndexerComponent({ applicationItem: $applicationList, oldApplicationItem: $oldApplicationItem })
+        }.width(Constants.AUTHORITY_ALPHABETINDEX_WIDTH)
+         .padding({ top: Constants.AUTHORITY_ALPHABETINDEX_PADDING_TOP })
+      }.flexGrow(Constants.FLEX_GROW)
+    }.height(Constants.FULL_HEIGHT)
   }
 }
