@@ -208,8 +208,8 @@ struct PermissionDialog {
       results.push(result)
     })
     let option = new rpc.MessageOption()
-    let data = new rpc.MessageParcel()
-    let reply = new rpc.MessageParcel()
+    let data = new rpc.MessageSequence()
+    let reply = new rpc.MessageSequence()
     Promise.all([data.writeInterfaceToken(Constants.ACCESS_TOKEN),
       data.writeStringArray(perms),
       data.writeIntArray(results)

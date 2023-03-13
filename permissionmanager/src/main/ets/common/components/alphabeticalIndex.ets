@@ -61,7 +61,7 @@ export struct alphabetIndexerComponent {
       .popupFont({ size: Constants.ALPHABETINDEXER_POPUPFONT_SIZE, weight: FontWeight.Bolder }) // Demo of the popup
       .itemSize(Constants.ALPHABETINDEXER_ITEMSIZE) // size square of each item
       .alignStyle(IndexerAlign.Left) // Align left
-      .onSelected((index: number) => {
+      .onSelect((index: number) => {
         this.index = index;
         if (this.value[index] === '#' || this.value[index] === '☆') {
           this.applicationItem = this.oldApplicationItem;

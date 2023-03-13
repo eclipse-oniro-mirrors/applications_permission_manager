@@ -14,18 +14,18 @@
  */
 
 import { backBar } from "../common/components/backBar";
-import router from '@system.router';
+import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup'
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
 
 var TAG = 'PermissionManager_MainAbility:'
 
-let routerData = router.getParams().routerData; // Routing jump data
-let tokenId: any = router.getParams().tokenId; // tokenId for verify permission
-let backTitle = router.getParams().backTitle; // return title name
-let status = router.getParams().status; // Status: Allowed, Forbidden
-let permissions: any = router.getParams().permission; // permissions name
+let routerData = router.getParams()['routerData']; // Routing jump data
+let tokenId: any = router.getParams()['tokenId']; // tokenId for verify permission
+let backTitle = router.getParams()['backTitle']; // return title name
+let status = router.getParams()['status']; // Status: Allowed, Forbidden
+let permissions: any = router.getParams()['permission']; // permissions name
 let otherPermissionList = []; // otherPermission List
 for (let i = 0; i < permissions.length; i++) {
   otherPermissionList.push({
@@ -130,8 +130,8 @@ struct appNameItem {
             }
           }
         }.onClick(() => {
-            router.push({
-              uri: 'pages/application-tertiary',
+            router.pushUrl({
+              url: 'pages/application-tertiary',
               params: {
                 routerData: routerData,
                 backTitle: item.permissionLabel,

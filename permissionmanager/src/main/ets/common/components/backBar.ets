@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import router from '@system.router';
+import router from '@ohos.router';
 import Constants from '../utils/constant';
 
 @Component
@@ -55,7 +55,7 @@ export struct backBar {
               {
                 value: this.record,
                 action: () => {
-                  router.push({ uri: 'pages/permission-access-record' })
+                  router.pushUrl({ url: 'pages/permission-access-record' })
                 }
               }
             ])
