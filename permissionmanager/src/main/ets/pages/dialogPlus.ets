@@ -35,6 +35,34 @@ const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 
 let permissionLabels: Object = {}
+let win: any = ""
+let proxy: any = ''
+
+class ResourceObj {
+  whether_to_allow: string
+  quotes: string
+  access_general_location: string
+  fuzzy_to_exact: string
+  comma: string
+  period: string
+  constructor(whether_to_allow: string, quotes: string, access_general_location: string, fuzzy_to_exact: string, comma: string, period: string) {
+    this.whether_to_allow = whether_to_allow
+    this.quotes = quotes
+    this.access_general_location = access_general_location
+    this.fuzzy_to_exact = fuzzy_to_exact
+    this.comma = comma
+    this.period = period
+  }
+}
+
+class BundleInfo {
+  targetVersion: number
+  reqPermissionDetails: Array<any>
+  constructor(targetVersion: number, reqPermissionDetails: Array<any>) {
+    this.targetVersion = targetVersion
+    this.reqPermissionDetails = reqPermissionDetails
+  }
+}
 
 @Entry
 @Component
@@ -63,11 +91,9 @@ struct PermissionDialog {
   @State grantGroups: Array<any> = []
   @State userFixedFlag: number = 2 // means user fixed
   @State appName: string = ""
-  @State win: any = ""
-  @State proxy: any = ''
   @State locationFlag: number = Constants.LOCATION_NONE
-  @State resource: any = {}
-  @State bundleInfo: any = {}
+  @State resource: ResourceObj = new ResourceObj('', '', '', '', '', '')
+  @State bundleInfo: BundleInfo = new BundleInfo(0, [])
   controller: CustomDialogController
 
   build() {
@@ -214,7 +240,7 @@ struct PermissionDialog {
       data.writeStringArray(perms),
       data.writeIntArray(results)
     ]).then(() => {
-      this.proxy.sendRequest(Constants.RESULT_CODE, data, reply, option)
+      proxy.sendRequest(Constants.RESULT_CODE, data, reply, option)
       this.destruction()
     }).catch(() => {
       Log.error('write result failed!')
@@ -223,7 +249,7 @@ struct PermissionDialog {
   }
 
   destruction() {
-    this.win.destroy()
+    win.destroy()
     globalThis.windowNum --
     Log.info("windowNum:" + globalThis.windowNum)
     if(globalThis.windowNum == 0) {
@@ -433,8 +459,8 @@ struct PermissionDialog {
     this.result = []
     this.reqPerms = globalThis.abilityWant.parameters['ohos.user.grant.permission']
     this.accessTokenId = globalThis.abilityWant.parameters['ohos.aafwk.param.callerToken']
-    this.proxy = globalThis.abilityWant.parameters['ohos.ability.params.callback'].value
-    this.win = globalThis.extensionWin
+    proxy = globalThis.abilityWant.parameters['ohos.ability.params.callback'].value
+    win = globalThis.extensionWin
     if (this.reqPerms == undefined || this.accessTokenId == undefined || this.reqPerms.length == 0) {
       Log.info("invalid parameters")
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED
