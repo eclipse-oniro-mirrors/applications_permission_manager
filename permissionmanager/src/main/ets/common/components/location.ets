@@ -27,7 +27,7 @@ import Constants from '../utils/constant';
 
 @Component
 export struct LocationCanvas {
-  @Link locationFlag: any
+  @Link locationFlag: number
 
   build() {
     Column() {

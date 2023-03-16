@@ -37,12 +37,31 @@ class permissionObj {
   }
 }
 
+class ResourceObj {
+  bundleName: string
+  api: number
+  tokenId: string
+  iconId: string
+  labelId: string
+  permissions: Array<any>
+  groupId: Array<any>
+  constructor(bundleName: string, api: number, tokenId: string, iconId: string, labelId: string, permissions: Array<any>, groupId: Array<any>) {
+    this.bundleName = bundleName
+    this.api = api
+    this.tokenId = tokenId
+    this.iconId = iconId
+    this.labelId = labelId
+    this.permissions = permissions
+    this.groupId = groupId
+  }
+}
+
 @Entry
 @Component
 struct appNamePlusPage {
   @State allowedListItem: permissionObj[] = []; // Array of allowed permissions
   @State bannedListItem: permissionObj[] = []; // array of forbidden permissions
-  @State routerData: any = globalThis.applicationInfo; // Routing jump data
+  @State routerData: ResourceObj = globalThis.applicationInfo; // Routing jump data
 
   @Builder ListItemLayout(item, index, status) {
     ListItem() {
