@@ -143,11 +143,10 @@ struct applicationItem {
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: object = {}; // toggle switch state array
   @State applicationList: ApplicationObj[] = []; // application info array
-  @State oldApplicationItem: ApplicationObj[] = []; // Original application information array
   @State searchResult: boolean = true; // search results
   @State placeholder: string = ''
   @State bundleNameGroup: Array<string> = []
-  @Link polymorphismIsOn: any
+  @Link polymorphismIsOn: Array<boolean>
   @State globalIsOn: boolean = true
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
@@ -332,10 +331,7 @@ struct applicationItem {
 
     // initial then fill values when sync return which may cause sync panic
     for (let i = 0; i < bundleNames.length; i++) {
-      this.applicationList.push(
-        new ApplicationObj('', '', i, 0, '', '', false));
-      this.oldApplicationItem.push(
-        new ApplicationObj('', '', i, 0, '', '', false));
+      this.applicationList.push(new ApplicationObj('', '', i, 0, '', '', false));
       this.bundleNameGroup.push(bundleNames[i])
     }
 
@@ -348,16 +344,6 @@ struct applicationItem {
         atManager.getPermissionFlags(res.appInfo.accessTokenId, routerData[0].permission)])
           .then((values) => {
             this.applicationList[i] = (
-              new ApplicationObj(
-              String(values[0]),
-              String(values[1]),
-                i,
-                res.appInfo.accessTokenId,
-                routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1),
-              values[2] == Constants.PERMISSION_POLICY_FIXED ? true : false) // Get the first letter in the returned initials array
-            );
-            this.oldApplicationItem[i] = (
               new ApplicationObj(
               String(values[0]),
               String(values[1]),
@@ -420,7 +406,6 @@ struct applicationItem {
         textInput({
           placeholder: this.placeholder,
           applicationItem: $applicationList,
-          oldApplicationItem: $oldApplicationItem,
           searchResult: $searchResult
         })
       }.padding({
@@ -521,7 +506,7 @@ struct applicationItem {
           .borderRadius(Constants.BORDER_RADIUS)
         }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
         Column() {
-          alphabetIndexerComponent({ applicationItem: $applicationList, oldApplicationItem: $oldApplicationItem })
+          alphabetIndexerComponent({ applicationItem: $applicationList })
         }.width(Constants.AUTHORITY_ALPHABETINDEX_WIDTH)
          .padding({ top: Constants.AUTHORITY_ALPHABETINDEX_PADDING_TOP })
       }.flexGrow(Constants.FLEX_GROW)

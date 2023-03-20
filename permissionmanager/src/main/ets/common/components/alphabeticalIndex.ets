@@ -46,9 +46,13 @@ export struct alphabetIndexerComponent {
     'Y',
     'Z'
   ]; // Array of alphabetically indexed names
-  @Link applicationItem: any; // application info array
-  @Link oldApplicationItem: any; // Original application information array
+  @Link applicationItem: Array<any>; // application info array
   @State index: number = 0; // alphabetical index
+  @State oldApplicationItem: Array<any> = [] // Original application information array
+
+  aboutToAppear() {
+    this.oldApplicationItem = this.applicationItem
+  }
 
   build() {
     AlphabetIndexer({ arrayValue: this.value, selected: this.index })

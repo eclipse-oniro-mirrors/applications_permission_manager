@@ -18,9 +18,13 @@ import Constants from '../utils/constant';
 @Component
 export struct textInput {
   @Prop placeholder: string; // Prompt text when no input
-  @Link applicationItem: any; // application info array
-  @Link oldApplicationItem: any; // Original application information array
+  @Link applicationItem: Array<any>; // application info array
   @Link searchResult: boolean; // search results
+  @State oldApplicationItem: Array<any> = [] // Original application information array
+
+  aboutToAppear() {
+    this.oldApplicationItem = this.applicationItem
+  }
 
   build() {
     Column() {
