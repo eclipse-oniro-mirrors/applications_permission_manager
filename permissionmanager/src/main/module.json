@@ -41,7 +41,8 @@
               "startWindowIcon": "$media:icon",
               "startWindowBackground": "$color:default_background_color",
               "visible": true,
-              "launchType": "standard"
+              "launchType": "standard",
+              "permissions": ["ohos.permission.GRANT_SENSITIVE_PERMISSIONS"]
             }
         ],
         "extensionAbilities": [

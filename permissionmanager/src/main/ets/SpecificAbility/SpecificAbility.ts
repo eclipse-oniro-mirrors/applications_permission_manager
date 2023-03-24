@@ -25,12 +25,12 @@ export default class SpecificAbility extends UIAbility {
         'labelId': bundleInfo.appInfo.labelId,
         'permissions': bundleInfo.reqPermissions,
         'groupId': [],
-      }
+      };
       globalThis.applicationInfo = info;
-      windowStage.setUIContent(this.context, "pages/application-secondary", null);
+      windowStage.setUIContent(this.context, 'pages/application-secondary', null);
     }).catch(() => {
       this.context.terminateSelf();
-    })
+    });
   }
 
   onWindowStageDestroy(): void {
