@@ -67,7 +67,7 @@ export struct alphabetIndexerComponent {
       .alignStyle(IndexerAlign.Left) // Align left
       .onSelect((index: number) => {
         this.index = index;
-        if (this.value[index] === '#' || this.value[index] === '☆') {
+        if (this.value[index] === '#') {
           this.applicationItem = this.oldApplicationItem;
         } else {
           this.applicationItem = this.oldApplicationItem.filter((item) => {

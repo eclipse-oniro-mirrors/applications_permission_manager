@@ -145,6 +145,7 @@ struct authorityManagementPage {
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
       Text(index ? $r('app.string.application') : $r('app.string.authority'))
+        .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
         .fontColor(this.currentIndex == index ? $r('app.color.button_color') : $r('app.color.label_color'))
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -477,7 +478,7 @@ struct authorityManagementPage {
                                       List() {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP), (item, index) => {
                                           this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).length - 1))
-                                        }, item => item.toString())
+                                        }, item => JSON.stringify(item))
                                       }.backgroundColor($r('app.color.default_background_color'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
@@ -488,7 +489,7 @@ struct authorityManagementPage {
                                       List() {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP), (item, index) => {
                                           this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).length - 1))
-                                        }, item => item.toString())
+                                        }, item => JSON.stringify(item))
                                       }.backgroundColor($r('app.color.default_background_color'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
@@ -500,7 +501,7 @@ struct authorityManagementPage {
                                         List() {
                                           ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP), (item, index) => {
                                             this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length - 1))
-                                          }, item => item.toString())
+                                          }, item => JSON.stringify(item))
                                         }.backgroundColor($r('app.color.default_background_color'))
                                         .borderRadius(Constants.BORDER_RADIUS)
                                         .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
@@ -513,7 +514,7 @@ struct authorityManagementPage {
                                       List() {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP), (item) => {
                                           this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-                                        }, item => item.toString())
+                                        }, item => JSON.stringify(item))
                                       }.backgroundColor($r('app.color.default_background_color'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
@@ -562,7 +563,7 @@ struct applicationItem {
   @State applicationItem: any[] = globalThis.allBundleInfo // application info array
   @State searchResult: boolean = true // search results
 
-  @Builder ListItemLayout(item, end) {
+  @Builder ListItemLayout(item, index) {
     ListItem() {
       Row() {
         Column() {
@@ -587,7 +588,7 @@ struct applicationItem {
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
           }
-          if (!end) {
+          if (index < this.applicationItem.length - 1) {
             Row() {
               Flex() {
                 Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
@@ -639,8 +640,8 @@ struct applicationItem {
                   Scroll() {
                     List() {
                       ForEach(this.applicationItem, (item, index) => {
-                          this.ListItemLayout(item, index == (this.applicationItem.length - 1))
-                        }, item => item.toString())
+                        this.ListItemLayout(item, index)
+                      }, item => JSON.stringify(item))
                     }.backgroundColor($r('app.color.default_background_color'))
                     .borderRadius(Constants.BORDER_RADIUS)
                     .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })

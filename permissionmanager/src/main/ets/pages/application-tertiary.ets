@@ -33,25 +33,14 @@ let nowGrantResult = Constants.PERMISSION_NUM; // Authorization results now
 let nowRevokeResult = Constants.PERMISSION_NUM; // Now deauthorize results
 let GrantResultFlag = []; // Authorization result Flag
 let RevokeResultFlag = []; // Cancel authorization result Flag
-let reason = null  // Authorized reason
 let bundleInfo: any = {}
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 class MeidaDocObj {
   name: Resource
-  index: number
-  groupName: string
   accessTokenId: number
   permissions: []
-  constructor(
-    name: Resource,
-    index: number,
-    groupName: string,
-    accessTokenId: number,
-    permissions: []
-  ) {
+  constructor(name: Resource, accessTokenId: number, permissions: []) {
     this.name = name
-    this.index = index
-    this.groupName = groupName
     this.accessTokenId = accessTokenId
     this.permissions = permissions
   }
@@ -121,6 +110,7 @@ struct mediaDocumentItem {
   @State api: number = 0;
   @State resource: ResourceObj = new ResourceObj('', '')
   @State isRisk: boolean = false // Whether it is a risky application
+  @State reason: string = ''
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -163,7 +153,7 @@ struct mediaDocumentItem {
    */
   aboutToAppear() {
     if(showSubpermissionsGrop.indexOf(globalThis.currentPermissionGroup) != -1) {
-      reason = []
+      var reason = []
       permissions.forEach(permission => {
         reason.push(globalThis.permissionLabels[permission])
       })
@@ -175,10 +165,8 @@ struct mediaDocumentItem {
         .then(values => {
           this.resource.period = values[3]
           this.resource.comma = values[4]
-          reason = globalThis.currentPermissionGroup == 'SMS' ? (reason.join(values[0]) + values[1]) : (reason.join(values[2]) + values[3])
+          this.reason = globalThis.currentPermissionGroup == 'SMS' ? (reason.join(values[0]) + values[1]) : (reason.join(values[2]) + values[3])
         })
-    }else {
-      reason = ''
     }
     let hasReason = false
     bundleManager.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(info => {
@@ -188,8 +176,8 @@ struct mediaDocumentItem {
             let context = globalThis.context.createBundleContext(routerData)
             context.resourceManager.getString(reqPermissionDetail.reasonId).then(value => {
               if (value !== undefined && !hasReason) {
-                reason = reason.replace(this.resource.period, this.resource.comma)
-                reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
+                this.reason = this.reason.replace(this.resource.period, this.resource.comma)
+                this.reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
                 hasReason = true
               }
             })
@@ -218,33 +206,19 @@ struct mediaDocumentItem {
             String(values[0]), String(values[1]), res.versionName);
         })
       this.mediaDocListItem.push(
-        new MeidaDocObj(
-          $r('app.string.allow'),
-          Constants.RADIO_ALLOW_INDEX,
-          Constants.RADIO_ALLOW_GROUP_NAME,
-          res.appInfo.accessTokenId,
-          permissions
-        )
+        new MeidaDocObj($r('app.string.allow'), res.appInfo.accessTokenId, permissions)
       );
       this.mediaDocListItem.push(
-        new MeidaDocObj(
-          $r('app.string.ban'),
-          Constants.RADIO_BAN_INDEX,
-          Constants.RADIO_BAN_GROUP_NAME,
-          res.appInfo.accessTokenId,
-          permissions
-        )
+        new MeidaDocObj($r('app.string.ban'), res.appInfo.accessTokenId, permissions)
       );
     }).catch((error) => {
       console.error(TAG + 'bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
       this.mediaListItem = new MediaListObj('', '', '');
       this.mediaDocListItem.push(
-        new MeidaDocObj($r('app.string.allow'), Constants.RADIO_ALLOW_INDEX,
-          Constants.RADIO_ALLOW_GROUP_NAME, 0, permissions)
+        new MeidaDocObj($r('app.string.allow'), 0, permissions)
       );
       this.mediaDocListItem.push(
-        new MeidaDocObj($r('app.string.ban'), Constants.RADIO_BAN_INDEX,
-          Constants.RADIO_BAN_GROUP_NAME, 0, permissions)
+        new MeidaDocObj($r('app.string.ban'), 0, permissions)
       );
     })
     // Get permission status
@@ -283,11 +257,11 @@ struct mediaDocumentItem {
           }
         }.margin({ left: Constants.TERTIARY_MARGIN_LEFT })
       }
-      if(reason) {
+      if(this.reason) {
         Row() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
-              Text(reason)
+              Text(this.reason)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_light'))
                 .textAlign(TextAlign.Start)
@@ -334,7 +308,7 @@ struct mediaDocumentItem {
         left: Constants.TERTIARY_TEXT_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT})
       Column() {
         List() {
-          ForEach(this.mediaDocListItem, (item) => {
+          ForEach(this.mediaDocListItem, (item, index) => {
             ListItem() {
               Column() {
                 Row() {
@@ -345,29 +319,15 @@ struct mediaDocumentItem {
                         .fontColor($r('app.color.label_color'))
                         .fontWeight(FontWeight.Medium)
                         .flexGrow(Constants.FLEX_GROW)
-                      if (this.isCheckList[item.index] === true) {
-                        Shape() {
-                          Circle().width(Constants.SHAPE_DIA).height(Constants.SHAPE_DIA)
-                            .fill($r("app.color.shape_allow_color")).offset({ x: 0, y: 0 })
-                          Circle().width(Constants.SHAPE_ALLOW_DIA).height(Constants.SHAPE_ALLOW_DIA)
-                            .fill($r("app.color.default_background_color"))
-                            .offset({ x: Constants.SHAPE_ALLOW_OFFSET, y: Constants.SHAPE_ALLOW_OFFSET })
-                        }
-                      } else if (this.isCheckList[item.index] === false) {
-                        Shape() {
-                          Circle().width(Constants.SHAPE_DIA).height(Constants.SHAPE_DIA)
-                            .fill($r("app.color.shape_ban_color")).offset({ x: 0, y: 0 })
-                          Circle().width(Constants.SHAPE_BAN_DIA).height(Constants.SHAPE_BAN_DIA)
-                            .fill($r("app.color.default_background_color"))
-                            .offset({ x: Constants.SHAPE_BAN_OFFSET, y: Constants.SHAPE_BAN_OFFSET })
-                        }
-                      }
+                      Radio({ value: 'Radio', group: 'radioGroup' }).checked(this.isCheckList[index]).touchable(false)
+                        .height(Constants.SHAPE_DIA)
+                        .width(Constants.SHAPE_DIA)
                     }
                     .width(Constants.FULL_WIDTH)
                     .height(Constants.LISTITEM_ROW_HEIGHT)
                     .onClick(() => {
                         item.permissions.forEach((permission) => {
-                          if (!item.index) {
+                          if (!index) {
                             if((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
                               return false
                             }
@@ -398,7 +358,7 @@ struct mediaDocumentItem {
                             }
                           }
                         })
-                        if (!item.index) {
+                        if (!index) {
                           if(GrantResultFlag.indexOf(-1) > -1){
                             this.authorizeDialogController.open();
                             setTimeout(()=> {
@@ -420,7 +380,7 @@ struct mediaDocumentItem {
                     })
                   }
                 }
-                if (!item.index) {
+                if (!index) {
                   Row() {
                     Column()
                       .backgroundColor($r('app.color.text_decoration_color'))
@@ -437,7 +397,7 @@ struct mediaDocumentItem {
               right: Constants.DEFAULT_PADDING_END
             })
             .margin({ top: Constants.TERTIARY_LISTITEM_MARGIN_TOP })
-          }, item => item.toString())
+          }, item => JSON.stringify(item))
         }
         .borderRadius(Constants.BORDER_RADIUS)
         .backgroundColor($r('app.color.default_background_color'))

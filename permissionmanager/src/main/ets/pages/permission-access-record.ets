@@ -53,9 +53,11 @@ struct permissionRecordPage {
   @State applicationIndex: number = -1
   @State strings: StringObj = new StringObj('', '', '', '')
   @State currentIndex: number = 0
+  @State show: boolean = false
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
       Text(index ? $r('app.string.application') : $r('app.string.authority'))
+        .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
         .fontColor(this.currentIndex == index ? $r('app.color.button_color') : $r('app.color.label_color'))
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -101,7 +103,7 @@ struct permissionRecordPage {
                         Image(permission.icon)
                           .customizeImage(Constants.IMAGE_WIDTH_RECORD_APPLICATION, Constants.IMAGE_HEIGHT_RECORD_APPLICATION)
                           .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
-                      })
+                      }, item => JSON.stringify(item))
                     }
                   }
                 }
@@ -177,7 +179,7 @@ struct permissionRecordPage {
                 }
                 router.pushUrl({ url: 'pages/application-secondary' });
               })
-            })
+            }, item => JSON.stringify(item))
           }
         }
         if(!dimension && (index == this.applicationIndex)) {
@@ -219,7 +221,7 @@ struct permissionRecordPage {
                 }
                 router.pushUrl({ url: 'pages/application-secondary' });
               })
-            })
+            }, item => JSON.stringify(item))
           }
         }
       }
@@ -262,12 +264,14 @@ struct permissionRecordPage {
                                   List() {
                                     ForEach(this.groups, (item, index) => {
                                       this.ListItemLayout(item, index, Constants.PERMISSION)
-                                    }, item => item.toString())
+                                    }, item => JSON.stringify(item))
                                   }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                  .height(Constants.FULL_HEIGHT)
                                 }.padding({
                                   left: Constants.MANAGEMENT_ROW_PADDING_LEFT,
                                   right: Constants.MANAGEMENT_ROW_PADDING_RIGHT,
-                                  top: Constants.MANAGEMENT_ROW_PADDING_TOP
+                                  top: Constants.MANAGEMENT_ROW_PADDING_TOP,
+                                  bottom: Constants.MANAGEMENT_ROW_PADDING_BOTTOM
                                 })
                               }.scrollBar(BarState.Off)
                             }.width(Constants.FULL_WIDTH)
@@ -278,15 +282,19 @@ struct permissionRecordPage {
                             Column() {
                               Scroll() {
                                 Row() {
-                                  List() {
-                                    ForEach(this.applicationInfos, (item, index) => {
-                                      this.ListItemLayout(item, index, Constants.APPLICATION)
-                                    }, item => item.toString())
-                                  }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                  if(this.show) {
+                                    List() {
+                                      ForEach(this.applicationInfos, (item, index) => {
+                                        this.ListItemLayout(item, index, Constants.APPLICATION)
+                                      }, item => JSON.stringify(item))
+                                    }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                    .height(Constants.FULL_HEIGHT)
+                                  }
                                 }.padding({
                                   left: Constants.MANAGEMENT_ROW_PADDING_LEFT,
                                   right: Constants.MANAGEMENT_ROW_PADDING_RIGHT,
-                                  top: Constants.MANAGEMENT_ROW_PADDING_TOP
+                                  top: Constants.MANAGEMENT_ROW_PADDING_TOP,
+                                  bottom: Constants.MANAGEMENT_ROW_PADDING_BOTTOM
                                 })
                               }.scrollBar(BarState.Off)
                             }.width(Constants.FULL_WIDTH)
@@ -297,6 +305,7 @@ struct permissionRecordPage {
                       .barMode(BarMode.Fixed)
                       .onChange((index) => {
                         this.currentIndex = index
+                        if(!this.show) this.show = true
                       })
                     }.height(Constants.FULL_HEIGHT)
                   }else {
