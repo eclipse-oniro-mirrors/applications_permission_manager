@@ -82,7 +82,7 @@ struct appNamePlusPage {
             .width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
           }
-          if (!index) {
+          if(this.showOrNot(index, status)) {
             Row() {
               Column()
                 .backgroundColor($r('app.color.text_decoration_color'))
@@ -92,57 +92,27 @@ struct appNamePlusPage {
           }
         }.onClick(() => {
           globalThis.currentPermissionGroup = item.group
-          if (status === 'allow') {
-            if (item.group == "OTHER") {
-              router.pushUrl({
-                url: 'pages/other-permissions',
-                params: {
-                  routerData: this.routerData.bundleName,
-                  backTitle: item.groupName,
-                  permission: item.permission,
-                  status: allowedStatus,
-                  tokenId: this.routerData.tokenId
-                }
-              });
-            } else {
-              router.pushUrl({
-                url: 'pages/application-tertiary',
-                params: {
-                  routerData: this.routerData.bundleName,
-                  backTitle: item.groupName,
-                  permission: item.permission,
-                  status: allowedStatus
-                }
-              });
+          router.pushUrl({
+            url: item.group == "OTHER" ? 'pages/other-permissions' : 'pages/application-tertiary',
+            params: {
+              routerData: this.routerData.bundleName,
+              backTitle: item.groupName,
+              permission: item.permission,
+              status: !status ? allowedStatus : bannedStatus,
+              tokenId: this.routerData.tokenId
             }
-          }
-          else if (status === 'banned') {
-            if (item.group == "OTHER") {
-              router.pushUrl({
-                url: 'pages/other-permissions',
-                params: {
-                  routerData: this.routerData.bundleName,
-                  backTitle: item.groupName,
-                  permission: item.permission,
-                  status: bannedStatus,
-                  tokenId: this.routerData.tokenId
-                }
-              });
-            } else {
-              router.pushUrl({
-                url: 'pages/application-tertiary',
-                params: {
-                  routerData: this.routerData.bundleName,
-                  backTitle: item.groupName,
-                  permission: item.permission,
-                  status: bannedStatus
-                }
-              });
-            }
-          }
+          });
         })
       }
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+  }
+
+  showOrNot(index, status) {
+    if(status) {
+      return index < this.bannedListItem.length - 1
+    }else {
+      return index < this.allowedListItem.length - 1
+    }
   }
 
   async initApplicationInfo(info) {
@@ -313,13 +283,9 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               List() {
-                                ForEach(this.allowedListItem.slice(Constants.SLICE_START, this.allowedListItem.length - 1),
-                                  (item) => {
-                                    this.ListItemLayout(item, Constants.SLICE_START_INDEX, 'allow')
-                                  }, item => item.toString())
-                                ForEach(this.allowedListItem.slice(Constants.SLICE_END), (item) => {
-                                  this.ListItemLayout(item, Constants.SLICE_END_INDEX, 'allow')
-                                }, item => item.toString())
+                                ForEach(this.allowedListItem, (item, index) => {
+                                  this.ListItemLayout(item, index, Constants.RADIO_ALLOW_INDEX)
+                                }, item => JSON.stringify(item))
                               }
                               .backgroundColor($r('app.color.default_background_color'))
                               .borderRadius(Constants.BORDER_RADIUS)
@@ -348,13 +314,9 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               List() {
-                                ForEach(this.bannedListItem.slice(Constants.SLICE_START, this.bannedListItem.length - 1),
-                                  (item) => {
-                                    this.ListItemLayout(item, Constants.SLICE_START_INDEX, 'banned')
-                                  }, item => item.toString())
-                                ForEach(this.bannedListItem.slice(Constants.SLICE_END), (item) => {
-                                  this.ListItemLayout(item, Constants.SLICE_END_INDEX, 'banned')
-                                }, item => item.toString())
+                                ForEach(this.bannedListItem, (item, index) => {
+                                  this.ListItemLayout(item, index, Constants.RADIO_BAN_INDEX)
+                                }, item => JSON.stringify(item))
                               }
                               .backgroundColor($r('app.color.default_background_color'))
                               .borderRadius(Constants.BORDER_RADIUS)

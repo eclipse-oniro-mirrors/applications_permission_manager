@@ -14,7 +14,6 @@
  */
 
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import bundle from '@ohos.bundle';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
 import { Log, getPermissionGroup } from '../common/utils/utils'
@@ -103,7 +102,7 @@ struct PermissionDialog {
         Flex({ justifyContent: FlexAlign.Center, alignItems: globalThis.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
           Column() {
             if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
-              Image(this.grantGroups[this.count].icon)
+              Image(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].icon)
                 .width(Constants.DIALOG_ICON_WIDTH)
                 .height(Constants.DIALOG_ICON_HEIGHT)
                 .fillColor($r("app.color.first_font_color"))
@@ -186,7 +185,8 @@ struct PermissionDialog {
   }
 
   showTitle() {
-    if(this.grantGroups[this.count].name == 'LOCATION') {
+    let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count
+    if(this.grantGroups[index].name == 'LOCATION') {
       if(this.locationFlag == Constants.LOCATION_FUZZY) {
         return this.resource.whether_to_allow + this.appName + this.resource.access_general_location
       }
@@ -194,16 +194,17 @@ struct PermissionDialog {
         return this.resource.whether_to_allow + this.appName + this.resource.fuzzy_to_exact
       }
     }
-    return this.resource.whether_to_allow + this.appName + this.resource.quotes + this.grantGroups[this.count].label
+    return this.resource.whether_to_allow + this.appName + this.resource.quotes + this.grantGroups[index].label
   }
 
   showReason() {
-    if(this.grantGroups[this.count].name == 'LOCATION') {
+    let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count
+    if(this.grantGroups[index].name == 'LOCATION') {
       if((this.locationFlag == Constants.LOCATION_FUZZY) || (this.locationFlag == Constants.LOCATION_BOTH_FUZZY)) {
         return $r('app.string.close_exact_position')
       }
     }
-    return this.grantGroups[this.count].description
+    return this.grantGroups[index].description
   }
 
   verify() {
@@ -390,10 +391,9 @@ struct PermissionDialog {
     this.initStatus = Constants.INIT_NEED_TO_VERIFY
   }
 
-  getApplicationName(bundleName, uid) {
+  getApplicationName(bundleName) {
     Log.info("getApplicationName bundleName:" + bundleName)
-    Log.info("getApplicationName userId:" + Math.floor(uid/200000))
-    bundle.getApplicationInfo(bundleName, BundleFlag.GET_BUNDLE_DEFAULT, Math.floor(uid/200000)).then(applicationInfo => {
+    bundleManager.getApplicationInfo(bundleName, BundleFlag.GET_BUNDLE_DEFAULT).then(applicationInfo => {
       let context = globalThis.extensionContext.createBundleContext(bundleName)
       context.resourceManager.getString(applicationInfo.labelId, (err, value) => {
         if (value == undefined) {
@@ -407,43 +407,38 @@ struct PermissionDialog {
       Log.error("applicationInfo error :" + err)
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED
     })
-    bundleManager.getBundleInfo(bundleName, Constants.PARMETER_BUNDLE_FLAG).then(info => {
-      this.grantGroups.forEach((group) => {
-        globalThis.extensionContext.resourceManager.getString(group.label.id, (err, val) => {
-          group.label = val
-        })
-        if(group.description) {
-          Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
-          globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id),
-          globalThis.extensionContext.resourceManager.getString($r("app.string.and").id),
-          globalThis.extensionContext.resourceManager.getString($r("app.string.period").id)])
-            .then(values => {
-              group.description = group.name == 'SMS' ? (group.description.join(values[0]) + values[1]) : (group.description.join(values[2]) + values[3])
-              this.getReason(group, info, bundleName)
-            })
-        }else {
-          this.getReason(group, info, bundleName)
-        }
+    this.grantGroups.forEach((group) => {
+      globalThis.extensionContext.resourceManager.getString(group.label.id, (err, val) => {
+        group.label = val
       })
-    }).catch(err => {
-      Log.error("bundleManager.getBundleInfo error :" + err)
-      this.initStatus = Constants.INIT_NEED_TO_TERMINATED
+      if(group.description) {
+        Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
+        globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id),
+        globalThis.extensionContext.resourceManager.getString($r("app.string.and").id),
+        globalThis.extensionContext.resourceManager.getString($r("app.string.period").id)])
+          .then(values => {
+            group.description = group.name == 'SMS' ? (group.description.join(values[0]) + values[1]) : (group.description.join(values[2]) + values[3])
+            this.getReason(group, bundleName)
+          })
+      }else {
+        this.getReason(group, bundleName)
+      }
     })
   }
 
-  getReason(group, bundleInfo, bundleName) {
+  getReason(group, bundleName) {
     group.permissions.forEach(permission => {
       if(this.reqPerms.indexOf(permission) != -1) {
-        bundleInfo.reqPermissionDetails.forEach(reqPermissionDetail => {
+        this.bundleInfo.reqPermissionDetails.forEach(reqPermissionDetail => {
           if(reqPermissionDetail.name == permission) {
             let context = globalThis.extensionContext.createBundleContext(bundleName)
             context.resourceManager.getString(reqPermissionDetail.reasonId, (err, value) => {
-              this.initStatus = Constants.INIT_NEED_TO_REFRESH
               if (value !== undefined && !group.hasReason) {
                 group.description = group.description.replace(this.resource.period, this.resource.comma)
                 group.description += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
                 group.hasReason = true
               }
+              this.initStatus = Constants.INIT_NEED_TO_REFRESH
             })
           }
         })
@@ -499,11 +494,11 @@ struct PermissionDialog {
     this.result = new Array(this.reqPerms.length).fill(-1);
     this.getStrings()
     let uid = globalThis.abilityWant.parameters['ohos.aafwk.param.callerUid']
-    bundle.getNameForUid(uid).then((data) => {
-      bundle.getBundleInfo(data, Constants.PARMETER_BUNDLE_FLAG).then(bundleInfo => {
+    bundleManager.getBundleNameByUid(uid).then((data) => {
+      bundleManager.getBundleInfo(data, Constants.PARMETER_BUNDLE_FLAG).then(bundleInfo => {
         this.bundleInfo = bundleInfo
         this.getgrantGroups(globalThis.abilityWant.parameters['ohos.user.grant.permission.state']);
-        this.getApplicationName(data, uid)
+        this.getApplicationName(data)
       }).catch(err => {
         Log.error("getBundleInfo error :" + JSON.stringify(err))
         this.initStatus = Constants.INIT_NEED_TO_TERMINATED

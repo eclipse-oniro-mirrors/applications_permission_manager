@@ -131,8 +131,8 @@ export default class Constants {
     static DEFAULT_MARGIN_END = 12;
     static DEFAULT_MARGIN_TOP = 12;
     static DEFAULT_MARGIN_BOTTOM = 12;
-    static DEFAULT_SLIDER_WIDTH = 36;
-    static DEFAULT_SLIDER_HEIGHT = 20;
+    static DEFAULT_SLIDER_WIDTH = 40;
+    static DEFAULT_SLIDER_HEIGHT = 30;
     static OFFSET = 100;
 
     // application-secondary, authority-secondary
@@ -213,6 +213,7 @@ export default class Constants {
     static MANAGEMENT_ROW_PADDING_LEFT = 12;
     static MANAGEMENT_ROW_PADDING_RIGHT = 12;
     static MANAGEMENT_ROW_PADDING_TOP = 8;
+    static MANAGEMENT_ROW_PADDING_BOTTOM = 50;
     static MANAGEMENT_ROW_MARGIN_TOP = 12;
     static APPLICATION_IMAGE_WIDTH = 40;
     static APPLICATION_IMAGE_HEIGHT = 40;
@@ -253,12 +254,8 @@ export default class Constants {
     static DELAY_TIME_MAX = 2000;
 
     // radio
-    static RADIO_ALLOW_NAME = '允许';
     static RADIO_ALLOW_INDEX = 0;
-    static RADIO_ALLOW_GROUP_NAME = 'radio';
-    static RADIO_BAN_NAME = '禁止';
     static RADIO_BAN_INDEX = 1;
-    static RADIO_BAN_GROUP_NAME = 'radio';
 
     //shape
     static SHAPE_DIA = 20;

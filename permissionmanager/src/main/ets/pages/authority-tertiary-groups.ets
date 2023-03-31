@@ -231,7 +231,7 @@ struct applicationItem {
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
           }
-          if (!index) {
+          if (index < this.applicationList.filter(item => item.accessTokenId !== 0).length - 1) {
             Row() {
               Flex() {
                 Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
@@ -486,13 +486,9 @@ struct applicationItem {
                 } else {
                   Row() {
                     List() {
-                      ForEach(this.applicationList.slice(Constants.SLICE_START, this.applicationList.length - 1),
-                      (item) => {
-                        this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-                      }, item => item.toString())
-                      ForEach(this.applicationList.slice(Constants.SLICE_END), (item) => {
-                        this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-                      }, item => item.toString())
+                      ForEach(this.applicationList.filter(item => item.accessTokenId !== 0), (item, index) => {
+                        this.ListItemLayout(item, index)
+                      }, item => JSON.stringify(item))
                     }
                     .backgroundColor($r('app.color.default_background_color'))
                     .borderRadius(Constants.BORDER_RADIUS)

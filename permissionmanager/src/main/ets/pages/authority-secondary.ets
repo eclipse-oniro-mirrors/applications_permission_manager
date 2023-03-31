@@ -135,10 +135,10 @@ struct appNameItem {
             List() {
               ForEach(this.calendarListItem.slice(Constants.SLICE_START, this.calendarListItem.length - 1), (item) => {
                 this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-              }, item => item.toString())
+              }, item => JSON.stringify(item))
               ForEach(this.calendarListItem.slice(Constants.SLICE_END), (item) => {
                 this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-              }, item => item.toString())
+              }, item => JSON.stringify(item))
             }.backgroundColor($r('app.color.default_background_color')).borderRadius(Constants.BORDER_RADIUS)
             .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
           }.margin({ top: Constants.ROW_MARGIN_TOP })
