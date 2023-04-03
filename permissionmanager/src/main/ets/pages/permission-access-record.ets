@@ -55,18 +55,23 @@ struct permissionRecordPage {
   @State currentIndex: number = 0
   @State show: boolean = false
   @Builder TabBuilder(index: number) {
-    Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+    Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
       Text(index ? $r('app.string.application') : $r('app.string.authority'))
         .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-        .fontColor(this.currentIndex == index ? $r('app.color.button_color') : $r('app.color.label_color'))
+        .fontColor(this.currentIndex == index ? $r('sys.color.ohos_id_color_subtab_text_on') : $r('sys.color.ohos_id_color_secondary'))
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
+        .baselineOffset(Constants.TAB_DECORATION_POSITION_Y)
       if(this.currentIndex == index) {
-        Row().width(Constants.FULL_WIDTH).height(Constants.TAB_DECORATION_HEIGHT)
-          .backgroundColor($r('app.color.button_color'))
-          .position({ y: Constants.TAB_DECORATION_POSITION_Y })
+        Text(index ? $r('app.string.application') : $r('app.string.authority'))
+          .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+          .fontWeight(FontWeight.Bold)
+          .height(Constants.TAB_DECORATION_HEIGHT)
+          .backgroundColor($r('sys.color.ohos_id_color_subtab_line_on'))
       }
     }.height(Constants.TAB_HEIGHT)
+    .width(Constants.FULL_WIDTH)
+    .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
   }
 
   @Builder ListItemLayout(item, index, dimension) {
@@ -301,7 +306,6 @@ struct permissionRecordPage {
                           }
                         }.tabBar(this.TabBuilder(1))
                       }
-                      .barWidth(Constants.BAR_WIDTH)
                       .barMode(BarMode.Fixed)
                       .onChange((index) => {
                         this.currentIndex = index
