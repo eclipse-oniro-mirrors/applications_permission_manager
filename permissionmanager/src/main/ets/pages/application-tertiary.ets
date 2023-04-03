@@ -21,6 +21,7 @@ import { getAppLabel, getAppIcon } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { authorizeDialog } from "../common/components/dialog";
 import { showSubpermissionsGrop } from "../common/model/permissionGroup";
+import { verifyAccessToken } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
 var TAG = 'PermissionManager_MainAbility:'
@@ -29,6 +30,8 @@ let routerData: any = router.getParams()['routerData']; // Routing jump data
 let backTitle: any = router.getParams()['backTitle']; // return title name
 let status = router.getParams()['status']; // Status: Allowed, Forbidden
 let permissions: any = router.getParams()['permission']; // permissions name
+let tokenId: any = router.getParams()['tokenId']; // tokenId for verify permission
+let api: number = 0;
 let nowGrantResult = Constants.PERMISSION_NUM; // Authorization results now
 let nowRevokeResult = Constants.PERMISSION_NUM; // Now deauthorize results
 let GrantResultFlag = []; // Authorization result Flag
@@ -68,6 +71,9 @@ class ResourceObj {
 @Entry
 @Component
 struct mediaDocumentPage {
+  @State refresh: boolean = false
+  @State isCheckList: boolean[] = []; // Permission status array
+
   build() {
     Column() {
       GridRow({ gutter: Constants.GUTTER, columns: {
@@ -81,7 +87,7 @@ struct mediaDocumentPage {
               }
               Row() {
                 Column() {
-                  mediaDocumentItem()
+                  mediaDocumentItem({ isCheckList: $isCheckList })
                 }.width(Constants.FULL_WIDTH)
               }
               .margin({ top: Constants.TITLE_MARGIN_BOTTOM })
@@ -95,6 +101,34 @@ struct mediaDocumentPage {
       }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
     }
   }
+
+  onPageShow() {
+    console.log(TAG + 'onPageShow');
+    if(this.refresh) this.refreshStatus()
+    this.refresh = true
+  }
+
+  async refreshStatus() {
+    console.log(TAG + 'Refresh permission status');
+    let isGranted = true;
+    for (let i = 0; i < permissions.length; i++) {
+      let permission = permissions[i]
+      if(api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
+        continue
+      }
+      let res = await verifyAccessToken(tokenId, permission);
+      if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        isGranted = false;
+      }
+    }
+    console.log(TAG + 'isGranted: ' + JSON.stringify(isGranted));
+
+    if (isGranted) {
+      this.isCheckList = [true, false];
+    } else {
+      this.isCheckList = [false, true];
+    }
+  }
 }
 
 @Component
@@ -105,7 +139,7 @@ struct mediaDocumentItem {
     iconId: '',
     versionName: '',
   }; // application info array
-  @State isCheckList: boolean[] = []; // Permission status array
+  @Link isCheckList: boolean[]; // Permission status array
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
   @State resource: ResourceObj = new ResourceObj('', '')
@@ -187,6 +221,7 @@ struct mediaDocumentItem {
     })
     bundle.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(res => {
       this.api = res.targetVersion
+      api = res.targetVersion
       bundleInfo = res
       var acManager = abilityAccessCtrl.createAtManager()
       let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION)

@@ -111,7 +111,8 @@ struct appNameItem {
                 routerData: routerData,
                 backTitle: item.permissionLabel,
                 permission: [item.permission],
-                status: status
+                status,
+                tokenId
               }
             });
         })
