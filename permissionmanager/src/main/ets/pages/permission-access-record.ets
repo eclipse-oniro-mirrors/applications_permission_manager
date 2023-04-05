@@ -30,6 +30,19 @@ var TAG = 'PermissionManager_MainAbility:'
   .height(height)
 };
 
+class StringObj {
+  visits: string
+  recent_visit: string
+  morning: string
+  afternoon: string
+  constructor(visits: string, recent_visit: string, morning: string, afternoon: string) {
+    this.visits = visits
+    this.recent_visit = recent_visit
+    this.morning = morning
+    this.afternoon = afternoon
+  }
+}
+
 @Entry
 @Component
 struct permissionRecordPage {
@@ -38,7 +51,7 @@ struct permissionRecordPage {
   @State permissionApplications: any[] = []
   @State permissionIndex: number = -1
   @State applicationIndex: number = -1
-  @State strings: any = {}
+  @State strings: StringObj = new StringObj('', '', '', '')
   @State currentIndex: number = 0
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {

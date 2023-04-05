@@ -565,7 +565,6 @@ struct authorityManagementPage {
 @Component
 struct applicationItem {
   @State applicationItem: any[] = globalThis.allBundleInfo // application info array
-  @State oldApplicationItem: any[] = globalThis.allBundleInfo // Original application information array
   @State searchResult: boolean = true // search results
 
   @Builder ListItemLayout(item, index) {
@@ -623,7 +622,6 @@ struct applicationItem {
         textInput({
           placeholder: String(textInput_placeholder),
           applicationItem: $applicationItem,
-          oldApplicationItem: $oldApplicationItem,
           searchResult: $searchResult
         })
       }.padding({
@@ -666,7 +664,7 @@ struct applicationItem {
             .height(Constants.FULL_HEIGHT)
           }.margin({ top: Constants.MANAGEMENT_ROW_MARGIN_TOP, bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM })
           Column() {
-            alphabetIndexerComponent({ applicationItem: $applicationItem, oldApplicationItem: $oldApplicationItem })
+            alphabetIndexerComponent({ applicationItem: $applicationItem })
           }.margin({ top: Constants.APPLICATION_ALPHABETINDEX_MARGIN_TOP })
           .width(Constants.APPLICATION_ALPHABETINDEX_WIDTH)
         }

@@ -67,6 +67,15 @@ class MediaListObj {
   }
 }; // Permission application information class
 
+class ResourceObj {
+  period: string
+  comma: string
+  constructor(period: string, comma: string) {
+    this.period = period
+    this.comma = comma
+  }
+}
+
 @Entry
 @Component
 struct mediaDocumentPage {
@@ -131,7 +140,7 @@ struct mediaDocumentItem {
   @State isCheckList: boolean[] = []; // Permission status array
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
-  @State resource: any = {}
+  @State resource: ResourceObj = new ResourceObj('', '')
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),

@@ -120,11 +120,11 @@ struct appNameItem {
           }
         }.onClick(() => {
           var dataList = this.routerData.filter((ele) => {
-            return ele.groupName === item.groupName;
+            return ele.permission === item.permissionName;
           })
           router.pushUrl({
             url: 'pages/authority-tertiary',
-            params: { routerData: dataList[item.index] ? [dataList[item.index]] : [], backTitle: item.label }
+            params: { routerData: dataList, backTitle: item.label }
           });
         })
       }
