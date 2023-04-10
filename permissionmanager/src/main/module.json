@@ -30,7 +30,8 @@
                 "icon": "$media:icon",
                 "label": "$string:MainAbility_label",
                 "visible": true,
-                "launchType": "singleton"
+                "launchType": "singleton",
+                "orientation": "auto_rotation"
             },
             {
               "name": "com.ohos.permissionmanager.SpecificAbility",
@@ -42,6 +43,7 @@
               "startWindowBackground": "$color:default_background_color",
               "visible": true,
               "launchType": "standard",
+              "orientation": "auto_rotation",
               "permissions": ["ohos.permission.GRANT_SENSITIVE_PERMISSIONS"]
             }
         ],
