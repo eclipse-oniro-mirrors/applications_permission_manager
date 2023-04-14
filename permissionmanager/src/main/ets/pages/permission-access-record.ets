@@ -367,7 +367,11 @@ struct permissionRecordPage {
     var record = appInfo.permissions.filter(permission => {
       return permission.groupName == groupName
     })
-    return option ? record[0]['count' + appInfo.accessTokenId] : record[0]['lastTime' + appInfo.accessTokenId]
+    if(record.length > 0) {
+      return option ? record[0]['count' + appInfo.accessTokenId] : record[0]['lastTime' + appInfo.accessTokenId]
+    }else {
+      return 0
+    }
   }
 
   getStrings() {
@@ -406,6 +410,9 @@ struct permissionRecordPage {
         if (userGrantPermissions.indexOf(permission) != -1) {
           reqUserRecords.push(record.permissionRecords[j])
         }
+      }
+      if (reqUserRecords.length == 0) {
+        return false
       }
       for (let k = 0; k < info.reqPermissions.length; k++) {
         var reqPermission: any = info.reqPermissions[k];
@@ -497,6 +504,7 @@ struct permissionRecordPage {
     privacyManager.getPermissionUsedRecord(request).then(async records => {
       console.info(TAG + "records: " + JSON.stringify(records.bundleRecords))
       var groupArray: any[] = []
+      var acManager = abilityAccessCtrl.createAtManager()
       for (let i = 0; i < records.bundleRecords.length; i++) {
         var record = records.bundleRecords[i]
         try {
@@ -514,7 +522,17 @@ struct permissionRecordPage {
         console.info(TAG + "record: " + JSON.stringify(record))
         this.getInfo(record, (i + 1) == records.bundleRecords.length)
 
-        record.permissionRecords.forEach(permissionRecord => {
+        for (let j = 0; j < record.permissionRecords.length; j++) {
+          var permissionRecord = record.permissionRecords[j]
+          try {
+            var reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName)
+            if(reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
+              continue
+            }
+          }
+          catch(err) {
+            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
+          }
           var group = getPermissionGroup(permissionRecord.permissionName)
           if(group) {
             var exist = groupArray.find(permissionGroup => permissionGroup.name == group.name)
@@ -528,7 +546,7 @@ struct permissionRecordPage {
               lastTime > exist.recentVisit ? exist.recentVisit = lastTime : ''
             }
           }
-        })
+        }
       }
       groupArray.sort((a, b) => { return b.recentVisit - a.recentVisit })
       this.groups = groupArray
