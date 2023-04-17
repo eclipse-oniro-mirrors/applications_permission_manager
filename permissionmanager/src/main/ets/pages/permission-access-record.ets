@@ -166,17 +166,16 @@ struct permissionRecordPage {
                 }
               }.height(Constants.LISTITEM_HEIGHT_APPLICATION)
               .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/application-secondary',
-                  params: { routerData: {
-                    'bundleName': permissionApplication.name,
-                    'tokenId': permissionApplication.accessTokenId,
-                    'iconId': permissionApplication.icon,
-                    'labelId': permissionApplication.groupName,
-                    'permissions': permissionApplication.reqUserPermissions,
-                    'groupId': permissionApplication.groupIds
-                  } }
-                });
+                globalThis.applicationInfo = {
+                  'bundleName': permissionApplication.name,
+                  'api': permissionApplication.api,
+                  'tokenId': permissionApplication.accessTokenId,
+                  'iconId': permissionApplication.icon,
+                  'labelId': permissionApplication.groupName,
+                  'permissions': permissionApplication.reqUserPermissions,
+                  'groupId': permissionApplication.groupIds
+                }
+                router.pushUrl({ url: 'pages/application-secondary' });
               })
             })
           }
@@ -209,17 +208,16 @@ struct permissionRecordPage {
                 }
               }.height(Constants.LISTITEM_HEIGHT_PERMISSION)
               .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/application-secondary',
-                  params: { routerData: {
-                    'bundleName': item.name,
-                    'tokenId': item.accessTokenId,
-                    'iconId': item.icon,
-                    'labelId': item.groupName,
-                    'permissions': item.reqUserPermissions,
-                    'groupId': item.groupIds
-                  } }
-                });
+                globalThis.applicationInfo = {
+                  'bundleName': item.name,
+                  'api': item.api,
+                  'tokenId': item.accessTokenId,
+                  'iconId': item.icon,
+                  'labelId': item.groupName,
+                  'permissions': item.reqUserPermissions,
+                  'groupId': item.groupIds
+                }
+                router.pushUrl({ url: 'pages/application-secondary' });
               })
             })
           }
@@ -476,6 +474,7 @@ struct permissionRecordPage {
       })
 
       appInfo.name = info.appInfo.name
+      appInfo.api = info.targetVersion
       appInfo.accessTokenId = info.appInfo.accessTokenId
       appInfo.reqUserPermissions = reqUserPermissions
       appInfo.permissions = permissionGroups
