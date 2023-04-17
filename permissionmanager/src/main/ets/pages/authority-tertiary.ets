@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,7 @@ import { makePy } from "../common/utils/utils";
 import { authorizeDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
 
-var TAG = 'PermissionManager_MainAbility:'
+var TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image) function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -96,7 +96,7 @@ struct applicationItem {
   @State toggleIsOn: object = {}; // toggle switch state array
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
-  @State placeholder: string = ''
+  @State placeholder: string = '';
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -118,7 +118,7 @@ struct applicationItem {
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
                   .fontColor($r('app.color.label_color'))
-                if(item.isRisk) {
+                if (item.isRisk) {
                   Text($r('app.string.risk_warning'))
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                     .fontColor($r('app.color.label_color_lighter'))
@@ -204,8 +204,8 @@ struct applicationItem {
       // result: 0 successfully cancel the authorization; result: -1 cancel the authorization failed
       this.toggleIsOn[index] = false;
       let num = Constants.PERMISSION_NUM;
-      for(let key in this.toggleIsOn){
-        if(this.toggleIsOn[key]){
+      for (let key in this.toggleIsOn) {
+        if (this.toggleIsOn[key]) {
           num++;
         }
       }
@@ -213,7 +213,7 @@ struct applicationItem {
     }).catch(() => {
         this.authorizeDialogController.open();
         this.toggleIsOn[index] = true;
-        setTimeout(()=> {
+        setTimeout(() => {
           this.authorizeDialogController.close();
         }, Constants.DELAY_TIME)
     })
@@ -226,7 +226,7 @@ struct applicationItem {
     let bundleNames = routerData.length > 0 ? routerData[0].bundleNames : routerData;
 
     globalThis.context.resourceManager.getString($r("app.string.textInput_placeholder").id).then(val => {
-      this.placeholder = val
+      this.placeholder = val;
     })
 
     // initial then fill values when sync return which may cause sync panic

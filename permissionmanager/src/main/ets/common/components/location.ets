@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,7 @@ import Constants from '../utils/constant';
 
 @Component
 export struct LocationCanvas {
-  @Link locationFlag: number
+  @Link locationFlag: number;
 
   build() {
     Column() {
@@ -69,13 +69,13 @@ export struct LocationCanvas {
           curve: Curve.Smooth, // The animation curve
           playMode: PlayMode.Normal // The animation mode
         })
-      if(this.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
+      if (this.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
         Button($r('app.string.precise_location_on'))
           .locationButton()
           .fontColor($r('app.color.button_color'))
           .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_FUZZY })
       }
-      if(this.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
+      if (this.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
         Button($r('app.string.precise_location_off'))
           .locationButton()
           .fontColor($r('app.color.label_color_light'))

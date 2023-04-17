@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,12 +20,12 @@ import { groups, permissionGroups, userGrantPermissions, permissionGroupIds } fr
 import Constants from '../common/utils/constant';
 import { verifyAccessToken } from "../common/utils/utils";
 
-var TAG = 'PermissionManager_MainAbility:'
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
+var TAG = 'PermissionManager_MainAbility:';
+const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 
 const allowedStatus = 0; // Status: Allowed
 const bannedStatus = 1; // Status: Banned
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 class permissionObj {
   groupName: string;
   permission: string[];
@@ -82,7 +82,7 @@ struct appNamePlusPage {
             .width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
           }
-          if(this.showOrNot(index, status)) {
+          if (this.showOrNot(index, status)) {
             Row() {
               Column()
                 .backgroundColor($r('app.color.text_decoration_color'))
@@ -108,57 +108,57 @@ struct appNamePlusPage {
   }
 
   showOrNot(index, status) {
-    if(status) {
-      return index < this.bannedListItem.length - 1
-    }else {
-      return index < this.allowedListItem.length - 1
+    if (status) {
+      return index < this.bannedListItem.length - 1;
+    } else {
+      return index < this.allowedListItem.length - 1;
     }
   }
 
   async initApplicationInfo(info) {
-    let context = globalThis.context.createBundleContext(info.bundleName)
+    let context = globalThis.context.createBundleContext(info.bundleName);
     context.resourceManager.getString(info.labelId, (error, value) => {
       info.labelId = value;
     })
     var reqUserPermissions: string[] = [];
-    var acManager = abilityAccessCtrl.createAtManager()
+    var acManager = abilityAccessCtrl.createAtManager();
     if (info.permissions.length > 0) {
       for (let j = 0; j < info.permissions.length; j++) {
         var permission = info.permissions[j];
-        if(userGrantPermissions.indexOf(permission) == -1) {
-          continue
+        if (userGrantPermissions.indexOf(permission) == -1) {
+          continue;
         }
-        if((info.api < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
-          continue
+        if ((info.api < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
+          continue;
         }
         try {
-          var flag = await acManager.getPermissionFlags(info.tokenId, permission)
-          if(flag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue
+          var flag = await acManager.getPermissionFlags(info.tokenId, permission);
+          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
+            continue;
           }
         }
         catch(err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         }
         reqUserPermissions.push(permission);
       }
     }
     let groupIds = [];
     for (let i = 0; i < reqUserPermissions.length; i++) {
-      if(groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1){
+      if (groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1) {
         groupIds.push(permissionGroupIds[reqUserPermissions[i]]);
       }
     }
-    info.permissions = reqUserPermissions
-    info.groupId = groupIds
+    info.permissions = reqUserPermissions;
+    info.groupId = groupIds;
   }
 
   /**
    * Initialize permission status information and group permission information
    */
   async initialPermissions() {
-    if(globalThis.bundleName && !this.routerData.groupId.length) {
-      await this.initApplicationInfo(this.routerData)
+    if (globalThis.bundleName && !this.routerData.groupId.length) {
+      await this.initApplicationInfo(this.routerData);
     }
     var reqPermissions = this.routerData.permissions;
     var reqGroupIds = this.routerData.groupId;
@@ -174,14 +174,14 @@ struct appNamePlusPage {
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
         if (groups[id].permissions.indexOf(permission) != -1) {
-          groupReqPermissons.push(permission)
+          groupReqPermissons.push(permission);
         }
       }
       let isGranted = true;
       for (let i = 0; i < groupReqPermissons.length; i++) {
-        let permission = groupReqPermissons[i]
-        if(this.routerData.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
-          continue
+        let permission = groupReqPermissons[i];
+        if (this.routerData.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
+          continue;
         }
         let res = await verifyAccessToken(this.routerData.tokenId, permission);
         if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
@@ -201,17 +201,17 @@ struct appNamePlusPage {
    * Lifecycle function, triggered once when this page is displayed
    */
   onPageShow() {
-    console.log(TAG + 'onPageShow application-secondary')
+    console.log(TAG + 'onPageShow application-secondary');
     this.initialPermissions();
   }
 
   aboutToAppear() {
-    if(globalThis.bundleName) {
+    if (globalThis.bundleName) {
       globalThis.applicationInfo.permissions.forEach(userPermission => {
         permissionGroups.forEach(permissionInfo => {
-          if(userPermission == permissionInfo.permissionName) {
+          if (userPermission == permissionInfo.permissionName) {
             globalThis.context.resourceManager.getString(permissionInfo.label.id).then(val => {
-              globalThis.permissionLabels[userPermission] = val
+              globalThis.permissionLabels[userPermission] = val;
             })
           }
         })

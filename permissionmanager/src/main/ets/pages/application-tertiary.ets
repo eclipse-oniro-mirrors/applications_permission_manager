@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,7 @@ import { showSubpermissionsGrop } from "../common/model/permissionGroup";
 import { verifyAccessToken } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
-var TAG = 'PermissionManager_MainAbility:'
+var TAG = 'PermissionManager_MainAbility:';
 
 let routerData: any = router.getParams()['routerData']; // Routing jump data
 let backTitle: any = router.getParams()['backTitle']; // return title name
@@ -36,8 +36,8 @@ let nowGrantResult = Constants.PERMISSION_NUM; // Authorization results now
 let nowRevokeResult = Constants.PERMISSION_NUM; // Now deauthorize results
 let GrantResultFlag = []; // Authorization result Flag
 let RevokeResultFlag = []; // Cancel authorization result Flag
-let bundleInfo: any = {}
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
+let bundleInfo: any = {};
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 class MeidaDocObj {
   name: Resource
   accessTokenId: number
@@ -71,7 +71,7 @@ class ResourceObj {
 @Entry
 @Component
 struct mediaDocumentPage {
-  @State refresh: boolean = false
+  @State refresh: boolean = false;
   @State isCheckList: boolean[] = []; // Permission status array
 
   build() {
@@ -104,17 +104,17 @@ struct mediaDocumentPage {
 
   onPageShow() {
     console.log(TAG + 'onPageShow');
-    if(this.refresh) this.refreshStatus()
-    this.refresh = true
+    if (this.refresh) this.refreshStatus();
+    this.refresh = true;
   }
 
   async refreshStatus() {
     console.log(TAG + 'Refresh permission status');
     let isGranted = true;
     for (let i = 0; i < permissions.length; i++) {
-      let permission = permissions[i]
-      if(api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
-        continue
+      let permission = permissions[i];
+      if (api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
+        continue;
       }
       let res = await verifyAccessToken(tokenId, permission);
       if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
@@ -142,9 +142,9 @@ struct mediaDocumentItem {
   @Link isCheckList: boolean[]; // Permission status array
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
-  @State resource: ResourceObj = new ResourceObj('', '')
-  @State isRisk: boolean = false // Whether it is a risky application
-  @State reason: string = ''
+  @State resource: ResourceObj = new ResourceObj('', '');
+  @State isRisk: boolean = false; // Whether it is a risky application
+  @State reason: string = '';
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -186,10 +186,10 @@ struct mediaDocumentItem {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-    if(showSubpermissionsGrop.indexOf(globalThis.currentPermissionGroup) != -1) {
-      var reason = []
+    if (showSubpermissionsGrop.indexOf(globalThis.currentPermissionGroup) != -1) {
+      var reason = [];
       permissions.forEach(permission => {
-        reason.push(globalThis.permissionLabels[permission])
+        reason.push(globalThis.permissionLabels[permission]);
       })
       Promise.all([globalThis.context.resourceManager.getString($r("app.string.separator").id),
       globalThis.context.resourceManager.getString($r("app.string.reason_suffix").id),
@@ -197,22 +197,22 @@ struct mediaDocumentItem {
       globalThis.context.resourceManager.getString($r("app.string.period").id),
       globalThis.context.resourceManager.getString($r("app.string.comma").id)])
         .then(values => {
-          this.resource.period = values[3]
-          this.resource.comma = values[4]
-          this.reason = globalThis.currentPermissionGroup == 'SMS' ? (reason.join(values[0]) + values[1]) : (reason.join(values[2]) + values[3])
+          this.resource.period = values[3];
+          this.resource.comma = values[4];
+          this.reason = globalThis.currentPermissionGroup == 'SMS' ? (reason.join(values[0]) + values[1]) : (reason.join(values[2]) + values[3]);
         })
     }
-    let hasReason = false
+    let hasReason = false;
     bundleManager.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(info => {
       permissions.forEach(permission => {
         info.reqPermissionDetails.forEach(reqPermissionDetail => {
-          if(reqPermissionDetail.name == permission) {
-            let context = globalThis.context.createBundleContext(routerData)
+          if (reqPermissionDetail.name == permission) {
+            let context = globalThis.context.createBundleContext(routerData);
             context.resourceManager.getString(reqPermissionDetail.reasonId).then(value => {
               if (value !== undefined && !hasReason) {
-                this.reason = this.reason.replace(this.resource.period, this.resource.comma)
-                this.reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
-                hasReason = true
+                this.reason = this.reason.replace(this.resource.period, this.resource.comma);
+                this.reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+                hasReason = true;
               }
             })
           }
@@ -220,16 +220,16 @@ struct mediaDocumentItem {
       })
     })
     bundle.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(res => {
-      this.api = res.targetVersion
-      api = res.targetVersion
-      bundleInfo = res
-      var acManager = abilityAccessCtrl.createAtManager()
-      let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION)
-      this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false
+      this.api = res.targetVersion;
+      api = res.targetVersion;
+      bundleInfo = res;
+      var acManager = abilityAccessCtrl.createAtManager();
+      let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION);
+      this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
       try {
         acManager.getPermissionFlags(res.appInfo.accessTokenId, permissions[0]).then((data) => {
           console.log(TAG + `getPermissionFlags success, data->${JSON.stringify(data)}`);
-          this.isRisk = (data == Constants.PERMISSION_POLICY_FIXED) ? true : false
+          this.isRisk = (data == Constants.PERMISSION_POLICY_FIXED) ? true : false;
         })
       } catch(err) {
         console.log(TAG + 'acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
@@ -292,7 +292,7 @@ struct mediaDocumentItem {
           }
         }.margin({ left: Constants.TERTIARY_MARGIN_LEFT })
       }
-      if(this.reason) {
+      if (this.reason) {
         Row() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
@@ -305,7 +305,7 @@ struct mediaDocumentItem {
         }
         .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP, left: Constants.DEFAULT_MARGIN_START, bottom: Constants.DEFAULT_MARGIN_BOTTOM })
       }
-      if(this.isRisk) {
+      if (this.isRisk) {
         Row() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
@@ -363,52 +363,52 @@ struct mediaDocumentItem {
                     .onClick(() => {
                         item.permissions.forEach((permission) => {
                           if (!index) {
-                            if((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
-                              return false
+                            if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
+                              return false;
                             }
-                            this.grantUserGrantedPermission(item.accessTokenId, permission)
+                            this.grantUserGrantedPermission(item.accessTokenId, permission);
                             if (nowGrantResult != Constants.PERMISSION_INDEX) {
-                              GrantResultFlag.push(-1)
-                            }else{
-                              GrantResultFlag.push(0)
+                              GrantResultFlag.push(-1);
+                            } else {
+                              GrantResultFlag.push(0);
                             }
                           } else {
-                            if((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
-                              if(this.accurateIsOn) {
-                                this.revokeUserGrantedPermission(item.accessTokenId, permission)
-                                this.accurateIsOn = false
+                            if ((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
+                              if (this.accurateIsOn) {
+                                this.revokeUserGrantedPermission(item.accessTokenId, permission);
+                                this.accurateIsOn = false;
                               }
-                            }else {
-                              this.revokeUserGrantedPermission(item.accessTokenId, permission)
+                            } else {
+                              this.revokeUserGrantedPermission(item.accessTokenId, permission);
                             }
 
                             if (nowRevokeResult != Constants.PERMISSION_INDEX) {
-                              RevokeResultFlag.push(-1)
+                              RevokeResultFlag.push(-1);
                               this.authorizeDialogController.open();
                               setTimeout(()=> {
                                 this.authorizeDialogController.close();
                               }, Constants.DELAY_TIME)
-                            }else{
-                              RevokeResultFlag.push(0)
+                            } else {
+                              RevokeResultFlag.push(0);
                             }
                           }
                         })
                         if (!index) {
-                          if(GrantResultFlag.indexOf(-1) > -1){
+                          if (GrantResultFlag.indexOf(-1) > -1) {
                             this.authorizeDialogController.open();
                             setTimeout(()=> {
                               this.authorizeDialogController.close();
                             }, Constants.DELAY_TIME)
-                          }else{
+                          } else {
                             this.isCheckList = [true, false];
                           }
-                        }else{
-                          if (RevokeResultFlag.indexOf(-1) > -1){
+                        } else {
+                          if (RevokeResultFlag.indexOf(-1) > -1) {
                             this.authorizeDialogController.open();
                             setTimeout(()=> {
                               this.authorizeDialogController.close();
                             }, Constants.DELAY_TIME)
-                          }else{
+                          } else {
                             this.isCheckList = [false, true];
                           }
                         }

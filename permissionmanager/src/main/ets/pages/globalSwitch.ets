@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,14 +14,14 @@
  */
 
 import Constants from '../common/utils/constant';
-import audio from '@ohos.multimedia.audio'
+import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
 import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import { Log } from '../common/utils/utils'
+import { Log } from '../common/utils/utils';
 
-const MICROPHONE = 'microphone'
-const CAMERA = 'camera'
+const MICROPHONE = 'microphone';
+const CAMERA = 'camera';
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('app.color.default_background_color'))
@@ -44,7 +44,7 @@ struct globalSwitch {
   build() {}
 
   aboutToAppear() {
-    this.privacyDialogController.open()
+    this.privacyDialogController.open();
   }
 }
 
@@ -106,21 +106,21 @@ struct globalDialog {
   }
 
   accept() {
-    Log.info('global accept')
-    if(globalThis.globalState == MICROPHONE) {
+    Log.info('global accept');
+    if (globalThis.globalState == MICROPHONE) {
       var audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
-          globalThis.globalContext.terminateSelf()
+          globalThis.globalContext.terminateSelf();
         })
       })
-    }else if(globalThis.globalState == CAMERA) {
+    } else if (globalThis.globalState == CAMERA) {
       let cameraManager = camera.getCameraManager(globalThis.globalContext);
       cameraManager.muteCamera(false);
       globalThis.globalContext.terminateSelf();
-    }else {
+    } else {
       let cameraManager = camera.getCameraManager(globalThis.globalContext);
       cameraManager.muteCamera(false);
       var audioManager = audio.getAudioManager();
@@ -128,7 +128,7 @@ struct globalDialog {
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
-          globalThis.globalContext.terminateSelf()
+          globalThis.globalContext.terminateSelf();
         })
       })
     }
@@ -136,14 +136,14 @@ struct globalDialog {
   }
 
   cancel() {
-    Log.info('global cancel')
-    globalThis.globalContext.terminateSelf()
+    Log.info('global cancel');
+    globalThis.globalContext.terminateSelf();
   }
 
   aboutToAppear() {
-    var acManager = abilityAccessCtrl.createAtManager()
+    var acManager = abilityAccessCtrl.createAtManager();
     bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
-      acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2)
+      acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2);
     })
   }
 
