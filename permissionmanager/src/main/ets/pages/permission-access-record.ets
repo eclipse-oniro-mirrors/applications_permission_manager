@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,13 +16,13 @@
 import bundle from '@ohos.bundle';
 import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import privacyManager from '@ohos.privacyManager'
+import privacyManager from '@ohos.privacyManager';
 import { backBar } from "../common/components/backBar";
 import Constants from '../common/utils/constant';
 import { noNeedDisplayApp, userGrantPermissions, permissionGroupIds } from "../common/model/permissionGroup";
-import { getPermissionGroup } from '../common/utils/utils'
+import { getPermissionGroup } from '../common/utils/utils';
 
-var TAG = 'PermissionManager_MainAbility:'
+var TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image) function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -46,14 +46,14 @@ class StringObj {
 @Entry
 @Component
 struct permissionRecordPage {
-  @State groups: any[] = []
-  @State applicationInfos: any[] = []
-  @State permissionApplications: any[] = []
-  @State permissionIndex: number = -1
-  @State applicationIndex: number = -1
-  @State strings: StringObj = new StringObj('', '', '', '')
-  @State currentIndex: number = 0
-  @State show: boolean = false
+  @State groups: any[] = [];
+  @State applicationInfos: any[] = [];
+  @State permissionApplications: any[] = [];
+  @State permissionIndex: number = -1;
+  @State applicationIndex: number = -1;
+  @State strings: StringObj = new StringObj('', '', '', '');
+  @State currentIndex: number = 0;
+  @State show: boolean = false;
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
       Text(index ? $r('app.string.application') : $r('app.string.authority'))
@@ -62,7 +62,7 @@ struct permissionRecordPage {
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
         .baselineOffset(Constants.TAB_DECORATION_POSITION_Y)
-      if(this.currentIndex == index) {
+      if (this.currentIndex == index) {
         Text(index ? $r('app.string.application') : $r('app.string.authority'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Bold)
@@ -80,11 +80,11 @@ struct permissionRecordPage {
         Column() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
-              if(dimension) {
+              if (dimension) {
                 Image(item.icon)
                   .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                   .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD, left: Constants.MANAGEMENT_IMAGE_MARGIN_LEFT })
-              }else {
+              } else {
                 Image(item.icon)
                   .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
                   .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
@@ -96,12 +96,12 @@ struct permissionRecordPage {
                   .fontColor($r('app.color.label_color'))
                   .lineHeight(Constants.TEXT_LINE_HEIGHT)
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
-                if(dimension) {
+                if (dimension) {
                   Text(this.strings.visits + item.sum)
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                     .fontColor($r('app.color.label_color_light'))
                     .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
-                }else {
+                } else {
                   Row() {
                     if (item.permissions) {
                       ForEach(item.permissions, permission => {
@@ -114,19 +114,19 @@ struct permissionRecordPage {
                 }
               }.flexGrow(Constants.FLEX_GROW)
               .alignItems(HorizontalAlign.Start)
-              if(dimension) {
-                if(index == this.permissionIndex) {
+              if (dimension) {
+                if (index == this.permissionIndex) {
                   Image($r('app.media.xiangshangjiantou'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
-                }else {
+                } else {
                   Image($r('app.media.xiangxiajiantou'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
                 }
-              }else {
-                if(index == this.applicationIndex) {
+              } else {
+                if (index == this.applicationIndex) {
                   Image($r('app.media.xiangshangjiantou'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
-                }else {
+                } else {
                   Image($r('app.media.xiangxiajiantou'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
                 }
@@ -139,13 +139,13 @@ struct permissionRecordPage {
           dimension ?
             (this.permissionIndex = this.permissionIndex == index ? -1 : index) :
             (this.applicationIndex = this.applicationIndex == index ? -1 : index)
-          if(dimension) {
+          if (dimension) {
             this.permissionApplications = this.applicationInfos.filter(appInfo => {
-              return appInfo.groupNames.includes(item.groupName)
+              return appInfo.groupNames.includes(item.groupName);
             })
           }
         })
-        if(dimension && (index == this.permissionIndex)) {
+        if (dimension && (index == this.permissionIndex)) {
           List() {
             ForEach(this.permissionApplications, (permissionApplication) => {
               ListItem() {
@@ -187,7 +187,7 @@ struct permissionRecordPage {
             }, item => JSON.stringify(item))
           }
         }
-        if(!dimension && (index == this.applicationIndex)) {
+        if (!dimension && (index == this.applicationIndex)) {
           List() {
             ForEach(item.permissions, (permission) => {
               ListItem() {
@@ -258,7 +258,7 @@ struct permissionRecordPage {
                       .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
                   }.constraintSize({ minHeight: Constants.SUBTITLE_MIN_HEIGHT })
                   .padding({ top: Constants.SUBTITLE_PADDING_TOP, bottom: Constants.SUBTITLE_PADDING_BOTTOM })
-                  if(this.groups.length) {
+                  if (this.groups.length) {
                     Stack() {
                       Tabs() {
                         TabContent() {
@@ -287,7 +287,7 @@ struct permissionRecordPage {
                             Column() {
                               Scroll() {
                                 Row() {
-                                  if(this.show) {
+                                  if (this.show) {
                                     List() {
                                       ForEach(this.applicationInfos, (item, index) => {
                                         this.ListItemLayout(item, index, Constants.APPLICATION)
@@ -308,11 +308,11 @@ struct permissionRecordPage {
                       }
                       .barMode(BarMode.Fixed)
                       .onChange((index) => {
-                        this.currentIndex = index
-                        if(!this.show) this.show = true
+                        this.currentIndex = index;
+                        if (!this.show) this.show = true;
                       })
                     }.height(Constants.FULL_HEIGHT)
-                  }else {
+                  } else {
                     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center, direction: FlexDirection.Column }) {
                       Image($r('app.media.noRecord'))
                         .customizeImage(Constants.NORECORD_IMAGE_WIDTH, Constants.NORECORD_IMAGE_HEIGHT)
@@ -341,8 +341,8 @@ struct permissionRecordPage {
    * @param {Number} The time stamp
    */
   getTime(time, format='MM月DD日 NNHH:mm') {
-    if(this.strings.morning == 'am') { format = 'HH:mm NN MM/DD' }
-    let date = new Date(time * 1000)
+    if (this.strings.morning == 'am') { format = 'HH:mm NN MM/DD' }
+    let date = new Date(time * 1000);
     let config = {
       MM: date.getMonth() + 1,
       DD: date.getDate(),
@@ -351,10 +351,10 @@ struct permissionRecordPage {
       mm: date.getMinutes() > 10 ? date.getMinutes() : '0' + date.getMinutes(),
     }
 
-    for(const key in config){
-      format = format.replace(key,config[key])
+    for (const key in config) {
+      format = format.replace(key,config[key]);
     }
-    return format
+    return format;
   }
 
   /**
@@ -365,27 +365,27 @@ struct permissionRecordPage {
    */
   getAppRecords(appInfo, groupName, option) {
     var record = appInfo.permissions.filter(permission => {
-      return permission.groupName == groupName
+      return permission.groupName == groupName;
     })
-    if(record.length > 0) {
-      return option ? record[0]['count' + appInfo.accessTokenId] : record[0]['lastTime' + appInfo.accessTokenId]
-    }else {
-      return 0
+    if (record.length > 0) {
+      return option ? record[0]['count' + appInfo.accessTokenId] : record[0]['lastTime' + appInfo.accessTokenId];
+    } else {
+      return 0;
     }
   }
 
   getStrings() {
     globalThis.context.resourceManager.getString($r("app.string.visits").id, (err, val) => {
-      this.strings.visits = val
+      this.strings.visits = val;
     })
     globalThis.context.resourceManager.getString($r("app.string.recent_visit").id, (err, val) => {
-      this.strings.recent_visit = val
+      this.strings.recent_visit = val;
     })
     globalThis.context.resourceManager.getString($r("app.string.morning").id, (err, val) => {
-      this.strings.morning = val
+      this.strings.morning = val;
     })
     globalThis.context.resourceManager.getString($r("app.string.afternoon").id, (err, val) => {
-      this.strings.afternoon = val
+      this.strings.afternoon = val;
     })
   }
 
@@ -394,36 +394,36 @@ struct permissionRecordPage {
       var reqUserPermissions: string[] = [];
       var reqUserRecords: any[] = [];
       var permissionGroups: any[] = [];
-      var acManager = abilityAccessCtrl.createAtManager()
-      var appInfo: any = {}
+      var acManager = abilityAccessCtrl.createAtManager();
+      var appInfo: any = {};
       for (let j = 0; j < record.permissionRecords.length; j++) {
         var permission = record.permissionRecords[j].permissionName;
         try {
-          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
-          if(flag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue
+          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
+          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
+            continue;
           }
         }
         catch(err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         }
         if (userGrantPermissions.indexOf(permission) != -1) {
-          reqUserRecords.push(record.permissionRecords[j])
+          reqUserRecords.push(record.permissionRecords[j]);
         }
       }
       if (reqUserRecords.length == 0) {
-        return false
+        return false;
       }
       for (let k = 0; k < info.reqPermissions.length; k++) {
         var reqPermission: any = info.reqPermissions[k];
         try {
-          var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission)
-          if(reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue
+          var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
+          if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
+            continue;
           }
         }
         catch(err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         }
         if (userGrantPermissions.indexOf(reqPermission) != -1) {
           reqUserPermissions.push(reqPermission);
@@ -433,33 +433,33 @@ struct permissionRecordPage {
       let groupNames = [];
       let appLastTime = 0;
       reqUserRecords.forEach(reqUserRecord => {
-        var group = getPermissionGroup(reqUserRecord.permissionName)
-        if(!group) {
-          console.info(TAG + "permission not find:" + reqUserRecord.permissionName)
-        }else {
-          var existing = permissionGroups.find(permissionGroup => permissionGroup.name == group.name)
-          var lastTime = reqUserRecord.lastAccessTime
-          lastTime > appLastTime ? appLastTime = lastTime : ''
-          if(!existing) {
-            group['count' + record.tokenId] = reqUserRecord.accessCount
-            group['lastTime' + record.tokenId] = lastTime
-            permissionGroups.push(group)
-            groupNames.push(group.groupName)
-          }else {
-            existing['count' + record.tokenId] += reqUserRecord.accessCount
-            lastTime > existing['lastTime' + record.tokenId] ? existing['lastTime' + record.tokenId] = lastTime : ''
+        var group = getPermissionGroup(reqUserRecord.permissionName);
+        if (!group) {
+          console.info(TAG + "permission not find:" + reqUserRecord.permissionName);
+        } else {
+          var existing = permissionGroups.find(permissionGroup => permissionGroup.name == group.name);
+          var lastTime = reqUserRecord.lastAccessTime;
+          lastTime > appLastTime ? appLastTime = lastTime : '';
+          if (!existing) {
+            group['count' + record.tokenId] = reqUserRecord.accessCount;
+            group['lastTime' + record.tokenId] = lastTime;
+            permissionGroups.push(group);
+            groupNames.push(group.groupName);
+          } else {
+            existing['count' + record.tokenId] += reqUserRecord.accessCount;
+            lastTime > existing['lastTime' + record.tokenId] ? existing['lastTime' + record.tokenId] = lastTime : '';
           }
         }
       })
 
       let groupIds = [];
       for (let i = 0; i < reqUserPermissions.length; i++) {
-        if(groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1){
+        if (groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1){
           groupIds.push(permissionGroupIds[reqUserPermissions[i]]);
         }
       }
 
-      let  context = globalThis.context.createBundleContext(info.name)
+      let  context = globalThis.context.createBundleContext(info.name);
       await context.resourceManager.getString(info.appInfo.labelId, (error, value) => {
         if (value == undefined) {
           appInfo.groupName = info.appInfo.label;
@@ -472,20 +472,20 @@ struct permissionRecordPage {
         appInfo.icon = value;
       })
 
-      appInfo.name = info.appInfo.name
-      appInfo.api = info.targetVersion
-      appInfo.accessTokenId = info.appInfo.accessTokenId
-      appInfo.reqUserPermissions = reqUserPermissions
-      appInfo.permissions = permissionGroups
-      appInfo.groupNames = groupNames
-      appInfo.groupIds = groupIds
-      appInfo.appLastTime = appLastTime
-      this.applicationInfos.push(appInfo)
-      if(sortFlag) {
-        var appInfos: any[] = []
-        this.applicationInfos.forEach(item => { appInfos.push(item) })
-        appInfos.sort((a, b) => { return b.appLastTime - a.appLastTime })
-        this.applicationInfos = appInfos
+      appInfo.name = info.appInfo.name;
+      appInfo.api = info.targetVersion;
+      appInfo.accessTokenId = info.appInfo.accessTokenId;
+      appInfo.reqUserPermissions = reqUserPermissions;
+      appInfo.permissions = permissionGroups;
+      appInfo.groupNames = groupNames;
+      appInfo.groupIds = groupIds;
+      appInfo.appLastTime = appLastTime;
+      this.applicationInfos.push(appInfo);
+      if (sortFlag) {
+        var appInfos: any[] = [];
+        this.applicationInfos.forEach(item => { appInfos.push(item) });
+        appInfos.sort((a, b) => { return b.appLastTime - a.appLastTime });
+        this.applicationInfos = appInfos;
       }
     })
   }
@@ -502,11 +502,11 @@ struct permissionRecordPage {
       "flag": 1
     }
     privacyManager.getPermissionUsedRecord(request).then(async records => {
-      console.info(TAG + "records: " + JSON.stringify(records.bundleRecords))
-      var groupArray: any[] = []
-      var acManager = abilityAccessCtrl.createAtManager()
+      console.info(TAG + "records: " + JSON.stringify(records.bundleRecords));
+      var groupArray: any[] = [];
+      var acManager = abilityAccessCtrl.createAtManager();
       for (let i = 0; i < records.bundleRecords.length; i++) {
-        var record = records.bundleRecords[i]
+        var record = records.bundleRecords[i];
         try {
           const ret = await bundle.queryAbilityByWant({
             bundleName: record.bundleName,
@@ -519,42 +519,42 @@ struct permissionRecordPage {
         if (noNeedDisplayApp.indexOf(record.bundleName) != -1) {
           continue;
         }
-        console.info(TAG + "record: " + JSON.stringify(record))
-        this.getInfo(record, (i + 1) == records.bundleRecords.length)
+        console.info(TAG + "record: " + JSON.stringify(record));
+        this.getInfo(record, (i + 1) == records.bundleRecords.length);
 
         for (let j = 0; j < record.permissionRecords.length; j++) {
-          var permissionRecord = record.permissionRecords[j]
+          var permissionRecord = record.permissionRecords[j];
           try {
-            var reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName)
-            if(reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
-              continue
+            var reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName);
+            if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
+              continue;
             }
           }
           catch(err) {
-            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
+            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
           }
-          var group = getPermissionGroup(permissionRecord.permissionName)
-          if(group) {
-            var exist = groupArray.find(permissionGroup => permissionGroup.name == group.name)
-            var lastTime = permissionRecord.lastAccessTime
-            if(!exist) {
-              group.sum = permissionRecord.accessCount
-              group.recentVisit = lastTime
-              groupArray.push(group)
-            }else {
-              exist.sum += permissionRecord.accessCount
-              lastTime > exist.recentVisit ? exist.recentVisit = lastTime : ''
+          var group = getPermissionGroup(permissionRecord.permissionName);
+          if (group) {
+            var exist = groupArray.find(permissionGroup => permissionGroup.name == group.name);
+            var lastTime = permissionRecord.lastAccessTime;
+            if (!exist) {
+              group.sum = permissionRecord.accessCount;
+              group.recentVisit = lastTime;
+              groupArray.push(group);
+            } else {
+              exist.sum += permissionRecord.accessCount;
+              lastTime > exist.recentVisit ? exist.recentVisit = lastTime : '';
             }
           }
         }
       }
-      groupArray.sort((a, b) => { return b.recentVisit - a.recentVisit })
-      this.groups = groupArray
+      groupArray.sort((a, b) => { return b.recentVisit - a.recentVisit });
+      this.groups = groupArray;
     })
   }
 
   aboutToAppear() {
-    this.getStrings()
-    this.getAllRecords()
+    this.getStrings();
+    this.getAllRecords();
   }
 }

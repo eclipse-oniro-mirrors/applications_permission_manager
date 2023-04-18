@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,7 +14,6 @@
  */
 
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-
 import { permissionGroups, groups } from "../model/permissionGroup";
 import Constants from '../utils/constant';
 
@@ -56,22 +55,22 @@ export function getAppIcon(iconId, bundleName) {
 export function verifyAccessToken(accessTokenId, permission) {
   return new Promise((resolve) => {
     let atManager = abilityAccessCtrl.createAtManager();
-    let data = atManager.verifyAccessTokenSync(accessTokenId, permission)
-    if(data == abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
-      resolve(data)
-    }else {
+    let data = atManager.verifyAccessTokenSync(accessTokenId, permission);
+    if (data == abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+      resolve(data);
+    } else {
       try {
         atManager.getPermissionFlags(accessTokenId, permission).then(flag => {
-          if(flag == Constants.PERMISSION_COMPONENT_SET) {
-            resolve(abilityAccessCtrl.GrantStatus.PERMISSION_DENIED)
-          }else {
-            resolve(data)
+          if (flag == Constants.PERMISSION_COMPONENT_SET) {
+            resolve(abilityAccessCtrl.GrantStatus.PERMISSION_DENIED);
+          } else {
+            resolve(data);
           }
         })
       }
       catch(err) {
-        console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
-        resolve(data)
+        console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+        resolve(data);
       }
     }
   })
@@ -403,7 +402,7 @@ function mkRslt(arr) {
 export function getPermissionGroup(permission: string) {
   for (var i = 0; i < permissionGroups.length; i++) {
     if (permissionGroups[i].permissionName == permission) {
-      if(permissionGroups[i].groupName == 'OTHER') {
+      if (permissionGroups[i].groupName == 'OTHER') {
         return {
           "name": permissionGroups[i].groupName,
           "groupName": permissionGroups[i].label,
@@ -414,8 +413,8 @@ export function getPermissionGroup(permission: string) {
             permissionGroups[i].permissionName
           ]
         }
-      }else {
-        return groups[permissionGroups[i].groupId]
+      } else {
+        return groups[permissionGroups[i].groupId];
       }
     }
   }
@@ -425,10 +424,10 @@ const TAG = 'PermissionManager_Log';
 
 export class Log {
   static info(log) {
-    console.info(`Info: ${TAG}  ${log}`)
+    console.info(`Info: ${TAG}  ${log}`);
   }
 
   static error(log) {
-    console.error(`Error: ${TAG}  ${log}`)
+    console.error(`Error: ${TAG}  ${log}`);
   }
 }

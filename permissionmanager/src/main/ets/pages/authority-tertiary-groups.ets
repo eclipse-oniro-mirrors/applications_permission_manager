@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,7 +27,7 @@ import { globalDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup } from "../common/model/permissionGroup";
 
-var TAG = 'PermissionManager_MainAbility:'
+var TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image) function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -37,8 +37,8 @@ var TAG = 'PermissionManager_MainAbility:'
 
 let routerData: any = router.getParams()['routerData']; // Routing jump data
 let backTitle = router.getParams()['backTitle']; // return title name
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
+const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 let globalIsOn: any = router.getParams()['globalIsOn']; // return title name
 
 class ApplicationObj {
@@ -70,7 +70,7 @@ class ApplicationObj {
 @Entry
 @Component
 struct locationInfoPage {
-  @State polymorphismIsOn: Array<boolean> = []
+  @State polymorphismIsOn: Array<boolean> = [];
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -101,11 +101,11 @@ struct locationInfoPage {
   onPageShow() {
     console.log(TAG + "onPageShow");
     if (polymorphismGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
-      var bundleNames = []
+      var bundleNames = [];
       routerData.forEach(permissionmanager => {
         permissionmanager.bundleNames.forEach( bundleName => {
           if (bundleNames.indexOf(bundleName) == -1) {
-            bundleNames.push(bundleName)
+            bundleNames.push(bundleName);
           }
         })
       })
@@ -113,16 +113,16 @@ struct locationInfoPage {
       bundleNames.forEach((bundleName, index) => {
         bundle.getBundleInfo(bundleName, Constants.PARMETER_BUNDLE_FLAG).then(res => {
           // 0: have permission; -1: no permission
-          this.polymorphismIsOn[index] = true
+          this.polymorphismIsOn[index] = true;
           for (let j = 0; j < routerData.length; j++) {
             if ((routerData[j].permission == PRECISE_LOCATION_PERMISSION) && (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
-              continue
+              continue;
             }
             if ((routerData[j].permission == FUZZY_LOCATION_PERMISSION) && (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
-              continue
+              continue;
             }
             if (res.reqPermissions.indexOf(routerData[j].permission) == -1) {
-              continue
+              continue;
             }
             verifyAccessToken(res.appInfo.accessTokenId, routerData[j].permission).then((access) => {
               if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
@@ -144,10 +144,10 @@ struct applicationItem {
   @State toggleIsOn: object = {}; // toggle switch state array
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
-  @State placeholder: string = ''
-  @State bundleNameGroup: Array<string> = []
-  @Link polymorphismIsOn: Array<boolean>
-  @State globalIsOn: boolean = true
+  @State placeholder: string = '';
+  @State bundleNameGroup: Array<string> = [];
+  @Link polymorphismIsOn: Array<boolean>;
+  @State globalIsOn: boolean = true;
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
     builder: globalDialog({ globalIsOn: $globalIsOn }),
@@ -170,7 +170,7 @@ struct applicationItem {
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
                   .fontColor($r('app.color.label_color'))
-                if(item.isRisk) {
+                if (item.isRisk) {
                   Text($r('app.string.risk_warning'))
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                     .fontColor($r('app.color.label_color_lighter'))
@@ -195,8 +195,8 @@ struct applicationItem {
                       Promise.all(promises).then(function() {
                         _this.toggleIsOn[item.index] = true;
                         let num = Constants.PERMISSION_NUM;
-                        for(let key in _this.toggleIsOn){
-                          if(_this.toggleIsOn[key]){
+                        for (let key in _this.toggleIsOn) {
+                          if (_this.toggleIsOn[key]) {
                             num++;
                           }
                         }
@@ -209,8 +209,8 @@ struct applicationItem {
                       Promise.all(promises).then(function() {
                         _this.toggleIsOn[item.index] = false;
                         let num = Constants.PERMISSION_NUM;
-                        for(let key in _this.toggleIsOn){
-                          if(_this.toggleIsOn[key]){
+                        for (let key in _this.toggleIsOn) {
+                          if (_this.toggleIsOn[key]) {
                             num++;
                           }
                         }
@@ -218,7 +218,7 @@ struct applicationItem {
                       });
                     }
                   })
-              }else {
+              } else {
                 Text(this.polymorphismIsOn[item.index] ? $r('app.string.allow') : $r('app.string.ban'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_light'))
@@ -244,9 +244,9 @@ struct applicationItem {
           }
         }.onClick(() => {
           if (polymorphismGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
-            var permissions: any = []
+            var permissions: any = [];
             routerData.forEach(item => {
-              permissions.push(item.permission)
+              permissions.push(item.permission);
             })
             router.pushUrl({
               url: 'pages/application-tertiary',
@@ -270,10 +270,10 @@ struct applicationItem {
    */
   getGrantApplicationNumber() {
     if (polymorphismGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
-      var sum = this.polymorphismIsOn.filter(item => item == true)
-      return sum.length
-    }else {
-      return this.permissionNum
+      var sum = this.polymorphismIsOn.filter(item => item == true);
+      return sum.length;
+    } else {
+      return this.permissionNum;
     }
   }
 
@@ -315,12 +315,12 @@ struct applicationItem {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-    var bundleNames = []
-    this.applicationList = []
+    var bundleNames = [];
+    this.applicationList = [];
     routerData.forEach(permissionmanager => {
       permissionmanager.bundleNames.forEach( bundleName => {
         if (bundleNames.indexOf(bundleName) == -1) {
-          bundleNames.push(bundleName)
+          bundleNames.push(bundleName);
         }
       })
     })
@@ -332,7 +332,7 @@ struct applicationItem {
     // initial then fill values when sync return which may cause sync panic
     for (let i = 0; i < bundleNames.length; i++) {
       this.applicationList.push(new ApplicationObj('', '', i, 0, '', '', false));
-      this.bundleNameGroup.push(bundleNames[i])
+      this.bundleNameGroup.push(bundleNames[i]);
     }
 
     let atManager = abilityAccessCtrl.createAtManager();
@@ -360,16 +360,16 @@ struct applicationItem {
         this.permissionNum++;
         for (let j = 0; j < routerData.length; j++) {
           if (res.reqPermissions.indexOf(routerData[j].permission) == -1) {
-            continue
+            continue;
           }
           verifyAccessToken(res.appInfo.accessTokenId, routerData[j].permission).then((access) => {
             if (Number(access) === Constants.PERMISSION_INDEX) {
-              if(boole){
+              if (boole) {
                 this.toggleIsOn[i] = true;
               }
             } else {
-              if(boole){
-                this.permissionNum--
+              if (boole) {
+                this.permissionNum--;
               }
               boole = false;
               this.toggleIsOn[i] = false;
@@ -380,20 +380,20 @@ struct applicationItem {
         console.log(TAG + bundleNames[i] + "getBundleInfo failed, cause: " + JSON.stringify(error));
       })
     }
-    if(globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
-      this.globalIsOn = globalIsOn
-      if(globalThis.currentPermissionGroup == "CAMERA") {
+    if (globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
+      this.globalIsOn = globalIsOn;
+      if (globalThis.currentPermissionGroup == "CAMERA") {
         let cameraManager = camera.getCameraManager(globalThis.context);
         cameraManager.on('cameraMute', curMuted => {
-          this.globalIsOn = !curMuted
+          this.globalIsOn = !curMuted;
         })
-      }else {
+      } else {
         var audioManager = audio.getAudioManager();
         let audioVolumeManager = audioManager.getVolumeManager();
         let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
         audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
           audioVolumeGroupManager.on('micStateChange', micStateChange => {
-            this.globalIsOn = !micStateChange.mute
+            this.globalIsOn = !micStateChange.mute;
           })
         })
       }
@@ -414,7 +414,7 @@ struct applicationItem {
       })
       Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
         Column() {
-          if(globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
+          if (globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                 Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera') : $r('app.string.microphone'))
@@ -426,11 +426,11 @@ struct applicationItem {
                     .switchPointColor($r('app.color.selected_Color'))
                     .padding({ right: 0 })
                     .onChange((isOn: boolean) => {
-                      if(isOn) {
-                        if(globalThis.currentPermissionGroup == "CAMERA") {
+                      if (isOn) {
+                        if (globalThis.currentPermissionGroup == "CAMERA") {
                           let cameraManager = camera.getCameraManager(globalThis.context);
                           cameraManager.muteCamera(false);
-                        }else {
+                        } else {
                           var audioManager = audio.getAudioManager();
                           let audioVolumeManager = audioManager.getVolumeManager();
                           let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
@@ -452,7 +452,7 @@ struct applicationItem {
             .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
           }
           Flex({ justifyContent: FlexAlign.Start }) {
-            if(this.globalIsOn) {
+            if (this.globalIsOn) {
               Text(String(this.getGrantApplicationNumber()))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.secondary_font_color'))
@@ -461,7 +461,7 @@ struct applicationItem {
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.secondary_font_color'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-            }else {
+            } else {
               Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera_is_off') : $r('app.string.microphone_is_off'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.secondary_font_color'))

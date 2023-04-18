@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,11 +16,11 @@
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
-import { Log, getPermissionGroup } from '../common/utils/utils'
-import Constants from '../common/utils/constant'
-import { BundleFlag } from '../common/model/bundle'
-import { permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup'
-import { LocationCanvas } from '../common/components/location'
+import { Log, getPermissionGroup } from '../common/utils/utils';
+import Constants from '../common/utils/constant';
+import { BundleFlag } from '../common/model/bundle';
+import { permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup';
+import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('app.color.default_background_color'))
@@ -30,12 +30,12 @@ import { LocationCanvas } from '../common/components/location'
   .width(Constants.BUTTON_WIDTH)
 }
 
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
+const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 
-let permissionLabels: Object = {}
-let win: any = ""
-let proxy: any = ''
+let permissionLabels: Object = {};
+let win: any = "";
+let proxy: any = '';
 
 class ResourceObj {
   whether_to_allow: string
@@ -76,23 +76,23 @@ struct dialogPlusPage {
   build() {}
 
   aboutToAppear() {
-    this.privacyDialogController.open()
+    this.privacyDialogController.open();
   }
 }
 
 @CustomDialog
 struct PermissionDialog {
-  @State count: number = 0
-  @State result: Array<any> = []
-  @State accessTokenId: number = 0
-  @State initStatus: number = Constants.INIT_NEED_TO_WAIT
-  @State reqPerms: Array<string> = []
-  @State grantGroups: Array<any> = []
-  @State userFixedFlag: number = 2 // means user fixed
-  @State appName: string = ""
-  @State locationFlag: number = Constants.LOCATION_NONE
-  @State resource: ResourceObj = new ResourceObj('', '', '', '', '', '')
-  @State bundleInfo: BundleInfo = new BundleInfo(0, [])
+  @State count: number = 0;
+  @State result: Array<any> = [];
+  @State accessTokenId: number = 0;
+  @State initStatus: number = Constants.INIT_NEED_TO_WAIT;
+  @State reqPerms: Array<string> = [];
+  @State grantGroups: Array<any> = [];
+  @State userFixedFlag: number = 2; // means user fixed
+  @State appName: string = "";
+  @State locationFlag: number = Constants.LOCATION_NONE;
+  @State resource: ResourceObj = new ResourceObj('', '', '', '', '', '');
+  @State bundleInfo: BundleInfo = new BundleInfo(0, []);
   controller: CustomDialogController
 
   build() {
@@ -109,7 +109,7 @@ struct PermissionDialog {
                 .margin({
                   top: Constants.DIALOG_ICON_MARGIN_TOP
                 })
-              if(this.grantGroups.length > 1) {
+              if (this.grantGroups.length > 1) {
                 Text(`${this.count + 1} / ${this.grantGroups.length}`)
                   .fontSize(Constants.DIALOG_LABEL_FONT_SIZE)
                   .fontColor($r('app.color.text_secondary_color'))
@@ -151,7 +151,7 @@ struct PermissionDialog {
                   }
                 }
 
-                if(this.locationFlag > Constants.LOCATION_NONE) {
+                if (this.locationFlag > Constants.LOCATION_NONE) {
                   LocationCanvas({ locationFlag: $locationFlag })
                 }
               }
@@ -185,174 +185,174 @@ struct PermissionDialog {
   }
 
   showTitle() {
-    let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count
-    if(this.grantGroups[index].name == 'LOCATION') {
-      if(this.locationFlag == Constants.LOCATION_FUZZY) {
-        return this.resource.whether_to_allow + this.appName + this.resource.access_general_location
+    let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
+    if (this.grantGroups[index].name == 'LOCATION') {
+      if (this.locationFlag == Constants.LOCATION_FUZZY) {
+        return this.resource.whether_to_allow + this.appName + this.resource.access_general_location;
       }
-      if(this.locationFlag == Constants.LOCATION_UPGRADE) {
-        return this.resource.whether_to_allow + this.appName + this.resource.fuzzy_to_exact
+      if (this.locationFlag == Constants.LOCATION_UPGRADE) {
+        return this.resource.whether_to_allow + this.appName + this.resource.fuzzy_to_exact;
       }
     }
-    return this.resource.whether_to_allow + this.appName + this.resource.quotes + this.grantGroups[index].label
+    return this.resource.whether_to_allow + this.appName + this.resource.quotes + this.grantGroups[index].label;
   }
 
   showReason() {
-    let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count
-    if(this.grantGroups[index].name == 'LOCATION') {
-      if((this.locationFlag == Constants.LOCATION_FUZZY) || (this.locationFlag == Constants.LOCATION_BOTH_FUZZY)) {
-        return $r('app.string.close_exact_position')
+    let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
+    if (this.grantGroups[index].name == 'LOCATION') {
+      if ((this.locationFlag == Constants.LOCATION_FUZZY) || (this.locationFlag == Constants.LOCATION_BOTH_FUZZY)) {
+        return $r('app.string.close_exact_position');
       }
     }
-    return this.grantGroups[index].description
+    return this.grantGroups[index].description;
   }
 
   verify() {
-    if((this.initStatus == Constants.INIT_NEED_TO_TERMINATED) || (this.count >= this.grantGroups.length)) {
-      this.answerRequest()
-      this.initStatus = Constants.INIT_NEED_TO_WAIT
-      return false
+    if ((this.initStatus == Constants.INIT_NEED_TO_TERMINATED) || (this.count >= this.grantGroups.length)) {
+      this.answerRequest();
+      this.initStatus = Constants.INIT_NEED_TO_WAIT;
+      return false;
     }
-    return true
+    return true;
   }
 
   answerRequest() {
-    var ret: number = Constants.RESULT_SUCCESS
+    var ret: number = Constants.RESULT_SUCCESS;
     if (this.initStatus == Constants.INIT_NEED_TO_TERMINATED) {
-      ret = Constants.RESULT_FAILURE
+      ret = Constants.RESULT_FAILURE;
     }
-    this.answer(ret, this.reqPerms)
+    this.answer(ret, this.reqPerms);
   }
 
   answer(ret, reqPerms) {
-    Log.info("code:" + ret + ", perms="+ JSON.stringify(reqPerms) +", result=" + JSON.stringify(this.result))
-    var perms = []
-    var results = []
+    Log.info("code:" + ret + ", perms="+ JSON.stringify(reqPerms) +", result=" + JSON.stringify(this.result));
+    var perms = [];
+    var results = [];
     reqPerms.forEach(perm => {
-      perms.push(perm)
+      perms.push(perm);
     })
     this.result.forEach(result => {
-      results.push(result)
+      results.push(result);
     })
-    let option = new rpc.MessageOption()
-    let data = new rpc.MessageSequence()
-    let reply = new rpc.MessageSequence()
+    let option = new rpc.MessageOption();
+    let data = new rpc.MessageSequence();
+    let reply = new rpc.MessageSequence();
     Promise.all([data.writeInterfaceToken(Constants.ACCESS_TOKEN),
       data.writeStringArray(perms),
       data.writeIntArray(results)
     ]).then(() => {
-      proxy.sendRequest(Constants.RESULT_CODE, data, reply, option)
-      this.destruction()
+      proxy.sendRequest(Constants.RESULT_CODE, data, reply, option);
+      this.destruction();
     }).catch(() => {
-      Log.error('write result failed!')
-      this.destruction()
+      Log.error('write result failed!');
+      this.destruction();
     })
   }
 
   destruction() {
-    win.destroy()
-    globalThis.windowNum --
-    Log.info("windowNum:" + globalThis.windowNum)
-    if(globalThis.windowNum == 0) {
-      globalThis.extensionContext.terminateSelf()
+    win.destroy();
+    globalThis.windowNum --;
+    Log.info("windowNum:" + globalThis.windowNum);
+    if (globalThis.windowNum == 0) {
+      globalThis.extensionContext.terminateSelf();
     }
   }
 
   async privacyAccept(group, accessTokenId, permissionList, userFixedFlag) {
-    var acManager = abilityAccessCtrl.createAtManager()
-    var num = 0
+    var acManager = abilityAccessCtrl.createAtManager();
+    var num = 0;
     group.permissions.forEach(async permission => {
-      let result
-      if(showSubpermissionsGrop.indexOf(group.name) == -1) {
-        if(group.name == 'LOCATION' && this.bundleInfo.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
-          if(!(((this.locationFlag == Constants.LOCATION_BOTH_FUZZY) || (this.locationFlag == Constants.LOCATION_FUZZY))
+      let result;
+      if (showSubpermissionsGrop.indexOf(group.name) == -1) {
+        if (group.name == 'LOCATION' && this.bundleInfo.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
+          if (!(((this.locationFlag == Constants.LOCATION_BOTH_FUZZY) || (this.locationFlag == Constants.LOCATION_FUZZY))
             && (permission == PRECISE_LOCATION_PERMISSION))) {
             try {
               await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-                result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+                result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
               })
             }
             catch(err) {
-              Log.error("failed to grant permission:" + permission + " ret:" + result)
+              Log.error("failed to grant permission:" + permission + " ret:" + result);
             }
           }
-        }else {
+        } else {
           try {
             await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
             })
           }
           catch(err) {
-            Log.error("failed to grant permission:" + permission + " ret:" + result)
+            Log.error("failed to grant permission:" + permission + " ret:" + result);
           }
         }
-      }else {
-        if(permissionList.includes(permission)) {
+      } else {
+        if (permissionList.includes(permission)) {
           try {
             await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
+              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
             })
           }
           catch(err) {
-            Log.error("failed to grant permission:" + permission + " ret:" + result)
+            Log.error("failed to grant permission:" + permission + " ret:" + result);
           }
         }
       }
-      num ++
-      Log.info("grant permission result:" + result + "permission" + permission)
+      num ++;
+      Log.info("grant permission result:" + result + "permission" + permission);
       if (result == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         permissionList.forEach((req, idx) => {
-          if(req == permission) {
+          if (req == permission) {
             this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
           }
         })
-        Log.info("grant permission success:" + permission)
+        Log.info("grant permission success:" + permission);
       } else {
-        Log.error("failed to grant permission:" + permission + " ret:" + result)
+        Log.error("failed to grant permission:" + permission + " ret:" + result);
       }
-      if(num == group.permissions.length) {
-        this.count ++
+      if (num == group.permissions.length) {
+        this.count ++;
       }
     })
   }
 
   async privacyCancel(group, accessTokenId, permissionList, userFixedFlag) {
-    var acManager = abilityAccessCtrl.createAtManager()
+    var acManager = abilityAccessCtrl.createAtManager();
     group.permissions.forEach(async permission => {
-      if(showSubpermissionsGrop.indexOf(group.name) == -1) {
-        if(!(this.locationFlag == Constants.LOCATION_UPGRADE && group.name == 'LOCATION') || permission == PRECISE_LOCATION_PERMISSION) {
+      if (showSubpermissionsGrop.indexOf(group.name) == -1) {
+        if (!(this.locationFlag == Constants.LOCATION_UPGRADE && group.name == 'LOCATION') || permission == PRECISE_LOCATION_PERMISSION) {
           try {
-            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
           }
           catch(err) {
-            Log.error("failed to revoke permission:" + permission)
+            Log.error("failed to revoke permission:" + permission);
           }
         }
-      }else {
-        if(permissionList.includes(permission)) {
+      } else {
+        if (permissionList.includes(permission)) {
           try {
-            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag)
+            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
           }
           catch(err) {
-            Log.error("failed to revoke permission:" + permission)
+            Log.error("failed to revoke permission:" + permission);
           }
         }
       }
       Log.info("revoke permission " + permission);
     })
-    this.count ++
+    this.count ++;
   }
 
   getgrantGroups(stateGroup) {
     //Processing of positioning
-    if(this.bundleInfo.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
-      if(this.reqPerms.includes(FUZZY_LOCATION_PERMISSION)) {
-        this.locationFlag = Constants.LOCATION_FUZZY
-        if(this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
-          this.locationFlag = Constants.LOCATION_BOTH_PRECISE
-          var fuzzyIndex = this.reqPerms.indexOf(FUZZY_LOCATION_PERMISSION)
-          if(stateGroup[fuzzyIndex] == Constants.PASS_OPER) {
-            this.locationFlag = Constants.LOCATION_UPGRADE
+    if (this.bundleInfo.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
+      if (this.reqPerms.includes(FUZZY_LOCATION_PERMISSION)) {
+        this.locationFlag = Constants.LOCATION_FUZZY;
+        if (this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
+          this.locationFlag = Constants.LOCATION_BOTH_PRECISE;
+          var fuzzyIndex = this.reqPerms.indexOf(FUZZY_LOCATION_PERMISSION);
+          if (stateGroup[fuzzyIndex] == Constants.PASS_OPER) {
+            this.locationFlag = Constants.LOCATION_UPGRADE;
           }
         }
       }
@@ -360,85 +360,85 @@ struct PermissionDialog {
 
     this.reqPerms.forEach((permission, idx) => {
       //已授权
-      if(stateGroup[idx] == Constants.PASS_OPER) {
-        Log.info("permission has been fixed:" + permission)
+      if (stateGroup[idx] == Constants.PASS_OPER) {
+        Log.info("permission has been fixed:" + permission);
         this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
         //待授权
-      }else if(stateGroup[idx] == Constants.DYNAMIC_OPER) {
-        var group = getPermissionGroup(permission)
-        if(!group) {
-          Log.info("permission not find:" + permission)
-        }else {
-          var exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name)
+      } else if (stateGroup[idx] == Constants.DYNAMIC_OPER) {
+        var group = getPermissionGroup(permission);
+        if (!group) {
+          Log.info("permission not find:" + permission);
+        } else {
+          var exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
           //判断是否为需要展示子权限的权限组
-          if(showSubpermissionsGrop.indexOf(group.name) != -1) {
-            if(!exist) {
-              group.description = [permissionLabels[permission]]
-              this.grantGroups.push(group)
-            }else {
-              if(exist.description.indexOf(permissionLabels[permission]) == -1) {
-                exist.description.push(permissionLabels[permission])
+          if (showSubpermissionsGrop.indexOf(group.name) != -1) {
+            if (!exist) {
+              group.description = [permissionLabels[permission]];
+              this.grantGroups.push(group);
+            } else {
+              if (exist.description.indexOf(permissionLabels[permission]) == -1) {
+                exist.description.push(permissionLabels[permission]);
               }
             }
-          }else {
-            if(!exist) {
-              this.grantGroups.push(group)
+          } else {
+            if (!exist) {
+              this.grantGroups.push(group);
             }
           }
         }
       }
     })
-    this.initStatus = Constants.INIT_NEED_TO_VERIFY
+    this.initStatus = Constants.INIT_NEED_TO_VERIFY;
   }
 
   getApplicationName(bundleName) {
-    Log.info("getApplicationName bundleName:" + bundleName)
+    Log.info("getApplicationName bundleName:" + bundleName);
     bundleManager.getApplicationInfo(bundleName, BundleFlag.GET_BUNDLE_DEFAULT).then(applicationInfo => {
-      let context = globalThis.extensionContext.createBundleContext(bundleName)
+      let context = globalThis.extensionContext.createBundleContext(bundleName);
       context.resourceManager.getString(applicationInfo.labelId, (err, value) => {
         if (value == undefined) {
-          this.appName = applicationInfo.label
+          this.appName = applicationInfo.label;
         } else {
-          this.appName = value
+          this.appName = value;
         }
-        Log.info("hap label:" + applicationInfo.label + ", value:"+this.appName)
+        Log.info("hap label:" + applicationInfo.label + ", value:"+this.appName);
       })
     }).catch(err => {
-      Log.error("applicationInfo error :" + err)
-      this.initStatus = Constants.INIT_NEED_TO_TERMINATED
+      Log.error("applicationInfo error :" + err);
+      this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
     })
     this.grantGroups.forEach((group) => {
       globalThis.extensionContext.resourceManager.getString(group.label.id, (err, val) => {
-        group.label = val
+        group.label = val;
       })
-      if(group.description) {
+      if (group.description) {
         Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
         globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id),
         globalThis.extensionContext.resourceManager.getString($r("app.string.and").id),
         globalThis.extensionContext.resourceManager.getString($r("app.string.period").id)])
           .then(values => {
-            group.description = group.name == 'SMS' ? (group.description.join(values[0]) + values[1]) : (group.description.join(values[2]) + values[3])
-            this.getReason(group, bundleName)
+            group.description = group.name == 'SMS' ? (group.description.join(values[0]) + values[1]) : (group.description.join(values[2]) + values[3]);
+            this.getReason(group, bundleName);
           })
-      }else {
-        this.getReason(group, bundleName)
+      } else {
+        this.getReason(group, bundleName);
       }
     })
   }
 
   getReason(group, bundleName) {
     group.permissions.forEach(permission => {
-      if(this.reqPerms.indexOf(permission) != -1) {
+      if (this.reqPerms.indexOf(permission) != -1) {
         this.bundleInfo.reqPermissionDetails.forEach(reqPermissionDetail => {
-          if(reqPermissionDetail.name == permission) {
-            let context = globalThis.extensionContext.createBundleContext(bundleName)
+          if (reqPermissionDetail.name == permission) {
+            let context = globalThis.extensionContext.createBundleContext(bundleName);
             context.resourceManager.getString(reqPermissionDetail.reasonId, (err, value) => {
               if (value !== undefined && !group.hasReason) {
-                group.description = group.description.replace(this.resource.period, this.resource.comma)
-                group.description += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT)
-                group.hasReason = true
+                group.description = group.description.replace(this.resource.period, this.resource.comma);
+                group.description += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+                group.hasReason = true;
               }
-              this.initStatus = Constants.INIT_NEED_TO_REFRESH
+              this.initStatus = Constants.INIT_NEED_TO_REFRESH;
             })
           }
         })
@@ -448,28 +448,28 @@ struct PermissionDialog {
 
   getStrings() {
     globalThis.extensionContext.resourceManager.getString($r("app.string.whether_to_allow").id, (err, val) => {
-      this.resource.whether_to_allow = val
+      this.resource.whether_to_allow = val;
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.quotes").id, (err, val) => {
-      this.resource.quotes = val
+      this.resource.quotes = val;
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.access_general_location").id, (err, val) => {
-      this.resource.access_general_location = val
+      this.resource.access_general_location = val;
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.fuzzy_to_exact").id, (err, val) => {
-      this.resource.fuzzy_to_exact = val
+      this.resource.fuzzy_to_exact = val;
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.comma").id, (err, val) => {
-      this.resource.comma = val
+      this.resource.comma = val;
     })
     globalThis.extensionContext.resourceManager.getString($r("app.string.period").id, (err, val) => {
-      this.resource.period = val
+      this.resource.period = val;
     })
     this.reqPerms.forEach(reqPerm => {
       permissionGroups.forEach(permissionInfo => {
-        if(reqPerm == permissionInfo.permissionName) {
+        if (reqPerm == permissionInfo.permissionName) {
           globalThis.extensionContext.resourceManager.getString(permissionInfo.label.id).then(val => {
-            permissionLabels[reqPerm] = val
+            permissionLabels[reqPerm] = val;
           })
         }
       })
@@ -478,34 +478,34 @@ struct PermissionDialog {
 
   aboutToAppear() {
     this.count = 0;
-    this.initStatus = Constants.INIT_NEED_TO_WAIT
-    this.result = []
-    this.reqPerms = globalThis.abilityWant.parameters['ohos.user.grant.permission']
-    this.accessTokenId = globalThis.abilityWant.parameters['ohos.aafwk.param.callerToken']
-    proxy = globalThis.abilityWant.parameters['ohos.ability.params.callback'].value
-    win = globalThis.extensionWin
+    this.initStatus = Constants.INIT_NEED_TO_WAIT;
+    this.result = [];
+    this.reqPerms = globalThis.abilityWant.parameters['ohos.user.grant.permission'];
+    this.accessTokenId = globalThis.abilityWant.parameters['ohos.aafwk.param.callerToken'];
+    proxy = globalThis.abilityWant.parameters['ohos.ability.params.callback'].value;
+    win = globalThis.extensionWin;
     if (this.reqPerms == undefined || this.accessTokenId == undefined || this.reqPerms.length == 0) {
-      Log.info("invalid parameters")
-      this.initStatus = Constants.INIT_NEED_TO_TERMINATED
-      return
+      Log.info("invalid parameters");
+      this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
+      return;
     }
-    Log.info("request permission=" + JSON.stringify(this.reqPerms) + ", tokenId = " + this.accessTokenId)
+    Log.info("request permission=" + JSON.stringify(this.reqPerms) + ", tokenId = " + this.accessTokenId);
     Log.info("permission state=" + JSON.stringify(globalThis.abilityWant.parameters['ohos.user.grant.permission.state']));
     this.result = new Array(this.reqPerms.length).fill(-1);
-    this.getStrings()
-    let uid = globalThis.abilityWant.parameters['ohos.aafwk.param.callerUid']
+    this.getStrings();
+    let uid = globalThis.abilityWant.parameters['ohos.aafwk.param.callerUid'];
     bundleManager.getBundleNameByUid(uid).then((data) => {
       bundleManager.getBundleInfo(data, Constants.PARMETER_BUNDLE_FLAG).then(bundleInfo => {
-        this.bundleInfo = bundleInfo
+        this.bundleInfo = bundleInfo;
         this.getgrantGroups(globalThis.abilityWant.parameters['ohos.user.grant.permission.state']);
-        this.getApplicationName(data)
+        this.getApplicationName(data);
       }).catch(err => {
-        Log.error("getBundleInfo error :" + JSON.stringify(err))
-        this.initStatus = Constants.INIT_NEED_TO_TERMINATED
+        Log.error("getBundleInfo error :" + JSON.stringify(err));
+        this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
       })
     }).catch(err => {
-      Log.error("getNameForUid error :" + JSON.stringify(err))
-      this.initStatus = Constants.INIT_NEED_TO_TERMINATED
+      Log.error("getNameForUid error :" + JSON.stringify(err));
+      this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
     })
   }
 }

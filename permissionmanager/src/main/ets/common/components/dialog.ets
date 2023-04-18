@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,12 +14,12 @@
  */
 
 import Constants from '../utils/constant';
-import audio from '@ohos.multimedia.audio'
-import camera from '@ohos.multimedia.camera'
-import deviceInfo from '@ohos.deviceInfo'
+import audio from '@ohos.multimedia.audio';
+import camera from '@ohos.multimedia.camera';
+import deviceInfo from '@ohos.deviceInfo';
 import display from '@ohos.display';
 
-let bottomPopoverTypes = ['default', 'phone']
+let bottomPopoverTypes = ['default', 'phone'];
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('app.color.default_background_color'))
@@ -55,8 +55,8 @@ export struct authorizeDialog {
 
 @CustomDialog
 export struct globalDialog {
-  @Link globalIsOn: boolean
-  @State isBottomPopover: boolean = true
+  @Link globalIsOn: boolean;
+  @State isBottomPopover: boolean = true;
   controller: CustomDialogController;
 
   build() {
@@ -109,31 +109,31 @@ export struct globalDialog {
   }
 
   confirm() {
-    if(globalThis.currentPermissionGroup == 'CAMERA') {
+    if (globalThis.currentPermissionGroup == 'CAMERA') {
       let cameraManager = camera.getCameraManager(globalThis.context);
       cameraManager.muteCamera(true);
       this.controller.close();
-    }else {
+    } else {
       var audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.setMicrophoneMute(true).then(() => {
-          this.controller.close()
+          this.controller.close();
         })
       })
     }
   }
 
   cancel() {
-    this.controller.close()
+    this.controller.close();
   }
 
   aboutToAppear() {
     try {
       let dis = display.getDefaultDisplaySync();
-      let isVertical = dis.width > dis.height ? false : true
-      this.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical
+      let isVertical = dis.width > dis.height ? false : true;
+      this.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical;
     } catch (exception) {
       console.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
     };

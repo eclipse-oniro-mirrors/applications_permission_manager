@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,10 +20,10 @@ export struct textInput {
   @Prop placeholder: string; // Prompt text when no input
   @Link applicationItem: Array<any>; // application info array
   @Link searchResult: boolean; // search results
-  @State oldApplicationItem: Array<any> = [] // Original application information array
+  @State oldApplicationItem: Array<any> = []; // Original application information array
 
   aboutToAppear() {
-    this.oldApplicationItem = this.applicationItem
+    this.oldApplicationItem = this.applicationItem;
   }
 
   build() {

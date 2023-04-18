@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,7 +26,7 @@ import { permissionGroups, permissionGroupIds, showSubpermissionsGrop } from "..
 import { makePy } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
-var TAG = 'PermissionManager_MainAbility:'
+var TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image) function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -59,9 +59,9 @@ interface groupPermission {
   'isShow':boolean
 };
 
-let textInput_placeholder: any = ''
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION'
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
+let textInput_placeholder: any = '';
+const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
+const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 
 @Entry
 @Component
@@ -105,17 +105,17 @@ struct authorityManagementPage {
             })
           } else {
             var dataList = this.allPermissionApplications.filter((ele) => {
-              return ele.groupName === item.group
+              return ele.groupName === item.group;
             })
 
-            globalThis.currentPermissionGroup = item.group
-            if(globalGroup.indexOf(item.group) == -1) {
+            globalThis.currentPermissionGroup = item.group;
+            if (globalGroup.indexOf(item.group) == -1) {
               router.pushUrl({
                 url: 'pages/authority-tertiary-groups',
                 params: { routerData: dataList, backTitle: item.groupName  }
               })
-            }else {
-              if(item.group == 'MICROPHONE') {
+            } else {
+              if (item.group == 'MICROPHONE') {
                 var audioManager = audio.getAudioManager();
                 audioManager.isMicrophoneMute().then(value => {
                   router.pushUrl({
@@ -123,7 +123,7 @@ struct authorityManagementPage {
                     params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
                   })
                 })
-              }else {
+              } else {
                 let cameraManager = camera.getCameraManager(globalThis.context);
                 let mute = cameraManager.isCameraMuted();
                 router.pushUrl({
@@ -138,10 +138,10 @@ struct authorityManagementPage {
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
   }
 
-  @State allPermissionApplications: permissionApplications [] = [] // All app permissions
-  @State allGroupPermission: groupPermission[] = [] // All group permissions
-  @State currentIndex: number = 0
-  @State @Watch("getLabelAndIcon") ready: boolean = false
+  @State allPermissionApplications: permissionApplications [] = []; // All app permissions
+  @State allGroupPermission: groupPermission[] = []; // All group permissions
+  @State currentIndex: number = 0;
+  @State @Watch("getLabelAndIcon") ready: boolean = false;
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
       Text(index ? $r('app.string.application') : $r('app.string.authority'))
@@ -150,7 +150,7 @@ struct authorityManagementPage {
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
         .baselineOffset(Constants.TAB_DECORATION_POSITION_Y)
-      if(this.currentIndex == index) {
+      if (this.currentIndex == index) {
         Text(index ? $r('app.string.application') : $r('app.string.authority'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Bold)
@@ -207,7 +207,7 @@ struct authorityManagementPage {
       this.getAllPermissionApplications();
       let orderSort = this.orderDict(userGrantPermissions);
       this.allPermissionApplications.sort(this.compare('permission', orderSort));
-      this.getPermissionLabel()
+      this.getPermissionLabel();
   }
 
   /**
@@ -231,7 +231,7 @@ struct authorityManagementPage {
       permissionGroups.forEach(permissionInfo => {
         if(userPermission == permissionInfo.permissionName) {
           globalThis.context.resourceManager.getString(permissionInfo.label.id).then(val => {
-            globalThis.permissionLabels[userPermission] = val
+            globalThis.permissionLabels[userPermission] = val;
           })
         }
       })
@@ -242,12 +242,12 @@ struct authorityManagementPage {
    * Get all permission label
    */
   getLabelAndIcon() {
-    const this_ = this
+    const this_ = this;
     setTimeout(function() {
       globalThis.allBundleInfo.forEach(bundleInfo => {
         let context = globalThis.context.createBundleContext(bundleInfo.bundleName)
-        this_.updateAppLabel(bundleInfo, context)
-        this_.updateAppIcon(bundleInfo, context)
+        this_.updateAppLabel(bundleInfo, context);
+        this_.updateAppIcon(bundleInfo, context);
       })
     }, 100)
   }
@@ -327,21 +327,21 @@ struct authorityManagementPage {
       for (let j = 0; j < info.reqPermissions.length; j++) {
         var permission = info.reqPermissions[j];
         console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name)
-        if((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
-          continue
+        if ((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
+          continue;
         }
-        if((info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION) && !info.reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
-          continue
+        if ((info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION) && !info.reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
+          continue;
         }
         try {
-          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission)
-          console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name + 'flag: ' + flag)
-          if(flag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue
+          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
+          console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name + 'flag: ' + flag);
+          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
+            continue;
           }
         }
         catch(err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err))
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         }
         if (userGrantPermissions.indexOf(permission) != -1) {
           reqUserPermissions.push(permission);
@@ -353,15 +353,15 @@ struct authorityManagementPage {
     }
     let groupIds = [];
     for (let i = 0; i < reqUserPermissions.length; i++) {
-      if(groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1){
+      if (groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1) {
         groupIds.push(permissionGroupIds[reqUserPermissions[i]]);
       }
     }
 
     // adapt different api
     if ((info.compatibleVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (info.hapModuleInfos.length > 0)) {
-      console.log(TAG + 'app.compatibleVersion: ' + info.name)
-      info.hapModuleInfos[0].abilityInfo.length > 0 ? info.appInfo.iconId = info.hapModuleInfos[0].abilityInfo[0].iconId : ''
+      console.log(TAG + 'app.compatibleVersion: ' + info.name);
+      info.hapModuleInfos[0].abilityInfo.length > 0 ? info.appInfo.iconId = info.hapModuleInfos[0].abilityInfo[0].iconId : '';
     }
 
     var ap: applicationPermissions = {
@@ -373,8 +373,8 @@ struct authorityManagementPage {
       'permissions': reqUserPermissions,
       'groupId': groupIds
     };
-    console.log(TAG + 'allBundleInfo.push: ' + info.name)
-    globalThis.allBundleInfo.push(ap)
+    console.log(TAG + 'allBundleInfo.push: ' + info.name);
+    globalThis.allBundleInfo.push(ap);
   }
 
   /**
@@ -411,50 +411,50 @@ struct authorityManagementPage {
   aboutToAppear() {
     console.log(TAG + 'on aboutToAppear, version 1.01');
     this.getAllBundlePermissions();
-    var acManager = abilityAccessCtrl.createAtManager()
+    var acManager = abilityAccessCtrl.createAtManager();
     bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
-      acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2)
+      acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2);
     })
     globalThis.context.resourceManager.getString($r("app.string.textInput_placeholder").id).then(val => {
-      textInput_placeholder = val
+      textInput_placeholder = val;
     })
   }
 
   getPermissionGroup(allGroup, order) {
-    var fixedName: string[] = ['LOCATION', 'CAMERA', 'MICROPHONE']
-    var extraName: string[] = ['ADS']
-    var fixedGroup: any[] = []
-    var extraGroup: any[] = []
-    var changeGroup: any[] = []
-    var otherGroup: any[] = []
+    var fixedName: string[] = ['LOCATION', 'CAMERA', 'MICROPHONE'];
+    var extraName: string[] = ['ADS'];
+    var fixedGroup: any[] = [];
+    var extraGroup: any[] = [];
+    var changeGroup: any[] = [];
+    var otherGroup: any[] = [];
 
     allGroup.forEach(group => {
-      if(fixedName.indexOf(group.group) !== -1) {
-        fixedGroup.push(group)
-      }else if(extraName.includes(group.group)) {
-        extraGroup.push(group)
-      }else if(group.group == 'OTHER') {
-        otherGroup.push(group)
-      }else {
-        changeGroup.push(group)
+      if (fixedName.indexOf(group.group) !== -1) {
+        fixedGroup.push(group);
+      } else if (extraName.includes(group.group)) {
+        extraGroup.push(group);
+      } else if (group.group == 'OTHER') {
+        otherGroup.push(group);
+      } else {
+        changeGroup.push(group);
       }
     })
 
-    if(order == Constants.FIXED_GROUP){
-      return fixedGroup
-    }else if(order == Constants.CHANGE_GROUP) {
-      return changeGroup
-    }else if(order == Constants.OTHER_GROUP) {
-      return otherGroup
-    }else if(order == Constants.EXTRA_GROUP) {
-      return extraGroup
+    if (order == Constants.FIXED_GROUP){
+      return fixedGroup;
+    } else if (order == Constants.CHANGE_GROUP) {
+      return changeGroup;
+    } else if (order == Constants.OTHER_GROUP) {
+      return otherGroup;
+    } else if (order == Constants.EXTRA_GROUP) {
+      return extraGroup;
     }
   }
 
   LoadLabelAndIcon() {
-    const this_ = this
+    const this_ = this;
     setTimeout(function() { this_.ready = true }, 100)
-    return true
+    return true;
   }
 
   build() {
@@ -544,7 +544,7 @@ struct authorityManagementPage {
                       .onChange((index) => {
                         this.currentIndex = index
                       })
-                    }else {
+                    } else {
                       LoadingProgress().width(Constants.LOADING_WIDTH)
                     }
                   }.height(Constants.FULL_HEIGHT)
@@ -564,8 +564,8 @@ struct authorityManagementPage {
 
 @Component
 struct applicationItem {
-  @State applicationItem: any[] = globalThis.allBundleInfo // application info array
-  @State searchResult: boolean = true // search results
+  @State applicationItem: any[] = globalThis.allBundleInfo; // application info array
+  @State searchResult: boolean = true; // search results
 
   @Builder ListItemLayout(item, index) {
     ListItem() {

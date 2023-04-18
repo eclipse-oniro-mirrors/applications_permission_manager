@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,8 +19,8 @@ import Constants from '../utils/constant';
 @Component
 export struct backBar {
   @Prop title: string; // return title name
-  @Prop recordable: boolean
-  @State record: string = ''
+  @Prop recordable: boolean;
+  @State record: string = '';
 
   build() {
     Column() {
@@ -35,8 +35,8 @@ export struct backBar {
             right: Constants.BACKBAR_IMAGE_MARGIN_RIGHT
           })
           .onClick(() => {
-            var length = router.getLength()
-            Number(length) == 1 ? globalThis.context.terminateSelf() : router.back()
+            var length = router.getLength();
+            Number(length) == 1 ? globalThis.context.terminateSelf() : router.back();
           })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
@@ -45,7 +45,7 @@ export struct backBar {
           .flexGrow(Constants.BACKBAR_TEXT_FLEX_GROW)
           .fontWeight(FontWeight.Bold)
           .margin({ top: Constants.BACKBAR_TEXT_MARGIN_TOP })
-        if(this.recordable) {
+        if (this.recordable) {
           Image($r("app.media.gongneng_dian"))
             .objectFit(ImageFit.Contain)
             .height(Constants.BACKBAR_IMAGE_HEIGHT)
@@ -70,7 +70,7 @@ export struct backBar {
 
   aboutToAppear() {
     globalThis.context.resourceManager.getString($r("app.string.permission_access_record").id).then(val => {
-      this.record = val
+      this.record = val;
     })
   }
 }

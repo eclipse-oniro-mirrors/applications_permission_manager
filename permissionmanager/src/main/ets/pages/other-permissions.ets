@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,11 +16,11 @@
 import { backBar } from "../common/components/backBar";
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
-import { permissionGroups } from '../common/model/permissionGroup'
+import { permissionGroups } from '../common/model/permissionGroup';
 import { verifyAccessToken } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
 
-var TAG = 'PermissionManager_MainAbility:'
+var TAG = 'PermissionManager_MainAbility:';
 
 let routerData = router.getParams()['routerData']; // Routing jump data
 let tokenId: any = router.getParams()['tokenId']; // tokenId for verify permission
@@ -68,9 +68,9 @@ struct appNamePage {
    * Lifecycle function, triggered once when this page is displayed
    */
   onPageShow() {
-    console.log(TAG + 'onPageShow other-permissions')
+    console.log(TAG + 'onPageShow other-permissions');
     permissions.forEach(permission => {
-      verifyAccessToken(tokenId, permission).then(data => status = data)
+      verifyAccessToken(tokenId, permission).then(data => status = data);
     })
   }
 }
