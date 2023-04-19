@@ -604,10 +604,8 @@ struct applicationItem {
             }
           }
         }.onClick(() => {
-          router.pushUrl({
-            url: 'pages/application-secondary',
-            params: { routerData: item }
-          });
+          globalThis.applicationInfo = item
+          router.pushUrl({ url: 'pages/application-secondary' });
         })
       }
     }.padding({
