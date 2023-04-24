@@ -66,7 +66,7 @@ const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION'
 @Entry
 @Component
 struct authorityManagementPage {
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item, end) {
     ListItem() {
       Row() {
         Column() {
@@ -86,7 +86,7 @@ struct authorityManagementPage {
             .width(Constants.FULL_WIDTH)
             .height(Constants.MANAGEMENT_ROW_HEIGHT)
           }
-          if (!index) {
+          if (!end) {
             Row() {
               Flex() {
                 Column().width(Constants.MANAGEMENT_TEXT_DECORATION_MARGIN_LEFT)
@@ -411,13 +411,17 @@ struct authorityManagementPage {
 
   getPermissionGroup(allGroup, order) {
     var fixedName: string[] = ['LOCATION', 'CAMERA', 'MICROPHONE']
+    var extraName: string[] = ['ADS']
     var fixedGroup: any[] = []
+    var extraGroup: any[] = []
     var changeGroup: any[] = []
     var otherGroup: any[] = []
 
     allGroup.forEach(group => {
       if(fixedName.indexOf(group.group) !== -1) {
         fixedGroup.push(group)
+      }else if(extraName.includes(group.group)) {
+        extraGroup.push(group)
       }else if(group.group == 'OTHER') {
         otherGroup.push(group)
       }else {
@@ -431,6 +435,8 @@ struct authorityManagementPage {
       return changeGroup
     }else if(order == Constants.OTHER_GROUP) {
       return otherGroup
+    }else if(order == Constants.EXTRA_GROUP) {
+      return extraGroup
     }
   }
 
@@ -470,12 +476,8 @@ struct authorityManagementPage {
                                   List() {
                                     ListItem() {
                                       List() {
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).slice(Constants.SLICE_START,
-                                          this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).length - 1), (item) => {
-                                          this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-                                        }, item => item.toString())
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).slice(Constants.SLICE_END), (item) => {
-                                          this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP), (item, index) => {
+                                          this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).length - 1))
                                         }, item => item.toString())
                                       }.backgroundColor($r('app.color.default_background_color'))
                                       .borderRadius(Constants.BORDER_RADIUS)
@@ -485,17 +487,26 @@ struct authorityManagementPage {
 
                                     ListItem() {
                                       List() {
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).slice(Constants.SLICE_START,
-                                          this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).length - 1), (item) => {
-                                          this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-                                        }, item => item.toString())
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).slice(Constants.SLICE_END), (item) => {
-                                          this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP), (item, index) => {
+                                          this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).length - 1))
                                         }, item => item.toString())
                                       }.backgroundColor($r('app.color.default_background_color'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
+                                    }
+
+                                    if(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length) {
+                                      ListItem() {
+                                        List() {
+                                          ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP), (item, index) => {
+                                            this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length - 1))
+                                          }, item => item.toString())
+                                        }.backgroundColor($r('app.color.default_background_color'))
+                                        .borderRadius(Constants.BORDER_RADIUS)
+                                        .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                        .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
+                                      }
                                     }
 
                                     ListItem() {
@@ -567,7 +578,7 @@ struct applicationItem {
   @State applicationItem: any[] = globalThis.allBundleInfo // application info array
   @State searchResult: boolean = true // search results
 
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item, end) {
     ListItem() {
       Row() {
         Column() {
@@ -592,7 +603,7 @@ struct applicationItem {
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
           }
-          if (!index) {
+          if (!end) {
             Row() {
               Flex() {
                 Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
@@ -643,13 +654,9 @@ struct applicationItem {
                 Row() {
                   Scroll() {
                     List() {
-                      ForEach(this.applicationItem.slice(Constants.SLICE_START, this.applicationItem.length - 1),
-                        (item) => {
-                          this.ListItemLayout(item, Constants.SLICE_START_INDEX)
+                      ForEach(this.applicationItem, (item, index) => {
+                        this.ListItemLayout(item, index == (this.applicationItem.length - 1))
                         }, item => item.toString())
-                      ForEach(this.applicationItem.slice(Constants.SLICE_END), (item) => {
-                        this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-                      }, item => item.toString())
                     }.backgroundColor($r('app.color.default_background_color'))
                     .borderRadius(Constants.BORDER_RADIUS)
                     .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })

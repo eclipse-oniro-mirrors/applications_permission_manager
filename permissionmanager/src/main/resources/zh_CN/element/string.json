@@ -269,6 +269,10 @@
       "value": "全部日历"
     },
     {
+      "name": "groupName_ADS",
+      "value": "广告跟踪"
+    },
+    {
       "name": "multi_device_collaboration",
       "value": "多设备协同"
     },
@@ -335,6 +339,10 @@
     {
       "name": "group_label_calendar_all",
       "value": "访问全部日历？"
+    },
+    {
+      "name": "group_label_ADS",
+      "value": "访问广告跟踪？"
     }
   ]
 }

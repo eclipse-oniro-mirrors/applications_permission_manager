@@ -201,6 +201,24 @@ export const permissionGroups: any[] = [
         "groupName": "DOCUMENTS",
         "label": $r('sys.string.ohos_desc_write_document'),
         "groupId": 14
+    },
+    {
+        "permissionName": "ohos.permission.READ_WHOLE_CALENDAR",
+        "groupName": "CALENDAR_ALL",
+        "label": $r('sys.string.ohos_lab_read_whole_calendar'),
+        "groupId": 15
+    },
+    {
+        "permissionName": "ohos.permission.WRITE_WHOLE_CALENDAR",
+        "groupName": "CALENDAR_ALL",
+        "label": $r('sys.string.ohos_lab_write_whole_calendar'),
+        "groupId": 15
+    },
+    {
+        "permissionName": "ohos.permission.APP_TRACKING_CONSENT",
+        "groupName": "ADS",
+        "label": $r('sys.string.ohos_lab_app_tracking_consent'),
+        "groupId": 16
     }
 ]
 
@@ -384,6 +402,29 @@ export const groups: any[] = [
             "ohos.permission.WRITE_DOCUMENT"
         ],
         "isShow":false
+    },
+    {
+        "name": "CALENDAR_ALL",
+        "groupName": $r("app.string.groupName_calendar_all"),
+        "icon": $r('app.media.ic_public_calendar'),
+        "label": $r("app.string.group_label_calendar_all"),
+        "description": "",
+        "permissions": [
+            "ohos.permission.READ_WHOLE_CALENDAR",
+            "ohos.permission.WRITE_WHOLE_CALENDAR"
+        ],
+        "isShow":false
+    },
+    {
+        "name": "ADS",
+        "groupName": $r("app.string.groupName_ADS"),
+        "icon": $r('app.media.track'),
+        "label": $r("app.string.group_label_ADS"),
+        "description": "",
+        "permissions": [
+            "ohos.permission.APP_TRACKING_CONSENT"
+        ],
+        "isShow":false
     }
 ];
 
@@ -448,6 +489,13 @@ export const permissionGroupPermissions: object = {
     "DOCUMENTS": [
         "ohos.permission.READ_DOCUMENT",
         "ohos.permission.WRITE_DOCUMENT"
+    ],
+    "CALENDAR_ALL": [
+        "ohos.permission.READ_WHOLE_CALENDAR",
+        "ohos.permission.WRITE_WHOLE_CALENDAR"
+    ],
+    "ADS": [
+        "ohos.permission.APP_TRACKING_CONSENT"
     ]
 };
 
@@ -483,7 +531,10 @@ export const userGrantPermissions: string[] = [
     "ohos.permission.READ_AUDIO",
     "ohos.permission.WRITE_AUDIO",
     "ohos.permission.READ_DOCUMENT",
-    "ohos.permission.WRITE_DOCUMENT"
+    "ohos.permission.WRITE_DOCUMENT",
+    "ohos.permission.READ_WHOLE_CALENDAR",
+    "ohos.permission.WRITE_WHOLE_CALENDAR",
+    "ohos.permission.APP_TRACKING_CONSENT"
 ];
 
 export const permissionGroupIds: object = {
@@ -517,7 +568,10 @@ export const permissionGroupIds: object = {
     "ohos.permission.READ_AUDIO": "13",
     "ohos.permission.WRITE_AUDIO": "13",
     "ohos.permission.READ_DOCUMENT": "14",
-    "ohos.permission.WRITE_DOCUMENT": "14"
+    "ohos.permission.WRITE_DOCUMENT": "14",
+    "ohos.permission.READ_WHOLE_CALENDAR": "15",
+    "ohos.permission.WRITE_WHOLE_CALENDAR": "15",
+    "ohos.permission.APP_TRACKING_CONSENT": "16"
 };
 
 export const noNeedDisplayApp: string[] = [
