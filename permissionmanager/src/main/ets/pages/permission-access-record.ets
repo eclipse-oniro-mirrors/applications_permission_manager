@@ -350,7 +350,7 @@ struct permissionRecordPage {
    */
   getTime(time, format='MM月DD日 NNHH:mm') {
     if(this.strings.morning == 'am') { format = 'HH:mm NN MM/DD' }
-    let date = new Date(time * 1000)
+    let date = new Date(time)
     let config = {
       MM: date.getMonth() + 1,
       DD: date.getDate(),
