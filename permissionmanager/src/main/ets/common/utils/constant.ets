@@ -131,8 +131,8 @@ export default class Constants {
     static DEFAULT_MARGIN_END = 12;
     static DEFAULT_MARGIN_TOP = 12;
     static DEFAULT_MARGIN_BOTTOM = 12;
-    static DEFAULT_SLIDER_WIDTH = 40;
-    static DEFAULT_SLIDER_HEIGHT = 30;
+    static DEFAULT_SLIDER_WIDTH = 60;
+    static DEFAULT_SLIDER_HEIGHT = 40;
     static OFFSET = 100;
 
     // application-secondary, authority-secondary

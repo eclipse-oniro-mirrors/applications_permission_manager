@@ -33,29 +33,28 @@ export default class ServiceExtensionAbility extends extension {
         globalThis.windowNum = 0
     }
 
-    /**
-     * Lifecycle function, called back when a service extension is started or recall.
-     */
-    onRequest(want, startId) {
-        globalThis.abilityWant = want
-        console.info(TAG + "ServiceExtensionAbility onRequest. start id is " + startId);
-        console.info(TAG + "want: " + JSON.stringify(want))
+  /**
+  * Lifecycle function, called back when a service extension is started or recall.
+  */
+  onRequest(want, startId) {
+    console.info(TAG + "ServiceExtensionAbility onRequest. start id is " + startId);
+    console.info(TAG + 'want: ' + JSON.stringify(want));
 
-        try {
-            let dis = display.getDefaultDisplaySync();
-            let navigationBarRect = {
-                left: 0,
-                top: 0,
-                width: dis.width,
-                height: dis.height
-            }
-            let isVertical = dis.width > dis.height ? false : true
-            globalThis.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical
-            this.createWindow("permissionDialog" + startId, window.WindowType.TYPE_DIALOG, navigationBarRect)
-        } catch (exception) {
-            console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
-        };
-    }
+    try {
+      let dis = display.getDefaultDisplaySync();
+      let navigationBarRect = {
+        left: 0,
+        top: 0,
+        width: dis.width,
+        height: dis.height
+      };
+      let isVertical = dis.width > dis.height ? false : true;
+      globalThis.isBottomPopover = (bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical) ? true : false;
+      this.createWindow('permissionDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
+    } catch (exception) {
+      console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+    };
+  }
 
     /**
      * Lifecycle function, called back before a service extension is destroyed.
@@ -64,24 +63,29 @@ export default class ServiceExtensionAbility extends extension {
         console.info(TAG + "ServiceExtensionAbility onDestroy.");
     }
 
-    private async createWindow(name: string, windowType: number, rect) {
-        console.info(TAG + "create window")
-        try {
-            const win = await window.createWindow({ ctx: globalThis.extensionContext, name, windowType })
-            globalThis.extensionWin = win
-            await win.bindDialogTarget(globalThis.abilityWant.parameters['ohos.ability.params.token'].value, () => {
-                win.destroyWindow()
-                globalThis.windowNum --
-                if(globalThis.windowNum == 0) this.context.terminateSelf()
-            })
-            await win.moveWindowTo(rect.left, rect.top)
-            await win.resize(rect.width, rect.height)
-            await win.setUIContent('pages/dialogPlus')
-            await win.setWindowBackgroundColor(BG_COLOR)
-            await win.showWindow()
-            globalThis.windowNum ++
-        } catch {
-            console.info(TAG + "window create failed!")
+  private async createWindow(name: string, windowType, rect, want): Promise<void> {
+    console.info(TAG + 'create window');
+    try {
+      const win = await window.createWindow({ ctx: globalThis.extensionContext, name, windowType });
+      let storage: LocalStorage = new LocalStorage({
+        'want': want,
+        'win': win
+      });
+      await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
+        win.destroyWindow();
+        globalThis.windowNum --;
+        if (globalThis.windowNum === 0) {
+          this.context.terminateSelf();
         }
+      });
+      await win.moveWindowTo(rect.left, rect.top);
+      await win.resize(rect.width, rect.height);
+      await win.loadContent('pages/dialogPlus', storage);
+      await win.setWindowBackgroundColor(BG_COLOR);
+      await win.showWindow();
+      globalThis.windowNum ++;
+    } catch {
+      console.info(TAG + 'window create failed!');
     }
+  }
 };

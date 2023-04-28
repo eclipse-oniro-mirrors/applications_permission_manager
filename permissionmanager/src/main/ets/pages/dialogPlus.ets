@@ -36,6 +36,8 @@ const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 let permissionLabels: Object = {};
 let win: any = "";
 let proxy: any = '';
+let want: any = '';
+let storage = LocalStorage.GetShared();
 
 class ResourceObj {
   whether_to_allow: string
@@ -63,9 +65,12 @@ class BundleInfo {
   }
 }
 
-@Entry
+@Entry(storage)
 @Component
 struct dialogPlusPage {
+  @LocalStorageLink('want') want: Object = {};
+  @LocalStorageLink('win') win: Object = {};
+
   privacyDialogController: CustomDialogController = new CustomDialogController({
     builder: PermissionDialog(),
     autoCancel: false,
@@ -76,6 +81,8 @@ struct dialogPlusPage {
   build() {}
 
   aboutToAppear() {
+    win = this.win
+    want = this.want
     this.privacyDialogController.open();
   }
 }
@@ -480,24 +487,23 @@ struct PermissionDialog {
     this.count = 0;
     this.initStatus = Constants.INIT_NEED_TO_WAIT;
     this.result = [];
-    this.reqPerms = globalThis.abilityWant.parameters['ohos.user.grant.permission'];
-    this.accessTokenId = globalThis.abilityWant.parameters['ohos.aafwk.param.callerToken'];
-    proxy = globalThis.abilityWant.parameters['ohos.ability.params.callback'].value;
-    win = globalThis.extensionWin;
+    this.reqPerms = want.parameters['ohos.user.grant.permission'];
+    this.accessTokenId = want.parameters['ohos.aafwk.param.callerToken'];
+    proxy = want.parameters['ohos.ability.params.callback'].value;
     if (this.reqPerms == undefined || this.accessTokenId == undefined || this.reqPerms.length == 0) {
       Log.info("invalid parameters");
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
       return;
     }
     Log.info("request permission=" + JSON.stringify(this.reqPerms) + ", tokenId = " + this.accessTokenId);
-    Log.info("permission state=" + JSON.stringify(globalThis.abilityWant.parameters['ohos.user.grant.permission.state']));
+    Log.info("permission state=" + JSON.stringify(want.parameters['ohos.user.grant.permission.state']));
     this.result = new Array(this.reqPerms.length).fill(-1);
     this.getStrings();
-    let uid = globalThis.abilityWant.parameters['ohos.aafwk.param.callerUid'];
+    let uid = want.parameters['ohos.aafwk.param.callerUid'];
     bundleManager.getBundleNameByUid(uid).then((data) => {
       bundleManager.getBundleInfo(data, Constants.PARMETER_BUNDLE_FLAG).then(bundleInfo => {
         this.bundleInfo = bundleInfo;
-        this.getgrantGroups(globalThis.abilityWant.parameters['ohos.user.grant.permission.state']);
+        this.getgrantGroups(want.parameters['ohos.user.grant.permission.state']);
         this.getApplicationName(data);
       }).catch(err => {
         Log.error("getBundleInfo error :" + JSON.stringify(err));
