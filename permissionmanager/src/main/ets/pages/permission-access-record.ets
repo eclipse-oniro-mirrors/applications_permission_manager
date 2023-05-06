@@ -56,14 +56,14 @@ struct permissionRecordPage {
   @State show: boolean = false;
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
-      Text(index ? $r('app.string.application') : $r('app.string.authority'))
+      Text(index ? $r('app.string.application') : $r('app.string.permission'))
         .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
         .fontColor(this.currentIndex == index ? $r('sys.color.ohos_id_color_subtab_text_on') : $r('sys.color.ohos_id_color_secondary'))
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
         .baselineOffset(Constants.TAB_DECORATION_POSITION_Y)
       if (this.currentIndex == index) {
-        Text(index ? $r('app.string.application') : $r('app.string.authority'))
+        Text(index ? $r('app.string.application') : $r('app.string.permission'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Bold)
           .height(Constants.TAB_DECORATION_HEIGHT)

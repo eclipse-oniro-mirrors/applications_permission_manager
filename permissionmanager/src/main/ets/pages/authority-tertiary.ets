@@ -96,7 +96,6 @@ struct applicationItem {
   @State toggleIsOn: object = {}; // toggle switch state array
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
-  @State placeholder: string = '';
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -225,10 +224,6 @@ struct applicationItem {
   aboutToAppear() {
     let bundleNames = routerData.length > 0 ? routerData[0].bundleNames : routerData;
 
-    globalThis.context.resourceManager.getString($r("app.string.textInput_placeholder").id).then(val => {
-      this.placeholder = val;
-    })
-
     // initial then fill values when sync return which may cause sync panic
     for (let i = 0; i < bundleNames.length; i++) {
       this.applicationList.push(new ApplicationObj('', '', i, 0, '', '', false));
@@ -271,7 +266,6 @@ struct applicationItem {
     Column() {
       Row() {
         textInput({
-          placeholder: this.placeholder,
           applicationItem: $applicationList,
           searchResult: $searchResult
         })

@@ -20,7 +20,6 @@ import Constants from '../utils/constant';
 export struct backBar {
   @Prop title: string; // return title name
   @Prop recordable: boolean;
-  @State record: string = '';
 
   build() {
     Column() {
@@ -53,7 +52,7 @@ export struct backBar {
             .margin({ top: Constants.BACKBAR_TEXT_MARGIN_TOP, right: Constants.BACKBAR_IMAGE_MARGIN_RIGHT })
             .bindMenu([
               {
-                value: this.record,
+                value: $r('app.string.permission_access_record'),
                 action: () => {
                   router.pushUrl({ url: 'pages/permission-access-record' })
                 }
@@ -69,8 +68,5 @@ export struct backBar {
   }
 
   aboutToAppear() {
-    globalThis.context.resourceManager.getString($r("app.string.permission_access_record").id).then(val => {
-      this.record = val;
-    })
   }
 }

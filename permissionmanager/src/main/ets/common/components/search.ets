@@ -17,7 +17,6 @@ import Constants from '../utils/constant';
 
 @Component
 export struct textInput {
-  @Prop placeholder: string; // Prompt text when no input
   @Link applicationItem: Array<any>; // application info array
   @Link searchResult: boolean; // search results
   @State oldApplicationItem: Array<any> = []; // Original application information array
@@ -29,7 +28,7 @@ export struct textInput {
   build() {
     Column() {
       Flex({ alignContent: FlexAlign.Start }) {
-        TextInput({ placeholder: this.placeholder })
+        TextInput({ placeholder: $r('app.string.textInput_placeholder') })
           .backgroundColor($r('app.color.default_background_color'))
           .padding({ left: Constants.TEXTINPUT_PADDING_LEFT })
           .type(InputType.Normal)
