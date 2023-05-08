@@ -265,10 +265,6 @@
       "value": "Other rights"
     },
     {
-      "name": "groupName_calendar_all",
-      "value": "All of the calendar"
-    },
-    {
       "name": "groupName_ADS",
       "value": "Advertising tracking"
     },
@@ -335,10 +331,6 @@
     {
       "name": "group_label_document",
       "value": " access to files?"
-    },
-    {
-      "name": "group_label_calendar_all",
-      "value": " access the entire calendar?"
     },
     {
       "name": "group_label_ADS",
