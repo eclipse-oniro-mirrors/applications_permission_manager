@@ -41,22 +41,19 @@ class ApplicationObj {
   accessTokenId: number
   permission: string
   alphabeticalIndex: string
-  isRisk: boolean
   constructor(
     labelId: string,
     iconId: string,
     index: number,
     accessTokenId: number,
     permission: string,
-    alphabeticalIndex: string,
-    isRisk: boolean) {
+    alphabeticalIndex: string) {
     this.labelId = labelId
     this.iconId = iconId
     this.index = index
     this.accessTokenId = accessTokenId
     this.permission = permission
     this.alphabeticalIndex = alphabeticalIndex
-    this.isRisk = isRisk
   }
 } // application information
 
@@ -94,6 +91,7 @@ struct locationInfoPage {
 struct applicationItem {
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: object = {}; // toggle switch state array
+  @State isRisk: object = {};
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
 
@@ -117,7 +115,7 @@ struct applicationItem {
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
                   .fontColor($r('app.color.label_color'))
-                if (item.isRisk) {
+                if (this.isRisk[item.index]) {
                   Text($r('app.string.risk_warning'))
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                     .fontColor($r('app.color.label_color_lighter'))
@@ -144,7 +142,7 @@ struct applicationItem {
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
           }
-          if (index < this.applicationList.filter(item => item.accessTokenId !== 0).length - 1) {
+          if (index < this.applicationList.length - 1) {
             Row() {
               Flex() {
                 Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
@@ -159,8 +157,8 @@ struct applicationItem {
         })
       }
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
-    .enabled(!item.isRisk)
-    .opacity(item.isRisk ? $r('sys.float.ohos_id_alpha_disabled') : 1)
+    .enabled(!this.isRisk[item.index])
+    .opacity(this.isRisk[item.index] ? $r('sys.float.ohos_id_alpha_disabled') : 1)
   }
 
   /**
@@ -226,7 +224,7 @@ struct applicationItem {
 
     // initial then fill values when sync return which may cause sync panic
     for (let i = 0; i < bundleNames.length; i++) {
-      this.applicationList.push(new ApplicationObj('', '', i, 0, '', '', false));
+      this.applicationList.push(new ApplicationObj('', '', i, 0, '', ''));
     }
 
     let atManager = abilityAccessCtrl.createAtManager();
@@ -235,8 +233,7 @@ struct applicationItem {
       bundle.getBundleInfo(bundleNames[i], Constants.PARMETER_BUNDLE_FLAG).then(res => {
         Promise.all([getAppLabel(res.appInfo.labelId, res.name),
           getAppIcon(res.appInfo.iconId, res.name),
-          verifyAccessToken(res.appInfo.accessTokenId, routerData[0].permission),
-          atManager.getPermissionFlags(res.appInfo.accessTokenId, routerData[0].permission)])
+          verifyAccessToken(res.appInfo.accessTokenId, routerData[0].permission)])
           .then((values) => {
           this.applicationList[i] = (
             new ApplicationObj(
@@ -245,8 +242,7 @@ struct applicationItem {
               i,
               res.appInfo.accessTokenId,
               routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1),
-              values[3] == Constants.PERMISSION_POLICY_FIXED ? true : false) // Get the first letter in the returned initials array
+              makePy(values[0])[0].slice(0, 1)) // Get the first letter in the returned initials array
           );
           // 0: have permission; -1: no permission
           if (values[2] === Constants.PERMISSION_INDEX) {
@@ -256,6 +252,17 @@ struct applicationItem {
             this.toggleIsOn[i] = false;
           }
           });
+        this.isRisk[i] = false;
+        try {
+          atManager.getPermissionFlags(res.appInfo.accessTokenId, routerData[0].permission).then(data => {
+            if (data == Constants.PERMISSION_POLICY_FIXED) {
+              this.isRisk[i] = true;
+            }
+          })
+        }
+        catch(err) {
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+        }
       }).catch(error => {
         console.log(TAG + bundleNames[i] + "getBundleInfo failed, cause: " + JSON.stringify(error));
       })
@@ -303,7 +310,7 @@ struct applicationItem {
                 } else {
                   Row() {
                     List() {
-                      ForEach(this.applicationList.filter(item => item.accessTokenId !== 0), (item, index) => {
+                      ForEach(this.applicationList, (item, index) => {
                         this.ListItemLayout(item, index)
                       }, item => JSON.stringify(item))
                     }
