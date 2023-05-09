@@ -59,7 +59,6 @@ interface groupPermission {
   'isShow':boolean
 };
 
-let textInput_placeholder: any = '';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 
@@ -144,14 +143,14 @@ struct authorityManagementPage {
   @State @Watch("getLabelAndIcon") ready: boolean = false;
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
-      Text(index ? $r('app.string.application') : $r('app.string.authority'))
+      Text(index ? $r('app.string.application') : $r('app.string.permission'))
         .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
         .fontColor(this.currentIndex == index ? $r('sys.color.ohos_id_color_subtab_text_on') : $r('sys.color.ohos_id_color_secondary'))
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
         .baselineOffset(Constants.TAB_DECORATION_POSITION_Y)
       if (this.currentIndex == index) {
-        Text(index ? $r('app.string.application') : $r('app.string.authority'))
+        Text(index ? $r('app.string.application') : $r('app.string.permission'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Bold)
           .height(Constants.TAB_DECORATION_HEIGHT)
@@ -415,9 +414,6 @@ struct authorityManagementPage {
     bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
       acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2);
     })
-    globalThis.context.resourceManager.getString($r("app.string.textInput_placeholder").id).then(val => {
-      textInput_placeholder = val;
-    })
   }
 
   getPermissionGroup(allGroup, order) {
@@ -465,7 +461,7 @@ struct authorityManagementPage {
         Row() {
           Column() {
             Row() {
-              backBar( { title: JSON.stringify($r('app.string.authority_management')), recordable: true })
+              backBar( { title: JSON.stringify($r('app.string.permission_manager')), recordable: true })
             }
             Row() {
               Column() {
@@ -618,7 +614,6 @@ struct applicationItem {
     Column() {
       Row() {
         textInput({
-          placeholder: String(textInput_placeholder),
           applicationItem: $applicationItem,
           searchResult: $searchResult
         })

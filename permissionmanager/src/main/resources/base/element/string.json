@@ -14,7 +14,7 @@
     },
     {
       "name": "no_permission",
-      "value": "no permission"
+      "value": "No permission"
     },
     {
       "name": "access_permission",
@@ -22,35 +22,31 @@
     },
     {
       "name": "permission_access_record",
-      "value": "permission access record"
+      "value": "Permission access record"
     },
     {
-      "name": "authority_management",
-      "value": "authority management"
-    },
-    {
-      "name": "other_permissions",
-      "value": "other permissions"
+      "name": "permission_manager",
+      "value": "Permission manager"
     },
     {
       "name": "application",
-      "value": "application"
+      "value": "Applications"
     },
     {
-      "name": "authority",
-      "value": "authority"
+      "name": "permission",
+      "value": "Permissions"
     },
     {
       "name": "textInput_placeholder",
-      "value": "search application"
+      "value": "Search application"
     },
     {
       "name": "allowed",
-      "value": "allowed"
+      "value": "Allowed"
     },
     {
       "name": "banned",
-      "value": "banned"
+      "value": "Banned"
     },
     {
       "name": "Authorization_failed",
@@ -74,7 +70,7 @@
     },
     {
       "name": "comma",
-      "value": ","
+      "value": ", "
     },
     {
       "name": "visits",
@@ -106,11 +102,11 @@
     },
     {
       "name": "allow",
-      "value": "allow"
+      "value": "Allow"
     },
     {
       "name": "ban",
-      "value": "ban"
+      "value": "Ban"
     },
     {
       "name": "precise_location",
@@ -150,23 +146,23 @@
     },
     {
       "name": "cancel",
-      "value": "cancel"
+      "value": "Cancel"
     },
     {
       "name": "open",
-      "value": "open"
+      "value": "Open"
     },
     {
       "name": "close",
-      "value": "close"
+      "value": "Close"
     },
     {
       "name": "camera",
-      "value": "camera"
+      "value": "Camera"
     },
     {
       "name": "microphone",
-      "value": "microphone"
+      "value": "Microphone"
     },
     {
       "name": "close_camera",

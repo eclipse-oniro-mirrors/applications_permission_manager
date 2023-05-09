@@ -25,19 +25,15 @@
       "value": "权限访问记录"
     },
     {
-      "name": "authority_management",
+      "name": "permission_manager",
       "value": "权限管理"
-    },
-    {
-      "name": "other_permissions",
-      "value": "其它权限"
     },
     {
       "name": "application",
       "value": "应用"
     },
     {
-      "name": "authority",
+      "name": "permission",
       "value": "权限"
     },
     {
