@@ -18,26 +18,26 @@ import window from '@ohos.window';
 import display from '@ohos.display';
 import deviceInfo from '@ohos.deviceInfo';
 
-var TAG = "PermissionManager_Log:";
+const TAG = 'PermissionManager_Log: ';
 const BG_COLOR = '#00000000'
 let bottomPopoverTypes = ['default', 'phone']
 
 export default class ServiceExtensionAbility extends extension {
-    /**
-     * Lifecycle function, called back when a service extension is started for initialization.
-     */
-    onCreate(want) {
-        console.info(TAG + "ServiceExtensionAbility onCreate, ability name is " + want.abilityName);
+  /**
+  * Lifecycle function, called back when a service extension is started for initialization.
+  */
+  onCreate(want): void {
+    console.info(TAG + 'ServiceExtensionAbility onCreate, ability name is ' + want.abilityName);
 
-        globalThis.extensionContext = this.context;
-        globalThis.windowNum = 0
-    }
+    globalThis.extensionContext = this.context;
+    globalThis.windowNum = 0;
+  }
 
   /**
   * Lifecycle function, called back when a service extension is started or recall.
   */
-  onRequest(want, startId) {
-    console.info(TAG + "ServiceExtensionAbility onRequest. start id is " + startId);
+  onRequest(want, startId): void {
+    console.info(TAG + 'ServiceExtensionAbility onRequest. start id is ' + startId);
     console.info(TAG + 'want: ' + JSON.stringify(want));
 
     try {
@@ -56,12 +56,12 @@ export default class ServiceExtensionAbility extends extension {
     };
   }
 
-    /**
-     * Lifecycle function, called back before a service extension is destroyed.
-     */
-    onDestroy() {
-        console.info(TAG + "ServiceExtensionAbility onDestroy.");
-    }
+  /**
+  * Lifecycle function, called back before a service extension is destroyed.
+  */
+  onDestroy(): void {
+    console.info(TAG + 'ServiceExtensionAbility onDestroy.');
+  }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
     console.info(TAG + 'create window');
