@@ -101,6 +101,10 @@
       "value": " applications have this permission"
     },
     {
+      "name": "version",
+      "value": "Version "
+    },
+    {
       "name": "allow",
       "value": "Allow"
     },

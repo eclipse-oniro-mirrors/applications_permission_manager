@@ -101,6 +101,10 @@
       "value": "个应用获取此权限"
     },
     {
+      "name": "version",
+      "value": "版本 "
+    },
+    {
       "name": "allow",
       "value": "允许"
     },
