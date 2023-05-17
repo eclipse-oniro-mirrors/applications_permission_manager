@@ -269,6 +269,10 @@
       "value": "广告跟踪"
     },
     {
+      "name": "groupName_appList",
+      "value": "已安装应用列表"
+    },
+    {
       "name": "multi_device_collaboration",
       "value": "多设备协同"
     },
@@ -335,6 +339,10 @@
     {
       "name": "group_label_ADS",
       "value": "访问广告跟踪？"
+    },
+    {
+      "name": "group_label_appList",
+      "value": "读取已安装应用列表？"
     },
     {
       "name": "risk_warning",

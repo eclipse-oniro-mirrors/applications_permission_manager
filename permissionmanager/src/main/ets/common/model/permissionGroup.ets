@@ -219,6 +219,12 @@ export const permissionGroups: any[] = [
         "groupName": "ADS",
         "label": $r('sys.string.ohos_lab_app_tracking_consent'),
         "groupId": 15
+    },
+    {
+        "permissionName": "ohos.permission.GET_INSTALLED_BUNDLE_LIST",
+        "groupName": "GET_INSTALLED_BUNDLE_LIST",
+        "label": $r('sys.string.ohos_lab_get_installed_bundle_list'),
+        "groupId": 16
     }
 ]
 
@@ -415,6 +421,17 @@ export const groups: any[] = [
             "ohos.permission.APP_TRACKING_CONSENT"
         ],
         "isShow":false
+    },
+    {
+        "name": "GET_INSTALLED_BUNDLE_LIST",
+        "groupName": $r('app.string.groupName_appList'),
+        "icon": $r('app.media.ic_public_app_list'),
+        "label": $r('app.string.group_label_appList'),
+        "description": "",
+        "permissions": [
+            "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
+        ],
+        "isShow":false
     }
 ];
 
@@ -484,6 +501,9 @@ export const permissionGroupPermissions: object = {
     ],
     "ADS": [
         "ohos.permission.APP_TRACKING_CONSENT"
+    ],
+    "GET_INSTALLED_BUNDLE_LIST": [
+        "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
     ]
 };
 
@@ -522,7 +542,8 @@ export const userGrantPermissions: string[] = [
     "ohos.permission.WRITE_DOCUMENT",
     "ohos.permission.READ_WHOLE_CALENDAR",
     "ohos.permission.WRITE_WHOLE_CALENDAR",
-    "ohos.permission.APP_TRACKING_CONSENT"
+    "ohos.permission.APP_TRACKING_CONSENT",
+    "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
 ];
 
 export const permissionGroupIds: object = {
@@ -559,7 +580,8 @@ export const permissionGroupIds: object = {
     "ohos.permission.WRITE_AUDIO": "13",
     "ohos.permission.READ_DOCUMENT": "14",
     "ohos.permission.WRITE_DOCUMENT": "14",
-    "ohos.permission.APP_TRACKING_CONSENT": "15"
+    "ohos.permission.APP_TRACKING_CONSENT": "15",
+    "ohos.permission.GET_INSTALLED_BUNDLE_LIST": "16"
 };
 
 export const noNeedDisplayApp: string[] = [
