@@ -37,6 +37,10 @@
       "value": "Permissions"
     },
     {
+      "name": "right",
+      "value": " permissions"
+    },
+    {
       "name": "textInput_placeholder",
       "value": "Search application"
     },
@@ -99,10 +103,6 @@
     {
       "name": "number_of_authorized_applications",
       "value": " applications have this permission"
-    },
-    {
-      "name": "version",
-      "value": "Version "
     },
     {
       "name": "allow",

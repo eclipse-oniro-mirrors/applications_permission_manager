@@ -275,6 +275,7 @@ struct mediaDocumentItem {
           Column() {
             Row() {
               Text(this.mediaListItem.labelId)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontColor($r('app.color.label_color'))
                 .fontWeight(FontWeight.Bold)
@@ -283,10 +284,6 @@ struct mediaDocumentItem {
             .width(Constants.TERTIARY_HALF_WIDTH)
             .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
             Row() {
-              Text($r('app.string.version'))
-                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.label_color_light'))
-                .textAlign(TextAlign.Start)
               Text(this.mediaListItem.versionName)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('app.color.label_color_light'))

@@ -37,6 +37,10 @@
       "value": "权限"
     },
     {
+      "name": "right",
+      "value": "项权限"
+    },
+    {
       "name": "textInput_placeholder",
       "value": "搜索应用"
     },
@@ -99,10 +103,6 @@
     {
       "name": "number_of_authorized_applications",
       "value": "个应用获取此权限"
-    },
-    {
-      "name": "version",
-      "value": "版本 "
     },
     {
       "name": "allow",

@@ -293,6 +293,9 @@ export default class Constants {
 
     static START_SUBSCRIPT = 0
     static END_SUBSCRIPT = 500
+    static MAXIMUM_HEADER_WIDTH = 250
+    static MAXIMUM_HEADER_HEIGHT = 500
+    static MAXIMUM_HEADER_LENGTH = 1000
 
     static RECORD_PADDING_BOTTOM = '20%'
 

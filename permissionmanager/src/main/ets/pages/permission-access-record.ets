@@ -91,6 +91,8 @@ struct permissionRecordPage {
               }
               Column() {
                 Text(item.groupName)
+                  .width(Constants.MAXIMUM_HEADER_WIDTH)
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
                   .fontColor($r('app.color.label_color'))
@@ -158,6 +160,8 @@ struct permissionRecordPage {
                       .backgroundColor($r("app.color.label_color_lightest"))
                       .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM_PERMISSION })
                     Text(permissionApplication.groupName)
+                      .width(Constants.MAXIMUM_HEADER_WIDTH)
+                      .textOverflow({ overflow: TextOverflow.Ellipsis })
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)
                       .fontColor($r('app.color.label_color'))
