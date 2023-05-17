@@ -265,6 +265,10 @@
       "value": "Advertising tracking"
     },
     {
+      "name": "groupName_appList",
+      "value": "App list"
+    },
+    {
       "name": "multi_device_collaboration",
       "value": "Multi-device collaboration"
     },
@@ -331,6 +335,10 @@
     {
       "name": "group_label_ADS",
       "value": " access AD tracking?"
+    },
+    {
+      "name": "group_label_appList",
+      "value": " read the list of installed apps?"
     },
     {
       "name": "risk_warning",
