@@ -101,6 +101,10 @@
       "value": "个应用获取此权限"
     },
     {
+      "name": "version",
+      "value": "版本 "
+    },
+    {
       "name": "allow",
       "value": "允许"
     },
@@ -122,7 +126,7 @@
     },
     {
       "name": "get_the_exact_position",
-      "value": "允许该应用获取您的准确位置。关闭后，应用获取的位置会有偏差。"
+      "value": "允许此应用获取您的准确位置。关闭后，应用获取的位置会有偏差，部分不支持此功能的应用可能会定位失败。"
     },
     {
       "name": "close_exact_position",

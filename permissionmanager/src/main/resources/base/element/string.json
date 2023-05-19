@@ -10,7 +10,7 @@
     },
     {
       "name": "MainAbility_label",
-      "value": "permission manage"
+      "value": "Permission manager"
     },
     {
       "name": "no_permission",
@@ -101,6 +101,10 @@
       "value": " applications have this permission"
     },
     {
+      "name": "version",
+      "value": "Version "
+    },
+    {
       "name": "allow",
       "value": "Allow"
     },
@@ -122,7 +126,7 @@
     },
     {
       "name": "get_the_exact_position",
-      "value": "Allows the app to get your exact location. When closed, the location obtained by the application will be biased."
+      "value": "Allows this application to get your exact location. When closed, the location obtained by the application will be biased. Some applications that do not support this function may fail to be located."
     },
     {
       "name": "close_exact_position",
