@@ -163,7 +163,7 @@ struct PermissionDialog {
                     LocationCanvas({ locationFlag: $locationFlag })
                   }
                 }
-            }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
+              }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
             }
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {

@@ -585,7 +585,7 @@ struct applicationItem {
                 .flexGrow(Constants.FLEX_GROW)
               Text(String(item.groupId.length))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.label_color_lighter'))
+                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
               Text($r('app.string.right'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
