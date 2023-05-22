@@ -20,7 +20,7 @@ import router from '@ohos.router';
 import bundle from "@ohos.bundle";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { getAppLabel, getAppIcon, verifyAccessToken } from "../common/utils/utils";
-import { makePy } from "../common/utils/utils";
+import { makePy, appSort, getSortId } from "../common/utils/utils";
 import { authorizeDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
 
@@ -41,19 +41,22 @@ class ApplicationObj {
   accessTokenId: number
   permission: string
   alphabeticalIndex: string
+  sortId: string
   constructor(
     labelId: string,
     iconId: string,
     index: number,
     accessTokenId: number,
     permission: string,
-    alphabeticalIndex: string) {
+    alphabeticalIndex: string,
+    sortId: string) {
     this.labelId = labelId
     this.iconId = iconId
     this.index = index
     this.accessTokenId = accessTokenId
     this.permission = permission
     this.alphabeticalIndex = alphabeticalIndex
+    this.sortId = sortId
   }
 } // application information
 
@@ -112,6 +115,8 @@ struct applicationItem {
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
               Column() {
                 Text(item.labelId)
+                  .width(Constants.MAXIMUM_HEADER_WIDTH)
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
                   .fontColor($r('sys.color.ohos_id_color_text_primary'))
@@ -225,7 +230,7 @@ struct applicationItem {
 
     // initial then fill values when sync return which may cause sync panic
     for (let i = 0; i < bundleNames.length; i++) {
-      this.applicationList.push(new ApplicationObj('', '', i, 0, '', ''));
+      this.applicationList.push(new ApplicationObj('', '', i, 0, '', '', '#'));
     }
 
     let atManager = abilityAccessCtrl.createAtManager();
@@ -243,7 +248,8 @@ struct applicationItem {
               i,
               res.appInfo.accessTokenId,
               routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1)) // Get the first letter in the returned initials array
+              makePy(values[0])[0].slice(0, 1),
+              getSortId(values[0])) // Get the first letter in the returned initials array
           );
           // 0: have permission; -1: no permission
           if (values[2] === Constants.PERMISSION_INDEX) {
@@ -311,7 +317,7 @@ struct applicationItem {
                 } else {
                   Row() {
                     List() {
-                      ForEach(this.applicationList, (item, index) => {
+                      ForEach(appSort(this.applicationList), (item, index) => {
                         this.ListItemLayout(item, index)
                       }, item => JSON.stringify(item))
                     }

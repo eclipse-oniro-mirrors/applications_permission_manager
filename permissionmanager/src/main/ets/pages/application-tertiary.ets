@@ -275,6 +275,7 @@ struct mediaDocumentItem {
           Column() {
             Row() {
               Text(this.mediaListItem.labelId)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .fontWeight(FontWeight.Bold)

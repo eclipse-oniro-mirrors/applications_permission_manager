@@ -16,7 +16,7 @@
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
-import { Log, getPermissionGroup } from '../common/utils/utils';
+import { Log, getPermissionGroup, titleTrim } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
 import { BundleFlag } from '../common/model/bundle';
 import { permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup';
@@ -125,43 +125,45 @@ struct PermissionDialog {
                     top: Constants.DIALOG_LABEL_MARGIN_TOP
                   })
               }
-              Column() {
-                Row() {
-                  Flex({ justifyContent: FlexAlign.Start }) {
-                    Text(this.showTitle())
-                      .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                      .fontWeight(FontWeight.Medium)
-                      .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                      .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
-                      .margin({
-                        top: Constants.DIALOG_REQ_MARGIN_TOP,
-                        left: Constants.DIALOG_REQ_MARGIN_LEFT,
-                        right: Constants.DIALOG_REQ_MARGIN_RIGHT
-                      })
+              Scroll() {
+                Column() {
+                  Row() {
+                    Flex({ justifyContent: FlexAlign.Start }) {
+                      Text(this.showTitle())
+                        .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
+                        .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                        .fontWeight(FontWeight.Medium)
+                        .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
+                        .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
+                        .margin({
+                          top: Constants.DIALOG_REQ_MARGIN_TOP,
+                          left: Constants.DIALOG_REQ_MARGIN_LEFT,
+                          right: Constants.DIALOG_REQ_MARGIN_RIGHT
+                        })
+                    }
+                  }
+
+                  Row() {
+                    Flex({ justifyContent: FlexAlign.Start }) {
+                      Text(this.showReason())
+                        .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
+                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                        .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
+                        .lineHeight(Constants.DIALOG_DESP_LINE_HEIGHT)
+                        .margin({
+                          top: Constants.DIALOG_DESP_MARGIN_TOP,
+                          left: Constants.DIALOG_DESP_MARGIN_LEFT,
+                          right: Constants.DIALOG_DESP_MARGIN_RIGHT,
+                          bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM
+                        })
+                    }
+                  }
+
+                  if (this.locationFlag > Constants.LOCATION_NONE) {
+                    LocationCanvas({ locationFlag: $locationFlag })
                   }
                 }
-
-                Row() {
-                  Flex({ justifyContent: FlexAlign.Start }) {
-                    Text(this.showReason())
-                      .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                      .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
-                      .lineHeight(Constants.DIALOG_DESP_LINE_HEIGHT)
-                      .margin({
-                        top: Constants.DIALOG_DESP_MARGIN_TOP,
-                        left: Constants.DIALOG_DESP_MARGIN_LEFT,
-                        right: Constants.DIALOG_DESP_MARGIN_RIGHT,
-                        bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM
-                      })
-                  }
-                }
-
-                if (this.locationFlag > Constants.LOCATION_NONE) {
-                  LocationCanvas({ locationFlag: $locationFlag })
-                }
-              }
+            }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
             }
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
@@ -404,9 +406,9 @@ struct PermissionDialog {
       let context = globalThis.extensionContext.createBundleContext(bundleName);
       context.resourceManager.getString(applicationInfo.labelId, (err, value) => {
         if (value == undefined) {
-          this.appName = applicationInfo.label;
+          this.appName = titleTrim(applicationInfo.label);
         } else {
-          this.appName = value;
+          this.appName = titleTrim(value);
         }
         Log.info("hap label:" + applicationInfo.label + ", value:"+this.appName);
       })

@@ -102,6 +102,21 @@ export function changeIndexValue(stateList, changeItem){
   return result;
 }
 
+/**
+ * Omit display when application name is too long
+ * @param {String} Application name
+ */
+export function titleTrim(title) {
+  const length = title.length;
+  if (length > Constants.MAXIMUM_HEADER_LENGTH) {
+    var str = '';
+    str = title.substring(0, Constants.MAXIMUM_HEADER_LENGTH) + '...';
+    return str;
+  } else {
+    return title;
+  }
+}
+
 // List of Chinese Pinyin Initials
 let strChineseFirstPY = "YDYQSXMWZSSXJBYMGCCZQPSSQBYCDSCDQLDYLYBSSJGYZZJJFKCCLZDHWDWZJLJPFYYNWJJTMYHZWZHFLZPPQHGSC" +
 "YYYNJQYXXGJHHSDSJNKKTMOMLCRXYPSNQSECCQZGGLLYJLMYZZSECYKYYHQWJSSGGYXYZYJWWKDJHYCHMYXJTLXJYQBYXZLDWRDJRWYSRLDZJPCBZ" +
@@ -343,6 +358,25 @@ let oMultiDiff = { "19969": "DZ", "19975": "WM", "19988": "QJ", "20048": "YL", "
   "38808": "SQ", "39048": "JG", "39049": "XJ", "39052": "HG", "39076": "CZ", "39271": "XT", "39534": "TD",
   "39552": "TD", "39584": "PB", "39647": "SB", "39730": "LG", "39748": "TPB", "40109": "ZQ", "40479": "ND",
   "40516": "HG", "40536": "HG", "40583": "QJ", "40765": "YQ", "40784": "QJ", "40840": "YK", "40863": "QJG" };
+
+export function appSort(appList) {
+  return appList.sort((a, b) => a.sortId.localeCompare(b.sortId, 'zh-CN'))
+}
+
+export function  getSortId(label) {
+  let pattern_Num = new RegExp("[0-9]");
+  let pattern_En = new RegExp("[A-Za-z]");
+  let pattern_Ch = new RegExp("[\u4E00-\u9FA5]");
+  if (pattern_Num.test(label[0])) {
+    return label;
+  } else if(pattern_En.test(label[0])) {
+    return label.toLowerCase();
+  } else if(pattern_Ch.test(label[0])) {
+    return makePy(label)[0].slice(0, 1) + ' ' + label;
+  } else {
+    return '#' + label;
+  }
+}
 
 // Program that returns the first letter array of Chinese characters
 export function makePy(str) {

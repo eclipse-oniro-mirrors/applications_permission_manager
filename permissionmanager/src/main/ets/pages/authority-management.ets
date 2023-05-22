@@ -23,7 +23,7 @@ import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import { groups, userGrantPermissions, permissionGroupPermissions, globalGroup } from "../common/model/permissionGroup";
 import { permissionGroups, permissionGroupIds, showSubpermissionsGrop } from "../common/model/permissionGroup";
-import { makePy } from "../common/utils/utils";
+import { makePy, appSort, getSortId } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
 var TAG = 'PermissionManager_MainAbility:';
@@ -392,6 +392,8 @@ struct authorityManagementPage {
         } else {
           info.alphabeticalIndex = makePy(info.labelId)[0].slice(0, 1); // Get the first letter in the returned initials array
         }
+
+        info.sortId = getSortId(value)
     })
   }
 
@@ -575,11 +577,16 @@ struct applicationItem {
                 .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
                 .margin({ right: Constants.APPLICATION_IMAGE_MARGIN_RIGHT })
               Text(item.labelId)
+                .width(Constants.MAXIMUM_HEADER_WIDTH)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontWeight(FontWeight.Medium)
                 .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .flexGrow(Constants.FLEX_GROW)
-              Text(item.groupId.length + '项权限')
+              Text(String(item.groupId.length))
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                .fontColor($r('app.color.label_color_lighter'))
+              Text($r('app.string.right'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
@@ -641,7 +648,7 @@ struct applicationItem {
                 Row() {
                   Scroll() {
                     List() {
-                      ForEach(this.applicationItem, (item, index) => {
+                      ForEach(appSort(this.applicationItem), (item, index) => {
                         this.ListItemLayout(item, index)
                       }, item => JSON.stringify(item))
                     }.backgroundColor($r('sys.color.ohos_id_color_background'))

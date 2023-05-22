@@ -42,6 +42,7 @@ export struct backBar {
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
           .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
           .fontSize(Constants.BACKBAR_TEXT_FONT_SIZE)
           .flexGrow(Constants.BACKBAR_TEXT_FLEX_GROW)
           .fontWeight(FontWeight.Bold)

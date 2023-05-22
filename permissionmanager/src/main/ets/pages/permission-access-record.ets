@@ -92,6 +92,8 @@ struct permissionRecordPage {
               }
               Column() {
                 Text(item.groupName)
+                  .width(Constants.MAXIMUM_HEADER_WIDTH)
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
                   .fontColor($r('sys.color.ohos_id_color_text_primary'))
@@ -164,6 +166,8 @@ struct permissionRecordPage {
                       .backgroundColor($r("sys.color.ohos_id_color_list_separator"))
                       .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM_PERMISSION })
                     Text(permissionApplication.groupName)
+                      .width(Constants.MAXIMUM_HEADER_WIDTH)
+                      .textOverflow({ overflow: TextOverflow.Ellipsis })
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)
                       .fontColor($r('sys.color.ohos_id_color_text_primary'))
