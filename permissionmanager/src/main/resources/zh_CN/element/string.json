@@ -37,6 +37,10 @@
       "value": "权限"
     },
     {
+      "name": "right",
+      "value": "项权限"
+    },
+    {
       "name": "textInput_placeholder",
       "value": "搜索应用"
     },

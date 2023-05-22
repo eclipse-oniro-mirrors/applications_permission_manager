@@ -37,6 +37,10 @@
       "value": "Permissions"
     },
     {
+      "name": "right",
+      "value": " permissions"
+    },
+    {
       "name": "textInput_placeholder",
       "value": "Search application"
     },

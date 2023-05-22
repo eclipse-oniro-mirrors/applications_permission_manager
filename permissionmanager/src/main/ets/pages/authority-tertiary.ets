@@ -115,6 +115,8 @@ struct applicationItem {
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
               Column() {
                 Text(item.labelId)
+                  .width(Constants.MAXIMUM_HEADER_WIDTH)
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
                   .fontColor($r('app.color.label_color'))
