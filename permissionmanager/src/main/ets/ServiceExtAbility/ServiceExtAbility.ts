@@ -19,8 +19,8 @@ import display from '@ohos.display';
 import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'PermissionManager_Log: ';
-const BG_COLOR = '#00000000'
-let bottomPopoverTypes = ['default', 'phone']
+const BG_COLOR = '#00000000';
+let bottomPopoverTypes = ['default', 'phone'];
 
 export default class ServiceExtensionAbility extends extension {
   /**

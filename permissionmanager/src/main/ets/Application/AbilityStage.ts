@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-import AbilityStage from "@ohos.app.ability.AbilityStage"
+import AbilityStage from '@ohos.app.ability.AbilityStage';
 
-var TAG = "PermissionManager_MainAbility:"
+const TAG = 'PermissionManager_MainAbility:';
 
 export default class MyAbilityStage extends AbilityStage {
-    onCreate() {
-        console.log(TAG + "MyAbilityStage onCreate.")
-    }
+  onCreate(): void {
+    console.log(TAG + 'MyAbilityStage onCreate.');
+  }
 }
