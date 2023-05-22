@@ -82,6 +82,7 @@ struct permissionRecordPage {
             Row() {
               if (dimension) {
                 Image(item.icon)
+                  .fillColor($r('sys.color.ohos_id_color_secondary'))
                   .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                   .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD, left: Constants.MANAGEMENT_IMAGE_MARGIN_LEFT })
               } else {
@@ -95,19 +96,20 @@ struct permissionRecordPage {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
-                  .fontColor($r('app.color.label_color'))
+                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
                   .lineHeight(Constants.TEXT_LINE_HEIGHT)
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                 if (dimension) {
                   Text(this.strings.visits + item.sum)
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('app.color.label_color_light'))
+                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                     .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                 } else {
                   Row() {
                     if (item.permissions) {
                       ForEach(item.permissions, permission => {
                         Image(permission.icon)
+                          .fillColor($r('sys.color.ohos_id_color_secondary'))
                           .customizeImage(Constants.IMAGE_WIDTH_RECORD_APPLICATION, Constants.IMAGE_HEIGHT_RECORD_APPLICATION)
                           .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
                       }, item => JSON.stringify(item))
@@ -119,17 +121,21 @@ struct permissionRecordPage {
               if (dimension) {
                 if (index == this.permissionIndex) {
                   Image($r('app.media.xiangshangjiantou'))
+                    .fillColor($r('sys.color.ohos_id_color_secondary'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
                 } else {
                   Image($r('app.media.xiangxiajiantou'))
+                    .fillColor($r('sys.color.ohos_id_color_secondary'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
                 }
               } else {
                 if (index == this.applicationIndex) {
                   Image($r('app.media.xiangshangjiantou'))
+                    .fillColor($r('sys.color.ohos_id_color_secondary'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
                 } else {
                   Image($r('app.media.xiangxiajiantou'))
+                    .fillColor($r('sys.color.ohos_id_color_secondary'))
                     .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
                 }
               }
@@ -157,20 +163,20 @@ struct permissionRecordPage {
                     .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
                   Column() {
                     Row().width(Constants.FULL_WIDTH).height(Constants.TEXT_DECORATION_HEIGHT)
-                      .backgroundColor($r("app.color.label_color_lightest"))
+                      .backgroundColor($r("sys.color.ohos_id_color_list_separator"))
                       .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM_PERMISSION })
                     Text(permissionApplication.groupName)
                       .width(Constants.MAXIMUM_HEADER_WIDTH)
                       .textOverflow({ overflow: TextOverflow.Ellipsis })
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)
-                      .fontColor($r('app.color.label_color'))
+                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text(this.strings.visits + this.getAppRecords(permissionApplication, item.groupName, true) +
                         this.strings.recent_visit + this.getTime(this.getAppRecords(permissionApplication, item.groupName, false)))
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                      .fontColor($r('app.color.label_color_light'))
+                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
@@ -197,22 +203,23 @@ struct permissionRecordPage {
               ListItem() {
                 Row() {
                   Image(permission.icon)
+                    .fillColor($r('sys.color.ohos_id_color_secondary'))
                     .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                     .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD, left: Constants.MANAGEMENT_IMAGE_MARGIN_LEFT })
                   Column() {
                     Row().width(Constants.FULL_WIDTH).height(Constants.TEXT_DECORATION_HEIGHT)
-                      .backgroundColor($r("app.color.label_color_lightest"))
+                      .backgroundColor($r("sys.color.ohos_id_color_list_separator"))
                       .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM_APPLICATION })
                     Text(permission.groupName)
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)
-                      .fontColor($r('app.color.label_color'))
+                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text(this.strings.visits + permission['count' + item.accessTokenId]
                         + this.strings.recent_visit + this.getTime(permission['lastTime' + item.accessTokenId]))
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                      .fontColor($r('app.color.label_color_light'))
+                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
@@ -237,7 +244,7 @@ struct permissionRecordPage {
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END,
       top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
     .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM })
-    .backgroundColor($r('app.color.default_background_color'))
+    .backgroundColor($r('sys.color.ohos_id_color_background'))
     .borderRadius(Constants.BORDER_RADIUS)
   }
 
@@ -258,7 +265,7 @@ struct permissionRecordPage {
                     Text($r('app.string.record_time_limit'))
                       .margin({ left: Constants.BACKBAR_IMAGE_MARGIN_LEFT })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                      .fontColor($r('app.color.label_color_light'))
+                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                       .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
                   }.constraintSize({ minHeight: Constants.SUBTITLE_MIN_HEIGHT })
                   .padding({ top: Constants.SUBTITLE_PADDING_TOP, bottom: Constants.SUBTITLE_PADDING_BOTTOM })
@@ -323,7 +330,7 @@ struct permissionRecordPage {
                         .margin({ left: Constants.NORECORD_IMAGE_MARGIN_LEFT })
                       Text($r('app.string.no_record')).margin({ top: Constants.DIALOG_REQ_MARGIN_TOP })
                         .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                        .fontColor($r('app.color.label_color_light'))
+                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                     }.width(Constants.FULL_WIDTH).height(Constants.FULL_HEIGHT)
                     .padding({ bottom: Constants.RECORD_PADDING_BOTTOM })
                   }

@@ -119,16 +119,17 @@ struct applicationItem {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
-                  .fontColor($r('app.color.label_color'))
+                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 if (this.isRisk[item.index]) {
                   Text($r('app.string.risk_warning'))
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('app.color.label_color_lighter'))
+                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 }
               }.flexGrow(Constants.FLEX_GROW)
               .alignItems(HorizontalAlign.Start)
               Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
-                .selectedColor($r('app.color.button_color'))
+                .selectedColor($r('sys.color.ohos_id_color_toolbar_icon_actived'))
+                .switchPointColor($r('sys.color.ohos_id_color_foreground_contrary'))
                 .padding({ right: 0 })
                 .width(Constants.AUTHORITY_TOGGLE_WIDTH)
                 .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
@@ -152,7 +153,7 @@ struct applicationItem {
               Flex() {
                 Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
                 Column()
-                  .backgroundColor($r('app.color.text_decoration_color'))
+                  .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
                   .height(Constants.TEXT_DECORATION_HEIGHT)
                   .flexGrow(Constants.FLEX_GROW)
               }
@@ -291,11 +292,11 @@ struct applicationItem {
           Flex({ justifyContent: FlexAlign.Start }) {
             Text(String(this.permissionNum))
               .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-              .fontColor($r('app.color.secondary_font_color'))
+              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
               .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
             Text($r('app.string.number_of_authorized_applications'))
               .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-              .fontColor($r('app.color.secondary_font_color'))
+              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
               .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
           }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
           .margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
@@ -320,7 +321,7 @@ struct applicationItem {
                         this.ListItemLayout(item, index)
                       }, item => JSON.stringify(item))
                     }
-                    .backgroundColor($r('app.color.default_background_color'))
+                    .backgroundColor($r('sys.color.ohos_id_color_background'))
                     .borderRadius(Constants.BORDER_RADIUS)
                     .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                   }

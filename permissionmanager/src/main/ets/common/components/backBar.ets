@@ -26,6 +26,7 @@ export struct backBar {
     Column() {
       Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
         Image($r('app.media.ic_public_back'))
+          .fillColor($r('sys.color.ohos_id_color_primary'))
           .objectFit(ImageFit.Contain)
           .height(Constants.BACKBAR_IMAGE_HEIGHT)
           .width(Constants.BACKBAR_IMAGE_WIDTH)
@@ -40,14 +41,15 @@ export struct backBar {
           })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
+          .fontColor($r('sys.color.ohos_id_color_text_primary'))
           .textOverflow({ overflow: TextOverflow.Ellipsis })
-          .fontColor($r('app.color.text_color'))
           .fontSize(Constants.BACKBAR_TEXT_FONT_SIZE)
           .flexGrow(Constants.BACKBAR_TEXT_FLEX_GROW)
           .fontWeight(FontWeight.Bold)
           .margin({ top: Constants.BACKBAR_TEXT_MARGIN_TOP })
         if (this.recordable) {
           Image($r("app.media.gongneng_dian"))
+            .fillColor($r('sys.color.ohos_id_color_primary'))
             .objectFit(ImageFit.Contain)
             .height(Constants.BACKBAR_IMAGE_HEIGHT)
             .width(Constants.BACKBAR_IMAGE_WIDTH)

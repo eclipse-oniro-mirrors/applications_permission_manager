@@ -16,7 +16,7 @@
 import Constants from '../utils/constant';
 
 @Extend(Button) function locationButton() {
-  .backgroundColor($r('app.color.default_background_color'))
+  .backgroundColor($r('sys.color.ohos_id_color_background'))
   .fontWeight(FontWeight.Medium)
   .fontSize(Constants.TEXT_SMALLER_FONT_SIZE)
   .height(Constants.LOCATION_BUTTON_HEIGHT)
@@ -72,13 +72,13 @@ export struct LocationCanvas {
       if (this.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
         Button($r('app.string.precise_location_on'))
           .locationButton()
-          .fontColor($r('app.color.button_color'))
+          .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
           .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_FUZZY })
       }
       if (this.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
         Button($r('app.string.precise_location_off'))
           .locationButton()
-          .fontColor($r('app.color.label_color_light'))
+          .fontColor($r('sys.color.ohos_id_color_text_secondary'))
           .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_PRECISE })
       }
     }.width(Constants.FULL_WIDTH)

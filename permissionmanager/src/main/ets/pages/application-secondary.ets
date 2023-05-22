@@ -71,10 +71,11 @@ struct appNamePlusPage {
             Row() {
               Text(item.groupName)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('app.color.text_color'))
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
               Image($r('app.media.ic_public_arrow_right'))
+                .fillColor($r('sys.color.ohos_id_color_tertiary'))
                 .objectFit(ImageFit.Contain)
                 .height(Constants.IMAGE_HEIGHT)
                 .width(Constants.IMAGE_WIDTH)
@@ -85,7 +86,7 @@ struct appNamePlusPage {
           if (this.showOrNot(index, status)) {
             Row() {
               Column()
-                .backgroundColor($r('app.color.text_decoration_color'))
+                .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
                 .width(Constants.FULL_WIDTH)
                 .height(Constants.TEXT_DECORATION_HEIGHT)
             }
@@ -245,7 +246,7 @@ struct appNamePlusPage {
                                       Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
                                         Text($r('app.string.no_permission'))
                                           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                                          .fontColor($r('app.color.text_color'))
+                                          .fontColor($r('sys.color.ohos_id_color_text_primary'))
                                       }.margin({ top: Constants.FLEX_MARGIN_TOP, bottom: Constants.FLEX_MARGIN_BOTTOM })
                                     }.height(Constants.FULL_HEIGHT)
                                   }.flexGrow(Constants.FLEX_GROW)
@@ -258,7 +259,7 @@ struct appNamePlusPage {
                           }
                         }.padding({ left: Constants.LISTITEM_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })
                       }
-                      .backgroundColor($r('app.color.default_background_color'))
+                      .backgroundColor($r('sys.color.ohos_id_color_background'))
                       .borderRadius(Constants.BORDER_RADIUS)
                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                     }.margin({ top: Constants.ROW_MARGIN_TOP })
@@ -271,7 +272,7 @@ struct appNamePlusPage {
                             Row() {
                               Text($r('app.string.allowed'))
                                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                                .fontColor($r('app.color.label_color_light'))
+                                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                                 .fontWeight(FontWeight.Medium)
                                 .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
                             }.constraintSize({ minHeight: Constants.SUBTITLE_MIN_HEIGHT })
@@ -287,7 +288,7 @@ struct appNamePlusPage {
                                   this.ListItemLayout(item, index, Constants.RADIO_ALLOW_INDEX)
                                 }, item => JSON.stringify(item))
                               }
-                              .backgroundColor($r('app.color.default_background_color'))
+                              .backgroundColor($r('sys.color.ohos_id_color_background'))
                               .borderRadius(Constants.BORDER_RADIUS)
                               .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                             }.margin({ top: Constants.ROW_MARGIN_TOP })
@@ -302,7 +303,7 @@ struct appNamePlusPage {
                             Row() {
                               Text($r('app.string.banned'))
                                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                                .fontColor($r('app.color.label_color_light'))
+                                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                                 .fontWeight(FontWeight.Medium)
                                 .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
                             }.constraintSize({ minHeight: Constants.SUBTITLE_MIN_HEIGHT })
@@ -318,7 +319,7 @@ struct appNamePlusPage {
                                   this.ListItemLayout(item, index, Constants.RADIO_BAN_INDEX)
                                 }, item => JSON.stringify(item))
                               }
-                              .backgroundColor($r('app.color.default_background_color'))
+                              .backgroundColor($r('sys.color.ohos_id_color_background'))
                               .borderRadius(Constants.BORDER_RADIUS)
                               .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                             }.margin({ top: Constants.ROW_MARGIN_TOP })

@@ -56,10 +56,11 @@ export struct alphabetIndexerComponent {
 
   build() {
     AlphabetIndexer({ arrayValue: this.value, selected: this.index })
-      .selectedColor($r('app.color.selected_Color')) // selected color
-      .popupColor($r('app.color.popup_Color')) // popover color
+      .color($r('sys.color.ohos_id_color_text_secondary'))
+      .selectedColor($r('sys.color.ohos_id_color_text_primary_activated')) // selected color
+      .popupColor($r('sys.color.ohos_id_color_text_primary_activated')) // popover color
       .selectedBackgroundColor($r('app.color.selected_Background_Color')) // Check background color
-      .popupBackground($r('app.color.popup_Background_Color')) // popover background color
+      .popupBackground($r('sys.color.ohos_id_color_card_bg')) // popover background color
       .usingPopup(true) // whether to show a popup
       .selectedFont({ size: Constants.ALPHABETINDEXER_SELECTEDFONT_SIZE, weight: FontWeight.Bolder }) // selected style
       .popupFont({ size: Constants.ALPHABETINDEXER_POPUPFONT_SIZE, weight: FontWeight.Bolder }) // Demo of the popup
