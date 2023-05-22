@@ -72,14 +72,16 @@ struct authorityManagementPage {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
               Image(item.icon)
+                .fillColor($r('sys.color.ohos_id_color_secondary'))
                 .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                 .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
               Text(item.groupName)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontWeight(FontWeight.Medium)
-                .fontColor($r('app.color.label_color'))
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .flexGrow(Constants.FLEX_GROW)
               Image($r('app.media.ic_public_arrow_right'))
+                .fillColor($r('sys.color.ohos_id_color_tertiary'))
                 .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
             }
             .width(Constants.FULL_WIDTH)
@@ -90,7 +92,7 @@ struct authorityManagementPage {
               Flex() {
                 Column().width(Constants.MANAGEMENT_TEXT_DECORATION_MARGIN_LEFT)
                 Column()
-                  .backgroundColor($r('app.color.text_decoration_color'))
+                  .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
                   .height(Constants.TEXT_DECORATION_HEIGHT)
                   .flexGrow(Constants.FLEX_GROW)
               }
@@ -480,7 +482,7 @@ struct authorityManagementPage {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP), (item, index) => {
                                           this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).length - 1))
                                         }, item => JSON.stringify(item))
-                                      }.backgroundColor($r('app.color.default_background_color'))
+                                      }.backgroundColor($r('sys.color.ohos_id_color_background'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
@@ -491,7 +493,7 @@ struct authorityManagementPage {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP), (item, index) => {
                                           this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).length - 1))
                                         }, item => JSON.stringify(item))
-                                      }.backgroundColor($r('app.color.default_background_color'))
+                                      }.backgroundColor($r('sys.color.ohos_id_color_background'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
@@ -503,7 +505,7 @@ struct authorityManagementPage {
                                           ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP), (item, index) => {
                                             this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length - 1))
                                           }, item => JSON.stringify(item))
-                                        }.backgroundColor($r('app.color.default_background_color'))
+                                        }.backgroundColor($r('sys.color.ohos_id_color_background'))
                                         .borderRadius(Constants.BORDER_RADIUS)
                                         .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                         .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
@@ -516,7 +518,7 @@ struct authorityManagementPage {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP), (item) => {
                                           this.ListItemLayout(item, Constants.SLICE_END_INDEX)
                                         }, item => JSON.stringify(item))
-                                      }.backgroundColor($r('app.color.default_background_color'))
+                                      }.backgroundColor($r('sys.color.ohos_id_color_background'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                     }
@@ -575,13 +577,14 @@ struct applicationItem {
               Text(item.labelId)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontWeight(FontWeight.Medium)
-                .fontColor($r('app.color.label_color'))
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .flexGrow(Constants.FLEX_GROW)
               Text(item.groupId.length + '项权限')
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.label_color_lighter'))
+                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
               Image($r('app.media.ic_public_arrow_right'))
+                .fillColor($r('sys.color.ohos_id_color_tertiary'))
                 .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
             }
             .width(Constants.FULL_WIDTH)
@@ -593,7 +596,7 @@ struct applicationItem {
               Flex() {
                 Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
                 Column()
-                  .backgroundColor($r('app.color.text_decoration_color'))
+                  .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
                   .height(Constants.TEXT_DECORATION_HEIGHT)
                   .flexGrow(Constants.FLEX_GROW)
               }
@@ -641,7 +644,7 @@ struct applicationItem {
                       ForEach(this.applicationItem, (item, index) => {
                         this.ListItemLayout(item, index)
                       }, item => JSON.stringify(item))
-                    }.backgroundColor($r('app.color.default_background_color'))
+                    }.backgroundColor($r('sys.color.ohos_id_color_background'))
                     .borderRadius(Constants.BORDER_RADIUS)
                     .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                   }.scrollBar(BarState.Off)
@@ -649,8 +652,7 @@ struct applicationItem {
                 .borderRadius(Constants.BORDER_RADIUS)
                 .clip(true)
               }
-            }.backgroundColor($r('app.color.background_color'))
-            .height(Constants.FULL_HEIGHT)
+            }.height(Constants.FULL_HEIGHT)
           }.margin({ top: Constants.MANAGEMENT_ROW_MARGIN_TOP, bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM })
           Column() {
             alphabetIndexerComponent({ applicationItem: $applicationItem })

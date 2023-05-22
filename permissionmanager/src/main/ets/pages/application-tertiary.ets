@@ -276,7 +276,7 @@ struct mediaDocumentItem {
             Row() {
               Text(this.mediaListItem.labelId)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('app.color.label_color'))
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .fontWeight(FontWeight.Bold)
                 .textAlign(TextAlign.Start)
             }
@@ -285,11 +285,11 @@ struct mediaDocumentItem {
             Row() {
               Text($r('app.string.version'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.label_color_light'))
+                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .textAlign(TextAlign.Start)
               Text(this.mediaListItem.versionName)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.label_color_light'))
+                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .textAlign(TextAlign.Start)
             }
             .width(Constants.TERTIARY_HALF_WIDTH)
@@ -302,7 +302,7 @@ struct mediaDocumentItem {
             Row() {
               Text(this.reason)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('app.color.label_color_light'))
+                .fontColor($r('sys.color.ohos_id_color_secondary'))
                 .textAlign(TextAlign.Start)
             }.margin({ left: Constants.TERTIARY_IMAGE_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
           }
@@ -314,6 +314,7 @@ struct mediaDocumentItem {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
               Image($r('app.media.ic_public_fail'))
+                .fillColor($r('sys.color.ohos_id_color_secondary'))
                 .width(Constants.TERTIARY_RADIO_IMAGE_WIDTH)
                 .height(Constants.TERTIARY_RADIO_IMAGE_HEIGHT)
                 .margin({ right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
@@ -331,13 +332,13 @@ struct mediaDocumentItem {
       Row() {
         Text(backTitle)
           .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-          .fontColor($r('app.color.label_color_light'))
+          .fontColor($r('sys.color.ohos_id_color_secondary'))
           .fontWeight(FontWeight.Medium)
           .textAlign(TextAlign.Start)
           .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
         Text($r('app.string.access_permission'))
           .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-          .fontColor($r('app.color.label_color_light'))
+          .fontColor($r('sys.color.ohos_id_color_secondary'))
           .fontWeight(FontWeight.Medium)
           .textAlign(TextAlign.Start)
           .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
@@ -355,7 +356,7 @@ struct mediaDocumentItem {
                     Row() {
                       Text(item.name)
                         .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                        .fontColor($r('app.color.label_color'))
+                        .fontColor($r('sys.color.ohos_id_color_text_primary'))
                         .fontWeight(FontWeight.Medium)
                         .flexGrow(Constants.FLEX_GROW)
                       Radio({ value: 'Radio', group: 'radioGroup' }).checked(this.isCheckList[index]).touchable(false)
@@ -422,7 +423,7 @@ struct mediaDocumentItem {
                 if (!index) {
                   Row() {
                     Column()
-                      .backgroundColor($r('app.color.text_decoration_color'))
+                      .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
                       .width(Constants.FULL_WIDTH)
                       .height(Constants.TEXT_DECORATION_HEIGHT)
                   }
@@ -439,7 +440,7 @@ struct mediaDocumentItem {
           }, item => JSON.stringify(item))
         }
         .borderRadius(Constants.BORDER_RADIUS)
-        .backgroundColor($r('app.color.default_background_color'))
+        .backgroundColor($r('sys.color.ohos_id_color_background'))
         .padding({
           top: Constants.TERTIARY_LIST_PADDING_TOP, bottom: Constants.TERTIARY_LIST_PADDING_BOTTOM
         })
@@ -449,12 +450,12 @@ struct mediaDocumentItem {
             Row() {
               Text($r('app.string.precise_location'))
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('app.color.label_color'))
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
               Toggle({ type: ToggleType.Switch, isOn: this.accurateIsOn })
-                .selectedColor($r('app.color.button_color'))
-                .switchPointColor($r('app.color.selected_Color'))
+                .selectedColor($r('sys.color.ohos_id_color_toolbar_icon_actived'))
+                .switchPointColor($r('sys.color.ohos_id_color_foreground_contrary'))
                 .onChange((isOn: boolean) => {
                   var acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
@@ -477,12 +478,12 @@ struct mediaDocumentItem {
             bottom: Constants.TERTIARY_LIST_PADDING_BOTTOM
           })
           .borderRadius(Constants.BORDER_RADIUS)
-          .backgroundColor($r('app.color.default_background_color'))
+          .backgroundColor($r('sys.color.ohos_id_color_background'))
 
           Row() {
             Text($r('app.string.get_the_exact_position'))
               .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-              .fontColor($r('app.color.label_color_light'))
+              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
               .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
           }.width(Constants.FULL_WIDTH)
           .padding({

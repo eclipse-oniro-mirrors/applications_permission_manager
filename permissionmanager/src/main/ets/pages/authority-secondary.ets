@@ -78,10 +78,11 @@ struct appNameItem {
             Row() {
               Text(item.label)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('app.color.label_color'))
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
                 .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
               Image($r('app.media.ic_public_arrow_right'))
+                .fillColor($r('sys.color.ohos_id_color_tertiary'))
                 .objectFit(ImageFit.Contain)
                 .height(Constants.IMAGE_HEIGHT)
                 .width(Constants.IMAGE_WIDTH)
@@ -92,7 +93,7 @@ struct appNameItem {
           if (!index) {
             Row() {
               Column()
-                .backgroundColor($r('app.color.text_decoration_color'))
+                .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
                 .width(Constants.FULL_WIDTH)
                 .height(Constants.TEXT_DECORATION_HEIGHT)
             }
@@ -139,7 +140,7 @@ struct appNameItem {
               ForEach(this.calendarListItem.slice(Constants.SLICE_END), (item) => {
                 this.ListItemLayout(item, Constants.SLICE_END_INDEX)
               }, item => JSON.stringify(item))
-            }.backgroundColor($r('app.color.default_background_color')).borderRadius(Constants.BORDER_RADIUS)
+            }.backgroundColor($r('sys.color.ohos_id_color_background')).borderRadius(Constants.BORDER_RADIUS)
             .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
           }.margin({ top: Constants.ROW_MARGIN_TOP })
         .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })

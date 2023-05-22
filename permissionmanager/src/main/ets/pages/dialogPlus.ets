@@ -23,8 +23,8 @@ import { permissionGroups, showSubpermissionsGrop } from '../common/model/permis
 import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button) function customizeButton() {
-  .backgroundColor($r('app.color.default_background_color'))
-  .fontColor($r('app.color.button_color'))
+  .backgroundColor($r('sys.color.ohos_id_color_background'))
+  .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
   .width(Constants.BUTTON_WIDTH)
@@ -112,14 +112,14 @@ struct PermissionDialog {
               Image(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].icon)
                 .width(Constants.DIALOG_ICON_WIDTH)
                 .height(Constants.DIALOG_ICON_HEIGHT)
-                .fillColor($r("app.color.first_font_color"))
+                .fillColor($r("sys.color.ohos_id_color_text_primary"))
                 .margin({
                   top: Constants.DIALOG_ICON_MARGIN_TOP
                 })
               if (this.grantGroups.length > 1) {
                 Text(`${this.count + 1} / ${this.grantGroups.length}`)
                   .fontSize(Constants.DIALOG_LABEL_FONT_SIZE)
-                  .fontColor($r('app.color.text_secondary_color'))
+                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .lineHeight(Constants.DIALOG_LABEL_LINE_HEIGHT)
                   .margin({
                     top: Constants.DIALOG_LABEL_MARGIN_TOP
@@ -130,7 +130,7 @@ struct PermissionDialog {
                   Flex({ justifyContent: FlexAlign.Start }) {
                     Text(this.showTitle())
                       .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                      .fontColor($r('app.color.first_font_color'))
+                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
                       .fontWeight(FontWeight.Medium)
                       .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
                       .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
@@ -146,7 +146,7 @@ struct PermissionDialog {
                   Flex({ justifyContent: FlexAlign.Start }) {
                     Text(this.showReason())
                       .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
-                      .fontColor($r('app.color.text_secondary_color'))
+                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                       .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
                       .lineHeight(Constants.DIALOG_DESP_LINE_HEIGHT)
                       .margin({
@@ -170,7 +170,7 @@ struct PermissionDialog {
                   .onClick(() => {
                     this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
                   }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('app.color.divider_color'))
+                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
                 Button($r('app.string.allow'))
                   .fontSize(Constants.BUTTON_FONT_SIZE)
                   .onClick(() => {
@@ -179,7 +179,7 @@ struct PermissionDialog {
               }
             }
           }
-          .backgroundColor($r('app.color.default_background_color'))
+          .backgroundColor($r('sys.color.ohos_id_color_background'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
           .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })

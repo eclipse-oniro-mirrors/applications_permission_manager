@@ -22,8 +22,8 @@ import display from '@ohos.display';
 let bottomPopoverTypes = ['default', 'phone'];
 
 @Extend(Button) function customizeButton() {
-  .backgroundColor($r('app.color.default_background_color'))
-  .fontColor($r('app.color.button_color'))
+  .backgroundColor($r('sys.color.ohos_id_color_background'))
+  .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
   .width(Constants.BUTTON_WIDTH)
@@ -46,7 +46,7 @@ export struct authorizeDialog {
         }
       }
     }
-    .backgroundColor($r('app.color.default_background_color'))
+    .backgroundColor($r('sys.color.ohos_id_color_background'))
     .borderRadius(Constants.DIALOG_BORDER_RADIUS)
     .height(Constants.DIALOG_HEIGHT)
     .width(Constants.DIALOG_WIDTH)
@@ -67,7 +67,7 @@ export struct globalDialog {
           Column() {
             Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
               .fontSize(Constants.TEXT_BIG_FONT_SIZE)
-              .fontColor($r('app.color.label_color'))
+              .fontColor($r('sys.color.ohos_id_color_text_primary'))
               .fontWeight(FontWeight.Medium)
               .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
               .height(Constants.ROW_HEIGHT)
@@ -75,7 +75,7 @@ export struct globalDialog {
               .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
             Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera_desc') : $r('app.string.close_microphone_desc'))
               .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-              .fontColor($r('app.color.label_color'))
+              .fontColor($r('sys.color.ohos_id_color_text_primary'))
               .lineHeight(Constants.TEXT_LINE_HEIGHT)
               .width(Constants.FULL_WIDTH)
               .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
@@ -87,7 +87,7 @@ export struct globalDialog {
                   .onClick(() => {
                     this.cancel()
                   }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('app.color.divider_color'))
+                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
                   .margin({ top: Constants.BUTTON_MARGIN_TOP })
                 Button($r('app.string.close'))
                   .fontSize(Constants.BUTTON_FONT_SIZE)
@@ -97,7 +97,7 @@ export struct globalDialog {
               }.height(Constants.ROW_HEIGHT)
             }
           }
-          .backgroundColor($r('app.color.default_background_color'))
+          .backgroundColor($r('sys.color.ohos_id_color_background'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
           .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
