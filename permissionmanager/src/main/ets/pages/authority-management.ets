@@ -23,7 +23,7 @@ import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import { groups, userGrantPermissions, permissionGroupPermissions, globalGroup } from "../common/model/permissionGroup";
 import { permissionGroups, permissionGroupIds, showSubpermissionsGrop } from "../common/model/permissionGroup";
-import { makePy } from "../common/utils/utils";
+import { makePy, appSort, getSortId } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
 var TAG = 'PermissionManager_MainAbility:';
@@ -390,6 +390,8 @@ struct authorityManagementPage {
         } else {
           info.alphabeticalIndex = makePy(info.labelId)[0].slice(0, 1); // Get the first letter in the returned initials array
         }
+
+        info.sortId = getSortId(value)
     })
   }
 
@@ -638,7 +640,7 @@ struct applicationItem {
                 Row() {
                   Scroll() {
                     List() {
-                      ForEach(this.applicationItem, (item, index) => {
+                      ForEach(appSort(this.applicationItem), (item, index) => {
                         this.ListItemLayout(item, index)
                       }, item => JSON.stringify(item))
                     }.backgroundColor($r('app.color.default_background_color'))
