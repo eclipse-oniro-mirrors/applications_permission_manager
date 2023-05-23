@@ -293,7 +293,8 @@ export default class Constants {
 
     static START_SUBSCRIPT = 0
     static END_SUBSCRIPT = 500
-    static MAXIMUM_HEADER_WIDTH = 250
+    static MAXIMUM_HEADER_LINES = 1
+    static MAXIMUM_HEADER_WIDTH = 200
     static MAXIMUM_HEADER_HEIGHT = 500
     static MAXIMUM_HEADER_LENGTH = 1000
 

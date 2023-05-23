@@ -93,6 +93,7 @@ struct permissionRecordPage {
               Column() {
                 Text(item.groupName)
                   .width(Constants.MAXIMUM_HEADER_WIDTH)
+                  .maxLines(Constants.MAXIMUM_HEADER_LINES)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
@@ -167,6 +168,7 @@ struct permissionRecordPage {
                       .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM_PERMISSION })
                     Text(permissionApplication.groupName)
                       .width(Constants.MAXIMUM_HEADER_WIDTH)
+                      .maxLines(Constants.MAXIMUM_HEADER_LINES)
                       .textOverflow({ overflow: TextOverflow.Ellipsis })
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)

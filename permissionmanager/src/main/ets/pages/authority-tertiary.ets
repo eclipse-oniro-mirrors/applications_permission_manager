@@ -116,6 +116,7 @@ struct applicationItem {
               Column() {
                 Text(item.labelId)
                   .width(Constants.MAXIMUM_HEADER_WIDTH)
+                  .maxLines(Constants.MAXIMUM_HEADER_LINES)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
