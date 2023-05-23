@@ -164,20 +164,20 @@ struct PermissionDialog {
                   }
                 }
               }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
-            }
-            Row() {
-              Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                Button($r('app.string.ban'))
-                  .fontSize(Constants.BUTTON_FONT_SIZE)
-                  .onClick(() => {
-                    this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
-                  }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
-                Button($r('app.string.allow'))
-                  .fontSize(Constants.BUTTON_FONT_SIZE)
-                  .onClick(() => {
-                    this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
-                  }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
+              Row() {
+                Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                  Button($r('app.string.ban'))
+                    .fontSize(Constants.BUTTON_FONT_SIZE)
+                    .onClick(() => {
+                      this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
+                    }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
+                  Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
+                  Button($r('app.string.allow'))
+                    .fontSize(Constants.BUTTON_FONT_SIZE)
+                    .onClick(() => {
+                      this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
+                    }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
+                }
               }
             }
           }
