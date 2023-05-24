@@ -46,11 +46,11 @@
     },
     {
       "name": "allowed",
-      "value": "Allowed"
+      "value": "ALLOWED"
     },
     {
       "name": "banned",
-      "value": "Banned"
+      "value": "BANNED"
     },
     {
       "name": "Authorization_failed",
@@ -117,6 +117,14 @@
       "value": "Ban"
     },
     {
+      "name": "ALLOW",
+      "value": "ALLOW"
+    },
+    {
+      "name": "BAN",
+      "value": "BAN"
+    },
+    {
       "name": "precise_location",
       "value": "Precise location"
     },
@@ -154,15 +162,15 @@
     },
     {
       "name": "cancel",
-      "value": "Cancel"
+      "value": "CANCEL"
     },
     {
       "name": "open",
-      "value": "Open"
+      "value": "OPEN"
     },
     {
       "name": "close",
-      "value": "Close"
+      "value": "CLOSE"
     },
     {
       "name": "camera",

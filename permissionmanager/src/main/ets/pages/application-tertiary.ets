@@ -442,7 +442,7 @@ struct mediaDocumentItem {
           }, item => JSON.stringify(item))
         }
         .borderRadius(Constants.BORDER_RADIUS)
-        .backgroundColor($r('sys.color.ohos_id_color_background'))
+        .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
         .padding({
           top: Constants.TERTIARY_LIST_PADDING_TOP, bottom: Constants.TERTIARY_LIST_PADDING_BOTTOM
         })
@@ -480,7 +480,7 @@ struct mediaDocumentItem {
             bottom: Constants.TERTIARY_LIST_PADDING_BOTTOM
           })
           .borderRadius(Constants.BORDER_RADIUS)
-          .backgroundColor($r('sys.color.ohos_id_color_background'))
+          .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
 
           Row() {
             Text($r('app.string.get_the_exact_position'))

@@ -156,7 +156,8 @@ struct authorityManagementPage {
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Bold)
           .height(Constants.TAB_DECORATION_HEIGHT)
-          .backgroundColor($r('sys.color.ohos_id_color_subtab_line_on'))
+          .fontColor($r('sys.color.ohos_id_color_subtab_text_on'))
+          .backgroundColor($r('sys.color.ohos_id_color_subtab_text_on'))
       }
     }.height(Constants.TAB_HEIGHT)
     .width(Constants.FULL_WIDTH)
@@ -484,7 +485,7 @@ struct authorityManagementPage {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP), (item, index) => {
                                           this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).length - 1))
                                         }, item => JSON.stringify(item))
-                                      }.backgroundColor($r('sys.color.ohos_id_color_background'))
+                                      }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
@@ -495,7 +496,7 @@ struct authorityManagementPage {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP), (item, index) => {
                                           this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).length - 1))
                                         }, item => JSON.stringify(item))
-                                      }.backgroundColor($r('sys.color.ohos_id_color_background'))
+                                      }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
@@ -507,7 +508,7 @@ struct authorityManagementPage {
                                           ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP), (item, index) => {
                                             this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length - 1))
                                           }, item => JSON.stringify(item))
-                                        }.backgroundColor($r('sys.color.ohos_id_color_background'))
+                                        }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                         .borderRadius(Constants.BORDER_RADIUS)
                                         .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                         .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
@@ -520,7 +521,7 @@ struct authorityManagementPage {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP), (item) => {
                                           this.ListItemLayout(item, Constants.SLICE_END_INDEX)
                                         }, item => JSON.stringify(item))
-                                      }.backgroundColor($r('sys.color.ohos_id_color_background'))
+                                      }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                     }
@@ -652,7 +653,7 @@ struct applicationItem {
                       ForEach(appSort(this.applicationItem), (item, index) => {
                         this.ListItemLayout(item, index)
                       }, item => JSON.stringify(item))
-                    }.backgroundColor($r('sys.color.ohos_id_color_background'))
+                    }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                     .borderRadius(Constants.BORDER_RADIUS)
                     .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                   }.scrollBar(BarState.Off)

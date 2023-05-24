@@ -246,7 +246,7 @@ struct permissionRecordPage {
     }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END,
       top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
     .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM })
-    .backgroundColor($r('sys.color.ohos_id_color_background'))
+    .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
     .borderRadius(Constants.BORDER_RADIUS)
   }
 
