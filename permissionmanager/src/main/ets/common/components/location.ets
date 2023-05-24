@@ -16,7 +16,7 @@
 import Constants from '../utils/constant';
 
 @Extend(Button) function locationButton() {
-  .backgroundColor($r('sys.color.ohos_id_color_background'))
+  .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontWeight(FontWeight.Medium)
   .fontSize(Constants.TEXT_SMALLER_FONT_SIZE)
   .height(Constants.LOCATION_BUTTON_HEIGHT)

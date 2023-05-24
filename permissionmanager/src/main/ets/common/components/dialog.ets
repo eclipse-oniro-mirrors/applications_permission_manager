@@ -22,7 +22,7 @@ import display from '@ohos.display';
 let bottomPopoverTypes = ['default', 'phone'];
 
 @Extend(Button) function customizeButton() {
-  .backgroundColor($r('sys.color.ohos_id_color_background'))
+  .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
@@ -46,7 +46,7 @@ export struct authorizeDialog {
         }
       }
     }
-    .backgroundColor($r('sys.color.ohos_id_color_background'))
+    .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
     .borderRadius(Constants.DIALOG_BORDER_RADIUS)
     .height(Constants.DIALOG_HEIGHT)
     .width(Constants.DIALOG_WIDTH)
@@ -97,7 +97,7 @@ export struct globalDialog {
               }.height(Constants.ROW_HEIGHT)
             }
           }
-          .backgroundColor($r('sys.color.ohos_id_color_background'))
+          .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
           .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })

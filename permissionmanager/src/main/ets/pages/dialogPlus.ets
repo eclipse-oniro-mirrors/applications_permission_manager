@@ -23,7 +23,7 @@ import { permissionGroups, showSubpermissionsGrop } from '../common/model/permis
 import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button) function customizeButton() {
-  .backgroundColor($r('sys.color.ohos_id_color_background'))
+  .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
@@ -166,13 +166,13 @@ struct PermissionDialog {
               }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
               Row() {
                 Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                  Button($r('app.string.ban'))
+                  Button($r('app.string.BAN'))
                     .fontSize(Constants.BUTTON_FONT_SIZE)
                     .onClick(() => {
                       this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
                     }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
                   Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
-                  Button($r('app.string.allow'))
+                  Button($r('app.string.ALLOW'))
                     .fontSize(Constants.BUTTON_FONT_SIZE)
                     .onClick(() => {
                       this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
@@ -181,7 +181,7 @@ struct PermissionDialog {
               }
             }
           }
-          .backgroundColor($r('sys.color.ohos_id_color_background'))
+          .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
           .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })

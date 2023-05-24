@@ -133,7 +133,7 @@ struct appNameItem {
             ForEach(this.otherPermissionListItem.slice(Constants.SLICE_END), (item) => {
               this.ListItemLayout(item, Constants.SLICE_END_INDEX)
             }, item => JSON.stringify(item))
-          }.backgroundColor($r('sys.color.ohos_id_color_background')).borderRadius(Constants.BORDER_RADIUS)
+          }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg')).borderRadius(Constants.BORDER_RADIUS)
            .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
         }.margin({ top: Constants.ROW_MARGIN_TOP })
          .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })

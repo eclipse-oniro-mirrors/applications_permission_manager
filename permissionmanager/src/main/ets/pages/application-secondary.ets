@@ -259,7 +259,7 @@ struct appNamePlusPage {
                           }
                         }.padding({ left: Constants.LISTITEM_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })
                       }
-                      .backgroundColor($r('sys.color.ohos_id_color_background'))
+                      .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                       .borderRadius(Constants.BORDER_RADIUS)
                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                     }.margin({ top: Constants.ROW_MARGIN_TOP })
@@ -288,7 +288,7 @@ struct appNamePlusPage {
                                   this.ListItemLayout(item, index, Constants.RADIO_ALLOW_INDEX)
                                 }, item => JSON.stringify(item))
                               }
-                              .backgroundColor($r('sys.color.ohos_id_color_background'))
+                              .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                               .borderRadius(Constants.BORDER_RADIUS)
                               .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                             }.margin({ top: Constants.ROW_MARGIN_TOP })
@@ -319,7 +319,7 @@ struct appNamePlusPage {
                                   this.ListItemLayout(item, index, Constants.RADIO_BAN_INDEX)
                                 }, item => JSON.stringify(item))
                               }
-                              .backgroundColor($r('sys.color.ohos_id_color_background'))
+                              .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                               .borderRadius(Constants.BORDER_RADIUS)
                               .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                             }.margin({ top: Constants.ROW_MARGIN_TOP })

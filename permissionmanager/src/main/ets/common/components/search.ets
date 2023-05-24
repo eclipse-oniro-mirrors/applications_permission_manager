@@ -29,7 +29,7 @@ export struct textInput {
     Column() {
       Flex({ alignContent: FlexAlign.Start }) {
         TextInput({ placeholder: $r('app.string.textInput_placeholder') })
-          .backgroundColor($r('sys.color.ohos_id_color_background'))
+          .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
           .padding({ left: Constants.TEXTINPUT_PADDING_LEFT })
           .type(InputType.Normal)
           .border({ width: Constants.TEXTINPUT_BORDER_WIDTH, color: $r("app.color.label_color_20"), radius: Constants.TEXTINPUT_BORDER_RADIUS })
