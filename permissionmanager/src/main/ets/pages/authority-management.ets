@@ -360,12 +360,6 @@ struct authorityManagementPage {
       }
     }
 
-    // adapt different api
-    if ((info.compatibleVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (info.hapModuleInfos.length > 0)) {
-      console.log(TAG + 'app.compatibleVersion: ' + info.name);
-      info.hapModuleInfos[0].abilityInfo.length > 0 ? info.appInfo.iconId = info.hapModuleInfos[0].abilityInfo[0].iconId : '';
-    }
-
     var ap: applicationPermissions = {
       'bundleName': info.name,
       'api': info.targetVersion,

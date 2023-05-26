@@ -367,6 +367,9 @@ export function  getSortId(label) {
   let pattern_Num = new RegExp("[0-9]");
   let pattern_En = new RegExp("[A-Za-z]");
   let pattern_Ch = new RegExp("[\u4E00-\u9FA5]");
+  if (typeof(label) != "string") {
+    return label;
+  }
   if (pattern_Num.test(label[0])) {
     return label;
   } else if(pattern_En.test(label[0])) {
