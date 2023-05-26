@@ -334,8 +334,7 @@ let oMultiDiff = { "19969": "DZ", "19975": "WM", "19988": "QJ", "20048": "YL", "
 
 // Program that returns the first letter array of Chinese characters
 export function makePy(str) {
-  if (typeof(str) != "string")
-    throw new Error("函数makePy需要字符串类型参数!");
+  if (typeof(str) != "string") str = String(str);
   var arrResult = [];
   // Convert string to array
   for (var i = 0, len = str.length; i < len; i++) {
