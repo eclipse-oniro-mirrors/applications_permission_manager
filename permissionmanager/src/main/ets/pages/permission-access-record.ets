@@ -165,7 +165,7 @@ struct permissionRecordPage {
                   Column() {
                     Row().width(Constants.FULL_WIDTH).height(Constants.TEXT_DECORATION_HEIGHT)
                       .backgroundColor($r("sys.color.ohos_id_color_list_separator"))
-                      .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM_PERMISSION })
+                      .position({ x: 0, y: 0 })
                     Text(permissionApplication.groupName)
                       .width(Constants.MAXIMUM_HEADER_WIDTH)
                       .maxLines(Constants.MAXIMUM_HEADER_LINES)
@@ -177,11 +177,14 @@ struct permissionRecordPage {
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text(this.strings.visits + this.getAppRecords(permissionApplication, item.groupName, true) +
                         this.strings.recent_visit + this.getTime(this.getAppRecords(permissionApplication, item.groupName, false)))
+                      .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
+                  .width(Constants.FULL_WIDTH)
+                  .justifyContent(FlexAlign.Center)
                 }
               }.height(Constants.LISTITEM_HEIGHT_APPLICATION)
               .onClick(() => {
@@ -211,7 +214,7 @@ struct permissionRecordPage {
                   Column() {
                     Row().width(Constants.FULL_WIDTH).height(Constants.TEXT_DECORATION_HEIGHT)
                       .backgroundColor($r("sys.color.ohos_id_color_list_separator"))
-                      .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM_APPLICATION })
+                      .position({ x: 0, y: 0 })
                     Text(permission.groupName)
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)
@@ -220,11 +223,14 @@ struct permissionRecordPage {
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text(this.strings.visits + permission['count' + item.accessTokenId]
                         + this.strings.recent_visit + this.getTime(permission['lastTime' + item.accessTokenId]))
+                      .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
+                  .width(Constants.FULL_WIDTH)
+                  .justifyContent(FlexAlign.Center)
                 }
               }.height(Constants.LISTITEM_HEIGHT_PERMISSION)
               .onClick(() => {
