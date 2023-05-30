@@ -18,7 +18,6 @@ import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
 import { verifyAccessToken } from "../common/utils/utils";
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl'
 
 var TAG = 'PermissionManager_MainAbility:';
 

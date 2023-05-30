@@ -15,7 +15,7 @@
 
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundle from '@ohos.bundle';
-
+import bundleManager from '@ohos.bundle.bundleManager';
 const TAG = 'PermissionManager_MainAbility:';
 const PARAMETER_BUNDLE_FLAG = 16;
 const USERID = 100;
@@ -47,11 +47,11 @@ export default class MainAbility extends UIAbility {
         let info = bundleInfos[i];
         // Filter blank icon icon and text label resources
         try {
-          await bundle.queryAbilityByWant({
+          await bundleManager.queryAbilityInfo({
             bundleName: info.name,
             action: 'action.system.home',
             entities: ['entity.system.home']
-          }, bundle.BundleFlag.GET_ABILITY_INFO_WITH_APPLICATION, USERID);
+          }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION, USERID);
         } catch (error) {
           console.log(TAG + 'queryAbilityByWant catch error: ' + JSON.stringify(error));
           continue;

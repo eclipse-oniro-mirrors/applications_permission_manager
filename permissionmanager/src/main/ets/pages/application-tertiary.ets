@@ -15,7 +15,6 @@
 
 import { backBar } from "../common/components/backBar";
 import router from '@ohos.router';
-import bundle from "@ohos.bundle";
 import bundleManager from '@ohos.bundle.bundleManager';
 import { getAppLabel, getAppIcon } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
@@ -219,7 +218,7 @@ struct mediaDocumentItem {
         })
       })
     })
-    bundle.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(res => {
+    bundleManager.getBundleInfo(routerData, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION).then(res => {
       this.api = res.targetVersion;
       api = res.targetVersion;
       bundleInfo = res;

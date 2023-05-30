@@ -17,7 +17,7 @@ import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
 import router from '@ohos.router';
-import bundle from "@ohos.bundle";
+import bundle from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
@@ -118,10 +118,14 @@ struct authorityManagementPage {
             } else {
               if (item.group == 'MICROPHONE') {
                 var audioManager = audio.getAudioManager();
-                audioManager.isMicrophoneMute().then(value => {
-                  router.pushUrl({
-                    url: 'pages/authority-tertiary-groups',
-                    params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
+                let audioVolumeManager = audioManager.getVolumeManager();
+                let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
+                audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+                  audioVolumeGroupManager.isMicrophoneMute().then(value => {
+                    router.pushUrl({
+                      url: 'pages/authority-tertiary-groups',
+                      params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
+                    })
                   })
                 })
               } else {
@@ -410,7 +414,7 @@ struct authorityManagementPage {
     console.log(TAG + 'on aboutToAppear, version 1.01');
     this.getAllBundlePermissions();
     var acManager = abilityAccessCtrl.createAtManager();
-    bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
+    bundle.getApplicationInfo(Constants.BUNDLE_NAME, bundle.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(data => {
       acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2);
     })
   }

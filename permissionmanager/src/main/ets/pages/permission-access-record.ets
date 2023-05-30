@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import bundle from '@ohos.bundle';
+import bundleManager from '@ohos.bundle.bundleManager';
 import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager';
@@ -409,7 +409,7 @@ struct permissionRecordPage {
   }
 
   getInfo(record, sortFlag) {
-    bundle.getBundleInfo(record.bundleName, Constants.PARMETER_BUNDLE_FLAG).then(async info => {
+    bundleManager.getApplicationInfo(record.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_WITH_PERMISSION).then(async info => {
       var reqUserPermissions: string[] = [];
       var reqUserRecords: any[] = [];
       var permissionGroups: any[] = [];
@@ -418,7 +418,7 @@ struct permissionRecordPage {
       for (let j = 0; j < record.permissionRecords.length; j++) {
         var permission = record.permissionRecords[j].permissionName;
         try {
-          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
+          var flag = await acManager.getPermissionFlags(info.accessTokenId, permission);
           if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
@@ -433,10 +433,10 @@ struct permissionRecordPage {
       if (reqUserRecords.length == 0) {
         return false;
       }
-      for (let k = 0; k < info.reqPermissions.length; k++) {
-        var reqPermission: any = info.reqPermissions[k];
+      for (let k = 0; k < info.permissions.length; k++) {
+        var reqPermission: any = info.permissions[k];
         try {
-          var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
+          var reqFlag = await acManager.getPermissionFlags(info.accessTokenId, reqPermission);
           if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
@@ -479,21 +479,24 @@ struct permissionRecordPage {
       }
 
       let  context = globalThis.context.createBundleContext(info.name);
-      await context.resourceManager.getString(info.appInfo.labelId, (error, value) => {
+      await context.resourceManager.getString(info.labelId, (error, value) => {
         if (value == undefined) {
-          appInfo.groupName = info.appInfo.label;
+          appInfo.groupName = info.label;
         } else {
           appInfo.groupName = value;
         }
       })
 
-      await context.resourceManager.getMediaBase64(info.appInfo.iconId, (error, value) => {
+      await context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
         appInfo.icon = value;
       })
 
-      appInfo.name = info.appInfo.name;
-      appInfo.api = info.targetVersion;
-      appInfo.accessTokenId = info.appInfo.accessTokenId;
+      await bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT).then(bundleInfo => {
+        appInfo.api = bundleInfo.targetVersion;
+      })
+
+      appInfo.name = info.name;
+      appInfo.accessTokenId = info.accessTokenId;
       appInfo.reqUserPermissions = reqUserPermissions;
       appInfo.permissions = permissionGroups;
       appInfo.groupNames = groupNames;
@@ -527,11 +530,11 @@ struct permissionRecordPage {
       for (let i = 0; i < records.bundleRecords.length; i++) {
         var record = records.bundleRecords[i];
         try {
-          const ret = await bundle.queryAbilityByWant({
+          await bundleManager.queryAbilityInfo({
             bundleName: record.bundleName,
             action: "action.system.home",
             entities: ["entity.system.home"]
-          }, bundle.BundleFlag.GET_ABILITY_INFO_WITH_APPLICATION, Constants.USERID);
+          }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
         } catch(e) {
           continue;
         }

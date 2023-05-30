@@ -17,7 +17,7 @@ import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
 import router from '@ohos.router';
-import bundle from "@ohos.bundle";
+import bundle from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { getAppLabel, getAppIcon, verifyAccessToken } from "../common/utils/utils";
 import { makePy, appSort, getSortId } from "../common/utils/utils";
@@ -237,17 +237,17 @@ struct applicationItem {
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
       // Get BundleInfo based on bundle name
-      bundle.getBundleInfo(bundleNames[i], Constants.PARMETER_BUNDLE_FLAG).then(res => {
-        Promise.all([getAppLabel(res.appInfo.labelId, res.name),
-          getAppIcon(res.appInfo.iconId, res.name),
-          verifyAccessToken(res.appInfo.accessTokenId, routerData[0].permission)])
+      bundle.getApplicationInfo(bundleNames[i], bundle.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(res => {
+        Promise.all([getAppLabel(res.labelId, res.name),
+          getAppIcon(res.iconId, res.name),
+          verifyAccessToken(res.accessTokenId, routerData[0].permission)])
           .then((values) => {
           this.applicationList[i] = (
             new ApplicationObj(
               String(values[0]),
               String(values[1]),
               i,
-              res.appInfo.accessTokenId,
+              res.accessTokenId,
               routerData[0].permission,
               makePy(values[0])[0].slice(0, 1),
               getSortId(values[0])) // Get the first letter in the returned initials array
@@ -262,7 +262,7 @@ struct applicationItem {
           });
         this.isRisk[i] = false;
         try {
-          atManager.getPermissionFlags(res.appInfo.accessTokenId, routerData[0].permission).then(data => {
+          atManager.getPermissionFlags(res.accessTokenId, routerData[0].permission).then(data => {
             if (data == Constants.PERMISSION_POLICY_FIXED) {
               this.isRisk[i] = true;
             }
