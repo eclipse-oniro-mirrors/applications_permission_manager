@@ -440,7 +440,8 @@ struct PermissionDialog {
       if (this.reqPerms.indexOf(permission) != -1) {
         this.bundleInfo.reqPermissionDetails.forEach(reqPermissionDetail => {
           if (reqPermissionDetail.name == permission) {
-            let context = globalThis.extensionContext.createBundleContext(bundleName);
+            Log.info("reqPermissionDetail: " + JSON.stringify(reqPermissionDetail));
+            let context = globalThis.extensionContext.createModuleContext(bundleName, reqPermissionDetail.moduleName);
             context.resourceManager.getString(reqPermissionDetail.reasonId, (err, value) => {
               if (value !== undefined && !group.hasReason) {
                 group.description = group.description.replace(this.resource.period, this.resource.comma);

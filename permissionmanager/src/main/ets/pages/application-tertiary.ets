@@ -206,7 +206,9 @@ struct mediaDocumentItem {
       permissions.forEach(permission => {
         info.reqPermissionDetails.forEach(reqPermissionDetail => {
           if (reqPermissionDetail.name == permission) {
-            let context = globalThis.context.createBundleContext(routerData);
+            console.info("reqPermissionDetail: " + JSON.stringify(reqPermissionDetail));
+            let permissionDetail: any = reqPermissionDetail;
+            let context = globalThis.context.createModuleContext(routerData, permissionDetail.moduleName);
             context.resourceManager.getString(reqPermissionDetail.reasonId).then(value => {
               if (value !== undefined && !hasReason) {
                 this.reason = this.reason.replace(this.resource.period, this.resource.comma);
