@@ -14,14 +14,8 @@
  */
 
 import UIAbility from '@ohos.app.ability.UIAbility';
-import bundle from '@ohos.bundle';
 import bundleManager from '@ohos.bundle.bundleManager';
 const TAG = 'PermissionManager_MainAbility:';
-const PARAMETER_BUNDLE_FLAG = 16;
-const USERID = 100;
-const noNeedDisplayApp: string[] = [
-  'com.ohos.launcher'
-];
 
 export default class MainAbility extends UIAbility {
   onCreate(want, launchParam): void {
@@ -38,7 +32,8 @@ export default class MainAbility extends UIAbility {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
 
-    bundle.getAllBundleInfo(PARAMETER_BUNDLE_FLAG).then(async(bundleInfos) => {
+    const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+    bundleManager.getAllBundleInfo(flag).then(async(bundleInfos) => {
       if (bundleInfos.length <= 0) {
         console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
         return;
@@ -51,15 +46,12 @@ export default class MainAbility extends UIAbility {
             bundleName: info.name,
             action: 'action.system.home',
             entities: ['entity.system.home']
-          }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION, USERID);
+          }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
         } catch (error) {
-          console.log(TAG + 'queryAbilityByWant catch error: ' + JSON.stringify(error));
+          console.log(TAG + 'queryAbilityByWant catch error: ' + JSON.stringify(info.name));
           continue;
         }
 
-        if (noNeedDisplayApp.indexOf(info.name) !== -1) {
-          continue;
-        }
         globalThis.initialGroups.push(info);
       }
       windowStage.setUIContent(this.context, 'pages/authority-management', null);

@@ -41,15 +41,19 @@ class ResourceObj {
   bundleName: string
   api: number
   tokenId: string
+  icon: string
   iconId: string
+  label: string
   labelId: string
   permissions: Array<any>
   groupId: Array<any>
-  constructor(bundleName: string, api: number, tokenId: string, iconId: string, labelId: string, permissions: Array<any>, groupId: Array<any>) {
+  constructor(bundleName: string, api: number, tokenId: string, icon: string, iconId: string, label: string, labelId: string, permissions: Array<any>, groupId: Array<any>) {
     this.bundleName = bundleName
     this.api = api
     this.tokenId = tokenId
+    this.icon = icon
     this.iconId = iconId
+    this.label = label
     this.labelId = labelId
     this.permissions = permissions
     this.groupId = groupId
@@ -117,9 +121,11 @@ struct appNamePlusPage {
   }
 
   async initApplicationInfo(info) {
-    let context = globalThis.context.createBundleContext(info.bundleName);
-    context.resourceManager.getString(info.labelId, (error, value) => {
-      info.labelId = value;
+    globalThis.context.resourceManager.getString(info.labelId, (error, value) => {
+      info.label = value;
+    })
+    globalThis.context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
+      info.icon = value;
     })
     var reqUserPermissions: string[] = [];
     var acManager = abilityAccessCtrl.createAtManager();
@@ -229,7 +235,7 @@ struct appNamePlusPage {
           Row() {
             Column() {
               Row() {
-                backBar({ title: JSON.stringify(this.routerData.labelId), recordable: false })
+                backBar({ title: JSON.stringify(this.routerData.label), recordable: false })
               }
               Row() {
                 Column() {

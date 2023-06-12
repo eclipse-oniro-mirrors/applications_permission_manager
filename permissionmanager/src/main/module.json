@@ -90,6 +90,9 @@
             },
             {
                 "name": "ohos.permission.MANAGE_CAMERA_CONFIG"
+            },
+            {
+                "name": "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
             }
         ]
     }

@@ -77,32 +77,6 @@ export function verifyAccessToken(accessTokenId, permission) {
 }
 
 /**
-* Let arkui detect changes in array index assignments。
-*/
-export function changeIndexValue(stateList, changeItem){
-  // copy array
-  let result = stateList.slice(0);
-  for (let i = 0 ; i < changeItem.length; i++) {
-    let item = changeItem[i];
-    if (!Array.isArray(item)) {
-      throw new Error("error");
-    }
-    let index = item[0];
-    let value = item[1];
-    if (index == undefined || value == undefined) {
-      throw new Error("error");
-    }
-    if (index < 0 || index > stateList.length - 1) {
-      continue;
-    }
-    let start = result.slice(0, index);
-    start = start.concat([value]);
-    result = start.concat(result.slice(index + 1));
-  }
-  return result;
-}
-
-/**
  * Omit display when application name is too long
  * @param {String} Application name
  */

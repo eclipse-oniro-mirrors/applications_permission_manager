@@ -17,12 +17,11 @@ import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
 import router from '@ohos.router';
-import bundle from "@ohos.bundle";
 import bundleManager from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
-import { getAppLabel, getAppIcon, verifyAccessToken} from "../common/utils/utils";
+import { verifyAccessToken} from "../common/utils/utils";
 import { makePy, appSort, getSortId } from "../common/utils/utils";
 import { globalDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
@@ -43,6 +42,7 @@ const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 let globalIsOn: any = router.getParams()['globalIsOn']; // return title name
 
 class ApplicationObj {
+  bundleName: string
   labelId: string
   iconId: string
   index: number
@@ -51,6 +51,7 @@ class ApplicationObj {
   alphabeticalIndex: string
   sortId: string
   constructor(
+    bundleName: string,
     labelId: string,
     iconId: string,
     index: number,
@@ -58,6 +59,7 @@ class ApplicationObj {
     permission: string,
     alphabeticalIndex: string,
     sortId: string) {
+    this.bundleName = bundleName
     this.labelId = labelId
     this.iconId = iconId
     this.index = index
@@ -112,9 +114,13 @@ struct locationInfoPage {
       })
 
       bundleNames.forEach((bundleName, index) => {
-        bundle.getBundleInfo(bundleName, Constants.PARMETER_BUNDLE_FLAG).then(res => {
+        bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(res => {
           // 0: have permission; -1: no permission
           this.polymorphismIsOn[index] = true;
+          let reqPermissions: Array<string> = [];
+          res.reqPermissionDetails.forEach(item => {
+            reqPermissions.push(item.name);
+          })
           for (let j = 0; j < routerData.length; j++) {
             if ((routerData[j].permission == PRECISE_LOCATION_PERMISSION) && (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
               continue;
@@ -122,7 +128,7 @@ struct locationInfoPage {
             if ((routerData[j].permission == FUZZY_LOCATION_PERMISSION) && (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
               continue;
             }
-            if (res.reqPermissions.indexOf(routerData[j].permission) == -1) {
+            if (reqPermissions.indexOf(routerData[j].permission) == -1) {
               continue;
             }
             verifyAccessToken(res.appInfo.accessTokenId, routerData[j].permission).then((access) => {
@@ -146,7 +152,6 @@ struct applicationItem {
   @State isRisk: object = {};
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
-  @State bundleNameGroup: Array<string> = [];
   @Link polymorphismIsOn: Array<boolean>;
   @State globalIsOn: boolean = true;
 
@@ -254,10 +259,15 @@ struct applicationItem {
             routerData.forEach(item => {
               permissions.push(item.permission);
             })
+            globalThis.allBundleInfo.forEach(bundleInfo => {
+              if (bundleInfo.bundleName === item.bundleName) {
+                globalThis.applicationInfo = bundleInfo;
+              }
+            })
             router.pushUrl({
               url: 'pages/application-tertiary',
               params: {
-                routerData: this.bundleNameGroup[item.index],
+                routerData: item.bundleName,
                 backTitle,
                 permission: permissions,
                 status: this.polymorphismIsOn[item.index] ? Constants.RADIO_ALLOW_INDEX : Constants.RADIO_BAN_INDEX
@@ -331,65 +341,55 @@ struct applicationItem {
       })
     })
 
-    // initial then fill values when sync return which may cause sync panic
-    for (let i = 0; i < bundleNames.length; i++) {
-      this.applicationList.push(new ApplicationObj('', '', i, 0, '', '', '#'));
-      this.bundleNameGroup.push(bundleNames[i]);
-    }
-
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
       // Get BundleInfo based on bundle name
-      bundleManager.getApplicationInfo(bundleNames[i], bundleManager.ApplicationFlag.GET_APPLICATION_INFO_WITH_PERMISSION).then(res => {
-        Promise.all([getAppLabel(res.labelId, res.name),
-        getAppIcon(res.iconId, res.name)])
-          .then((values) => {
-            this.applicationList[i] = (
-              new ApplicationObj(
-              String(values[0]),
-              String(values[1]),
-                i,
-                res.accessTokenId,
-                routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1),
-              getSortId(values[0])) // Get the first letter in the returned initials array
-            );
-            this.bundleNameGroup[i] = bundleNames[i]
-          });
-        this.isRisk[i] = false;
-        try {
-          atManager.getPermissionFlags(res.accessTokenId, routerData[0].permission).then(data => {
-            if (data == Constants.PERMISSION_POLICY_FIXED) {
-              this.isRisk[i] = true;
-            }
-          })
-        }
-        catch(err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
-        }
-        // 0: have permission; -1: no permission
-        var boole = true;
-        this.permissionNum++;
-        for (let j = 0; j < routerData.length; j++) {
-          if (res.permissions.indexOf(routerData[j].permission) == -1) {
-            continue;
+      globalThis.allBundleInfo.forEach(bundleInfo => {
+        if (bundleInfo.bundleName === bundleNames[i]) {
+          this.applicationList.push(
+            new ApplicationObj(
+            bundleInfo.bundleName,
+            bundleInfo.label,
+            bundleInfo.icon,
+              i,
+            bundleInfo.tokenId,
+            routerData[0].permission,
+            makePy(bundleInfo.label)[0].slice(0, 1),
+            getSortId(bundleInfo.label)) // Get the first letter in the returned initials array
+          );
+          this.isRisk[i] = false;
+          try {
+            atManager.getPermissionFlags(bundleInfo.tokenId, routerData[0].permission).then(data => {
+              if (data == Constants.PERMISSION_POLICY_FIXED) {
+                this.isRisk[i] = true;
+              }
+            })
           }
-          verifyAccessToken(res.accessTokenId, routerData[j].permission).then((access) => {
-            if (Number(access) === Constants.PERMISSION_INDEX) {
-              if (boole) {
-                this.toggleIsOn[i] = true;
-              }
-            } else {
-              if (boole) {
-                this.permissionNum--;
-              }
-              boole = false;
-              this.toggleIsOn[i] = false;
+          catch(err) {
+            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+          }
+          // 0: have permission; -1: no permission
+          var boole = true;
+          this.permissionNum++;
+          for (let j = 0; j < routerData.length; j++) {
+            if (bundleInfo.permissions.indexOf(routerData[j].permission) == -1) {
+              continue;
             }
-          });
+            verifyAccessToken(bundleInfo.tokenId, routerData[j].permission).then((access) => {
+              if (Number(access) === Constants.PERMISSION_INDEX) {
+                if (boole) {
+                  this.toggleIsOn[i] = true;
+                }
+              } else {
+                if (boole) {
+                  this.permissionNum--;
+                }
+                boole = false;
+                this.toggleIsOn[i] = false;
+              }
+            });
+          }
         }
-      }).catch(error => {
-        console.log(TAG + bundleNames[i] + "getBundleInfo failed, cause: " + JSON.stringify(error));
       })
     }
     if (globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {

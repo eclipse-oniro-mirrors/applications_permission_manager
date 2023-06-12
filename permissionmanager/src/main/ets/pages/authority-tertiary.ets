@@ -17,9 +17,8 @@ import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
 import router from '@ohos.router';
-import bundle from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import { getAppLabel, getAppIcon, verifyAccessToken } from "../common/utils/utils";
+import { verifyAccessToken } from "../common/utils/utils";
 import { makePy, appSort, getSortId } from "../common/utils/utils";
 import { authorizeDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
@@ -229,50 +228,42 @@ struct applicationItem {
   aboutToAppear() {
     let bundleNames = routerData.length > 0 ? routerData[0].bundleNames : routerData;
 
-    // initial then fill values when sync return which may cause sync panic
-    for (let i = 0; i < bundleNames.length; i++) {
-      this.applicationList.push(new ApplicationObj('', '', i, 0, '', '', '#'));
-    }
-
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
       // Get BundleInfo based on bundle name
-      bundle.getApplicationInfo(bundleNames[i], bundle.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(res => {
-        Promise.all([getAppLabel(res.labelId, res.name),
-          getAppIcon(res.iconId, res.name),
-          verifyAccessToken(res.accessTokenId, routerData[0].permission)])
-          .then((values) => {
-          this.applicationList[i] = (
-            new ApplicationObj(
-              String(values[0]),
-              String(values[1]),
-              i,
-              res.accessTokenId,
+      globalThis.allBundleInfo.forEach(bundleInfo => {
+        if (bundleInfo.bundleName === bundleNames[i]) {
+          verifyAccessToken(bundleInfo.tokenId, routerData[0].permission).then(data => {
+            this.applicationList.push(
+              new ApplicationObj(
+              bundleInfo.label,
+              bundleInfo.icon,
+                i,
+              bundleInfo.tokenId,
               routerData[0].permission,
-              makePy(values[0])[0].slice(0, 1),
-              getSortId(values[0])) // Get the first letter in the returned initials array
-          );
-          // 0: have permission; -1: no permission
-          if (values[2] === Constants.PERMISSION_INDEX) {
-            this.toggleIsOn[i] = true;
-            this.permissionNum++;
-          } else {
-            this.toggleIsOn[i] = false;
-          }
-          });
-        this.isRisk[i] = false;
-        try {
-          atManager.getPermissionFlags(res.accessTokenId, routerData[0].permission).then(data => {
-            if (data == Constants.PERMISSION_POLICY_FIXED) {
-              this.isRisk[i] = true;
+              makePy(bundleInfo.label)[0].slice(0, 1),
+              getSortId(bundleInfo.label)) // Get the first letter in the returned initials array
+            );
+            // 0: have permission; -1: no permission
+            if (data === Constants.PERMISSION_INDEX) {
+              this.toggleIsOn[i] = true;
+              this.permissionNum++;
+            } else {
+              this.toggleIsOn[i] = false;
             }
           })
+          this.isRisk[i] = false;
+          try {
+            atManager.getPermissionFlags(bundleInfo.tokenId, routerData[0].permission).then(data => {
+              if (data == Constants.PERMISSION_POLICY_FIXED) {
+                this.isRisk[i] = true;
+              }
+            })
+          }
+          catch(err) {
+            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+          }
         }
-        catch(err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
-        }
-      }).catch(error => {
-        console.log(TAG + bundleNames[i] + "getBundleInfo failed, cause: " + JSON.stringify(error));
       })
     }
   }

@@ -19,7 +19,7 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager';
 import { backBar } from "../common/components/backBar";
 import Constants from '../common/utils/constant';
-import { noNeedDisplayApp, userGrantPermissions, permissionGroupIds } from "../common/model/permissionGroup";
+import { userGrantPermissions, permissionGroupIds } from "../common/model/permissionGroup";
 import { getPermissionGroup } from '../common/utils/utils';
 
 var TAG = 'PermissionManager_MainAbility:';
@@ -192,8 +192,8 @@ struct permissionRecordPage {
                   'bundleName': permissionApplication.name,
                   'api': permissionApplication.api,
                   'tokenId': permissionApplication.accessTokenId,
-                  'iconId': permissionApplication.icon,
-                  'labelId': permissionApplication.groupName,
+                  'icon': permissionApplication.icon,
+                  'label': permissionApplication.groupName,
                   'permissions': permissionApplication.reqUserPermissions,
                   'groupId': permissionApplication.groupIds
                 }
@@ -238,8 +238,8 @@ struct permissionRecordPage {
                   'bundleName': item.name,
                   'api': item.api,
                   'tokenId': item.accessTokenId,
-                  'iconId': item.icon,
-                  'labelId': item.groupName,
+                  'icon': item.icon,
+                  'label': item.groupName,
                   'permissions': item.reqUserPermissions,
                   'groupId': item.groupIds
                 }
@@ -409,16 +409,20 @@ struct permissionRecordPage {
   }
 
   getInfo(record, sortFlag) {
-    bundleManager.getApplicationInfo(record.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_WITH_PERMISSION).then(async info => {
+    bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async info => {
       var reqUserPermissions: string[] = [];
       var reqUserRecords: any[] = [];
       var permissionGroups: any[] = [];
       var acManager = abilityAccessCtrl.createAtManager();
       var appInfo: any = {};
+      let reqPermissions: Array<string> = [];
+      info.reqPermissionDetails.forEach(item => {
+        reqPermissions.push(item.name);
+      });
       for (let j = 0; j < record.permissionRecords.length; j++) {
         var permission = record.permissionRecords[j].permissionName;
         try {
-          var flag = await acManager.getPermissionFlags(info.accessTokenId, permission);
+          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
           if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
@@ -433,10 +437,10 @@ struct permissionRecordPage {
       if (reqUserRecords.length == 0) {
         return false;
       }
-      for (let k = 0; k < info.permissions.length; k++) {
-        var reqPermission: any = info.permissions[k];
+      for (let k = 0; k < reqPermissions.length; k++) {
+        var reqPermission: any = reqPermissions[k];
         try {
-          var reqFlag = await acManager.getPermissionFlags(info.accessTokenId, reqPermission);
+          var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
           if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
@@ -478,25 +482,21 @@ struct permissionRecordPage {
         }
       }
 
-      let  context = globalThis.context.createBundleContext(info.name);
-      await context.resourceManager.getString(info.labelId, (error, value) => {
+      await globalThis.context.resourceManager.getString(info.appInfo.labelResource, (error, value) => {
         if (value == undefined) {
-          appInfo.groupName = info.label;
+          appInfo.groupName = info.appInfo.label;
         } else {
           appInfo.groupName = value;
         }
       })
 
-      await context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
+      await globalThis.context.resourceManager.getMediaBase64(info.appInfo.iconResource, (error, value) => {
         appInfo.icon = value;
       })
 
-      await bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT).then(bundleInfo => {
-        appInfo.api = bundleInfo.targetVersion;
-      })
-
       appInfo.name = info.name;
-      appInfo.accessTokenId = info.accessTokenId;
+      appInfo.api = info.targetVersion;
+      appInfo.accessTokenId = info.appInfo.accessTokenId;
       appInfo.reqUserPermissions = reqUserPermissions;
       appInfo.permissions = permissionGroups;
       appInfo.groupNames = groupNames;
@@ -536,9 +536,6 @@ struct permissionRecordPage {
             entities: ["entity.system.home"]
           }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
         } catch(e) {
-          continue;
-        }
-        if (noNeedDisplayApp.indexOf(record.bundleName) != -1) {
           continue;
         }
         console.info(TAG + "record: " + JSON.stringify(record));
