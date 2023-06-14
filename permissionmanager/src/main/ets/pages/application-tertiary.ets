@@ -15,9 +15,7 @@
 
 import { backBar } from "../common/components/backBar";
 import router from '@ohos.router';
-import bundle from "@ohos.bundle";
 import bundleManager from '@ohos.bundle.bundleManager';
-import { getAppLabel, getAppIcon } from "../common/utils/utils";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { authorizeDialog } from "../common/components/dialog";
 import { showSubpermissionsGrop } from "../common/model/permissionGroup";
@@ -203,7 +201,7 @@ struct mediaDocumentItem {
         })
     }
     let hasReason = false;
-    bundleManager.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(info => {
+    bundleManager.getBundleInfo(routerData, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(info => {
       permissions.forEach(permission => {
         info.reqPermissionDetails.forEach(reqPermissionDetail => {
           if (reqPermissionDetail.name == permission) {
@@ -221,7 +219,7 @@ struct mediaDocumentItem {
         })
       })
     })
-    bundle.getBundleInfo(routerData, Constants.PARMETER_BUNDLE_FLAG).then(res => {
+    bundleManager.getBundleInfo(routerData, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION).then(res => {
       this.api = res.targetVersion;
       api = res.targetVersion;
       bundleInfo = res;
@@ -236,12 +234,7 @@ struct mediaDocumentItem {
       } catch(err) {
         console.log(TAG + 'acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
       }
-      Promise.all([getAppLabel(res.appInfo.labelId, res.name),
-      getAppIcon(res.appInfo.iconId, res.name)])
-        .then((values) => {
-          this.mediaListItem = new MediaListObj(
-            String(values[0]), String(values[1]), res.versionName);
-        })
+      this.mediaListItem = new MediaListObj(globalThis.applicationInfo.label, globalThis.applicationInfo.icon, res.versionName);
       this.mediaDocListItem.push(
         new MeidaDocObj($r('app.string.allow'), res.appInfo.accessTokenId, permissions)
       );

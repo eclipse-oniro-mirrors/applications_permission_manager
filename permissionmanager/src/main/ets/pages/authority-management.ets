@@ -17,7 +17,7 @@ import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
 import router from '@ohos.router';
-import bundle from "@ohos.bundle";
+import bundle from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
@@ -37,8 +37,10 @@ var TAG = 'PermissionManager_MainAbility:';
 interface applicationPermissions {
   'bundleName': string,
   'api': number,
+  'icon': string,
   'iconId': string,
   'permissions': string[],
+  'label': string,
   'labelId': string,
   'tokenId': number,
   'groupId': number[]
@@ -118,10 +120,14 @@ struct authorityManagementPage {
             } else {
               if (item.group == 'MICROPHONE') {
                 var audioManager = audio.getAudioManager();
-                audioManager.isMicrophoneMute().then(value => {
-                  router.pushUrl({
-                    url: 'pages/authority-tertiary-groups',
-                    params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
+                let audioVolumeManager = audioManager.getVolumeManager();
+                let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
+                audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+                  audioVolumeGroupManager.isMicrophoneMute().then(value => {
+                    router.pushUrl({
+                      url: 'pages/authority-tertiary-groups',
+                      params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
+                    })
                   })
                 })
               } else {
@@ -247,9 +253,8 @@ struct authorityManagementPage {
     const this_ = this;
     setTimeout(function() {
       globalThis.allBundleInfo.forEach(bundleInfo => {
-        let context = globalThis.context.createBundleContext(bundleInfo.bundleName)
-        this_.updateAppLabel(bundleInfo, context);
-        this_.updateAppIcon(bundleInfo, context);
+        this_.updateAppLabel(bundleInfo);
+        this_.updateAppIcon(bundleInfo);
       })
     }, 100)
   }
@@ -322,17 +327,21 @@ struct authorityManagementPage {
    */
   async deduplicationPermissions(info) {
     console.log(TAG + 'allBundleInfo start: ' + info.name)
-    var reqPermissionsLen = info.reqPermissions.length;
+    let reqPermissions: Array<any> = [];
+    info.reqPermissionDetails.forEach(item => {
+      reqPermissions.push(item.name);
+    })
+    var reqPermissionsLen = reqPermissions.length;
     var reqUserPermissions: string[] = [];
     var acManager = abilityAccessCtrl.createAtManager()
     if (reqPermissionsLen > 0) {
-      for (let j = 0; j < info.reqPermissions.length; j++) {
-        var permission = info.reqPermissions[j];
+      for (let j = 0; j < reqPermissions.length; j++) {
+        var permission = reqPermissions[j];
         console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name)
         if ((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
           continue;
         }
-        if ((info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION) && !info.reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
+        if ((info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION) && !reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
           continue;
         }
         try {
@@ -364,8 +373,10 @@ struct authorityManagementPage {
       'bundleName': info.name,
       'api': info.targetVersion,
       'tokenId': info.appInfo.accessTokenId,
-      'iconId': info.appInfo.iconId,
-      'labelId': info.appInfo.labelId,
+      'icon': '',
+      'iconId': info.appInfo.iconResource,
+      'label': '',
+      'labelId': info.appInfo.labelResource,
       'permissions': reqUserPermissions,
       'groupId': groupIds
     };
@@ -379,13 +390,13 @@ struct authorityManagementPage {
    * @param {String} bundleName Package names
    * @param {String} labelName Application Name
    */
-  updateAppLabel(info, context) {
-    context.resourceManager.getString(info.labelId, (error, value) => {
-        info.labelId = value;
-        if (!isNaN(info.labelId)) {
+  updateAppLabel(info) {
+    globalThis.context.resourceManager.getStringValue(info.labelId, (error, value) => {
+        info.label = value;
+        if (!isNaN(info.label)) {
           info.alphabeticalIndex = '';
         } else {
-          info.alphabeticalIndex = makePy(info.labelId)[0].slice(0, 1); // Get the first letter in the returned initials array
+          info.alphabeticalIndex = makePy(info.label)[0].slice(0, 1); // Get the first letter in the returned initials array
         }
 
         info.sortId = getSortId(value)
@@ -397,10 +408,19 @@ struct authorityManagementPage {
    * @param {Number} index index of all app permissions array
    * @param {String} bundleName Package names
    */
-  updateAppIcon(info, context) {
-    context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
-      info.iconId = value;
-    })
+  updateAppIcon(info) {
+    try {
+      let iconDescriptor = globalThis.context.resourceManager.getDrawableDescriptor(info.iconId);
+      info.icon = iconDescriptor?.getPixelMap()
+    } catch (error) {
+      console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`)
+    }
+
+    if (info.icon == '') {
+      globalThis.context.resourceManager.getMediaContentBase64(info.iconId, (error, value) => {
+        info.icon = value;
+      })
+    }
   }
 
   /**
@@ -410,7 +430,7 @@ struct authorityManagementPage {
     console.log(TAG + 'on aboutToAppear, version 1.01');
     this.getAllBundlePermissions();
     var acManager = abilityAccessCtrl.createAtManager();
-    bundle.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
+    bundle.getApplicationInfo(Constants.BUNDLE_NAME, bundle.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(data => {
       acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2);
     })
   }
@@ -568,10 +588,10 @@ struct applicationItem {
         Column() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
-              Image(item.iconId)
+              Image(item.icon)
                 .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
                 .margin({ right: Constants.APPLICATION_IMAGE_MARGIN_RIGHT })
-              Text(item.labelId)
+              Text(item.label)
                 .width(Constants.OFFSET)
                 .maxLines(Constants.MAXIMUM_HEADER_LINES)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })

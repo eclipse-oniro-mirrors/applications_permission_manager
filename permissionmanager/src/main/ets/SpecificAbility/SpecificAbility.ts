@@ -1,7 +1,5 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
-import bundle from '@ohos.bundle';
-
-const PARAMETER_BUNDLE_FLAG = 16;
+import bundle from '@ohos.bundle.bundleManager';
 
 export default class SpecificAbility extends UIAbility {
   onCreate(want, launchParam): void {
@@ -16,14 +14,21 @@ export default class SpecificAbility extends UIAbility {
   onWindowStageCreate(windowStage): void {
     // Main window is created, set main page for this ability
 
-    bundle.getBundleInfo(globalThis.bundleName, PARAMETER_BUNDLE_FLAG).then(bundleInfo => {
+    const flag = bundle.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundle.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+    bundle.getBundleInfo(globalThis.bundleName, flag).then(bundleInfo => {
+      let reqPermissions: Array<string> = [];
+      bundleInfo.reqPermissionDetails.forEach(item => {
+        reqPermissions.push(item.name);
+      });
       let info = {
         'bundleName': bundleInfo.name,
         'api': bundleInfo.targetVersion,
         'tokenId': bundleInfo.appInfo.accessTokenId,
-        'iconId': bundleInfo.appInfo.iconId,
-        'labelId': bundleInfo.appInfo.labelId,
-        'permissions': bundleInfo.reqPermissions,
+        'icon': '',
+        'iconId': bundleInfo.appInfo.iconResource,
+        'label': '',
+        'labelId': bundleInfo.appInfo.labelResource,
+        'permissions': reqPermissions,
         'groupId': [],
       };
       globalThis.applicationInfo = info;

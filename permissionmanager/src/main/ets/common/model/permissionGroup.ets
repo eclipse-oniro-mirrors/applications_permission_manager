@@ -584,10 +584,6 @@ export const permissionGroupIds: object = {
     "ohos.permission.GET_INSTALLED_BUNDLE_LIST": "16"
 };
 
-export const noNeedDisplayApp: string[] = [
-    "com.ohos.launcher"
-]
-
 export const showSubpermissionsGrop: string[] = [
     "CALENDAR",
     "SMS",

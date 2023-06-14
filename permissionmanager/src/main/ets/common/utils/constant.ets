@@ -249,9 +249,6 @@ export default class Constants {
     static UNI_MAX = 40869;
     static UNI_MIN = 19968;
 
-    static PARMETER_BUNDLE_FLAG = 16;
-    static USERID = 100;
-
     static PERMISSION_INDEX = 0;
 
     static PERMISSION_NUM = 0;

@@ -18,7 +18,6 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
 import { Log, getPermissionGroup, titleTrim } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
-import { BundleFlag } from '../common/model/bundle';
 import { permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
 
@@ -402,7 +401,7 @@ struct PermissionDialog {
 
   getApplicationName(bundleName) {
     Log.info("getApplicationName bundleName:" + bundleName);
-    bundleManager.getApplicationInfo(bundleName, BundleFlag.GET_BUNDLE_DEFAULT).then(applicationInfo => {
+    bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(applicationInfo => {
       let context = globalThis.extensionContext.createBundleContext(bundleName);
       context.resourceManager.getString(applicationInfo.labelId, (err, value) => {
         if (value == undefined) {
@@ -504,7 +503,7 @@ struct PermissionDialog {
     this.getStrings();
     let uid = want.parameters['ohos.aafwk.param.callerUid'];
     bundleManager.getBundleNameByUid(uid).then((data) => {
-      bundleManager.getBundleInfo(data, Constants.PARMETER_BUNDLE_FLAG).then(bundleInfo => {
+      bundleManager.getBundleInfo(data, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(bundleInfo => {
         this.bundleInfo = bundleInfo;
         this.getgrantGroups(want.parameters['ohos.user.grant.permission.state']);
         this.getApplicationName(data);
