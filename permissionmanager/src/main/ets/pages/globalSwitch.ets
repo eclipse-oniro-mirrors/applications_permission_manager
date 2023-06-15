@@ -38,7 +38,8 @@ struct globalSwitch {
     builder: globalDialog(),
     autoCancel: false,
     alignment: DialogAlignment.Center,
-    customStyle: true
+    customStyle: true,
+    cancel: () => { globalThis.globalWin.destroyWindow() }
   })
 
   build() {}

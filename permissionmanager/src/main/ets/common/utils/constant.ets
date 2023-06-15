@@ -266,7 +266,6 @@ export default class Constants {
     static DEFAULT_DEVICE_TYPE = 'default'
     static PHONE_DEVICE_TYPE = 'phone'
     static TABLET_DEVICE_TYPE = 'tablet'
-    static PERMISSION_DIALOG_MARGIN_BOTTOM = 62
 
     static START_SUBSCRIPT = 0
     static END_SUBSCRIPT = 500

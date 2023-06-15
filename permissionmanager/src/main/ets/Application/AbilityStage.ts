@@ -19,6 +19,6 @@ const TAG = 'PermissionManager_MainAbility:';
 
 export default class MyAbilityStage extends AbilityStage {
   onCreate(): void {
-    console.log(TAG + 'MyAbilityStage onCreate.');
+    console.info(TAG + 'MyAbilityStage onCreate.');
   }
 }

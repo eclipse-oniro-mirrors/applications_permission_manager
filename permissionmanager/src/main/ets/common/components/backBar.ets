@@ -36,7 +36,7 @@ export struct backBar {
             right: Constants.BACKBAR_IMAGE_MARGIN_RIGHT
           })
           .onClick(() => {
-            var length = router.getLength();
+            let length = router.getLength();
             Number(length) == 1 ? globalThis.context.terminateSelf() : router.back();
           })
         Text(JSON.parse(this.title))

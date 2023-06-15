@@ -16,6 +16,7 @@
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
+import window from '@ohos.window';
 import { Log, getPermissionGroup, titleTrim } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
 import { permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup';
@@ -99,6 +100,7 @@ struct PermissionDialog {
   @State locationFlag: number = Constants.LOCATION_NONE;
   @State resource: ResourceObj = new ResourceObj('', '', '', '', '', '');
   @State bundleInfo: BundleInfo = new BundleInfo(0, []);
+  @State naviHeight: number = 0
   controller: CustomDialogController
 
   build() {
@@ -184,12 +186,13 @@ struct PermissionDialog {
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
           .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })
-          .margin({ bottom: Constants.PERMISSION_DIALOG_MARGIN_BOTTOM })
+          .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }
     }.margin({ left: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      right: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN })
+      right: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
+      bottom: globalThis.isBottomPopover ? this.naviHeight : 0})
   }
 
   showTitle() {
@@ -485,6 +488,17 @@ struct PermissionDialog {
     })
   }
 
+  getAvoidWindow() {
+    let type = window.AvoidAreaType.TYPE_SYSTEM;
+    try {
+      let avoidArea = win.getWindowAvoidArea(type);
+      Log.info('avoidArea: ' + JSON.stringify(avoidArea));
+      this.naviHeight = avoidArea.bottomRect.height;
+    } catch (exception) {
+      Log.error('Failed to obtain the area. Cause:' + JSON.stringify(exception));
+    }
+  }
+
   aboutToAppear() {
     this.count = 0;
     this.initStatus = Constants.INIT_NEED_TO_WAIT;
@@ -501,6 +515,7 @@ struct PermissionDialog {
     Log.info("permission state=" + JSON.stringify(want.parameters['ohos.user.grant.permission.state']));
     this.result = new Array(this.reqPerms.length).fill(-1);
     this.getStrings();
+    this.getAvoidWindow();
     let uid = want.parameters['ohos.aafwk.param.callerUid'];
     bundleManager.getBundleNameByUid(uid).then((data) => {
       bundleManager.getBundleInfo(data, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(bundleInfo => {
