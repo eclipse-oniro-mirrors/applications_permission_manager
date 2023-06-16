@@ -47,12 +47,12 @@ class MeidaDocObj {
   }
 }; // permission information class
 class MediaListObj {
-  labelId: string
-  iconId: string
+  label: string
+  icon: string
   versionName: string
-  constructor(labelId: string, iconId: string, versionName: string,) {
-    this.labelId = labelId
-    this.iconId = iconId
+  constructor(label: string, icon: string, versionName: string,) {
+    this.label = label
+    this.icon = icon
     this.versionName = versionName
   }
 }; // Permission application information class
@@ -133,8 +133,8 @@ struct mediaDocumentPage {
 struct mediaDocumentItem {
   @State mediaDocListItem: MeidaDocObj[] = []; // Permission information array
   @State mediaListItem: MediaListObj = {
-    labelId: '',
-    iconId: '',
+    label: '',
+    icon: '',
     versionName: '',
   }; // application info array
   @Link isCheckList: boolean[]; // Permission status array
@@ -263,13 +263,13 @@ struct mediaDocumentItem {
     Column() {
       Row() {
         Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
-          Image(this.mediaListItem.iconId)
+          Image(this.mediaListItem.icon)
             .width(Constants.TERTIARY_IMAGE_WIDTH)
             .height(Constants.TERTIARY_IMAGE_HEIGHT)
             .margin({ left: Constants.TERTIARY_IMAGE_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
           Column() {
             Row() {
-              Text(this.mediaListItem.labelId)
+              Text(this.mediaListItem.label)
                 .maxLines(Constants.MAXIMUM_HEADER_LINES)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)

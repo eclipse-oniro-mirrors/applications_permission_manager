@@ -34,23 +34,23 @@ var TAG = 'PermissionManager_MainAbility:';
 let routerData: any = router.getParams()['routerData']; // Routing jump data
 let backTitle = router.getParams()['backTitle']; // return title name
 class ApplicationObj {
-  labelId: string
-  iconId: string
+  label: string
+  icon: string
   index: number
   accessTokenId: number
   permission: string
   alphabeticalIndex: string
   sortId: string
   constructor(
-    labelId: string,
-    iconId: string,
+    label: string,
+    icon: string,
     index: number,
     accessTokenId: number,
     permission: string,
     alphabeticalIndex: string,
     sortId: string) {
-    this.labelId = labelId
-    this.iconId = iconId
+    this.label = label
+    this.icon = icon
     this.index = index
     this.accessTokenId = accessTokenId
     this.permission = permission
@@ -109,11 +109,11 @@ struct applicationItem {
         Column() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
-              Image(item.iconId)
+              Image(item.icon)
                 .customizeImage(Constants.AUTHORITY_IMAGE_WIDTH, Constants.AUTHORITY_IMAGE_HEIGHT)
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
               Column() {
-                Text(item.labelId)
+                Text(item.label)
                   .width(Constants.MAXIMUM_HEADER_WIDTH)
                   .maxLines(Constants.MAXIMUM_HEADER_LINES)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
