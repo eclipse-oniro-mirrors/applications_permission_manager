@@ -14,69 +14,39 @@
  */
 
 import Constants from '../utils/constant';
+import { indexValue, appSort } from '../utils/utils';
 
 @Component
 export struct alphabetIndexerComponent {
-  private value: string[] = [
-    '#',
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z'
-  ]; // Array of alphabetically indexed names
   @Link applicationItem: Array<any>; // application info array
-  @State index: number = 0; // alphabetical index
-  @State oldApplicationItem: Array<any> = []; // Original application information array
-
-  aboutToAppear() {
-    this.oldApplicationItem = this.applicationItem;
-  }
+  @Link index: number; // alphabetical index
 
   build() {
-    AlphabetIndexer({ arrayValue: this.value, selected: this.index })
+    AlphabetIndexer({ arrayValue: indexValue, selected: this.index })
       .color($r('sys.color.ohos_id_color_text_secondary'))
       .selectedColor($r('sys.color.ohos_id_color_text_primary_activated')) // selected color
       .popupColor($r('sys.color.ohos_id_color_text_primary_activated')) // popover color
-      .selectedBackgroundColor($r('app.color.selected_Background_Color')) // Check background color
       .popupBackground($r('sys.color.ohos_id_color_card_bg')) // popover background color
       .usingPopup(true) // whether to show a popup
-      .selectedFont({ size: Constants.ALPHABETINDEXER_SELECTEDFONT_SIZE, weight: FontWeight.Bolder }) // selected style
-      .popupFont({ size: Constants.ALPHABETINDEXER_POPUPFONT_SIZE, weight: FontWeight.Bolder }) // Demo of the popup
-      .itemSize(Constants.ALPHABETINDEXER_ITEMSIZE) // size square of each item
-      .alignStyle(IndexerAlign.Left) // Align left
+      .font({ size: $r('sys.float.ohos_id_text_size_body3') })
+      .popupFont({ size: $r('sys.float.ohos_id_text_size_headline7') }) // Demo of the popup
       .onSelect((index: number) => {
-        this.index = index;
-        if (this.value[index] === '#') {
-          this.applicationItem = this.oldApplicationItem;
-        } else {
-          this.applicationItem = this.oldApplicationItem.filter((item) => {
-            return item.alphabeticalIndex.toUpperCase() === this.value[index];
-          })
+        const value = indexValue[index];
+        if (value === '#') {
+          let item = appSort(this.applicationItem)[0];
+          indexValue.includes(item.alphabeticalIndex.toUpperCase()) ? '' : globalThis.scroller.scrollToIndex(0);
+          return;
+        }
+        for (let i = 0; i < this.applicationItem.length; i++) {
+          let item = appSort(this.applicationItem)[i];
+          if (item.alphabeticalIndex.toUpperCase() === value) {
+            globalThis.scroller.scrollToIndex(i);
+            return;
+          }
         }
       })
-      .height(Constants.ALPHABETINDEXER_HEIGHT)
-      .width(Constants.ALPHABETINDEXER_WIDTH)
+      .height(Constants.FULL_HEIGHT)
+      .constraintSize({ maxHeight: Constants.ALPHABETINDEXER_HEIGHT })
+      .width(Constants.APPLICATION_ALPHABETINDEX_WIDTH)
   }
 }
