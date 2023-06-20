@@ -50,7 +50,7 @@ class MediaListObj {
   label: string
   icon: string
   versionName: string
-  constructor(label: string, icon: string, versionName: string,) {
+  constructor(label: string, icon: string, versionName: string) {
     this.label = label
     this.icon = icon
     this.versionName = versionName
