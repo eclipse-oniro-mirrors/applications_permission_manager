@@ -15,11 +15,7 @@
 
 export default class Constants {
     // alphabetIndexer
-    static ALPHABETINDEXER_SELECTEDFONT_SIZE = 12;
-    static ALPHABETINDEXER_POPUPFONT_SIZE = 30;
-    static ALPHABETINDEXER_ITEMSIZE = 16;
     static ALPHABETINDEXER_HEIGHT = 448;
-    static ALPHABETINDEXER_WIDTH = 36;
 
     // backBar
     static BACKBAR_HEIGHT = 56;

@@ -21,8 +21,7 @@ import bundleManager from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
-import { verifyAccessToken} from "../common/utils/utils";
-import { makePy, appSort, getSortId } from "../common/utils/utils";
+import { verifyAccessToken, makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
 import { globalDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup } from "../common/model/permissionGroup";
@@ -154,6 +153,8 @@ struct applicationItem {
   @State searchResult: boolean = true; // search results
   @Link polymorphismIsOn: Array<boolean>;
   @State globalIsOn: boolean = true;
+  @State selectedIndex: number = 0;
+  scroller: Scroller = new Scroller();
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
     builder: globalDialog({ globalIsOn: $globalIsOn }),
@@ -480,42 +481,46 @@ struct applicationItem {
             }
           }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
           .margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
-          Scroll() {
-            Row() {
-              Column() {
-                if (!this.applicationList.length) {
-                  if (this.searchResult) {
-                    Row() {}
-                  } else {
-                    Row() {
-                      Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
-                        Image($r('app.media.searchnoresult'))
-                          .customizeImage(Constants.SEARCHNORESULT_IMAGE_WIDTH, Constants.SEARCHNORESULT_IMAGE_HEIGHT)
-                      }
-                    }
-                  }
+          Row() {
+            Column() {
+              if (!this.applicationList.length) {
+                if (this.searchResult) {
+                  Row() {}
                 } else {
                   Row() {
-                    List() {
-                      ForEach(appSort(this.applicationList), (item, index) => {
-                        this.ListItemLayout(item, index)
-                      }, item => JSON.stringify(item))
+                    Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+                      Image($r('app.media.searchnoresult'))
+                        .customizeImage(Constants.SEARCHNORESULT_IMAGE_WIDTH, Constants.SEARCHNORESULT_IMAGE_HEIGHT)
                     }
-                    .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-                    .borderRadius(Constants.BORDER_RADIUS)
-                    .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                   }
                 }
-              }.width(Constants.FULL_WIDTH)
-              .margin({ bottom: globalGroup.includes(globalThis.currentPermissionGroup) ? Constants.AUTHORITY_LIST_MARGIN_BOTTOM_GLOBAL : Constants.AUTHORITY_LIST_MARGIN_BOTTOM })
-            }
-          }.scrollBar(BarState.Off)
-          .borderRadius(Constants.BORDER_RADIUS)
+              } else {
+                Row() {
+                  List({ scroller: this.scroller }) {
+                    ForEach(appSort(this.applicationList), (item, index) => {
+                      this.ListItemLayout(item, index)
+                    }, item => JSON.stringify(item))
+                  }
+                  .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                  .borderRadius(Constants.BORDER_RADIUS)
+                  .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                  .onScrollIndex((start, end) => {
+                    globalThis.scroller = this.scroller;
+                    let alphabeticalIndex = appSort(this.applicationList)[start].alphabeticalIndex;
+                    let index = indexValue.indexOf(alphabeticalIndex.toUpperCase());
+                    this.selectedIndex = index >= 0 ? index : 0;
+                  })
+                }
+              }
+            }.width(Constants.FULL_WIDTH)
+            .margin({ bottom: globalGroup.includes(globalThis.currentPermissionGroup) ? Constants.AUTHORITY_LIST_MARGIN_BOTTOM_GLOBAL : Constants.AUTHORITY_LIST_MARGIN_BOTTOM })
+          }
         }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
         Column() {
-          alphabetIndexerComponent({ applicationItem: $applicationList })
+          alphabetIndexerComponent({ applicationItem: $applicationList, index: $selectedIndex })
         }.width(Constants.AUTHORITY_ALPHABETINDEX_WIDTH)
          .padding({ top: Constants.AUTHORITY_ALPHABETINDEX_PADDING_TOP })
+        .margin({ bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM })
       }.flexGrow(Constants.FLEX_GROW)
     }.height(Constants.FULL_HEIGHT)
   }
