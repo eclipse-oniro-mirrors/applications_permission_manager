@@ -23,7 +23,7 @@ import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import { groups, userGrantPermissions, permissionGroupPermissions, globalGroup } from "../common/model/permissionGroup";
 import { permissionGroups, permissionGroupIds, showSubpermissionsGrop } from "../common/model/permissionGroup";
-import { makePy, appSort, getSortId } from "../common/utils/utils";
+import { makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
 var TAG = 'PermissionManager_MainAbility:';
@@ -581,6 +581,8 @@ struct authorityManagementPage {
 struct applicationItem {
   @State applicationItem: any[] = globalThis.allBundleInfo; // application info array
   @State searchResult: boolean = true; // search results
+  @State selectedIndex: number = 0;
+  scroller: Scroller = new Scroller();
 
   @Builder ListItemLayout(item, index) {
     ListItem() {
@@ -662,15 +664,19 @@ struct applicationItem {
                 .padding({ left: Constants.MANAGEMENT_ROW_PADDING_LEFT })
               } else {
                 Row() {
-                  Scroll() {
-                    List() {
-                      ForEach(appSort(this.applicationItem), (item, index) => {
-                        this.ListItemLayout(item, index)
-                      }, item => JSON.stringify(item))
-                    }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-                    .borderRadius(Constants.BORDER_RADIUS)
-                    .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-                  }.scrollBar(BarState.Off)
+                  List({ scroller: this.scroller }) {
+                    ForEach(appSort(this.applicationItem), (item, index) => {
+                      this.ListItemLayout(item, index)
+                    }, item => JSON.stringify(item))
+                  }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                  .borderRadius(Constants.BORDER_RADIUS)
+                  .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                  .onScrollIndex((start, end) => {
+                    globalThis.scroller = this.scroller;
+                    let alphabeticalIndex = appSort(this.applicationItem)[start].alphabeticalIndex;
+                    let index = indexValue.indexOf(alphabeticalIndex.toUpperCase());
+                    this.selectedIndex = index >= 0 ? index : 0;
+                  })
                 }.margin({ left: Constants.MANAGEMENT_ROW_PADDING_LEFT })
                 .borderRadius(Constants.BORDER_RADIUS)
                 .clip(true)
@@ -678,8 +684,8 @@ struct applicationItem {
             }.height(Constants.FULL_HEIGHT)
           }.margin({ top: Constants.MANAGEMENT_ROW_MARGIN_TOP, bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM })
           Column() {
-            alphabetIndexerComponent({ applicationItem: $applicationItem })
-          }.margin({ top: Constants.APPLICATION_ALPHABETINDEX_MARGIN_TOP })
+            alphabetIndexerComponent({ applicationItem: $applicationItem, index: $selectedIndex })
+          }.margin({ top: Constants.APPLICATION_ALPHABETINDEX_MARGIN_TOP, bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM })
           .width(Constants.APPLICATION_ALPHABETINDEX_WIDTH)
         }
       }

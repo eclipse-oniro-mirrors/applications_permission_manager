@@ -11,10 +11,6 @@
     {
       "name": "location_circle_color",
       "value": "#254FF7"
-    },
-    {
-      "name": "selected_Background_Color",
-      "value": "#CCCCCC"
-    },
+    }
   ]
 }
