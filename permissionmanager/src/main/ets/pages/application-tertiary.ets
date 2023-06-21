@@ -50,7 +50,7 @@ class MediaListObj {
   label: string
   icon: string
   versionName: string
-  constructor(label: string, icon: string, versionName: string,) {
+  constructor(label: string, icon: string, versionName: string) {
     this.label = label
     this.icon = icon
     this.versionName = versionName
@@ -156,13 +156,13 @@ struct mediaDocumentItem {
    * @param {String} permission permission name
    */
   grantUserGrantedPermission(accessTokenId, permission) {
-    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
-      nowGrantResult = Constants.PERMISSION_INDEX;
-    })
-    .catch((error) => {
-      console.error(TAG + 'grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
-    })
+    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
+      .then(() => {
+        nowGrantResult = Constants.PERMISSION_INDEX;
+      })
+      .catch((error) => {
+        console.error(TAG + 'grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+      })
   }
 
   /**
@@ -171,10 +171,10 @@ struct mediaDocumentItem {
    * @param {String} permission permission name
    */
   revokeUserGrantedPermission(accessTokenId, permission) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
-      nowRevokeResult = Constants.PERMISSION_INDEX;
-    })
+    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
+      .then(() => {
+        nowRevokeResult = Constants.PERMISSION_INDEX;
+      })
       .catch((error) => {
         console.error(TAG + 'revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
       })
@@ -426,8 +426,6 @@ struct mediaDocumentItem {
                   }
                 }
               }
-              .onClick(() => {
-              })
             }
             .padding({
               left: Constants.DEFAULT_PADDING_START,

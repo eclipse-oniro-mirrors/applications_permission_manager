@@ -99,7 +99,7 @@ struct appNameItem {
             }
           }
         }.onClick(() => {
-          var dataList = this.routerData.filter((ele) => {
+          let dataList = this.routerData.filter((ele) => {
             return ele.permission === item.permissionName;
           })
           router.pushUrl({

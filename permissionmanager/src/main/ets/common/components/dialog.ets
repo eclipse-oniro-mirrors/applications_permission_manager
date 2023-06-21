@@ -109,7 +109,7 @@ export struct globalDialog {
   }
 
   confirm() {
-    if (globalThis.currentPermissionGroup == 'CAMERA') {
+    if (globalThis.currentPermissionGroup === 'CAMERA') {
       let cameraManager = camera.getCameraManager(globalThis.context);
       cameraManager.muteCamera(true);
       this.controller.close();

@@ -83,6 +83,7 @@ export default class ServiceExtensionAbility extends extension {
       await win.loadContent('pages/dialogPlus', storage);
       await win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
+      await win.setWindowLayoutFullScreen(true);
       globalThis.windowNum ++;
     } catch {
       console.info(TAG + 'window create failed!');
