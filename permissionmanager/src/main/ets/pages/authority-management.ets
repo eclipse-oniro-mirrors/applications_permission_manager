@@ -124,6 +124,7 @@ struct authorityManagementPage {
                 let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
                 audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
                   audioVolumeGroupManager.isMicrophoneMute().then(value => {
+                    globalThis.ismutesuppotred = true;
                     router.pushUrl({
                       url: 'pages/authority-tertiary-groups',
                       params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !value }
@@ -133,6 +134,7 @@ struct authorityManagementPage {
               } else {
                 let cameraManager = camera.getCameraManager(globalThis.context);
                 let mute = cameraManager.isCameraMuted();
+                globalThis.ismutesuppotred = cameraManager.isCameraMuteSupported();
                 router.pushUrl({
                   url: 'pages/authority-tertiary-groups',
                   params: { routerData: dataList, backTitle: item.groupName, globalIsOn: !mute }

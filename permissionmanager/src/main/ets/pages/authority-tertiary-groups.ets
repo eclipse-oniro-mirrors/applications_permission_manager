@@ -426,7 +426,7 @@ struct applicationItem {
       })
       Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
         Column() {
-          if (globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
+          if (globalGroup.indexOf(globalThis.currentPermissionGroup) !== -1  && globalThis.ismutesuppotred === true) {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                 Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera') : $r('app.string.microphone'))
@@ -513,7 +513,7 @@ struct applicationItem {
                 }
               }
             }.width(Constants.FULL_WIDTH)
-            .margin({ bottom: globalGroup.includes(globalThis.currentPermissionGroup) ? Constants.AUTHORITY_LIST_MARGIN_BOTTOM_GLOBAL : Constants.AUTHORITY_LIST_MARGIN_BOTTOM })
+            .margin({ bottom: globalGroup.includes(globalThis.currentPermissionGroup) && globalThis.ismutesuppotred === true ? Constants.AUTHORITY_LIST_MARGIN_BOTTOM_GLOBAL : Constants.AUTHORITY_LIST_MARGIN_BOTTOM })
           }
         }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
         Column() {
