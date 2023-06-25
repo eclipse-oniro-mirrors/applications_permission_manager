@@ -20,6 +20,14 @@ import { indexValue, appSort } from '../utils/utils';
 export struct alphabetIndexerComponent {
   @Link applicationItem: Array<any>; // application info array
   @Link index: number; // alphabetical index
+  @State usingPopup: boolean = false;
+
+  aboutToAppear() {
+    const this_ = this;
+    setTimeout(function (){
+      this_.usingPopup = true;
+    }, 500)
+  }
 
   build() {
     AlphabetIndexer({ arrayValue: indexValue, selected: this.index })
@@ -27,7 +35,7 @@ export struct alphabetIndexerComponent {
       .selectedColor($r('sys.color.ohos_id_color_text_primary_activated')) // selected color
       .popupColor($r('sys.color.ohos_id_color_text_primary_activated')) // popover color
       .popupBackground($r('sys.color.ohos_id_color_card_bg')) // popover background color
-      .usingPopup(true) // whether to show a popup
+      .usingPopup(this.usingPopup) // whether to show a popup
       .font({ size: $r('sys.float.ohos_id_text_size_body3') })
       .popupFont({ size: $r('sys.float.ohos_id_text_size_headline7') }) // Demo of the popup
       .onSelect((index: number) => {
