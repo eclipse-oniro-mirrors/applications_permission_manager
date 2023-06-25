@@ -506,9 +506,11 @@ struct applicationItem {
                   .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                   .onScrollIndex((start, end) => {
                     globalThis.scroller = this.scroller;
-                    let alphabeticalIndex = appSort(this.applicationList)[start].alphabeticalIndex;
-                    let index = indexValue.indexOf(alphabeticalIndex.toUpperCase());
-                    this.selectedIndex = index >= 0 ? index : 0;
+                    if (this.applicationList.length > 0) {
+                      let alphabeticalIndex = appSort(this.applicationList)[start].alphabeticalIndex;
+                      let index = indexValue.indexOf(alphabeticalIndex.toUpperCase());
+                      this.selectedIndex = index >= 0 ? index : 0;
+                    }
                   })
                 }
               }
