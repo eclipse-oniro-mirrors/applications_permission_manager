@@ -41,9 +41,11 @@ export struct alphabetIndexerComponent {
       .onSelect((index: number) => {
         const value = indexValue[index];
         if (value === '#') {
-          let item = appSort(this.applicationItem)[0];
-          indexValue.includes(item.alphabeticalIndex.toUpperCase()) ? '' : globalThis.scroller.scrollToIndex(0);
-          return;
+          if (this.applicationItem.length > 0) {
+            let item = appSort(this.applicationItem)[0];
+            indexValue.includes(item.alphabeticalIndex.toUpperCase()) ? '' : globalThis.scroller.scrollToIndex(0);
+            return;
+          }
         }
         for (let i = 0; i < this.applicationItem.length; i++) {
           let item = appSort(this.applicationItem)[i];
