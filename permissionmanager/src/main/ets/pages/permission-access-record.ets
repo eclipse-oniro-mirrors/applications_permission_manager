@@ -66,12 +66,14 @@ struct permissionRecordPage {
         Text(index ? $r('app.string.application') : $r('app.string.permission'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Bold)
+          .lineHeight(Constants.TAB_LINE_HEIGHT)
           .height(Constants.TAB_DECORATION_HEIGHT)
           .backgroundColor($r('sys.color.ohos_id_color_subtab_line_on'))
       }
     }.height(Constants.TAB_HEIGHT)
     .width(Constants.FULL_WIDTH)
-    .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+    .padding({ left: globalThis.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_START,
+      right: globalThis.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_END })
   }
 
   @Builder ListItemLayout(item, index, dimension) {

@@ -187,6 +187,7 @@ struct PermissionDialog {
           .width(Constants.FULL_WIDTH)
           .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })
           .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
+          .clip(true)
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }

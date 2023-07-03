@@ -116,6 +116,8 @@ export default class Constants {
     static SUBTITLE_PADDING_TOP = 16;
     static SUBTITLE_PADDING_BOTTOM = 8;
     static TAB_HEIGHT = 56;
+    static TAB_LINE_HEIGHT = 100;
+    static TAB_INNER_PADDING = 8;
     static TAB_DECORATION_HEIGHT = 2;
     static TAB_DECORATION_POSITION_Y = 6;
     static DEFAULT_PADDING_START = 12;

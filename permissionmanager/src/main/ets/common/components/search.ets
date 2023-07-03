@@ -42,7 +42,7 @@ export struct textInput {
               this.applicationItem = this.oldApplicationItem;
             } else {
               this.applicationItem = this.oldApplicationItem.filter((item) => {
-                  return item.label.indexOf(value) > -1;
+                  return String(item.label).indexOf(value) > -1;
               })
             }
             if (this.applicationItem.length) {

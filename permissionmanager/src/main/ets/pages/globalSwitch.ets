@@ -99,6 +99,7 @@ struct globalDialog {
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
           .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
+          .clip(true)
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }
