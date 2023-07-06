@@ -380,7 +380,7 @@ struct authorityManagementPage {
       'tokenId': info.appInfo.accessTokenId,
       'icon': '',
       'iconId': info.appInfo.iconResource,
-      'label': '',
+      'label': info.appInfo.label,
       'labelId': info.appInfo.labelResource,
       'permissions': reqUserPermissions,
       'groupId': groupIds
@@ -397,7 +397,9 @@ struct authorityManagementPage {
    */
   updateAppLabel(info) {
     globalThis.context.resourceManager.getStringValue(info.labelId, (error, value) => {
-        info.label = value;
+        if (!!value) {
+          info.label = value;
+        }
         if (!isNaN(info.label)) {
           info.alphabeticalIndex = '';
         } else {
@@ -413,7 +415,7 @@ struct authorityManagementPage {
    * @param {Number} index index of all app permissions array
    * @param {String} bundleName Package names
    */
-  updateAppIcon(info) {
+  async updateAppIcon(info) {
     try {
       let iconDescriptor = globalThis.context.resourceManager.getDrawableDescriptor(info.iconId);
       info.icon = iconDescriptor?.getPixelMap()
@@ -421,10 +423,11 @@ struct authorityManagementPage {
       console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`)
     }
 
-    if (info.icon == '') {
-      globalThis.context.resourceManager.getMediaContentBase64(info.iconId, (error, value) => {
-        info.icon = value;
-      })
+    if (!info.icon) {
+      info.icon = await globalThis.context.resourceManager.getMediaContentBase64(info.iconId);
+    }
+    if (!info.icon) {
+      info.icon = $r('app.media.icon');
     }
   }
 
