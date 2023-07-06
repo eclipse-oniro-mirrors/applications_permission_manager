@@ -21,6 +21,7 @@ import bundle from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
+import display from '@ohos.display';
 import { groups, userGrantPermissions, permissionGroupPermissions, globalGroup } from "../common/model/permissionGroup";
 import { permissionGroups, permissionGroupIds, showSubpermissionsGrop } from "../common/model/permissionGroup";
 import { makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
@@ -163,13 +164,15 @@ struct authorityManagementPage {
         Text(index ? $r('app.string.application') : $r('app.string.permission'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Bold)
+          .lineHeight(Constants.TAB_LINE_HEIGHT)
           .height(Constants.TAB_DECORATION_HEIGHT)
           .fontColor($r('sys.color.ohos_id_color_subtab_text_on'))
           .backgroundColor($r('sys.color.ohos_id_color_subtab_text_on'))
       }
     }.height(Constants.TAB_HEIGHT)
     .width(Constants.FULL_WIDTH)
-    .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+    .padding({ left: globalThis.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_START,
+      right: globalThis.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_END })
   }
 
   /**
@@ -431,6 +434,8 @@ struct authorityManagementPage {
   aboutToAppear() {
     console.log(TAG + 'on aboutToAppear, version 1.01');
     this.getAllBundlePermissions();
+    let dis = display.getDefaultDisplaySync();
+    globalThis.isVertical = dis.height > dis.width ? true : false;
     var acManager = abilityAccessCtrl.createAtManager();
     bundle.getApplicationInfo(Constants.BUNDLE_NAME, bundle.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(data => {
       acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2);
