@@ -24,10 +24,10 @@
             {
                 "name": "com.ohos.permissionmanager.MainAbility",
                 "startWindowBackground": "$color:default_background_color",
-                "startWindowIcon": "$media:icon",
+                "startWindowIcon": "$media:app_icon",
                 "srcEntrance": "./ets/MainAbility/MainAbility.ts",
                 "description": "$string:MainAbility_desc",
-                "icon": "$media:icon",
+                "icon": "$media:app_icon",
                 "label": "$string:MainAbility_label",
                 "visible": true,
                 "launchType": "singleton",
@@ -37,9 +37,9 @@
               "name": "com.ohos.permissionmanager.SpecificAbility",
               "srcEntrance": "./ets/SpecificAbility/SpecificAbility.ts",
               "description": "$string:SpecificAbility_desc",
-              "icon": "$media:icon",
+              "icon": "$media:app_icon",
               "label": "$string:SpecificAbility_label",
-              "startWindowIcon": "$media:icon",
+              "startWindowIcon": "$media:app_icon",
               "startWindowBackground": "$color:default_background_color",
               "visible": true,
               "launchType": "standard",
@@ -49,14 +49,14 @@
         ],
         "extensionAbilities": [
             {
-                "icon": "$media:icon",
+                "icon": "$media:app_icon",
                 "name": "com.ohos.permissionmanager.GrantAbility",
                 "srcEntrance": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
                 "type": "service",
                 "visible": true
             },
             {
-                "icon": "$media:icon",
+                "icon": "$media:app_icon",
                 "name": "com.ohos.permissionmanager.GlobalExtAbility",
                 "srcEntrance": "./ets/GlobalExtAbility/GlobalExtAbility.ts",
                 "type": "service",

@@ -557,7 +557,7 @@ struct authorityManagementPage {
                                   right: Constants.MANAGEMENT_ROW_PADDING_RIGHT,
                                 })
                               }.scrollBar(BarState.Off)
-                              .margin({ top: Constants.MANAGEMENT_ROW_PADDING_TOP })
+                              .margin({ top: Constants.MANAGEMENT_ROW_PADDING_TOP, bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
                             }.width(Constants.FULL_WIDTH)
                           }
                         }.tabBar(this.TabBuilder(0))
