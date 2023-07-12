@@ -160,7 +160,7 @@ struct PermissionDialog {
                     }
                   }
 
-                  if (this.locationFlag > Constants.LOCATION_NONE) {
+                  if (this.locationFlag > Constants.LOCATION_NONE && this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].name === 'LOCATION') {
                     LocationCanvas({ locationFlag: $locationFlag })
                   }
                 }
