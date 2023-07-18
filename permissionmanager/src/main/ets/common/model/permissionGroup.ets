@@ -94,11 +94,9 @@ export const permissionGroups: any[] = [
     },
     {
         "permissionName": "ohos.permission.DISTRIBUTED_DATASYNC",
-        "groupName": "OTHER",
-        "icon": $r("app.media.ic_multi_device_vector"),
-        "text": $r("app.string.group_label_distributed_datasync"),
-        "label": $r("app.string.multi_device_collaboration"),
-        "groupId": 7
+        "groupName": "DISTRIBUTED_DATASYNC",
+        "label": $r("sys.string.ohos_lab_distributed_datasync"),
+        "groupId": 13
     },
     {
         "permissionName": "ohos.permission.READ_IMAGEVIDEO",
@@ -256,16 +254,15 @@ export const groups: any[] = [
         "name": "OTHER",
         "groupName": $r("app.string.groupName_other"),
         "icon": $r('app.media.ic_more'),
+        "label": '',
         "description": "",
-        "permissions": [
-            "ohos.permission.DISTRIBUTED_DATASYNC"
-        ],
-        "isShow":false
+        "permissions": [],
+        "isShow":true
     },
     {
         "name": "IMAGE_AND_VIDEOS",
         "groupName": $r('sys.string.ohos_lab_read_imagevideo'),
-        "icon": $r('app.media.ic_public_folder'),
+        "icon": $r('app.media.ic_public_picture'),
         "label": $r("app.string.group_label_image_and_videos"),
         "description": "",
         "permissions": [
@@ -278,7 +275,7 @@ export const groups: any[] = [
     {
         "name": "AUDIOS",
         "groupName": $r('sys.string.ohos_lab_read_audio'),
-        "icon": $r('app.media.ic_public_folder'),
+        "icon": $r('app.media.ic_public_audio'),
         "label": $r("app.string.group_label_audios"),
         "description": "",
         "permissions": [
@@ -322,6 +319,17 @@ export const groups: any[] = [
             "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
         ],
         "isShow":false
+    },
+    {
+        "name": "DISTRIBUTED_DATASYNC",
+        "groupName": $r('app.string.multi_device_collaboration'),
+        "icon": $r('app.media.ic_multi_device_vector'),
+        "label": $r('app.string.group_label_distributed_datasync'),
+        "description": "",
+        "permissions": [
+            "ohos.permission.DISTRIBUTED_DATASYNC"
+        ],
+        "isShow":false
     }
 ];
 
@@ -353,9 +361,7 @@ export const permissionGroupPermissions: object = {
     "HEALTH": [
         "ohos.permission.READ_HEALTH_DATA"
     ],
-    "OTHER": [
-        "ohos.permission.DISTRIBUTED_DATASYNC"
-    ],
+    "OTHER": [],
     "IMAGE_AND_VIDEOS": [
         "ohos.permission.READ_IMAGEVIDEO",
         "ohos.permission.WRITE_IMAGEVIDEO",
@@ -376,6 +382,9 @@ export const permissionGroupPermissions: object = {
     ],
     "GET_INSTALLED_BUNDLE_LIST": [
         "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
+    ],
+    "DISTRIBUTED_DATASYNC": [
+        "ohos.permission.DISTRIBUTED_DATASYNC"
     ]
 };
 
@@ -422,7 +431,7 @@ export const permissionGroupIds: object = {
     "ohos.permission.WRITE_WHOLE_CALENDAR": "4",
     "ohos.permission.ACTIVITY_MOTION": "5",
     "ohos.permission.READ_HEALTH_DATA": "6",
-    "ohos.permission.DISTRIBUTED_DATASYNC": "7",
+    "ohos.permission.DISTRIBUTED_DATASYNC": "13",
     "ohos.permission.READ_IMAGEVIDEO": "8",
     "ohos.permission.WRITE_IMAGEVIDEO": "8",
     "ohos.permission.MEDIA_LOCATION": "8",
