@@ -134,12 +134,25 @@ struct appNameItem {
       Column() {
         Row() {
             List() {
-              ForEach(this.calendarListItem.slice(Constants.SLICE_START, this.calendarListItem.length - 1), (item) => {
-                this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-              }, item => JSON.stringify(item))
-              ForEach(this.calendarListItem.slice(Constants.SLICE_END), (item) => {
-                this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-              }, item => JSON.stringify(item))
+              if (this.calendarListItem.length > 0) {
+                ForEach(this.calendarListItem.slice(Constants.SLICE_START, this.calendarListItem.length - 1), (item) => {
+                  this.ListItemLayout(item, Constants.SLICE_START_INDEX)
+                }, item => JSON.stringify(item))
+                ForEach(this.calendarListItem.slice(Constants.SLICE_END), (item) => {
+                  this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+                }, item => JSON.stringify(item))
+              } else {
+                ListItem() {
+                  Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+                    Text($r('app.string.no_permission'))
+                      .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  }
+                }
+                .width(Constants.FULL_WIDTH)
+                .height(Constants.LISTITEM_ROW_HEIGHT)
+                .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+              }
             }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg')).borderRadius(Constants.BORDER_RADIUS)
             .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
           }.margin({ top: Constants.ROW_MARGIN_TOP })
