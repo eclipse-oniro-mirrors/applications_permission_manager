@@ -548,7 +548,7 @@ struct authorityManagementPage {
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius(Constants.BORDER_RADIUS)
                                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-                                    }
+                                    }.margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
                                   }.height(Constants.FULL_HEIGHT)
                                   .borderRadius(Constants.BORDER_RADIUS)
                                   .clip(true)
@@ -557,7 +557,7 @@ struct authorityManagementPage {
                                   right: Constants.MANAGEMENT_ROW_PADDING_RIGHT,
                                 })
                               }.scrollBar(BarState.Off)
-                              .margin({ top: Constants.MANAGEMENT_ROW_PADDING_TOP, bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
+                              .margin({ top: Constants.MANAGEMENT_ROW_PADDING_TOP })
                             }.width(Constants.FULL_WIDTH)
                           }
                         }.tabBar(this.TabBuilder(0))
