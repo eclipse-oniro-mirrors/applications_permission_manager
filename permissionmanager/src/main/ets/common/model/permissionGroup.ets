@@ -163,6 +163,12 @@ export const permissionGroups: any[] = [
         "groupName": "GET_INSTALLED_BUNDLE_LIST",
         "label": $r('sys.string.ohos_lab_get_installed_bundle_list'),
         "groupId": 12
+    },
+    {
+        "permissionName": "ohos.permission.ACCESS_BLUETOOTH",
+        "groupName": "BLUETOOTH",
+        "label": $r('sys.string.ohos_lab_access_bluetooth'),
+        "groupId": 14
     }
 ]
 
@@ -330,6 +336,17 @@ export const groups: any[] = [
             "ohos.permission.DISTRIBUTED_DATASYNC"
         ],
         "isShow":false
+    },
+    {
+        "name": "BLUETOOTH",
+        "groupName": $r('app.string.groupName_bluetooth'),
+        "icon": $r('app.media.ic_public_bluetooth'),
+        "label": $r('app.string.group_label_bluetooth'),
+        "description": "",
+        "permissions": [
+            "ohos.permission.ACCESS_BLUETOOTH"
+        ],
+        "isShow":false
     }
 ];
 
@@ -385,6 +402,9 @@ export const permissionGroupPermissions: object = {
     ],
     "DISTRIBUTED_DATASYNC": [
         "ohos.permission.DISTRIBUTED_DATASYNC"
+    ],
+    "BLUETOOTH": [
+        "ohos.permission.ACCESS_BLUETOOTH"
     ]
 };
 
@@ -414,7 +434,8 @@ export const userGrantPermissions: string[] = [
     "ohos.permission.READ_WHOLE_CALENDAR",
     "ohos.permission.WRITE_WHOLE_CALENDAR",
     "ohos.permission.APP_TRACKING_CONSENT",
-    "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
+    "ohos.permission.GET_INSTALLED_BUNDLE_LIST",
+    "ohos.permission.ACCESS_BLUETOOTH"
 ];
 
 export const permissionGroupIds: object = {
@@ -442,7 +463,8 @@ export const permissionGroupIds: object = {
     "ohos.permission.READ_MEDIA": "10",
     "ohos.permission.WRITE_MEDIA": "10",
     "ohos.permission.APP_TRACKING_CONSENT": "11",
-    "ohos.permission.GET_INSTALLED_BUNDLE_LIST": "12"
+    "ohos.permission.GET_INSTALLED_BUNDLE_LIST": "12",
+    "ohos.permission.ACCESS_BLUETOOTH": "14"
 };
 
 export const showSubpermissionsGrop: string[] = [

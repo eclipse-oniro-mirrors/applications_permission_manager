@@ -285,6 +285,10 @@
       "value": "读取已安装应用列表"
     },
     {
+      "name": "groupName_bluetooth",
+      "value": "蓝牙"
+    },
+    {
       "name": "multi_device_collaboration",
       "value": "多设备协同"
     },
@@ -355,6 +359,10 @@
     {
       "name": "group_label_appList",
       "value": "读取已安装应用列表？"
+    },
+    {
+      "name": "group_label_bluetooth",
+      "value": "访问蓝牙？"
     },
     {
       "name": "risk_warning",

@@ -285,6 +285,10 @@
       "value": "Read the list of installed apps"
     },
     {
+      "name": "groupName_bluetooth",
+      "value": "Bluetooth"
+    },
+    {
       "name": "multi_device_collaboration",
       "value": "Multi-device collaboration"
     },
@@ -355,6 +359,10 @@
     {
       "name": "group_label_appList",
       "value": " read the list of installed apps?"
+    },
+    {
+      "name": "group_label_bluetooth",
+      "value": " access Bluetooth?"
     },
     {
       "name": "risk_warning",
