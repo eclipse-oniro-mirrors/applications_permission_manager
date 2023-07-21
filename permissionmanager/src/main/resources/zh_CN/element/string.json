@@ -375,6 +375,42 @@
     {
       "name": "SpecificAbility_label",
       "value": "label"
+    },
+    {
+      "name": "Temporarily_authorize",
+      "value": "临时授权"
+    },
+    {
+      "name": "To_access",
+      "value": "访问"
+    },
+    {
+      "name": "location_desc",
+      "value": "位置信息"
+    },
+    {
+      "name": "media_files_desc",
+      "value": "媒体和文件"
+    },
+    {
+      "name": "location_button_desc",
+      "value": "此按钮通过系统安全认证，"
+    },
+    {
+      "name": "only_can_desc",
+      "value": "仅允许应用在您点击此按钮时，临时访问"
+    },
+    {
+      "name": "only_after_desc",
+      "value": "，"
+    },
+    {
+      "name": "prevent_desc",
+      "value": "以减少您的隐私数据被应用持续获取。"
+    },
+    {
+      "name": "Got_it",
+      "value": "知道了"
     }
   ]
 }

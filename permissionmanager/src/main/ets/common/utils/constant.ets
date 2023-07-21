@@ -274,10 +274,26 @@ export default class Constants {
 
     static RECORD_PADDING_BOTTOM = '20%'
 
+    //////////////security_dialog///////////////
+    // total
+    static SECURITY_TOTAL_MARGIN_LEFT = 24;
+    static SECURITY_TOTAL_MARGIN_RIGHT = 24;
 
+    // icon
+    static SECURITY_ICON_MARGIN_TOP = 24;
+    static SECURITY_ICON_MARGIN_BOTTOM = 16;
+    static SECURITY_ICON_WIDTH = 24;
+    static SECURITY_ICON_HEIGHT = 24;
 
+    // content-descriptor
+    static SECURITY_DESCRIPTOR_DEVIDER_MARGIN_TOP = 8;
 
+    //button
+    static SECURITY_BUTTON_MARGIN_TOP = 8;
+    static SECURITY_BUTTON_ROW_HEIGHT = 56;
+    static SECURITY_BUTTON_HEIGHT = 40;
     ////////////////////////////////////////////
+
     // icon of dialog
     static DIALOG_ICON_WIDTH = 24;
     static DIALOG_ICON_HEIGHT = 24;

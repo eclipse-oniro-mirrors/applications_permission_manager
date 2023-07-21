@@ -375,6 +375,42 @@
     {
       "name": "SpecificAbility_label",
       "value": "label"
+    },
+    {
+      "name": "Temporarily_authorize",
+      "value": "Temporarily authorize "
+    },
+    {
+      "name": "To_access",
+      "value": " to access "
+    },
+    {
+      "name": "location_desc",
+      "value": "location information"
+    },
+    {
+      "name": "media_files_desc",
+      "value": "media and files"
+    },
+    {
+      "name": "location_button_desc",
+      "value": "This button has passed the system security authentication. "
+    },
+    {
+      "name": "only_can_desc",
+      "value": "The app is allowed to temporarily access your "
+    },
+    {
+      "name": "only_after_desc",
+      "value": " only after you touch this button. "
+    },
+    {
+      "name": "prevent_desc",
+      "value": "This prevents your private data from being continuously obtained by the app."
+    },
+    {
+      "name": "Got_it",
+      "value": "OK"
     }
   ]
 }
