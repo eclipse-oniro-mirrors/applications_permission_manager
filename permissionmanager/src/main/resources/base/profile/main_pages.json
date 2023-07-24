@@ -9,6 +9,7 @@
     "pages/authority-tertiary-groups",
     "pages/permission-access-record",
     "pages/dialogPlus",
-    "pages/globalSwitch"
+    "pages/globalSwitch",
+    "pages/securityDialog"
   ]
 }
