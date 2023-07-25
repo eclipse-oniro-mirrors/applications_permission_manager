@@ -31,13 +31,9 @@ var TAG = 'PermissionManager_MainAbility:';
 };
 
 class StringObj {
-  visits: string
-  recent_visit: string
   morning: string
   afternoon: string
-  constructor(visits: string, recent_visit: string, morning: string, afternoon: string) {
-    this.visits = visits
-    this.recent_visit = recent_visit
+  constructor(morning: string, afternoon: string) {
     this.morning = morning
     this.afternoon = afternoon
   }
@@ -51,7 +47,7 @@ struct permissionRecordPage {
   @State permissionApplications: any[] = [];
   @State permissionIndex: number = -1;
   @State applicationIndex: number = -1;
-  @State strings: StringObj = new StringObj('', '', '', '');
+  @State strings: StringObj = new StringObj('', '');
   @State currentIndex: number = 0;
   @State show: boolean = false;
   @Builder TabBuilder(index: number) {
@@ -103,7 +99,10 @@ struct permissionRecordPage {
                   .lineHeight(Constants.TEXT_LINE_HEIGHT)
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                 if (dimension) {
-                  Text(this.strings.visits + item.sum)
+                  Text() {
+                    Span($r("app.string.visits"))
+                    Span(String(item.sum))
+                  }
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                     .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                     .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
@@ -177,8 +176,12 @@ struct permissionRecordPage {
                       .fontColor($r('sys.color.ohos_id_color_text_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
-                    Text(this.strings.visits + this.getAppRecords(permissionApplication, item.groupName, true) +
-                        this.strings.recent_visit + this.getTime(this.getAppRecords(permissionApplication, item.groupName, false)))
+                    Text() {
+                      Span($r("app.string.visits"))
+                      Span(String(this.getAppRecords(permissionApplication, item.groupName, true)))
+                      Span($r("app.string.recent_visit"))
+                      Span(this.getTime(this.getAppRecords(permissionApplication, item.groupName, false)))
+                    }
                       .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('sys.color.ohos_id_color_text_secondary'))
@@ -223,8 +226,12 @@ struct permissionRecordPage {
                       .fontColor($r('sys.color.ohos_id_color_text_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
-                    Text(this.strings.visits + permission['count' + item.accessTokenId]
-                        + this.strings.recent_visit + this.getTime(permission['lastTime' + item.accessTokenId]))
+                    Text() {
+                      Span($r("app.string.visits"))
+                      Span(String(permission['count' + item.accessTokenId]))
+                      Span($r("app.string.recent_visit"))
+                      Span(this.getTime(permission['lastTime' + item.accessTokenId]))
+                    }
                       .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('sys.color.ohos_id_color_text_secondary'))
@@ -396,12 +403,6 @@ struct permissionRecordPage {
   }
 
   getStrings() {
-    globalThis.context.resourceManager.getString($r("app.string.visits").id, (err, val) => {
-      this.strings.visits = val;
-    })
-    globalThis.context.resourceManager.getString($r("app.string.recent_visit").id, (err, val) => {
-      this.strings.recent_visit = val;
-    })
     globalThis.context.resourceManager.getString($r("app.string.morning").id, (err, val) => {
       this.strings.morning = val;
     })

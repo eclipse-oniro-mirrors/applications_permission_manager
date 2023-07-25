@@ -154,11 +154,11 @@
     },
     {
       "name": "access_general_location",
-      "value": "\" access the general location?"
+      "value": " access the general location?"
     },
     {
       "name": "fuzzy_to_exact",
-      "value": "\" position access to change from \"APPROXIMATE POSITION\" to \"EXACT POSITION\"?"
+      "value": " position access to change from \"APPROXIMATE POSITION\" to \"EXACT POSITION\"?"
     },
     {
       "name": "cancel",

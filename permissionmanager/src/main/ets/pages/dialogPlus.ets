@@ -17,9 +17,9 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
 import window from '@ohos.window';
-import { Log, getPermissionGroup, titleTrim } from '../common/utils/utils';
+import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
-import { permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup';
+import { showSubpermissionsGrop } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button) function customizeButton() {
@@ -33,28 +33,10 @@ import { LocationCanvas } from '../common/components/location';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 
-let permissionLabels: Object = {};
 let win: any = "";
 let proxy: any = '';
 let want: any = '';
 let storage = LocalStorage.GetShared();
-
-class ResourceObj {
-  whether_to_allow: string
-  quotes: string
-  access_general_location: string
-  fuzzy_to_exact: string
-  comma: string
-  period: string
-  constructor(whether_to_allow: string, quotes: string, access_general_location: string, fuzzy_to_exact: string, comma: string, period: string) {
-    this.whether_to_allow = whether_to_allow
-    this.quotes = quotes
-    this.access_general_location = access_general_location
-    this.fuzzy_to_exact = fuzzy_to_exact
-    this.comma = comma
-    this.period = period
-  }
-}
 
 class BundleInfo {
   targetVersion: number
@@ -70,9 +52,10 @@ class BundleInfo {
 struct dialogPlusPage {
   @LocalStorageLink('want') want: Object = {};
   @LocalStorageLink('win') win: Object = {};
+  @State isUpdate: number = -1;
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
-    builder: PermissionDialog(),
+    builder: PermissionDialog({ isUpdate: $isUpdate }),
     autoCancel: false,
     alignment: DialogAlignment.Center,
     customStyle: true
@@ -84,6 +67,10 @@ struct dialogPlusPage {
     win = this.win
     want = this.want
     this.privacyDialogController.open();
+  }
+
+  onPageShow() {
+    this.isUpdate ++;
   }
 }
 
@@ -98,9 +85,10 @@ struct PermissionDialog {
   @State userFixedFlag: number = 2; // means user fixed
   @State appName: string = "";
   @State locationFlag: number = Constants.LOCATION_NONE;
-  @State resource: ResourceObj = new ResourceObj('', '', '', '', '', '');
   @State bundleInfo: BundleInfo = new BundleInfo(0, []);
   @State naviHeight: number = 0
+  @State refresh: number = 0;
+  @Link @Watch('updateReason') isUpdate: number;
   controller: CustomDialogController
 
   build() {
@@ -130,7 +118,12 @@ struct PermissionDialog {
                 Column() {
                   Row() {
                     Flex({ justifyContent: FlexAlign.Start }) {
-                      Text(this.showTitle())
+                      Text() {
+                        Span($r('app.string.whether_to_allow'))
+                        Span(this.appName)
+                        Span($r("app.string.quotes"))
+                        Span(this.showTitle())
+                      }
                         .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
                         .fontColor($r('sys.color.ohos_id_color_text_primary'))
                         .fontWeight(FontWeight.Medium)
@@ -146,7 +139,19 @@ struct PermissionDialog {
 
                   Row() {
                     Flex({ justifyContent: FlexAlign.Start }) {
-                      Text(this.showReason())
+                      Text() {
+                        if (this.showReason()) {
+                          Span($r('app.string.close_exact_position'))
+                        } else {
+                          if (this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].description) {
+                            ForEach(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].description, item => {
+                              Span(item)
+                            })
+                            Span(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].reason ? $r("app.string.comma") : $r("app.string.period"))
+                          }
+                          Span(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : (this.count + this.refresh - this.refresh)].reason)
+                        }
+                      }
                         .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
                         .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                         .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
@@ -200,23 +205,23 @@ struct PermissionDialog {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
     if (this.grantGroups[index].name == 'LOCATION') {
       if (this.locationFlag == Constants.LOCATION_FUZZY) {
-        return this.resource.whether_to_allow + this.appName + this.resource.access_general_location;
+        return $r("app.string.access_general_location");
       }
       if (this.locationFlag == Constants.LOCATION_UPGRADE) {
-        return this.resource.whether_to_allow + this.appName + this.resource.fuzzy_to_exact;
+        return $r("app.string.fuzzy_to_exact");
       }
     }
-    return this.resource.whether_to_allow + this.appName + this.resource.quotes + this.grantGroups[index].label;
+    return this.grantGroups[index].label;
   }
 
   showReason() {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
     if (this.grantGroups[index].name == 'LOCATION') {
       if ((this.locationFlag == Constants.LOCATION_FUZZY) || (this.locationFlag == Constants.LOCATION_BOTH_FUZZY)) {
-        return $r('app.string.close_exact_position');
+        return true;
       }
     }
-    return this.grantGroups[index].description;
+    return false;
   }
 
   verify() {
@@ -384,12 +389,14 @@ struct PermissionDialog {
           var exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
           //判断是否为需要展示子权限的权限组
           if (showSubpermissionsGrop.indexOf(group.name) != -1) {
+            let label = getPermissionLabel(permission)
             if (!exist) {
-              group.description = [permissionLabels[permission]];
+              group.description = [label];
               this.grantGroups.push(group);
             } else {
-              if (exist.description.indexOf(permissionLabels[permission]) == -1) {
-                exist.description.push(permissionLabels[permission]);
+              if (exist.description.indexOf(label) == -1) {
+                exist.description.push($r("app.string.and"));
+                exist.description.push(label);
               }
             }
           } else {
@@ -420,21 +427,8 @@ struct PermissionDialog {
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
     })
     this.grantGroups.forEach((group) => {
-      globalThis.extensionContext.resourceManager.getString(group.label.id, (err, val) => {
-        group.label = val;
-      })
-      if (group.description) {
-        Promise.all([globalThis.extensionContext.resourceManager.getString($r("app.string.separator").id),
-        globalThis.extensionContext.resourceManager.getString($r("app.string.reason_suffix").id),
-        globalThis.extensionContext.resourceManager.getString($r("app.string.and").id),
-        globalThis.extensionContext.resourceManager.getString($r("app.string.period").id)])
-          .then(values => {
-            group.description = group.name == 'SMS' ? (group.description.join(values[0]) + values[1]) : (group.description.join(values[2]) + values[3]);
-            this.getReason(group, bundleName);
-          })
-      } else {
-        this.getReason(group, bundleName);
-      }
+      group.hasReason = false;
+      this.getReason(group, bundleName);
     })
   }
 
@@ -447,45 +441,15 @@ struct PermissionDialog {
             let context = globalThis.extensionContext.createModuleContext(bundleName, reqPermissionDetail.moduleName);
             context.resourceManager.getString(reqPermissionDetail.reasonId, (err, value) => {
               if (value !== undefined && !group.hasReason) {
-                group.description = group.description.replace(this.resource.period, this.resource.comma);
-                group.description += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+                group.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
                 group.hasReason = true;
+                this.refresh ++;
               }
               this.initStatus = Constants.INIT_NEED_TO_REFRESH;
             })
           }
         })
       }
-    })
-  }
-
-  getStrings() {
-    globalThis.extensionContext.resourceManager.getString($r("app.string.whether_to_allow").id, (err, val) => {
-      this.resource.whether_to_allow = val;
-    })
-    globalThis.extensionContext.resourceManager.getString($r("app.string.quotes").id, (err, val) => {
-      this.resource.quotes = val;
-    })
-    globalThis.extensionContext.resourceManager.getString($r("app.string.access_general_location").id, (err, val) => {
-      this.resource.access_general_location = val;
-    })
-    globalThis.extensionContext.resourceManager.getString($r("app.string.fuzzy_to_exact").id, (err, val) => {
-      this.resource.fuzzy_to_exact = val;
-    })
-    globalThis.extensionContext.resourceManager.getString($r("app.string.comma").id, (err, val) => {
-      this.resource.comma = val;
-    })
-    globalThis.extensionContext.resourceManager.getString($r("app.string.period").id, (err, val) => {
-      this.resource.period = val;
-    })
-    this.reqPerms.forEach(reqPerm => {
-      permissionGroups.forEach(permissionInfo => {
-        if (reqPerm == permissionInfo.permissionName) {
-          globalThis.extensionContext.resourceManager.getString(permissionInfo.label.id).then(val => {
-            permissionLabels[reqPerm] = val;
-          })
-        }
-      })
     })
   }
 
@@ -497,6 +461,12 @@ struct PermissionDialog {
       this.naviHeight = avoidArea.bottomRect.height;
     } catch (exception) {
       Log.error('Failed to obtain the area. Cause:' + JSON.stringify(exception));
+    }
+  }
+
+  updateReason() {
+    if (this.isUpdate > 0) {
+      this.getApplicationName(want.parameters['ohos.aafwk.param.callerBundleName'])
     }
   }
 
@@ -515,7 +485,6 @@ struct PermissionDialog {
     Log.info("request permission=" + JSON.stringify(this.reqPerms) + ", tokenId = " + this.accessTokenId);
     Log.info("permission state=" + JSON.stringify(want.parameters['ohos.user.grant.permission.state']));
     this.result = new Array(this.reqPerms.length).fill(-1);
-    this.getStrings();
     this.getAvoidWindow();
     let uid = want.parameters['ohos.aafwk.param.callerUid'];
     bundleManager.getBundleNameByUid(uid).then((data) => {

@@ -151,7 +151,6 @@ struct authorityManagementPage {
   @State allPermissionApplications: permissionApplications [] = []; // All app permissions
   @State allGroupPermission: groupPermission[] = []; // All group permissions
   @State currentIndex: number = 0;
-  @State @Watch("getLabelAndIcon") ready: boolean = false;
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
       Text(index ? $r('app.string.application') : $r('app.string.permission'))
@@ -221,6 +220,7 @@ struct authorityManagementPage {
       let orderSort = this.orderDict(userGrantPermissions);
       this.allPermissionApplications.sort(this.compare('permission', orderSort));
       this.getPermissionLabel();
+      this.getLabelAndIcon()
   }
 
   /**
@@ -255,13 +255,10 @@ struct authorityManagementPage {
    * Get all permission label
    */
   getLabelAndIcon() {
-    const this_ = this;
-    setTimeout(function() {
-      globalThis.allBundleInfo.forEach(bundleInfo => {
-        this_.updateAppLabel(bundleInfo);
-        this_.updateAppIcon(bundleInfo);
-      })
-    }, 100)
+    globalThis.allBundleInfo.forEach(bundleInfo => {
+      this.updateAppLabel(bundleInfo);
+      this.updateAppIcon(bundleInfo);
+    })
   }
 
   /**
@@ -476,12 +473,6 @@ struct authorityManagementPage {
     }
   }
 
-  LoadLabelAndIcon() {
-    const this_ = this;
-    setTimeout(function() { this_.ready = true }, 100)
-    return true;
-  }
-
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
@@ -540,7 +531,6 @@ struct authorityManagementPage {
                                     }
 
                                     ListItem() {
-                                      if(this.LoadLabelAndIcon()) {}
                                       List() {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP), (item) => {
                                           this.ListItemLayout(item, Constants.SLICE_END_INDEX)
