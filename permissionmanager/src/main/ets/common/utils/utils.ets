@@ -436,6 +436,18 @@ function mkRslt(arr) {
 }
 
 /**
+ * Get permission label
+ * @param {String} permission name
+ */
+export function getPermissionLabel(permission: string) {
+  for (var i = 0; i < permissionGroups.length; i++) {
+    if (permissionGroups[i].permissionName == permission) {
+      return permissionGroups[i].label
+    }
+  }
+}
+
+/**
  * Get the corresponding permission group id according to the permission
  * @param {String} permission app name id
  * @return {Number} groupId

@@ -57,7 +57,7 @@ export struct backBar {
             .margin({ top: Constants.BACKBAR_TEXT_MARGIN_TOP, right: Constants.BACKBAR_IMAGE_MARGIN_RIGHT })
             .bindMenu([
               {
-                value: this.record,
+                value: $r("app.string.permission_access_record"),
                 action: () => {
                   router.pushUrl({ url: 'pages/permission-access-record' })
                 }
@@ -70,11 +70,5 @@ export struct backBar {
     .constraintSize({ minHeight: Constants.BACKBAR_MINHEIGHT })
     .alignItems(HorizontalAlign.Start)
     .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
-  }
-
-  aboutToAppear() {
-    globalThis.context.resourceManager.getString($r("app.string.permission_access_record").id).then(val => {
-      this.record = val;
-    })
   }
 }

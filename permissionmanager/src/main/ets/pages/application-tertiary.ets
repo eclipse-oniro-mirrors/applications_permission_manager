@@ -19,7 +19,7 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { authorizeDialog } from "../common/components/dialog";
 import { showSubpermissionsGrop } from "../common/model/permissionGroup";
-import { verifyAccessToken } from "../common/utils/utils";
+import { verifyAccessToken, getPermissionLabel } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
 
 var TAG = 'PermissionManager_MainAbility:';
@@ -35,6 +35,7 @@ let nowRevokeResult = Constants.PERMISSION_NUM; // Now deauthorize results
 let GrantResultFlag = []; // Authorization result Flag
 let RevokeResultFlag = []; // Cancel authorization result Flag
 let bundleInfo: any = {};
+let reqPermissionInfo;
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 class MeidaDocObj {
   name: Resource
@@ -46,31 +47,13 @@ class MeidaDocObj {
     this.permissions = permissions
   }
 }; // permission information class
-class MediaListObj {
-  label: string
-  icon: string
-  versionName: string
-  constructor(label: string, icon: string, versionName: string) {
-    this.label = label
-    this.icon = icon
-    this.versionName = versionName
-  }
-}; // Permission application information class
-
-class ResourceObj {
-  period: string
-  comma: string
-  constructor(period: string, comma: string) {
-    this.period = period
-    this.comma = comma
-  }
-}
 
 @Entry
 @Component
 struct mediaDocumentPage {
   @State refresh: boolean = false;
   @State isCheckList: boolean[] = []; // Permission status array
+  @State isRefreshReason: number = 0
 
   build() {
     Column() {
@@ -85,7 +68,7 @@ struct mediaDocumentPage {
               }
               Row() {
                 Column() {
-                  mediaDocumentItem({ isCheckList: $isCheckList })
+                  mediaDocumentItem({ isCheckList: $isCheckList, isRefreshReason: $isRefreshReason })
                 }.width(Constants.FULL_WIDTH)
               }
               .margin({ top: Constants.TITLE_MARGIN_BOTTOM })
@@ -107,6 +90,7 @@ struct mediaDocumentPage {
   }
 
   async refreshStatus() {
+    this.isRefreshReason ++;
     console.log(TAG + 'Refresh permission status');
     let isGranted = true;
     for (let i = 0; i < permissions.length; i++) {
@@ -132,17 +116,15 @@ struct mediaDocumentPage {
 @Component
 struct mediaDocumentItem {
   @State mediaDocListItem: MeidaDocObj[] = []; // Permission information array
-  @State mediaListItem: MediaListObj = {
-    label: '',
-    icon: '',
-    versionName: '',
-  }; // application info array
   @Link isCheckList: boolean[]; // Permission status array
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
-  @State resource: ResourceObj = new ResourceObj('', '');
   @State isRisk: boolean = false; // Whether it is a risky application
   @State reason: string = '';
+  @State label: string = '';
+  @State version: string = '';
+  @State permissionLabels: Array<any> = [];
+  @Link @Watch("updateReason") isRefreshReason: number;
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
     builder: authorizeDialog({ }),
@@ -181,24 +163,40 @@ struct mediaDocumentItem {
   }
 
   /**
+   * Update reason
+   */
+  updateReason() {
+    bundleManager.getApplicationInfo(globalThis.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(appInfo => {
+      let bundleContext = globalThis.context.createBundleContext(routerData)
+      bundleContext.resourceManager.getStringValue(appInfo.labelId, (error, value) => {
+        if (value) {
+          globalThis.applicationInfo.label = value;
+          this.label = value
+        }
+      })
+    }).catch(error => {
+      console.error(TAG + 'getApplicationInfo error: ' + JSON.stringify(error));
+    })
+    let context = globalThis.context.createModuleContext(routerData, reqPermissionInfo.moduleName);
+    context.resourceManager.getString(reqPermissionInfo.reasonId).then(value => {
+      if (value !== undefined) {
+        this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+      }
+    })
+  }
+
+  /**
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
     if (showSubpermissionsGrop.indexOf(globalThis.currentPermissionGroup) != -1) {
-      var reason = [];
-      permissions.forEach(permission => {
-        reason.push(globalThis.permissionLabels[permission]);
+      permissions.forEach((permission, idx) => {
+        if (idx > 0) {
+          this.permissionLabels.push($r("app.string.and"))
+        }
+        let label = getPermissionLabel(permission)
+        this.permissionLabels.push(label);
       })
-      Promise.all([globalThis.context.resourceManager.getString($r("app.string.separator").id),
-      globalThis.context.resourceManager.getString($r("app.string.reason_suffix").id),
-      globalThis.context.resourceManager.getString($r("app.string.and").id),
-      globalThis.context.resourceManager.getString($r("app.string.period").id),
-      globalThis.context.resourceManager.getString($r("app.string.comma").id)])
-        .then(values => {
-          this.resource.period = values[3];
-          this.resource.comma = values[4];
-          this.reason = globalThis.currentPermissionGroup == 'SMS' ? (reason.join(values[0]) + values[1]) : (reason.join(values[2]) + values[3]);
-        })
     }
     let hasReason = false;
     bundleManager.getBundleInfo(routerData, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(info => {
@@ -206,12 +204,11 @@ struct mediaDocumentItem {
         info.reqPermissionDetails.forEach(reqPermissionDetail => {
           if (reqPermissionDetail.name == permission) {
             console.info("reqPermissionDetail: " + JSON.stringify(reqPermissionDetail));
-            let permissionDetail: any = reqPermissionDetail;
-            let context = globalThis.context.createModuleContext(routerData, permissionDetail.moduleName);
+            let context = globalThis.context.createModuleContext(routerData, reqPermissionDetail.moduleName);
             context.resourceManager.getString(reqPermissionDetail.reasonId).then(value => {
               if (value !== undefined && !hasReason) {
-                this.reason = this.reason.replace(this.resource.period, this.resource.comma);
-                this.reason += value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+                this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+                reqPermissionInfo = reqPermissionDetail;
                 hasReason = true;
               }
             })
@@ -221,6 +218,7 @@ struct mediaDocumentItem {
     })
     bundleManager.getBundleInfo(routerData, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION).then(res => {
       this.api = res.targetVersion;
+      this.version = res.versionName;
       api = res.targetVersion;
       bundleInfo = res;
       var acManager = abilityAccessCtrl.createAtManager();
@@ -234,7 +232,6 @@ struct mediaDocumentItem {
       } catch(err) {
         console.log(TAG + 'acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
       }
-      this.mediaListItem = new MediaListObj(globalThis.applicationInfo.label, globalThis.applicationInfo.icon, res.versionName);
       this.mediaDocListItem.push(
         new MeidaDocObj($r('app.string.allow'), res.appInfo.accessTokenId, permissions)
       );
@@ -243,7 +240,6 @@ struct mediaDocumentItem {
       );
     }).catch((error) => {
       console.error(TAG + 'bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
-      this.mediaListItem = new MediaListObj('', '', '');
       this.mediaDocListItem.push(
         new MeidaDocObj($r('app.string.allow'), 0, permissions)
       );
@@ -263,13 +259,13 @@ struct mediaDocumentItem {
     Column() {
       Row() {
         Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
-          Image(this.mediaListItem.icon)
+          Image(globalThis.applicationInfo.icon)
             .width(Constants.TERTIARY_IMAGE_WIDTH)
             .height(Constants.TERTIARY_IMAGE_HEIGHT)
             .margin({ left: Constants.TERTIARY_IMAGE_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
           Column() {
             Row() {
-              Text(this.mediaListItem.label)
+              Text(this.label || globalThis.applicationInfo.label)
                 .maxLines(Constants.MAXIMUM_HEADER_LINES)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
@@ -284,7 +280,7 @@ struct mediaDocumentItem {
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .textAlign(TextAlign.Start)
-              Text(this.mediaListItem.versionName)
+              Text(this.version)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .textAlign(TextAlign.Start)
@@ -293,11 +289,19 @@ struct mediaDocumentItem {
           }
         }.margin({ left: Constants.TERTIARY_MARGIN_LEFT })
       }
-      if (this.reason) {
+      if (this.reason || this.permissionLabels.length > 0) {
         Row() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
-              Text(this.reason)
+              Text() {
+                if (this.permissionLabels.length > 0) {
+                  ForEach(this.permissionLabels, item => {
+                    Span(item)
+                  })
+                  Span(this.reason ? $r("app.string.comma") : $r("app.string.period"))
+                }
+                Span(this.reason)
+              }
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_secondary'))
                 .textAlign(TextAlign.Start)
@@ -327,13 +331,10 @@ struct mediaDocumentItem {
         .margin({ left: Constants.DEFAULT_MARGIN_START, right: Constants.DEFAULT_MARGIN_END })
       }
       Row() {
-        Text(backTitle)
-          .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_secondary'))
-          .fontWeight(FontWeight.Medium)
-          .textAlign(TextAlign.Start)
-          .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
-        Text($r('app.string.access_permission'))
+        Text() {
+          Span(backTitle)
+          Span($r('app.string.access_permission'))
+        }
           .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
           .fontColor($r('sys.color.ohos_id_color_secondary'))
           .fontWeight(FontWeight.Medium)

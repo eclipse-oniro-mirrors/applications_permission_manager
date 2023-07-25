@@ -16,6 +16,7 @@
 import { backBar } from "../common/components/backBar";
 import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import bundleManager from '@ohos.bundle.bundleManager';
 import { groups, permissionGroups, userGrantPermissions, permissionGroupIds } from "../common/model/permissionGroup";
 import Constants from '../common/utils/constant';
 import { verifyAccessToken } from "../common/utils/utils";
@@ -66,6 +67,7 @@ struct appNamePlusPage {
   @State allowedListItem: permissionObj[] = []; // Array of allowed permissions
   @State bannedListItem: permissionObj[] = []; // array of forbidden permissions
   @State routerData: ResourceObj = globalThis.applicationInfo; // Routing jump data
+  @State label: string = '';
 
   @Builder ListItemLayout(item, index, status) {
     ListItem() {
@@ -210,6 +212,17 @@ struct appNamePlusPage {
   onPageShow() {
     console.log(TAG + 'onPageShow application-secondary');
     this.initialPermissions();
+    bundleManager.getApplicationInfo(globalThis.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(appInfo => {
+      let bundleContext = globalThis.context.createBundleContext(globalThis.applicationInfo.bundleName)
+      bundleContext.resourceManager.getStringValue(appInfo.labelId, (error, value) => {
+        if (value) {
+          globalThis.applicationInfo.label = value;
+          this.label = value
+        }
+      })
+    }).catch(error => {
+      console.error(TAG + 'getApplicationInfo error: ' + JSON.stringify(error));
+    })
   }
 
   aboutToAppear() {
@@ -235,7 +248,7 @@ struct appNamePlusPage {
           Row() {
             Column() {
               Row() {
-                backBar({ title: JSON.stringify(this.routerData.label), recordable: false })
+                backBar({ title: JSON.stringify(this.label || this.routerData.label), recordable: false })
               }
               Row() {
                 Column() {
