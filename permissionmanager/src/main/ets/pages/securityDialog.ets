@@ -35,7 +35,14 @@ struct SecurityDialog {
   securityDialogController: CustomDialogController = new CustomDialogController({
     builder: CustomSecurityDialog(),
     alignment: DialogAlignment.Bottom,
-    customStyle: true
+    customStyle: true,
+    cancel: () => {
+      win.destroy();
+      globalThis.windowNum --;
+      if (globalThis.windowNum == 0) {
+        globalThis.extensionContext.terminateSelf();
+      }
+    }
   })
 
   build() {}
@@ -135,17 +142,25 @@ struct CustomSecurityDialog {
                   bottom: Constants.SECURITY_ICON_MARGIN_BOTTOM
                 })
               Column() { // content
-                Text($r('app.string.Temporarily_authorize') + this.appName + $r('app.string.To_access')
-                + this.securityParams[this.index].label)
+                Text() {
+                  Span($r('app.string.Temporarily_authorize'))
+                  Span(this.appName)
+                  Span($r('app.string.To_access'))
+                  Span(this.securityParams[this.index].label)
+                }
                   .textAlign(TextAlign.Center)
-                  .lineHeight($r('sys.float.ohos_id_text_line_space_l'))
                   .fontColor($r('sys.color.ohos_id_color_text_primary'))
                   .fontSize($r('sys.float.ohos_id_text_size_body1'))
                   .fontWeight(FontWeight.Medium)
-                Text($r('app.string.only_can_desc') + '' + this.securityParams[this.index].label
-                + $r('app.string.only_after_desc') + '' + $r('app.string.prevent_desc'))
+
+                Text() {
+                  Span($r('app.string.location_button_desc'))
+                  Span($r('app.string.only_can_desc'))
+                  Span(this.securityParams[this.index].label)
+                  Span($r('app.string.only_after_desc'))
+                  Span($r('app.string.prevent_desc'))
+                }
                   .textAlign(TextAlign.Center)
-                  .lineHeight($r('sys.float.ohos_id_text_line_space_l'))
                   .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .fontSize($r('sys.float.ohos_id_text_size_body2'))
                   .margin({
@@ -172,7 +187,8 @@ struct CustomSecurityDialog {
           .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
           .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
-        }
+        }.width(Constants.FULL_WIDTH)
+        .height(Constants.FULL_HEIGHT)
       }
     }.margin({ left: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
       right: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
