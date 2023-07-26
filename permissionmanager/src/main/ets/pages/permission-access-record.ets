@@ -50,6 +50,7 @@ struct permissionRecordPage {
   @State strings: StringObj = new StringObj('', '');
   @State currentIndex: number = 0;
   @State show: boolean = false;
+  @State isToush: string = '';
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
       Text(index ? $r('app.string.application') : $r('app.string.permission'))
@@ -155,6 +156,7 @@ struct permissionRecordPage {
             })
           }
         })
+        .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
         if (dimension && (index == this.permissionIndex)) {
           List() {
             ForEach(this.permissionApplications, (permissionApplication) => {
@@ -203,6 +205,25 @@ struct permissionRecordPage {
                   'groupId': permissionApplication.groupIds
                 }
                 router.pushUrl({ url: 'pages/application-secondary' });
+              })
+              .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+              .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+              .linearGradient((this.isToush === permissionApplication.name) ? {
+                  angle: 90,
+                  direction: GradientDirection.Right,
+                  colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+                } : {
+                  angle: 90,
+                  direction: GradientDirection.Right,
+                  colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+                })
+              .onTouch((event: TouchEvent) => {
+                if (event.type === TouchType.Down) {
+                  this.isToush = permissionApplication.name;
+                }
+                if (event.type === TouchType.Up) {
+                  this.isToush = '';
+                }
               })
             }, item => JSON.stringify(item))
           }
@@ -254,12 +275,30 @@ struct permissionRecordPage {
                 }
                 router.pushUrl({ url: 'pages/application-secondary' });
               })
+              .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+              .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+              .linearGradient((this.isToush === permission.name) ? {
+                  angle: 90,
+                  direction: GradientDirection.Right,
+                  colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+                } : {
+                  angle: 90,
+                  direction: GradientDirection.Right,
+                  colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+                })
+              .onTouch((event: TouchEvent) => {
+                if (event.type === TouchType.Down) {
+                  this.isToush = permission.name;
+                }
+                if (event.type === TouchType.Up) {
+                  this.isToush = '';
+                }
+              })
             }, item => JSON.stringify(item))
           }
         }
       }
-    }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END,
-      top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+    }.padding(Constants.LIST_PADDING_TOP)
     .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM })
     .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
     .borderRadius(Constants.BORDER_RADIUS)

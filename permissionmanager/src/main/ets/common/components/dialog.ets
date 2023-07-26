@@ -100,7 +100,7 @@ export struct globalDialog {
           .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
-          .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
+          .margin({ bottom: $r('sys.float.ohos_id_dialog_margin_bottom') })
           .clip(true)
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)

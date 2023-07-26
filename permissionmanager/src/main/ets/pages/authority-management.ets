@@ -145,12 +145,31 @@ struct authorityManagementPage {
           }
         })
       }
-    }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+    }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .linearGradient((this.isToush === item.group) ? {
+        angle: 90,
+        direction: GradientDirection.Right,
+        colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+      } : {
+        angle: 90,
+        direction: GradientDirection.Right,
+        colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+      })
+    .onTouch((event: TouchEvent) => {
+      if (event.type === TouchType.Down) {
+        this.isToush = item.group;
+      }
+      if (event.type === TouchType.Up) {
+        this.isToush = '';
+      }
+    })
   }
 
   @State allPermissionApplications: permissionApplications [] = []; // All app permissions
   @State allGroupPermission: groupPermission[] = []; // All group permissions
   @State currentIndex: number = 0;
+  @State isToush: string = '';
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
       Text(index ? $r('app.string.application') : $r('app.string.permission'))
@@ -502,7 +521,7 @@ struct authorityManagementPage {
                                         }, item => JSON.stringify(item))
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius(Constants.BORDER_RADIUS)
-                                      .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                      .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                     }
 
@@ -513,7 +532,7 @@ struct authorityManagementPage {
                                         }, item => JSON.stringify(item))
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius(Constants.BORDER_RADIUS)
-                                      .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                      .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                     }
 
@@ -525,7 +544,7 @@ struct authorityManagementPage {
                                           }, item => JSON.stringify(item))
                                         }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                         .borderRadius(Constants.BORDER_RADIUS)
-                                        .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                        .padding(Constants.LIST_PADDING_TOP)
                                         .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                       }
                                     }
@@ -537,7 +556,7 @@ struct authorityManagementPage {
                                         }, item => JSON.stringify(item))
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius(Constants.BORDER_RADIUS)
-                                      .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                      .padding(Constants.LIST_PADDING_TOP)
                                     }.margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
                                   }.height(Constants.FULL_HEIGHT)
                                   .borderRadius(Constants.BORDER_RADIUS)
@@ -582,6 +601,7 @@ struct applicationItem {
   @State applicationItem: any[] = globalThis.allBundleInfo; // application info array
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
+  @State isToush: string = '';
   scroller: Scroller = new Scroller();
 
   @Builder ListItemLayout(item, index) {
@@ -632,9 +652,24 @@ struct applicationItem {
           router.pushUrl({ url: 'pages/application-secondary' });
         })
       }
-    }.padding({
-      left: Constants.DEFAULT_PADDING_START,
-      right: Constants.DEFAULT_PADDING_END
+    }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .linearGradient((this.isToush === item.bundleName) ? {
+         angle: 90,
+         direction: GradientDirection.Right,
+         colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+       } : {
+         angle: 90,
+         direction: GradientDirection.Right,
+         colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+       })
+    .onTouch((event: TouchEvent) => {
+      if (event.type === TouchType.Down) {
+        this.isToush = item.bundleName;
+      }
+      if (event.type === TouchType.Up) {
+        this.isToush = '';
+      }
     })
   }
 
@@ -670,7 +705,7 @@ struct applicationItem {
                     }, item => JSON.stringify(item))
                   }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                   .borderRadius(Constants.BORDER_RADIUS)
-                  .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                  .padding(Constants.LIST_PADDING_TOP)
                   .onScrollIndex((start, end) => {
                     globalThis.scroller = this.scroller;
                     if (this.applicationItem.length > 0) {

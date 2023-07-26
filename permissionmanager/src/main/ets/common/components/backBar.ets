@@ -21,6 +21,7 @@ export struct backBar {
   @Prop title: string; // return title name
   @Prop recordable: boolean;
   @State record: string = '';
+  @State isToush: string = '';
 
   build() {
     Column() {
@@ -55,14 +56,7 @@ export struct backBar {
             .height(Constants.BACKBAR_IMAGE_HEIGHT)
             .width(Constants.BACKBAR_IMAGE_WIDTH)
             .margin({ top: Constants.BACKBAR_TEXT_MARGIN_TOP, right: Constants.BACKBAR_IMAGE_MARGIN_RIGHT })
-            .bindMenu([
-              {
-                value: $r("app.string.permission_access_record"),
-                action: () => {
-                  router.pushUrl({ url: 'pages/permission-access-record' })
-                }
-              }
-            ])
+            .bindMenu(this.MenuBuilder())
         }
       }
     }
@@ -70,5 +64,39 @@ export struct backBar {
     .constraintSize({ minHeight: Constants.BACKBAR_MINHEIGHT })
     .alignItems(HorizontalAlign.Start)
     .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+  }
+
+  @Builder MenuBuilder() {
+    Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+      Row() {
+        Text($r("app.string.permission_access_record"))
+          .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+      }.constraintSize({ minWidth: Constants.MAXIMUM_HEADER_WIDTH })
+      .height(Constants.LISTITEM_ROW_HEIGHT)
+      .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+      .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+      .linearGradient((this.isToush === 'true') ? {
+          angle: 90,
+          direction: GradientDirection.Right,
+          colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+        } : {
+          angle: 90,
+          direction: GradientDirection.Right,
+          colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+        })
+      .onTouch((event: TouchEvent) => {
+        if (event.type === TouchType.Down) {
+          this.isToush = 'true';
+        }
+        if (event.type === TouchType.Up) {
+          this.isToush = '';
+        }
+      })
+      .onClick(() => {
+        router.pushUrl({ url: 'pages/permission-access-record' })
+      })
+    }
   }
 }
