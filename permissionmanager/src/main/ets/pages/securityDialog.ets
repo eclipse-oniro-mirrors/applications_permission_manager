@@ -184,7 +184,7 @@ struct CustomSecurityDialog {
               .height(Constants.SECURITY_BUTTON_ROW_HEIGHT)
             }.margin({ left: Constants.SECURITY_TOTAL_MARGIN_LEFT, right: Constants.SECURITY_TOTAL_MARGIN_RIGHT })
           }
-          .margin({ bottom: Constants.DIALOG_MARGIN_BOTTOM })
+          .margin({ bottom: $r('sys.float.ohos_id_dialog_margin_bottom') })
           .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
         }.width(Constants.FULL_WIDTH)
