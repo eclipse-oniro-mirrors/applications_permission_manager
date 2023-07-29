@@ -40,7 +40,7 @@ struct SecurityDialog {
       win.destroy();
       globalThis.windowNum --;
       if (globalThis.windowNum == 0) {
-        globalThis.extensionContext.terminateSelf();
+        globalThis.securityContext.terminateSelf();
       }
     }
   })
@@ -94,7 +94,7 @@ struct CustomSecurityDialog {
     win.destroy();
     globalThis.windowNum --;
     if (globalThis.windowNum == 0) {
-      globalThis.extensionContext.terminateSelf();
+      globalThis.securityContext.terminateSelf();
     }
   }
 
