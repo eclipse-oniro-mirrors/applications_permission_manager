@@ -62,13 +62,13 @@
                 "type": "service",
                 "visible": true
             },
-	    {
-	        "icon": "$media:icon",
-		"name": "com.ohos.permissionmanager.SecurityExtAbility",
+            {
+                "icon": "$media:icon",
+                "name": "com.ohos.permissionmanager.SecurityExtAbility",
                 "srcEntrance": "./ets/SecurityExtAbility/SecurityExtAbility.ts",
                 "type": "service",
                 "visible": true
-	    }
+            }
         ],
         "requestPermissions": [
             {
