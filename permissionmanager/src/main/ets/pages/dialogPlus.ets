@@ -456,6 +456,12 @@ struct PermissionDialog {
   getAvoidWindow() {
     let type = window.AvoidAreaType.TYPE_SYSTEM;
     try {
+      win.on('avoidAreaChange', (data) => {
+        if (data.type == window.AvoidAreaType.TYPE_SYSTEM) {
+          Log.info('avoidAreaChange: ' + JSON.stringify(data));
+          this.naviHeight = data.area.bottomRect.height;
+        }
+      });
       let avoidArea = win.getWindowAvoidArea(type);
       Log.info('avoidArea: ' + JSON.stringify(avoidArea));
       this.naviHeight = avoidArea.bottomRect.height;
