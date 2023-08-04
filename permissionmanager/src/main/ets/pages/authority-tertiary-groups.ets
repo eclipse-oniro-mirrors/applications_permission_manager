@@ -154,6 +154,7 @@ struct applicationItem {
   @Link polymorphismIsOn: Array<boolean>;
   @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
+  @State isToush: string = '';
   scroller: Scroller = new Scroller();
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
@@ -277,9 +278,27 @@ struct applicationItem {
           }
         })
       }
-    }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+    }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
     .enabled(!this.isRisk[item.index])
     .opacity(this.isRisk[item.index] ? $r('sys.float.ohos_id_alpha_disabled') : 1)
+    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .linearGradient((this.isToush === item.bundleName) ? {
+        angle: 90,
+        direction: GradientDirection.Right,
+        colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+      } : {
+        angle: 90,
+        direction: GradientDirection.Right,
+        colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+      })
+    .onTouch((event: TouchEvent) => {
+      if (event.type === TouchType.Down && polymorphismGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
+        this.isToush = item.bundleName;
+      }
+      if (event.type === TouchType.Up) {
+        this.isToush = '';
+      }
+    })
   }
 
   /**
@@ -503,7 +522,7 @@ struct applicationItem {
                   }
                   .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                   .borderRadius(Constants.BORDER_RADIUS)
-                  .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                  .padding(Constants.LIST_PADDING_TOP)
                   .onScrollIndex((start, end) => {
                     globalThis.scroller = this.scroller;
                     if (this.applicationList.length > 0) {

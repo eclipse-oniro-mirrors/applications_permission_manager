@@ -22,47 +22,80 @@ export struct backBar {
   @Prop recordable: boolean;
   @State record: string = '';
   @State isToush: string = '';
+  @State isBack: boolean = false;
+  @State isMore: boolean = false;
 
   build() {
     Column() {
       Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
-        Image($r('app.media.ic_public_back'))
-          .fillColor($r('sys.color.ohos_id_color_primary'))
-          .objectFit(ImageFit.Contain)
-          .height(Constants.BACKBAR_IMAGE_HEIGHT)
-          .width(Constants.BACKBAR_IMAGE_WIDTH)
-          .margin({
-            top: Constants.BACKBAR_IMAGE_MARGIN_TOP,
-            left: Constants.BACKBAR_IMAGE_MARGIN_LEFT,
-            right: Constants.BACKBAR_IMAGE_MARGIN_RIGHT
-          })
-          .onClick(() => {
-            let length = router.getLength();
-            Number(length) == 1 ? globalThis.context.terminateSelf() : router.back();
-          })
+        Row() {
+          Image($r('app.media.ic_public_back'))
+            .fillColor($r('sys.color.ohos_id_color_primary'))
+            .objectFit(ImageFit.Contain)
+            .height(Constants.BACKBAR_IMAGE_HEIGHT)
+            .width(Constants.BACKBAR_IMAGE_WIDTH)
+        }.width(Constants.CLICK_SHADOW_LENGTH)
+        .height(Constants.CLICK_SHADOW_LENGTH)
+        .borderRadius($r('sys.float.ohos_id_corner_radius_clicked'))
+        .alignItems(VerticalAlign.Center)
+        .justifyContent(FlexAlign.Center)
+        .margin({
+          left: Constants.DEFAULT_MARGIN_START,
+          right: Constants.BACKBAR_MARGIN_RIGHT
+        })
+        .backgroundColor(this.isBack ? $r('sys.color.ohos_id_color_click_effect') : '')
+        .onTouch((event: TouchEvent) => {
+          if (event.type === TouchType.Down) {
+            this.isBack = true;
+          }
+          if (event.type === TouchType.Up) {
+            this.isBack = false;
+          }
+        })
+        .onClick(() => {
+          let length = router.getLength();
+          Number(length) == 1 ? globalThis.context.terminateSelf() : router.back();
+        })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
           .fontColor($r('sys.color.ohos_id_color_text_primary'))
           .maxLines(Constants.MAXIMUM_HEADER_LINES)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
-          .fontSize(Constants.BACKBAR_TEXT_FONT_SIZE)
-          .flexGrow(Constants.BACKBAR_TEXT_FLEX_GROW)
+          .fontSize(Constants.TEXT_BIG_FONT_SIZE)
+          .flexGrow(Constants.FLEX_GROW)
           .fontWeight(FontWeight.Bold)
-          .margin({ top: Constants.BACKBAR_TEXT_MARGIN_TOP })
         if (this.recordable) {
-          Image($r("app.media.gongneng_dian"))
-            .fillColor($r('sys.color.ohos_id_color_primary'))
-            .objectFit(ImageFit.Contain)
-            .height(Constants.BACKBAR_IMAGE_HEIGHT)
-            .width(Constants.BACKBAR_IMAGE_WIDTH)
-            .margin({ top: Constants.BACKBAR_TEXT_MARGIN_TOP, right: Constants.BACKBAR_IMAGE_MARGIN_RIGHT })
-            .bindMenu(this.MenuBuilder())
+          Row() {
+            Image($r("app.media.gongneng_dian"))
+              .fillColor($r('sys.color.ohos_id_color_primary'))
+              .objectFit(ImageFit.Contain)
+              .height(Constants.BACKBAR_IMAGE_HEIGHT)
+              .width(Constants.BACKBAR_IMAGE_WIDTH)
+          }.width(Constants.CLICK_SHADOW_LENGTH)
+          .height(Constants.CLICK_SHADOW_LENGTH)
+          .borderRadius($r('sys.float.ohos_id_corner_radius_clicked'))
+          .alignItems(VerticalAlign.Center)
+          .justifyContent(FlexAlign.Center)
+          .margin({
+            right: Constants.DEFAULT_MARGIN_END
+          })
+          .bindMenu(this.MenuBuilder())
+          .backgroundColor(this.isMore ? $r('sys.color.ohos_id_color_click_effect') : '')
+          .onTouch((event: TouchEvent) => {
+            if (event.type === TouchType.Down) {
+              this.isMore = true;
+            }
+            if (event.type === TouchType.Up) {
+              this.isMore = false;
+            }
+          })
         }
       }
     }
     .height(Constants.BACKBAR_HEIGHT)
     .constraintSize({ minHeight: Constants.BACKBAR_MINHEIGHT })
     .alignItems(HorizontalAlign.Start)
+    .justifyContent(FlexAlign.Center)
     .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
   }
 

@@ -319,7 +319,7 @@ struct permissionRecordPage {
                 Column() {
                   Flex({ justifyContent: FlexAlign.Start }) {
                     Text($r('app.string.record_time_limit'))
-                      .margin({ left: Constants.BACKBAR_IMAGE_MARGIN_LEFT })
+                      .margin({ left: Constants.DEFAULT_MARGIN_START })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                       .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)

@@ -20,18 +20,9 @@ export default class Constants {
     // backBar
     static BACKBAR_HEIGHT = 56;
     static BACKBAR_MINHEIGHT = 56;
-
-    // image of backBar
     static BACKBAR_IMAGE_HEIGHT = 24;
     static BACKBAR_IMAGE_WIDTH = 24;
-    static BACKBAR_IMAGE_MARGIN_TOP = 17;
-    static BACKBAR_IMAGE_MARGIN_LEFT = 12;
-    static BACKBAR_IMAGE_MARGIN_RIGHT = 15;
-
-    // text of backBar
-    static BACKBAR_TEXT_FONT_SIZE = 20;
-    static BACKBAR_TEXT_FLEX_GROW = 1;
-    static BACKBAR_TEXT_MARGIN_TOP = 17;
+    static BACKBAR_MARGIN_RIGHT = 4;
 
     // dialog
     static DIALOG_BORDER_RADIUS = 24;
@@ -131,6 +122,7 @@ export default class Constants {
     static DEFAULT_SLIDER_WIDTH = 60;
     static DEFAULT_SLIDER_HEIGHT = 40;
     static OFFSET = 100;
+    static CLICK_SHADOW_LENGTH = 48;
 
     // application-secondary, authority-secondary
     static FLEX_MARGIN_TOP = 8;
@@ -139,7 +131,6 @@ export default class Constants {
     static LIST_PADDING_BOTTOM = 4;
     static LIST_MARGIN_BOTTOM = 12;
     static ROW_MARGIN_TOP = 9;
-    static SECONDARY_TEXT_MARGIN_TOP = 19.5;
     static SECONDARY_TEXT_MARGIN_LEFT = 24;
     static SECONDARY_LIST_PADDING_LEFT = 12;
     static SECONDARY_LIST_PADDING_RIGHT = 12;
