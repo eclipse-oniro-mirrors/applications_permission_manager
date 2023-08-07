@@ -120,7 +120,7 @@ struct mediaDocumentItem {
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
   @State isRisk: boolean = false; // Whether it is a risky application
-  @State isToush: number = -1;
+  @State isTouch: number = -1;
   @State reason: string = '';
   @State label: string = '';
   @State version: string = '';
@@ -431,7 +431,7 @@ struct mediaDocumentItem {
             }
             .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
             .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-            .linearGradient((this.isToush === index) ? {
+            .linearGradient((this.isTouch === index) ? {
                 angle: 90,
                 direction: GradientDirection.Right,
                 colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -442,16 +442,16 @@ struct mediaDocumentItem {
               })
             .onTouch((event: TouchEvent) => {
               if (event.type === TouchType.Down) {
-                this.isToush = index;
+                this.isTouch = index;
               }
               if (event.type === TouchType.Up) {
-                this.isToush = -1;
+                this.isTouch = -1;
               }
             })
             .margin({ top: Constants.TERTIARY_LISTITEM_MARGIN_TOP })
           }, item => JSON.stringify(item))
         }
-        .borderRadius(Constants.BORDER_RADIUS)
+        .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
         .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
         .padding(Constants.LIST_PADDING_TOP)
 
@@ -487,7 +487,7 @@ struct mediaDocumentItem {
             top: Constants.TERTIARY_LIST_PADDING_TOP,
             bottom: Constants.TERTIARY_LIST_PADDING_BOTTOM
           })
-          .borderRadius(Constants.BORDER_RADIUS)
+          .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
           .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
 
           Row() {

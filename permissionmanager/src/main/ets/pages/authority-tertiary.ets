@@ -314,7 +314,7 @@ struct applicationItem {
                     }, item => JSON.stringify(item))
                   }
                   .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-                  .borderRadius(Constants.BORDER_RADIUS)
+                  .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                   .onScrollIndex((start, end) => {
                     globalThis.scroller = this.scroller;

@@ -69,7 +69,7 @@ struct appNameItem {
   @State calendarListItem: CalendarObj[] = []; // Permission management secondary interface data array
   private routerData: any = router.getParams()['routerData']; // Routing jump data
   private group = router.getParams()['group'];
-  @State isToush: string = '';
+  @State isTouch: string = '';
 
   @Builder ListItemLayout(item, index) {
     ListItem() {
@@ -111,7 +111,7 @@ struct appNameItem {
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
     .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-    .linearGradient((this.isToush === item.permissionName) ? {
+    .linearGradient((this.isTouch === item.permissionName) ? {
          angle: 90,
          direction: GradientDirection.Right,
          colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -122,10 +122,10 @@ struct appNameItem {
        })
     .onTouch((event: TouchEvent) => {
       if (event.type === TouchType.Down) {
-        this.isToush = item.permissionName;
+        this.isTouch = item.permissionName;
       }
       if (event.type === TouchType.Up) {
-        this.isToush = '';
+        this.isTouch = '';
       }
     })
   }
@@ -172,7 +172,8 @@ struct appNameItem {
                 .height(Constants.LISTITEM_ROW_HEIGHT)
                 .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
               }
-            }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg')).borderRadius(Constants.BORDER_RADIUS)
+            }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+            .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .padding(Constants.LIST_PADDING_TOP)
           }.margin({ top: Constants.ROW_MARGIN_TOP })
         .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })

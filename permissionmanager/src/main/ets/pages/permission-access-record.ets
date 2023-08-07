@@ -50,7 +50,7 @@ struct permissionRecordPage {
   @State strings: StringObj = new StringObj('', '');
   @State currentIndex: number = 0;
   @State show: boolean = false;
-  @State isToush: string = '';
+  @State isTouch: string = '';
   @Builder TabBuilder(index: number) {
     Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
       Text(index ? $r('app.string.application') : $r('app.string.permission'))
@@ -208,7 +208,7 @@ struct permissionRecordPage {
               })
               .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
               .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-              .linearGradient((this.isToush === permissionApplication.name) ? {
+              .linearGradient((this.isTouch === permissionApplication.name) ? {
                   angle: 90,
                   direction: GradientDirection.Right,
                   colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -219,10 +219,10 @@ struct permissionRecordPage {
                 })
               .onTouch((event: TouchEvent) => {
                 if (event.type === TouchType.Down) {
-                  this.isToush = permissionApplication.name;
+                  this.isTouch = permissionApplication.name;
                 }
                 if (event.type === TouchType.Up) {
-                  this.isToush = '';
+                  this.isTouch = '';
                 }
               })
             }, item => JSON.stringify(item))
@@ -277,7 +277,7 @@ struct permissionRecordPage {
               })
               .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
               .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-              .linearGradient((this.isToush === permission.name) ? {
+              .linearGradient((this.isTouch === permission.name) ? {
                   angle: 90,
                   direction: GradientDirection.Right,
                   colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -288,10 +288,10 @@ struct permissionRecordPage {
                 })
               .onTouch((event: TouchEvent) => {
                 if (event.type === TouchType.Down) {
-                  this.isToush = permission.name;
+                  this.isTouch = permission.name;
                 }
                 if (event.type === TouchType.Up) {
-                  this.isToush = '';
+                  this.isTouch = '';
                 }
               })
             }, item => JSON.stringify(item))
@@ -301,7 +301,7 @@ struct permissionRecordPage {
     }.padding(Constants.LIST_PADDING_TOP)
     .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM })
     .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-    .borderRadius(Constants.BORDER_RADIUS)
+    .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
   }
 
   build() {

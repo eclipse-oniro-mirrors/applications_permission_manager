@@ -154,7 +154,7 @@ struct applicationItem {
   @Link polymorphismIsOn: Array<boolean>;
   @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
-  @State isToush: string = '';
+  @State isTouch: string = '';
   scroller: Scroller = new Scroller();
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
@@ -282,7 +282,7 @@ struct applicationItem {
     .enabled(!this.isRisk[item.index])
     .opacity(this.isRisk[item.index] ? $r('sys.float.ohos_id_alpha_disabled') : 1)
     .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-    .linearGradient((this.isToush === item.bundleName) ? {
+    .linearGradient((this.isTouch === item.bundleName) ? {
         angle: 90,
         direction: GradientDirection.Right,
         colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -293,10 +293,10 @@ struct applicationItem {
       })
     .onTouch((event: TouchEvent) => {
       if (event.type === TouchType.Down && polymorphismGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
-        this.isToush = item.bundleName;
+        this.isTouch = item.bundleName;
       }
       if (event.type === TouchType.Up) {
-        this.isToush = '';
+        this.isTouch = '';
       }
     })
   }
@@ -479,7 +479,7 @@ struct applicationItem {
               .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
             }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
             .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-            .borderRadius(Constants.BORDER_RADIUS)
+            .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
           }
           Flex({ justifyContent: FlexAlign.Start }) {
@@ -521,7 +521,7 @@ struct applicationItem {
                     }, item => JSON.stringify(item))
                   }
                   .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-                  .borderRadius(Constants.BORDER_RADIUS)
+                  .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding(Constants.LIST_PADDING_TOP)
                   .onScrollIndex((start, end) => {
                     globalThis.scroller = this.scroller;
