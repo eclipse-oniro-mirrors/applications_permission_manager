@@ -21,7 +21,7 @@ export struct backBar {
   @Prop title: string; // return title name
   @Prop recordable: boolean;
   @State record: string = '';
-  @State isToush: string = '';
+  @State isTouch: string = '';
   @State isBack: boolean = false;
   @State isMore: boolean = false;
 
@@ -110,7 +110,7 @@ export struct backBar {
       .height(Constants.LISTITEM_ROW_HEIGHT)
       .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
       .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-      .linearGradient((this.isToush === 'true') ? {
+      .linearGradient((this.isTouch === 'true') ? {
           angle: 90,
           direction: GradientDirection.Right,
           colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -121,10 +121,10 @@ export struct backBar {
         })
       .onTouch((event: TouchEvent) => {
         if (event.type === TouchType.Down) {
-          this.isToush = 'true';
+          this.isTouch = 'true';
         }
         if (event.type === TouchType.Up) {
-          this.isToush = '';
+          this.isTouch = '';
         }
       })
       .onClick(() => {

@@ -68,7 +68,7 @@ struct appNamePlusPage {
   @State bannedListItem: permissionObj[] = []; // array of forbidden permissions
   @State routerData: ResourceObj = globalThis.applicationInfo; // Routing jump data
   @State label: string = '';
-  @State isToush: string = '';
+  @State isTouch: string = '';
 
   @Builder ListItemLayout(item, index, status) {
     ListItem() {
@@ -114,7 +114,7 @@ struct appNamePlusPage {
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
     .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-    .linearGradient((this.isToush === item.group) ? {
+    .linearGradient((this.isTouch === item.group) ? {
         angle: 90,
         direction: GradientDirection.Right,
         colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -125,10 +125,10 @@ struct appNamePlusPage {
       })
     .onTouch((event: TouchEvent) => {
       if (event.type === TouchType.Down) {
-        this.isToush = item.group;
+        this.isTouch = item.group;
       }
       if (event.type === TouchType.Up) {
-        this.isToush = '';
+        this.isTouch = '';
       }
     })
   }
@@ -298,7 +298,7 @@ struct appNamePlusPage {
                         }.padding({ left: Constants.LISTITEM_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })
                       }
                       .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-                      .borderRadius(Constants.BORDER_RADIUS)
+                      .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                     }.margin({ top: Constants.ROW_MARGIN_TOP })
                      .padding({ left: Constants.SECONDARY_LIST_PADDING_LEFT, right: Constants.SECONDARY_LIST_PADDING_RIGHT })
@@ -327,7 +327,7 @@ struct appNamePlusPage {
                                 }, item => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-                              .borderRadius(Constants.BORDER_RADIUS)
+                              .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                               .padding(Constants.LIST_PADDING_TOP)
                             }.margin({ top: Constants.ROW_MARGIN_TOP })
                             .padding({
@@ -358,7 +358,7 @@ struct appNamePlusPage {
                                 }, item => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
-                              .borderRadius(Constants.BORDER_RADIUS)
+                              .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                               .padding(Constants.LIST_PADDING_TOP)
                             }.margin({ top: Constants.ROW_MARGIN_TOP })
                             .padding({

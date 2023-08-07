@@ -100,7 +100,6 @@ export default class Constants {
     static IMAGE_WIDTH_RECORD = 24;
     static IMAGE_HEIGHT_RECORD_APPLICATION = 16;
     static IMAGE_WIDTH_RECORD_APPLICATION = 16;
-    static BORDER_RADIUS = 24;
     static TITLE_MARGIN_BOTTOM = 16;
     static SUBTITLE_MIN_HEIGHT = 48;
     static SUBTITLE_LINE_HEIGHT = 24;
