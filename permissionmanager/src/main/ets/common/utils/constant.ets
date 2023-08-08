@@ -227,10 +227,6 @@ export default class Constants {
 
     //shape
     static SHAPE_DIA = 20;
-    static SHAPE_BAN_DIA = 18;
-    static SHAPE_BAN_OFFSET = 1;
-    static SHAPE_ALLOW_DIA = 10;
-    static SHAPE_ALLOW_OFFSET = 5;
 
     // utils
     static CHAR_CODE = 0;
@@ -369,10 +365,7 @@ export default class Constants {
     static ROW_HEIGHT = 56
     static ROW_PADDING_TOP = 14
     static ROW_PADDING_BOTTOM = 14
-    static DIALOG_MARGIN_BOTTOM = 12
 
-    //
-    static INITIAL_INDEX = 10
     static ACCESS_TOKEN = 'ohos.security.accesstoken.tokencallback'
 
 }
