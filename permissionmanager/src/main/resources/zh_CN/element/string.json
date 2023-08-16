@@ -365,6 +365,158 @@
       "value": "访问蓝牙？"
     },
     {
+      "name": "enable_description_start_default",
+      "value": "已允许"
+    },
+    {
+      "name": "enable_description_start_location",
+      "value": "系统定位服务开关开启时，已允许"
+    },
+    {
+      "name": "enable_description_end_location",
+      "value": "个应用获取此设备的位置。"
+    },
+    {
+      "name": "enable_description_end_camera",
+      "value": "个应用使用相机拍摄照片和视频。此权限可让应用随时使用相机，而无需您的确认。"
+    },
+    {
+      "name": "enable_description_end_microphone",
+      "value": "个应用使用麦克风录制音频。此权限可让该应用不经您的确认即可随时录制音频。"
+    },
+    {
+      "name": "enable_description_end_read_contacts",
+      "value": "个应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。"
+    },
+    {
+      "name": "enable_description_end_write_contacts",
+      "value": "个应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。"
+    },
+    {
+      "name": "enable_description_end_read_calendar",
+      "value": "个应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。"
+    },
+    {
+      "name": "enable_description_end_write_calendar",
+      "value": "个应用程序以日历所有者名义发送活动邀请，同时允许其添加、删除和更改您能在设备上修改的活动（包括朋友或同事的活动）。拥有此权限的恶意应用程序，可以冒充日历所有者发送垃圾邮件，还可在所有者不知情的情况下，修改活动或添加虚假活动。"
+    },
+    {
+      "name": "enable_description_end_read_whole_calendar",
+      "value": "个应用读取全部日历。"
+    },
+    {
+      "name": "enable_description_end_write_whole_calendar",
+      "value": "个应用添加、删除和更改全部日历。"
+    },
+    {
+      "name": "enable_description_end_sport",
+      "value": "个应用识别您的健身运动。"
+    },
+    {
+      "name": "enable_description_end_health",
+      "value": "个应用访问您用于测量身体状况（如心跳速率）的传感器中的数据。"
+    },
+    {
+      "name": "enable_description_end_distributed_datasync",
+      "value": "个应用发现并访问其他设备，以进行多个设备间的协同操作。"
+    },
+    {
+      "name": "enable_description_end_image",
+      "value": "个应用访问您设备上的图片和视频。"
+    },
+    {
+      "name": "enable_description_end_audios",
+      "value": "个应用访问您设备上的音乐和音频。"
+    },
+    {
+      "name": "enable_description_end_documents",
+      "value": "个应用访问您设备上的文件。"
+    },
+    {
+      "name": "enable_description_end_ADS",
+      "value": "个应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
+    },
+    {
+      "name": "enable_description_end_appList",
+      "value": "个应用读取本机已安装的应用列表。"
+    },
+    {
+      "name": "enable_description_end_bluetooth",
+      "value": "个应用使用蓝牙查找、连接附近设备。"
+    },
+    {
+      "name": "forbidden_description_location",
+      "value": "系统定位服务开关开启时，已禁止应用获取此设备的位置。"
+    },
+    {
+      "name": "forbidden_description_camera",
+      "value": "已禁止应用使用相机拍摄照片和视频。此权限可让该应用随时使用相机，而无需您的确认。"
+    },
+    {
+      "name": "forbidden_description_microphone",
+      "value": "已禁止应用使用麦克风录制音频。此权限可让该应用不经您的确认即可随时录制音频。"
+    },
+    {
+      "name": "forbidden_description_read_contacts",
+      "value": "已禁止应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。"
+    },
+    {
+      "name": "forbidden_description_write_contacts",
+      "value": "已禁止应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。"
+    },
+    {
+      "name": "forbidden_description_read_calendar",
+      "value": "已禁止应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。"
+    },
+    {
+      "name": "forbidden_description_write_calendar",
+      "value": "已禁止应用程序以日历所有者名义发送活动邀请，同时允许其添加、删除和更改您能在设备上修改的活动（包括朋友或同事的活动）。拥有此权限的恶意应用程序，可以冒充日历所有者发送垃圾邮件，还可在所有者不知情的情况下，修改活动或添加虚假活动。"
+    },
+    {
+      "name": "forbidden_description_read_whole_calendar",
+      "value": "已禁止应用读取全部日历。"
+    },
+    {
+      "name": "forbidden_description_write_whole_calendar",
+      "value": "已禁止应用添加、删除和更改全部日历。"
+    },
+    {
+      "name": "forbidden_description_sport",
+      "value": "已禁止应用识别您的健身运动。"
+    },
+    {
+      "name": "forbidden_description_health",
+      "value": "已禁止应用访问您用于测量身体状况（如心跳速率）的传感器中的数据。"
+    },
+    {
+      "name": "forbidden_description_distributed_datasync",
+      "value": "已禁止应用发现并访问其他设备，以进行多个设备间的协同操作。"
+    },
+    {
+      "name": "forbidden_description_image",
+      "value": "已禁止应用访问您设备上的图片和视频。"
+    },
+    {
+      "name": "forbidden_description_audios",
+      "value": "已禁止应用访问您设备上的音乐和音频。"
+    },
+    {
+      "name": "forbidden_description_documents",
+      "value": "已禁止应用访问您设备上的文件。"
+    },
+    {
+      "name": "forbidden_description_ADS",
+      "value": "已禁止应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
+    },
+    {
+      "name": "forbidden_description_appList",
+      "value": "已禁止应用读取本机已安装的应用列表。"
+    },
+    {
+      "name": "forbidden_description_bluetooth",
+      "value": "已禁止应用使用蓝牙查找、连接附近设备。"
+    },
+    {
       "name": "risk_warning",
       "value": "风险应用禁止获取该权限"
     },

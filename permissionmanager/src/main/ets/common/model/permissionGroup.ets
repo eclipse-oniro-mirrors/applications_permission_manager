@@ -48,36 +48,54 @@ export const permissionGroups: any[] = [
         "permissionName": "ohos.permission.READ_CONTACTS",
         "groupName": "CONTACTS",
         "label": $r("sys.string.ohos_lab_read_contacts"),
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_read_contacts"),
+        "forbidden_description": $r("app.string.forbidden_description_read_contacts"),
         "groupId": 3
     },
     {
         "permissionName": "ohos.permission.WRITE_CONTACTS",
         "groupName": "CONTACTS",
         "label": $r("sys.string.ohos_lab_write_contacts"),
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_write_contacts"),
+        "forbidden_description": $r("app.string.forbidden_description_write_contacts"),
         "groupId": 3
     },
     {
         "permissionName": "ohos.permission.READ_CALENDAR",
         "groupName": "CALENDAR",
         "label": $r("sys.string.ohos_lab_read_calendar"),
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_read_calendar"),
+        "forbidden_description": $r("app.string.forbidden_description_read_calendar"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.WRITE_CALENDAR",
         "groupName": "CALENDAR",
         "label": $r("sys.string.ohos_lab_write_calendar"),
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_write_calendar"),
+        "forbidden_description": $r("app.string.forbidden_description_write_calendar"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.READ_WHOLE_CALENDAR",
         "groupName": "CALENDAR",
         "label": $r('sys.string.ohos_lab_read_whole_calendar'),
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_read_whole_calendar"),
+        "forbidden_description": $r("app.string.forbidden_description_read_whole_calendar"),
         "groupId": 4
     },
     {
         "permissionName": "ohos.permission.WRITE_WHOLE_CALENDAR",
         "groupName": "CALENDAR",
         "label": $r('sys.string.ohos_lab_write_whole_calendar'),
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_write_whole_calendar"),
+        "forbidden_description": $r("app.string.forbidden_description_write_whole_calendar"),
         "groupId": 4
     },
     {
@@ -178,6 +196,9 @@ export const groups: any[] = [
         "groupName": $r("app.string.groupName_location"),
         "icon": $r('app.media.ic_public_gps'),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_location"),
+        "enable_description_end": $r("app.string.enable_description_end_location"),
+        "forbidden_description": $r("app.string.forbidden_description_location"),
         "label": $r("app.string.group_label_location"),
         "permissions": [
             "ohos.permission.LOCATION_IN_BACKGROUND",
@@ -192,6 +213,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_public_camera'),
         "label": $r("app.string.group_label_camera"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_camera"),
+        "forbidden_description": $r("app.string.forbidden_description_camera"),
         "permissions": [
             "ohos.permission.CAMERA"
         ],
@@ -203,6 +227,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_public_voice'),
         "label": $r("app.string.group_label_microphone"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_microphone"),
+        "forbidden_description": $r("app.string.forbidden_description_microphone"),
         "permissions": [
             "ohos.permission.MICROPHONE"
         ],
@@ -240,6 +267,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_sport'),
         "label": $r("app.string.group_label_sport"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_sport"),
+        "forbidden_description": $r("app.string.forbidden_description_sport"),
         "permissions": [
             "ohos.permission.ACTIVITY_MOTION"
         ],
@@ -251,6 +281,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_ssensor'),
         "label": $r("app.string.group_label_health"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_health"),
+        "forbidden_description": $r("app.string.forbidden_description_health"),
         "permissions": [
             "ohos.permission.READ_HEALTH_DATA"
         ],
@@ -271,6 +304,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_public_picture'),
         "label": $r("app.string.group_label_image_and_videos"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_image"),
+        "forbidden_description": $r("app.string.forbidden_description_image"),
         "permissions": [
             "ohos.permission.READ_IMAGEVIDEO",
             "ohos.permission.WRITE_IMAGEVIDEO",
@@ -284,6 +320,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_public_audio'),
         "label": $r("app.string.group_label_audios"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_audios"),
+        "forbidden_description": $r("app.string.forbidden_description_audios"),
         "permissions": [
             "ohos.permission.READ_AUDIO",
             "ohos.permission.WRITE_AUDIO"
@@ -296,6 +335,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_public_folder'),
         "label": $r("app.string.group_label_document"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_documents"),
+        "forbidden_description": $r("app.string.forbidden_description_documents"),
         "permissions": [
             "ohos.permission.READ_DOCUMENT",
             "ohos.permission.WRITE_DOCUMENT",
@@ -310,6 +352,9 @@ export const groups: any[] = [
         "icon": $r('app.media.track'),
         "label": $r("app.string.group_label_ADS"),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_ADS"),
+        "forbidden_description": $r("app.string.forbidden_description_ADS"),
         "permissions": [
             "ohos.permission.APP_TRACKING_CONSENT"
         ],
@@ -321,6 +366,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_public_app_list'),
         "label": $r('app.string.group_label_appList'),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_appList"),
+        "forbidden_description": $r("app.string.forbidden_description_appList"),
         "permissions": [
             "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
         ],
@@ -332,6 +380,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_multi_device_vector'),
         "label": $r('app.string.group_label_distributed_datasync'),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_distributed_datasync"),
+        "forbidden_description": $r("app.string.forbidden_description_distributed_datasync"),
         "permissions": [
             "ohos.permission.DISTRIBUTED_DATASYNC"
         ],
@@ -343,6 +394,9 @@ export const groups: any[] = [
         "icon": $r('app.media.ic_public_bluetooth'),
         "label": $r('app.string.group_label_bluetooth'),
         "description": "",
+        "enable_description_start": $r("app.string.enable_description_start_default"),
+        "enable_description_end": $r("app.string.enable_description_end_bluetooth"),
+        "forbidden_description": $r("app.string.forbidden_description_bluetooth"),
         "permissions": [
             "ohos.permission.ACCESS_BLUETOOTH"
         ],

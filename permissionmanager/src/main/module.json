@@ -26,23 +26,23 @@
                 "name": "com.ohos.permissionmanager.MainAbility",
                 "startWindowBackground": "$color:default_background_color",
                 "startWindowIcon": "$media:app_icon",
-                "srcEntrance": "./ets/MainAbility/MainAbility.ts",
+                "srcEntry": "./ets/MainAbility/MainAbility.ts",
                 "description": "$string:MainAbility_desc",
                 "icon": "$media:app_icon",
                 "label": "$string:MainAbility_label",
-                "visible": true,
+                "exported": true,
                 "launchType": "singleton",
                 "orientation": "auto_rotation_restricted"
             },
             {
               "name": "com.ohos.permissionmanager.SpecificAbility",
-              "srcEntrance": "./ets/SpecificAbility/SpecificAbility.ts",
+              "srcEntry": "./ets/SpecificAbility/SpecificAbility.ts",
               "description": "$string:SpecificAbility_desc",
               "icon": "$media:app_icon",
               "label": "$string:SpecificAbility_label",
               "startWindowIcon": "$media:app_icon",
               "startWindowBackground": "$color:default_background_color",
-              "visible": true,
+              "exported": true,
               "launchType": "standard",
               "orientation": "auto_rotation_restricted",
               "permissions": ["ohos.permission.GRANT_SENSITIVE_PERMISSIONS"]
@@ -52,23 +52,23 @@
             {
                 "icon": "$media:app_icon",
                 "name": "com.ohos.permissionmanager.GrantAbility",
-                "srcEntrance": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
+                "srcEntry": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
                 "type": "service",
-                "visible": true
+                "exported": true
             },
             {
                 "icon": "$media:app_icon",
                 "name": "com.ohos.permissionmanager.GlobalExtAbility",
-                "srcEntrance": "./ets/GlobalExtAbility/GlobalExtAbility.ts",
+                "srcEntry": "./ets/GlobalExtAbility/GlobalExtAbility.ts",
                 "type": "service",
-                "visible": true
+                "exported": true
             },
             {
                 "icon": "$media:icon",
                 "name": "com.ohos.permissionmanager.SecurityExtAbility",
-                "srcEntrance": "./ets/SecurityExtAbility/SecurityExtAbility.ts",
+                "srcEntry": "./ets/SecurityExtAbility/SecurityExtAbility.ts",
                 "type": "service",
-                "visible": true
+                "exported": true
             }
         ],
         "requestPermissions": [
