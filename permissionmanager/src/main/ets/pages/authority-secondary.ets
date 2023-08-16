@@ -105,7 +105,7 @@ struct appNameItem {
           })
           router.pushUrl({
             url: 'pages/authority-tertiary',
-            params: { routerData: dataList, backTitle: item.label }
+            params: { routerData: dataList, backTitle: item.label, permissionName: item.permissionName }
           });
         })
       }

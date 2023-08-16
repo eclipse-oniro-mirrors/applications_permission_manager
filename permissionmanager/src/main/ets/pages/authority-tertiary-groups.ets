@@ -24,7 +24,7 @@ import camera from '@ohos.multimedia.camera'
 import { verifyAccessToken, makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
 import { globalDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
-import { polymorphismGroup, globalGroup } from "../common/model/permissionGroup";
+import { polymorphismGroup, globalGroup, groups } from "../common/model/permissionGroup";
 
 var TAG = 'PermissionManager_MainAbility:';
 
@@ -155,6 +155,7 @@ struct applicationItem {
   @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
   @State isTouch: string = '';
+  @State groupInfo: object = {};
   scroller: Scroller = new Scroller();
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
@@ -360,6 +361,11 @@ struct applicationItem {
         }
       })
     })
+    groups.forEach(group => {
+      if (group.name === globalThis.currentPermissionGroup) {
+        this.groupInfo = group;
+      }
+    })
 
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
@@ -484,19 +490,26 @@ struct applicationItem {
           }
           Flex({ justifyContent: FlexAlign.Start }) {
             if (this.globalIsOn) {
-              Text(String(this.getGrantApplicationNumber()))
-                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-              Text($r('app.string.number_of_authorized_applications'))
-                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+              if (this.getGrantApplicationNumber() > 0) {
+                Text() {
+                  Span(this.groupInfo['enable_description_start'])
+                  Span(String(this.getGrantApplicationNumber()))
+                  Span(this.groupInfo['enable_description_end'])
+                }
+                  .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
+              } else {
+                Text(this.groupInfo['forbidden_description'])
+                  .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
+              }
             } else {
               Text(globalThis.currentPermissionGroup == "CAMERA" ? $r('app.string.camera_is_off') : $r('app.string.microphone_is_off'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
             }
           }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
           .margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })

@@ -21,6 +21,7 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { verifyAccessToken, makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
 import { authorizeDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
+import { permissionGroups } from "../common/model/permissionGroup";
 
 var TAG = 'PermissionManager_MainAbility:';
 
@@ -32,6 +33,7 @@ var TAG = 'PermissionManager_MainAbility:';
 
 let routerData: any = router.getParams()['routerData']; // Routing jump data
 let backTitle = router.getParams()['backTitle']; // return title name
+let permissionName = router.getParams()['permissionName'];
 class ApplicationObj {
   label: string
   icon: string
@@ -96,6 +98,7 @@ struct applicationItem {
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
+  @State permissionInfo: object = {};
   scroller: Scroller = new Scroller();
 
   authorizeDialogController: CustomDialogController = new CustomDialogController({
@@ -228,6 +231,11 @@ struct applicationItem {
    */
   aboutToAppear() {
     let bundleNames = routerData.length > 0 ? routerData[0].bundleNames : routerData;
+    permissionGroups.forEach(permission => {
+      if (permission.permissionName === permissionName) {
+        this.permissionInfo = permission;
+      }
+    })
 
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
@@ -283,14 +291,21 @@ struct applicationItem {
       Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
         Column() {
           Flex({ justifyContent: FlexAlign.Start }) {
-            Text(String(this.permissionNum))
-              .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-              .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
-            Text($r('app.string.number_of_authorized_applications'))
-              .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-              .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP, left: Constants.AUTHORITY_TEXT_MARGIN_LEFT })
+            if (this.permissionNum > 0) {
+              Text() {
+                Span(this.permissionInfo['enable_description_start'])
+                Span(String(this.permissionNum))
+                Span(this.permissionInfo['enable_description_end'])
+              }
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
+            } else {
+              Text(this.permissionInfo['forbidden_description'])
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
+            }
           }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
           .margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
           Row() {
