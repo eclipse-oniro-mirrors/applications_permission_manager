@@ -142,10 +142,16 @@ struct appNamePlusPage {
   }
 
   async initApplicationInfo(info) {
-    globalThis.context.resourceManager.getString(info.labelId, (error, value) => {
+    console.info(TAG + `labelId: ` + JSON.stringify(info.labelId));
+    let resourceManager = globalThis.context.resourceManager;
+    if (!info.labelId.id) {
+      resourceManager = globalThis.context.createBundleContext(info.bundleName).resourceManager;
+    }
+
+    resourceManager.getString(info.labelId, (error, value) => {
       info.label = value;
     })
-    globalThis.context.resourceManager.getMediaBase64(info.iconId, (error, value) => {
+    resourceManager.getMediaBase64(info.iconId, (error, value) => {
       info.icon = value;
     })
     var reqUserPermissions: string[] = [];
@@ -242,20 +248,6 @@ struct appNamePlusPage {
     }).catch(error => {
       console.error(TAG + 'getApplicationInfo error: ' + JSON.stringify(error));
     })
-  }
-
-  aboutToAppear() {
-    if (globalThis.bundleName) {
-      globalThis.applicationInfo.permissions.forEach(userPermission => {
-        permissionGroups.forEach(permissionInfo => {
-          if (userPermission == permissionInfo.permissionName) {
-            globalThis.context.resourceManager.getString(permissionInfo.label.id).then(val => {
-              globalThis.permissionLabels[userPermission] = val;
-            })
-          }
-        })
-      })
-    }
   }
 
   build() {
