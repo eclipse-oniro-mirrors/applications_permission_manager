@@ -24,7 +24,6 @@ export default class MainAbility extends UIAbility {
     globalThis.allBundleInfo = [];
     globalThis.allUserPermissions = [];
     globalThis.allGroups = [];
-    globalThis.permissionLabels = {};
     globalThis.initialGroups = [];
   }
 

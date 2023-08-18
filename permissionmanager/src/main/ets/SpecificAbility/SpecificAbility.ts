@@ -4,7 +4,6 @@ import bundle from '@ohos.bundle.bundleManager';
 export default class SpecificAbility extends UIAbility {
   onCreate(want, launchParam): void {
     globalThis.context = this.context;
-    globalThis.permissionLabels = {};
     globalThis.bundleName = want.parameters.bundleName;
     globalThis.applicationInfo = {};
   }
@@ -25,9 +24,9 @@ export default class SpecificAbility extends UIAbility {
         'api': bundleInfo.targetVersion,
         'tokenId': bundleInfo.appInfo.accessTokenId,
         'icon': '',
-        'iconId': bundleInfo.appInfo.iconResource,
+        'iconId': bundleInfo.appInfo.iconResource.id ? bundleInfo.appInfo.iconResource : bundleInfo.appInfo.iconId,
         'label': '',
-        'labelId': bundleInfo.appInfo.labelResource,
+        'labelId': bundleInfo.appInfo.labelResource.id ? bundleInfo.appInfo.labelResource : bundleInfo.appInfo.labelId,
         'permissions': reqPermissions,
         'groupId': [],
       };

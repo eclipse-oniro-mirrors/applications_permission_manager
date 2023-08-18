@@ -38,7 +38,7 @@ var TAG = 'PermissionManager_MainAbility:';
 interface applicationPermissions {
   'bundleName': string,
   'api': number,
-  'icon': string,
+  'icon': ResourceStr | PixelMap,
   'iconId': string,
   'permissions': string[],
   'label': string,
@@ -238,8 +238,7 @@ struct authorityManagementPage {
       this.getAllPermissionApplications();
       let orderSort = this.orderDict(userGrantPermissions);
       this.allPermissionApplications.sort(this.compare('permission', orderSort));
-      this.getPermissionLabel();
-      this.getLabelAndIcon()
+      this.getLabelAndIcon();
   }
 
   /**
@@ -253,21 +252,6 @@ struct authorityManagementPage {
         return groups[permissionGroups[i].groupId];
       }
     }
-  }
-
-  /**
-   * Get all permission label
-   */
-  getPermissionLabel() {
-    globalThis.allUserPermissions.forEach(userPermission => {
-      permissionGroups.forEach(permissionInfo => {
-        if(userPermission == permissionInfo.permissionName) {
-          globalThis.context.resourceManager.getString(permissionInfo.label.id).then(val => {
-            globalThis.permissionLabels[userPermission] = val;
-          })
-        }
-      })
-    })
   }
 
   /**
@@ -395,9 +379,9 @@ struct authorityManagementPage {
       'api': info.targetVersion,
       'tokenId': info.appInfo.accessTokenId,
       'icon': '',
-      'iconId': info.appInfo.iconResource,
+      'iconId': info.appInfo.iconResource.id ? info.appInfo.iconResource : info.appInfo.iconId,
       'label': info.appInfo.label,
-      'labelId': info.appInfo.labelResource,
+      'labelId': info.appInfo.labelResource.id ? info.appInfo.labelResource : info.appInfo.labelId,
       'permissions': reqUserPermissions,
       'groupId': groupIds
     };
@@ -412,7 +396,13 @@ struct authorityManagementPage {
    * @param {String} labelName Application Name
    */
   updateAppLabel(info) {
-    globalThis.context.resourceManager.getStringValue(info.labelId, (error, value) => {
+    console.info(TAG + `labelId: ` + JSON.stringify(info.labelId));
+    let resourceManager = globalThis.context.resourceManager;
+    if (!info.labelId.id) {
+      resourceManager = globalThis.context.createBundleContext(info.bundleName).resourceManager;
+    }
+
+    resourceManager.getStringValue(info.labelId, (error, value) => {
         if (!!value) {
           info.label = value;
         }
@@ -432,15 +422,21 @@ struct authorityManagementPage {
    * @param {String} bundleName Package names
    */
   async updateAppIcon(info) {
+    console.info(TAG + `iconId: ` + JSON.stringify(info.iconId));
+    let resourceManager = globalThis.context.resourceManager;
+    if (!info.iconId.id) {
+      resourceManager = globalThis.context.createBundleContext(info.bundleName).resourceManager;
+    }
+
     try {
-      let iconDescriptor = globalThis.context.resourceManager.getDrawableDescriptor(info.iconId);
-      info.icon = iconDescriptor?.getPixelMap()
+      let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
+      info.icon = iconDescriptor?.getPixelMap();
     } catch (error) {
       console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`)
     }
 
     if (!info.icon) {
-      info.icon = await globalThis.context.resourceManager.getMediaContentBase64(info.iconId);
+      info.icon = await resourceManager.getMediaContentBase64(info.iconId);
     }
     if (!info.icon) {
       info.icon = $r('app.media.icon');
