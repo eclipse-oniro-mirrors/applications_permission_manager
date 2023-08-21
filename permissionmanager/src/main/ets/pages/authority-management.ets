@@ -68,7 +68,7 @@ const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 @Entry
 @Component
 struct authorityManagementPage {
-  @Builder ListItemLayout(item, end) {
+  @Builder ListItemLayout(item) {
     ListItem() {
       Row() {
         Column() {
@@ -89,17 +89,6 @@ struct authorityManagementPage {
             }
             .width(Constants.FULL_WIDTH)
             .height(Constants.MANAGEMENT_ROW_HEIGHT)
-          }
-          if (!end) {
-            Row() {
-              Flex() {
-                Column().width(Constants.MANAGEMENT_TEXT_DECORATION_MARGIN_LEFT)
-                Column()
-                  .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                  .height(Constants.TEXT_DECORATION_HEIGHT)
-                  .flexGrow(Constants.FLEX_GROW)
-              }
-            }
           }
         }.onClick(() => {
           if (item.group === 'OTHER' || showSubpermissionsGrop.indexOf(item.group) !== -1) {
@@ -512,47 +501,71 @@ struct authorityManagementPage {
                                   List() {
                                     ListItem() {
                                       List() {
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP), (item, index) => {
-                                          this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP).length - 1))
+                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP), (item) => {
+                                          this.ListItemLayout(item)
                                         }, item => JSON.stringify(item))
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
+                                      .divider({
+                                        strokeWidth: $r('app.float.divider'),
+                                        color: $r('sys.color.ohos_id_color_list_separator'),
+                                        startMargin: $r('app.float.divider_margin_right_permission'),
+                                        endMargin: Constants.DEFAULT_MARGIN_END
+                                      })
                                     }
 
                                     ListItem() {
                                       List() {
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP), (item, index) => {
-                                          this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP).length - 1))
+                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP), (item) => {
+                                          this.ListItemLayout(item)
                                         }, item => JSON.stringify(item))
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
+                                      .divider({
+                                        strokeWidth: $r('app.float.divider'),
+                                        color: $r('sys.color.ohos_id_color_list_separator'),
+                                        startMargin: $r('app.float.divider_margin_right_permission'),
+                                        endMargin: Constants.DEFAULT_MARGIN_END
+                                      })
                                     }
 
                                     if(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length) {
                                       ListItem() {
                                         List() {
-                                          ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP), (item, index) => {
-                                            this.ListItemLayout(item, index == (this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length - 1))
+                                          ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP), (item) => {
+                                            this.ListItemLayout(item)
                                           }, item => JSON.stringify(item))
                                         }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                         .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                         .padding(Constants.LIST_PADDING_TOP)
                                         .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
+                                        .divider({
+                                          strokeWidth: $r('app.float.divider'),
+                                          color: $r('sys.color.ohos_id_color_list_separator'),
+                                          startMargin: $r('app.float.divider_margin_right_permission'),
+                                          endMargin: Constants.DEFAULT_MARGIN_END
+                                        })
                                       }
                                     }
 
                                     ListItem() {
                                       List() {
                                         ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP), (item) => {
-                                          this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+                                          this.ListItemLayout(item)
                                         }, item => JSON.stringify(item))
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
+                                      .divider({
+                                        strokeWidth: $r('app.float.divider'),
+                                        color: $r('sys.color.ohos_id_color_list_separator'),
+                                        startMargin: $r('app.float.divider_margin_right_permission'),
+                                        endMargin: Constants.DEFAULT_MARGIN_END
+                                      })
                                     }.margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
                                   }.height(Constants.FULL_HEIGHT)
                                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
@@ -600,7 +613,7 @@ struct applicationItem {
   @State isTouch: string = '';
   scroller: Scroller = new Scroller();
 
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item) {
     ListItem() {
       Row() {
         Column() {
@@ -631,17 +644,6 @@ struct applicationItem {
             .width(Constants.FULL_WIDTH)
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
-          }
-          if (index < this.applicationItem.length - 1) {
-            Row() {
-              Flex() {
-                Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
-                Column()
-                  .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                  .height(Constants.TEXT_DECORATION_HEIGHT)
-                  .flexGrow(Constants.FLEX_GROW)
-              }
-            }
           }
         }.onClick(() => {
           globalThis.applicationInfo = item
@@ -696,12 +698,18 @@ struct applicationItem {
               } else {
                 Row() {
                   List({ scroller: this.scroller }) {
-                    ForEach(appSort(this.applicationItem), (item, index) => {
-                      this.ListItemLayout(item, index)
+                    ForEach(appSort(this.applicationItem), (item) => {
+                      this.ListItemLayout(item)
                     }, item => JSON.stringify(item))
                   }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding(Constants.LIST_PADDING_TOP)
+                  .divider({
+                    strokeWidth: $r('app.float.divider'),
+                    color: $r('sys.color.ohos_id_color_list_separator'),
+                    startMargin: $r('app.float.divider_margin_right_application'),
+                    endMargin: Constants.DEFAULT_MARGIN_END
+                  })
                   .onScrollIndex((start, end) => {
                     globalThis.scroller = this.scroller;
                     if (this.applicationItem.length > 0) {

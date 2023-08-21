@@ -71,7 +71,7 @@ struct appNameItem {
   private group = router.getParams()['group'];
   @State isTouch: string = '';
 
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item) {
     ListItem() {
       Row() {
         Column() {
@@ -90,14 +90,6 @@ struct appNameItem {
             }
             .width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
-          }
-          if (!index) {
-            Row() {
-              Column()
-                .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                .width(Constants.FULL_WIDTH)
-                .height(Constants.TEXT_DECORATION_HEIGHT)
-            }
           }
         }.onClick(() => {
           let dataList = this.routerData.filter((ele) => {
@@ -154,11 +146,8 @@ struct appNameItem {
         Row() {
             List() {
               if (this.calendarListItem.length > 0) {
-                ForEach(this.calendarListItem.slice(Constants.SLICE_START, this.calendarListItem.length - 1), (item) => {
-                  this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-                }, item => JSON.stringify(item))
-                ForEach(this.calendarListItem.slice(Constants.SLICE_END), (item) => {
-                  this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+                ForEach(this.calendarListItem, (item) => {
+                  this.ListItemLayout(item)
                 }, item => JSON.stringify(item))
               } else {
                 ListItem() {
@@ -175,6 +164,12 @@ struct appNameItem {
             }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
             .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .padding(Constants.LIST_PADDING_TOP)
+            .divider({
+              strokeWidth: $r('app.float.divider'),
+              color: $r('sys.color.ohos_id_color_list_separator'),
+              startMargin: Constants.DEFAULT_MARGIN_START,
+              endMargin: Constants.DEFAULT_MARGIN_END
+            })
           }.margin({ top: Constants.ROW_MARGIN_TOP })
         .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })
       }

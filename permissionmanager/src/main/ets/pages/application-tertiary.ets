@@ -419,14 +419,6 @@ struct mediaDocumentItem {
                     })
                   }
                 }
-                if (!index) {
-                  Row() {
-                    Column()
-                      .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                      .width(Constants.FULL_WIDTH)
-                      .height(Constants.TEXT_DECORATION_HEIGHT)
-                  }
-                }
               }
             }
             .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
@@ -454,6 +446,12 @@ struct mediaDocumentItem {
         .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
         .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
         .padding(Constants.LIST_PADDING_TOP)
+        .divider({
+          strokeWidth: $r('app.float.divider'),
+          color: $r('sys.color.ohos_id_color_list_separator'),
+          startMargin: Constants.DEFAULT_MARGIN_START,
+          endMargin: Constants.DEFAULT_MARGIN_END
+        })
 
         if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permissions.includes(PRECISE_LOCATION_PERMISSION))) {
           Column() {

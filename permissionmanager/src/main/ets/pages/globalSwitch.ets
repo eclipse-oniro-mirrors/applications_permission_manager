@@ -26,9 +26,10 @@ const CAMERA = 'camera';
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
-  .width(Constants.BUTTON_WIDTH)
+  .flexGrow(Constants.FLEX_GROW)
 }
 
 @Entry
@@ -81,18 +82,21 @@ struct globalDialog {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Start }) {
                 Button($r('app.string.cancel'))
-                  .fontSize(Constants.BUTTON_FONT_SIZE)
                   .onClick(() => {
                     this.cancel()
-                  }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
-                  .margin({ top: Constants.BUTTON_MARGIN_TOP })
+                  }).customizeButton()
+                Divider()
+                  .color($r('sys.color.ohos_id_color_list_separator'))
+                  .vertical(true)
+                  .height($r('app.float.divider_height'))
+                  .margin({ top: $r('app.float.divider_margin_top') })
+                  .opacity($r('app.float.opacity_0_2'))
                 Button($r('app.string.open'))
-                  .fontSize(Constants.BUTTON_FONT_SIZE)
                   .onClick(() => {
                     this.accept()
-                  }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
+                  }).customizeButton()
               }.height(Constants.ROW_HEIGHT)
+              .margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
             }
           }
           .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))

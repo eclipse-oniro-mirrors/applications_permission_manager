@@ -70,7 +70,7 @@ struct appNamePlusPage {
   @State label: string = '';
   @State isTouch: string = '';
 
-  @Builder ListItemLayout(item, index, status) {
+  @Builder ListItemLayout(item, status) {
     ListItem() {
       Row() {
         Column() {
@@ -89,14 +89,6 @@ struct appNamePlusPage {
             }
             .width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
-          }
-          if (this.showOrNot(index, status)) {
-            Row() {
-              Column()
-                .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                .width(Constants.FULL_WIDTH)
-                .height(Constants.TEXT_DECORATION_HEIGHT)
-            }
           }
         }.onClick(() => {
           globalThis.currentPermissionGroup = item.group
@@ -131,14 +123,6 @@ struct appNamePlusPage {
         this.isTouch = '';
       }
     })
-  }
-
-  showOrNot(index, status) {
-    if (status) {
-      return index < this.bannedListItem.length - 1;
-    } else {
-      return index < this.allowedListItem.length - 1;
-    }
   }
 
   async initApplicationInfo(info) {
@@ -314,13 +298,19 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               List() {
-                                ForEach(this.allowedListItem, (item, index) => {
-                                  this.ListItemLayout(item, index, Constants.RADIO_ALLOW_INDEX)
+                                ForEach(this.allowedListItem, (item) => {
+                                  this.ListItemLayout(item, Constants.RADIO_ALLOW_INDEX)
                                 }, item => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                               .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                               .padding(Constants.LIST_PADDING_TOP)
+                              .divider({
+                                strokeWidth: $r('app.float.divider'),
+                                color: $r('sys.color.ohos_id_color_list_separator'),
+                                startMargin: Constants.DEFAULT_MARGIN_START,
+                                endMargin: Constants.DEFAULT_MARGIN_END
+                              })
                             }.margin({ top: Constants.ROW_MARGIN_TOP })
                             .padding({
                               left: Constants.SECONDARY_LIST_PADDING_LEFT,
@@ -345,13 +335,19 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               List() {
-                                ForEach(this.bannedListItem, (item, index) => {
-                                  this.ListItemLayout(item, index, Constants.RADIO_BAN_INDEX)
+                                ForEach(this.bannedListItem, (item) => {
+                                  this.ListItemLayout(item, Constants.RADIO_BAN_INDEX)
                                 }, item => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                               .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                               .padding(Constants.LIST_PADDING_TOP)
+                              .divider({
+                                strokeWidth: $r('app.float.divider'),
+                                color: $r('sys.color.ohos_id_color_list_separator'),
+                                startMargin: Constants.DEFAULT_MARGIN_START,
+                                endMargin: Constants.DEFAULT_MARGIN_END
+                              })
                             }.margin({ top: Constants.ROW_MARGIN_TOP })
                             .padding({
                               left: Constants.SECONDARY_LIST_PADDING_LEFT,
