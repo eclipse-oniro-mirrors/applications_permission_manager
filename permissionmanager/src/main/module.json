@@ -30,7 +30,7 @@
                 "description": "$string:MainAbility_desc",
                 "icon": "$media:app_icon",
                 "label": "$string:MainAbility_label",
-                "exported": true,
+                "exported": false,
                 "launchType": "singleton",
                 "orientation": "auto_rotation_restricted"
             },
@@ -42,10 +42,9 @@
               "label": "$string:SpecificAbility_label",
               "startWindowIcon": "$media:app_icon",
               "startWindowBackground": "$color:default_background_color",
-              "exported": true,
+              "exported": false,
               "launchType": "standard",
               "orientation": "auto_rotation_restricted",
-              "permissions": ["ohos.permission.GRANT_SENSITIVE_PERMISSIONS"]
             }
         ],
         "extensionAbilities": [

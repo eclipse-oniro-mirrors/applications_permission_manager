@@ -422,7 +422,8 @@ struct applicationItem {
       this.globalIsOn = globalIsOn;
       if (globalThis.currentPermissionGroup == "CAMERA") {
         let cameraManager = camera.getCameraManager(globalThis.context);
-        cameraManager.on('cameraMute', curMuted => {
+        cameraManager.on('cameraMute', (err, curMuted) => {
+          console.log(TAG + 'curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
           this.globalIsOn = !curMuted;
         })
       } else {
