@@ -25,9 +25,10 @@ import { LocationCanvas } from '../common/components/location';
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
-  .width(Constants.BUTTON_WIDTH)
+  .flexGrow(Constants.FLEX_GROW)
 }
 
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
@@ -173,17 +174,19 @@ struct PermissionDialog {
               Row() {
                 Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                   Button($r('app.string.BAN'))
-                    .fontSize(Constants.BUTTON_FONT_SIZE)
                     .onClick(() => {
                       this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
-                    }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-                  Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
+                    }).customizeButton()
+                  Divider()
+                    .color($r('sys.color.ohos_id_color_list_separator'))
+                    .vertical(true)
+                    .height($r('app.float.divider_height'))
+                    .opacity($r('app.float.opacity_0_2'))
                   Button($r('app.string.ALLOW'))
-                    .fontSize(Constants.BUTTON_FONT_SIZE)
                     .onClick(() => {
                       this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
-                    }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
-                }
+                    }).customizeButton()
+                }.margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
               }
             }
           }

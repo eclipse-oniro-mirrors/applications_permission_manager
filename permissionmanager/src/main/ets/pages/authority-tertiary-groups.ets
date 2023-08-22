@@ -165,7 +165,7 @@ struct applicationItem {
     customStyle: true
   })
 
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item) {
     ListItem() {
       Row() {
         Column() {
@@ -244,17 +244,6 @@ struct applicationItem {
             .width(Constants.FULL_WIDTH)
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
-          }
-          if (index < this.applicationList.length - 1) {
-            Row() {
-              Flex() {
-                Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
-                Column()
-                  .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                  .height(Constants.TEXT_DECORATION_HEIGHT)
-                  .flexGrow(Constants.FLEX_GROW)
-              }
-            }
           }
         }.onClick(() => {
           if (polymorphismGroup.indexOf(globalThis.currentPermissionGroup) !== -1) {
@@ -529,13 +518,19 @@ struct applicationItem {
               } else {
                 Row() {
                   List({ scroller: this.scroller }) {
-                    ForEach(appSort(this.applicationList), (item, index) => {
-                      this.ListItemLayout(item, index)
+                    ForEach(appSort(this.applicationList), (item) => {
+                      this.ListItemLayout(item)
                     }, item => JSON.stringify(item))
                   }
                   .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding(Constants.LIST_PADDING_TOP)
+                  .divider({
+                    strokeWidth: $r('app.float.divider'),
+                    color: $r('sys.color.ohos_id_color_list_separator'),
+                    startMargin: $r('app.float.divider_margin_right_application'),
+                    endMargin: Constants.DEFAULT_MARGIN_END
+                  })
                   .onScrollIndex((start, end) => {
                     globalThis.scroller = this.scroller;
                     if (this.applicationList.length > 0) {

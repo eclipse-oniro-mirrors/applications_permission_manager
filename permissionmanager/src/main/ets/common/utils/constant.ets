@@ -76,7 +76,6 @@ export default class Constants {
     static APPLICATION = 0;
     static LAYOUT_WEIGHT = 1;
     static FLEX_GROW = 1;
-    static TEXT_DECORATION_HEIGHT = 1;
     static TEXT_BIG_FONT_SIZE = 20;
     static TEXT_MIDDLE_FONT_SIZE = 16;
     static TEXT_SMALL_FONT_SIZE = 14;
@@ -183,7 +182,6 @@ export default class Constants {
     static MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD = 24;
     static MANAGEMENT_IMAGE_MARGIN_LEFT = 8;
     static MANAGEMENT_ROW_HEIGHT = 56;
-    static MANAGEMENT_TEXT_DECORATION_MARGIN_LEFT = 40;
     static MANAGEMENT_LODING_IMAGE_WIDTH = 48;
     static MANAGEMENT_LODING_IMAGE_HEIGHT = 48;
     static MANAGEMENT_ROW_PADDING_LEFT = 12;
@@ -201,14 +199,7 @@ export default class Constants {
     static APPLICATION_TEXTINPUT_PADDING_RIGHT = 24;
     static APPLICATION_ALPHABETINDEX_MARGIN_TOP = 12;
     static APPLICATION_ALPHABETINDEX_WIDTH = 24;
-    static APPLICATION_TEXT_DECORATION_MARGIN_LEFT = 56;
     static LOADING_WIDTH = 100;
-
-    // slice
-    static SLICE_START = 0;
-    static SLICE_END = -1;
-    static SLICE_START_INDEX = 0;
-    static SLICE_END_INDEX = 1;
 
     //group number
     static FIXED_GROUP = 1;
@@ -304,14 +295,9 @@ export default class Constants {
     static DIALOG_DESP_MARGIN_BOTTOM = 8;
     static DIALOG_DESP_LINE_HEIGHT = 19;
 
-    static BUTTON_FONT_SIZE = 16;
-    static BUTTON_DIVIDER_FONT_SIZE = 24;
-    static BUTTON_MARGIN_TOP = 8;
-    static BUTTON_MARGIN_BOTTOM = 16;
     static BUTTON_MARGIN_LEFT = 16;
     static BUTTON_MARGIN_RIGHT = 16;
     static BUTTON_HEIGHT = 40;
-    static BUTTON_WIDTH = 177;
 
     static DIALOG_PRIVACY_BORDER_RADIUS = 32;
     static DIALOG_PADDING_BOTTOM = 16;

@@ -79,7 +79,7 @@ struct appNameItem {
   @State otherPermissionListItem: string[] = otherPermissionList; // Other permission interface data array
   @State isTouch: string = '';
 
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item) {
     ListItem() {
       Row() {
         Column() {
@@ -97,14 +97,6 @@ struct appNameItem {
             }
             .width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
-          }
-          if (!index) {
-            Row() {
-              Column()
-                .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                .width(Constants.FULL_WIDTH)
-                .height(Constants.TEXT_DECORATION_HEIGHT)
-            }
           }
         }.onClick(() => {
             router.pushUrl({
@@ -145,16 +137,18 @@ struct appNameItem {
       Column() {
         Row() {
           List() {
-            ForEach(this.otherPermissionListItem.slice(Constants.SLICE_START, this.otherPermissionListItem.length - 1),
-            (item) => {
-              this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-            }, item => JSON.stringify(item))
-            ForEach(this.otherPermissionListItem.slice(Constants.SLICE_END), (item) => {
-              this.ListItemLayout(item, Constants.SLICE_END_INDEX)
+            ForEach(this.otherPermissionListItem, (item) => {
+              this.ListItemLayout(item)
             }, item => JSON.stringify(item))
           }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
           .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
-           .padding(Constants.LIST_PADDING_TOP)
+          .padding(Constants.LIST_PADDING_TOP)
+          .divider({
+            strokeWidth: $r('app.float.divider'),
+            color: $r('sys.color.ohos_id_color_list_separator'),
+            startMargin: Constants.DEFAULT_MARGIN_START,
+            endMargin: Constants.DEFAULT_MARGIN_END
+          })
         }.margin({ top: Constants.ROW_MARGIN_TOP })
          .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })
       }
