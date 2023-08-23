@@ -31,20 +31,6 @@ export default class MainAbility extends UIAbility {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
 
-    let systemBarProperties = {
-      statusBarColor: '#ffffff',
-      navigationBarColor: '#ffffff',
-      //以下两个属性从API Version8开始支持
-      statusBarContentColor:'#000000',
-      navigationBarContentColor:'#000000'
-    };
-    try {
-      let win = windowStage.getMainWindowSync();
-      win.setWindowSystemBarProperties(systemBarProperties);
-    } catch (error) {
-      console.error(TAG + 'setWindowSystemBarProperties failed. Cause: ' + JSON.stringify(error));
-    }
-
     const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
     bundleManager.getAllBundleInfo(flag).then(async(bundleInfos) => {
       if (bundleInfos.length <= 0) {
