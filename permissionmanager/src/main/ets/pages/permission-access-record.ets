@@ -166,7 +166,7 @@ struct permissionRecordPage {
                     .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
                     .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
                   Column() {
-                    Row().width(Constants.FULL_WIDTH).height($r('app.float.divider'))
+                    Row().width(Constants.FULL_WIDTH).height(Constants.DIVIDER)
                       .backgroundColor($r("sys.color.ohos_id_color_list_separator"))
                       .position({ x: 0, y: 0 })
                     Text(permissionApplication.groupName)
@@ -238,7 +238,7 @@ struct permissionRecordPage {
                     .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                     .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD, left: Constants.MANAGEMENT_IMAGE_MARGIN_LEFT })
                   Column() {
-                    Row().width(Constants.FULL_WIDTH).height($r('app.float.divider'))
+                    Row().width(Constants.FULL_WIDTH).height(Constants.DIVIDER)
                       .backgroundColor($r("sys.color.ohos_id_color_list_separator"))
                       .position({ x: 0, y: 0 })
                     Text(permission.groupName)

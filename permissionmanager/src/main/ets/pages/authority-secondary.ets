@@ -165,7 +165,7 @@ struct appNameItem {
             .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .padding(Constants.LIST_PADDING_TOP)
             .divider({
-              strokeWidth: $r('app.float.divider'),
+              strokeWidth: Constants.DIVIDER,
               color: $r('sys.color.ohos_id_color_list_separator'),
               startMargin: Constants.DEFAULT_MARGIN_START,
               endMargin: Constants.DEFAULT_MARGIN_END
