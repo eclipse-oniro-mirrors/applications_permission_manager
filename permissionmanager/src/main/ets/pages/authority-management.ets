@@ -320,7 +320,7 @@ struct authorityManagementPage {
    * @param {Object} info bundleInfos Application Information
    */
   async deduplicationPermissions(info) {
-    console.log(TAG + 'allBundleInfo start: ' + info.name)
+    console.log(TAG + 'allBundleInfo start: ' + info.name);
     let reqPermissions: Array<any> = [];
     info.reqPermissionDetails.forEach(item => {
       reqPermissions.push(item.name);
@@ -401,7 +401,7 @@ struct authorityManagementPage {
           info.alphabeticalIndex = makePy(info.label)[0].slice(0, 1); // Get the first letter in the returned initials array
         }
 
-        info.sortId = getSortId(value)
+        info.sortId = getSortId(value);
     })
   }
 
@@ -421,7 +421,7 @@ struct authorityManagementPage {
       let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
       info.icon = iconDescriptor?.getPixelMap();
     } catch (error) {
-      console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`)
+      console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
     }
 
     if (!info.icon) {
@@ -509,9 +509,9 @@ struct authorityManagementPage {
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                       .divider({
-                                        strokeWidth: $r('app.float.divider'),
+                                        strokeWidth: Constants.DIVIDER,
                                         color: $r('sys.color.ohos_id_color_list_separator'),
-                                        startMargin: $r('app.float.divider_margin_right_permission'),
+                                        startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                         endMargin: Constants.DEFAULT_MARGIN_END
                                       })
                                     }
@@ -526,9 +526,9 @@ struct authorityManagementPage {
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                       .divider({
-                                        strokeWidth: $r('app.float.divider'),
+                                        strokeWidth: Constants.DIVIDER,
                                         color: $r('sys.color.ohos_id_color_list_separator'),
-                                        startMargin: $r('app.float.divider_margin_right_permission'),
+                                        startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                         endMargin: Constants.DEFAULT_MARGIN_END
                                       })
                                     }
@@ -544,9 +544,9 @@ struct authorityManagementPage {
                                         .padding(Constants.LIST_PADDING_TOP)
                                         .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                         .divider({
-                                          strokeWidth: $r('app.float.divider'),
+                                          strokeWidth: Constants.DIVIDER,
                                           color: $r('sys.color.ohos_id_color_list_separator'),
-                                          startMargin: $r('app.float.divider_margin_right_permission'),
+                                          startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                           endMargin: Constants.DEFAULT_MARGIN_END
                                         })
                                       }
@@ -561,9 +561,9 @@ struct authorityManagementPage {
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .divider({
-                                        strokeWidth: $r('app.float.divider'),
+                                        strokeWidth: Constants.DIVIDER,
                                         color: $r('sys.color.ohos_id_color_list_separator'),
-                                        startMargin: $r('app.float.divider_margin_right_permission'),
+                                        startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                         endMargin: Constants.DEFAULT_MARGIN_END
                                       })
                                     }.margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
@@ -705,9 +705,9 @@ struct applicationItem {
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding(Constants.LIST_PADDING_TOP)
                   .divider({
-                    strokeWidth: $r('app.float.divider'),
+                    strokeWidth: Constants.DIVIDER,
                     color: $r('sys.color.ohos_id_color_list_separator'),
-                    startMargin: $r('app.float.divider_margin_right_application'),
+                    startMargin: Constants.DIVIDER_MARGIN_RIGHT_APPLICATION,
                     endMargin: Constants.DEFAULT_MARGIN_END
                   })
                   .onScrollIndex((start, end) => {

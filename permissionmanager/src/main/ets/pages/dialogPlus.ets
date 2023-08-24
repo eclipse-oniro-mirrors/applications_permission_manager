@@ -180,8 +180,8 @@ struct PermissionDialog {
                   Divider()
                     .color($r('sys.color.ohos_id_color_list_separator'))
                     .vertical(true)
-                    .height($r('app.float.divider_height'))
-                    .opacity($r('app.float.opacity_0_2'))
+                    .height(Constants.DIVIDER_HEIGHT)
+                    .opacity(.2)
                   Button($r('app.string.ALLOW'))
                     .onClick(() => {
                       this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)

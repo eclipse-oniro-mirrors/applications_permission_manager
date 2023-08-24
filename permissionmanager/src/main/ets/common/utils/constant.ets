@@ -121,6 +121,10 @@ export default class Constants {
     static DEFAULT_SLIDER_HEIGHT = 40;
     static OFFSET = 100;
     static CLICK_SHADOW_LENGTH = 48;
+    static DIVIDER = '1px';
+    static DIVIDER_HEIGHT = 24;
+    static DIVIDER_MARGIN_RIGHT_PERMISSION = 52;
+    static DIVIDER_MARGIN_RIGHT_APPLICATION = 68;
 
     // application-secondary, authority-secondary
     static FLEX_MARGIN_TOP = 8;
@@ -295,6 +299,7 @@ export default class Constants {
     static DIALOG_DESP_MARGIN_BOTTOM = 8;
     static DIALOG_DESP_LINE_HEIGHT = 19;
 
+    static BUTTON_MARGIN_TOP = 8;
     static BUTTON_MARGIN_LEFT = 16;
     static BUTTON_MARGIN_RIGHT = 16;
     static BUTTON_HEIGHT = 40;

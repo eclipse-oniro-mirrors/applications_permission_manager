@@ -88,9 +88,9 @@ struct globalDialog {
                 Divider()
                   .color($r('sys.color.ohos_id_color_list_separator'))
                   .vertical(true)
-                  .height($r('app.float.divider_height'))
-                  .margin({ top: $r('app.float.divider_margin_top') })
-                  .opacity($r('app.float.opacity_0_2'))
+                  .height(Constants.DIVIDER_HEIGHT)
+                  .margin({ top: Constants.BUTTON_MARGIN_TOP })
+                  .opacity(.2)
                 Button($r('app.string.open'))
                   .onClick(() => {
                     this.accept()
