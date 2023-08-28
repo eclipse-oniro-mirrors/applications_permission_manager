@@ -37,6 +37,7 @@ export struct textInput {
           .placeholderFont({ size: Constants.TEXTINPUT_PLACEHOLDER_Font_SIZE, weight: FontWeight.Normal, family: "sans-serif", style: FontStyle.Normal })
           .caretColor($r('sys.color.ohos_id_color_text_secondary'))
           .height(Constants.TEXTINPUT_HEIGHT)
+          .enableKeyboardOnFocus(false)
           .onChange((value: string) => {
             if (value === '' || value === null) {
               this.applicationItem = this.oldApplicationItem;
