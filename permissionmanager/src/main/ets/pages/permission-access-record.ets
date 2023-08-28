@@ -415,7 +415,7 @@ struct permissionRecordPage {
       DD: date.getDate(),
       NN: date.getHours() >= 12 ? this.strings.afternoon : this.strings.morning,
       HH: date.getHours() >= 12 ? date.getHours() - 12 : date.getHours(),
-      mm: date.getMinutes() > 10 ? date.getMinutes() : '0' + date.getMinutes(),
+      mm: date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes(),
     }
 
     for (const key in config) {
@@ -524,16 +524,11 @@ struct permissionRecordPage {
         }
       }
 
-      await globalThis.context.resourceManager.getString(info.appInfo.labelResource, (error, value) => {
-        if (value == undefined) {
-          appInfo.groupName = info.appInfo.label;
-        } else {
-          appInfo.groupName = value;
+      globalThis.allBundleInfo.forEach(bundleInfo => {
+        if (bundleInfo.bundleName === info.name) {
+          appInfo.groupName = bundleInfo.label;
+          appInfo.icon = bundleInfo.icon;
         }
-      })
-
-      await globalThis.context.resourceManager.getMediaBase64(info.appInfo.iconResource, (error, value) => {
-        appInfo.icon = value;
       })
 
       appInfo.name = info.name;
