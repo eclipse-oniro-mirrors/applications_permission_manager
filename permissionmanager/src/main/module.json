@@ -44,7 +44,7 @@
               "startWindowBackground": "$color:default_background_color",
               "exported": false,
               "launchType": "standard",
-              "orientation": "auto_rotation_restricted",
+              "orientation": "auto_rotation_restricted"
             }
         ],
         "extensionAbilities": [
