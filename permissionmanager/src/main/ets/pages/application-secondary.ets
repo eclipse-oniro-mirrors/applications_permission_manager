@@ -135,9 +135,20 @@ struct appNamePlusPage {
     resourceManager.getString(info.labelId, (error, value) => {
       info.label = value;
     })
-    resourceManager.getMediaBase64(info.iconId, (error, value) => {
-      info.icon = value;
-    })
+
+    try {
+      let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
+      info.icon = iconDescriptor?.getPixelMap();
+    } catch (error) {
+      console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
+    }
+    if (!info.icon) {
+      info.icon = await resourceManager.getMediaContentBase64(info.iconId);
+    }
+    if (!info.icon) {
+      info.icon = $r('app.media.icon');
+    }
+
     var reqUserPermissions: string[] = [];
     var acManager = abilityAccessCtrl.createAtManager();
     if (info.permissions.length > 0) {
