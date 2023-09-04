@@ -45,7 +45,8 @@ interface applicationPermissions {
   'labelId': string,
   'tokenId': number,
   'groupId': number[],
-  'sortId': string
+  'sortId': string,
+  'alphabeticalIndex': string
 };
 
 interface permissionApplications {
@@ -374,7 +375,8 @@ struct authorityManagementPage {
       'labelId': info.appInfo.labelResource.id ? info.appInfo.labelResource : info.appInfo.labelId,
       'permissions': reqUserPermissions,
       'groupId': groupIds,
-      'sortId': ''
+      'sortId': '',
+      'alphabeticalIndex': ''
     };
     console.log(TAG + 'allBundleInfo.push: ' + info.name);
     globalThis.allBundleInfo.push(ap);
