@@ -21,7 +21,7 @@ import bundleManager from "@ohos.bundle.bundleManager";
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
-import { verifyAccessToken, makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
+import { verifyAccessToken, appSort, indexValue } from "../common/utils/utils";
 import { globalDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup, groups } from "../common/model/permissionGroup";
@@ -369,8 +369,8 @@ struct applicationItem {
               i,
             bundleInfo.tokenId,
             routerData[0].permission,
-            makePy(bundleInfo.label)[0].slice(0, 1),
-            getSortId(bundleInfo.label)) // Get the first letter in the returned initials array
+            bundleInfo.alphabeticalIndex,
+            bundleInfo.sortId) // Get the first letter in the returned initials array
           );
           this.isRisk[i] = false;
           try {

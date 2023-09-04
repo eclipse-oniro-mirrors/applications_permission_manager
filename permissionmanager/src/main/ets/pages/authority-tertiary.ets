@@ -18,7 +18,7 @@ import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex
 import { textInput } from "../common/components/search";
 import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import { verifyAccessToken, makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
+import { verifyAccessToken, appSort, indexValue } from "../common/utils/utils";
 import { authorizeDialog } from "../common/components/dialog";
 import Constants from '../common/utils/constant';
 import { permissionGroups } from "../common/model/permissionGroup";
@@ -239,8 +239,8 @@ struct applicationItem {
                 i,
               bundleInfo.tokenId,
               routerData[0].permission,
-              makePy(bundleInfo.label)[0].slice(0, 1),
-              getSortId(bundleInfo.label)) // Get the first letter in the returned initials array
+              bundleInfo.alphabeticalIndex,
+              bundleInfo.sortId) // Get the first letter in the returned initials array
             );
             // 0: have permission; -1: no permission
             if (data === Constants.PERMISSION_INDEX) {
