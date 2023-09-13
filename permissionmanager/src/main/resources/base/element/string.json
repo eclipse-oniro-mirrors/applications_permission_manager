@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "permissionmanager_desc",
-      "value": "permissionmanager"
+      "value": "Permission manager"
     },
     {
       "name": "MainAbility_desc",
@@ -522,11 +522,11 @@
     },
     {
       "name": "SpecificAbility_desc",
-      "value": "description"
+      "value": "Manage application permissions"
     },
     {
       "name": "SpecificAbility_label",
-      "value": "label"
+      "value": "Permission manager"
     },
     {
       "name": "Temporarily_authorize",
