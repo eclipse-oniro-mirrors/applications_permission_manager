@@ -522,11 +522,11 @@
     },
     {
       "name": "SpecificAbility_desc",
-      "value": "description"
+      "value": "管理应用申请的权限"
     },
     {
       "name": "SpecificAbility_label",
-      "value": "label"
+      "value": "权限管理"
     },
     {
       "name": "Temporarily_authorize",
