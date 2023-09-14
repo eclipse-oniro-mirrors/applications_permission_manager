@@ -15,33 +15,32 @@
 import bundleManager from '@ohos.bundle.bundleManager';
 import Constants from '../common/utils/constant';
 import window from '@ohos.window';
+import common from '@ohos.app.ability.common';
+import display from '@ohos.display';
+import deviceInfo from '@ohos.deviceInfo';
+import { BusinessError } from '@ohos.base';
 import { Log } from '../common/utils/utils';
+import { param, wantInfo } from '../common/utils/typedef';
 
-let storage = LocalStorage.GetShared();
-let want: any = '';
-let win: any = '';
-
-interface param {
-  'icon': Resource,
-  'label': Resource
-};
+let bottomPopoverTypes = ['default', 'phone'];
+let storage = LocalStorage.getShared();
+let want: wantInfo;
+let win: window.Window;
 
 @Entry(storage)
 @Component
 struct SecurityDialog {
-  @LocalStorageLink('want') want: Object = {};
-  @LocalStorageLink('win') win: Object = {};
+  private context = getContext(this) as common.ServiceExtensionContext;
+  @LocalStorageLink('want') want: wantInfo = new wantInfo([]);
+  @LocalStorageLink('win') win: window.Window = {} as window.Window;
 
   securityDialogController: CustomDialogController = new CustomDialogController({
     builder: CustomSecurityDialog(),
     alignment: DialogAlignment.Bottom,
     customStyle: true,
     cancel: () => {
-      win.destroy();
-      globalThis.windowNum --;
-      if (globalThis.windowNum == 0) {
-        globalThis.securityContext.terminateSelf();
-      }
+      win.destroyWindow();
+      this.context.terminateSelf();
     }
   })
 
@@ -56,46 +55,39 @@ struct SecurityDialog {
 
 @CustomDialog
 struct CustomSecurityDialog {
-  controller: CustomDialogController;
+  private context = getContext(this) as common.ServiceExtensionContext;
+  @State isBottomPopover: boolean = true;
+  controller?: CustomDialogController;
   descriptor: string = ''
   @State appName: string = 'ToBeInstead';
   @State index: number = 0;
   @State naviHeight: number = 0
 
   securityParams : Array<param> = [
-    {
-      'icon': $r('app.media.ic_public_gps'),
-      'label': $r('app.string.location_desc'),
-    },
-    {
-      'icon': $r('app.media.ic_public_folder'),
-      'label': $r('app.string.media_files_desc')
-    }
+    new param($r('app.media.ic_public_gps'), $r('app.string.location_desc')),
+    new param($r('app.media.ic_public_folder'), $r('app.string.media_files_desc'))
   ]
 
   GetAppName() {
     let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'];
     bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT)
       .then(data => {
-        globalThis.securityContext.resourceManager.getStringValue(data.labelResource)
+        this.context.resourceManager.getStringValue(data.labelResource)
           .then(data => {
             this.appName = data;
           })
-          .catch(error => {
+          .catch((error: BusinessError) => {
             Log.error('getStringValue failed. err is ' + JSON.stringify(error));
           });
       })
-      .catch(error => {
+      .catch((error: BusinessError) => {
         Log.error('getApplicationInfo failed. err is ' + JSON.stringify(error));
       });
   }
 
   destruction() {
-    win.destroy();
-    globalThis.windowNum --;
-    if (globalThis.windowNum == 0) {
-      globalThis.securityContext.terminateSelf();
-    }
+    win.destroyWindow();
+    this.context.terminateSelf();
   }
 
   getAvoidWindow() {
@@ -107,6 +99,16 @@ struct CustomSecurityDialog {
     } catch (exception) {
       Log.error('Failed to obtain the area. Cause:' + JSON.stringify(exception));
     }
+  }
+
+  getPopupPosition() {
+    try {
+      let dis = display.getDefaultDisplaySync();
+      let isVertical = dis.width > dis.height ? false : true;
+      this.isBottomPopover = (bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical) ? true : false;
+    } catch (exception) {
+      Log.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+    };
   }
 
   build() {
@@ -129,7 +131,7 @@ struct CustomSecurityDialog {
       }) {
         Flex({
           justifyContent: FlexAlign.Center,
-          alignItems: globalThis.isBottomPopover ? ItemAlign.End : ItemAlign.Center
+          alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center
         }) {
           Row() {
             Column() {
@@ -176,7 +178,9 @@ struct CustomSecurityDialog {
                   .height(Constants.SECURITY_BUTTON_HEIGHT)
                   .width(Constants.FULL_WIDTH)
                   .onClick(() => {
-                    this.controller.close();
+                    if (this.controller !== undefined) {
+                      this.controller.close();
+                    }
                     this.destruction();
                   })
               }
@@ -190,9 +194,9 @@ struct CustomSecurityDialog {
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }
-    }.margin({ left: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      right: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      bottom: globalThis.isBottomPopover ? this.naviHeight : 0})
+    }.margin({ left: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
+      right: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
+      bottom: this.isBottomPopover ? this.naviHeight : 0})
   }
 
   aboutToAppear() {
@@ -200,6 +204,7 @@ struct CustomSecurityDialog {
     this.getAvoidWindow();
     this.GetAppName();
     this.index = want.parameters['ohos.user.security.type'];
+    this.getPopupPosition();
   }
 }
 

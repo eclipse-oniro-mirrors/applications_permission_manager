@@ -14,12 +14,14 @@
  */
 
 import router from '@ohos.router';
+import common from '@ohos.app.ability.common';
 import Constants from '../utils/constant';
 
 @Component
 export struct backBar {
-  @Prop title: string; // return title name
-  @Prop recordable: boolean;
+  private context = getContext(this) as common.UIAbilityContext;
+  @Prop title: string = ''; // return title name
+  @Prop recordable: boolean = false;
   @State record: string = '';
   @State isTouch: string = '';
   @State isBack: boolean = false;
@@ -44,7 +46,10 @@ export struct backBar {
           right: Constants.BACKBAR_MARGIN_RIGHT
         })
         .backgroundColor(this.isBack ? $r('sys.color.ohos_id_color_click_effect') : '')
-        .onTouch((event: TouchEvent) => {
+        .onTouch(event => {
+          if (event === undefined) {
+            return;
+          }
           if (event.type === TouchType.Down) {
             this.isBack = true;
           }
@@ -54,7 +59,7 @@ export struct backBar {
         })
         .onClick(() => {
           let length = router.getLength();
-          Number(length) == 1 ? globalThis.context.terminateSelf() : router.back();
+          Number(length) == 1 ? this.context.terminateSelf() : router.back();
         })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
@@ -81,7 +86,10 @@ export struct backBar {
           })
           .bindMenu(this.MenuBuilder())
           .backgroundColor(this.isMore ? $r('sys.color.ohos_id_color_click_effect') : '')
-          .onTouch((event: TouchEvent) => {
+          .onTouch(event => {
+            if (event === undefined) {
+              return;
+            }
             if (event.type === TouchType.Down) {
               this.isMore = true;
             }
@@ -119,7 +127,10 @@ export struct backBar {
           direction: GradientDirection.Right,
           colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
         })
-      .onTouch((event: TouchEvent) => {
+      .onTouch(event => {
+        if (event === undefined) {
+          return;
+        }
         if (event.type === TouchType.Down) {
           this.isTouch = 'true';
         }

@@ -15,14 +15,17 @@
 
 import bundleManager from '@ohos.bundle.bundleManager';
 import router from '@ohos.router';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import common from '@ohos.app.ability.common';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager';
 import { backBar } from "../common/components/backBar";
 import Constants from '../common/utils/constant';
-import { userGrantPermissions, permissionGroupIds } from "../common/model/permissionGroup";
-import { getPermissionGroup } from '../common/utils/utils';
+import { userGrantPermissions } from "../common/model/permissionGroup";
+import { getPermissionGroup, getGroupIdByPermission } from '../common/utils/utils';
+import { StringObj, appInfoSimple, appRecordInfo, appInfo, GroupRecordInfo, appGroupRecordInfo } from '../common/utils/typedef';
+import { GlobalContext } from "../common/utils/globalContext";
 
-var TAG = 'PermissionManager_MainAbility:';
+const TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image) function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -30,21 +33,15 @@ var TAG = 'PermissionManager_MainAbility:';
   .height(height)
 };
 
-class StringObj {
-  morning: string
-  afternoon: string
-  constructor(morning: string, afternoon: string) {
-    this.morning = morning
-    this.afternoon = afternoon
-  }
-}
-
 @Entry
 @Component
 struct permissionRecordPage {
-  @State groups: any[] = [];
-  @State applicationInfos: any[] = [];
-  @State permissionApplications: any[] = [];
+  private context = getContext(this) as common.UIAbilityContext;
+  @State isVertical: boolean = GlobalContext.load('isVertical');
+  @State allBundleInfo: appInfo[] = GlobalContext.load('allBundleInfo');
+  @State groups: GroupRecordInfo[] = [];
+  @State applicationInfos: appRecordInfo[] = [];
+  @State permissionApplications: appRecordInfo[] = [];
   @State permissionIndex: number = -1;
   @State applicationIndex: number = -1;
   @State strings: StringObj = new StringObj('', '');
@@ -69,26 +66,20 @@ struct permissionRecordPage {
       }
     }.height(Constants.TAB_HEIGHT)
     .width(Constants.FULL_WIDTH)
-    .padding({ left: globalThis.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_START,
-      right: globalThis.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_END })
+    .padding({ left: this.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_START,
+      right: this.isVertical ? Constants.TAB_INNER_PADDING : Constants.DEFAULT_PADDING_END })
   }
 
-  @Builder ListItemLayout(item, index, dimension) {
+  @Builder PermissionListItemLayout(item: GroupRecordInfo, index: number) {
     ListItem() {
       Column() {
         Column() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
-              if (dimension) {
-                Image(item.icon)
-                  .fillColor($r('sys.color.ohos_id_color_secondary'))
-                  .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
-                  .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD, left: Constants.MANAGEMENT_IMAGE_MARGIN_LEFT })
-              } else {
-                Image(item.icon)
-                  .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
-                  .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
-              }
+              Image(item.icon)
+                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
+                .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD, left: Constants.MANAGEMENT_IMAGE_MARGIN_LEFT })
               Column() {
                 Text(item.groupName)
                   .width(Constants.MAXIMUM_HEADER_WIDTH)
@@ -99,67 +90,32 @@ struct permissionRecordPage {
                   .fontColor($r('sys.color.ohos_id_color_text_primary'))
                   .lineHeight(Constants.TEXT_LINE_HEIGHT)
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
-                if (dimension) {
-                  Text() {
-                    Span($r("app.string.visits"))
-                    Span(String(item.sum))
-                  }
-                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                    .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
-                } else {
-                  Row() {
-                    if (item.permissions) {
-                      ForEach(item.permissions, permission => {
-                        Image(permission.icon)
-                          .fillColor($r('sys.color.ohos_id_color_secondary'))
-                          .customizeImage(Constants.IMAGE_WIDTH_RECORD_APPLICATION, Constants.IMAGE_HEIGHT_RECORD_APPLICATION)
-                          .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
-                      }, item => JSON.stringify(item))
-                    }
-                  }
+                Text() {
+                  Span($r("app.string.visits"))
+                  Span(String(item.sum))
                 }
+                  .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
               }.flexGrow(Constants.FLEX_GROW)
               .alignItems(HorizontalAlign.Start)
-              if (dimension) {
-                if (index == this.permissionIndex) {
-                  Image($r('app.media.xiangshangjiantou'))
-                    .fillColor($r('sys.color.ohos_id_color_secondary'))
-                    .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
-                } else {
-                  Image($r('app.media.xiangxiajiantou'))
-                    .fillColor($r('sys.color.ohos_id_color_secondary'))
-                    .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
-                }
-              } else {
-                if (index == this.applicationIndex) {
-                  Image($r('app.media.xiangshangjiantou'))
-                    .fillColor($r('sys.color.ohos_id_color_secondary'))
-                    .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
-                } else {
-                  Image($r('app.media.xiangxiajiantou'))
-                    .fillColor($r('sys.color.ohos_id_color_secondary'))
-                    .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
-                }
-              }
+              Image(index == this.permissionIndex ? $r('app.media.xiangshangjiantou') : $r('app.media.xiangxiajiantou'))
+                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
             }
             .width(Constants.FULL_WIDTH)
-            .height(dimension ? Constants.LISTITEM_HEIGHT_PERMISSION : Constants.LISTITEM_HEIGHT_APPLICATION)
+            .height(Constants.LISTITEM_HEIGHT_PERMISSION)
           }
         }.onClick(() => {
-          dimension ?
-            (this.permissionIndex = this.permissionIndex == index ? -1 : index) :
-            (this.applicationIndex = this.applicationIndex == index ? -1 : index)
-          if (dimension) {
-            this.permissionApplications = this.applicationInfos.filter(appInfo => {
-              return appInfo.groupNames.includes(item.groupName);
-            })
-          }
+          this.permissionIndex = this.permissionIndex == index ? -1 : index
+          this.permissionApplications = this.applicationInfos.filter((appInfo) => {
+            return appInfo.groupNames.includes(item.groupName);
+          })
         })
         .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-        if (dimension && (index == this.permissionIndex)) {
+        if (index == this.permissionIndex) {
           List() {
-            ForEach(this.permissionApplications, (permissionApplication) => {
+            ForEach(this.permissionApplications, (permissionApplication: appRecordInfo) => {
               ListItem() {
                 Row() {
                   Image(permissionApplication.icon)
@@ -195,15 +151,16 @@ struct permissionRecordPage {
                 }
               }.height(Constants.LISTITEM_HEIGHT_APPLICATION)
               .onClick(() => {
-                globalThis.applicationInfo = {
-                  'bundleName': permissionApplication.name,
-                  'api': permissionApplication.api,
-                  'tokenId': permissionApplication.accessTokenId,
-                  'icon': permissionApplication.icon,
-                  'label': permissionApplication.groupName,
-                  'permissions': permissionApplication.reqUserPermissions,
-                  'groupId': permissionApplication.groupIds
-                }
+                let info: appInfoSimple = new appInfoSimple(
+                  permissionApplication.name,
+                  permissionApplication.api,
+                  permissionApplication.accessTokenId,
+                  permissionApplication.icon,
+                  permissionApplication.groupName,
+                  permissionApplication.reqUserPermissions,
+                  permissionApplication.groupIds
+                )
+                GlobalContext.store('applicationInfo', info);
                 router.pushUrl({ url: 'pages/application-secondary' });
               })
               .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
@@ -217,7 +174,10 @@ struct permissionRecordPage {
                   direction: GradientDirection.Right,
                   colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
                 })
-              .onTouch((event: TouchEvent) => {
+              .onTouch(event => {
+                if (event === undefined) {
+                  return;
+                }
                 if (event.type === TouchType.Down) {
                   this.isTouch = permissionApplication.name;
                 }
@@ -225,12 +185,59 @@ struct permissionRecordPage {
                   this.isTouch = '';
                 }
               })
-            }, item => JSON.stringify(item))
+            }, (item: appRecordInfo) => JSON.stringify(item))
           }
         }
-        if (!dimension && (index == this.applicationIndex)) {
+      }
+    }.padding(Constants.LIST_PADDING_TOP)
+    .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM })
+    .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
+  }
+
+  @Builder ApplicationListItemLayout(item: appRecordInfo, index: number) {
+    ListItem() {
+      Column() {
+        Column() {
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Row() {
+              Image(item.icon)
+                .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
+                .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
+              Column() {
+                Text(item.groupName)
+                  .width(Constants.MAXIMUM_HEADER_WIDTH)
+                  .maxLines(Constants.MAXIMUM_HEADER_LINES)
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
+                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+                  .fontWeight(FontWeight.Medium)
+                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  .lineHeight(Constants.TEXT_LINE_HEIGHT)
+                  .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
+                Row() {
+                  ForEach(item.permissions, (permission: appGroupRecordInfo) => {
+                    Image(permission.icon)
+                      .fillColor($r('sys.color.ohos_id_color_secondary'))
+                      .customizeImage(Constants.IMAGE_WIDTH_RECORD_APPLICATION, Constants.IMAGE_HEIGHT_RECORD_APPLICATION)
+                      .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
+                  }, (item: appGroupRecordInfo) => JSON.stringify(item))
+                }
+              }.flexGrow(Constants.FLEX_GROW)
+              .alignItems(HorizontalAlign.Start)
+              Image(index == this.applicationIndex ? $r('app.media.xiangshangjiantou') : $r('app.media.xiangxiajiantou'))
+                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
+            }
+            .width(Constants.FULL_WIDTH)
+            .height(Constants.LISTITEM_HEIGHT_APPLICATION)
+          }
+        }.onClick(() => {
+          this.applicationIndex = this.applicationIndex == index ? -1 : index
+        })
+        .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+        if (index == this.applicationIndex) {
           List() {
-            ForEach(item.permissions, (permission) => {
+            ForEach(item.permissions, (permission: appGroupRecordInfo) => {
               ListItem() {
                 Row() {
                   Image(permission.icon)
@@ -249,14 +256,14 @@ struct permissionRecordPage {
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text() {
                       Span($r("app.string.visits"))
-                      Span(String(permission['count' + item.accessTokenId]))
+                      Span(String(permission.count))
                       Span($r("app.string.recent_visit"))
-                      Span(this.getTime(permission['lastTime' + item.accessTokenId]))
+                      Span(this.getTime(permission.lastTime))
                     }
-                      .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
-                      .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                      .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
+                    .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
+                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                    .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
                   .width(Constants.FULL_WIDTH)
@@ -264,29 +271,25 @@ struct permissionRecordPage {
                 }
               }.height(Constants.LISTITEM_HEIGHT_PERMISSION)
               .onClick(() => {
-                globalThis.applicationInfo = {
-                  'bundleName': item.name,
-                  'api': item.api,
-                  'tokenId': item.accessTokenId,
-                  'icon': item.icon,
-                  'label': item.groupName,
-                  'permissions': item.reqUserPermissions,
-                  'groupId': item.groupIds
-                }
+                let info: appInfoSimple = new appInfoSimple(item.name, item.api, item.accessTokenId, item.icon, item.groupName, item.reqUserPermissions, item.groupIds);
+                GlobalContext.store('applicationInfo', info);
                 router.pushUrl({ url: 'pages/application-secondary' });
               })
               .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
               .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
               .linearGradient((this.isTouch === permission.name) ? {
-                  angle: 90,
-                  direction: GradientDirection.Right,
-                  colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
-                } : {
-                  angle: 90,
-                  direction: GradientDirection.Right,
-                  colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
-                })
-              .onTouch((event: TouchEvent) => {
+                   angle: 90,
+                   direction: GradientDirection.Right,
+                   colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+                 } : {
+                   angle: 90,
+                   direction: GradientDirection.Right,
+                   colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+                 })
+              .onTouch(event => {
+                if (event === undefined) {
+                  return;
+                }
                 if (event.type === TouchType.Down) {
                   this.isTouch = permission.name;
                 }
@@ -294,7 +297,7 @@ struct permissionRecordPage {
                   this.isTouch = '';
                 }
               })
-            }, item => JSON.stringify(item))
+            }, (item: appGroupRecordInfo) => JSON.stringify(item))
           }
         }
       }
@@ -334,9 +337,9 @@ struct permissionRecordPage {
                               Scroll() {
                                 Row() {
                                   List() {
-                                    ForEach(this.groups, (item, index) => {
-                                      this.ListItemLayout(item, index, Constants.PERMISSION)
-                                    }, item => JSON.stringify(item))
+                                    ForEach(this.groups, (item: GroupRecordInfo, index) => {
+                                      this.PermissionListItemLayout(item, index as number)
+                                    }, (item: GroupRecordInfo) => JSON.stringify(item))
                                   }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                   .height(Constants.FULL_HEIGHT)
                                 }.padding({
@@ -356,9 +359,9 @@ struct permissionRecordPage {
                                 Row() {
                                   if (this.show) {
                                     List() {
-                                      ForEach(this.applicationInfos, (item, index) => {
-                                        this.ListItemLayout(item, index, Constants.APPLICATION)
-                                      }, item => JSON.stringify(item))
+                                      ForEach(this.applicationInfos, (item: appRecordInfo, index) => {
+                                        this.ApplicationListItemLayout(item, index as number)
+                                      }, (item: appRecordInfo) => JSON.stringify(item))
                                     }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                                     .height(Constants.FULL_HEIGHT)
                                   }
@@ -407,19 +410,20 @@ struct permissionRecordPage {
    * Get time
    * @param {Number} The time stamp
    */
-  getTime(time, format='MM月DD日 NNHH:mm') {
+  getTime(time: number, format='MM月DD日 NNHH:mm') {
     if (this.strings.morning == 'am') { format = 'HH:mm NN MM/DD' }
     let date = new Date(time);
-    let config = {
-      MM: date.getMonth() + 1,
-      DD: date.getDate(),
-      NN: date.getHours() >= 12 ? this.strings.afternoon : this.strings.morning,
-      HH: date.getHours() >= 12 ? date.getHours() - 12 : date.getHours(),
-      mm: date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes(),
-    }
+    let key = ['MM', 'DD', 'NN', 'HH', 'mm'];
+    let value = [
+      date.getMonth() + 1,
+      date.getDate(),
+      date.getHours() >= 12 ? this.strings.afternoon : this.strings.morning,
+      date.getHours() >= 12 ? date.getHours() - 12 : date.getHours(),
+      date.getMinutes() >= 10 ? date.getMinutes() : '0' + date.getMinutes(),
+    ];
 
-    for (const key in config) {
-      format = format.replace(key,config[key]);
+    for (let i = 0; i < key.length; ++i) {
+      format = format.replace(key[i], String(value[i]));
     }
     return format;
   }
@@ -430,41 +434,41 @@ struct permissionRecordPage {
    * @param {String} groupName
    * @param {Boolean} true: count, false: lastTime
    */
-  getAppRecords(appInfo, groupName, option) {
-    var record = appInfo.permissions.filter(permission => {
+  getAppRecords(appInfo: appRecordInfo, groupName: ResourceStr, option: boolean): number {
+    let record = appInfo.permissions.filter(permission => {
       return permission.groupName == groupName;
     })
     if (record.length > 0) {
-      return option ? record[0]['count' + appInfo.accessTokenId] : record[0]['lastTime' + appInfo.accessTokenId];
+      return option ? record[0].count : record[0].lastTime;
     } else {
       return 0;
     }
   }
 
   getStrings() {
-    globalThis.context.resourceManager.getString($r("app.string.morning").id, (err, val) => {
+    this.context.resourceManager.getString($r("app.string.morning").id, (err, val) => {
       this.strings.morning = val;
     })
-    globalThis.context.resourceManager.getString($r("app.string.afternoon").id, (err, val) => {
+    this.context.resourceManager.getString($r("app.string.afternoon").id, (err, val) => {
       this.strings.afternoon = val;
     })
   }
 
-  getInfo(record, sortFlag) {
-    bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async info => {
-      var reqUserPermissions: string[] = [];
-      var reqUserRecords: any[] = [];
-      var permissionGroups: any[] = [];
-      var acManager = abilityAccessCtrl.createAtManager();
-      var appInfo: any = {};
-      let reqPermissions: Array<string> = [];
+  getInfo(record: privacyManager.BundleUsedRecord, sortFlag: boolean) {
+    bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async (info): Promise<boolean> => {
+      let reqUserPermissions: string[] = [];
+      let reqUserRecords: privacyManager.PermissionUsedRecord[] = [];
+      let permissionGroups: appGroupRecordInfo[] = [];
+      let acManager = abilityAccessCtrl.createAtManager();
+      let appInfo: appRecordInfo = new appRecordInfo('', '', '', 0, 0, [], [], [], [], 0);
+      let reqPermissions: Array<Permissions> = [];
       info.reqPermissionDetails.forEach(item => {
-        reqPermissions.push(item.name);
+        reqPermissions.push(item.name as Permissions);
       });
       for (let j = 0; j < record.permissionRecords.length; j++) {
-        var permission = record.permissionRecords[j].permissionName;
+        let permission = record.permissionRecords[j].permissionName;
         try {
-          var flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
+          let flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
           if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
@@ -480,9 +484,9 @@ struct permissionRecordPage {
         return false;
       }
       for (let k = 0; k < reqPermissions.length; k++) {
-        var reqPermission: any = reqPermissions[k];
+        let reqPermission = reqPermissions[k];
         try {
-          var reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
+          let reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
           if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
@@ -495,36 +499,36 @@ struct permissionRecordPage {
         }
       }
 
-      let groupNames = [];
+      let groupNames: ResourceStr[] = [];
       let appLastTime = 0;
       reqUserRecords.forEach(reqUserRecord => {
-        var group = getPermissionGroup(reqUserRecord.permissionName);
+        let group = getPermissionGroup(reqUserRecord.permissionName);
         if (!group) {
           console.info(TAG + "permission not find:" + reqUserRecord.permissionName);
         } else {
-          var existing = permissionGroups.find(permissionGroup => permissionGroup.name == group.name);
-          var lastTime = reqUserRecord.lastAccessTime;
+          let existing = permissionGroups.find(permissionGroup => permissionGroup.name == group.name);
+          let lastTime = reqUserRecord.lastAccessTime;
           lastTime > appLastTime ? appLastTime = lastTime : '';
           if (!existing) {
-            group['count' + record.tokenId] = reqUserRecord.accessCount;
-            group['lastTime' + record.tokenId] = lastTime;
-            permissionGroups.push(group);
+            let appGroupRecord: appGroupRecordInfo = new appGroupRecordInfo(group.name, group.groupName, group.label, group.icon, reqUserRecord.accessCount, lastTime);
+            permissionGroups.push(appGroupRecord);
             groupNames.push(group.groupName);
           } else {
-            existing['count' + record.tokenId] += reqUserRecord.accessCount;
-            lastTime > existing['lastTime' + record.tokenId] ? existing['lastTime' + record.tokenId] = lastTime : '';
+            existing.count += reqUserRecord.accessCount;
+            lastTime > existing.lastTime ? existing.lastTime = lastTime : '';
           }
         }
       })
 
-      let groupIds = [];
+      let groupIds: number[] = [];
       for (let i = 0; i < reqUserPermissions.length; i++) {
-        if (groupIds.indexOf(permissionGroupIds[reqUserPermissions[i]]) == -1){
-          groupIds.push(permissionGroupIds[reqUserPermissions[i]]);
+        let groupId = getGroupIdByPermission(reqUserPermissions[i])
+        if (groupIds.indexOf(groupId) == -1){
+          groupIds.push(groupId);
         }
       }
 
-      globalThis.allBundleInfo.forEach(bundleInfo => {
+      this.allBundleInfo.forEach(bundleInfo => {
         if (bundleInfo.bundleName === info.name) {
           appInfo.groupName = bundleInfo.label;
           appInfo.icon = bundleInfo.icon;
@@ -541,31 +545,32 @@ struct permissionRecordPage {
       appInfo.appLastTime = appLastTime;
       this.applicationInfos.push(appInfo);
       if (sortFlag) {
-        var appInfos: any[] = [];
+        let appInfos: appRecordInfo[] = [];
         this.applicationInfos.forEach(item => { appInfos.push(item) });
         appInfos.sort((a, b) => { return b.appLastTime - a.appLastTime });
         this.applicationInfos = appInfos;
       }
+      return true;
     })
   }
 
   getAllRecords() {
-    let request = {
-      "tokenId": 0,
-      "isRemote": false,
-      "deviceId": '',
-      "bundleName": '',
-      "permissionNames": [],
-      "beginTime": 0,
-      "endTime": 0,
-      "flag": 1
+    let request: privacyManager.PermissionUsedRequest = {
+      tokenId: 0,
+      isRemote: false,
+      deviceId: '',
+      bundleName: '',
+      permissionNames: [],
+      beginTime: 0,
+      endTime: 0,
+      flag: 1
     }
     privacyManager.getPermissionUsedRecord(request).then(async records => {
       console.info(TAG + "records: " + JSON.stringify(records.bundleRecords));
-      var groupArray: any[] = [];
-      var acManager = abilityAccessCtrl.createAtManager();
+      let groupArray: GroupRecordInfo[] = [];
+      let acManager = abilityAccessCtrl.createAtManager();
       for (let i = 0; i < records.bundleRecords.length; i++) {
-        var record = records.bundleRecords[i];
+        let record = records.bundleRecords[i];
         try {
           await bundleManager.queryAbilityInfo({
             bundleName: record.bundleName,
@@ -579,9 +584,9 @@ struct permissionRecordPage {
         this.getInfo(record, (i + 1) == records.bundleRecords.length);
 
         for (let j = 0; j < record.permissionRecords.length; j++) {
-          var permissionRecord = record.permissionRecords[j];
+          let permissionRecord = record.permissionRecords[j];
           try {
-            var reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName);
+            let reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName);
             if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
               continue;
             }
@@ -589,14 +594,13 @@ struct permissionRecordPage {
           catch(err) {
             console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
           }
-          var group = getPermissionGroup(permissionRecord.permissionName);
+          let group = getPermissionGroup(permissionRecord.permissionName);
           if (group) {
-            var exist = groupArray.find(permissionGroup => permissionGroup.name == group.name);
-            var lastTime = permissionRecord.lastAccessTime;
+            let exist = groupArray.find(permissionGroup => permissionGroup.name == group.name);
+            let lastTime = permissionRecord.lastAccessTime;
             if (!exist) {
-              group.sum = permissionRecord.accessCount;
-              group.recentVisit = lastTime;
-              groupArray.push(group);
+              let groupRecord: GroupRecordInfo = new GroupRecordInfo(group.name, group.groupName, group.label, group.icon, group.permissions, permissionRecord.accessCount, lastTime);
+              groupArray.push(groupRecord);
             } else {
               exist.sum += permissionRecord.accessCount;
               lastTime > exist.recentVisit ? exist.recentVisit = lastTime : '';

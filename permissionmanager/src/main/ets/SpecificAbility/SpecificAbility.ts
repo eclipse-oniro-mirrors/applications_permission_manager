@@ -1,11 +1,11 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundle from '@ohos.bundle.bundleManager';
+import { GlobalContext } from '../common/utils/globalContext';
 
 export default class SpecificAbility extends UIAbility {
-  onCreate(want, launchParam): void {
-    globalThis.context = this.context;
+  onCreate(want): void {
     globalThis.bundleName = want.parameters.bundleName;
-    globalThis.applicationInfo = {};
+    GlobalContext.store('bundleName', want.parameters.bundleName);
   }
 
   onDestroy(): void {}
@@ -19,18 +19,22 @@ export default class SpecificAbility extends UIAbility {
       bundleInfo.reqPermissionDetails.forEach(item => {
         reqPermissions.push(item.name);
       });
+
       let info = {
         'bundleName': bundleInfo.name,
         'api': bundleInfo.targetVersion,
         'tokenId': bundleInfo.appInfo.accessTokenId,
         'icon': '',
-        'iconId': bundleInfo.appInfo.iconResource.id ? bundleInfo.appInfo.iconResource : bundleInfo.appInfo.iconId,
+        'iconId': bundleInfo.appInfo.iconId,
         'label': '',
-        'labelId': bundleInfo.appInfo.labelResource.id ? bundleInfo.appInfo.labelResource : bundleInfo.appInfo.labelId,
+        'labelId': bundleInfo.appInfo.labelId,
         'permissions': reqPermissions,
         'groupId': [],
+        'zhTag': '',
+        'indexTag': '',
+        'language': ''
       };
-      globalThis.applicationInfo = info;
+      GlobalContext.store('applicationInfo', info);
       windowStage.setUIContent(this.context, 'pages/application-secondary', null);
     }).catch(() => {
       this.context.terminateSelf();
