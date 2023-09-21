@@ -16,12 +16,16 @@
 import Constants from '../common/utils/constant';
 import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
-import bundleManager from '@ohos.bundle.bundleManager';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import common from '@ohos.app.ability.common';
+import window from '@ohos.window';
+import display from '@ohos.display';
+import deviceInfo from '@ohos.deviceInfo';
 import { Log } from '../common/utils/utils';
+import { GlobalContext } from '../common/utils/globalContext';
 
 const MICROPHONE = 'microphone';
 const CAMERA = 'camera';
+let bottomPopoverTypes = ['default', 'phone'];
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
@@ -35,12 +39,14 @@ const CAMERA = 'camera';
 @Entry
 @Component
 struct globalSwitch {
+  @State globalWin: window.Window = GlobalContext.load('globalWin');
+
   privacyDialogController: CustomDialogController = new CustomDialogController({
     builder: globalDialog(),
     autoCancel: false,
     alignment: DialogAlignment.Center,
     customStyle: true,
-    cancel: () => { globalThis.globalWin.destroyWindow() }
+    cancel: () => { this.globalWin.destroyWindow() }
   })
 
   build() {}
@@ -52,16 +58,19 @@ struct globalSwitch {
 
 @CustomDialog
 struct globalDialog {
-  controller: CustomDialogController
+  private context = getContext(this) as common.ServiceExtensionContext;
+  @State isBottomPopover: boolean = true;
+  @State globalState: string = GlobalContext.load('globalState');
+  controller?: CustomDialogController
 
   build() {
     GridRow({ columns: { xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS }, gutter: Constants.DIALOG_GUTTER }) {
       GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN },
         offset: {xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.DIALOG_MD_OFFSET, lg: Constants.DIALOG_LG_OFFSET} }) {
-        Flex({ justifyContent: FlexAlign.Center, alignItems: globalThis.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
+        Flex({ justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
           Column() {
-            Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
-                globalThis.globalState == CAMERA ? $r('app.string.global_title_camera') :
+            Text(this.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
+              this.globalState == CAMERA ? $r('app.string.global_title_camera') :
               $r('app.string.global_title_camera_and_microphone'))
               .fontSize(Constants.TEXT_BIG_FONT_SIZE)
               .fontColor($r('sys.color.ohos_id_color_text_primary'))
@@ -70,8 +79,8 @@ struct globalDialog {
               .width(Constants.FULL_WIDTH)
               .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT,
                           top: Constants.ROW_PADDING_TOP, bottom: Constants.ROW_PADDING_BOTTOM})
-            Text(globalThis.globalState == MICROPHONE ? $r('app.string.global_desc_microphone') :
-                globalThis.globalState == CAMERA ? $r('app.string.global_desc_camera') :
+            Text(this.globalState == MICROPHONE ? $r('app.string.global_desc_microphone') :
+              this.globalState == CAMERA ? $r('app.string.global_desc_camera') :
               $r('app.string.global_desc_camera_and_microphone'))
               .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
               .fontColor($r('sys.color.ohos_id_color_text_primary'))
@@ -107,34 +116,35 @@ struct globalDialog {
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }
-    }.margin({ left: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      right: globalThis.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN })
+    }.margin({ left: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
+      right: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN })
   }
 
   accept() {
     Log.info('global accept');
-    if (globalThis.globalState == MICROPHONE) {
-      var audioManager = audio.getAudioManager();
+    let context: any = this.context;
+    if (this.globalState == MICROPHONE) {
+      let audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
-          globalThis.globalContext.terminateSelf();
+          this.context.terminateSelf();
         })
       })
-    } else if (globalThis.globalState == CAMERA) {
-      let cameraManager = camera.getCameraManager(globalThis.globalContext);
+    } else if (this.globalState == CAMERA) {
+      let cameraManager = camera.getCameraManager(context);
       cameraManager.muteCamera(false);
-      globalThis.globalContext.terminateSelf();
+      this.context.terminateSelf();
     } else {
-      let cameraManager = camera.getCameraManager(globalThis.globalContext);
+      let cameraManager = camera.getCameraManager(context);
       cameraManager.muteCamera(false);
-      var audioManager = audio.getAudioManager();
+      let audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
-          globalThis.globalContext.terminateSelf();
+          this.context.terminateSelf();
         })
       })
     }
@@ -143,14 +153,17 @@ struct globalDialog {
 
   cancel() {
     Log.info('global cancel');
-    globalThis.globalContext.terminateSelf();
+    this.context.terminateSelf();
   }
 
   aboutToAppear() {
-    var acManager = abilityAccessCtrl.createAtManager();
-    bundleManager.getApplicationInfo(Constants.BUNDLE_NAME, 0).then(data => {
-      acManager.grantUserGrantedPermission(data.accessTokenId, "ohos.permission.MICROPHONE", 2);
-    })
+    try {
+      let dis = display.getDefaultDisplaySync();
+      let isVertical = dis.width > dis.height ? false : true;
+      this.isBottomPopover = (bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical) ? true : false;
+    } catch (exception) {
+      Log.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+    };
   }
 
 }

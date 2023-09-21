@@ -15,16 +15,14 @@
 
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundleManager from '@ohos.bundle.bundleManager';
+import account_osAccount from '@ohos.account.osAccount';
+
 const TAG = 'PermissionManager_MainAbility:';
+const USER_ID = 100;
 
 export default class MainAbility extends UIAbility {
   onCreate(want, launchParam): void {
     console.log(TAG + 'MainAbility onCreate, ability name is ' + want.abilityName + '.');
-    globalThis.context = this.context;
-    globalThis.allBundleInfo = [];
-    globalThis.allUserPermissions = [];
-    globalThis.allGroups = [];
-    globalThis.initialGroups = [];
   }
 
   onWindowStageCreate(windowStage): void {
@@ -32,31 +30,43 @@ export default class MainAbility extends UIAbility {
     console.log(TAG + 'MainAbility onWindowStageCreate.');
 
     const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
-    bundleManager.getAllBundleInfo(flag).then(async(bundleInfos) => {
-      if (bundleInfos.length <= 0) {
-        console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
-        return;
-      }
-      for (let i = 0; i < bundleInfos.length; i++) {
-        let info = bundleInfos[i];
-        // Filter blank icon icon and text label resources
-        try {
-          await bundleManager.queryAbilityInfo({
-            bundleName: info.name,
-            action: 'action.system.home',
-            entities: ['entity.system.home']
-          }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
-        } catch (error) {
-          console.log(TAG + 'queryAbilityByWant catch error: ' + JSON.stringify(info.name));
-          continue;
-        }
+    let accountManager = account_osAccount.getAccountManager();
+    try {
+      accountManager.getActivatedOsAccountLocalIds((err, idArray: number[])=>{
+        console.log(TAG + 'getActivatedOsAccountLocalIds err:' + JSON.stringify(err));
+        console.log(TAG + 'getActivatedOsAccountLocalIds idArray: ' + JSON.stringify(idArray));
+        let userId = idArray[0];
+        bundleManager.getAllBundleInfo(flag, userId || USER_ID).then(async(bundleInfos) => {
+          if (bundleInfos.length <= 0) {
+            console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
+            return;
+          }
+          let initialGroups = [];
+          for (let i = 0; i < bundleInfos.length; i++) {
+            let info = bundleInfos[i];
+            // Filter blank icon icon and text label resources
+            try {
+              await bundleManager.queryAbilityInfo({
+                bundleName: info.name,
+                action: 'action.system.home',
+                entities: ['entity.system.home']
+              }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
+            } catch (error) {
+              console.error(TAG + 'queryAbilityByWant catch app: ' + JSON.stringify(info.name) + 'err: ' + JSON.stringify(error));
+              continue;
+            }
 
-        globalThis.initialGroups.push(info);
-      }
-      windowStage.setUIContent(this.context, 'pages/authority-management', null);
-    }).catch((error) => {
-      console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
-    })
+            initialGroups.push(info);
+          }
+          let storage: LocalStorage = new LocalStorage({ 'initialGroups': initialGroups });
+          windowStage.loadContent('pages/authority-management', storage);
+        }).catch((error) => {
+          console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
+        })
+      });
+    } catch (e) {
+      console.error(TAG + 'getActivatedOsAccountLocalIds exception: ' + JSON.stringify(e));
+    }
   }
 
   onForeground(): void {
