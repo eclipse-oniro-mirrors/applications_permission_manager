@@ -97,8 +97,7 @@ struct authorityManagementPage {
                   })
                 })
               } else {
-                let context: any = this.context;
-                let cameraManager = camera.getCameraManager(context);
+                let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
                 let mute = cameraManager.isCameraMuted();
                 GlobalContext.store('isMuteSupported', cameraManager.isCameraMuteSupported());
                 router.pushUrl({

@@ -30,6 +30,7 @@ export default class GlobalExtensionAbility extends extension {
     console.info(TAG + 'want: ' + JSON.stringify(want));
 
     GlobalContext.store('globalState', want.parameters['ohos.sensitive.resource']);
+    GlobalContext.store('context', this.context);
 
     try {
       let dis = display.getDefaultDisplaySync();

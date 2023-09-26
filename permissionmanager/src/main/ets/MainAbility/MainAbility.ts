@@ -16,6 +16,7 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundleManager from '@ohos.bundle.bundleManager';
 import account_osAccount from '@ohos.account.osAccount';
+import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_MainAbility:';
 const USER_ID = 100;
@@ -23,6 +24,8 @@ const USER_ID = 100;
 export default class MainAbility extends UIAbility {
   onCreate(want, launchParam): void {
     console.log(TAG + 'MainAbility onCreate, ability name is ' + want.abilityName + '.');
+
+    GlobalContext.store('context', this.context);
   }
 
   onWindowStageCreate(windowStage): void {

@@ -122,7 +122,6 @@ struct globalDialog {
 
   accept() {
     Log.info('global accept');
-    let context: any = this.context;
     if (this.globalState == MICROPHONE) {
       let audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
@@ -133,11 +132,11 @@ struct globalDialog {
         })
       })
     } else if (this.globalState == CAMERA) {
-      let cameraManager = camera.getCameraManager(context);
+      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
       cameraManager.muteCamera(false);
       this.context.terminateSelf();
     } else {
-      let cameraManager = camera.getCameraManager(context);
+      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
       cameraManager.muteCamera(false);
       let audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
