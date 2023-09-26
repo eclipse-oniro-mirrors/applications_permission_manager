@@ -381,8 +381,7 @@ struct applicationItem {
     if (globalGroup.indexOf(this.currentGroup) !== -1) {
       this.globalIsOn = globalIsOn;
       if (this.currentGroup == "CAMERA") {
-        let context: any = this.context;
-        let cameraManager = camera.getCameraManager(context);
+        let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
         cameraManager.on('cameraMute', (err, curMuted) => {
           console.log(TAG + 'curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
           this.globalIsOn = !curMuted;
@@ -427,8 +426,7 @@ struct applicationItem {
                     .onChange((isOn: boolean) => {
                       if (isOn) {
                         if (this.currentGroup == "CAMERA") {
-                          let context: any = this.context;
-                          let cameraManager = camera.getCameraManager(context);
+                          let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
                           cameraManager.muteCamera(false);
                         } else {
                           let audioManager = audio.getAudioManager();

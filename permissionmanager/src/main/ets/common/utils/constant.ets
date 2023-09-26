@@ -328,7 +328,6 @@ export default class Constants {
     static LOCATION_CANVAS_MARGIN_BOTTOM = 8;
     static LOCATION_CANVAS_INITIAL_SCALE = 1;
     static LOCATION_CANVAS_ZOOM_SCALE = 1.3;
-    static LOCATION_BUTTON_WIDTH = 120;
     static LOCATION_BUTTON_HEIGHT = 32;
     static LOCATION_BUTTON_RADIUS = 16;
     static LOCATION_BUTTON_POSITION_X = 137.5;

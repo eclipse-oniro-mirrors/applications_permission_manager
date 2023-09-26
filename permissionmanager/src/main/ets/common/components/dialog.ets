@@ -95,8 +95,7 @@ export struct globalDialog {
 
   confirm() {
     if (this.currentGroup === 'CAMERA') {
-      let context: any = this.context;
-      let cameraManager = camera.getCameraManager(context);
+      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
       cameraManager.muteCamera(true);
       if (this.controller !== undefined) {
         this.controller.close();
