@@ -40,7 +40,7 @@ export default class GlobalExtensionAbility extends extension {
         width: dis.width,
         height: dis.height
       };
-      this.createWindow('globalDialog', window.WindowType.TYPE_KEYGUARD, navigationBarRect);
+      this.createWindow('globalDialog', window.WindowType.TYPE_VOICE_INTERACTION, navigationBarRect);
     } catch (exception) {
       console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
     };

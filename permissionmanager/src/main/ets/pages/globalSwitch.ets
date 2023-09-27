@@ -17,7 +17,6 @@ import Constants from '../common/utils/constant';
 import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
 import common from '@ohos.app.ability.common';
-import window from '@ohos.window';
 import display from '@ohos.display';
 import deviceInfo from '@ohos.deviceInfo';
 import { Log } from '../common/utils/utils';
@@ -39,14 +38,14 @@ let bottomPopoverTypes = ['default', 'phone'];
 @Entry
 @Component
 struct globalSwitch {
-  @State globalWin: window.Window = GlobalContext.load('globalWin');
+  private context = getContext(this) as common.ServiceExtensionContext;
 
   privacyDialogController: CustomDialogController = new CustomDialogController({
     builder: globalDialog(),
     autoCancel: false,
     alignment: DialogAlignment.Center,
     customStyle: true,
-    cancel: () => { this.globalWin.destroyWindow() }
+    cancel: () => { this.context.terminateSelf() }
   })
 
   build() {}
