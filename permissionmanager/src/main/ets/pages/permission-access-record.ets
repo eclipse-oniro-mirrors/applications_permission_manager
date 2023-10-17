@@ -446,10 +446,10 @@ struct permissionRecordPage {
   }
 
   getStrings() {
-    this.context.resourceManager.getString($r("app.string.morning").id, (err, val) => {
+    this.context.resourceManager.getStringValue($r("app.string.morning").id, (err, val) => {
       this.strings.morning = val;
     })
-    this.context.resourceManager.getString($r("app.string.afternoon").id, (err, val) => {
+    this.context.resourceManager.getStringValue($r("app.string.afternoon").id, (err, val) => {
       this.strings.afternoon = val;
     })
   }
