@@ -425,7 +425,7 @@ struct PermissionDialog {
     Log.info("getApplicationName bundleName:" + bundleName);
     bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(applicationInfo => {
       let context = this.context.createBundleContext(bundleName);
-      context.resourceManager.getString(applicationInfo.labelId, (err, value) => {
+      context.resourceManager.getStringValue(applicationInfo.labelId, (err, value) => {
         if (value == undefined) {
           this.appName = titleTrim(applicationInfo.label);
         } else {
@@ -449,7 +449,7 @@ struct PermissionDialog {
           if (reqPermissionDetail.name == permission) {
             Log.info("reqPermissionDetail: " + JSON.stringify(reqPermissionDetail));
             let context = this.context.createModuleContext(bundleName, reqPermissionDetail.moduleName);
-            context.resourceManager.getString(reqPermissionDetail.reasonId, (err, value) => {
+            context.resourceManager.getStringValue(reqPermissionDetail.reasonId, (err, value) => {
               if (value !== undefined && group.reason === '') {
                 group.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
                 this.refresh ++;

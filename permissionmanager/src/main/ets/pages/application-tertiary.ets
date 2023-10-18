@@ -171,7 +171,7 @@ struct mediaDocumentItem {
       console.error(TAG + 'getApplicationInfo error: ' + JSON.stringify(error));
     })
     let context = this.context.createModuleContext(this.bundleName, reqPermissionInfo.moduleName);
-    context.resourceManager.getString(reqPermissionInfo.reasonId).then(value => {
+    context.resourceManager.getStringValue(reqPermissionInfo.reasonId).then(value => {
       if (value !== undefined) {
         this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
       }
@@ -199,7 +199,7 @@ struct mediaDocumentItem {
           if (reqPermissionDetail.name == permission) {
             console.info("reqPermissionDetail: " + JSON.stringify(reqPermissionDetail));
             let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
-            context.resourceManager.getString(reqPermissionDetail.reasonId).then(value => {
+            context.resourceManager.getStringValue(reqPermissionDetail.reasonId).then(value => {
               if (value !== undefined && !hasReason) {
                 this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
                 reqPermissionInfo = reqPermissionDetail;
