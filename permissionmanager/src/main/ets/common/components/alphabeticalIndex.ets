@@ -14,19 +14,21 @@
  */
 
 import Constants from '../utils/constant';
-import { indexValue, appSort } from '../utils/utils';
+import { indexValue, sortByName } from '../utils/utils';
+import { GlobalContext } from '../utils/globalContext';
+import { appInfo, ApplicationObj } from '../utils/typedef';
 
 @Component
 export struct alphabetIndexerComponent {
-  @Link applicationItem: Array<any>; // application info array
+  @Link applicationItem: Array<appInfo | ApplicationObj>; // application info array
   @Link index: number; // alphabetical index
   @State usingPopup: boolean = false;
 
   aboutToAppear() {
     const this_ = this;
-    setTimeout(function (){
+    setTimeout(() => {
       this_.usingPopup = true;
-    }, 500)
+    }, 1000)
   }
 
   build() {
@@ -40,17 +42,11 @@ export struct alphabetIndexerComponent {
       .popupFont({ size: $r('sys.float.ohos_id_text_size_headline7') }) // Demo of the popup
       .onSelect((index: number) => {
         const value = indexValue[index];
-        if (value === '#') {
-          if (this.applicationItem.length > 0) {
-            let item = appSort(this.applicationItem)[0];
-            indexValue.includes(item.alphabeticalIndex.toUpperCase()) ? '' : globalThis.scroller.scrollToIndex(0);
-            return;
-          }
-        }
+        let scroller: Scroller = GlobalContext.getContext().get('scroller') as Scroller;
         for (let i = 0; i < this.applicationItem.length; i++) {
-          let item = appSort(this.applicationItem)[i];
-          if (item.alphabeticalIndex.toUpperCase() === value) {
-            globalThis.scroller.scrollToIndex(i);
+          let item = sortByName(this.applicationItem)[i];
+          if (item.indexTag === value) {
+            scroller.scrollToIndex(i);
             return;
           }
         }

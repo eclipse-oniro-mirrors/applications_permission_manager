@@ -17,13 +17,15 @@ import { backBar } from "../common/components/backBar";
 import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
 import { textInput } from "../common/components/search";
 import router from '@ohos.router';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import { verifyAccessToken, makePy, appSort, getSortId, indexValue } from "../common/utils/utils";
-import { authorizeDialog } from "../common/components/dialog";
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
+import { BusinessError } from '@ohos.base';
+import { verifyAccessToken, indexValue, sortByName } from "../common/utils/utils";
+import { ApplicationObj, PermissionInfo, routerParams_2, permissionApplications, appInfo } from "../common/utils/typedef";
+import { GlobalContext } from "../common/utils/globalContext";
 import Constants from '../common/utils/constant';
 import { permissionGroups } from "../common/model/permissionGroup";
 
-var TAG = 'PermissionManager_MainAbility:';
+const TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image) function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -31,38 +33,11 @@ var TAG = 'PermissionManager_MainAbility:';
   .height(height)
 }
 
-let routerData: any = router.getParams()['routerData']; // Routing jump data
-let backTitle = router.getParams()['backTitle']; // return title name
-let permissionName = router.getParams()['permissionName'];
-class ApplicationObj {
-  label: string
-  icon: string
-  index: number
-  accessTokenId: number
-  permission: string
-  alphabeticalIndex: string
-  sortId: string
-  constructor(
-    label: string,
-    icon: string,
-    index: number,
-    accessTokenId: number,
-    permission: string,
-    alphabeticalIndex: string,
-    sortId: string) {
-    this.label = label
-    this.icon = icon
-    this.index = index
-    this.accessTokenId = accessTokenId
-    this.permission = permission
-    this.alphabeticalIndex = alphabeticalIndex
-    this.sortId = sortId
-  }
-} // application information
-
 @Entry
 @Component
 struct locationInfoPage {
+  private backTitle: ResourceStr = (router.getParams() as routerParams_2).backTitle;
+
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
@@ -71,7 +46,7 @@ struct locationInfoPage {
         Row() {
           Column() {
             Row() {
-              backBar({ title: JSON.stringify(backTitle), recordable: false })
+              backBar({ title: JSON.stringify(this.backTitle), recordable: false })
             }
             Row() {
               Column() {
@@ -92,22 +67,19 @@ struct locationInfoPage {
 
 @Component
 struct applicationItem {
+  private list: permissionApplications[] = (router.getParams() as routerParams_2).list;
+  private permissionName: string = (router.getParams() as routerParams_2).permissionName;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
-  @State toggleIsOn: object = {}; // toggle switch state array
-  @State isRisk: object = {};
+  @State toggleIsOn: boolean[] = []; // toggle switch state array
+  @State isRisk: boolean[] = [];
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
-  @State permissionInfo: object = {};
+  @State permissionInfo: PermissionInfo = new PermissionInfo('', '', '', 0);
+  @State allBundleInfo: appInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
 
-  authorizeDialogController: CustomDialogController = new CustomDialogController({
-    builder: authorizeDialog({ }),
-    autoCancel: true,
-    alignment: DialogAlignment.Center
-  });
-
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item: ApplicationObj) {
     ListItem() {
       Row() {
         Column() {
@@ -138,7 +110,7 @@ struct applicationItem {
                 .width(Constants.AUTHORITY_TOGGLE_WIDTH)
                 .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
                 .onChange((isOn: boolean) => {
-                  if (item.accessTokenId === '' || item.permission === '') {
+                  if (item.permission === undefined) {
                     return;
                   }
                   if (isOn) {
@@ -151,17 +123,6 @@ struct applicationItem {
             .width(Constants.FULL_WIDTH)
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
-          }
-          if (index < this.applicationList.length - 1) {
-            Row() {
-              Flex() {
-                Column().width(Constants.APPLICATION_TEXT_DECORATION_MARGIN_LEFT)
-                Column()
-                  .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                  .height(Constants.TEXT_DECORATION_HEIGHT)
-                  .flexGrow(Constants.FLEX_GROW)
-              }
-            }
           }
         }.onClick(() => {
         })
@@ -177,24 +138,15 @@ struct applicationItem {
    * @param {String} permission permission name
    * @param {Number} index Array index to modify permission status
    */
-  grantUserGrantedPermission(accessTokenId, permission, index) {
+  grantUserGrantedPermission(accessTokenId: number, permission: Permissions, index: number) {
     abilityAccessCtrl.createAtManager().grantUserGrantedPermission(
       accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
       // result: 0 Authorization succeeded; result: -1 Authorization failed
       this.toggleIsOn[index] = true;
-      let num = Constants.PERMISSION_NUM;
-      for(let key in this.toggleIsOn){
-        if(this.toggleIsOn[key]){
-          num++;
-        }
-      }
+      let num = this.toggleIsOn.filter(item => item === true).length;
       this.permissionNum = num;
-    }).catch(error => {
-        this.authorizeDialogController.open();
-        this.toggleIsOn[index] = false;
-        setTimeout(()=> {
-          this.authorizeDialogController.close();
-        }, Constants.DELAY_TIME)
+    }).catch((error: BusinessError) => {
+      this.toggleIsOn[index] = false;
       console.error(TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
     })
   }
@@ -205,24 +157,15 @@ struct applicationItem {
    * @param {String} permission permission name
    * @param {Number} index Array index to modify permission status
    */
-  revokeUserGrantedPermission(accessTokenId, permission, index) {
+  revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, index: number) {
     abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
       accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
       // result: 0 successfully cancel the authorization; result: -1 cancel the authorization failed
       this.toggleIsOn[index] = false;
-      let num = Constants.PERMISSION_NUM;
-      for (let key in this.toggleIsOn) {
-        if (this.toggleIsOn[key]) {
-          num++;
-        }
-      }
+      let num = this.toggleIsOn.filter(item => item === true).length;
       this.permissionNum = num;
     }).catch(() => {
-        this.authorizeDialogController.open();
-        this.toggleIsOn[index] = true;
-        setTimeout(() => {
-          this.authorizeDialogController.close();
-        }, Constants.DELAY_TIME)
+      this.toggleIsOn[index] = true;
     })
   }
 
@@ -230,9 +173,9 @@ struct applicationItem {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-    let bundleNames = routerData.length > 0 ? routerData[0].bundleNames : routerData;
+    let bundleNames = this.list.length > 0 ? this.list[0].bundleNames : this.list;
     permissionGroups.forEach(permission => {
-      if (permission.permissionName === permissionName) {
+      if (permission.permissionName === this.permissionName) {
         this.permissionInfo = permission;
       }
     })
@@ -240,19 +183,20 @@ struct applicationItem {
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
       // Get BundleInfo based on bundle name
-      globalThis.allBundleInfo.forEach(bundleInfo => {
+      this.allBundleInfo.forEach(bundleInfo => {
         if (bundleInfo.bundleName === bundleNames[i]) {
-          verifyAccessToken(bundleInfo.tokenId, routerData[0].permission).then(data => {
-            this.applicationList.push(
-              new ApplicationObj(
+          this.applicationList.push(
+            new ApplicationObj(
               bundleInfo.label,
               bundleInfo.icon,
-                i,
+              i,
               bundleInfo.tokenId,
-              routerData[0].permission,
-              makePy(bundleInfo.label)[0].slice(0, 1),
-              getSortId(bundleInfo.label)) // Get the first letter in the returned initials array
-            );
+              this.list[0].permission,
+              bundleInfo.zhTag,
+              bundleInfo.indexTag,
+              bundleInfo.language) // Get the first letter in the returned initials array
+          );
+          verifyAccessToken(bundleInfo.tokenId, this.list[0].permission).then(data => {
             // 0: have permission; -1: no permission
             if (data === Constants.PERMISSION_INDEX) {
               this.toggleIsOn[i] = true;
@@ -263,7 +207,7 @@ struct applicationItem {
           })
           this.isRisk[i] = false;
           try {
-            atManager.getPermissionFlags(bundleInfo.tokenId, routerData[0].permission).then(data => {
+            atManager.getPermissionFlags(bundleInfo.tokenId, this.list[0].permission).then(data => {
               if (data == Constants.PERMISSION_POLICY_FIXED) {
                 this.isRisk[i] = true;
               }
@@ -293,15 +237,15 @@ struct applicationItem {
           Flex({ justifyContent: FlexAlign.Start }) {
             if (this.permissionNum > 0) {
               Text() {
-                Span(this.permissionInfo['enable_description_start'])
+                Span(this.permissionInfo.enable_description_start ? this.permissionInfo.enable_description_start : '')
                 Span(String(this.permissionNum))
-                Span(this.permissionInfo['enable_description_end'])
+                Span(this.permissionInfo.enable_description_end ? this.permissionInfo.enable_description_end : '')
               }
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
             } else {
-              Text(this.permissionInfo['forbidden_description'])
+              Text(this.permissionInfo.forbidden_description)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
@@ -324,18 +268,24 @@ struct applicationItem {
               } else {
                 Row() {
                   List({ scroller: this.scroller }) {
-                    ForEach(appSort(this.applicationList), (item, index) => {
-                      this.ListItemLayout(item, index)
-                    }, item => JSON.stringify(item))
+                    ForEach(sortByName(this.applicationList), (item: ApplicationObj) => {
+                      this.ListItemLayout(item)
+                    }, (item: ApplicationObj) => JSON.stringify(item))
                   }
                   .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                  .divider({
+                    strokeWidth: Constants.DIVIDER,
+                    color: $r('sys.color.ohos_id_color_list_separator'),
+                    startMargin: Constants.DIVIDER_MARGIN_RIGHT_APPLICATION,
+                    endMargin: Constants.DEFAULT_MARGIN_END
+                  })
                   .onScrollIndex((start, end) => {
-                    globalThis.scroller = this.scroller;
+                    GlobalContext.getContext().set('scroller', this.scroller);
                     if (this.applicationList.length > 0) {
-                      let alphabeticalIndex = appSort(this.applicationList)[start].alphabeticalIndex;
-                      let index = indexValue.indexOf(alphabeticalIndex.toUpperCase());
+                      let alphabeticalIndex = sortByName(this.applicationList)[start].indexTag;
+                      let index = indexValue.indexOf(alphabeticalIndex);
                       this.selectedIndex = index >= 0 ? index : 0;
                     }
                   })

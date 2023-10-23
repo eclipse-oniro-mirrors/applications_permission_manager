@@ -14,12 +14,13 @@
  */
 
 import Constants from '../utils/constant';
+import { appInfo, ApplicationObj } from '../utils/typedef';
 
 @Component
 export struct textInput {
-  @Link applicationItem: Array<any>; // application info array
+  @Link applicationItem: Array<appInfo | ApplicationObj>; // application info array
   @Link searchResult: boolean; // search results
-  @State oldApplicationItem: Array<any> = []; // Original application information array
+  @State oldApplicationItem: Array<appInfo | ApplicationObj> = []; // Original application information array
 
   aboutToAppear() {
     this.oldApplicationItem = this.applicationItem;
@@ -37,12 +38,11 @@ export struct textInput {
           .placeholderFont({ size: Constants.TEXTINPUT_PLACEHOLDER_Font_SIZE, weight: FontWeight.Normal, family: "sans-serif", style: FontStyle.Normal })
           .caretColor($r('sys.color.ohos_id_color_text_secondary'))
           .height(Constants.TEXTINPUT_HEIGHT)
-          .enableKeyboardOnFocus(false)
           .onChange((value: string) => {
             if (value === '' || value === null) {
               this.applicationItem = this.oldApplicationItem;
             } else {
-              this.applicationItem = this.oldApplicationItem.filter((item) => {
+              this.applicationItem = this.oldApplicationItem.filter((item: appInfo | ApplicationObj) => {
                   return String(item.label).indexOf(value) > -1;
               })
             }
@@ -52,6 +52,7 @@ export struct textInput {
               this.searchResult = false;
             }
           })
+        Button().defaultFocus(true).opacity(0).position({ x: '-100%' })
         Image($r('app.media.ic_public_search_filled'))
           .objectFit(ImageFit.Contain)
           .width(Constants.TEXTINPUT_IMAGE_WIDTH)
