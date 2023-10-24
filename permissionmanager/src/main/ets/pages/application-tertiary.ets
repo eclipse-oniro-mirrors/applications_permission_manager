@@ -27,11 +27,8 @@ import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_MainAbility:';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
+const PASTE = 'ohos.permission.READ_PASTEBOARD';
 let api: number = 0;
-let nowGrantResult = Constants.PERMISSION_NUM; // Authorization results now
-let nowRevokeResult = Constants.PERMISSION_NUM; // Now deauthorize results
-let GrantResultFlag: number[] = []; // Authorization result Flag
-let RevokeResultFlag: number[] = []; // Cancel authorization result Flag
 let accessTokenId: number = 0;
 let reqPermissionInfo: bundleManager.ReqPermissionDetail;
 
@@ -41,8 +38,9 @@ struct mediaDocumentPage {
   private backTitle: ResourceStr = (router.getParams() as routerParams_3).backTitle;
   private permissions: Permissions[] = (router.getParams() as routerParams_3).permission;
   private tokenId: number = (router.getParams() as routerParams_3).tokenId;
+  @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State refresh: boolean = false;
-  @State isCheckList: boolean[] = []; // Permission status array
+  @State selected: number = 0; // Permission status array
   @State isRefreshReason: number = 0
 
   build() {
@@ -58,7 +56,7 @@ struct mediaDocumentPage {
               }
               Row() {
                 Column() {
-                  mediaDocumentItem({ isCheckList: $isCheckList, isRefreshReason: $isRefreshReason })
+                  mediaDocumentItem({ selected: $selected, isRefreshReason: $isRefreshReason })
                 }.width(Constants.FULL_WIDTH)
               }
               .margin({ top: Constants.TITLE_MARGIN_BOTTOM })
@@ -95,10 +93,19 @@ struct mediaDocumentPage {
     }
     console.log(TAG + 'isGranted: ' + JSON.stringify(isGranted));
 
-    if (isGranted) {
-      this.isCheckList = [true, false];
-    } else {
-      this.isCheckList = [false, true];
+    this.selected = isGranted ? Constants.PERMISSION_ALLOW : Constants.PERMISSION_BAN;
+    if (this.currentGroup === 'PASTEBOARD') {
+      try {
+        let acManager = abilityAccessCtrl.createAtManager();
+        acManager.getPermissionFlags(this.tokenId, PASTE).then(flag => {
+          if (flag == Constants.PERMISSION_ALLOW_THIS_TIME) {
+            this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
+          }
+        })
+      }
+      catch(err) {
+        console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+      }
     }
   }
 }
@@ -113,7 +120,7 @@ struct mediaDocumentItem {
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State applicationInfo: appInfo = GlobalContext.load('applicationInfo');
   @State mediaDocListItem: MediaDocObj[] = []; // Permission information array
-  @Link isCheckList: boolean[]; // Permission status array
+  @Link selected: number;
   @State accurateIsOn: boolean = true;
   @State api: number = 0;
   @State isRisk: boolean = false; // Whether it is a risky application
@@ -131,9 +138,7 @@ struct mediaDocumentItem {
    */
   grantUserGrantedPermission(accessTokenId: number, permission: Permissions) {
     abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
-      .then(() => {
-        nowGrantResult = Constants.PERMISSION_INDEX;
-      })
+      .then(() => {})
       .catch((error: BusinessError) => {
         console.error(TAG + 'grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
       })
@@ -144,11 +149,9 @@ struct mediaDocumentItem {
    * @param {Number} accessTokenId
    * @param {String} permission permission name
    */
-  revokeUserGrantedPermission(accessTokenId: number, permission: Permissions) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
-      .then(() => {
-        nowRevokeResult = Constants.PERMISSION_INDEX;
-      })
+  revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, flag: number) {
+    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, flag)
+      .then(() => {})
       .catch((error: BusinessError) => {
         console.error(TAG + 'revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
       })
@@ -182,6 +185,18 @@ struct mediaDocumentItem {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
+    this.selected = this.status ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
+    if (this.currentGroup == 'PASTEBOARD') {
+      this.mediaDocListItem.push(
+        new MediaDocObj($r('app.string.per_use_query'), this.permissions, Constants.PERMISSION_ONLY_THIS_TIME)
+      );
+    }
+    this.mediaDocListItem.push(
+      new MediaDocObj(this.currentGroup == 'PASTEBOARD' ? $r('app.string.always_allow') : $r('app.string.allow'), this.permissions, Constants.PERMISSION_ALLOW)
+    );
+    this.mediaDocListItem.push(
+      new MediaDocObj($r('app.string.ban'), this.permissions, Constants.PERMISSION_BAN)
+    );
     this.label = this.applicationInfo.label;
     if (showSubpermissionsGrop.indexOf(this.currentGroup) != -1) {
       this.permissions.forEach((permission, idx) => {
@@ -226,27 +241,21 @@ struct mediaDocumentItem {
       } catch(err) {
         console.log(TAG + 'acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
       }
-      this.mediaDocListItem.push(
-        new MediaDocObj($r('app.string.allow'), res.appInfo.accessTokenId, this.permissions, 0)
-      );
-      this.mediaDocListItem.push(
-        new MediaDocObj($r('app.string.ban'), res.appInfo.accessTokenId, this.permissions, 1)
-      );
+      if (this.currentGroup == 'PASTEBOARD') {
+        try {
+          acManager.getPermissionFlags(res.appInfo.accessTokenId, PASTE).then(flag => {
+            if (flag == Constants.PERMISSION_ALLOW_THIS_TIME) {
+              this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
+            }
+          })
+        }
+        catch(err) {
+          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+        }
+      }
     }).catch((error: BusinessError) => {
       console.error(TAG + 'bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
-      this.mediaDocListItem.push(
-        new MediaDocObj($r('app.string.allow'), 0, this.permissions, 0)
-      );
-      this.mediaDocListItem.push(
-        new MediaDocObj($r('app.string.ban'), 0, this.permissions, 1)
-      );
     })
-    // Get permission status
-    if (!this.status) {
-      this.isCheckList = [true, false];
-    } else {
-      this.isCheckList = [false, true];
-    }
   }
 
   build(){
@@ -352,7 +361,7 @@ struct mediaDocumentItem {
                         .fontWeight(FontWeight.Medium)
                         .flexGrow(Constants.FLEX_GROW)
                       Radio({ value: 'Radio', group: 'radioGroup' })
-                        .checked(this.isCheckList[item.index])
+                        .checked(item.index === this.selected)
                         .touchable(false)
                         .height(Constants.SHAPE_DIA)
                         .width(Constants.SHAPE_DIA)
@@ -360,45 +369,27 @@ struct mediaDocumentItem {
                     .width(Constants.FULL_WIDTH)
                     .height(Constants.LISTITEM_ROW_HEIGHT)
                     .onClick(() => {
-                        let index = item.index;
-                        item.permissions.forEach((permission): boolean => {
-                          if (!index) {
-                            if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
-                              return false;
-                            }
-                            this.grantUserGrantedPermission(item.accessTokenId, permission);
-                            if (nowGrantResult != Constants.PERMISSION_INDEX) {
-                              GrantResultFlag.push(-1);
-                            } else {
-                              GrantResultFlag.push(0);
+                      this.selected = item.index;
+                      item.permissions.forEach((permission): boolean => {
+                        if (item.index === Constants.PERMISSION_ALLOW) {
+                          if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
+                            return false;
+                          }
+                          this.grantUserGrantedPermission(accessTokenId, permission);
+                        } else if (item.index === Constants.PERMISSION_BAN) {
+                          if ((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
+                            if (this.accurateIsOn) {
+                              this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                              this.accurateIsOn = false;
                             }
                           } else {
-                            if ((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
-                              if (this.accurateIsOn) {
-                                this.revokeUserGrantedPermission(item.accessTokenId, permission);
-                                this.accurateIsOn = false;
-                              }
-                            } else {
-                              this.revokeUserGrantedPermission(item.accessTokenId, permission);
-                            }
-
-                            if (nowRevokeResult != Constants.PERMISSION_INDEX) {
-                              RevokeResultFlag.push(-1);
-                            } else {
-                              RevokeResultFlag.push(0);
-                            }
-                          }
-                          return true;
-                        })
-                        if (!index) {
-                          if (GrantResultFlag.indexOf(-1) <= -1) {
-                            this.isCheckList = [true, false];
+                            this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
                           }
                         } else {
-                          if (RevokeResultFlag.indexOf(-1) <= -1) {
-                            this.isCheckList = [false, true];
-                          }
+                          this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME);
                         }
+                        return true;
+                      })
                     })
                   }
                 }
@@ -461,7 +452,7 @@ struct mediaDocumentItem {
                   }
                 })
                 .padding({ right: 0 })
-                .enabled(this.isCheckList[0])
+                .enabled(this.selected === Constants.PERMISSION_ALLOW)
             }.width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
           }.margin({ top: Constants.LOCATION_MARGIN_TOP, bottom: Constants.LOCATION_MARGIN_BOTTOM })

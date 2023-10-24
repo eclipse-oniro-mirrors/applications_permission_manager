@@ -41,7 +41,8 @@ export const permissionGroups: Array<PermissionInfo> = [
     new PermissionInfo("ohos.permission.APP_TRACKING_CONSENT", "ADS", $r('sys.string.ohos_lab_app_tracking_consent'), 11),
     new PermissionInfo("ohos.permission.GET_INSTALLED_BUNDLE_LIST", "GET_INSTALLED_BUNDLE_LIST", $r('sys.string.ohos_lab_get_installed_bundle_list'), 12),
     new PermissionInfo("ohos.permission.DISTRIBUTED_DATASYNC", "DISTRIBUTED_DATASYNC", $r("sys.string.ohos_lab_distributed_datasync"), 13),
-    new PermissionInfo("ohos.permission.ACCESS_BLUETOOTH", "BLUETOOTH", $r('sys.string.ohos_lab_access_bluetooth'), 14)
+    new PermissionInfo("ohos.permission.ACCESS_BLUETOOTH", "BLUETOOTH", $r('sys.string.ohos_lab_access_bluetooth'), 14),
+    new PermissionInfo("ohos.permission.READ_PASTEBOARD", "PASTEBOARD", $r('sys.string.ohos_lab_read_pasteboard'), 15)
 ]
 
 export const groups: Array<GroupInfo> = [
@@ -59,7 +60,8 @@ export const groups: Array<GroupInfo> = [
     new GroupInfo("ADS", $r("app.string.groupName_ADS"), $r("app.string.group_label_ADS"), $r('app.media.track'), [], '', ["ohos.permission.APP_TRACKING_CONSENT"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_ADS"), $r("app.string.forbidden_description_ADS")),
     new GroupInfo("GET_INSTALLED_BUNDLE_LIST", $r('app.string.groupName_appList'), $r('app.string.group_label_appList'), $r('app.media.ic_public_app_list'), [], '', ["ohos.permission.GET_INSTALLED_BUNDLE_LIST"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_appList"), $r("app.string.forbidden_description_appList")),
     new GroupInfo("DISTRIBUTED_DATASYNC", $r('app.string.multi_device_collaboration'), $r('app.string.group_label_distributed_datasync'), $r('app.media.ic_multi_device_vector'), [], '', ["ohos.permission.DISTRIBUTED_DATASYNC"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_distributed_datasync"), $r("app.string.forbidden_description_distributed_datasync")),
-    new GroupInfo("BLUETOOTH", $r('app.string.groupName_bluetooth'), $r('app.string.group_label_bluetooth'), $r('app.media.ic_public_bluetooth'), [], '', ["ohos.permission.ACCESS_BLUETOOTH"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_bluetooth"), $r("app.string.forbidden_description_bluetooth"))
+    new GroupInfo("BLUETOOTH", $r('app.string.groupName_bluetooth'), $r('app.string.group_label_bluetooth'), $r('app.media.ic_public_bluetooth'), [], '', ["ohos.permission.ACCESS_BLUETOOTH"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_bluetooth"), $r("app.string.forbidden_description_bluetooth")),
+    new GroupInfo("PASTEBOARD", $r('app.string.groupName_pasteboard'), $r('app.string.group_label_pasteboard'), $r('app.media.ic_clipboard'), [], '', ["ohos.permission.READ_PASTEBOARD"], false, $r("app.string.enable_description_start_default"), $r('app.string.enable_description_end_pasteboard'), $r('app.string.forbidden_description_pasteboard'))
 ];
 
 export const userGrantPermissions: string[] = [
@@ -88,7 +90,8 @@ export const userGrantPermissions: string[] = [
     "ohos.permission.APP_TRACKING_CONSENT",
     "ohos.permission.GET_INSTALLED_BUNDLE_LIST",
     "ohos.permission.DISTRIBUTED_DATASYNC",
-    "ohos.permission.ACCESS_BLUETOOTH"
+    "ohos.permission.ACCESS_BLUETOOTH",
+    "ohos.permission.READ_PASTEBOARD"
 ];
 
 export const showSubpermissionsGrop: string[] = [

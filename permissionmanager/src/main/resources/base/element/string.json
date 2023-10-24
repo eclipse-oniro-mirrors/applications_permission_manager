@@ -117,12 +117,24 @@
       "value": "Ban"
     },
     {
+      "name": "always_allow",
+      "value": "Always allow"
+    },
+    {
+      "name": "per_use_query",
+      "value": "Per-use query"
+    },
+    {
       "name": "ALLOW",
       "value": "ALLOW"
     },
     {
       "name": "BAN",
       "value": "BAN"
+    },
+    {
+      "name": "THIS_TIME_ONLY",
+      "value": "THIS TIME ONLY"
     },
     {
       "name": "precise_location",
@@ -229,6 +241,18 @@
       "value": "After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
     },
     {
+      "name": "pasteBoard_start",
+      "value": "Content copied from \""
+    },
+    {
+      "name": "pasteBoard_end",
+      "value": "\". "
+    },
+    {
+      "name": "pasteBoard_desc",
+      "value": "Disabling will no longer allow this app to access the clipboard."
+    },
+    {
       "name": "groupName_location",
       "value": "Location information"
     },
@@ -287,6 +311,10 @@
     {
       "name": "groupName_bluetooth",
       "value": "Bluetooth"
+    },
+    {
+      "name": "groupName_pasteboard",
+      "value": "Pasteboard"
     },
     {
       "name": "multi_device_collaboration",
@@ -363,6 +391,10 @@
     {
       "name": "group_label_bluetooth",
       "value": " access Bluetooth?"
+    },
+    {
+      "name": "group_label_pasteboard",
+      "value": " access Pasteboard?"
     },
     {
       "name": "enable_description_start_default",
@@ -445,6 +477,10 @@
       "value": " apps have been allowed to use Bluetooth to find and connect to nearby devices."
     },
     {
+      "name": "enable_description_end_pasteboard",
+      "value": " apps have been allowed to read and write clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
+    },
+    {
       "name": "forbidden_description_location",
       "value": "When the system positioning service is enabled, applications are not allowed to obtain the location of the device."
     },
@@ -515,6 +551,10 @@
     {
       "name": "forbidden_description_bluetooth",
       "value": "Applications are prohibited from using Bluetooth to find or connect to nearby devices."
+    },
+    {
+      "name": "forbidden_description_pasteboard",
+      "value": "Applications are prohibited from reading or writing clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
     },
     {
       "name": "risk_warning",

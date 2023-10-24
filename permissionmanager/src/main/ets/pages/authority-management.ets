@@ -506,6 +506,7 @@ struct authorityManagementPage {
                         }.tabBar(this.TabBuilder(1))
                       }
                       .barMode(BarMode.Fixed)
+                      .barWidth(Constants.BAR_WIDTH)
                       .onChange((index) => {
                         this.currentIndex = index
                       })

@@ -377,6 +377,7 @@ struct permissionRecordPage {
                         }.tabBar(this.TabBuilder(1))
                       }
                       .barMode(BarMode.Fixed)
+                      .barWidth(Constants.BAR_WIDTH)
                       .onChange((index) => {
                         this.currentIndex = index;
                         if (!this.show) this.show = true;
@@ -566,11 +567,11 @@ struct permissionRecordPage {
       flag: 1
     }
     privacyManager.getPermissionUsedRecord(request).then(async records => {
-      console.info(TAG + "records: " + JSON.stringify(records.bundleRecords));
       let groupArray: GroupRecordInfo[] = [];
       let acManager = abilityAccessCtrl.createAtManager();
       for (let i = 0; i < records.bundleRecords.length; i++) {
         let record = records.bundleRecords[i];
+        console.info(TAG + "bundleName: " + record.bundleName + " permissionRecords: " + JSON.stringify(record.permissionRecords));
         try {
           await bundleManager.queryAbilityInfo({
             bundleName: record.bundleName,
@@ -580,7 +581,6 @@ struct permissionRecordPage {
         } catch(e) {
           continue;
         }
-        console.info(TAG + "record: " + JSON.stringify(record));
         this.getInfo(record, (i + 1) == records.bundleRecords.length);
 
         for (let j = 0; j < record.permissionRecords.length; j++) {

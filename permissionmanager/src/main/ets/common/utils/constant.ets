@@ -204,6 +204,7 @@ export default class Constants {
     static APPLICATION_ALPHABETINDEX_MARGIN_TOP = 12;
     static APPLICATION_ALPHABETINDEX_WIDTH = 24;
     static LOADING_WIDTH = 100;
+    static BAR_WIDTH = 250;
 
     //group number
     static FIXED_GROUP = 1;
@@ -218,6 +219,11 @@ export default class Constants {
     // radio
     static RADIO_ALLOW_INDEX = 0;
     static RADIO_BAN_INDEX = 1;
+
+    //Permission state
+    static PERMISSION_ALLOW = 0;
+    static PERMISSION_BAN = 1;
+    static PERMISSION_ONLY_THIS_TIME = 2;
 
     //shape
     static SHAPE_DIA = 20;
@@ -238,6 +244,7 @@ export default class Constants {
     static PERMISSION_SYSTEM_FIXED = 4;
     static PERMISSION_COMPONENT_SET = 16;
     static PERMISSION_POLICY_FIXED = 32;
+    static PERMISSION_ALLOW_THIS_TIME = 64;
 
     static DEFAULT_DEVICE_TYPE = 'default'
     static PHONE_DEVICE_TYPE = 'phone'
