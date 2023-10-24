@@ -117,12 +117,24 @@
       "value": "禁止"
     },
     {
+      "name": "always_allow",
+      "value": "始终允许"
+    },
+    {
+      "name": "per_use_query",
+      "value": "每次使用询问"
+    },
+    {
       "name": "ALLOW",
       "value": "允许"
     },
     {
       "name": "BAN",
       "value": "禁止"
+    },
+    {
+      "name": "THIS_TIME_ONLY",
+      "value": "仅本次允许"
     },
     {
       "name": "precise_location",
@@ -229,6 +241,18 @@
       "value": "关闭后，所有应用服务都将无法正常使用摄像头拍摄照片、视频或进行人脸识别。若需恢复，请打开摄像头开关。"
     },
     {
+      "name": "pasteBoard_start",
+      "value": "内容复制自“"
+    },
+    {
+      "name": "pasteBoard_end",
+      "value": "”。"
+    },
+    {
+      "name": "pasteBoard_desc",
+      "value": "禁止后将不再允许此应用访问剪贴板。"
+    },
+    {
       "name": "groupName_location",
       "value": "位置信息"
     },
@@ -287,6 +311,10 @@
     {
       "name": "groupName_bluetooth",
       "value": "蓝牙"
+    },
+    {
+      "name": "groupName_pasteboard",
+      "value": "剪贴板"
     },
     {
       "name": "multi_device_collaboration",
@@ -363,6 +391,10 @@
     {
       "name": "group_label_bluetooth",
       "value": "访问蓝牙？"
+    },
+    {
+      "name": "group_label_pasteboard",
+      "value": "访问剪贴板？"
     },
     {
       "name": "enable_description_start_default",
@@ -445,6 +477,10 @@
       "value": "个应用使用蓝牙查找、连接附近设备。"
     },
     {
+      "name": "enable_description_end_pasteboard",
+      "value": "个应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
+    },
+    {
       "name": "forbidden_description_location",
       "value": "系统定位服务开关开启时，已禁止应用获取此设备的位置。"
     },
@@ -515,6 +551,10 @@
     {
       "name": "forbidden_description_bluetooth",
       "value": "已禁止应用使用蓝牙查找、连接附近设备。"
+    },
+    {
+      "name": "forbidden_description_pasteboard",
+      "value": "已禁止应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
     },
     {
       "name": "risk_warning",

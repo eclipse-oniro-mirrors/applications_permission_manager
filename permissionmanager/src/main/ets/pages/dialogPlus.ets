@@ -20,12 +20,13 @@ import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import display from '@ohos.display';
 import deviceInfo from '@ohos.deviceInfo';
+import pasteboard from '@ohos.pasteboard';
 import { BusinessError } from '@ohos.base';
 import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../common/utils/utils';
 import { GroupInfo, wantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
-import { showSubpermissionsGrop } from '../common/model/permissionGroup';
+import { showSubpermissionsGrop, userGrantPermissions } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button) function customizeButton() {
@@ -39,6 +40,7 @@ import { LocationCanvas } from '../common/components/location';
 
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
+const PASTE = 'ohos.permission.READ_PASTEBOARD';
 let bottomPopoverTypes = ['default', 'phone'];
 
 let win: window.Window;
@@ -89,6 +91,7 @@ struct PermissionDialog {
   @State reqPermissionDetails: bundleManager.ReqPermissionDetail[] = [];
   @State naviHeight: number = 0
   @State refresh: number = 0;
+  @State pasteBoardName: string = '';
   @Link @Watch('updateReason') isUpdate: number;
   controller?: CustomDialogController
 
@@ -141,8 +144,17 @@ struct PermissionDialog {
                   Row() {
                     Flex({ justifyContent: FlexAlign.Start }) {
                       Text() {
-                        if (this.showReason()) {
+                        if (this.currentGroup() === 'LOCATION') {
                           Span($r('app.string.close_exact_position'))
+                        } else if (this.currentGroup() === 'PASTEBOARD') {
+                          if (this.pasteBoardName) {
+                            Span($r('app.string.pasteBoard_start'))
+                            Span(this.pasteBoardName)
+                            Span($r('app.string.pasteBoard_end'))
+                            Span($r('app.string.pasteBoard_desc'))
+                          } else {
+                            Span($r('app.string.pasteBoard_desc'))
+                          }
                         } else {
                           if (this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].description.length > 0) {
                             ForEach(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].description, (item: ResourceStr) => {
@@ -182,9 +194,9 @@ struct PermissionDialog {
                     .vertical(true)
                     .height(Constants.DIVIDER_HEIGHT)
                     .opacity(.2)
-                  Button($r('app.string.ALLOW'))
+                  Button(this.currentGroup() === 'PASTEBOARD'? $r('app.string.THIS_TIME_ONLY') : $r('app.string.ALLOW'))
                     .onClick(() => {
-                      this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
+                      this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.currentGroup() === 'PASTEBOARD' ? Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag)
                     }).customizeButton()
                 }.margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
               }
@@ -217,14 +229,17 @@ struct PermissionDialog {
     return this.grantGroups[index].label;
   }
 
-  showReason() {
+  currentGroup() {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
     if (this.grantGroups[index].name == 'LOCATION') {
       if ((this.locationFlag == Constants.LOCATION_FUZZY) || (this.locationFlag == Constants.LOCATION_BOTH_FUZZY)) {
-        return true;
+        return 'LOCATION';
       }
     }
-    return false;
+    if (this.grantGroups[index].name == 'PASTEBOARD') {
+      return 'PASTEBOARD';
+    }
+    return 'Normal';
   }
 
   punctuation() {
@@ -394,7 +409,7 @@ struct PermissionDialog {
         //待授权
       } else if (stateGroup[idx] == Constants.DYNAMIC_OPER) {
         let group = getPermissionGroup(permission);
-        if (!group) {
+        if (!userGrantPermissions.includes(permission)) {
           Log.info("permission not find:" + permission);
         } else {
           let exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
@@ -489,6 +504,13 @@ struct PermissionDialog {
     };
   }
 
+  getPasteBoardInfo() {
+    if (this.reqPerms.includes(PASTE)) {
+      let systemPasteboard: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
+      this.pasteBoardName = systemPasteboard.getDataSource();
+    }
+  }
+
   updateReason() {
     if (this.isUpdate > 0) {
       this.getApplicationName(want.parameters['ohos.aafwk.param.callerBundleName'])
@@ -511,6 +533,7 @@ struct PermissionDialog {
     this.result = new Array(this.reqPerms.length).fill(-1);
     this.getAvoidWindow();
     this.getPopupPosition();
+    this.getPasteBoardInfo();
     let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'];
     bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(bundleInfo => {
       this.targetVersion = bundleInfo.targetVersion;
