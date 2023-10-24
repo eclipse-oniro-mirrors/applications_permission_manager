@@ -20,7 +20,6 @@ import Constants from '../utils/constant';
   .fontWeight(FontWeight.Medium)
   .fontSize(Constants.TEXT_SMALLER_FONT_SIZE)
   .height(Constants.LOCATION_BUTTON_HEIGHT)
-  .width(Constants.LOCATION_BUTTON_WIDTH)
   .borderRadius(Constants.LOCATION_BUTTON_RADIUS)
   .position({ x: Constants.LOCATION_BUTTON_POSITION_X, y: Constants.LOCATION_BUTTON_POSITION_Y })
 }

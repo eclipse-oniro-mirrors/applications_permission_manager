@@ -18,46 +18,27 @@ import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
 import deviceInfo from '@ohos.deviceInfo';
 import display from '@ohos.display';
+import common from '@ohos.app.ability.common';
+import { GlobalContext } from "../utils/globalContext";
 
 let bottomPopoverTypes = ['default', 'phone'];
 
 @Extend(Button) function customizeButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
-  .width(Constants.BUTTON_WIDTH)
-}
-
-@CustomDialog
-export struct authorizeDialog {
-  controller: CustomDialogController;
-  cancel: () => void;
-  confirm: () => void;
-
-  build() {
-    Column() {
-      Row() {
-        Flex({ justifyContent: FlexAlign.Center }) {
-          Text($r("app.string.Authorization_failed")).fontSize(Constants.DIALOG_TEXT_FONT_SIZE)
-            .margin({
-              top: Constants.DIALOG_TEXT_MARGIN_TOP
-            })
-        }
-      }
-    }
-    .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
-    .borderRadius(Constants.DIALOG_BORDER_RADIUS)
-    .height(Constants.DIALOG_HEIGHT)
-    .width(Constants.DIALOG_WIDTH)
-  }
+  .flexGrow(Constants.FLEX_GROW)
 }
 
 @CustomDialog
 export struct globalDialog {
+  private context = getContext(this) as common.UIAbilityContext;
+  @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @Link globalIsOn: boolean;
   @State isBottomPopover: boolean = true;
-  controller: CustomDialogController;
+  controller?: CustomDialogController;
 
   build() {
     GridRow({ columns: { xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS }, gutter: Constants.DIALOG_GUTTER }) {
@@ -65,7 +46,7 @@ export struct globalDialog {
         offset: {xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.DIALOG_MD_OFFSET, lg: Constants.DIALOG_LG_OFFSET} }) {
         Flex({ justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
           Column() {
-            Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
+            Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
               .fontSize(Constants.TEXT_BIG_FONT_SIZE)
               .fontColor($r('sys.color.ohos_id_color_text_primary'))
               .fontWeight(FontWeight.Medium)
@@ -73,7 +54,7 @@ export struct globalDialog {
               .height(Constants.ROW_HEIGHT)
               .width(Constants.FULL_WIDTH)
               .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
-            Text(globalThis.currentPermissionGroup == 'CAMERA' ? $r('app.string.close_camera_desc') : $r('app.string.close_microphone_desc'))
+            Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera_desc') : $r('app.string.close_microphone_desc'))
               .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
               .fontColor($r('sys.color.ohos_id_color_text_primary'))
               .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -83,18 +64,21 @@ export struct globalDialog {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Start }) {
                 Button($r('app.string.cancel'))
-                  .fontSize(Constants.BUTTON_FONT_SIZE)
                   .onClick(() => {
                     this.cancel()
-                  }).customizeButton().margin({ left: Constants.BUTTON_MARGIN_LEFT })
-                Text('|').fontSize(Constants.BUTTON_DIVIDER_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_list_separator'))
+                  }).customizeButton()
+                Divider()
+                  .color($r('sys.color.ohos_id_color_list_separator'))
+                  .vertical(true)
+                  .height(Constants.DIVIDER_HEIGHT)
                   .margin({ top: Constants.BUTTON_MARGIN_TOP })
+                  .opacity(.2)
                 Button($r('app.string.close'))
-                  .fontSize(Constants.BUTTON_FONT_SIZE)
                   .onClick(() => {
                     this.confirm()
-                  }).customizeButton().margin({ right: Constants.BUTTON_MARGIN_RIGHT })
+                  }).customizeButton()
               }.height(Constants.ROW_HEIGHT)
+              .margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
             }
           }
           .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
@@ -110,24 +94,30 @@ export struct globalDialog {
   }
 
   confirm() {
-    if (globalThis.currentPermissionGroup === 'CAMERA') {
-      let cameraManager = camera.getCameraManager(globalThis.context);
+    if (this.currentGroup === 'CAMERA') {
+      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
       cameraManager.muteCamera(true);
-      this.controller.close();
+      if (this.controller !== undefined) {
+        this.controller.close();
+      }
     } else {
-      var audioManager = audio.getAudioManager();
+      let audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.setMicrophoneMute(true).then(() => {
-          this.controller.close();
+          if (this.controller !== undefined) {
+            this.controller.close();
+          }
         })
       })
     }
   }
 
   cancel() {
-    this.controller.close();
+    if (this.controller !== undefined) {
+      this.controller.close();
+    }
   }
 
   aboutToAppear() {

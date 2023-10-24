@@ -16,11 +16,10 @@
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
-import deviceInfo from '@ohos.deviceInfo';
+import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_Log: ';
 const BG_COLOR = '#00000000';
-let bottomPopoverTypes = ['default', 'phone'];
 
 export default class ServiceExtensionAbility extends extension {
   /**
@@ -29,7 +28,6 @@ export default class ServiceExtensionAbility extends extension {
   onCreate(want): void {
     console.info(TAG + 'ServiceExtensionAbility onCreate, ability name is ' + want.abilityName);
 
-    globalThis.extensionContext = this.context;
     globalThis.windowNum = 0;
   }
 
@@ -48,8 +46,6 @@ export default class ServiceExtensionAbility extends extension {
         width: dis.width,
         height: dis.height
       };
-      let isVertical = dis.width > dis.height ? false : true;
-      globalThis.isBottomPopover = (bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical) ? true : false;
       this.createWindow('permissionDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
     } catch (exception) {
       console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
@@ -66,15 +62,14 @@ export default class ServiceExtensionAbility extends extension {
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
     console.info(TAG + 'create window');
     try {
-      const win = await window.createWindow({ ctx: globalThis.extensionContext, name, windowType });
-      let storage: LocalStorage = new LocalStorage({
-        'want': want,
-        'win': win
-      });
+      const win = await window.createWindow({ ctx: this.context, name, windowType });
+      let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
+        let windowNum = GlobalContext.load('windowNum');
+        windowNum --;
+        GlobalContext.store('windowNum', windowNum);
         win.destroyWindow();
-        globalThis.windowNum --;
-        if (globalThis.windowNum === 0) {
+        if (windowNum === 0) {
           this.context.terminateSelf();
         }
       });
@@ -85,6 +80,7 @@ export default class ServiceExtensionAbility extends extension {
       await win.showWindow();
       await win.setWindowLayoutFullScreen(true);
       globalThis.windowNum ++;
+      GlobalContext.store('windowNum', globalThis.windowNum);
     } catch {
       console.info(TAG + 'window create failed!');
     }

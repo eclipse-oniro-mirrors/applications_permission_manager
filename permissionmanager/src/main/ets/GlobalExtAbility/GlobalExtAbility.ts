@@ -16,11 +16,10 @@
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
-import deviceInfo from '@ohos.deviceInfo';
+import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
-let bottomPopoverTypes = ['default', 'phone'];
 
 export default class GlobalExtensionAbility extends extension {
   /**
@@ -28,10 +27,10 @@ export default class GlobalExtensionAbility extends extension {
   */
   onCreate(want): void {
     console.info(TAG + 'ServiceExtensionAbility onCreate, ability name is ' + want.abilityName);
-
-    globalThis.globalContext = this.context;
-    globalThis.globalState = want.parameters['ohos.sensitive.resource'];
     console.info(TAG + 'want: ' + JSON.stringify(want));
+
+    GlobalContext.store('globalState', want.parameters['ohos.sensitive.resource']);
+    GlobalContext.store('context', this.context);
 
     try {
       let dis = display.getDefaultDisplaySync();
@@ -41,9 +40,7 @@ export default class GlobalExtensionAbility extends extension {
         width: dis.width,
         height: dis.height
       };
-      let isVertical = dis.width > dis.height ? false : true;
-      globalThis.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical;
-      this.createWindow('globalDialog', window.WindowType.TYPE_KEYGUARD, navigationBarRect);
+      this.createWindow('globalDialog', window.WindowType.TYPE_VOICE_INTERACTION, navigationBarRect);
     } catch (exception) {
       console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
     };
@@ -61,14 +58,15 @@ export default class GlobalExtensionAbility extends extension {
   */
   onDestroy(): void {
     console.info(TAG + 'ServiceExtensionAbility onDestroy.');
-    globalThis.globalWin.destroy();
+    let win = GlobalContext.load('globalWin');
+    win.destroyWindow();
   }
 
   private async createWindow(name: string, windowType: number, rect): Promise<void> {
     console.info(TAG + 'create window');
     try {
-      const win = await window.createWindow({ ctx: globalThis.globalContext, name, windowType });
-      globalThis.globalWin = win;
+      const win = await window.createWindow({ ctx: this.context, name, windowType });
+      GlobalContext.store('globalWin', win);
       await win.moveWindowTo(rect.left, rect.top);
       await win.resize(rect.width, rect.height);
       await win.setUIContent('pages/globalSwitch');

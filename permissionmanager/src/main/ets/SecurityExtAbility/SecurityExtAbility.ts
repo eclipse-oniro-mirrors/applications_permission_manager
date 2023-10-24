@@ -16,11 +16,9 @@
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
-import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
-let bottomPopoverTypes = ['default', 'phone'];
 
 export default class SecurityExtensionAbility extends extension {
   /**
@@ -28,9 +26,6 @@ export default class SecurityExtensionAbility extends extension {
    */
   onCreate(want): void {
     console.info(TAG + 'SecurityExtensionAbility onCreate, ability name is ' + want.abilityName);
-
-    globalThis.securityContext = this.context;
-    globalThis.windowNum = 0;
   }
 
   /**
@@ -48,8 +43,6 @@ export default class SecurityExtensionAbility extends extension {
         width: dis.width,
         height: dis.height
       };
-      let isVertical = dis.width > dis.height ? false : true;
-      globalThis.isBottomPopover = (bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical) ? true : false;
       this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
     } catch (exception) {
       console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
@@ -66,17 +59,11 @@ export default class SecurityExtensionAbility extends extension {
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
     console.info(TAG + 'create securitywindow');
     try {
-      const win = await window.createWindow({ ctx: globalThis.securityContext, name, windowType });
-      let storage: LocalStorage = new LocalStorage({
-        'want': want,
-        'win': win
-      });
+      const win = await window.createWindow({ ctx: this.context, name, windowType });
+      let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         win.destroyWindow();
-        globalThis.windowNum --;
-        if (globalThis.windowNum === 0) {
-          this.context.terminateSelf();
-        }
+        this.context.terminateSelf();
       });
       await win.moveWindowTo(rect.left, rect.top);
       await win.resize(rect.width, rect.height);
@@ -84,7 +71,6 @@ export default class SecurityExtensionAbility extends extension {
       await win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
       await win.setWindowLayoutFullScreen(true);
-      globalThis.windowNum ++;
     } catch {
       console.info(TAG + 'window create failed!');
     }

@@ -10,6 +10,7 @@
     "pages/permission-access-record",
     "pages/dialogPlus",
     "pages/globalSwitch",
-    "pages/securityDialog"
+    "pages/securityDialog",
+    "pages/transition"
   ]
 }

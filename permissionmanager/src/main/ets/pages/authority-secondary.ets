@@ -17,25 +17,12 @@ import { backBar } from "../common/components/backBar";
 import { permissionGroups, groups } from "../common/model/permissionGroup";
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
-
-
-class CalendarObj {
-  permissionName: string
-  groupName: string
-  label: string
-  index: number
-  constructor(permissionName: string, groupName: string, label: string, index: number) {
-    this.permissionName = permissionName
-    this.groupName = groupName
-    this.label = label
-    this.index = index
-  }
-} // Permission management secondary interface data class
+import { CalendarObj, routerParams_1, permissionApplications } from '../common/utils/typedef';
 
 @Entry
 @Component
 struct appNamePage {
-  private backTitle = router.getParams()['backTitle']; // return title name
+  private backTitle: ResourceStr = (router.getParams() as routerParams_1).backTitle;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -67,11 +54,11 @@ struct appNamePage {
 @Component
 struct appNameItem {
   @State calendarListItem: CalendarObj[] = []; // Permission management secondary interface data array
-  private routerData: any = router.getParams()['routerData']; // Routing jump data
-  private group = router.getParams()['group'];
+  private list: permissionApplications[] = (router.getParams() as routerParams_1).list; // Routing jump data
+  private group: string = (router.getParams() as routerParams_1).group;
   @State isTouch: string = '';
 
-  @Builder ListItemLayout(item, index) {
+  @Builder ListItemLayout(item: CalendarObj) {
     ListItem() {
       Row() {
         Column() {
@@ -91,21 +78,13 @@ struct appNameItem {
             .width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
           }
-          if (!index) {
-            Row() {
-              Column()
-                .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
-                .width(Constants.FULL_WIDTH)
-                .height(Constants.TEXT_DECORATION_HEIGHT)
-            }
-          }
         }.onClick(() => {
-          let dataList = this.routerData.filter((ele) => {
+          let dataList = this.list.filter((ele) => {
             return ele.permission === item.permissionName;
           })
           router.pushUrl({
             url: 'pages/authority-tertiary',
-            params: { routerData: dataList, backTitle: item.label, permissionName: item.permissionName }
+            params: { list: dataList, backTitle: item.label, permissionName: item.permissionName }
           });
         })
       }
@@ -120,7 +99,10 @@ struct appNameItem {
          direction: GradientDirection.Right,
          colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
        })
-    .onTouch((event: TouchEvent) => {
+    .onTouch(event => {
+      if (event === undefined) {
+        return;
+      }
       if (event.type === TouchType.Down) {
         this.isTouch = item.permissionName;
       }
@@ -134,7 +116,7 @@ struct appNameItem {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-    var permissionsList = groups.filter((item) => {
+    let permissionsList = groups.filter((item) => {
       return item.name === this.group;
     })
     for (let i = 0; i < permissionsList[0].permissions.length; i++) {
@@ -154,12 +136,9 @@ struct appNameItem {
         Row() {
             List() {
               if (this.calendarListItem.length > 0) {
-                ForEach(this.calendarListItem.slice(Constants.SLICE_START, this.calendarListItem.length - 1), (item) => {
-                  this.ListItemLayout(item, Constants.SLICE_START_INDEX)
-                }, item => JSON.stringify(item))
-                ForEach(this.calendarListItem.slice(Constants.SLICE_END), (item) => {
-                  this.ListItemLayout(item, Constants.SLICE_END_INDEX)
-                }, item => JSON.stringify(item))
+                ForEach(this.calendarListItem, (item: CalendarObj) => {
+                  this.ListItemLayout(item)
+                }, (item: CalendarObj) => JSON.stringify(item))
               } else {
                 ListItem() {
                   Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
@@ -175,6 +154,12 @@ struct appNameItem {
             }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
             .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .padding(Constants.LIST_PADDING_TOP)
+            .divider({
+              strokeWidth: Constants.DIVIDER,
+              color: $r('sys.color.ohos_id_color_list_separator'),
+              startMargin: Constants.DEFAULT_MARGIN_START,
+              endMargin: Constants.DEFAULT_MARGIN_END
+            })
           }.margin({ top: Constants.ROW_MARGIN_TOP })
         .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })
       }

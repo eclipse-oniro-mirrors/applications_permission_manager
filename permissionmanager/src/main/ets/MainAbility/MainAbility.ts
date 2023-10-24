@@ -15,63 +15,65 @@
 
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundleManager from '@ohos.bundle.bundleManager';
+import account_osAccount from '@ohos.account.osAccount';
+import { GlobalContext } from '../common/utils/globalContext';
+
 const TAG = 'PermissionManager_MainAbility:';
+const USER_ID = 100;
 
 export default class MainAbility extends UIAbility {
   onCreate(want, launchParam): void {
     console.log(TAG + 'MainAbility onCreate, ability name is ' + want.abilityName + '.');
-    globalThis.context = this.context;
-    globalThis.allBundleInfo = [];
-    globalThis.allUserPermissions = [];
-    globalThis.allGroups = [];
-    globalThis.permissionLabels = {};
-    globalThis.initialGroups = [];
+
+    globalThis.bundleName = want.parameters.bundleName;
+    GlobalContext.store('bundleName', want.parameters.bundleName);
+    GlobalContext.store('context', this.context);
   }
 
   onWindowStageCreate(windowStage): void {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
+    globalThis.windowStage = windowStage;
 
-    let systemBarProperties = {
-      statusBarColor: '#ffffff',
-      navigationBarColor: '#ffffff',
-      //以下两个属性从API Version8开始支持
-      statusBarContentColor:'#000000',
-      navigationBarContentColor:'#000000'
-    };
-    try {
-      let win = windowStage.getMainWindowSync();
-      win.setWindowSystemBarProperties(systemBarProperties);
-    } catch (error) {
-      console.error(TAG + 'setWindowSystemBarProperties failed. Cause: ' + JSON.stringify(error));
+    if (globalThis.bundleName) {
+      globalThis.currentApp = globalThis.bundleName;
+      this.getSperifiedApplication(globalThis.bundleName);
+    } else {
+      globalThis.currentApp = 'all';
+      this.getAllApplications();
+    }
+  }
+
+  onNewWant(want): void {
+    console.log(TAG + 'MainAbility onNewWant. want: ' + JSON.stringify(want));
+    console.log(TAG + 'MainAbility onNewWant. bundleName: ' + JSON.stringify(want.parameters.bundleName));
+
+    let bundleName = want.parameters.bundleName ? want.parameters.bundleName : 'all';
+    if (globalThis.currentApp === 'all') {
+      if (globalThis.currentApp !== bundleName) {
+        console.log(TAG + 'MainAbility onNewWant. all -> app');
+        globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+        globalThis.currentApp = bundleName;
+        GlobalContext.store('bundleName', bundleName);
+        this.getSperifiedApplication(bundleName);
+      }
+    } else {
+      if (bundleName === 'all') {
+        console.log(TAG + 'MainAbility onNewWant. app -> all');
+        globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+        globalThis.currentApp = 'all';
+        this.getAllApplications();
+      } else {
+        if (globalThis.currentApp !== bundleName) {
+          console.log(TAG + 'MainAbility onNewWant. app -> app');
+          globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+          globalThis.currentApp = bundleName;
+          GlobalContext.store('bundleName', bundleName);
+          this.getSperifiedApplication(bundleName);
+        }
+      }
     }
 
-    const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
-    bundleManager.getAllBundleInfo(flag).then(async(bundleInfos) => {
-      if (bundleInfos.length <= 0) {
-        console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
-        return;
-      }
-      for (let i = 0; i < bundleInfos.length; i++) {
-        let info = bundleInfos[i];
-        // Filter blank icon icon and text label resources
-        try {
-          await bundleManager.queryAbilityInfo({
-            bundleName: info.name,
-            action: 'action.system.home',
-            entities: ['entity.system.home']
-          }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
-        } catch (error) {
-          console.log(TAG + 'queryAbilityByWant catch error: ' + JSON.stringify(info.name));
-          continue;
-        }
-
-        globalThis.initialGroups.push(info);
-      }
-      windowStage.setUIContent(this.context, 'pages/authority-management', null);
-    }).catch((error) => {
-      console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
-    })
   }
 
   onForeground(): void {
@@ -91,5 +93,76 @@ export default class MainAbility extends UIAbility {
   onWindowStageDestroy(): void {
     // Main window is destroyed, release UI related resources
     console.log(TAG + 'MainAbility onWindowStageDestroy.');
+  }
+
+  getAllApplications(): void {
+    const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+    let accountManager = account_osAccount.getAccountManager();
+    try {
+      accountManager.getActivatedOsAccountLocalIds((err, idArray: number[])=>{
+        console.log(TAG + 'getActivatedOsAccountLocalIds err:' + JSON.stringify(err));
+        console.log(TAG + 'getActivatedOsAccountLocalIds idArray: ' + JSON.stringify(idArray));
+        let userId = idArray[0];
+        bundleManager.getAllBundleInfo(flag, userId || USER_ID).then(async(bundleInfos) => {
+          if (bundleInfos.length <= 0) {
+            console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
+            return;
+          }
+          let initialGroups = [];
+          for (let i = 0; i < bundleInfos.length; i++) {
+            let info = bundleInfos[i];
+            // Filter blank icon icon and text label resources
+            try {
+              await bundleManager.queryAbilityInfo({
+                bundleName: info.name,
+                action: 'action.system.home',
+                entities: ['entity.system.home']
+              }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
+            } catch (error) {
+              console.error(TAG + 'queryAbilityByWant catch app: ' + JSON.stringify(info.name) + 'err: ' + JSON.stringify(error));
+              continue;
+            }
+
+            initialGroups.push(info);
+          }
+          let storage: LocalStorage = new LocalStorage({ 'initialGroups': initialGroups });
+          globalThis.windowStage.loadContent('pages/authority-management', storage);
+        }).catch((error) => {
+          console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
+        });
+      });
+    } catch (e) {
+      console.error(TAG + 'getActivatedOsAccountLocalIds exception: ' + JSON.stringify(e));
+    }
+  }
+
+  getSperifiedApplication(bundleName): void {
+    const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+    bundleManager.getBundleInfo(bundleName, flag).then(bundleInfo => {
+      let reqPermissions: Array<string> = [];
+      bundleInfo.reqPermissionDetails.forEach(item => {
+        reqPermissions.push(item.name);
+      });
+
+      let info = {
+        'bundleName': bundleInfo.name,
+        'api': bundleInfo.targetVersion,
+        'tokenId': bundleInfo.appInfo.accessTokenId,
+        'icon': '',
+        'iconId': bundleInfo.appInfo.iconId,
+        'label': '',
+        'labelId': bundleInfo.appInfo.labelId,
+        'permissions': reqPermissions,
+        'groupId': [],
+        'zhTag': '',
+        'indexTag': '',
+        'language': ''
+      };
+      GlobalContext.store('applicationInfo', info);
+      globalThis.windowStage.setUIContent(this.context, 'pages/application-secondary', null);
+    }).catch(() => {
+      console.log(TAG + 'MainAbility getSperifiedApplication failed.');
+      this.context.terminateSelf();
+    });
   }
 };

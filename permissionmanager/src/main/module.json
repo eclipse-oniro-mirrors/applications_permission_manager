@@ -33,19 +33,6 @@
                 "exported": true,
                 "launchType": "singleton",
                 "orientation": "auto_rotation_restricted"
-            },
-            {
-              "name": "com.ohos.permissionmanager.SpecificAbility",
-              "srcEntry": "./ets/SpecificAbility/SpecificAbility.ts",
-              "description": "$string:SpecificAbility_desc",
-              "icon": "$media:app_icon",
-              "label": "$string:SpecificAbility_label",
-              "startWindowIcon": "$media:app_icon",
-              "startWindowBackground": "$color:default_background_color",
-              "exported": true,
-              "launchType": "standard",
-              "orientation": "auto_rotation_restricted",
-              "permissions": ["ohos.permission.GRANT_SENSITIVE_PERMISSIONS"]
             }
         ],
         "extensionAbilities": [
@@ -92,9 +79,6 @@
             },
             {
                 "name": "ohos.permission.MANAGE_AUDIO_CONFIG"
-            },
-            {
-                "name": "ohos.permission.MICROPHONE"
             },
             {
                 "name": "ohos.permission.MANAGE_CAMERA_CONFIG"
