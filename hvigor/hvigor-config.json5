@@ -14,21 +14,8 @@
  */
 
 {
-  "hvigorVersion": "file:../dependencies/hvigor-2.5.0-s.tgz",
+  "hvigorVersion": "3.0.2",
   "dependencies": {
-    "@ohos/hvigor-ohos-plugin": "file:../dependencies/hvigor-ohos-plugin-2.5.0-s.tgz",
-    "rollup": "file:../dependencies/rollup.tgz"
-  },
-  "execution": {
-    // "daemon": true,                          /* Enable daemon compilation. Default: true */
-    // "incremental": true,                     /* Enable incremental compilation. Default: true */
-    // "parallel": true,                        /* Enable parallel compilation. Default: true */
-    // "typeCheck": false,                      /* Enable typeCheck. Default: false */
-  },
-  "logging": {
-    // "level": "info"                          /* Define the log level. Value: [ "debug" | "info" | "warn" | "error" ]. Default: "info" */
-  },
-  "debugging": {
-    // "stacktrace": false                      /* Disable stacktrace compilation. Default: false */
+    "@ohos/hvigor-ohos-plugin": "3.0.2"
   }
 }
