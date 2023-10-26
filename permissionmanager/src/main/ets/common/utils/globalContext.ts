@@ -21,16 +21,16 @@ export class GlobalContext {
   globalState: string;
   windowNum: number;
 
-  private constructor() {}
-  private static instance: GlobalContext;
-  private _objects = new Map<string, Object>();
-
   public static getContext(): GlobalContext {
     if (!GlobalContext.instance) {
       GlobalContext.instance = new GlobalContext();
     }
     return GlobalContext.instance;
   }
+
+  private constructor() {}
+  private static instance: GlobalContext;
+  private _objects = new Map<string, Object>();
 
   static load(name: string): any {
     return globalThis[name];

@@ -76,23 +76,20 @@ export default class MainAbility extends UIAbility {
 
   }
 
+  onWindowStageDestroy(): void {
+    console.log(TAG + 'MainAbility onWindowStageDestroy.');
+  }
+
   onForeground(): void {
-    // Ability has brought to foreground
     console.log(TAG + 'MainAbility onForeground.');
   }
 
   onBackground(): void {
-    // Ability has back to background
     console.log(TAG + 'MainAbility onBackground.');
   }
 
   onDestroy(): void {
     console.log(TAG + 'MainAbility onDestroy.');
-  }
-
-  onWindowStageDestroy(): void {
-    // Main window is destroyed, release UI related resources
-    console.log(TAG + 'MainAbility onWindowStageDestroy.');
   }
 
   getAllApplications(): void {
