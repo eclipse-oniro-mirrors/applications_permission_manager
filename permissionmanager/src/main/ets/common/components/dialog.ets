@@ -29,7 +29,7 @@ let bottomPopoverTypes = ['default', 'phone'];
   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
-  .flexGrow(Constants.FLEX_GROW)
+  .width(Constants.HALF_LENGTH)
 }
 
 @CustomDialog
