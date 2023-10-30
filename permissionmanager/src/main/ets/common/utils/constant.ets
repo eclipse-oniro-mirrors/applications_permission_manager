@@ -70,6 +70,7 @@ export default class Constants {
     // 100% width,height
     static FULL_WIDTH = '100%';
     static FULL_HEIGHT = '100%';
+    static HALF_LENGTH = '50%';
 
     // public property style
     static PERMISSION = 1;

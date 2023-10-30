@@ -35,7 +35,7 @@ import { LocationCanvas } from '../common/components/location';
   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
   .fontWeight(FontWeight.Medium)
   .height(Constants.BUTTON_HEIGHT)
-  .flexGrow(Constants.FLEX_GROW)
+  .width(Constants.HALF_LENGTH)
 }
 
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
