@@ -31,6 +31,7 @@ const TAG = 'PermissionManager_MainAbility:';
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
+  .draggable(false)
 };
 
 @Entry

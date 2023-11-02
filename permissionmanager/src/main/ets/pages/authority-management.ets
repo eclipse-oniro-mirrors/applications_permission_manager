@@ -38,6 +38,7 @@ let storage = LocalStorage.getShared();
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
+  .draggable(false)
 };
 
 @Entry(storage)

@@ -39,6 +39,7 @@ let globalIsOn: boolean = (router.getParams() as routerParams_1).globalIsOn; // 
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
+  .draggable(false)
 }
 
 @Entry
