@@ -102,25 +102,28 @@ struct appNamePlusPage {
   }
 
   async initApplicationInfo(info: appInfo) {
-    console.info(TAG + `labelId: ` + JSON.stringify(info.labelId));
+    console.info(TAG + `labelResource: ` + JSON.stringify(info.labelResource));
     let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
 
-    resourceManager.getStringValue(info.labelId, (error, value) => {
-      info.label = value;
-    })
+    if (info.labelResource.id !== 0) {
+      info.label = await this.context.resourceManager.getStringValue(info.labelResource);
+    } else {
+      info.label = await resourceManager.getStringValue(info.labelId);
+    }
 
     try {
-      let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
-      info.icon = iconDescriptor?.getPixelMap();
+      if (info.iconResource.id !== 0) {
+        let iconDescriptor = this.context.resourceManager.getDrawableDescriptor(info.iconResource);
+        info.icon = iconDescriptor?.getPixelMap();
+      } else {
+        let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
+        info.icon = iconDescriptor?.getPixelMap();
+      }
     } catch (error) {
       console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
     }
-    let icon = info.icon;
-    if (!icon) {
-      info.icon = await resourceManager.getMediaContentBase64(info.iconId);
-    }
-    let icon1 = info.icon;
-    if (!icon1) {
+
+    if (!info.icon) {
       info.icon = $r('app.media.icon');
     }
 

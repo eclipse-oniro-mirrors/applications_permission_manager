@@ -301,8 +301,10 @@ struct authorityManagementPage {
       info.appInfo.accessTokenId,
       '',
       info.appInfo.iconId,
+      info.appInfo.iconResource,
       info.appInfo.label,
       info.appInfo.labelId,
+      info.appInfo.labelResource,
       reqUserPermissions,
       groupIds,
       '',
@@ -320,11 +322,15 @@ struct authorityManagementPage {
    * @param {String} labelName Application Name
    */
   async updateAppLabel(info: appInfo) {
-    console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `labelId: ` + JSON.stringify(info.labelId));
+    console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `labelResource: ` + JSON.stringify(info.labelResource) + 'labelId: ' + JSON.stringify(info.labelId));
     let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
 
     try {
-      info.label = await resourceManager.getStringValue(info.labelId);
+      if (info.labelResource.id !== 0) {
+        info.label = await this.context.resourceManager.getStringValue(info.labelResource);
+      } else {
+        info.label = await resourceManager.getStringValue(info.labelId);
+      }
     } catch (error) {
       console.error(TAG + "getStringValue promise error is " + error);
     }
@@ -337,22 +343,22 @@ struct authorityManagementPage {
    * @param {String} bundleName Package names
    */
   async updateAppIcon(info: appInfo) {
-    console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `iconId: ` + JSON.stringify(info.iconId));
+    console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `iconResource: ` + JSON.stringify(info.iconResource) + 'iconId: ' + JSON.stringify(info.iconId));
     let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
 
     try {
-      let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
-      info.icon = iconDescriptor?.getPixelMap();
+      if (info.iconResource.id !== 0) {
+        let iconDescriptor = this.context.resourceManager.getDrawableDescriptor(info.iconResource);
+        info.icon = iconDescriptor?.getPixelMap();
+      } else {
+        let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
+        info.icon = iconDescriptor?.getPixelMap();
+      }
     } catch (error) {
       console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
     }
 
-    let icon = info.icon;
-    if (!icon) {
-      info.icon = await resourceManager.getMediaContentBase64(info.iconId);
-    }
-    let icon1 = info.icon;
-    if (!icon1) {
+    if (!info.icon) {
       info.icon = $r('app.media.icon');
     }
   }

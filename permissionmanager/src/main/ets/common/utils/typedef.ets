@@ -20,22 +20,26 @@ export class appInfo {
   tokenId: number
   icon: ResourceStr | PixelMap
   iconId: number
+  iconResource: Resource
   label: string
   labelId: number
+  labelResource: Resource
   permissions: Permissions[]
   groupId: number[]
   zhTag: string
   indexTag: string
   language: string
 
-  constructor(bundleName: string, api: number, tokenId: number, icon: ResourceStr | PixelMap, iconId: number, label: string, labelId: number, permissions: Permissions[], groupId: number[], zhTag: string, indexTag: string, language: string) {
+  constructor(bundleName: string, api: number, tokenId: number, icon: ResourceStr | PixelMap, iconId: number, iconResource: Resource, label: string, labelId: number, labelResource: Resource, permissions: Permissions[], groupId: number[], zhTag: string, indexTag: string, language: string) {
     this.bundleName = bundleName
     this.api = api
     this.tokenId = tokenId
     this.icon = icon
     this.iconId = iconId
+    this.iconResource = iconResource
     this.label = label
     this.labelId = labelId
+    this.labelResource = labelResource
     this.permissions = permissions
     this.groupId = groupId
     this.zhTag = zhTag
