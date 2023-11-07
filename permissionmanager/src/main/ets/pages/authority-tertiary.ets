@@ -72,6 +72,7 @@ struct applicationItem {
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
+  @State isFirst: boolean[] = [];
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
@@ -111,6 +112,10 @@ struct applicationItem {
                 .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
                 .onChange((isOn: boolean) => {
                   if (item.permission === undefined) {
+                    return;
+                  }
+                  if (this.isFirst[item.index]) {
+                    this.isFirst[item.index] = false;
                     return;
                   }
                   if (isOn) {
@@ -200,9 +205,11 @@ struct applicationItem {
             // 0: have permission; -1: no permission
             if (data === Constants.PERMISSION_INDEX) {
               this.toggleIsOn[i] = true;
+              this.isFirst[i] = true;
               this.permissionNum++;
             } else {
               this.toggleIsOn[i] = false;
+              this.isFirst[i] = false;
             }
           })
           this.isRisk[i] = false;
