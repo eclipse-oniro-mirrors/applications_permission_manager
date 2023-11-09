@@ -94,6 +94,7 @@ export default class Constants {
     static LISTITEM_MARGIN_BOTTOM = 12;
     static LISTITEM_HEIGHT_PERMISSION = 64;
     static LISTITEM_HEIGHT_APPLICATION = 72;
+    static IMAGE_LENGTH_20 = 20;
     static IMAGE_HEIGHT = 24;
     static IMAGE_WIDTH = 12;
     static IMAGE_HEIGHT_RECORD = 12;
