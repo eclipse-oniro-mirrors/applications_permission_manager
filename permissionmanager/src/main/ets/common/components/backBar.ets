@@ -72,11 +72,11 @@ export struct backBar {
           .fontWeight(FontWeight.Bold)
         if (this.recordable) {
           Row() {
-            Image($r("app.media.gongneng_dian"))
+            Image($r("sys.media.ohos_ic_public_more"))
               .fillColor($r('sys.color.ohos_id_color_primary'))
               .objectFit(ImageFit.Contain)
-              .height(Constants.IMAGE_LENGTH_20)
-              .width(Constants.IMAGE_LENGTH_20)
+              .height(Constants.BACKBAR_IMAGE_WIDTH)
+              .width(Constants.BACKBAR_IMAGE_HEIGHT)
               .draggable(false)
           }.width(Constants.CLICK_SHADOW_LENGTH)
           .height(Constants.CLICK_SHADOW_LENGTH)
