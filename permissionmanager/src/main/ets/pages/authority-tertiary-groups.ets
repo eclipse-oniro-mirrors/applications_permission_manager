@@ -183,10 +183,11 @@ struct applicationItem {
                     if (item.permission === undefined) {
                       return;
                     }
-                    if (this.isFirst[item.index]) {
+                    if (this.isFirst[item.index] && isOn) {
                       this.isFirst[item.index] = false;
                       return;
                     }
+                    this.isFirst[item.index] = false;
                     let _this = this;
                     if (isOn) {
                       let promises = this.list.map(it => new Promise<number>((resolve) => {
