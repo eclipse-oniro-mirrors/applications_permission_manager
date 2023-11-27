@@ -114,10 +114,11 @@ struct applicationItem {
                   if (item.permission === undefined) {
                     return;
                   }
-                  if (this.isFirst[item.index]) {
+                  if (this.isFirst[item.index] && isOn) {
                     this.isFirst[item.index] = false;
                     return;
                   }
+                  this.isFirst[item.index] = false;
                   if (isOn) {
                     this.grantUserGrantedPermission(item.accessTokenId, item.permission, item.index);
                   } else {
