@@ -33,6 +33,7 @@ import { polymorphismGroup, globalGroup, groups } from "../common/model/permissi
 const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
+const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
 let globalIsOn: boolean = (router.getParams() as routerParams_1).globalIsOn; // return title name
 
 @Extend(Image) function customizeImage(width: number, height: number) {
@@ -96,11 +97,17 @@ struct locationInfoPage {
           res.reqPermissionDetails.forEach(item => {
             reqPermissions.push(item.name);
           })
+          if (this.currentGroup === 'LOCATION' && !reqPermissions.includes(FUZZY_LOCATION_PERMISSION) && res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
+            this.polymorphismIsOn[index] = false;
+          }
           for (let j = 0; j < this.list.length; j++) {
             if ((this.list[j].permission == PRECISE_LOCATION_PERMISSION) && (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
               continue;
             }
             if ((this.list[j].permission == FUZZY_LOCATION_PERMISSION) && (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
+              continue;
+            }
+            if (this.list[j].permission == BACKGROUND_LOCATION_PERMISSION) {
               continue;
             }
             if (reqPermissions.indexOf(this.list[j].permission) == -1) {
@@ -240,7 +247,8 @@ struct applicationItem {
                 bundleName: item.bundleName,
                 backTitle: this.backTitle,
                 permission: permissions,
-                status: this.polymorphismIsOn[item.index] ? Constants.RADIO_ALLOW_INDEX : Constants.RADIO_BAN_INDEX
+                status: this.polymorphismIsOn[item.index] ? Constants.RADIO_ALLOW_INDEX : Constants.RADIO_BAN_INDEX,
+                tokenId: item.accessTokenId
               }
             });
           }

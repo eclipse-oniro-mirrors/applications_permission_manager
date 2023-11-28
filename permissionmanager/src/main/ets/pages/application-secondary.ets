@@ -28,6 +28,7 @@ import { GlobalContext } from '../common/utils/globalContext';
 const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
+const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
 const allowedStatus = 0; // Status: Allowed
 const bannedStatus = 1; // Status: Banned
 
@@ -186,9 +187,15 @@ struct appNamePlusPage {
         }
       }
       let isGranted = true;
+      if (group === 'LOCATION' && !groupReqPermissons.includes(FUZZY_LOCATION_PERMISSION) && this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE) {
+        isGranted = false;
+      }
       for (let i = 0; i < groupReqPermissons.length; i++) {
         let permission = groupReqPermissons[i];
         if (this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
+          continue;
+        }
+        if (permission == BACKGROUND_LOCATION_PERMISSION) {
           continue;
         }
         let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
