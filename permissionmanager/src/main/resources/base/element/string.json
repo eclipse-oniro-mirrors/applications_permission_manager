@@ -137,6 +137,14 @@
       "value": "THIS TIME ONLY"
     },
     {
+      "name": "ALLOWED_ONLY_DURING_USE",
+      "value": "ALLOWED ONLY DURING USE"
+    },
+    {
+      "name": "allowed_only_during_use",
+      "value": "Allowed only during use"
+    },
+    {
       "name": "precise_location",
       "value": "Precise location"
     },

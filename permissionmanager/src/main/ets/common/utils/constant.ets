@@ -226,6 +226,7 @@ export default class Constants {
     static PERMISSION_ALLOW = 0;
     static PERMISSION_BAN = 1;
     static PERMISSION_ONLY_THIS_TIME = 2;
+    static PERMISSION_ALLOWED_ONLY_DURING_USE = 3;
 
     //shape
     static SHAPE_DIA = 20;

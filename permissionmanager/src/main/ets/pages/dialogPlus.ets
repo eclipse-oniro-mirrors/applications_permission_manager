@@ -41,6 +41,8 @@ import { LocationCanvas } from '../common/components/location';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const PASTE = 'ohos.permission.READ_PASTEBOARD';
+const fuzzyMarks = [Constants.LOCATION_FUZZY, Constants.LOCATION_BOTH_FUZZY, Constants.LOCATION_BOTH_PRECISE];
+const preciseMarks = [Constants.LOCATION_UPGRADE, Constants.LOCATION_BOTH_PRECISE];
 let bottomPopoverTypes = ['default', 'phone'];
 
 let win: window.Window;
@@ -92,6 +94,7 @@ struct PermissionDialog {
   @State naviHeight: number = 0
   @State refresh: number = 0;
   @State pasteBoardName: string = '';
+  @State sureButton: Resource = $r('app.string.ALLOW');
   @Link @Watch('updateReason') isUpdate: number;
   controller?: CustomDialogController
 
@@ -194,7 +197,7 @@ struct PermissionDialog {
                     .vertical(true)
                     .height(Constants.DIVIDER_HEIGHT)
                     .opacity(.2)
-                  Button(this.currentGroup() === 'PASTEBOARD'? $r('app.string.THIS_TIME_ONLY') : $r('app.string.ALLOW'))
+                  Button(this.sureButton)
                     .onClick(() => {
                       this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.currentGroup() === 'PASTEBOARD' ? Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag)
                     }).customizeButton()
@@ -232,13 +235,17 @@ struct PermissionDialog {
   currentGroup() {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
     if (this.grantGroups[index].name == 'LOCATION') {
+      this.sureButton = $r('app.string.ALLOWED_ONLY_DURING_USE');
       if ((this.locationFlag == Constants.LOCATION_FUZZY) || (this.locationFlag == Constants.LOCATION_BOTH_FUZZY)) {
         return 'LOCATION';
       }
+      return 'LOCATION_PRECISE';
     }
     if (this.grantGroups[index].name == 'PASTEBOARD') {
+      this.sureButton = $r('app.string.THIS_TIME_ONLY');
       return 'PASTEBOARD';
     }
+    this.sureButton = $r('app.string.ALLOW');
     return 'Normal';
   }
 
@@ -308,8 +315,17 @@ struct PermissionDialog {
       let result: number = -1;
       if (showSubpermissionsGrop.indexOf(group.name) == -1) {
         if (group.name == 'LOCATION' && this.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
-          if (!(((this.locationFlag == Constants.LOCATION_BOTH_FUZZY) || (this.locationFlag == Constants.LOCATION_FUZZY))
-            && (permission == PRECISE_LOCATION_PERMISSION))) {
+          if (fuzzyMarks.includes(this.locationFlag) && permission === FUZZY_LOCATION_PERMISSION) {
+            try {
+              await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
+                result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
+              })
+            }
+            catch(err) {
+              Log.error("failed to grant permission:" + permission);
+            }
+          }
+          if (preciseMarks.includes(this.locationFlag) && permission === PRECISE_LOCATION_PERMISSION) {
             try {
               await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
                 result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;

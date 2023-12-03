@@ -137,6 +137,14 @@
       "value": "仅本次允许"
     },
     {
+      "name": "ALLOWED_ONLY_DURING_USE",
+      "value": "仅使用期间允许"
+    },
+    {
+      "name": "allowed_only_during_use",
+      "value": "仅使用期间允许"
+    },
+    {
       "name": "precise_location",
       "value": "精确位置"
     },
