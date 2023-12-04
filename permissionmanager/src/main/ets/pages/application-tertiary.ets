@@ -213,17 +213,17 @@ struct mediaDocumentItem {
       );
     } else if (this.currentGroup == 'LOCATION') {
       this.selected = this.status ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOWED_ONLY_DURING_USE;
+      if (this.permissions.includes(BACKGROUND_LOCATION_PERMISSION)) {
+        this.mediaDocListItem.push(
+          new MediaDocObj($r('app.string.always_allow'), this.permissions, Constants.PERMISSION_ALLOW)
+        );
+      }
       if (this.permissions.includes(FUZZY_LOCATION_PERMISSION)) {
         this.mediaDocListItem.push(
           new MediaDocObj($r('app.string.allowed_only_during_use'), [FUZZY_LOCATION_PERMISSION], Constants.PERMISSION_ALLOWED_ONLY_DURING_USE)
         );
       } else {
         this.noForeground = true;
-      }
-      if (this.permissions.includes(BACKGROUND_LOCATION_PERMISSION)) {
-        this.mediaDocListItem.push(
-          new MediaDocObj($r('app.string.always_allow'), this.permissions, Constants.PERMISSION_ALLOW)
-        );
       }
     } else {
       this.mediaDocListItem.push(
