@@ -90,6 +90,21 @@ export function changeIndexValue(stateList, changeItem){
   return result;
 }
 
+/**
+ * Omit display when application name is too long
+ * @param {String} Application name
+ */
+export function titleTrim(title) {
+  const length = title.length;
+  if (length > Constants.MAXIMUM_HEADER_LENGTH) {
+    var str = '';
+    str = title.substring(0, Constants.MAXIMUM_HEADER_LENGTH) + '...';
+    return str;
+  } else {
+    return title;
+  }
+}
+
 // List of Chinese Pinyin Initials
 let strChineseFirstPY = "YDYQSXMWZSSXJBYMGCCZQPSSQBYCDSCDQLDYLYBSSJGYZZJJFKCCLZDHWDWZJLJPFYYNWJJTMYHZWZHFLZPPQHGSC" +
 "YYYNJQYXXGJHHSDSJNKKTMOMLCRXYPSNQSECCQZGGLLYJLMYZZSECYKYYHQWJSSGGYXYZYJWWKDJHYCHMYXJTLXJYQBYXZLDWRDJRWYSRLDZJPCBZ" +
