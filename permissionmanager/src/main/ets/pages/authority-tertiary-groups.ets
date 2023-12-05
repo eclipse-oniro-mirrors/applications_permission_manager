@@ -233,8 +233,10 @@ struct applicationItem {
         }.onClick(() => {
           if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
             let permissions: string[] = [];
-            this.list.forEach(item => {
-              permissions.push(item.permission);
+            this.list.forEach(data => {
+              if (data.bundleNames.includes(item.bundleName)) {
+                permissions.push(data.permission);
+              }
             })
             this.allBundleInfo.forEach(bundleInfo => {
               if (bundleInfo.bundleName === item.bundleName) {
