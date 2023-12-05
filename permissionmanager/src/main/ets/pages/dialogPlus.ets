@@ -17,7 +17,7 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundle from '@ohos.bundle';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
-import { Log, getPermissionGroup } from '../common/utils/utils'
+import { Log, getPermissionGroup, titleTrim } from '../common/utils/utils'
 import Constants from '../common/utils/constant'
 import { BundleFlag } from '../common/model/bundle'
 import { permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup'
@@ -155,7 +155,7 @@ struct PermissionDialog {
                 if(this.locationFlag > Constants.LOCATION_NONE) {
                   LocationCanvas({ locationFlag: $locationFlag })
                 }
-              }
+              }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
             }
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
@@ -372,9 +372,9 @@ struct PermissionDialog {
       let context = globalThis.extensionContext.createBundleContext(bundleName)
       context.resourceManager.getString(applicationInfo.labelId, (err, value) => {
         if (value == undefined) {
-          this.appName = applicationInfo.label
+          this.appName = titleTrim(applicationInfo.label);
         } else {
-          this.appName = value
+          this.appName = titleTrim(value);
         }
         Log.info("hap label:" + applicationInfo.label + ", value:"+this.appName)
       })
