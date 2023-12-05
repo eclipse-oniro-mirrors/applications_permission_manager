@@ -195,6 +195,7 @@ struct PermissionDialog {
                   Divider()
                     .color($r('sys.color.ohos_id_color_list_separator'))
                     .vertical(true)
+                    .strokeWidth(Constants.DIALOG_DIVIDER)
                     .height(Constants.DIVIDER_HEIGHT)
                     .opacity(.2)
                   Button(this.sureButton)

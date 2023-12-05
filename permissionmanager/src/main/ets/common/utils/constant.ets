@@ -124,6 +124,7 @@ export default class Constants {
     static OFFSET = 100;
     static CLICK_SHADOW_LENGTH = 48;
     static DIVIDER = '1px';
+    static DIALOG_DIVIDER = 1;
     static DIVIDER_HEIGHT = 24;
     static DIVIDER_MARGIN_RIGHT_PERMISSION = 52;
     static DIVIDER_MARGIN_RIGHT_APPLICATION = 68;

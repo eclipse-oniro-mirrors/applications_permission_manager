@@ -21,7 +21,6 @@ import Constants from '../utils/constant';
   .fontSize(Constants.TEXT_SMALLER_FONT_SIZE)
   .height(Constants.LOCATION_BUTTON_HEIGHT)
   .borderRadius(Constants.LOCATION_BUTTON_RADIUS)
-  .position({ x: Constants.LOCATION_BUTTON_POSITION_X, y: Constants.LOCATION_BUTTON_POSITION_Y })
 }
 
 @Component
@@ -68,18 +67,25 @@ export struct LocationCanvas {
           curve: Curve.Smooth, // The animation curve
           playMode: PlayMode.Normal // The animation mode
         })
-      if (this.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
-        Button($r('app.string.precise_location_on'))
-          .locationButton()
-          .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
-          .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_FUZZY })
-      }
-      if (this.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
-        Button($r('app.string.precise_location_off'))
-          .locationButton()
-          .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-          .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_PRECISE })
-      }
+      Row() {
+        if (this.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
+          Button($r('app.string.precise_location_on'))
+            .locationButton()
+            .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+            .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_FUZZY })
+        }
+        if (this.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
+          Button($r('app.string.precise_location_off'))
+            .locationButton()
+            .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+            .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_PRECISE })
+        }
+      }.position({ x: 0, y: 0 })
+      .width(Constants.FULL_WIDTH)
+      .height(Constants.FULL_HEIGHT)
+      .alignItems(VerticalAlign.Top)
+      .justifyContent(FlexAlign.Center)
+      .padding({ top: Constants.LOCATION_BUTTON_POSITION_Y })
     }.width(Constants.FULL_WIDTH)
     .height(Constants.LOCATION_CANVAS_HEIGHT)
     .margin({ top: Constants.LOCATION_CANVAS_MARGIN_TOP, bottom: Constants.LOCATION_CANVAS_MARGIN_BOTTOM })
