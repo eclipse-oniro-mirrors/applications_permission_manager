@@ -48,14 +48,16 @@
                 "name": "com.ohos.permissionmanager.GlobalExtAbility",
                 "srcEntry": "./ets/GlobalExtAbility/GlobalExtAbility.ts",
                 "type": "service",
-                "exported": true
+                "exported": true,
+                "permissions": ["ohos.permission.GET_SENSITIVE_PERMISSIONS"]
             },
             {
                 "icon": "$media:icon",
                 "name": "com.ohos.permissionmanager.SecurityExtAbility",
                 "srcEntry": "./ets/SecurityExtAbility/SecurityExtAbility.ts",
                 "type": "service",
-                "exported": true
+                "exported": true,
+                "permissions": ["ohos.permission.GET_SENSITIVE_PERMISSIONS"]
             }
         ],
         "requestPermissions": [
