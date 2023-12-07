@@ -323,12 +323,12 @@ struct authorityManagementPage {
    */
   async updateAppLabel(info: appInfo) {
     console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `labelResource: ` + JSON.stringify(info.labelResource) + 'labelId: ' + JSON.stringify(info.labelId));
-    let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
 
     try {
       if (info.labelResource.id !== 0) {
         info.label = await this.context.resourceManager.getStringValue(info.labelResource);
       } else {
+        let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
         info.label = await resourceManager.getStringValue(info.labelId);
       }
     } catch (error) {
@@ -344,13 +344,13 @@ struct authorityManagementPage {
    */
   async updateAppIcon(info: appInfo) {
     console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `iconResource: ` + JSON.stringify(info.iconResource) + 'iconId: ' + JSON.stringify(info.iconId));
-    let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
 
     try {
       if (info.iconResource.id !== 0) {
         let iconDescriptor = this.context.resourceManager.getDrawableDescriptor(info.iconResource);
         info.icon = iconDescriptor?.getPixelMap();
       } else {
+        let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
         let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
         info.icon = iconDescriptor?.getPixelMap();
       }
