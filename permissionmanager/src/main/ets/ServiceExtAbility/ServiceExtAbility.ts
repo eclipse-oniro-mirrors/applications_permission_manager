@@ -17,6 +17,7 @@ import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
 import { GlobalContext } from '../common/utils/globalContext';
+import dialogRequest from '@ohos.app.ability.dialogRequest';
 
 const TAG = 'PermissionManager_Log: ';
 const BG_COLOR = '#00000000';
@@ -63,8 +64,9 @@ export default class ServiceExtensionAbility extends extension {
     console.info(TAG + 'create window');
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
+      let requestInfo = dialogRequest.getRequestInfo(want);
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
-      await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
+      await win.bindDialogTarget(requestInfo, () => {
         let windowNum = GlobalContext.load('windowNum');
         windowNum --;
         GlobalContext.store('windowNum', windowNum);
@@ -73,8 +75,8 @@ export default class ServiceExtensionAbility extends extension {
           this.context.terminateSelf();
         }
       });
-      await win.moveWindowTo(rect.left, rect.top);
-      await win.resize(rect.width, rect.height);
+      await win.moveWindowTo(requestInfo.windowRect.left, requestInfo.windowRect.top);
+      await win.resize(requestInfo.windowRect.width, requestInfo.windowRect.height);
       await win.loadContent('pages/dialogPlus', storage);
       await win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
