@@ -402,7 +402,7 @@ struct mediaDocumentItem {
                         .flexGrow(Constants.FLEX_GROW)
                       Radio({ value: 'Radio', group: 'radioGroup' })
                         .checked(item.index === this.selected)
-                        .touchable(false)
+                        .hitTestBehavior(HitTestMode.None)
                         .height(Constants.SHAPE_DIA)
                         .width(Constants.SHAPE_DIA)
                     }
