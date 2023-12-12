@@ -234,7 +234,7 @@ struct applicationItem {
           if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
             let permissions: string[] = [];
             this.list.forEach(data => {
-              if (data.bundleNames.includes(item.bundleName)) {
+              if (data.bundleNames.includes(item.bundleName as string)) {
                 permissions.push(data.permission);
               }
             })
