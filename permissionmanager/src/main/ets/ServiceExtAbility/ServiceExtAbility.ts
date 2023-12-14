@@ -15,7 +15,6 @@
 
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
-import display from '@ohos.display';
 import { GlobalContext } from '../common/utils/globalContext';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
 
@@ -39,18 +38,7 @@ export default class ServiceExtensionAbility extends extension {
     console.info(TAG + 'ServiceExtensionAbility onRequest. start id is ' + startId);
     console.info(TAG + 'want: ' + JSON.stringify(want));
 
-    try {
-      let dis = display.getDefaultDisplaySync();
-      let navigationBarRect = {
-        left: 0,
-        top: 0,
-        width: dis.width,
-        height: dis.height
-      };
-      this.createWindow('permissionDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
-    } catch (exception) {
-      console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
-    };
+    this.createWindow('permissionDialog' + startId, window.WindowType.TYPE_DIALOG, want);
   }
 
   /**
@@ -60,7 +48,7 @@ export default class ServiceExtensionAbility extends extension {
     console.info(TAG + 'ServiceExtensionAbility onDestroy.');
   }
 
-  private async createWindow(name: string, windowType, rect, want): Promise<void> {
+  private async createWindow(name: string, windowType, want): Promise<void> {
     console.info(TAG + 'create window');
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
