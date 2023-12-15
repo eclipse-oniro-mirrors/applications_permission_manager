@@ -15,6 +15,7 @@
 
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
+import display from '@ohos.display';
 import { GlobalContext } from '../common/utils/globalContext';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
 
@@ -38,7 +39,18 @@ export default class ServiceExtensionAbility extends extension {
     console.info(TAG + 'ServiceExtensionAbility onRequest. start id is ' + startId);
     console.info(TAG + 'want: ' + JSON.stringify(want));
 
-    this.createWindow('permissionDialog' + startId, window.WindowType.TYPE_DIALOG, want);
+    try {
+      let dis = display.getDefaultDisplaySync();
+      let navigationBarRect = {
+        left: 0,
+        top: 0,
+        width: dis.width,
+        height: dis.height
+      };
+      this.createWindow('permissionDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
+    } catch (exception) {
+      console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+    };
   }
 
   /**
@@ -48,13 +60,19 @@ export default class ServiceExtensionAbility extends extension {
     console.info(TAG + 'ServiceExtensionAbility onDestroy.');
   }
 
-  private async createWindow(name: string, windowType, want): Promise<void> {
-    console.info(TAG + 'create window');
+  private async createWindow(name: string, windowType, rect, want): Promise<void> {
+    let requestInfo: dialogRequest.RequestInfo;
+    try {
+      requestInfo = dialogRequest.getRequestInfo(want);
+    } catch (err) {
+      console.error(`getRequestInfo err= ${JSON.stringify(err)}`);
+    }
+
+    console.info(TAG + 'create window start, requestInfo: ' + JSON.stringify(requestInfo));
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
-      let requestInfo = dialogRequest.getRequestInfo(want);
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
-      await win.bindDialogTarget(requestInfo, () => {
+      await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         let windowNum = GlobalContext.load('windowNum');
         windowNum --;
         GlobalContext.store('windowNum', windowNum);
@@ -63,8 +81,8 @@ export default class ServiceExtensionAbility extends extension {
           this.context.terminateSelf();
         }
       });
-      await win.moveWindowTo(requestInfo.windowRect.left, requestInfo.windowRect.top);
-      await win.resize(requestInfo.windowRect.width, requestInfo.windowRect.height);
+      await win.moveWindowTo(requestInfo ? requestInfo.windowRect.left : rect.left, requestInfo ? requestInfo.windowRect.top : rect.top);
+      await win.resize(requestInfo ? requestInfo.windowRect.width : rect.width, requestInfo ? requestInfo.windowRect.height : rect.height);
       await win.loadContent('pages/dialogPlus', storage);
       await win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
