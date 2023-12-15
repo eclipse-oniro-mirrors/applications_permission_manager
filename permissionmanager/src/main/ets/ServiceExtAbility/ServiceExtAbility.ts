@@ -69,6 +69,8 @@ export default class ServiceExtensionAbility extends extension {
     }
 
     console.info(TAG + 'create window start, requestInfo: ' + JSON.stringify(requestInfo));
+    let rectInfo = requestInfo ? requestInfo.windowRect : rect;
+    rectInfo = rectInfo.width === 0 ? rect : rectInfo;
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
@@ -81,8 +83,8 @@ export default class ServiceExtensionAbility extends extension {
           this.context.terminateSelf();
         }
       });
-      await win.moveWindowTo(requestInfo ? requestInfo.windowRect.left : rect.left, requestInfo ? requestInfo.windowRect.top : rect.top);
-      await win.resize(requestInfo ? requestInfo.windowRect.width : rect.width, requestInfo ? requestInfo.windowRect.height : rect.height);
+      await win.moveWindowTo(rectInfo.left, rectInfo.top);
+      await win.resize(rectInfo.width, rectInfo.height);
       await win.loadContent('pages/dialogPlus', storage);
       await win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
