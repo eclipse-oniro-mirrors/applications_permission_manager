@@ -71,6 +71,10 @@ struct dialogPlusPage {
     this.privacyDialogController.open();
   }
 
+  aboutToDisappear() {
+    this.privacyDialogController = null;
+  }
+
   onPageShow() {
     this.isUpdate ++;
   }

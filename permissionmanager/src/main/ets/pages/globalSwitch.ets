@@ -53,6 +53,10 @@ struct globalSwitch {
   aboutToAppear() {
     this.privacyDialogController.open();
   }
+
+  aboutToDisappear() {
+    this.privacyDialogController = null;
+  }
 }
 
 @CustomDialog
