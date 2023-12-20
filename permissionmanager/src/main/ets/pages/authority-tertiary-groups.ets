@@ -418,6 +418,10 @@ struct applicationItem {
     }
   }
 
+  aboutToDisappear() {
+    this.privacyDialogController = null;
+  }
+
   build() {
     Column() {
       Row() {

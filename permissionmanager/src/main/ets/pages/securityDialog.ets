@@ -51,6 +51,10 @@ struct SecurityDialog {
     want = this.want;
     win = this.win;
   }
+
+  aboutToDisappear() {
+    this.securityDialogController = null;
+  }
 }
 
 @CustomDialog
