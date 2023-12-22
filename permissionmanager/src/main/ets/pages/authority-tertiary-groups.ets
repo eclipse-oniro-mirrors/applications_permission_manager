@@ -34,6 +34,9 @@ const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
+const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
+const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
+const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 let globalIsOn: boolean = (router.getParams() as routerParams_1).globalIsOn; // return title name
 
 @Extend(Image) function customizeImage(width: number, height: number) {
@@ -50,6 +53,7 @@ struct locationInfoPage {
   private list: permissionApplications[] = (router.getParams() as routerParams_1).list;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State polymorphismIsOn: Array<boolean> = [];
+  @State folderStatusArray: Array<Array<boolean>> = [[]];
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -63,7 +67,7 @@ struct locationInfoPage {
             }
             Row() {
               Column() {
-                applicationItem({ polymorphismIsOn: $polymorphismIsOn })
+                applicationItem({ polymorphismIsOn: $polymorphismIsOn, folderStatusArray: $folderStatusArray })
 
               }.width(Constants.FULL_WIDTH)
             }
@@ -81,6 +85,7 @@ struct locationInfoPage {
     console.log(TAG + "onPageShow");
     if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
       let bundleNames: string[] = [];
+      let atManager = abilityAccessCtrl.createAtManager();
       this.list.forEach(permissionmanager => {
         permissionmanager.bundleNames.forEach(bundleName => {
           if (bundleNames.indexOf(bundleName) == -1) {
@@ -93,31 +98,55 @@ struct locationInfoPage {
         bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(res => {
           // 0: have permission; -1: no permission
           this.polymorphismIsOn[index] = true;
+          this.folderStatusArray[index] = [false, false, false];
           let reqPermissions: Array<string> = [];
           res.reqPermissionDetails.forEach(item => {
             reqPermissions.push(item.name);
           })
-          if (this.currentGroup === 'LOCATION' && !reqPermissions.includes(FUZZY_LOCATION_PERMISSION) && res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
-            this.polymorphismIsOn[index] = false;
-          }
-          for (let j = 0; j < this.list.length; j++) {
-            if ((this.list[j].permission == PRECISE_LOCATION_PERMISSION) && (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
-              continue;
+          if (this.currentGroup === 'LOCATION') {
+            if (!reqPermissions.includes(FUZZY_LOCATION_PERMISSION) && res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
+              this.polymorphismIsOn[index] = false;
             }
-            if ((this.list[j].permission == FUZZY_LOCATION_PERMISSION) && (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
-              continue;
-            }
-            if (this.list[j].permission == BACKGROUND_LOCATION_PERMISSION) {
-              continue;
-            }
-            if (reqPermissions.indexOf(this.list[j].permission) == -1) {
-              continue;
-            }
-            verifyAccessToken(res.appInfo.accessTokenId, this.list[j].permission).then((access) => {
-              if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
-                this.polymorphismIsOn[index] = false;
+            for (let j = 0; j < this.list.length; j++) {
+              if ((this.list[j].permission == PRECISE_LOCATION_PERMISSION) && (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
+                continue;
               }
-            });
+              if ((this.list[j].permission == FUZZY_LOCATION_PERMISSION) && (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
+                continue;
+              }
+              if (this.list[j].permission == BACKGROUND_LOCATION_PERMISSION) {
+                continue;
+              }
+              if (reqPermissions.indexOf(this.list[j].permission) == -1) {
+                continue;
+              }
+              verifyAccessToken(res.appInfo.accessTokenId, this.list[j].permission).then((access) => {
+                if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+                  this.polymorphismIsOn[index] = false;
+                }
+              });
+            }
+          }
+          if (this.currentGroup === 'FOLDER') {
+            for (let j = 0; j < this.list.length; j++) {
+              if (reqPermissions.indexOf(this.list[j].permission) == -1) {
+                continue;
+              }
+              let access = atManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission);
+              if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+                switch (this.list[j].permission) {
+                  case DOWNLOAD_PERMISSION:
+                    this.folderStatusArray[index][0] = true;
+                    break;
+                  case DESKTOP_PERMISSION:
+                    this.folderStatusArray[index][1] = true;
+                    break;
+                  case DOCUMENTS_PERMISSION:
+                    this.folderStatusArray[index][2] = true;
+                    break;
+                }
+              }
+            }
           }
         }).catch((error: BusinessError) => {
           console.log(TAG + bundleName + "onPageShow getBundleInfo failed, cause: " + JSON.stringify(error));
@@ -139,6 +168,7 @@ struct applicationItem {
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
   @Link polymorphismIsOn: Array<boolean>;
+  @Link folderStatusArray: Array<Array<boolean>>;
   @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
   @State isTouch: string = '';
@@ -148,7 +178,7 @@ struct applicationItem {
   @State allBundleInfo: appInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
 
-  privacyDialogController: CustomDialogController = new CustomDialogController({
+  privacyDialogController: CustomDialogController | null = new CustomDialogController({
     builder: globalDialog({ globalIsOn: $globalIsOn }),
     autoCancel: false,
     alignment: DialogAlignment.Center,
@@ -217,10 +247,30 @@ struct applicationItem {
                     }
                   })
               } else {
-                Text(this.polymorphismIsOn[item.index] ? $r('app.string.allow') : $r('app.string.ban'))
-                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
+                if (this.currentGroup === 'FOLDER') {
+                  Text() {
+                    if (this.folderStatusArray[item.index].includes(true)) {
+                      ForEach(this.folderStatusArray[item.index], (status: boolean, index) =>{
+                        if (status) {
+                          if (index !== this.folderStatusArray[item.index].indexOf(true)) {
+                            Span($r('app.string.separator'))
+                          }
+                          Span(index === 0 ? $r('app.string.Download') : index === 1 ? $r('app.string.Desktop') : $r('app.string.Document'))
+                        }
+                      })
+                    } else {
+                      Span($r('app.string.ban'))
+                    }
+                  }
+                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                    .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
+                } else {
+                  Text(this.polymorphismIsOn[item.index] ? $r('app.string.allow') : $r('app.string.ban'))
+                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                    .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
+                }
                 Image($r('app.media.ic_public_arrow_right'))
                   .fillColor($r('sys.color.ohos_id_color_tertiary'))
                   .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
@@ -243,6 +293,7 @@ struct applicationItem {
                 GlobalContext.store('applicationInfo', bundleInfo);
               }
             })
+            GlobalContext.store('folderStatus', this.folderStatusArray[item.index]);
             router.pushUrl({
               url: 'pages/application-tertiary',
               params: {
@@ -287,8 +338,13 @@ struct applicationItem {
    */
   getGrantApplicationNumber() {
     if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
-      let sum = this.polymorphismIsOn.filter(item => item == true);
-      return sum.length;
+      if (this.currentGroup === 'FOLDER') {
+        let sum = this.folderStatusArray.filter(item => item.includes(true));
+        return sum.length;
+      } else {
+        let sum = this.polymorphismIsOn.filter(item => item == true);
+        return sum.length;
+      }
     } else {
       return this.permissionNum;
     }
@@ -461,7 +517,11 @@ struct applicationItem {
                         }
                       }
                     })
-                  Row().onClick(() => { this.privacyDialogController.open() })
+                  Row().onClick(() => {
+                    if (this.privacyDialogController !== null) {
+                      this.privacyDialogController.open()
+                    }
+                  })
                     .width(Constants.DEFAULT_SLIDER_WIDTH).height(Constants.DEFAULT_SLIDER_HEIGHT)
                     .position({ x: this.globalIsOn ? 0 : Constants.OFFSET, y: 0 })
                 }.clip(true)

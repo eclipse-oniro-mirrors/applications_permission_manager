@@ -346,3 +346,13 @@ export class wantInfo {
     this.parameters = parameters
   }
 }
+
+export class checkboxInfo {
+  label: Resource
+  index: number
+
+  constructor(label: Resource, index: number) {
+    this.label = label
+    this.index = index
+  }
+}

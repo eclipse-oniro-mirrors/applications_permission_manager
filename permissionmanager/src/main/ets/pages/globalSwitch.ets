@@ -40,7 +40,7 @@ let bottomPopoverTypes = ['default', 'phone'];
 struct globalSwitch {
   private context = getContext(this) as common.ServiceExtensionContext;
 
-  privacyDialogController: CustomDialogController = new CustomDialogController({
+  privacyDialogController: CustomDialogController | null = new CustomDialogController({
     builder: globalDialog(),
     autoCancel: false,
     alignment: DialogAlignment.Center,
@@ -51,7 +51,9 @@ struct globalSwitch {
   build() {}
 
   aboutToAppear() {
-    this.privacyDialogController.open();
+    if (this.privacyDialogController !== null) {
+      this.privacyDialogController.open();
+    }
   }
 
   aboutToDisappear() {

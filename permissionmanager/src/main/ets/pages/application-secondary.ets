@@ -29,6 +29,9 @@ const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
+const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
+const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
+const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const allowedStatus = 0; // Status: Allowed
 const bannedStatus = 1; // Status: Banned
 
@@ -187,6 +190,7 @@ struct appNamePlusPage {
         }
       }
       let isGranted = true;
+      let folderStatus = [false, false, false];
       if (group === 'LOCATION' && !groupReqPermissons.includes(FUZZY_LOCATION_PERMISSION) && this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE) {
         isGranted = false;
       }
@@ -202,13 +206,32 @@ struct appNamePlusPage {
         if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
           isGranted = false;
         }
+        if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+          switch (permission) {
+            case DOWNLOAD_PERMISSION:
+              folderStatus[0] = true;
+              break;
+            case DESKTOP_PERMISSION:
+              folderStatus[1] = true;
+              break;
+            case DOCUMENTS_PERMISSION:
+             folderStatus[2] = true;
+             break;
+          }
+        }
       }
 
       if (isGranted) {
         this.allowedListItem.push(new permissionObj(groupName, groupReqPermissons, group));
       } else {
-        this.bannedListItem.push(new permissionObj(groupName, groupReqPermissons, group));
+        if (group === 'FOLDER' && folderStatus.includes(true)) {
+          this.allowedListItem.push(new permissionObj(groupName, groupReqPermissons, group));
+        } else {
+          this.bannedListItem.push(new permissionObj(groupName, groupReqPermissons, group));
+        }
       }
+
+      GlobalContext.store('folderStatus', folderStatus);
     }
   }
 
