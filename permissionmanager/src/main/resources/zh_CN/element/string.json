@@ -325,6 +325,10 @@
       "value": "剪贴板"
     },
     {
+      "name": "groupName_folder",
+      "value": "文件夹"
+    },
+    {
       "name": "multi_device_collaboration",
       "value": "多设备协同"
     },
@@ -403,6 +407,22 @@
     {
       "name": "group_label_pasteboard",
       "value": "访问剪贴板？"
+    },
+    {
+      "name": "group_label_folder",
+      "value": "访问文件夹？"
+    },
+    {
+      "name": "group_label_download_folder",
+      "value": "访问“下载”文件夹？"
+    },
+    {
+      "name": "group_label_desktop_folder",
+      "value": "访问“桌面”文件夹？"
+    },
+    {
+      "name": "group_label_document_folder",
+      "value": "访问“文档”文件夹？"
     },
     {
       "name": "enable_description_start_default",
@@ -489,6 +509,10 @@
       "value": "个应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
     },
     {
+      "name": "enable_description_end_folder",
+      "value": "个应用访问文件和文件夹。"
+    },
+    {
       "name": "forbidden_description_location",
       "value": "系统定位服务开关开启时，已禁止应用获取此设备的位置。"
     },
@@ -565,6 +589,10 @@
       "value": "已禁止应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
     },
     {
+      "name": "forbidden_description_folder",
+      "value": "已禁止应用访问文件和文件夹。"
+    },
+    {
       "name": "risk_warning",
       "value": "风险应用禁止获取该权限"
     },
@@ -611,6 +639,30 @@
     {
       "name": "Got_it",
       "value": "知道了"
+    },
+    {
+      "name": "Download",
+      "value": "下载"
+    },
+    {
+      "name": "Desktop",
+      "value": "桌面"
+    },
+    {
+      "name": "Document",
+      "value": "文档"
+    },
+    {
+      "name": "Download_folder",
+      "value": "下载文件夹"
+    },
+    {
+      "name": "Desktop_folder",
+      "value": "桌面文件夹"
+    },
+    {
+      "name": "Document_folder",
+      "value": "文档文件夹"
     }
   ]
 }

@@ -34,7 +34,7 @@ struct SecurityDialog {
   @LocalStorageLink('want') want: wantInfo = new wantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
 
-  securityDialogController: CustomDialogController = new CustomDialogController({
+  securityDialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomSecurityDialog(),
     alignment: DialogAlignment.Bottom,
     customStyle: true,
@@ -47,7 +47,9 @@ struct SecurityDialog {
   build() {}
 
   aboutToAppear() {
-    this.securityDialogController.open();
+    if (this.securityDialogController !== null) {
+      this.securityDialogController.open();
+    }
     want = this.want;
     win = this.win;
   }

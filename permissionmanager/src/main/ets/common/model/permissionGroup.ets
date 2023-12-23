@@ -42,7 +42,10 @@ export const permissionGroups: Array<PermissionInfo> = [
     new PermissionInfo("ohos.permission.GET_INSTALLED_BUNDLE_LIST", "GET_INSTALLED_BUNDLE_LIST", $r('sys.string.ohos_lab_get_installed_bundle_list'), 12),
     new PermissionInfo("ohos.permission.DISTRIBUTED_DATASYNC", "DISTRIBUTED_DATASYNC", $r("sys.string.ohos_lab_distributed_datasync"), 13),
     new PermissionInfo("ohos.permission.ACCESS_BLUETOOTH", "BLUETOOTH", $r('sys.string.ohos_lab_access_bluetooth'), 14),
-    new PermissionInfo("ohos.permission.READ_PASTEBOARD", "PASTEBOARD", $r('sys.string.ohos_lab_read_pasteboard'), 15)
+    new PermissionInfo("ohos.permission.READ_PASTEBOARD", "PASTEBOARD", $r('sys.string.ohos_lab_read_pasteboard'), 15),
+    new PermissionInfo("ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY", "FOLDER", $r('sys.string.ohos_lab_read_write_download_directory'), 16),
+    new PermissionInfo("ohos.permission.READ_WRITE_DESKTOP_DIRECTORY", "FOLDER", $r('sys.string.ohos_lab_read_write_desktop_directory'), 16),
+    new PermissionInfo("ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY", "FOLDER", $r('sys.string.ohos_lab_read_write_documents_directory'), 16)
 ]
 
 export const groups: Array<GroupInfo> = [
@@ -61,7 +64,8 @@ export const groups: Array<GroupInfo> = [
     new GroupInfo("GET_INSTALLED_BUNDLE_LIST", $r('app.string.groupName_appList'), $r('app.string.group_label_appList'), $r('app.media.ic_public_app_list'), [], '', ["ohos.permission.GET_INSTALLED_BUNDLE_LIST"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_appList"), $r("app.string.forbidden_description_appList")),
     new GroupInfo("DISTRIBUTED_DATASYNC", $r('app.string.multi_device_collaboration'), $r('app.string.group_label_distributed_datasync'), $r('app.media.ic_multi_device_vector'), [], '', ["ohos.permission.DISTRIBUTED_DATASYNC"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_distributed_datasync"), $r("app.string.forbidden_description_distributed_datasync")),
     new GroupInfo("BLUETOOTH", $r('app.string.groupName_bluetooth'), $r('app.string.group_label_bluetooth'), $r('app.media.ic_public_bluetooth'), [], '', ["ohos.permission.ACCESS_BLUETOOTH"], false, $r("app.string.enable_description_start_default"), $r("app.string.enable_description_end_bluetooth"), $r("app.string.forbidden_description_bluetooth")),
-    new GroupInfo("PASTEBOARD", $r('app.string.groupName_pasteboard'), $r('app.string.group_label_pasteboard'), $r('app.media.ic_clipboard'), [], '', ["ohos.permission.READ_PASTEBOARD"], false, $r("app.string.enable_description_start_default"), $r('app.string.enable_description_end_pasteboard'), $r('app.string.forbidden_description_pasteboard'))
+    new GroupInfo("PASTEBOARD", $r('app.string.groupName_pasteboard'), $r('app.string.group_label_pasteboard'), $r('app.media.ic_clipboard'), [], '', ["ohos.permission.READ_PASTEBOARD"], false, $r("app.string.enable_description_start_default"), $r('app.string.enable_description_end_pasteboard'), $r('app.string.forbidden_description_pasteboard')),
+    new GroupInfo("FOLDER", $r('app.string.groupName_folder'), $r('app.string.group_label_folder'), $r('app.media.ic_public_folder'), [], '', ["ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY", "ohos.permission.READ_WRITE_DESKTOP_DIRECTORY", "ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY"], false, $r("app.string.enable_description_start_default"), $r('app.string.enable_description_end_folder'), $r('app.string.forbidden_description_folder'))
 ];
 
 export const userGrantPermissions: string[] = [
@@ -91,7 +95,10 @@ export const userGrantPermissions: string[] = [
     "ohos.permission.GET_INSTALLED_BUNDLE_LIST",
     "ohos.permission.DISTRIBUTED_DATASYNC",
     "ohos.permission.ACCESS_BLUETOOTH",
-    "ohos.permission.READ_PASTEBOARD"
+    "ohos.permission.READ_PASTEBOARD",
+    "ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY",
+    "ohos.permission.READ_WRITE_DESKTOP_DIRECTORY",
+    "ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY"
 ];
 
 export const showSubpermissionsGrop: string[] = [
@@ -100,7 +107,8 @@ export const showSubpermissionsGrop: string[] = [
 ];
 
 export const polymorphismGroup: string[] = [
-    "LOCATION"
+    "LOCATION",
+    "FOLDER"
 ]
 
 export const globalGroup: string[] = [

@@ -41,6 +41,9 @@ import { LocationCanvas } from '../common/components/location';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const PASTE = 'ohos.permission.READ_PASTEBOARD';
+const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
+const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
+const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const fuzzyMarks = [Constants.LOCATION_FUZZY, Constants.LOCATION_BOTH_FUZZY, Constants.LOCATION_BOTH_PRECISE];
 const preciseMarks = [Constants.LOCATION_UPGRADE, Constants.LOCATION_BOTH_PRECISE];
 let bottomPopoverTypes = ['default', 'phone'];
@@ -56,7 +59,7 @@ struct dialogPlusPage {
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
   @State isUpdate: number = -1;
 
-  privacyDialogController: CustomDialogController = new CustomDialogController({
+  privacyDialogController: CustomDialogController | null = new CustomDialogController({
     builder: PermissionDialog({ isUpdate: $isUpdate }),
     autoCancel: false,
     alignment: DialogAlignment.Center,
@@ -68,7 +71,9 @@ struct dialogPlusPage {
   aboutToAppear() {
     win = this.win
     want = this.want
-    this.privacyDialogController.open();
+    if (this.privacyDialogController !== null) {
+      this.privacyDialogController.open();
+    }
   }
 
   aboutToDisappear() {
@@ -433,22 +438,41 @@ struct PermissionDialog {
         if (!userGrantPermissions.includes(permission)) {
           Log.info("permission not find:" + permission);
         } else {
-          let exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
-          //判断是否为需要展示子权限的权限组
-          if (showSubpermissionsGrop.indexOf(group.name) != -1) {
-            let label = getPermissionLabel(permission)
-            if (!exist) {
-              group.description.push(label);
-              this.grantGroups.push(group);
-            } else {
-              if (exist.description.indexOf(label) == -1) {
-                exist.description.push($r("app.string.and"));
-                exist.description.push(label);
-              }
+          if (group.name === 'FOLDER') {
+            switch (permission) {
+              case DOWNLOAD_PERMISSION:
+                let downloadGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_download_folder'),
+                  group.icon, group.description, group.reason, [DOWNLOAD_PERMISSION], group.isShow)
+                this.grantGroups.push(downloadGroup);
+                break;
+              case DESKTOP_PERMISSION:
+                let desktopGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_desktop_folder'),
+                  group.icon, group.description, group.reason, [DESKTOP_PERMISSION], group.isShow)
+                this.grantGroups.push(desktopGroup);
+                break;
+              case DOCUMENTS_PERMISSION:
+                let documentGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_document_folder'),
+                  group.icon, group.description, group.reason, [DOCUMENTS_PERMISSION], group.isShow)
+                this.grantGroups.push(documentGroup);
+                break;
             }
           } else {
-            if (!exist) {
-              this.grantGroups.push(group);
+            let exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
+            if (showSubpermissionsGrop.indexOf(group.name) != -1) {
+              let label = getPermissionLabel(permission)
+              if (!exist) {
+                group.description.push(label);
+                this.grantGroups.push(group);
+              } else {
+                if (exist.description.indexOf(label) == -1) {
+                  exist.description.push($r("app.string.and"));
+                  exist.description.push(label);
+                }
+              }
+            } else {
+              if (!exist) {
+                this.grantGroups.push(group);
+              }
             }
           }
         }

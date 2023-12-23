@@ -325,6 +325,10 @@
       "value": "Pasteboard"
     },
     {
+      "name": "groupName_folder",
+      "value": "Folder"
+    },
+    {
       "name": "multi_device_collaboration",
       "value": "Multi-device collaboration"
     },
@@ -403,6 +407,22 @@
     {
       "name": "group_label_pasteboard",
       "value": " access Pasteboard?"
+    },
+    {
+      "name": "group_label_folder",
+      "value": " access Folder?"
+    },
+    {
+      "name": "group_label_download_folder",
+      "value": " access the \"Downloads\" folder?"
+    },
+    {
+      "name": "group_label_desktop_folder",
+      "value": " access the \"Desktop\" folder?"
+    },
+    {
+      "name": "group_label_document_folder",
+      "value": " access the \"Document\" folder?"
     },
     {
       "name": "enable_description_start_default",
@@ -489,6 +509,10 @@
       "value": " apps have been allowed to read and write clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
     },
     {
+      "name": "enable_description_end_folder",
+      "value": " apps have been allowed to access files and folders."
+    },
+    {
       "name": "forbidden_description_location",
       "value": "When the system positioning service is enabled, applications are not allowed to obtain the location of the device."
     },
@@ -565,6 +589,10 @@
       "value": "Applications are prohibited from reading or writing clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
     },
     {
+      "name": "forbidden_description_folder",
+      "value": "Applications have been prevented from accessing files and folders."
+    },
+    {
       "name": "risk_warning",
       "value": "Risk application does not obtain this permission"
     },
@@ -611,6 +639,30 @@
     {
       "name": "Got_it",
       "value": "OK"
+    },
+    {
+      "name": "Download",
+      "value": "Download"
+    },
+    {
+      "name": "Desktop",
+      "value": "Desktop"
+    },
+    {
+      "name": "Document",
+      "value": "Document"
+    },
+    {
+      "name": "Download_folder",
+      "value": "Download folder"
+    },
+    {
+      "name": "Desktop_folder",
+      "value": "Desktop folder"
+    },
+    {
+      "name": "Document_folder",
+      "value": "Document folder"
     }
   ]
 }

@@ -22,13 +22,16 @@ import { BusinessError } from '@ohos.base';
 import { showSubpermissionsGrop } from "../common/model/permissionGroup";
 import { verifyAccessToken, getPermissionLabel } from "../common/utils/utils";
 import Constants from '../common/utils/constant';
-import { MediaDocObj, routerParams_3, appInfo } from '../common/utils/typedef';
+import { MediaDocObj, routerParams_3, appInfo, checkboxInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
+const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
+const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
+const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const PASTE = 'ohos.permission.READ_PASTEBOARD';
 let api: number = 0;
 let accessTokenId: number = 0;
@@ -41,6 +44,7 @@ struct mediaDocumentPage {
   private permissions: Permissions[] = (router.getParams() as routerParams_3).permission;
   private tokenId: number = (router.getParams() as routerParams_3).tokenId;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
+  @State folderStatus: boolean[] = GlobalContext.load('folderStatus');
   @State refresh: boolean = false;
   @State selected: number = 0; // Permission status array
   @State isRefreshReason: number = 0
@@ -58,7 +62,7 @@ struct mediaDocumentPage {
               }
               Row() {
                 Column() {
-                  mediaDocumentItem({ selected: $selected, isRefreshReason: $isRefreshReason })
+                  mediaDocumentItem({ selected: $selected, isRefreshReason: $isRefreshReason, folderStatus: $folderStatus })
                 }.width(Constants.FULL_WIDTH)
               }
               .margin({ top: Constants.TITLE_MARGIN_BOTTOM })
@@ -85,6 +89,7 @@ struct mediaDocumentPage {
     }
     console.log(TAG + 'Refresh permission status');
     let isGranted = true;
+    let folderStatus = [false, false, false];
     if (this.currentGroup === 'LOCATION' && !this.permissions.includes(FUZZY_LOCATION_PERMISSION) && api >= Constants.API_VERSION_SUPPORT_STAGE) {
       isGranted = false;
     }
@@ -101,8 +106,22 @@ struct mediaDocumentPage {
       if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         isGranted = false;
       }
+      if (this.currentGroup === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        switch (permission) {
+          case DOWNLOAD_PERMISSION:
+            folderStatus[0] = true;
+            break;
+          case DESKTOP_PERMISSION:
+            folderStatus[1] = true;
+            break;
+          case DOCUMENTS_PERMISSION:
+            folderStatus[2] = true;
+            break;
+        }
+      }
     }
     console.log(TAG + 'isGranted: ' + JSON.stringify(isGranted));
+    this.folderStatus = folderStatus;
 
     this.selected = isGranted ? Constants.PERMISSION_ALLOW : Constants.PERMISSION_BAN;
     if (this.currentGroup === 'PASTEBOARD') {
@@ -136,6 +155,7 @@ struct mediaDocumentItem {
   private status: number = (router.getParams() as routerParams_3).status;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State applicationInfo: appInfo = GlobalContext.load('applicationInfo');
+  @Link folderStatus: boolean[];
   @State mediaDocListItem: MediaDocObj[] = []; // Permission information array
   @Link selected: number;
   @State accurateIsOn: boolean = true;
@@ -143,6 +163,7 @@ struct mediaDocumentItem {
   @State isRisk: boolean = false; // Whether it is a risky application
   @State noForeground: boolean = false;
   @State isTouch: number = -1;
+  @State isCheck: string = '';
   @State reason: string = '';
   @State label: string = '';
   @State version: string = '';
@@ -197,6 +218,19 @@ struct mediaDocumentItem {
         this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
       }
     })
+  }
+
+  getCheckboxInfo(permission: Permissions): checkboxInfo {
+    switch (permission) {
+      case DOWNLOAD_PERMISSION:
+        return new checkboxInfo($r('app.string.Download_folder'), 0);
+      case DESKTOP_PERMISSION:
+        return new checkboxInfo($r('app.string.Desktop_folder'), 1);
+      case DOCUMENTS_PERMISSION:
+        return new checkboxInfo($r('app.string.Document_folder'), 2);
+      default:
+        return new checkboxInfo($r('app.string.Download_folder'), 0);
+    }
   }
 
   /**
@@ -389,58 +423,37 @@ struct mediaDocumentItem {
         left: Constants.TERTIARY_TEXT_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT})
       Column() {
         List() {
-          ForEach(this.mediaDocListItem, (item: MediaDocObj) => {
-            ListItem() {
-              Column() {
-                Row() {
-                  Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
-                    Row() {
-                      Text(item.name)
-                        .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                        .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                        .fontWeight(FontWeight.Medium)
-                        .flexGrow(Constants.FLEX_GROW)
-                      Radio({ value: 'Radio', group: 'radioGroup' })
-                        .checked(item.index === this.selected)
-                        .hitTestBehavior(HitTestMode.None)
-                        .height(Constants.SHAPE_DIA)
-                        .width(Constants.SHAPE_DIA)
-                    }
-                    .width(Constants.FULL_WIDTH)
-                    .height(Constants.LISTITEM_ROW_HEIGHT)
-                    .onClick(() => {
-                      this.selected = item.index;
-                      item.permissions.forEach((permission): boolean => {
-                        if (item.index === Constants.PERMISSION_ALLOW) {
-                          if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
-                            return false;
-                          }
-                          this.grantUserGrantedPermission(accessTokenId, permission);
-                        } else if (item.index === Constants.PERMISSION_BAN) {
-                          if ((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
-                            if (this.accurateIsOn) {
-                              this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
-                              this.accurateIsOn = false;
-                            }
-                          } else {
-                            this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
-                          }
-                        } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
-                          this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME);
-                        } else if (item.index === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE) {
-                          this.grantUserGrantedPermission(accessTokenId, permission);
-                          this.revokeUserGrantedPermission(accessTokenId, BACKGROUND_LOCATION_PERMISSION, Constants.PERMISSION_FLAG);
-                        }
-                        return true;
-                      })
-                    })
+          if (this.currentGroup === 'FOLDER') {
+            ForEach(this.permissions, (permission: Permissions) => {
+              ListItem() {
+                Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+                  Row() {
+                    Text(this.getCheckboxInfo(permission).label)
+                      .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                      .fontWeight(FontWeight.Medium)
+                      .flexGrow(Constants.FLEX_GROW)
+                    Checkbox()
+                      .select(this.folderStatus[this.getCheckboxInfo(permission).index])
+                      .hitTestBehavior(HitTestMode.None)
                   }
+                  .width(Constants.FULL_WIDTH)
+                  .height(Constants.LISTITEM_ROW_HEIGHT)
+                  .onClick(() => {
+                    if (this.folderStatus[this.getCheckboxInfo(permission).index]) {
+                      this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                      this.folderStatus[this.getCheckboxInfo(permission).index] = false;
+                    } else {
+                      this.grantUserGrantedPermission(accessTokenId, permission);
+                      this.folderStatus[this.getCheckboxInfo(permission).index] = true;
+                    }
+                  })
                 }
               }
-            }
-            .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-            .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
-            .linearGradient((this.isTouch === item.index) ? {
+              .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+              .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+              .margin({ top: Constants.TERTIARY_LISTITEM_MARGIN_TOP })
+              .linearGradient((this.isCheck === permission) ? {
                 angle: 90,
                 direction: GradientDirection.Right,
                 colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
@@ -449,19 +462,93 @@ struct mediaDocumentItem {
                 direction: GradientDirection.Right,
                 colors: []
               })
-            .onTouch(event => {
-              if (event === undefined) {
-                return;
+              .onTouch(event => {
+                if (event === undefined) {
+                  return;
+                }
+                if (event.type === TouchType.Down) {
+                  this.isCheck = permission;
+                }
+                if (event.type === TouchType.Up) {
+                  this.isCheck = '';
+                }
+              })
+            }, (permission: Permissions) => JSON.stringify(permission))
+          } else {
+            ForEach(this.mediaDocListItem, (item: MediaDocObj) => {
+              ListItem() {
+                Column() {
+                  Row() {
+                    Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+                      Row() {
+                        Text(item.name)
+                          .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+                          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                          .fontWeight(FontWeight.Medium)
+                          .flexGrow(Constants.FLEX_GROW)
+                        Radio({ value: 'Radio', group: 'radioGroup' })
+                          .checked(item.index === this.selected)
+                          .hitTestBehavior(HitTestMode.None)
+                          .height(Constants.SHAPE_DIA)
+                          .width(Constants.SHAPE_DIA)
+                      }
+                      .width(Constants.FULL_WIDTH)
+                      .height(Constants.LISTITEM_ROW_HEIGHT)
+                      .onClick(() => {
+                        this.selected = item.index;
+                        item.permissions.forEach((permission): boolean => {
+                          if (item.index === Constants.PERMISSION_ALLOW) {
+                            if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
+                              return false;
+                            }
+                            this.grantUserGrantedPermission(accessTokenId, permission);
+                          } else if (item.index === Constants.PERMISSION_BAN) {
+                            if ((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
+                              if (this.accurateIsOn) {
+                                this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                                this.accurateIsOn = false;
+                              }
+                            } else {
+                              this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                            }
+                          } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
+                            this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME);
+                          } else if (item.index === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE) {
+                            this.grantUserGrantedPermission(accessTokenId, permission);
+                            this.revokeUserGrantedPermission(accessTokenId, BACKGROUND_LOCATION_PERMISSION, Constants.PERMISSION_FLAG);
+                          }
+                          return true;
+                        })
+                      })
+                    }
+                  }
+                }
               }
-              if (event.type === TouchType.Down) {
-                this.isTouch = item.index;
-              }
-              if (event.type === TouchType.Up) {
-                this.isTouch = -1;
-              }
-            })
-            .margin({ top: Constants.TERTIARY_LISTITEM_MARGIN_TOP })
-          }, (item: MediaDocObj) => JSON.stringify(item))
+              .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
+              .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+              .linearGradient((this.isTouch === item.index) ? {
+                  angle: 90,
+                  direction: GradientDirection.Right,
+                  colors: [['#DCEAF9', 0.0], ['#FAFAFA', 1.0]]
+                } : {
+                  angle: 90,
+                  direction: GradientDirection.Right,
+                  colors: []
+                })
+              .onTouch(event => {
+                if (event === undefined) {
+                  return;
+                }
+                if (event.type === TouchType.Down) {
+                  this.isTouch = item.index;
+                }
+                if (event.type === TouchType.Up) {
+                  this.isTouch = -1;
+                }
+              })
+              .margin({ top: Constants.TERTIARY_LISTITEM_MARGIN_TOP })
+            }, (item: MediaDocObj) => JSON.stringify(item))
+          }
         }
         .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
         .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
