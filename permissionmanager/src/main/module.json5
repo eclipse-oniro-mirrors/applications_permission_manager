@@ -99,6 +99,9 @@
             },
             {
                 "name": "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
+            },
+            {
+                "name": "ohos.permission.LISTEN_BUNDLE_CHANGE"
             }
         ]
     }

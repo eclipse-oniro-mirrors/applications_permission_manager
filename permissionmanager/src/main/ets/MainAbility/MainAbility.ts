@@ -15,6 +15,7 @@
 
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundleManager from '@ohos.bundle.bundleManager';
+import bundleMonitor from '@ohos.bundle.bundleMonitor';
 import account_osAccount from '@ohos.account.osAccount';
 import { GlobalContext } from '../common/utils/globalContext';
 
@@ -34,6 +35,7 @@ export default class MainAbility extends UIAbility {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
     globalThis.windowStage = windowStage;
+    globalThis.refresh = false;
 
     if (globalThis.bundleName) {
       globalThis.currentApp = globalThis.bundleName;
@@ -42,6 +44,20 @@ export default class MainAbility extends UIAbility {
       globalThis.currentApp = 'all';
       this.getAllApplications();
     }
+    bundleMonitor.on('add', (bundleChangeInfo) => {
+      console.log(`${TAG} bundleMonitor.add: ${JSON.stringify(bundleChangeInfo)}`);
+      if (globalThis.currentApp === 'all') {
+        this.getAllApplications();
+        globalThis.refresh = true;
+      }
+    })
+    bundleMonitor.on('remove', (bundleChangeInfo) => {
+      console.log(`${TAG} bundleMonitor.remove: ${JSON.stringify(bundleChangeInfo)}`);
+      if (globalThis.currentApp === 'all') {
+        this.getAllApplications();
+        globalThis.refresh = true;
+      }
+    })
   }
 
   onNewWant(want): void {
@@ -56,6 +72,12 @@ export default class MainAbility extends UIAbility {
         globalThis.currentApp = bundleName;
         GlobalContext.store('bundleName', bundleName);
         this.getSperifiedApplication(bundleName);
+      } else {
+        if (globalThis.refresh === true) {
+          globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+          this.getAllApplications();
+          globalThis.refresh = false;
+        }
       }
     } else {
       if (bundleName === 'all') {
@@ -77,6 +99,8 @@ export default class MainAbility extends UIAbility {
   }
 
   onWindowStageDestroy(): void {
+    bundleMonitor.off('add');
+    bundleMonitor.off('remove');
     console.log(TAG + 'MainAbility onWindowStageDestroy.');
   }
 
