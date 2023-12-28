@@ -30,6 +30,7 @@ export struct LocationCanvas {
   build() {
     Column() {
       Image($r('app.media.img_location_map'))
+        .opacity($r('app.float.opacity_location'))
         .width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
         .scale({ x:  ((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE))
