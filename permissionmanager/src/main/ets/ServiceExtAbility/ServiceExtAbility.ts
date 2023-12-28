@@ -21,6 +21,7 @@ import dialogRequest from '@ohos.app.ability.dialogRequest';
 
 const TAG = 'PermissionManager_Log: ';
 const BG_COLOR = '#00000000';
+const DEFAULT_CORNER_RADIUS_L = 16;
 
 export default class ServiceExtensionAbility extends extension {
   /**
@@ -73,6 +74,7 @@ export default class ServiceExtensionAbility extends extension {
     rectInfo = rectInfo.width === 0 ? rect : rectInfo;
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
+      console.info(TAG + 'createWindow end.');
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         let windowNum = GlobalContext.load('windowNum');
@@ -83,12 +85,20 @@ export default class ServiceExtensionAbility extends extension {
           this.context.terminateSelf();
         }
       });
+      console.info(TAG + 'bindDialogTarget end.');
       await win.moveWindowTo(rectInfo.left, rectInfo.top);
+      console.info(TAG + 'moveWindowTo end.');
       await win.resize(rectInfo.width, rectInfo.height);
+      console.info(TAG + 'resize end.');
       await win.loadContent('pages/dialogPlus', storage);
-      await win.setWindowBackgroundColor(BG_COLOR);
+      win.setWindowBackgroundColor(BG_COLOR);
+      if (rectInfo.width < rect.width) {
+        win.setCornerRadius(DEFAULT_CORNER_RADIUS_L);
+      }
       await win.showWindow();
+      console.info(TAG + 'showWindow end.');
       await win.setWindowLayoutFullScreen(true);
+      console.info(TAG + 'setWindowLayoutFullScreen end.');
       globalThis.windowNum ++;
       GlobalContext.store('windowNum', globalThis.windowNum);
     } catch {
