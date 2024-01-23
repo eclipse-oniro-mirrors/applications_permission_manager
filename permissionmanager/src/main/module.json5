@@ -102,6 +102,9 @@
             },
             {
                 "name": "ohos.permission.LISTEN_BUNDLE_CHANGE"
+            },
+            {
+                "name": "ohos.permission.ACCESS_BUNDLE_DIR"
             }
         ]
     }
