@@ -389,8 +389,19 @@ struct PermissionDialog {
     let acManager = abilityAccessCtrl.createAtManager();
     group.permissions.forEach(async permission => {
       if (showSubpermissionsGrop.indexOf(group.name) == -1) {
-        if (!(this.locationFlag == Constants.LOCATION_UPGRADE && group.name == 'LOCATION') || permission == PRECISE_LOCATION_PERMISSION) {
+        if (group.name == 'LOCATION') {
+          if (permissionList.includes(permission) && this.locationFlag !== Constants.LOCATION_UPGRADE) {
+            try {
+              Log.info('revokeUserGrantedPermission' + permission)
+              await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
+            }
+            catch(err) {
+              Log.error("failed to revoke permission:" + permission);
+            }
+          }
+        } else {
           try {
+            Log.info('revokeUserGrantedPermission' + permission)
             await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
           }
           catch(err) {
@@ -400,6 +411,7 @@ struct PermissionDialog {
       } else {
         if (permissionList.includes(permission)) {
           try {
+            Log.info('revokeUserGrantedPermission' + permission)
             await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
           }
           catch(err) {
@@ -407,7 +419,6 @@ struct PermissionDialog {
           }
         }
       }
-      Log.info("revoke permission " + permission);
     })
     this.count ++;
   }
