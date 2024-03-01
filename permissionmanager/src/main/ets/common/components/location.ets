@@ -15,7 +15,8 @@
 
 import Constants from '../utils/constant';
 
-@Extend(Button) function locationButton() {
+@Extend (Button) function locationButton()
+{
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontWeight(FontWeight.Medium)
   .fontSize(Constants.TEXT_SMALLER_FONT_SIZE)
@@ -33,10 +34,18 @@ export struct LocationCanvas {
         .opacity($r('app.float.opacity_location'))
         .width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
-        .scale({ x:  ((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE))
+        .scale({
+          x: (
+               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+             )
           ? Constants.LOCATION_CANVAS_ZOOM_SCALE : Constants.LOCATION_CANVAS_INITIAL_SCALE,
-          y: ((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE))
-            ? Constants.LOCATION_CANVAS_ZOOM_SCALE : Constants.LOCATION_CANVAS_INITIAL_SCALE })
+          y: (
+               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+             )
+            ? Constants.LOCATION_CANVAS_ZOOM_SCALE : Constants.LOCATION_CANVAS_INITIAL_SCALE
+        })
         .animation({
           duration: Constants.LOCATION_ANIMATION_DURATION, // Animation duration
           curve: Curve.Smooth, // The animation curve
@@ -47,9 +56,22 @@ export struct LocationCanvas {
         .width(Constants.LOCATION_ICON_WIDTH)
         .height(Constants.LOCATION_ICON_HEIGHT)
         .position({ x: Constants.LOCATION_ICON_POSITION_X, y: Constants.LOCATION_ICON_POSITION_Y })
-        .opacity(((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)) ? 1 : 0)
-        .scale({ x: ((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)) ? 1 : 0.8,
-        y: ((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)) ? 1 : 0.8 })
+        .opacity(
+          (
+            (this.locationFlag == Constants.LOCATION_UPGRADE) ||
+            (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+          ) ? 1 : 0
+        )
+        .scale({
+          x: (
+               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+             ) ? 1 : 0.8,
+          y: (
+               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+             ) ? 1 : 0.8
+        })
         .animation({
           duration: Constants.LOCATION_ANIMATION_DURATION / 2, // Animation duration
           delay: this.locationFlag == Constants.LOCATION_BOTH_PRECISE ? (Constants.LOCATION_ANIMATION_DURATION / 2) : 0,
@@ -61,8 +83,16 @@ export struct LocationCanvas {
         .fill($r('app.color.location_circle_color'))
         .fillOpacity(Constants.LOCATION_CIRCLE_OPACITY)
         .stroke($r('app.color.location_circle_color'))
-        .scale({ x: ((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)) ? 0 : 1,
-          y: ((this.locationFlag == Constants.LOCATION_UPGRADE) || (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)) ? 0 : 1 })
+        .scale({
+          x: (
+               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+             ) ? 0 : 1,
+          y: (
+               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+             ) ? 0 : 1
+        })
         .animation({
           duration: Constants.LOCATION_ANIMATION_DURATION, // Animation duration
           curve: Curve.Smooth, // The animation curve

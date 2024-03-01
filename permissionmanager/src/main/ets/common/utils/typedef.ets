@@ -14,23 +14,38 @@
  */
 import { Permissions } from '@ohos.abilityAccessCtrl';
 
-export class appInfo {
-  bundleName: string
-  api: number
-  tokenId: number
-  icon: ResourceStr | PixelMap
-  iconId: number
-  iconResource: Resource
-  label: string
-  labelId: number
-  labelResource: Resource
-  permissions: Permissions[]
-  groupId: number[]
-  zhTag: string
-  indexTag: string
-  language: string
+export class AppInfo {
+  public bundleName: string
+  public api: number
+  public tokenId: number
+  public icon: ResourceStr | PixelMap
+  public iconId: number
+  public iconResource: Resource
+  public label: string
+  public labelId: number
+  public labelResource: Resource
+  public permissions: Permissions[]
+  public groupId: number[]
+  public zhTag: string
+  public indexTag: string
+  public language: string
 
-  constructor(bundleName: string, api: number, tokenId: number, icon: ResourceStr | PixelMap, iconId: number, iconResource: Resource, label: string, labelId: number, labelResource: Resource, permissions: Permissions[], groupId: number[], zhTag: string, indexTag: string, language: string) {
+  constructor(
+    bundleName: string,
+    api: number,
+    tokenId: number,
+    icon: ResourceStr | PixelMap,
+    iconId: number,
+    iconResource: Resource,
+    label: string,
+    labelId: number,
+    labelResource: Resource,
+    permissions: Permissions[],
+    groupId: number[],
+    zhTag: string,
+    indexTag: string,
+    language: string
+  ) {
     this.bundleName = bundleName
     this.api = api
     this.tokenId = tokenId
@@ -48,11 +63,11 @@ export class appInfo {
   }
 };
 
-export class permissionApplications {
-  permission: Permissions
-  groupName: string
-  bundleNames: string[]
-  icon: ResourceStr
+export class PermissionApplications {
+  public permission: Permissions
+  public groupName: string
+  public bundleNames: string[]
+  public icon: ResourceStr
 
   constructor(permission: Permissions, groupName: string, bundleNames: string[], icon: ResourceStr) {
     this.permission = permission
@@ -62,12 +77,12 @@ export class permissionApplications {
   }
 };
 
-export class groupPermission {
-  group: string
-  permissions: string[]
-  groupName: ResourceStr
-  icon: ResourceStr
-  isShow:boolean
+export class GroupPermission {
+  public group: string
+  public permissions: string[]
+  public groupName: ResourceStr
+  public icon: ResourceStr
+  public isShow:boolean
 
   constructor(group: string, permissions: string[], groupName: ResourceStr, icon: ResourceStr, isShow:boolean) {
     this.group = group
@@ -79,16 +94,27 @@ export class groupPermission {
 };
 
 export class ApplicationObj {
-  label: string
-  icon: ResourceStr | PixelMap
-  index: number
-  accessTokenId: number
-  permission: Permissions
-  zhTag: string
-  indexTag: string
-  language: string
-  bundleName?: string
-  constructor(label: string, icon: ResourceStr | PixelMap, index: number, accessTokenId: number, permission: Permissions, zhTag: string, indexTag: string, language: string, bundleName?: string,) {
+  public label: string
+  public icon: ResourceStr | PixelMap
+  public index: number
+  public accessTokenId: number
+  public permission: Permissions
+  public zhTag: string
+  public indexTag: string
+  public language: string
+  public bundleName?: string
+
+  constructor(
+    label: string,
+    icon: ResourceStr | PixelMap,
+    index: number,
+    accessTokenId: number,
+    permission: Permissions,
+    zhTag: string,
+    indexTag: string,
+    language: string,
+    bundleName?: string
+  ) {
     this.label = label
     this.icon = icon
     this.index = index
@@ -102,10 +128,11 @@ export class ApplicationObj {
 }
 
 export class CalendarObj {
-  permissionName: string
-  groupName: string
-  label: ResourceStr
-  index: number
+  public permissionName: string
+  public groupName: string
+  public label: ResourceStr
+  public index: number
+
   constructor(permissionName: string, groupName: string, label: ResourceStr, index: number) {
     this.permissionName = permissionName
     this.groupName = groupName
@@ -115,9 +142,10 @@ export class CalendarObj {
 }
 
 export class MediaDocObj {
-  name: Resource
-  permissions: Array<Permissions>
-  index: number
+  public name: Resource
+  public permissions: Array<Permissions>
+  public index: number
+
   constructor(name: Resource, permissions: Array<Permissions>, index: number) {
     this.name = name
     this.permissions = permissions
@@ -125,10 +153,11 @@ export class MediaDocObj {
   }
 }
 
-export class permissionObj {
-  groupName: ResourceStr;
-  permission: string[];
-  group: string;
+export class PermissionObj {
+  public groupName: ResourceStr;
+  public permission: string[];
+  public group: string;
+
   constructor(groupName: ResourceStr, permission: string[], group: string) {
     this.groupName = groupName;
     this.permission = permission;
@@ -137,24 +166,32 @@ export class permissionObj {
 }
 
 export class StringObj {
-  morning: string
-  afternoon: string
+  public morning: string
+  public afternoon: string
   constructor(morning: string, afternoon: string) {
     this.morning = morning
     this.afternoon = afternoon
   }
 }
 
-export class appInfoSimple {
-  bundleName: string
-  api: number
-  tokenId: number
-  icon: ResourceStr | PixelMap
-  label: ResourceStr
-  permissions: Array<string>
-  groupId: Array<number>
+export class AppInfoSimple {
+  public bundleName: string
+  public api: number
+  public tokenId: number
+  public icon: ResourceStr | PixelMap
+  public label: ResourceStr
+  public permissions: Array<string>
+  public groupId: Array<number>
 
-  constructor(bundleName: string, api: number, tokenId: number, icon: ResourceStr | PixelMap, label: ResourceStr, permissions: Array<string>, groupId: Array<number>) {
+  constructor(
+    bundleName: string,
+    api: number,
+    tokenId: number,
+    icon: ResourceStr | PixelMap,
+    label: ResourceStr,
+    permissions: Array<string>,
+    groupId: Array<number>
+  ) {
     this.bundleName = bundleName
     this.api = api
     this.tokenId = tokenId
@@ -165,9 +202,9 @@ export class appInfoSimple {
   }
 }
 
-export class param {
-  icon: Resource
-  label: Resource
+export class Param {
+  public icon: Resource
+  public label: Resource
 
   constructor(icon: Resource, label: Resource) {
     this.icon = icon
@@ -175,9 +212,9 @@ export class param {
   }
 };
 
-export class otherPermission {
-  permissionLabel: ResourceStr
-  permission: string
+export class OtherPermission {
+  public permissionLabel: ResourceStr
+  public permission: string
 
   constructor(permissionLabel: ResourceStr, permission: string) {
     this.permissionLabel = permissionLabel
@@ -186,39 +223,59 @@ export class otherPermission {
 }
 
 export class PermissionInfo {
-  permissionName: string
-  groupName: string
-  label: ResourceStr
-  groupId: number
-  enable_description_start?: ResourceStr
-  enable_description_end?: ResourceStr
-  forbidden_description?: ResourceStr
+  public permissionName: string
+  public groupName: string
+  public label: ResourceStr
+  public groupId: number
+  public enableDescriptionStart?: ResourceStr
+  public enableDescriptionEnd?: ResourceStr
+  public forbiddenDescription?: ResourceStr
 
-  constructor(permissionName: string, groupName: string, label: ResourceStr, groupId: number, enable_description_start?: ResourceStr, enable_description_end?: ResourceStr, forbidden_description?: ResourceStr,) {
+  constructor(
+    permissionName: string,
+    groupName: string,
+    label: ResourceStr,
+    groupId: number,
+    enableDescriptionStart?: ResourceStr,
+    enableDescriptionEnd?: ResourceStr,
+    forbiddenDescription?: ResourceStr
+  ) {
     this.permissionName = permissionName;
     this.groupName = groupName;
     this.label = label;
     this.groupId = groupId;
-    this.enable_description_start = enable_description_start;
-    this.enable_description_end = enable_description_end;
-    this.forbidden_description = forbidden_description;
+    this.enableDescriptionStart = enableDescriptionStart;
+    this.enableDescriptionEnd = enableDescriptionEnd;
+    this.forbiddenDescription = forbiddenDescription;
   }
 }
 
 export class GroupInfo {
-  name: string
-  groupName: ResourceStr
-  label: ResourceStr
-  icon: ResourceStr
-  description: Array<ResourceStr>
-  reason: string
-  permissions: Array<Permissions>
-  isShow: boolean
-  enable_description_start?: ResourceStr
-  enable_description_end?: ResourceStr
-  forbidden_description?: ResourceStr
+  public name: string
+  public groupName: ResourceStr
+  public label: ResourceStr
+  public icon: ResourceStr
+  public description: Array<ResourceStr>
+  public reason: string
+  public permissions: Array<Permissions>
+  public isShow: boolean
+  public enableDescriptionStart?: ResourceStr
+  public enableDescriptionEnd?: ResourceStr
+  public forbiddenDescription?: ResourceStr
 
-  constructor(name: string, groupName: ResourceStr, label: ResourceStr, icon: ResourceStr, description: Array<ResourceStr>, reason: string, permissions: Array<Permissions>, isShow: boolean, enable_description_start?: ResourceStr, enable_description_end?: ResourceStr, forbidden_description?: ResourceStr) {
+  constructor(
+    name: string,
+    groupName: ResourceStr,
+    label: ResourceStr,
+    icon: ResourceStr,
+    description: Array<ResourceStr>,
+    reason: string,
+    permissions: Array<Permissions>,
+    isShow: boolean,
+    enableDescriptionStart?: ResourceStr,
+    enableDescriptionEnd?: ResourceStr,
+    forbiddenDescription?: ResourceStr
+  ) {
     this.name = name;
     this.groupName = groupName;
     this.label = label;
@@ -227,25 +284,35 @@ export class GroupInfo {
     this.reason = reason;
     this.permissions = permissions;
     this.isShow = isShow;
-    this.enable_description_start = enable_description_start;
-    this.enable_description_end = enable_description_end;
-    this.forbidden_description = forbidden_description;
+    this.enableDescriptionStart = enableDescriptionStart;
+    this.enableDescriptionEnd = enableDescriptionEnd;
+    this.forbiddenDescription = forbiddenDescription;
   }
 }
 
-export class appRecordInfo {
-  groupName: ResourceStr
-  icon: ResourceStr | PixelMap
-  name: string
-  api: number
-  accessTokenId: number
-  reqUserPermissions: string[]
-  permissions: appGroupRecordInfo[]
-  groupNames: ResourceStr[]
-  groupIds: number[]
-  appLastTime: number
+export class AppRecordInfo {
+  public groupName: ResourceStr
+  public icon: ResourceStr | PixelMap
+  public name: string
+  public api: number
+  public accessTokenId: number
+  public reqUserPermissions: string[]
+  public permissions: AppGroupRecordInfo[]
+  public groupNames: ResourceStr[]
+  public groupIds: number[]
+  public appLastTime: number
 
-  constructor(groupName: ResourceStr, icon: ResourceStr | PixelMap, name: string, api: number, accessTokenId: number, reqUserPermissions: string[], permissions: appGroupRecordInfo[], groupNames: ResourceStr[], groupIds: number[], appLastTime: number) {
+  constructor(
+    groupName: ResourceStr,
+    icon: ResourceStr | PixelMap,
+    name: string, api: number,
+    accessTokenId: number,
+    reqUserPermissions: string[],
+    permissions: AppGroupRecordInfo[],
+    groupNames: ResourceStr[],
+    groupIds: number[],
+    appLastTime: number
+  ) {
     this.groupName = groupName
     this.icon = icon
     this.name = name
@@ -260,15 +327,23 @@ export class appRecordInfo {
 }
 
 export class GroupRecordInfo {
-  name: string
-  groupName: ResourceStr
-  label: ResourceStr
-  icon: ResourceStr
-  permissions: Array<Permissions>
-  sum: number
-  recentVisit: number
+  public name: string
+  public groupName: ResourceStr
+  public label: ResourceStr
+  public icon: ResourceStr
+  public permissions: Array<Permissions>
+  public sum: number
+  public recentVisit: number
 
-  constructor(name: string, groupName: ResourceStr, label: ResourceStr, icon: ResourceStr, permissions: Array<Permissions>, sum: number, recentVisit: number) {
+  constructor(
+    name: string,
+    groupName: ResourceStr,
+    label: ResourceStr,
+    icon: ResourceStr,
+    permissions: Array<Permissions>,
+    sum: number,
+    recentVisit: number
+  ) {
     this.name = name;
     this.groupName = groupName;
     this.label = label;
@@ -279,15 +354,22 @@ export class GroupRecordInfo {
   }
 }
 
-export class appGroupRecordInfo {
-  name: string
-  groupName: ResourceStr
-  label: ResourceStr
-  icon: ResourceStr
-  count: number
-  lastTime: number
+export class AppGroupRecordInfo {
+  public name: string
+  public groupName: ResourceStr
+  public label: ResourceStr
+  public icon: ResourceStr
+  public count: number
+  public lastTime: number
 
-  constructor(name: string, groupName: ResourceStr, label: ResourceStr, icon: ResourceStr, count: number, lastTime: number) {
+  constructor(
+    name: string,
+    groupName: ResourceStr,
+    label: ResourceStr,
+    icon: ResourceStr,
+    count: number,
+    lastTime: number
+  ) {
     this.name = name;
     this.groupName = groupName;
     this.label = label;
@@ -297,13 +379,13 @@ export class appGroupRecordInfo {
   }
 }
 
-export class routerParams_1 {
-  list: permissionApplications[]
-  backTitle: ResourceStr
-  group: string
-  globalIsOn: boolean
+export class RouterParams_1 {
+  public list: PermissionApplications[]
+  public backTitle: ResourceStr
+  public group: string
+  public globalIsOn: boolean
 
-  constructor(list: permissionApplications[], backTitle: ResourceStr, group: string, globalIsOn: boolean) {
+  constructor(list: PermissionApplications[], backTitle: ResourceStr, group: string, globalIsOn: boolean) {
     this.list = list
     this.backTitle = backTitle
     this.group = group
@@ -311,24 +393,24 @@ export class routerParams_1 {
   }
 }
 
-export class routerParams_2 {
-  list: permissionApplications[]
-  backTitle: ResourceStr
-  permissionName: string
+export class RouterParams_2 {
+  public list: PermissionApplications[]
+  public backTitle: ResourceStr
+  public permissionName: string
 
-  constructor(list: permissionApplications[], backTitle: ResourceStr, permissionName: string) {
+  constructor(list: PermissionApplications[], backTitle: ResourceStr, permissionName: string) {
     this.list = list
     this.backTitle = backTitle
     this.permissionName = permissionName
   }
 }
 
-export class routerParams_3 {
-  bundleName: string
-  backTitle: ResourceStr
-  permission: Permissions[]
-  status: number
-  tokenId: number
+export class RouterParams_3 {
+  public bundleName: string
+  public backTitle: ResourceStr
+  public permission: Permissions[]
+  public status: number
+  public tokenId: number
 
   constructor(bundleName: string, backTitle: ResourceStr, permission: Permissions[], status: number, tokenId: number) {
     this.bundleName = bundleName
@@ -339,17 +421,17 @@ export class routerParams_3 {
   }
 }
 
-export class wantInfo {
-  parameters: Object[]
+export class WantInfo {
+  public parameters: Object[]
 
   constructor(parameters: Object[]) {
     this.parameters = parameters
   }
 }
 
-export class checkboxInfo {
-  label: Resource
-  index: number
+export class CheckboxInfo {
+  public label: Resource
+  public index: number
 
   constructor(label: Resource, index: number) {
     this.label = label

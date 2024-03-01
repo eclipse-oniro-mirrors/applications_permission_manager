@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import { backBar } from "../common/components/backBar";
+import { backBar } from '../common/components/backBar';
 import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { BusinessError } from '@ohos.base';
-import { groups, userGrantPermissions } from "../common/model/permissionGroup";
+import { groups, userGrantPermissions } from '../common/model/permissionGroup';
 import Constants from '../common/utils/constant';
-import { verifyAccessToken, getGroupIdByPermission } from "../common/utils/utils";
-import { permissionObj, appInfo } from '../common/utils/typedef';
+import { verifyAccessToken, getGroupIdByPermission } from '../common/utils/utils';
+import { PermissionObj, AppInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_MainAbility:';
@@ -39,14 +39,14 @@ const bannedStatus = 1; // Status: Banned
 @Component
 struct appNamePlusPage {
   private context = getContext(this) as common.UIAbilityContext;
-  @State allowedListItem: permissionObj[] = []; // Array of allowed permissions
-  @State bannedListItem: permissionObj[] = []; // array of forbidden permissions
-  @State applicationInfo: appInfo = GlobalContext.load('applicationInfo'); // Routing jump data
+  @State allowedListItem: PermissionObj[] = []; // Array of allowed permissions
+  @State bannedListItem: PermissionObj[] = []; // array of forbidden permissions
+  @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo'); // Routing jump data
   @State bundleName: string = GlobalContext.load('bundleName');
   @State label: string = '';
   @State isTouch: string = '';
 
-  @Builder ListItemLayout(item: permissionObj, status: number) {
+  @Builder ListItemLayout(item: PermissionObj, status: number) {
     ListItem() {
       Row() {
         Column() {
@@ -70,7 +70,7 @@ struct appNamePlusPage {
         }.onClick(() => {
           GlobalContext.store('currentPermissionGroup', item.group);
           router.pushUrl({
-            url: item.group == "OTHER" ? 'pages/other-permissions' : 'pages/application-tertiary',
+            url: item.group == 'OTHER' ? 'pages/other-permissions' : 'pages/application-tertiary',
             params: {
               bundleName: this.applicationInfo.bundleName,
               backTitle: item.groupName,
@@ -82,7 +82,7 @@ struct appNamePlusPage {
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
     .linearGradient((this.isTouch === item.group) ? {
         angle: 90,
         direction: GradientDirection.Right,
@@ -90,7 +90,7 @@ struct appNamePlusPage {
       } : {
         angle: 90,
         direction: GradientDirection.Right,
-        colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+        colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
       })
     .onTouch(event => {
       if (event === undefined) {
@@ -105,7 +105,7 @@ struct appNamePlusPage {
     })
   }
 
-  async initApplicationInfo(info: appInfo) {
+  async initApplicationInfo(info: AppInfo) {
     console.info(TAG + `labelResource: ` + JSON.stringify(info.labelResource));
     let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
 
@@ -147,8 +147,7 @@ struct appNamePlusPage {
           if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
-        }
-        catch(err) {
+        } catch (err) {
           console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         }
         reqUserPermissions.push(permission);
@@ -191,12 +190,18 @@ struct appNamePlusPage {
       }
       let isGranted = true;
       let folderStatus = [false, false, false];
-      if (group === 'LOCATION' && !groupReqPermissons.includes(FUZZY_LOCATION_PERMISSION) && this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE) {
+      if (
+        group === 'LOCATION' &&
+        !groupReqPermissons.includes(FUZZY_LOCATION_PERMISSION) &&
+        this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE
+      ) {
         isGranted = false;
       }
       for (let i = 0; i < groupReqPermissons.length; i++) {
         let permission = groupReqPermissons[i];
-        if (this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
+        if (
+          this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION
+        ) {
           continue;
         }
         if (permission == BACKGROUND_LOCATION_PERMISSION) {
@@ -222,12 +227,12 @@ struct appNamePlusPage {
       }
 
       if (isGranted) {
-        this.allowedListItem.push(new permissionObj(groupName, groupReqPermissons, group));
+        this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
       } else {
         if (group === 'FOLDER' && folderStatus.includes(true)) {
-          this.allowedListItem.push(new permissionObj(groupName, groupReqPermissons, group));
+          this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
         } else {
-          this.bannedListItem.push(new permissionObj(groupName, groupReqPermissons, group));
+          this.bannedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
         }
       }
 
@@ -241,7 +246,9 @@ struct appNamePlusPage {
   onPageShow() {
     console.log(TAG + 'onPageShow application-secondary');
     this.initialPermissions();
-    bundleManager.getApplicationInfo(this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(appInfo => {
+    bundleManager.getApplicationInfo(
+      this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT
+    ).then(appInfo => {
       let bundleContext = this.context.createBundleContext(this.applicationInfo.bundleName)
       bundleContext.resourceManager.getStringValue(appInfo.labelId, (error, value) => {
         if (value) {
@@ -256,11 +263,13 @@ struct appNamePlusPage {
   }
 
   build() {
-    Column(){
+    Column() {
       GridRow({ gutter: Constants.GUTTER, columns: {
         xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
-        GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
-          offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
+        GridCol({
+          span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+          offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET }
+        }) {
           Row() {
             Column() {
               Row() {
@@ -298,7 +307,10 @@ struct appNamePlusPage {
                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                       .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                     }.margin({ top: Constants.ROW_MARGIN_TOP })
-                     .padding({ left: Constants.SECONDARY_LIST_PADDING_LEFT, right: Constants.SECONDARY_LIST_PADDING_RIGHT })
+                     .padding({
+                       left: Constants.SECONDARY_LIST_PADDING_LEFT,
+                       right: Constants.SECONDARY_LIST_PADDING_RIGHT
+                     })
                   } else {
                     Scroll() {
                       List() {
@@ -319,9 +331,9 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               List() {
-                                ForEach(this.allowedListItem, (item: permissionObj) => {
+                                ForEach(this.allowedListItem, (item: PermissionObj) => {
                                   this.ListItemLayout(item, Constants.RADIO_ALLOW_INDEX)
-                                }, (item: permissionObj) => JSON.stringify(item))
+                                }, (item: PermissionObj) => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                               .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
@@ -356,9 +368,9 @@ struct appNamePlusPage {
                           ListItem() {
                             Row() {
                               List() {
-                                ForEach(this.bannedListItem, (item: permissionObj) => {
+                                ForEach(this.bannedListItem, (item: PermissionObj) => {
                                   this.ListItemLayout(item, Constants.RADIO_BAN_INDEX)
-                                }, (item: permissionObj) => JSON.stringify(item))
+                                }, (item: PermissionObj) => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                               .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
@@ -388,9 +400,9 @@ struct appNamePlusPage {
           }
           .height(Constants.FULL_HEIGHT)
           .width(Constants.FULL_WIDTH)
-          .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+          .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
         }
-      }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+      }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
     }
   }
 }

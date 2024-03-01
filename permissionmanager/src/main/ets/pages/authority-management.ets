@@ -13,19 +13,19 @@
  * limitations under the License.
  */
 
-import { backBar } from "../common/components/backBar";
-import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
-import { textInput } from "../common/components/search";
+import { backBar } from '../common/components/backBar';
+import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
+import { textInput } from '../common/components/search';
 import router from '@ohos.router';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
-import { groups, userGrantPermissions, globalGroup, permissionGroups, showSubpermissionsGrop } from "../common/model/permissionGroup";
-import { indexValue, getPermissionGroupByName, getGroupIdByPermission, addLocalTag, sortByName } from "../common/utils/utils";
-import { appInfo, permissionApplications, groupPermission, GroupInfo } from "../common/utils/typedef";
-import { GlobalContext } from "../common/utils/globalContext";
+import { groups, userGrantPermissions, globalGroup, permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup';
+import { indexValue, getPermissionGroupByName, getGroupIdByPermission, addLocalTag, sortByName } from '../common/utils/utils';
+import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/utils/typedef';
+import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import bundleManager from '@ohos.bundle.bundleManager';
 
@@ -34,7 +34,8 @@ const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 let storage = LocalStorage.getShared();
 
-@Extend(Image) function customizeImage(width: number, height: number) {
+@Extend (Image) function customizeImage(width: number, height: number)
+{
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
@@ -44,7 +45,7 @@ let storage = LocalStorage.getShared();
 @Entry(storage)
 @Component
 struct authorityManagementPage {
-  @Builder ListItemLayout(item: groupPermission) {
+  @Builder ListItemLayout(item: GroupPermission) {
     ListItem() {
       Row() {
         Column() {
@@ -81,7 +82,7 @@ struct authorityManagementPage {
             if (globalGroup.indexOf(item.group) == -1) {
               router.pushUrl({
                 url: 'pages/authority-tertiary-groups',
-                params: { list: dataList, backTitle: item.groupName  }
+                params: { list: dataList, backTitle: item.groupName }
               })
             } else {
               if (item.group == 'MICROPHONE') {
@@ -111,7 +112,7 @@ struct authorityManagementPage {
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
     .linearGradient((this.isTouch === item.group) ? {
         angle: 90,
         direction: GradientDirection.Right,
@@ -119,7 +120,7 @@ struct authorityManagementPage {
       } : {
         angle: 90,
         direction: GradientDirection.Right,
-        colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+        colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
       })
     .onTouch(event => {
       if (event === undefined) {
@@ -136,19 +137,26 @@ struct authorityManagementPage {
 
   private context = getContext(this) as common.UIAbilityContext;
   @LocalStorageLink('initialGroups') initialGroups: bundleManager.BundleInfo[] = [];
-  @State allPermissionApplications: permissionApplications [] = []; // All app permissions
-  @State allGroupPermission: groupPermission[] = []; // All group permissions
+  @State allPermissionApplications: PermissionApplications [] = []; // All app permissions
+  @State allGroupPermission: GroupPermission[] = []; // All group permissions
   @State allUserPermissions: Permissions[] = [];
-  @State allBundleInfo: appInfo[] = [];
+  @State allBundleInfo: AppInfo[] = [];
   @State allGroups: string[] = [];
   @State currentIndex: number = 0;
   @State isTouch: string = '';
   @State isVertical: boolean = true;
   @Builder TabBuilder(index: number) {
-    Flex({ alignItems: index ? ItemAlign.Start : ItemAlign.End, justifyContent: FlexAlign.Center, direction: FlexDirection.Column }) {
+    Flex({
+      alignItems: index ? ItemAlign.Start : ItemAlign.End,
+      justifyContent: FlexAlign.Center, direction: FlexDirection.Column
+    }) {
       Text(index ? $r('app.string.application') : $r('app.string.permission'))
         .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-        .fontColor(this.currentIndex == index ? $r('sys.color.ohos_id_color_subtab_text_on') : $r('sys.color.ohos_id_color_secondary'))
+        .fontColor(
+          this.currentIndex == index ?
+          $r('sys.color.ohos_id_color_subtab_text_on') :
+          $r('sys.color.ohos_id_color_secondary')
+        )
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
         .baselineOffset(Constants.TAB_DECORATION_POSITION_Y)
@@ -198,7 +206,7 @@ struct authorityManagementPage {
    * Get all permission label
    */
   getLabelAndIcon() {
-    this.allBundleInfo.forEach((bundleInfo: appInfo) => {
+    this.allBundleInfo.forEach((bundleInfo: AppInfo) => {
       this.updateAppLabel(bundleInfo);
       this.updateAppIcon(bundleInfo);
     })
@@ -218,7 +226,7 @@ struct authorityManagementPage {
           bundleNames.push(this.allBundleInfo[j].bundleName);
         }
       }
-      let pa: permissionApplications = new permissionApplications(permission, permissionGroup.name, bundleNames, icon);
+      let pa: PermissionApplications = new PermissionApplications(permission, permissionGroup.name, bundleNames, icon);
       this.allPermissionApplications.push(pa);
     }
   }
@@ -241,7 +249,9 @@ struct authorityManagementPage {
     // Permission layout
     for (let i = 0; i < this.allGroups.length; i++) {
       let group = getPermissionGroupByName(this.allGroups[i]);
-      let gp: groupPermission = new groupPermission(this.allGroups[i], group.permissions, group.groupName, group.icon, group.isShow)
+      let gp: GroupPermission = new GroupPermission(
+        this.allGroups[i], group.permissions, group.groupName, group.icon, group.isShow
+      );
       this.allGroupPermission.push(gp);
     }
   }
@@ -252,7 +262,7 @@ struct authorityManagementPage {
    */
   async deduplicationPermissions(info: bundleManager.BundleInfo) {
     console.log(TAG + 'allBundleInfo start: ' + info.name);
-    let reqPermissions: Array<Permissions> = [];
+    let reqPermissions: Permissions[] = [];
     info.reqPermissionDetails.forEach(item => {
       reqPermissions.push(item.name as Permissions);
     })
@@ -266,7 +276,11 @@ struct authorityManagementPage {
         if ((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
           continue;
         }
-        if ((info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION) && !reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
+        if (
+          (info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) &&
+          (permission == PRECISE_LOCATION_PERMISSION) &&
+          !reqPermissions.includes(FUZZY_LOCATION_PERMISSION)
+        ) {
           continue;
         }
         try {
@@ -275,8 +289,7 @@ struct authorityManagementPage {
           if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
-        }
-        catch(err) {
+        } catch (err) {
           console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         }
         if (userGrantPermissions.indexOf(permission) != -1) {
@@ -295,7 +308,7 @@ struct authorityManagementPage {
       }
     }
 
-    let ap: appInfo = new appInfo(
+    let ap: AppInfo = new AppInfo(
       info.name,
       info.targetVersion,
       info.appInfo.accessTokenId,
@@ -321,8 +334,12 @@ struct authorityManagementPage {
    * @param {String} bundleName Package names
    * @param {String} labelName Application Name
    */
-  async updateAppLabel(info: appInfo) {
-    console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `labelResource: ` + JSON.stringify(info.labelResource) + 'labelId: ' + JSON.stringify(info.labelId));
+  async updateAppLabel(info: AppInfo) {
+    console.info(
+      TAG + 'bundleName: ' + JSON.stringify(info.bundleName) +
+      `labelResource: ` + JSON.stringify(info.labelResource) +
+      'labelId: ' + JSON.stringify(info.labelId)
+    );
 
     try {
       if (info.labelResource.id !== 0) {
@@ -332,7 +349,7 @@ struct authorityManagementPage {
         info.label = await resourceManager.getStringValue(info.labelId);
       }
     } catch (error) {
-      console.error(TAG + "getStringValue promise error is " + error);
+      console.error(TAG + 'getStringValue promise error is ' + error);
     }
     addLocalTag(info);
   }
@@ -342,8 +359,12 @@ struct authorityManagementPage {
    * @param {Number} index index of all app permissions array
    * @param {String} bundleName Package names
    */
-  async updateAppIcon(info: appInfo) {
-    console.info(TAG + 'bundleName: ' + JSON.stringify(info.bundleName) + `iconResource: ` + JSON.stringify(info.iconResource) + 'iconId: ' + JSON.stringify(info.iconId));
+  async updateAppIcon(info: AppInfo) {
+    console.info(
+      TAG + 'bundleName: ' + JSON.stringify(info.bundleName) +
+      `iconResource: ` + JSON.stringify(info.iconResource) +
+      'iconId: ' + JSON.stringify(info.iconId)
+    );
 
     try {
       if (info.iconResource.id !== 0) {
@@ -374,13 +395,13 @@ struct authorityManagementPage {
     GlobalContext.store('isVertical', dis.height > dis.width ? true : false);
   }
 
-  getPermissionGroup(allGroup: groupPermission[], order: number): groupPermission[] {
+  getPermissionGroup(allGroup: GroupPermission[], order: number): GroupPermission[] {
     let fixedName: string[] = ['LOCATION', 'CAMERA', 'MICROPHONE'];
     let extraName: string[] = ['ADS'];
-    let fixedGroup: groupPermission[] = [];
-    let extraGroup: groupPermission[] = [];
-    let changeGroup: groupPermission[] = [];
-    let otherGroup: groupPermission[] = [];
+    let fixedGroup: GroupPermission[] = [];
+    let extraGroup: GroupPermission[] = [];
+    let changeGroup: GroupPermission[] = [];
+    let otherGroup: GroupPermission[] = [];
 
     allGroup.forEach(group => {
       if (fixedName.indexOf(group.group) !== -1) {
@@ -394,7 +415,7 @@ struct authorityManagementPage {
       }
     })
 
-    if (order == Constants.FIXED_GROUP){
+    if (order == Constants.FIXED_GROUP) {
       return fixedGroup;
     } else if (order == Constants.CHANGE_GROUP) {
       return changeGroup;
@@ -409,8 +430,10 @@ struct authorityManagementPage {
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
-        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
+      GridCol({
+        span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET }
+      }) {
         Row() {
           Column() {
             Row() {
@@ -420,7 +443,7 @@ struct authorityManagementPage {
               Column() {
                 Column() {
                   Stack() {
-                    if(this.allGroupPermission.length) {
+                    if (this.allGroupPermission.length) {
                       Tabs() {
                         TabContent() {
                           Row() {
@@ -430,9 +453,11 @@ struct authorityManagementPage {
                                   List() {
                                     ListItem() {
                                       List() {
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP), (item: groupPermission) => {
-                                          this.ListItemLayout(item)
-                                        }, (item: groupPermission) => JSON.stringify(item))
+                                        ForEach(
+                                          this.getPermissionGroup(this.allGroupPermission, Constants.FIXED_GROUP),
+                                          (item: GroupPermission) => { this.ListItemLayout(item) },
+                                          (item: GroupPermission) => JSON.stringify(item)
+                                        )
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
@@ -447,9 +472,11 @@ struct authorityManagementPage {
 
                                     ListItem() {
                                       List() {
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP), (item: groupPermission) => {
-                                          this.ListItemLayout(item)
-                                        }, (item: groupPermission) => JSON.stringify(item))
+                                        ForEach(
+                                          this.getPermissionGroup(this.allGroupPermission, Constants.CHANGE_GROUP),
+                                          (item: GroupPermission) => { this.ListItemLayout(item) },
+                                          (item: GroupPermission) => JSON.stringify(item)
+                                        )
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
@@ -462,12 +489,16 @@ struct authorityManagementPage {
                                       })
                                     }
 
-                                    if(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length) {
+                                    if (
+                                      this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP).length
+                                    ) {
                                       ListItem() {
                                         List() {
-                                          ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP), (item: groupPermission) => {
-                                            this.ListItemLayout(item)
-                                          }, (item: groupPermission) => JSON.stringify(item))
+                                          ForEach(
+                                            this.getPermissionGroup(this.allGroupPermission, Constants.EXTRA_GROUP),
+                                            (item: GroupPermission) => { this.ListItemLayout(item) },
+                                            (item: GroupPermission) => JSON.stringify(item)
+                                          )
                                         }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                         .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                         .padding(Constants.LIST_PADDING_TOP)
@@ -483,9 +514,11 @@ struct authorityManagementPage {
 
                                     ListItem() {
                                       List() {
-                                        ForEach(this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP), (item: groupPermission) => {
-                                          this.ListItemLayout(item)
-                                        }, (item: groupPermission) => JSON.stringify(item))
+                                        ForEach(
+                                          this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP),
+                                          (item: GroupPermission) => { this.ListItemLayout(item) },
+                                          (item: GroupPermission) => JSON.stringify(item)
+                                        )
                                       }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
@@ -529,21 +562,21 @@ struct authorityManagementPage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
       }
-    }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 }
 
 @Component
 struct applicationItem {
-  @State applicationItem: appInfo[] = GlobalContext.load('allBundleInfo'); // application info array
+  @State applicationItem: AppInfo[] = GlobalContext.load('allBundleInfo'); // application info array
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
   @State isTouch: string = '';
   scroller: Scroller = new Scroller();
 
-  @Builder ListItemLayout(item: appInfo) {
+  @Builder ListItemLayout(item: AppInfo) {
     ListItem() {
       Row() {
         Column() {
@@ -581,7 +614,7 @@ struct applicationItem {
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
     .linearGradient((this.isTouch === item.bundleName) ? {
          angle: 90,
          direction: GradientDirection.Right,
@@ -589,7 +622,7 @@ struct applicationItem {
        } : {
          angle: 90,
          direction: GradientDirection.Right,
-         colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+         colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
        })
     .onTouch(event => {
       if (event === undefined) {
@@ -631,9 +664,9 @@ struct applicationItem {
               } else {
                 Row() {
                   List({ scroller: this.scroller }) {
-                    ForEach(sortByName(this.applicationItem), (item: appInfo) => {
+                    ForEach(sortByName(this.applicationItem), (item: AppInfo) => {
                       this.ListItemLayout(item)
-                    }, (item: appInfo) => JSON.stringify(item))
+                    }, (item: AppInfo) => JSON.stringify(item))
                   }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding(Constants.LIST_PADDING_TOP)
@@ -659,7 +692,11 @@ struct applicationItem {
           }.margin({ top: Constants.MANAGEMENT_ROW_MARGIN_TOP, bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM })
           Column() {
             alphabetIndexerComponent({ applicationItem: $applicationItem, index: $selectedIndex })
-          }.margin({ top: Constants.APPLICATION_ALPHABETINDEX_MARGIN_TOP, bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM })
+          }
+          .margin({
+            top: Constants.APPLICATION_ALPHABETINDEX_MARGIN_TOP,
+            bottom: Constants.APPLICATION_LIST_MARGIN_BOTTOM
+          })
           .width(Constants.APPLICATION_ALPHABETINDEX_WIDTH)
         }
       }

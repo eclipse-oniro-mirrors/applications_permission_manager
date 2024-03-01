@@ -15,11 +15,11 @@
 
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import i18n from '@ohos.i18n';
-import { permissionGroups, groups } from "../model/permissionGroup";
+import { permissionGroups, groups } from '../model/permissionGroup';
 import Constants from '../utils/constant';
 import { BundleInfoUtils } from './bundleInfoUtils';
 import { CommonUtils } from './commonUtils';
-import { GroupInfo, appInfo, ApplicationObj } from './typedef';
+import { GroupInfo, AppInfo, ApplicationObj } from './typedef';
 
 /**
  * verify permission
@@ -41,8 +41,7 @@ export function verifyAccessToken(accessTokenId: number, permission: Permissions
             resolve(data);
           }
         })
-      }
-      catch(err) {
+      } catch (err) {
         console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         resolve(data);
       }
@@ -95,12 +94,12 @@ export const indexValue: string[] = [
   'Z'
 ]; // Array of alphabetically indexed names
 
-export function addLocalTag(info: appInfo) {
+export function addLocalTag(info: AppInfo) {
   let isZh = i18n.System.getSystemLanguage().indexOf('zh') >= 0;
   let appName: string = info.label;
   let upperCase = CommonUtils.isEmpty(appName) ? '' : appName[0].toLocaleUpperCase();
-  let regexEn: RegExp = new RegExp("[A-Z]");
-  let regexNm: RegExp = new RegExp("[0-9]");
+  let regexEn: RegExp = new RegExp('[A-Z]');
+  let regexNm: RegExp = new RegExp('[0-9]');
 
   if (isZh) {
     if (upperCase.match(regexEn)) {
@@ -132,8 +131,8 @@ export function addLocalTag(info: appInfo) {
 let enComparator = new Intl.Collator('en');
 let zhComparator = new Intl.Collator('zh-Hans-CN');
 
-export function sortByName(appArray: Array<appInfo | ApplicationObj>): Array<appInfo | ApplicationObj> {
-  return appArray.sort((item1: appInfo | ApplicationObj, item2: appInfo | ApplicationObj) => {
+export function sortByName(appArray: Array<AppInfo | ApplicationObj>): Array<AppInfo | ApplicationObj> {
+  return appArray.sort((item1: AppInfo | ApplicationObj, item2: AppInfo | ApplicationObj) => {
     if (item1.indexTag !== item2.indexTag) {
       return enComparator.compare(item1.indexTag, item2.indexTag);
     }

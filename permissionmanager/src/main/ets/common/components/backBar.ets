@@ -72,7 +72,7 @@ export struct backBar {
           .fontWeight(FontWeight.Bold)
         if (this.recordable) {
           Row() {
-            Image($r("sys.media.ohos_ic_public_more"))
+            Image($r('sys.media.ohos_ic_public_more'))
               .fillColor($r('sys.color.ohos_id_color_primary'))
               .objectFit(ImageFit.Contain)
               .height(Constants.BACKBAR_IMAGE_WIDTH)
@@ -106,20 +106,20 @@ export struct backBar {
     .constraintSize({ minHeight: Constants.BACKBAR_MINHEIGHT })
     .alignItems(HorizontalAlign.Start)
     .justifyContent(FlexAlign.Center)
-    .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+    .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 
   @Builder MenuBuilder() {
     Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Row() {
-        Text($r("app.string.permission_access_record"))
+        Text($r('app.string.permission_access_record'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Medium)
           .fontColor($r('sys.color.ohos_id_color_text_primary'))
       }.constraintSize({ minWidth: Constants.MAXIMUM_HEADER_WIDTH })
       .height(Constants.LISTITEM_ROW_HEIGHT)
       .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-      .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+      .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
       .linearGradient((this.isTouch === 'true') ? {
           angle: 90,
           direction: GradientDirection.Right,
@@ -127,7 +127,7 @@ export struct backBar {
         } : {
           angle: 90,
           direction: GradientDirection.Right,
-          colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+          colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
         })
       .onTouch(event => {
         if (event === undefined) {

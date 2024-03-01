@@ -20,8 +20,8 @@ export class BundleInfoUtils {
    *
    *
    */
-  static readonly zh: string = '阿八嚓哒妸发旮哈靃讥咔垃呣拏噢妑七呥仨它唾畖窊夕丫帀';
-  static readonly en: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  private static readonly zh: string = '阿八嚓哒妸发旮哈靃讥咔垃呣拏噢妑七呥仨它唾畖窊夕丫帀';
+  private static readonly en: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   /**
    *
@@ -30,7 +30,7 @@ export class BundleInfoUtils {
   static getStringZh(input: string): string {
     let result: string = '';
     let upperCaseStr = input.toLocaleUpperCase();
-    let regex: RegExp = new RegExp("[A-Z]")
+    let regex: RegExp = new RegExp('[A-Z]')
     for (let i = 0; i < input.length; i++) {
       if (upperCaseStr[i].match(regex)) {
         let index = upperCaseStr.charCodeAt(i) - 'A'.charCodeAt(0);
@@ -53,7 +53,10 @@ export class BundleInfoUtils {
     }
     for (let left = 0; left < BundleInfoUtils.zh.length - 1; left++) {
       let next = left + 1;
-      if (zhCharacter.localeCompare(BundleInfoUtils.zh[left], 'zh') >= 0 && zhCharacter.localeCompare(BundleInfoUtils.zh[next], 'zh') < 0) {
+      if (
+        zhCharacter.localeCompare(BundleInfoUtils.zh[left], 'zh') >= 0 &&
+        zhCharacter.localeCompare(BundleInfoUtils.zh[next], 'zh') < 0
+      ) {
         return BundleInfoUtils.en[left];
       }
       if (next === BundleInfoUtils.zh.length - 1 && zhCharacter.localeCompare(BundleInfoUtils.zh[next], 'zh') >= 0) {

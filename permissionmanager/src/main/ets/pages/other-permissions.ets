@@ -13,33 +13,37 @@
  * limitations under the License.
  */
 
-import { backBar } from "../common/components/backBar";
+import { backBar } from '../common/components/backBar';
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
-import { verifyAccessToken } from "../common/utils/utils";
-import { otherPermission, routerParams_3 } from '../common/utils/typedef';
+import { verifyAccessToken } from '../common/utils/utils';
+import { OtherPermission, RouterParams_3 } from '../common/utils/typedef';
 import { Permissions } from '@ohos.abilityAccessCtrl';
 
 const TAG = 'PermissionManager_MainAbility:';
-let status: number = (router.getParams() as routerParams_3).status; // Status: Allowed, Forbidden
-let permissions: Permissions[] = (router.getParams() as routerParams_3).permission; // permissions name
-let otherPermissionList: otherPermission[] = []; // otherPermission List
+let status: number = (router.getParams() as RouterParams_3).status; // Status: Allowed, Forbidden
+let permissions: Permissions[] = (router.getParams() as RouterParams_3).permission; // permissions name
+let otherPermissionList: OtherPermission[] = []; // otherPermission List
 for (let i = 0; i < permissions.length; i++) {
-  otherPermissionList.push(new otherPermission(permissionGroups.filter(item => item.permissionName == permissions[i])[0].label, permissions[i]));
+  otherPermissionList.push(
+    new OtherPermission(permissionGroups.filter(item => item.permissionName == permissions[i])[0].label, permissions[i])
+  );
 }
 
 @Entry
 @Component
 struct appNamePage {
-  private backTitle: ResourceStr = (router.getParams() as routerParams_3).backTitle;
-  private tokenId: number = (router.getParams() as routerParams_3).tokenId;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams_3).backTitle;
+  private tokenId: number = (router.getParams() as RouterParams_3).tokenId;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
-        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
+      GridCol({
+        span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET }
+      }) {
         Row() {
           Column() {
             Row() {
@@ -56,9 +60,9 @@ struct appNamePage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
       }
-    }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 
 /**
@@ -76,12 +80,12 @@ struct appNamePage {
 
 @Component
 struct appNameItem {
-  private bundleName: string = (router.getParams() as routerParams_3).bundleName;
-  private tokenId: number = (router.getParams() as routerParams_3).tokenId;
-  @State otherPermissionListItem: otherPermission[] = otherPermissionList; // Other permission interface data array
+  private bundleName: string = (router.getParams() as RouterParams_3).bundleName;
+  private tokenId: number = (router.getParams() as RouterParams_3).tokenId;
+  @State otherPermissionListItem: OtherPermission[] = otherPermissionList; // Other permission interface data array
   @State isTouch: string = '';
 
-  @Builder ListItemLayout(item: otherPermission) {
+  @Builder ListItemLayout(item: OtherPermission) {
     ListItem() {
       Row() {
         Column() {
@@ -115,7 +119,7 @@ struct appNameItem {
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
     .linearGradient((this.isTouch === item.permission) ? {
         angle: 90,
         direction: GradientDirection.Right,
@@ -123,7 +127,7 @@ struct appNameItem {
       } : {
         angle: 90,
         direction: GradientDirection.Right,
-        colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+        colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
       })
     .onTouch(event => {
       if (event === undefined) {
@@ -143,9 +147,9 @@ struct appNameItem {
       Column() {
         Row() {
           List() {
-            ForEach(this.otherPermissionListItem, (item: otherPermission) => {
+            ForEach(this.otherPermissionListItem, (item: OtherPermission) => {
               this.ListItemLayout(item)
-            }, (item: otherPermission) => JSON.stringify(item))
+            }, (item: OtherPermission) => JSON.stringify(item))
           }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
           .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
           .padding(Constants.LIST_PADDING_TOP)

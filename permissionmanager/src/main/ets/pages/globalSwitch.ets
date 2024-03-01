@@ -26,7 +26,8 @@ const MICROPHONE = 'microphone';
 const CAMERA = 'camera';
 let bottomPopoverTypes = ['default', 'phone'];
 
-@Extend(Button) function customizeButton() {
+@Extend (Button) function customizeButton()
+{
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
@@ -69,10 +70,33 @@ struct globalDialog {
   controller?: CustomDialogController
 
   build() {
-    GridRow({ columns: { xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS }, gutter: Constants.DIALOG_GUTTER }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN },
-        offset: {xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.DIALOG_MD_OFFSET, lg: Constants.DIALOG_LG_OFFSET} }) {
-        Flex({ justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
+    GridRow({
+      columns: {
+        xs: Constants.XS_COLUMNS,
+        sm: Constants.SM_COLUMNS,
+        md: Constants.MD_COLUMNS,
+        lg: Constants.LG_COLUMNS
+      },
+      gutter: Constants.DIALOG_GUTTER
+    }) {
+      GridCol({
+        span: {
+          xs: Constants.XS_SPAN,
+          sm: Constants.SM_SPAN,
+          md: Constants.DIALOG_MD_SPAN,
+          lg: Constants.DIALOG_LG_SPAN
+        },
+        offset: {
+          xs: Constants.XS_OFFSET,
+          sm: Constants.SM_OFFSET,
+          md: Constants.DIALOG_MD_OFFSET,
+          lg: Constants.DIALOG_LG_OFFSET
+        }
+      }) {
+        Flex({
+          justifyContent: FlexAlign.Center,
+          alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center
+        }) {
           Column() {
             Text(this.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
               this.globalState == CAMERA ? $r('app.string.global_title_camera') :
@@ -104,7 +128,7 @@ struct globalDialog {
                   .vertical(true)
                   .height(Constants.DIVIDER_HEIGHT)
                   .margin({ top: Constants.BUTTON_MARGIN_TOP })
-                  .opacity(.2)
+                  .opacity(0.2)
                 Button($r('app.string.open'))
                   .onClick(() => {
                     this.accept()

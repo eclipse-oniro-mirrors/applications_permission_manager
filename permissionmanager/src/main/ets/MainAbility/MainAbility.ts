@@ -50,14 +50,14 @@ export default class MainAbility extends UIAbility {
         this.getAllApplications();
         globalThis.refresh = true;
       }
-    })
+    });
     bundleMonitor.on('remove', (bundleChangeInfo) => {
       console.log(`${TAG} bundleMonitor.remove: ${JSON.stringify(bundleChangeInfo)}`);
       if (globalThis.currentApp === 'all') {
         this.getAllApplications();
         globalThis.refresh = true;
       }
-    })
+    });
   }
 
   onNewWant(want): void {
@@ -117,7 +117,9 @@ export default class MainAbility extends UIAbility {
   }
 
   getAllApplications(): void {
-    const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+    const flag =
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
     let accountManager = account_osAccount.getAccountManager();
     try {
       accountManager.getActivatedOsAccountLocalIds((err, idArray: number[])=>{
@@ -140,7 +142,9 @@ export default class MainAbility extends UIAbility {
                 entities: ['entity.system.home']
               }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
             } catch (error) {
-              console.error(TAG + 'queryAbilityByWant catch app: ' + JSON.stringify(info.name) + 'err: ' + JSON.stringify(error));
+              console.error(
+                TAG + 'queryAbilityByWant catch app: ' + JSON.stringify(info.name) + 'err: ' + JSON.stringify(error)
+              );
               continue;
             }
 
@@ -158,7 +162,9 @@ export default class MainAbility extends UIAbility {
   }
 
   getSperifiedApplication(bundleName): void {
-    const flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+    const flag =
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
     bundleManager.getBundleInfo(bundleName, flag).then(bundleInfo => {
       let reqPermissions: Array<string> = [];
       bundleInfo.reqPermissionDetails.forEach(item => {

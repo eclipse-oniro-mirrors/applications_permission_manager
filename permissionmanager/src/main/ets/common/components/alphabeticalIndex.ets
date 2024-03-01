@@ -16,11 +16,11 @@
 import Constants from '../utils/constant';
 import { indexValue, sortByName } from '../utils/utils';
 import { GlobalContext } from '../utils/globalContext';
-import { appInfo, ApplicationObj } from '../utils/typedef';
+import { AppInfo, ApplicationObj } from '../utils/typedef';
 
 @Component
 export struct alphabetIndexerComponent {
-  @Link applicationItem: Array<appInfo | ApplicationObj>; // application info array
+  @Link applicationItem: Array<AppInfo | ApplicationObj>; // application info array
   @Link index: number; // alphabetical index
   @State usingPopup: boolean = false;
 
