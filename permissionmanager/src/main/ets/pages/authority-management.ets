@@ -34,8 +34,7 @@ const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 let storage = LocalStorage.getShared();
 
-@Extend (Image) function customizeImage(width: number, height: number)
-{
+@Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)

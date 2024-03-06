@@ -379,7 +379,7 @@ export class AppGroupRecordInfo {
   }
 }
 
-export class RouterParams_1 {
+export class RouterParams1 {
   public list: PermissionApplications[]
   public backTitle: ResourceStr
   public group: string
@@ -393,7 +393,7 @@ export class RouterParams_1 {
   }
 }
 
-export class RouterParams_2 {
+export class RouterParams2 {
   public list: PermissionApplications[]
   public backTitle: ResourceStr
   public permissionName: string
@@ -405,7 +405,7 @@ export class RouterParams_2 {
   }
 }
 
-export class RouterParams_3 {
+export class RouterParams3 {
   public bundleName: string
   public backTitle: ResourceStr
   public permission: Permissions[]

@@ -17,12 +17,12 @@ import { backBar } from '../common/components/backBar';
 import { permissionGroups, groups } from '../common/model/permissionGroup';
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
-import { CalendarObj, RouterParams_1, PermissionApplications } from '../common/utils/typedef';
+import { CalendarObj, RouterParams1, PermissionApplications } from '../common/utils/typedef';
 
 @Entry
 @Component
 struct appNamePage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams_1).backTitle;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -56,8 +56,8 @@ struct appNamePage {
 @Component
 struct appNameItem {
   @State calendarListItem: CalendarObj[] = []; // Permission management secondary interface data array
-  private list: PermissionApplications[] = (router.getParams() as RouterParams_1).list; // Routing jump data
-  private group: string = (router.getParams() as RouterParams_1).group;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams1).list; // Routing jump data
+  private group: string = (router.getParams() as RouterParams1).group;
   @State isTouch: string = '';
 
   @Builder ListItemLayout(item: CalendarObj) {
