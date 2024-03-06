@@ -22,7 +22,7 @@ import { BusinessError } from '@ohos.base';
 import { showSubpermissionsGrop } from '../common/model/permissionGroup';
 import { verifyAccessToken, getPermissionLabel } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
-import { MediaDocObj, RouterParams_3, AppInfo, CheckboxInfo } from '../common/utils/typedef';
+import { MediaDocObj, RouterParams3, AppInfo, CheckboxInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_MainAbility:';
@@ -40,9 +40,9 @@ let reqPermissionInfo: bundleManager.ReqPermissionDetail;
 @Entry
 @Component
 struct mediaDocumentPage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams_3).backTitle;
-  private permissions: Permissions[] = (router.getParams() as RouterParams_3).permission;
-  private tokenId: number = (router.getParams() as RouterParams_3).tokenId;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams3).backTitle;
+  private permissions: Permissions[] = (router.getParams() as RouterParams3).permission;
+  private tokenId: number = (router.getParams() as RouterParams3).tokenId;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State folderStatus: boolean[] = GlobalContext.load('folderStatus');
   @State refresh: boolean = false;
@@ -159,10 +159,10 @@ struct mediaDocumentPage {
 @Component
 struct mediaDocumentItem {
   private context = getContext(this) as common.UIAbilityContext;
-  private backTitle: ResourceStr = (router.getParams() as RouterParams_3).backTitle;
-  private bundleName: string = (router.getParams() as RouterParams_3).bundleName;
-  private permissions: Permissions[] = (router.getParams() as RouterParams_3).permission;
-  private status: number = (router.getParams() as RouterParams_3).status;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams3).backTitle;
+  private bundleName: string = (router.getParams() as RouterParams3).bundleName;
+  private permissions: Permissions[] = (router.getParams() as RouterParams3).permission;
+  private status: number = (router.getParams() as RouterParams3).status;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo');
   @Link folderStatus: boolean[];

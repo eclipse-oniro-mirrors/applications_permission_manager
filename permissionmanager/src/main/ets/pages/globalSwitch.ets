@@ -26,8 +26,7 @@ const MICROPHONE = 'microphone';
 const CAMERA = 'camera';
 let bottomPopoverTypes = ['default', 'phone'];
 
-@Extend (Button) function customizeButton()
-{
+@Extend(Button)function customizeButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)

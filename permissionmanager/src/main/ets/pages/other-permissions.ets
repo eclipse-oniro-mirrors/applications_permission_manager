@@ -18,12 +18,12 @@ import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
 import { verifyAccessToken } from '../common/utils/utils';
-import { OtherPermission, RouterParams_3 } from '../common/utils/typedef';
+import { OtherPermission, RouterParams3 } from '../common/utils/typedef';
 import { Permissions } from '@ohos.abilityAccessCtrl';
 
 const TAG = 'PermissionManager_MainAbility:';
-let status: number = (router.getParams() as RouterParams_3).status; // Status: Allowed, Forbidden
-let permissions: Permissions[] = (router.getParams() as RouterParams_3).permission; // permissions name
+let status: number = (router.getParams() as RouterParams3).status; // Status: Allowed, Forbidden
+let permissions: Permissions[] = (router.getParams() as RouterParams3).permission; // permissions name
 let otherPermissionList: OtherPermission[] = []; // otherPermission List
 for (let i = 0; i < permissions.length; i++) {
   otherPermissionList.push(
@@ -34,8 +34,8 @@ for (let i = 0; i < permissions.length; i++) {
 @Entry
 @Component
 struct appNamePage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams_3).backTitle;
-  private tokenId: number = (router.getParams() as RouterParams_3).tokenId;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams3).backTitle;
+  private tokenId: number = (router.getParams() as RouterParams3).tokenId;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -80,8 +80,8 @@ struct appNamePage {
 
 @Component
 struct appNameItem {
-  private bundleName: string = (router.getParams() as RouterParams_3).bundleName;
-  private tokenId: number = (router.getParams() as RouterParams_3).tokenId;
+  private bundleName: string = (router.getParams() as RouterParams3).bundleName;
+  private tokenId: number = (router.getParams() as RouterParams3).tokenId;
   @State otherPermissionListItem: OtherPermission[] = otherPermissionList; // Other permission interface data array
   @State isTouch: string = '';
 

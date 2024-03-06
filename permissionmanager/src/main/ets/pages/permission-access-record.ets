@@ -27,8 +27,7 @@ import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_MainAbility:';
 
-@Extend (Image) function customizeImage(width: number, height: number)
-{
+@Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)

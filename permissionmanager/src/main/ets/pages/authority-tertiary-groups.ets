@@ -24,7 +24,7 @@ import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import common from '@ohos.app.ability.common';
 import { verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
-import { ApplicationObj, GroupInfo, RouterParams_1, PermissionApplications, AppInfo } from '../common/utils/typedef';
+import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { globalDialog } from '../common/components/dialog';
 import Constants from '../common/utils/constant';
@@ -37,10 +37,9 @@ const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
 const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
 const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
-let globalIsOn: boolean = (router.getParams() as RouterParams_1).globalIsOn; // return title name
+let globalIsOn: boolean = (router.getParams() as RouterParams1).globalIsOn; // return title name
 
-@Extend (Image) function customizeImage(width: number, height: number)
-{
+@Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
@@ -50,8 +49,8 @@ let globalIsOn: boolean = (router.getParams() as RouterParams_1).globalIsOn; // 
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams_1).backTitle;
-  private list: PermissionApplications[] = (router.getParams() as RouterParams_1).list;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State polymorphismIsOn: Array<boolean> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
@@ -175,8 +174,8 @@ struct locationInfoPage {
 @Component
 struct applicationItem {
   private context = getContext(this) as common.UIAbilityContext;
-  private backTitle: ResourceStr = (router.getParams() as RouterParams_1).backTitle;
-  private list: PermissionApplications[] = (router.getParams() as RouterParams_1).list;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];

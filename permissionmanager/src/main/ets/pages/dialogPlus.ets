@@ -29,8 +29,7 @@ import Constants from '../common/utils/constant';
 import { showSubpermissionsGrop, userGrantPermissions } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
 
-@Extend (Button) function customizeButton()
-{
+@Extend(Button)function customizeButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)

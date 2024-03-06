@@ -20,15 +20,14 @@ import router from '@ohos.router';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import { verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
-import { ApplicationObj, PermissionInfo, RouterParams_2, PermissionApplications, AppInfo } from '../common/utils/typedef';
+import { ApplicationObj, PermissionInfo, RouterParams2, PermissionApplications, AppInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
 
 const TAG = 'PermissionManager_MainAbility:';
 
-@Extend (Image) function customizeImage(width: number, height: number)
-{
+@Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
@@ -37,7 +36,7 @@ const TAG = 'PermissionManager_MainAbility:';
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams_2).backTitle;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams2).backTitle;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -70,8 +69,8 @@ struct locationInfoPage {
 
 @Component
 struct applicationItem {
-  private list: PermissionApplications[] = (router.getParams() as RouterParams_2).list;
-  private permissionName: string = (router.getParams() as RouterParams_2).permissionName;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams2).list;
+  private permissionName: string = (router.getParams() as RouterParams2).permissionName;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
