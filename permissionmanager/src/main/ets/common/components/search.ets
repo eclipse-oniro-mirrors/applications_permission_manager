@@ -14,13 +14,13 @@
  */
 
 import Constants from '../utils/constant';
-import { appInfo, ApplicationObj } from '../utils/typedef';
+import { AppInfo, ApplicationObj } from '../utils/typedef';
 
 @Component
 export struct textInput {
-  @Link applicationItem: Array<appInfo | ApplicationObj>; // application info array
+  @Link applicationItem: Array<AppInfo | ApplicationObj>; // application info array
   @Link searchResult: boolean; // search results
-  @State oldApplicationItem: Array<appInfo | ApplicationObj> = []; // Original application information array
+  @State oldApplicationItem: Array<AppInfo | ApplicationObj> = []; // Original application information array
 
   aboutToAppear() {
     this.oldApplicationItem = this.applicationItem;
@@ -33,16 +33,23 @@ export struct textInput {
           .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
           .padding({ left: Constants.TEXTINPUT_PADDING_LEFT })
           .type(InputType.Normal)
-          .border({ width: Constants.TEXTINPUT_BORDER_WIDTH, color: $r("app.color.label_color_20"), radius: Constants.TEXTINPUT_BORDER_RADIUS })
+          .border({
+            width: Constants.TEXTINPUT_BORDER_WIDTH, color: $r('app.color.label_color_20'), radius: Constants.TEXTINPUT_BORDER_RADIUS
+          })
           .placeholderColor(Color.Grey)
-          .placeholderFont({ size: Constants.TEXTINPUT_PLACEHOLDER_Font_SIZE, weight: FontWeight.Normal, family: "sans-serif", style: FontStyle.Normal })
+          .placeholderFont({
+            size: Constants.TEXT_MIDDLE_FONT_SIZE,
+            weight: FontWeight.Normal,
+            family: 'sans-serif',
+            style: FontStyle.Normal
+          })
           .caretColor($r('sys.color.ohos_id_color_text_secondary'))
           .height(Constants.TEXTINPUT_HEIGHT)
           .onChange((value: string) => {
             if (value === '' || value === null) {
               this.applicationItem = this.oldApplicationItem;
             } else {
-              this.applicationItem = this.oldApplicationItem.filter((item: appInfo | ApplicationObj) => {
+              this.applicationItem = this.oldApplicationItem.filter((item: AppInfo | ApplicationObj) => {
                   return String(item.label).indexOf(value) > -1;
               })
             }

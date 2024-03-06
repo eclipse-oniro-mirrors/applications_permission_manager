@@ -13,22 +13,22 @@
  * limitations under the License.
  */
 
-import { backBar } from "../common/components/backBar";
-import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
-import { textInput } from "../common/components/search";
+import { backBar } from '../common/components/backBar';
+import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
+import { textInput } from '../common/components/search';
 import router from '@ohos.router';
-import bundleManager from "@ohos.bundle.bundleManager";
+import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import common from '@ohos.app.ability.common';
-import { verifyAccessToken, indexValue, sortByName } from "../common/utils/utils";
-import { ApplicationObj, GroupInfo, routerParams_1, permissionApplications, appInfo } from "../common/utils/typedef";
-import { GlobalContext } from "../common/utils/globalContext";
-import { globalDialog } from "../common/components/dialog";
+import { verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
+import { ApplicationObj, GroupInfo, RouterParams_1, PermissionApplications, AppInfo } from '../common/utils/typedef';
+import { GlobalContext } from '../common/utils/globalContext';
+import { globalDialog } from '../common/components/dialog';
 import Constants from '../common/utils/constant';
-import { polymorphismGroup, globalGroup, groups } from "../common/model/permissionGroup";
+import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';
 
 const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
@@ -37,9 +37,10 @@ const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
 const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
 const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
-let globalIsOn: boolean = (router.getParams() as routerParams_1).globalIsOn; // return title name
+let globalIsOn: boolean = (router.getParams() as RouterParams_1).globalIsOn; // return title name
 
-@Extend(Image) function customizeImage(width: number, height: number) {
+@Extend (Image) function customizeImage(width: number, height: number)
+{
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
@@ -49,8 +50,8 @@ let globalIsOn: boolean = (router.getParams() as routerParams_1).globalIsOn; // 
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (router.getParams() as routerParams_1).backTitle;
-  private list: permissionApplications[] = (router.getParams() as routerParams_1).list;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams_1).backTitle;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams_1).list;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State polymorphismIsOn: Array<boolean> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
@@ -58,8 +59,10 @@ struct locationInfoPage {
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
-        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
+      GridCol({
+        span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET }
+      }) {
         Row() {
           Column() {
             Row() {
@@ -76,13 +79,13 @@ struct locationInfoPage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
       }
-    }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 
   onPageShow() {
-    console.log(TAG + "onPageShow");
+    console.log(TAG + 'onPageShow');
     if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
       let bundleNames: string[] = [];
       let atManager = abilityAccessCtrl.createAtManager();
@@ -95,23 +98,36 @@ struct locationInfoPage {
       })
 
       bundleNames.forEach((bundleName, index) => {
-        bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION | bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(res => {
+        bundleManager.getBundleInfo(
+          bundleName,
+          bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
+          bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION
+        ).then(res => {
           // 0: have permission; -1: no permission
           this.polymorphismIsOn[index] = true;
           this.folderStatusArray[index] = [false, false, false];
-          let reqPermissions: Array<string> = [];
+          let reqPermissions: string[] = [];
           res.reqPermissionDetails.forEach(item => {
             reqPermissions.push(item.name);
           })
           if (this.currentGroup === 'LOCATION') {
-            if (!reqPermissions.includes(FUZZY_LOCATION_PERMISSION) && res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
+            if (
+              !reqPermissions.includes(FUZZY_LOCATION_PERMISSION) &&
+              res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE
+            ) {
               this.polymorphismIsOn[index] = false;
             }
             for (let j = 0; j < this.list.length; j++) {
-              if ((this.list[j].permission == PRECISE_LOCATION_PERMISSION) && (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
+              if (
+                (this.list[j].permission == PRECISE_LOCATION_PERMISSION) &&
+                (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)
+              ) {
                 continue;
               }
-              if ((this.list[j].permission == FUZZY_LOCATION_PERMISSION) && (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
+              if (
+                (this.list[j].permission == FUZZY_LOCATION_PERMISSION) &&
+                (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)
+              ) {
                 continue;
               }
               if (this.list[j].permission == BACKGROUND_LOCATION_PERMISSION) {
@@ -149,7 +165,7 @@ struct locationInfoPage {
             }
           }
         }).catch((error: BusinessError) => {
-          console.log(TAG + bundleName + "onPageShow getBundleInfo failed, cause: " + JSON.stringify(error));
+          console.log(TAG + bundleName + 'onPageShow getBundleInfo failed, cause: ' + JSON.stringify(error));
         })
       })
     }
@@ -159,8 +175,8 @@ struct locationInfoPage {
 @Component
 struct applicationItem {
   private context = getContext(this) as common.UIAbilityContext;
-  private backTitle: ResourceStr = (router.getParams() as routerParams_1).backTitle;
-  private list: permissionApplications[] = (router.getParams() as routerParams_1).list;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams_1).backTitle;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams_1).list;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
@@ -175,7 +191,7 @@ struct applicationItem {
   @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], false);
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State isMuteSupported: boolean = GlobalContext.load('isMuteSupported');
-  @State allBundleInfo: appInfo[] = GlobalContext.load('allBundleInfo');
+  @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
 
   privacyDialogController: CustomDialogController | null = new CustomDialogController({
@@ -310,7 +326,7 @@ struct applicationItem {
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
     .enabled(!this.isRisk[item.index])
     .opacity(this.isRisk[item.index] ? $r('sys.float.ohos_id_alpha_disabled') : 1)
-    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
     .linearGradient((this.isTouch === item.bundleName) ? {
         angle: 90,
         direction: GradientDirection.Right,
@@ -318,7 +334,7 @@ struct applicationItem {
       } : {
         angle: 90,
         direction: GradientDirection.Right,
-        colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+        colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
       })
     .onTouch(event => {
       if (event === undefined) {
@@ -357,11 +373,14 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   grantUserGrantedPermission(accessTokenId: number, permission: Permissions, resolve: (value: number) => void) {
-    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
+    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
+    .then(() => {
       resolve(0);
     }).catch((error: BusinessError) => {
       resolve(-1);
-      console.error(TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+      console.error(
+        TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error)
+      );
     })
   }
 
@@ -372,11 +391,15 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, resolve: (value: number) => void) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
+    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
+      accessTokenId, permission, Constants.PERMISSION_FLAG
+    ).then(() => {
       resolve(0);
     }).catch((error: BusinessError) => {
       resolve(-1);
-      console.error(TAG + 'abilityAccessCtrl.createAtManager.revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+      console.error(
+        TAG + 'abilityAccessCtrl.createAtManager.revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error)
+      );
     })
   }
 
@@ -423,8 +446,7 @@ struct applicationItem {
                 this.isRisk[i] = true;
               }
             })
-          }
-          catch(err) {
+          } catch (err) {
             console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
           }
           // 0: have permission; -1: no permission
@@ -455,7 +477,7 @@ struct applicationItem {
     }
     if (globalGroup.indexOf(this.currentGroup) !== -1) {
       this.globalIsOn = globalIsOn;
-      if (this.currentGroup == "CAMERA") {
+      if (this.currentGroup == 'CAMERA') {
         let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
         cameraManager.on('cameraMute', (err, curMuted) => {
           console.log(TAG + 'curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
@@ -494,7 +516,7 @@ struct applicationItem {
           if (globalGroup.indexOf(this.currentGroup) !== -1  && this.isMuteSupported === true) {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                Text(this.currentGroup == "CAMERA" ? $r('app.string.camera') : $r('app.string.microphone'))
+                Text(this.currentGroup == 'CAMERA' ? $r('app.string.camera') : $r('app.string.microphone'))
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_text_primary'))
                   .fontWeight(FontWeight.Medium)
                 Row() {
@@ -504,7 +526,7 @@ struct applicationItem {
                     .padding({ right: 0 })
                     .onChange((isOn: boolean) => {
                       if (isOn) {
-                        if (this.currentGroup == "CAMERA") {
+                        if (this.currentGroup == 'CAMERA') {
                           let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
                           cameraManager.muteCamera(false);
                         } else {
@@ -536,21 +558,25 @@ struct applicationItem {
             if (this.globalIsOn) {
               if (this.getGrantApplicationNumber() > 0) {
                 Text() {
-                  Span(this.groupInfo.enable_description_start ? this.groupInfo.enable_description_start : '')
+                  Span(this.groupInfo.enableDescriptionStart ? this.groupInfo.enableDescriptionStart : '')
                   Span(String(this.getGrantApplicationNumber()))
-                  Span(this.groupInfo.enable_description_end ? this.groupInfo.enable_description_end : '')
+                  Span(this.groupInfo.enableDescriptionEnd ? this.groupInfo.enableDescriptionEnd : '')
                 }
                   .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                   .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
               } else {
-                Text(this.groupInfo.forbidden_description)
+                Text(this.groupInfo.forbiddenDescription)
                   .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                   .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
               }
             } else {
-              Text(this.currentGroup == "CAMERA" ? $r('app.string.camera_is_off') : $r('app.string.microphone_is_off'))
+              Text(
+                this.currentGroup == 'CAMERA' ?
+                $r('app.string.camera_is_off') :
+                $r('app.string.microphone_is_off')
+              )
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
@@ -597,7 +623,11 @@ struct applicationItem {
                 }
               }
             }.width(Constants.FULL_WIDTH)
-            .margin({ bottom: globalGroup.includes(this.currentGroup) && this.isMuteSupported === true ? Constants.AUTHORITY_LIST_MARGIN_BOTTOM_GLOBAL : Constants.AUTHORITY_LIST_MARGIN_BOTTOM })
+            .margin({
+              bottom: globalGroup.includes(this.currentGroup) && this.isMuteSupported === true ?
+                Constants.AUTHORITY_LIST_MARGIN_BOTTOM_GLOBAL :
+                Constants.AUTHORITY_LIST_MARGIN_BOTTOM
+            })
           }
         }.padding({ left: Constants.AUTHORITY_LISTITEM_PADDING_LEFT })
         Column() {

@@ -13,22 +13,24 @@
  * limitations under the License.
  */
 
-import { backBar } from "../common/components/backBar";
-import { permissionGroups, groups } from "../common/model/permissionGroup";
+import { backBar } from '../common/components/backBar';
+import { permissionGroups, groups } from '../common/model/permissionGroup';
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
-import { CalendarObj, routerParams_1, permissionApplications } from '../common/utils/typedef';
+import { CalendarObj, RouterParams_1, PermissionApplications } from '../common/utils/typedef';
 
 @Entry
 @Component
 struct appNamePage {
-  private backTitle: ResourceStr = (router.getParams() as routerParams_1).backTitle;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams_1).backTitle;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
-        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
+      GridCol({
+        span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET }
+      }) {
         Row() {
           Column() {
             Row() {
@@ -45,17 +47,17 @@ struct appNamePage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
       }
-    }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 }
 
 @Component
 struct appNameItem {
   @State calendarListItem: CalendarObj[] = []; // Permission management secondary interface data array
-  private list: permissionApplications[] = (router.getParams() as routerParams_1).list; // Routing jump data
-  private group: string = (router.getParams() as routerParams_1).group;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams_1).list; // Routing jump data
+  private group: string = (router.getParams() as RouterParams_1).group;
   @State isTouch: string = '';
 
   @Builder ListItemLayout(item: CalendarObj) {
@@ -90,7 +92,7 @@ struct appNameItem {
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
     .linearGradient((this.isTouch === item.permissionName) ? {
          angle: 90,
          direction: GradientDirection.Right,
@@ -98,7 +100,7 @@ struct appNameItem {
        } : {
          angle: 90,
          direction: GradientDirection.Right,
-         colors: [[$r("sys.color.ohos_id_color_list_card_bg"), 1], [$r("sys.color.ohos_id_color_list_card_bg"), 1]]
+         colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
        })
     .onTouch(event => {
       if (event === undefined) {

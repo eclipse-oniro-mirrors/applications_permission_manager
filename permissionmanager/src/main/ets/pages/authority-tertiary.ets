@@ -13,21 +13,22 @@
  * limitations under the License.
  */
 
-import { backBar } from "../common/components/backBar";
-import { alphabetIndexerComponent } from "../common/components/alphabeticalIndex";
-import { textInput } from "../common/components/search";
+import { backBar } from '../common/components/backBar';
+import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
+import { textInput } from '../common/components/search';
 import router from '@ohos.router';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
-import { verifyAccessToken, indexValue, sortByName } from "../common/utils/utils";
-import { ApplicationObj, PermissionInfo, routerParams_2, permissionApplications, appInfo } from "../common/utils/typedef";
-import { GlobalContext } from "../common/utils/globalContext";
+import { verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
+import { ApplicationObj, PermissionInfo, RouterParams_2, PermissionApplications, AppInfo } from '../common/utils/typedef';
+import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
-import { permissionGroups } from "../common/model/permissionGroup";
+import { permissionGroups } from '../common/model/permissionGroup';
 
 const TAG = 'PermissionManager_MainAbility:';
 
-@Extend(Image) function customizeImage(width: number, height: number) {
+@Extend (Image) function customizeImage(width: number, height: number)
+{
   .objectFit(ImageFit.Contain)
   .width(width)
   .height(height)
@@ -36,13 +37,15 @@ const TAG = 'PermissionManager_MainAbility:';
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (router.getParams() as routerParams_2).backTitle;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams_2).backTitle;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
-        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
+      GridCol({
+        span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+        offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET }
+      }) {
         Row() {
           Column() {
             Row() {
@@ -59,16 +62,16 @@ struct locationInfoPage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
       }
-    }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 }
 
 @Component
 struct applicationItem {
-  private list: permissionApplications[] = (router.getParams() as routerParams_2).list;
-  private permissionName: string = (router.getParams() as routerParams_2).permissionName;
+  private list: PermissionApplications[] = (router.getParams() as RouterParams_2).list;
+  private permissionName: string = (router.getParams() as RouterParams_2).permissionName;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
@@ -77,7 +80,7 @@ struct applicationItem {
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
   @State permissionInfo: PermissionInfo = new PermissionInfo('', '', '', 0);
-  @State allBundleInfo: appInfo[] = GlobalContext.load('allBundleInfo');
+  @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
 
   @Builder ListItemLayout(item: ApplicationObj) {
@@ -153,7 +156,9 @@ struct applicationItem {
       this.permissionNum = num;
     }).catch((error: BusinessError) => {
       this.toggleIsOn[index] = false;
-      console.error(TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+      console.error(
+        TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error)
+      );
     })
   }
 
@@ -220,8 +225,7 @@ struct applicationItem {
                 this.isRisk[i] = true;
               }
             })
-          }
-          catch(err) {
+          } catch (err) {
             console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
           }
         }
@@ -245,15 +249,15 @@ struct applicationItem {
           Flex({ justifyContent: FlexAlign.Start }) {
             if (this.permissionNum > 0) {
               Text() {
-                Span(this.permissionInfo.enable_description_start ? this.permissionInfo.enable_description_start : '')
+                Span(this.permissionInfo.enableDescriptionStart ? this.permissionInfo.enableDescriptionStart : '')
                 Span(String(this.permissionNum))
-                Span(this.permissionInfo.enable_description_end ? this.permissionInfo.enable_description_end : '')
+                Span(this.permissionInfo.enableDescriptionEnd ? this.permissionInfo.enableDescriptionEnd : '')
               }
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
             } else {
-              Text(this.permissionInfo.forbidden_description)
+              Text(this.permissionInfo.forbiddenDescription)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })

@@ -19,11 +19,12 @@ import camera from '@ohos.multimedia.camera';
 import deviceInfo from '@ohos.deviceInfo';
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
-import { GlobalContext } from "../utils/globalContext";
+import { GlobalContext } from '../utils/globalContext';
 
 let bottomPopoverTypes = ['default', 'phone'];
 
-@Extend(Button) function customizeButton() {
+@Extend (Button) function customizeButton()
+{
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
@@ -41,10 +42,26 @@ export struct globalDialog {
   controller?: CustomDialogController;
 
   build() {
-    GridRow({ columns: { xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS }, gutter: Constants.DIALOG_GUTTER }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN },
-        offset: {xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.DIALOG_MD_OFFSET, lg: Constants.DIALOG_LG_OFFSET} }) {
-        Flex({ justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
+    GridRow({
+      columns: {
+        xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS
+      },
+      gutter: Constants.DIALOG_GUTTER
+    }) {
+      GridCol({
+        span: {
+          xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN
+        },
+        offset: {
+          xs: Constants.XS_OFFSET,
+          sm: Constants.SM_OFFSET,
+          md: Constants.DIALOG_MD_OFFSET,
+          lg: Constants.DIALOG_LG_OFFSET
+        }
+      }) {
+        Flex({
+          justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center
+        }) {
           Column() {
             Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
               .fontSize(Constants.TEXT_BIG_FONT_SIZE)
@@ -54,7 +71,11 @@ export struct globalDialog {
               .height(Constants.ROW_HEIGHT)
               .width(Constants.FULL_WIDTH)
               .padding({ left: Constants.DIALOG_DESP_MARGIN_LEFT, right: Constants.DIALOG_DESP_MARGIN_RIGHT })
-            Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera_desc') : $r('app.string.close_microphone_desc'))
+            Text(
+              this.currentGroup == 'CAMERA' ?
+              $r('app.string.close_camera_desc') :
+              $r('app.string.close_microphone_desc')
+            )
               .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
               .fontColor($r('sys.color.ohos_id_color_text_primary'))
               .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -72,7 +93,7 @@ export struct globalDialog {
                   .vertical(true)
                   .height(Constants.DIVIDER_HEIGHT)
                   .margin({ top: Constants.BUTTON_MARGIN_TOP })
-                  .opacity(.2)
+                  .opacity(0.2)
                 Button($r('app.string.close'))
                   .onClick(() => {
                     this.confirm()

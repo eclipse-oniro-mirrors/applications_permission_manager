@@ -23,13 +23,14 @@ import deviceInfo from '@ohos.deviceInfo';
 import pasteboard from '@ohos.pasteboard';
 import { BusinessError } from '@ohos.base';
 import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../common/utils/utils';
-import { GroupInfo, wantInfo } from '../common/utils/typedef';
+import { GroupInfo, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { showSubpermissionsGrop, userGrantPermissions } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
 
-@Extend(Button) function customizeButton() {
+@Extend (Button) function customizeButton()
+{
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
@@ -49,13 +50,13 @@ const preciseMarks = [Constants.LOCATION_UPGRADE, Constants.LOCATION_BOTH_PRECIS
 let bottomPopoverTypes = ['default', 'phone'];
 
 let win: window.Window;
-let want: wantInfo;
+let want: WantInfo;
 let storage = LocalStorage.getShared();
 
 @Entry(storage)
 @Component
 struct dialogPlusPage {
-  @LocalStorageLink('want') want: wantInfo = new wantInfo([]);
+  @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
   @State isUpdate: number = -1;
 
@@ -108,16 +109,42 @@ struct PermissionDialog {
   controller?: CustomDialogController
 
   build() {
-    GridRow({ columns: { xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS }, gutter: Constants.DIALOG_GUTTER }) {
-      GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN },
-        offset: {xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.DIALOG_MD_OFFSET, lg: Constants.DIALOG_LG_OFFSET} }) {
-        Flex({ justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center }) {
+    GridRow({
+      columns: {
+        xs: Constants.XS_COLUMNS,
+        sm: Constants.SM_COLUMNS,
+        md: Constants.MD_COLUMNS,
+        lg: Constants.LG_COLUMNS
+      },
+      gutter: Constants.DIALOG_GUTTER
+    }) {
+      GridCol({
+        span: {
+          xs: Constants.XS_SPAN,
+          sm: Constants.SM_SPAN,
+          md: Constants.DIALOG_MD_SPAN,
+          lg: Constants.DIALOG_LG_SPAN
+        },
+        offset: {
+          xs: Constants.XS_OFFSET,
+          sm: Constants.SM_OFFSET,
+          md: Constants.DIALOG_MD_OFFSET,
+          lg: Constants.DIALOG_LG_OFFSET
+        }
+      }) {
+        Flex({
+          justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center
+        }) {
           Column() {
             if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
-              Image(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].icon)
+              Image(
+                this.grantGroups[this.count >= this.grantGroups.length ?
+                this.grantGroups.length - 1 :
+                this.count].icon
+              )
                 .width(Constants.DIALOG_ICON_WIDTH)
                 .height(Constants.DIALOG_ICON_HEIGHT)
-                .fillColor($r("sys.color.ohos_id_color_text_primary"))
+                .fillColor($r('sys.color.ohos_id_color_text_primary'))
                 .margin({
                   top: Constants.DIALOG_ICON_MARGIN_TOP
                 })
@@ -137,7 +164,7 @@ struct PermissionDialog {
                       Text() {
                         Span($r('app.string.whether_to_allow'))
                         Span(this.appName)
-                        Span($r("app.string.quotes"))
+                        Span($r('app.string.quotes'))
                         Span(this.showTitle())
                       }
                         .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
@@ -168,13 +195,24 @@ struct PermissionDialog {
                             Span($r('app.string.pasteBoard_desc'))
                           }
                         } else {
-                          if (this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].description.length > 0) {
-                            ForEach(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].description, (item: ResourceStr) => {
-                              Span(item)
-                            })
+                          if (
+                            this.grantGroups[this.count >= this.grantGroups.length ?
+                            this.grantGroups.length - 1 :
+                            this.count].description.length > 0
+                          ) {
+                            ForEach(
+                              this.grantGroups[this.count >= this.grantGroups.length ?
+                              this.grantGroups.length - 1 :
+                              this.count].description,
+                              (item: ResourceStr) => {
+                                Span(item)
+                              }
+                            )
                             Span(this.punctuation())
                           }
-                          Span(this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : (this.count + this.refresh - this.refresh)].reason)
+                          Span(this.grantGroups[this.count >= this.grantGroups.length ?
+                            this.grantGroups.length - 1 :
+                            (this.count + this.refresh - this.refresh)].reason)
                         }
                       }
                         .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
@@ -190,7 +228,12 @@ struct PermissionDialog {
                     }
                   }
 
-                  if (this.locationFlag > Constants.LOCATION_NONE && this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].name === 'LOCATION') {
+                  if (
+                    this.locationFlag > Constants.LOCATION_NONE &&
+                    this.grantGroups[this.count >= this.grantGroups.length ?
+                    this.grantGroups.length - 1 :
+                    this.count].name === 'LOCATION'
+                  ) {
                     LocationCanvas({ locationFlag: $locationFlag })
                   }
                 }
@@ -199,17 +242,24 @@ struct PermissionDialog {
                 Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                   Button($r('app.string.BAN'))
                     .onClick(() => {
-                      this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag)
+                      this.privacyCancel(
+                        this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
+                      )
                     }).customizeButton()
                   Divider()
                     .color($r('sys.color.ohos_id_color_list_separator'))
                     .vertical(true)
                     .strokeWidth(Constants.DIALOG_DIVIDER)
                     .height(Constants.DIVIDER_HEIGHT)
-                    .opacity(.2)
+                    .opacity(0.2)
                   Button(this.sureButton)
                     .onClick(() => {
-                      this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.currentGroup() === 'PASTEBOARD' ? Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag)
+                      this.privacyAccept(
+                        this.grantGroups[this.count],
+                        this.accessTokenId,
+                        this.reqPerms,
+                        this.currentGroup() === 'PASTEBOARD' ? Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag
+                      )
                     }).customizeButton()
                 }.margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
               }
@@ -233,10 +283,10 @@ struct PermissionDialog {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
     if (this.grantGroups[index].name == 'LOCATION') {
       if (this.locationFlag == Constants.LOCATION_FUZZY) {
-        return $r("app.string.access_general_location");
+        return $r('app.string.access_general_location');
       }
       if (this.locationFlag == Constants.LOCATION_UPGRADE) {
-        return $r("app.string.fuzzy_to_exact");
+        return $r('app.string.fuzzy_to_exact');
       }
     }
     return this.grantGroups[index].label;
@@ -260,8 +310,9 @@ struct PermissionDialog {
   }
 
   punctuation() {
-    let reason = this.grantGroups[this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count].reason;
-    return reason ? $r("app.string.comma") : $r("app.string.period");
+    let reason = this.grantGroups[this.count >= this.grantGroups.length ?
+      this.grantGroups.length - 1 : this.count].reason;
+    return reason ? $r('app.string.comma') : $r('app.string.period');
   }
 
   verify() {
@@ -282,7 +333,7 @@ struct PermissionDialog {
   }
 
   answer(ret: number, reqPerms: string[]) {
-    Log.info("code:" + ret + ", perms="+ JSON.stringify(reqPerms) +", result=" + JSON.stringify(this.result));
+    Log.info('code:' + ret + ', perms=' + JSON.stringify(reqPerms) + ', result=' + JSON.stringify(this.result));
     let perms: string[] = [];
     let results: number[] = [];
     reqPerms.forEach(perm => {
@@ -310,7 +361,7 @@ struct PermissionDialog {
   destruction() {
     let windowNum: number = GlobalContext.load('windowNum');
     windowNum --;
-    Log.info("windowNum:" + windowNum);
+    Log.info('windowNum:' + windowNum);
     GlobalContext.store('windowNum', windowNum);
     win.destroyWindow();
     if (windowNum == 0) {
@@ -330,9 +381,8 @@ struct PermissionDialog {
               await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
                 result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
               })
-            }
-            catch(err) {
-              Log.error("failed to grant permission:" + permission);
+            } catch (err) {
+              Log.error('failed to grant permission:' + permission);
             }
           }
           if (preciseMarks.includes(this.locationFlag) && permission === PRECISE_LOCATION_PERMISSION) {
@@ -340,9 +390,8 @@ struct PermissionDialog {
               await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
                 result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
               })
-            }
-            catch(err) {
-              Log.error("failed to grant permission:" + permission);
+            } catch (err) {
+              Log.error('failed to grant permission:' + permission);
             }
           }
         } else {
@@ -350,9 +399,8 @@ struct PermissionDialog {
             await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
               result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
             })
-          }
-          catch(err) {
-            Log.error("failed to grant permission:" + permission);
+          } catch (err) {
+            Log.error('failed to grant permission:' + permission);
           }
         }
       } else {
@@ -361,23 +409,22 @@ struct PermissionDialog {
             await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
               result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
             })
-          }
-          catch(err) {
-            Log.error("failed to grant permission:" + permission);
+          } catch (err) {
+            Log.error('failed to grant permission:' + permission);
           }
         }
       }
       num ++;
-      Log.info("grant permission permission" + permission);
+      Log.info('grant permission permission' + permission);
       if (result == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         permissionList.forEach((req, idx) => {
           if (req == permission) {
             this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
           }
         })
-        Log.info("grant permission success:" + permission);
+        Log.info('grant permission success:' + permission);
       } else {
-        Log.error("failed to grant permission:" + permission);
+        Log.error('failed to grant permission:' + permission);
       }
       if (num == group.permissions.length) {
         this.count ++;
@@ -394,18 +441,16 @@ struct PermissionDialog {
             try {
               Log.info('revokeUserGrantedPermission' + permission)
               await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
-            }
-            catch(err) {
-              Log.error("failed to revoke permission:" + permission);
+            } catch (err) {
+              Log.error('failed to revoke permission:' + permission);
             }
           }
         } else {
           try {
             Log.info('revokeUserGrantedPermission' + permission)
             await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
-          }
-          catch(err) {
-            Log.error("failed to revoke permission:" + permission);
+          } catch (err) {
+            Log.error('failed to revoke permission:' + permission);
           }
         }
       } else {
@@ -413,9 +458,8 @@ struct PermissionDialog {
           try {
             Log.info('revokeUserGrantedPermission' + permission)
             await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
-          }
-          catch(err) {
-            Log.error("failed to revoke permission:" + permission);
+          } catch (err) {
+            Log.error('failed to revoke permission:' + permission);
           }
         }
       }
@@ -441,13 +485,13 @@ struct PermissionDialog {
     this.reqPerms.forEach((permission, idx) => {
       //已授权
       if (stateGroup[idx] == Constants.PASS_OPER) {
-        Log.info("permission has been fixed:" + permission);
+        Log.info('permission has been fixed:' + permission);
         this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
         //待授权
       } else if (stateGroup[idx] == Constants.DYNAMIC_OPER) {
         let group = getPermissionGroup(permission);
         if (!userGrantPermissions.includes(permission)) {
-          Log.info("permission not find:" + permission);
+          Log.info('permission not find:' + permission);
         } else {
           if (group.name === 'FOLDER') {
             switch (permission) {
@@ -476,7 +520,7 @@ struct PermissionDialog {
                 this.grantGroups.push(group);
               } else {
                 if (exist.description.indexOf(label) == -1) {
-                  exist.description.push($r("app.string.and"));
+                  exist.description.push($r('app.string.and'));
                   exist.description.push(label);
                 }
               }
@@ -493,8 +537,9 @@ struct PermissionDialog {
   }
 
   getApplicationName(bundleName: string) {
-    Log.info("getApplicationName bundleName:" + bundleName);
-    bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(applicationInfo => {
+    Log.info('getApplicationName bundleName:' + bundleName);
+    bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT)
+    .then(applicationInfo => {
       let context = this.context.createBundleContext(bundleName);
       context.resourceManager.getStringValue(applicationInfo.labelId, (err, value) => {
         if (value == undefined) {
@@ -502,10 +547,10 @@ struct PermissionDialog {
         } else {
           this.appName = titleTrim(value);
         }
-        Log.info("hap label:" + applicationInfo.label + ", value:"+this.appName);
+        Log.info('hap label:' + applicationInfo.label + ', value:' + this.appName);
       })
     }).catch((err: BusinessError) => {
-      Log.error("applicationInfo error :" + err);
+      Log.error('applicationInfo error :' + err);
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
     })
     this.grantGroups.forEach((group) => {
@@ -518,7 +563,7 @@ struct PermissionDialog {
       if (this.reqPerms.indexOf(permission) != -1) {
         this.reqPermissionDetails.forEach(reqPermissionDetail => {
           if (reqPermissionDetail.name == permission) {
-            Log.info("reqPermissionDetail: " + JSON.stringify(reqPermissionDetail));
+            Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
             let context = this.context.createModuleContext(bundleName, reqPermissionDetail.moduleName);
             context.resourceManager.getStringValue(reqPermissionDetail.reasonId, (err, value) => {
               if (value !== undefined && group.reason === '') {
@@ -580,24 +625,25 @@ struct PermissionDialog {
     this.reqPerms = want.parameters['ohos.user.grant.permission'];
     this.accessTokenId = want.parameters['ohos.aafwk.param.callerToken'];
     if (this.reqPerms == undefined || this.accessTokenId == undefined || this.reqPerms.length == 0) {
-      Log.info("invalid parameters");
+      Log.info('invalid parameters');
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
       return;
     }
-    Log.info("request permission=" + JSON.stringify(this.reqPerms) + ", tokenId = " + this.accessTokenId);
-    Log.info("permission state=" + JSON.stringify(want.parameters['ohos.user.grant.permission.state']));
+    Log.info('request permission=' + JSON.stringify(this.reqPerms) + ', tokenId = ' + this.accessTokenId);
+    Log.info('permission state=' + JSON.stringify(want.parameters['ohos.user.grant.permission.state']));
     this.result = new Array(this.reqPerms.length).fill(-1);
     this.getAvoidWindow();
     this.getPopupPosition();
     this.getPasteBoardInfo();
     let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'];
-    bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(bundleInfo => {
-      this.targetVersion = bundleInfo.targetVersion;
-      this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
-      this.getgrantGroups(want.parameters['ohos.user.grant.permission.state']);
-      this.getApplicationName(bundleName);
+    bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+      .then(bundleInfo => {
+        this.targetVersion = bundleInfo.targetVersion;
+        this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
+        this.getgrantGroups(want.parameters['ohos.user.grant.permission.state']);
+        this.getApplicationName(bundleName);
     }).catch((err: BusinessError) => {
-      Log.error("getBundleInfo error :" + JSON.stringify(err));
+      Log.error('getBundleInfo error :' + JSON.stringify(err));
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
     })
   }

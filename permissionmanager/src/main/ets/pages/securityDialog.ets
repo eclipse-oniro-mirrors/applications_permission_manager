@@ -20,18 +20,18 @@ import display from '@ohos.display';
 import deviceInfo from '@ohos.deviceInfo';
 import { BusinessError } from '@ohos.base';
 import { Log } from '../common/utils/utils';
-import { param, wantInfo } from '../common/utils/typedef';
+import { Param, WantInfo } from '../common/utils/typedef';
 
 let bottomPopoverTypes = ['default', 'phone'];
 let storage = LocalStorage.getShared();
-let want: wantInfo;
+let want: WantInfo;
 let win: window.Window;
 
 @Entry(storage)
 @Component
 struct SecurityDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
-  @LocalStorageLink('want') want: wantInfo = new wantInfo([]);
+  @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
 
   securityDialogController: CustomDialogController | null = new CustomDialogController({
@@ -69,9 +69,9 @@ struct CustomSecurityDialog {
   @State index: number = 0;
   @State naviHeight: number = 0
 
-  securityParams : Array<param> = [
-    new param($r('app.media.ic_public_gps'), $r('app.string.location_desc')),
-    new param($r('app.media.ic_public_folder'), $r('app.string.media_files_desc'))
+  securityParams : Array<Param> = [
+    new Param($r('app.media.ic_public_gps'), $r('app.string.location_desc')),
+    new Param($r('app.media.ic_public_folder'), $r('app.string.media_files_desc'))
   ]
 
   GetAppName() {

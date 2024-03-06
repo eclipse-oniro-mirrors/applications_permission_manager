@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import { backBar } from "../common/components/backBar";
+import { backBar } from '../common/components/backBar';
 import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
-import { showSubpermissionsGrop } from "../common/model/permissionGroup";
-import { verifyAccessToken, getPermissionLabel } from "../common/utils/utils";
+import { showSubpermissionsGrop } from '../common/model/permissionGroup';
+import { verifyAccessToken, getPermissionLabel } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
-import { MediaDocObj, routerParams_3, appInfo, checkboxInfo } from '../common/utils/typedef';
+import { MediaDocObj, RouterParams_3, AppInfo, CheckboxInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_MainAbility:';
@@ -40,9 +40,9 @@ let reqPermissionInfo: bundleManager.ReqPermissionDetail;
 @Entry
 @Component
 struct mediaDocumentPage {
-  private backTitle: ResourceStr = (router.getParams() as routerParams_3).backTitle;
-  private permissions: Permissions[] = (router.getParams() as routerParams_3).permission;
-  private tokenId: number = (router.getParams() as routerParams_3).tokenId;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams_3).backTitle;
+  private permissions: Permissions[] = (router.getParams() as RouterParams_3).permission;
+  private tokenId: number = (router.getParams() as RouterParams_3).tokenId;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State folderStatus: boolean[] = GlobalContext.load('folderStatus');
   @State refresh: boolean = false;
@@ -53,8 +53,10 @@ struct mediaDocumentPage {
     Column() {
       GridRow({ gutter: Constants.GUTTER, columns: {
         xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
-        GridCol({ span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
-          offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET } }) {
+        GridCol({
+          span: { xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.MD_SPAN, lg: Constants.LG_SPAN },
+          offset: { xs: Constants.XS_OFFSET, sm: Constants.SM_OFFSET, md: Constants.MD_OFFSET, lg: Constants.LG_OFFSET }
+        }) {
           Row() {
             Column() {
               Row() {
@@ -62,7 +64,9 @@ struct mediaDocumentPage {
               }
               Row() {
                 Column() {
-                  mediaDocumentItem({ selected: $selected, isRefreshReason: $isRefreshReason, folderStatus: $folderStatus })
+                  mediaDocumentItem({
+                    selected: $selected, isRefreshReason: $isRefreshReason, folderStatus: $folderStatus
+                  })
                 }.width(Constants.FULL_WIDTH)
               }
               .margin({ top: Constants.TITLE_MARGIN_BOTTOM })
@@ -71,15 +75,17 @@ struct mediaDocumentPage {
           }
           .height(Constants.FULL_HEIGHT)
           .width(Constants.FULL_WIDTH)
-          .backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+          .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
         }
-      }.backgroundColor($r("sys.color.ohos_id_color_sub_background"))
+      }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
     }
   }
 
   onPageShow() {
     console.log(TAG + 'onPageShow');
-    if (this.refresh) this.refreshStatus();
+    if (this.refresh) {
+      this.refreshStatus();
+    }
     this.refresh = true;
   }
 
@@ -90,7 +96,11 @@ struct mediaDocumentPage {
     console.log(TAG + 'Refresh permission status');
     let isGranted = true;
     let folderStatus = [false, false, false];
-    if (this.currentGroup === 'LOCATION' && !this.permissions.includes(FUZZY_LOCATION_PERMISSION) && api >= Constants.API_VERSION_SUPPORT_STAGE) {
+    if (
+      this.currentGroup === 'LOCATION' &&
+      !this.permissions.includes(FUZZY_LOCATION_PERMISSION) &&
+      api >= Constants.API_VERSION_SUPPORT_STAGE
+    ) {
       isGranted = false;
     }
     let atManager = abilityAccessCtrl.createAtManager();
@@ -132,8 +142,7 @@ struct mediaDocumentPage {
             this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
           }
         })
-      }
-      catch(err) {
+      } catch (err) {
         console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
       }
     }
@@ -141,7 +150,8 @@ struct mediaDocumentPage {
       this.selected = isGranted ? Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : Constants.PERMISSION_BAN;
       let acManager = abilityAccessCtrl.createAtManager();
       let backgroundState = acManager.verifyAccessTokenSync(this.tokenId, BACKGROUND_LOCATION_PERMISSION);
-      backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ? this.selected = Constants.PERMISSION_ALLOW : null;
+      backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+        this.selected = Constants.PERMISSION_ALLOW : null;
     }
   }
 }
@@ -149,12 +159,12 @@ struct mediaDocumentPage {
 @Component
 struct mediaDocumentItem {
   private context = getContext(this) as common.UIAbilityContext;
-  private backTitle: ResourceStr = (router.getParams() as routerParams_3).backTitle;
-  private bundleName: string = (router.getParams() as routerParams_3).bundleName;
-  private permissions: Permissions[] = (router.getParams() as routerParams_3).permission;
-  private status: number = (router.getParams() as routerParams_3).status;
+  private backTitle: ResourceStr = (router.getParams() as RouterParams_3).backTitle;
+  private bundleName: string = (router.getParams() as RouterParams_3).bundleName;
+  private permissions: Permissions[] = (router.getParams() as RouterParams_3).permission;
+  private status: number = (router.getParams() as RouterParams_3).status;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
-  @State applicationInfo: appInfo = GlobalContext.load('applicationInfo');
+  @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo');
   @Link folderStatus: boolean[];
   @State mediaDocListItem: MediaDocObj[] = []; // Permission information array
   @Link selected: number;
@@ -168,7 +178,7 @@ struct mediaDocumentItem {
   @State label: string = '';
   @State version: string = '';
   @State permissionLabels: Array<ResourceStr> = [];
-  @Link @Watch("updateReason") isRefreshReason: number;
+  @Link @Watch('updateReason') isRefreshReason: number;
 
   /**
    * Grant permissions to the app
@@ -200,7 +210,9 @@ struct mediaDocumentItem {
    * Update reason
    */
   updateReason() {
-    bundleManager.getApplicationInfo(this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT).then(appInfo => {
+    bundleManager.getApplicationInfo(
+      this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT
+    ).then(appInfo => {
       let bundleContext = this.context.createBundleContext(this.bundleName)
       bundleContext.resourceManager.getStringValue(appInfo.labelId, (error, value) => {
         if (value) {
@@ -220,16 +232,16 @@ struct mediaDocumentItem {
     })
   }
 
-  getCheckboxInfo(permission: Permissions): checkboxInfo {
+  getCheckboxInfo(permission: Permissions): CheckboxInfo {
     switch (permission) {
       case DOWNLOAD_PERMISSION:
-        return new checkboxInfo($r('app.string.Download_folder'), 0);
+        return new CheckboxInfo($r('app.string.Download_folder'), 0);
       case DESKTOP_PERMISSION:
-        return new checkboxInfo($r('app.string.Desktop_folder'), 1);
+        return new CheckboxInfo($r('app.string.Desktop_folder'), 1);
       case DOCUMENTS_PERMISSION:
-        return new checkboxInfo($r('app.string.Document_folder'), 2);
+        return new CheckboxInfo($r('app.string.Document_folder'), 2);
       default:
-        return new checkboxInfo($r('app.string.Download_folder'), 0);
+        return new CheckboxInfo($r('app.string.Download_folder'), 0);
     }
   }
 
@@ -254,7 +266,9 @@ struct mediaDocumentItem {
       }
       if (this.permissions.includes(FUZZY_LOCATION_PERMISSION)) {
         this.mediaDocListItem.push(
-          new MediaDocObj($r('app.string.allowed_only_during_use'), [FUZZY_LOCATION_PERMISSION], Constants.PERMISSION_ALLOWED_ONLY_DURING_USE)
+          new MediaDocObj(
+            $r('app.string.allowed_only_during_use'), [FUZZY_LOCATION_PERMISSION], Constants.PERMISSION_ALLOWED_ONLY_DURING_USE
+          )
         );
       } else {
         this.noForeground = true;
@@ -271,18 +285,19 @@ struct mediaDocumentItem {
     if (showSubpermissionsGrop.indexOf(this.currentGroup) != -1) {
       this.permissions.forEach((permission, idx) => {
         if (idx > 0) {
-          this.permissionLabels.push($r("app.string.and"))
+          this.permissionLabels.push($r('app.string.and'))
         }
         let label = getPermissionLabel(permission)
         this.permissionLabels.push(label);
       })
     }
     let hasReason = false;
-    bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(info => {
+    bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+    .then(info => {
       this.permissions.forEach(permission => {
         info.reqPermissionDetails.forEach(reqPermissionDetail => {
           if (reqPermissionDetail.name == permission) {
-            console.info("reqPermissionDetail: " + JSON.stringify(reqPermissionDetail));
+            console.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
             let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
             context.resourceManager.getStringValue(reqPermissionDetail.reasonId).then(value => {
               if (value !== undefined && !hasReason) {
@@ -295,7 +310,8 @@ struct mediaDocumentItem {
         })
       })
     })
-    bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION).then(res => {
+    bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
+    .then(res => {
       this.api = res.targetVersion;
       this.version = res.versionName;
       api = res.targetVersion;
@@ -308,7 +324,7 @@ struct mediaDocumentItem {
           console.log(TAG + `getPermissionFlags success, data->${JSON.stringify(data)}`);
           this.isRisk = (data == Constants.PERMISSION_POLICY_FIXED) ? true : false;
         })
-      } catch(err) {
+      } catch (err) {
         console.log(TAG + 'acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
       }
       if (this.currentGroup == 'PASTEBOARD') {
@@ -318,21 +334,21 @@ struct mediaDocumentItem {
               this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
             }
           })
-        }
-        catch(err) {
+        } catch (err) {
           console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
         }
       }
       if (this.currentGroup == 'LOCATION') {
         let backgroundState = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, BACKGROUND_LOCATION_PERMISSION);
-        backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ? this.selected = Constants.PERMISSION_ALLOW : null;
+        backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          this.selected = Constants.PERMISSION_ALLOW : null;
       }
     }).catch((error: BusinessError) => {
       console.error(TAG + 'bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
     })
   }
 
-  build(){
+  build() {
     Column() {
       Row() {
         Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
@@ -375,7 +391,7 @@ struct mediaDocumentItem {
                   ForEach(this.permissionLabels, (item: ResourceStr) => {
                     Span(item)
                   })
-                  Span(this.reason ? $r("app.string.comma") : $r("app.string.period"))
+                  Span(this.reason ? $r('app.string.comma') : $r('app.string.period'))
                 }
                 Span(this.reason)
               }
@@ -385,7 +401,11 @@ struct mediaDocumentItem {
             }.margin({ left: Constants.TERTIARY_IMAGE_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
           }
         }
-        .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP, left: Constants.DEFAULT_MARGIN_START, bottom: Constants.DEFAULT_MARGIN_BOTTOM })
+        .margin({
+          top: Constants.TERTIARY_ROW_MARGIN_TOP,
+          left: Constants.DEFAULT_MARGIN_START,
+          bottom: Constants.DEFAULT_MARGIN_BOTTOM
+        })
       }
       if (this.isRisk) {
         Row() {
@@ -450,8 +470,11 @@ struct mediaDocumentItem {
                   })
                 }
               }
-              .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-              .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+              .padding({
+                left: $r('sys.float.ohos_id_card_margin_start'),
+                right: $r('sys.float.ohos_id_card_margin_end')
+              })
+              .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
               .margin({ top: Constants.TERTIARY_LISTITEM_MARGIN_TOP })
               .linearGradient((this.isCheck === permission) ? {
                 angle: 90,
@@ -498,12 +521,18 @@ struct mediaDocumentItem {
                         this.selected = item.index;
                         item.permissions.forEach((permission): boolean => {
                           if (item.index === Constants.PERMISSION_ALLOW) {
-                            if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (permission == PRECISE_LOCATION_PERMISSION)) {
+                            if (
+                              (this.api >= Constants.API_VERSION_SUPPORT_STAGE) &&
+                              (permission == PRECISE_LOCATION_PERMISSION)
+                            ) {
                               return false;
                             }
                             this.grantUserGrantedPermission(accessTokenId, permission);
                           } else if (item.index === Constants.PERMISSION_BAN) {
-                            if ((permission == PRECISE_LOCATION_PERMISSION) && (this.api >= Constants.API_VERSION_SUPPORT_STAGE)) {
+                            if (
+                              (permission == PRECISE_LOCATION_PERMISSION) &&
+                              (this.api >= Constants.API_VERSION_SUPPORT_STAGE)
+                            ) {
                               if (this.accurateIsOn) {
                                 this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
                                 this.accurateIsOn = false;
@@ -512,10 +541,14 @@ struct mediaDocumentItem {
                               this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
                             }
                           } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
-                            this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME);
+                            this.revokeUserGrantedPermission(
+                              accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME
+                            );
                           } else if (item.index === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE) {
                             this.grantUserGrantedPermission(accessTokenId, permission);
-                            this.revokeUserGrantedPermission(accessTokenId, BACKGROUND_LOCATION_PERMISSION, Constants.PERMISSION_FLAG);
+                            this.revokeUserGrantedPermission(
+                              accessTokenId, BACKGROUND_LOCATION_PERMISSION, Constants.PERMISSION_FLAG
+                            );
                           }
                           return true;
                         })
@@ -524,8 +557,11 @@ struct mediaDocumentItem {
                   }
                 }
               }
-              .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
-              .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+              .padding({
+                left: $r('sys.float.ohos_id_card_margin_start'),
+                right: $r('sys.float.ohos_id_card_margin_end')
+              })
+              .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
               .linearGradient((this.isTouch === item.index) ? {
                   angle: 90,
                   direction: GradientDirection.Right,
@@ -560,7 +596,7 @@ struct mediaDocumentItem {
           endMargin: Constants.DEFAULT_MARGIN_END
         })
 
-        if ((this.api >= Constants.API_VERSION_SUPPORT_STAGE) && (this.permissions.includes(PRECISE_LOCATION_PERMISSION))) {
+        if (this.api >= Constants.API_VERSION_SUPPORT_STAGE && this.permissions.includes(PRECISE_LOCATION_PERMISSION)) {
           Column() {
             Row() {
               Text($r('app.string.precise_location'))
@@ -574,11 +610,13 @@ struct mediaDocumentItem {
                 .onChange((isOn: boolean) => {
                   let acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
-                    acManager.grantUserGrantedPermission(accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
-                      .then(() => { this.accurateIsOn = true })
+                    acManager.grantUserGrantedPermission(
+                      accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG
+                    ).then(() => { this.accurateIsOn = true })
                   } else {
-                    acManager.revokeUserGrantedPermission(accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG)
-                      .then(() => { this.accurateIsOn = false })
+                    acManager.revokeUserGrantedPermission(
+                      accessTokenId, PRECISE_LOCATION_PERMISSION, Constants.PERMISSION_FLAG
+                    ).then(() => { this.accurateIsOn = false })
                   }
                 })
                 .padding({ right: 0 })
