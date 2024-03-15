@@ -512,7 +512,7 @@ struct applicationItem {
       })
       Flex({ alignItems:ItemAlign.Start, justifyContent: FlexAlign.Start }) {
         Column() {
-          if (globalGroup.indexOf(this.currentGroup) !== -1  && this.isMuteSupported === true) {
+          if (globalGroup.indexOf(this.currentGroup) !== -1 && this.isMuteSupported === true) {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                 Text(this.currentGroup == 'CAMERA' ? $r('app.string.camera') : $r('app.string.microphone'))
@@ -533,7 +533,7 @@ struct applicationItem {
                           let audioVolumeManager = audioManager.getVolumeManager();
                           let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
                           audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-                            audioVolumeGroupManager.setMicrophoneMute(false)
+                            audioVolumeGroupManager.setMicMute(false)
                           })
                         }
                       }

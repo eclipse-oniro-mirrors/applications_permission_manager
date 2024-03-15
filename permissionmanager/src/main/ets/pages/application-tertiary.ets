@@ -339,7 +339,9 @@ struct mediaDocumentItem {
         }
       }
       if (this.currentGroup == 'LOCATION') {
-        let backgroundState = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, BACKGROUND_LOCATION_PERMISSION);
+        let backgroundState = acManager.verifyAccessTokenSync(
+          res.appInfo.accessTokenId, BACKGROUND_LOCATION_PERMISSION
+        );
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.selected = Constants.PERMISSION_ALLOW : null;
       }

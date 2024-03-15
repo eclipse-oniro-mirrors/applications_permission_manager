@@ -125,7 +125,7 @@ export struct globalDialog {
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-        audioVolumeGroupManager.setMicrophoneMute(true).then(() => {
+        audioVolumeGroupManager.setMicMute(true).then(() => {
           if (this.controller !== undefined) {
             this.controller.close();
           }
