@@ -96,7 +96,7 @@ struct PermissionDialog {
   @State reqPerms: Array<string> = [];
   @State grantGroups: Array<GroupInfo> = [];
   @State userFixedFlag: number = 2; // means user fixed
-  @State appName: string = "";
+  @State appName: string = '';
   @State locationFlag: number = Constants.LOCATION_NONE;
   @State targetVersion: number = 0;
   @State reqPermissionDetails: bundleManager.ReqPermissionDetail[] = [];

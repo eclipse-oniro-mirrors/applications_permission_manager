@@ -155,7 +155,7 @@ struct globalDialog {
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-        audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
+        audioVolumeGroupManager.setMicMute(false).then(() => {
           this.context.terminateSelf();
         })
       })
@@ -170,7 +170,7 @@ struct globalDialog {
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-        audioVolumeGroupManager.setMicrophoneMute(false).then(() => {
+        audioVolumeGroupManager.setMicMute(false).then(() => {
           this.context.terminateSelf();
         })
       })
