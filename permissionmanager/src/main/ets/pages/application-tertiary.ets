@@ -19,13 +19,12 @@ import common from '@ohos.app.ability.common';
 import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
-import { showSubpermissionsGrop } from '../common/model/permissionGroup';
-import { verifyAccessToken, getPermissionLabel } from '../common/utils/utils';
+import { showSubPermissionsGroup } from '../common/model/permissionGroup';
+import { Log, getPermissionLabel } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
 import { MediaDocObj, RouterParams3, AppInfo, CheckboxInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
-const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
@@ -82,7 +81,6 @@ struct mediaDocumentPage {
   }
 
   onPageShow() {
-    console.log(TAG + 'onPageShow');
     if (this.refresh) {
       this.refreshStatus();
     }
@@ -93,7 +91,7 @@ struct mediaDocumentPage {
     if (reqPermissionInfo) {
       this.isRefreshReason ++;
     }
-    console.log(TAG + 'Refresh permission status');
+    Log.info('Refresh permission status');
     let isGranted = true;
     let folderStatus = [false, false, false];
     if (
@@ -130,9 +128,13 @@ struct mediaDocumentPage {
         }
       }
     }
-    console.log(TAG + 'isGranted: ' + JSON.stringify(isGranted));
+    Log.info('isGranted: ' + JSON.stringify(isGranted));
     this.folderStatus = folderStatus;
 
+    this.refreshSelected(isGranted);
+  }
+
+  refreshSelected(isGranted: boolean) {
     this.selected = isGranted ? Constants.PERMISSION_ALLOW : Constants.PERMISSION_BAN;
     if (this.currentGroup === 'PASTEBOARD') {
       try {
@@ -143,7 +145,7 @@ struct mediaDocumentPage {
           }
         })
       } catch (err) {
-        console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
       }
     }
     if (this.currentGroup === 'LOCATION') {
@@ -189,7 +191,7 @@ struct mediaDocumentItem {
     abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
       .then(() => {})
       .catch((error: BusinessError) => {
-        console.error(TAG + 'grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+        Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
       })
   }
 
@@ -202,7 +204,7 @@ struct mediaDocumentItem {
     abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, flag)
       .then(() => {})
       .catch((error: BusinessError) => {
-        console.error(TAG + 'revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+        Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
       })
   }
 
@@ -222,7 +224,7 @@ struct mediaDocumentItem {
         }
       })
     }).catch((error: BusinessError) => {
-      console.error(TAG + 'getApplicationInfo error: ' + JSON.stringify(error));
+      Log.error('getApplicationInfo error: ' + JSON.stringify(error));
     })
     let context = this.context.createModuleContext(this.bundleName, reqPermissionInfo.moduleName);
     context.resourceManager.getStringValue(reqPermissionInfo.reasonId).then(value => {
@@ -245,11 +247,7 @@ struct mediaDocumentItem {
     }
   }
 
-  /**
-   * Lifecycle function, executed when the page is initialized
-   */
-  aboutToAppear() {
-    this.selected = this.status ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
+  getMediaDocList() {
     if (this.currentGroup == 'PASTEBOARD') {
       this.mediaDocListItem.push(
         new MediaDocObj($r('app.string.per_use_query'), this.permissions, Constants.PERMISSION_ONLY_THIS_TIME)
@@ -281,8 +279,11 @@ struct mediaDocumentItem {
     this.mediaDocListItem.push(
       new MediaDocObj($r('app.string.ban'), this.permissions, Constants.PERMISSION_BAN)
     );
+  }
+
+  getReason() {
     this.label = this.applicationInfo.label;
-    if (showSubpermissionsGrop.indexOf(this.currentGroup) != -1) {
+    if (showSubPermissionsGroup.indexOf(this.currentGroup) != -1) {
       this.permissions.forEach((permission, idx) => {
         if (idx > 0) {
           this.permissionLabels.push($r('app.string.and'))
@@ -293,23 +294,33 @@ struct mediaDocumentItem {
     }
     let hasReason = false;
     bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
-    .then(info => {
-      this.permissions.forEach(permission => {
-        info.reqPermissionDetails.forEach(reqPermissionDetail => {
-          if (reqPermissionDetail.name == permission) {
-            console.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
-            let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
-            context.resourceManager.getStringValue(reqPermissionDetail.reasonId).then(value => {
-              if (value !== undefined && !hasReason) {
-                this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
-                reqPermissionInfo = reqPermissionDetail;
-                hasReason = true;
-              }
-            })
-          }
+      .then(info => {
+        this.permissions.forEach(permission => {
+          info.reqPermissionDetails.forEach(reqPermissionDetail => {
+            if (reqPermissionDetail.name == permission) {
+              Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
+              let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
+              context.resourceManager.getStringValue(reqPermissionDetail.reasonId).then(value => {
+                if (value !== undefined && !hasReason) {
+                  this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+                  reqPermissionInfo = reqPermissionDetail;
+                  hasReason = true;
+                }
+              })
+            }
+          })
         })
       })
-    })
+  }
+
+  /**
+   * Lifecycle function, executed when the page is initialized
+   */
+  aboutToAppear() {
+    this.selected = this.status ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
+    this.getMediaDocList();
+    this.getReason();
+
     bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
     .then(res => {
       this.api = res.targetVersion;
@@ -321,11 +332,11 @@ struct mediaDocumentItem {
       this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
       try {
         acManager.getPermissionFlags(res.appInfo.accessTokenId, this.permissions[0]).then((data) => {
-          console.log(TAG + `getPermissionFlags success, data->${JSON.stringify(data)}`);
+          Log.info(`getPermissionFlags success, data->${JSON.stringify(data)}`);
           this.isRisk = (data == Constants.PERMISSION_POLICY_FIXED) ? true : false;
         })
       } catch (err) {
-        console.log(TAG + 'acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
+        Log.error('acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
       }
       if (this.currentGroup == 'PASTEBOARD') {
         try {
@@ -335,7 +346,7 @@ struct mediaDocumentItem {
             }
           })
         } catch (err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+          Log.error('getPermissionFlags error: ' + JSON.stringify(err));
         }
       }
       if (this.currentGroup == 'LOCATION') {
@@ -346,7 +357,7 @@ struct mediaDocumentItem {
           this.selected = Constants.PERMISSION_ALLOW : null;
       }
     }).catch((error: BusinessError) => {
-      console.error(TAG + 'bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
+      Log.error('bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
     })
   }
 

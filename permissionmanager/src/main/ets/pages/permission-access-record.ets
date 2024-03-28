@@ -21,11 +21,9 @@ import privacyManager from '@ohos.privacyManager';
 import { backBar } from '../common/components/backBar';
 import Constants from '../common/utils/constant';
 import { userGrantPermissions } from '../common/model/permissionGroup';
-import { getPermissionGroup, getGroupIdByPermission } from '../common/utils/utils';
+import { Log, getPermissionGroup, getGroupIdByPermission } from '../common/utils/utils';
 import { StringObj, AppInfoSimple, AppRecordInfo, AppInfo, GroupRecordInfo, AppGroupRecordInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-
-const TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -49,6 +47,11 @@ struct permissionRecordPage {
   @State currentIndex: number = 0;
   @State show: boolean = false;
   @State isTouch: string = '';
+  @State reqUserRecords: privacyManager.PermissionUsedRecord[] = [];
+  @State reqUserPermissions: string[] = [];
+  @State permissionGroups: AppGroupRecordInfo[] = [];
+  @State groupNames: ResourceStr[] = [];
+  @State appLastTime: number = 0;
   @Builder TabBuilder(index: number) {
     Flex({
       alignItems: index ? ItemAlign.Start : ItemAlign.End,
@@ -502,84 +505,94 @@ struct permissionRecordPage {
     })
   }
 
+  async getReqUserRecords(record: privacyManager.BundleUsedRecord, info: bundleManager.BundleInfo) {
+    for (let j = 0; j < record.permissionRecords.length; j++) {
+      let permission = record.permissionRecords[j].permissionName;
+      try {
+        let flag = await abilityAccessCtrl.createAtManager().getPermissionFlags(info.appInfo.accessTokenId, permission);
+        if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
+          continue;
+        }
+      } catch (err) {
+        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+      }
+      if (userGrantPermissions.indexOf(permission) != -1) {
+        this.reqUserRecords.push(record.permissionRecords[j]);
+      }
+    }
+  }
+
+  async getReqUserPermissions(reqPermissions: Permissions[], info: bundleManager.BundleInfo) {
+    let acManager = abilityAccessCtrl.createAtManager();
+    for (let k = 0; k < reqPermissions.length; k++) {
+      let reqPermission = reqPermissions[k];
+      try {
+        let reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
+        if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
+          continue;
+        }
+      } catch (err) {
+        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+      }
+      if (userGrantPermissions.indexOf(reqPermission) != -1) {
+        this.reqUserPermissions.push(reqPermission);
+      }
+    }
+  }
+
+  getPermissionGroups() {
+    this.reqUserRecords.forEach(reqUserRecord => {
+      let group = getPermissionGroup(reqUserRecord.permissionName);
+      if (!group) {
+        Log.info('permission not find:' + reqUserRecord.permissionName);
+      } else {
+        let existing = this.permissionGroups.find(permissionGroup => permissionGroup.name == group.name);
+        let lastTime = reqUserRecord.lastAccessTime;
+        lastTime > this.appLastTime ? this.appLastTime = lastTime : '';
+        if (!existing) {
+          let appGroupRecord: AppGroupRecordInfo = new AppGroupRecordInfo(
+            group.name,
+            group.groupName,
+            group.label,
+            group.icon,
+            reqUserRecord.accessCount,
+            lastTime
+          );
+          this.permissionGroups.push(appGroupRecord);
+          this.groupNames.push(group.groupName);
+        } else {
+          existing.count += reqUserRecord.accessCount;
+          lastTime > existing.lastTime ? existing.lastTime = lastTime : '';
+        }
+      }
+    })
+  }
+
   getInfo(record: privacyManager.BundleUsedRecord, sortFlag: boolean) {
     bundleManager.getBundleInfo(
       record.bundleName,
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION
     ).then(async (info): Promise<boolean> => {
-      let reqUserPermissions: string[] = [];
-      let reqUserRecords: privacyManager.PermissionUsedRecord[] = [];
-      let permissionGroups: AppGroupRecordInfo[] = [];
-      let acManager = abilityAccessCtrl.createAtManager();
       let appInfo: AppRecordInfo = new AppRecordInfo('', '', '', 0, 0, [], [], [], [], 0);
       let reqPermissions: Permissions[] = [];
+      let groupIds: number[] = [];
+      this.reqUserPermissions = [];
+      this.reqUserRecords = [];
+      this.permissionGroups = [];
+      this.groupNames = [];
+      this.appLastTime = 0;
       info.reqPermissionDetails.forEach(item => {
         reqPermissions.push(item.name as Permissions);
       });
-      for (let j = 0; j < record.permissionRecords.length; j++) {
-        let permission = record.permissionRecords[j].permissionName;
-        try {
-          let flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
-          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue;
-          }
-        } catch (err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
-        }
-        if (userGrantPermissions.indexOf(permission) != -1) {
-          reqUserRecords.push(record.permissionRecords[j]);
-        }
-      }
-      if (reqUserRecords.length == 0) {
+      await this.getReqUserRecords(record, info);
+      await this.getReqUserPermissions(reqPermissions, info);
+      if (this.reqUserRecords.length == 0) {
         return false;
       }
-      for (let k = 0; k < reqPermissions.length; k++) {
-        let reqPermission = reqPermissions[k];
-        try {
-          let reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
-          if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue;
-          }
-        } catch (err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
-        }
-        if (userGrantPermissions.indexOf(reqPermission) != -1) {
-          reqUserPermissions.push(reqPermission);
-        }
-      }
-
-      let groupNames: ResourceStr[] = [];
-      let appLastTime = 0;
-      reqUserRecords.forEach(reqUserRecord => {
-        let group = getPermissionGroup(reqUserRecord.permissionName);
-        if (!group) {
-          console.info(TAG + 'permission not find:' + reqUserRecord.permissionName);
-        } else {
-          let existing = permissionGroups.find(permissionGroup => permissionGroup.name == group.name);
-          let lastTime = reqUserRecord.lastAccessTime;
-          lastTime > appLastTime ? appLastTime = lastTime : '';
-          if (!existing) {
-            let appGroupRecord: AppGroupRecordInfo = new AppGroupRecordInfo(
-              group.name,
-              group.groupName,
-              group.label,
-              group.icon,
-              reqUserRecord.accessCount,
-              lastTime
-            );
-            permissionGroups.push(appGroupRecord);
-            groupNames.push(group.groupName);
-          } else {
-            existing.count += reqUserRecord.accessCount;
-            lastTime > existing.lastTime ? existing.lastTime = lastTime : '';
-          }
-        }
-      })
-
-      let groupIds: number[] = [];
-      for (let i = 0; i < reqUserPermissions.length; i++) {
-        let groupId = getGroupIdByPermission(reqUserPermissions[i])
+      this.getPermissionGroups();
+      for (let i = 0; i < this.reqUserPermissions.length; i++) {
+        let groupId = getGroupIdByPermission(this.reqUserPermissions[i])
         if (groupIds.indexOf(groupId) == -1) {
           groupIds.push(groupId);
         }
@@ -595,11 +608,11 @@ struct permissionRecordPage {
       appInfo.name = info.name;
       appInfo.api = info.targetVersion;
       appInfo.accessTokenId = info.appInfo.accessTokenId;
-      appInfo.reqUserPermissions = reqUserPermissions;
-      appInfo.permissions = permissionGroups;
-      appInfo.groupNames = groupNames;
+      appInfo.reqUserPermissions = this.reqUserPermissions;
+      appInfo.permissions = this.permissionGroups;
+      appInfo.groupNames = this.groupNames;
       appInfo.groupIds = groupIds;
-      appInfo.appLastTime = appLastTime;
+      appInfo.appLastTime = this.appLastTime;
       this.applicationInfos.push(appInfo);
       if (sortFlag) {
         let appInfos: AppRecordInfo[] = [];
@@ -622,60 +635,60 @@ struct permissionRecordPage {
       endTime: 0,
       flag: 1
     }
-    privacyManager.getPermissionUsedRecord(request).then(async records => {
-      let groupArray: GroupRecordInfo[] = [];
-      let acManager = abilityAccessCtrl.createAtManager();
-      for (let i = 0; i < records.bundleRecords.length; i++) {
-        let record = records.bundleRecords[i];
-        console.info(
-          TAG + 'bundleName: ' + record.bundleName + ' permissionRecords: ' + JSON.stringify(record.permissionRecords)
-        );
-        try {
-          await bundleManager.queryAbilityInfo({
-            bundleName: record.bundleName,
-            action: 'action.system.home',
-            entities: ['entity.system.home']
-          }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
-        } catch (e) {
-          continue;
-        }
-        this.getInfo(record, (i + 1) == records.bundleRecords.length);
+    privacyManager.getPermissionUsedRecord(request).then(records => {
+      this.getRecord(records);
+    })
+  }
 
-        for (let j = 0; j < record.permissionRecords.length; j++) {
-          let permissionRecord = record.permissionRecords[j];
-          try {
-            let reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName);
-            if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
-              continue;
-            }
-          } catch (err) {
-            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+  async getRecord(records: privacyManager.PermissionUsedResponse) {
+    let groupArray: GroupRecordInfo[] = [];
+    let acManager = abilityAccessCtrl.createAtManager();
+    for (let i = 0; i < records.bundleRecords.length; i++) {
+      let record = records.bundleRecords[i];
+      Log.info('bundleName: ' + record.bundleName + 'permissionRecords: ' + JSON.stringify(record.permissionRecords));
+      try {
+        await bundleManager.queryAbilityInfo({
+          bundleName: record.bundleName,
+          action: 'action.system.home',
+          entities: ['entity.system.home']
+        }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
+      } catch (e) {
+        continue;
+      }
+      this.getInfo(record, (i + 1) == records.bundleRecords.length);
+      for (let j = 0; j < record.permissionRecords.length; j++) {
+        let permissionRecord = record.permissionRecords[j];
+        try {
+          let reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName);
+          if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
+            continue;
           }
-          let group = getPermissionGroup(permissionRecord.permissionName);
-          if (group) {
-            let exist = groupArray.find(permissionGroup => permissionGroup.name == group.name);
-            let lastTime = permissionRecord.lastAccessTime;
-            if (!exist) {
-              let groupRecord: GroupRecordInfo = new GroupRecordInfo(
-                group.name,
-                group.groupName,
-                group.label,
-                group.icon,
-                group.permissions,
-                permissionRecord.accessCount,
-                lastTime
-              );
-              groupArray.push(groupRecord);
-            } else {
-              exist.sum += permissionRecord.accessCount;
-              lastTime > exist.recentVisit ? exist.recentVisit = lastTime : '';
-            }
+        } catch (err) {
+          Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+        }
+        let group = getPermissionGroup(permissionRecord.permissionName);
+        if (group) {
+          let exist = groupArray.find(permissionGroup => permissionGroup.name == group.name);
+          let lastTime = permissionRecord.lastAccessTime;
+          if (!exist) {
+            let groupRecord: GroupRecordInfo = new GroupRecordInfo(
+              group.name,
+              group.groupName,
+              group.label,
+              group.icon,
+              group.permissions,
+              permissionRecord.accessCount,
+              lastTime);
+            groupArray.push(groupRecord);
+          } else {
+            exist.sum += permissionRecord.accessCount;
+            lastTime > exist.recentVisit ? exist.recentVisit = lastTime : '';
           }
         }
       }
-      groupArray.sort((a, b) => { return b.recentVisit - a.recentVisit });
-      this.groups = groupArray;
-    })
+    }
+    groupArray.sort((a, b) => { return b.recentVisit - a.recentVisit });
+    this.groups = groupArray;
   }
 
   aboutToAppear() {

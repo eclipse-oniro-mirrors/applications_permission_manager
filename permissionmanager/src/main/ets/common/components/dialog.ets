@@ -20,6 +20,7 @@ import deviceInfo from '@ohos.deviceInfo';
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
 import { GlobalContext } from '../utils/globalContext';
+import { Log } from '../utils/utils';
 
 let bottomPopoverTypes = ['default', 'phone'];
 
@@ -146,7 +147,7 @@ export struct globalDialog {
       let isVertical = dis.width > dis.height ? false : true;
       this.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical;
     } catch (exception) {
-      console.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+      Log.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
     };
   }
 }

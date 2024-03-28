@@ -19,7 +19,7 @@ import bundleMonitor from '@ohos.bundle.bundleMonitor';
 import account_osAccount from '@ohos.account.osAccount';
 import { GlobalContext } from '../common/utils/globalContext';
 
-const TAG = 'PermissionManager_MainAbility:';
+const TAG = 'PermissionManager_Log:';
 const USER_ID = 100;
 
 export default class MainAbility extends UIAbility {
