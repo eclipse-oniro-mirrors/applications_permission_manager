@@ -30,9 +30,21 @@
                 "description": "$string:MainAbility_desc",
                 "icon": "$media:app_icon",
                 "label": "$string:MainAbility_label",
-                "exported": false,
+                "exported": true,
                 "launchType": "singleton",
-                "orientation": "auto_rotation_restricted"
+                "orientation": "auto_rotation_restricted",
+                "permissions": ["ohos.permission.ACCESS_SECURITY_PRIVACY_CENTER"],
+                "skills": [
+                    {
+                        "actions": ["action.access.privacy.center"]
+                    }
+                ],
+                "metadata": [
+                    {
+                        "name": "metadata.access.privacy.center",
+                        "value": "security_privacy.json"
+                    }
+                ]
             }
         ],
         "extensionAbilities": [
@@ -93,6 +105,9 @@
             },
             {
                 "name": "ohos.permission.ACCESS_BUNDLE_DIR"
+            },
+            {
+                "name": "ohos.permission.ACCESS_SECURITY_PRIVACY_CENTER"
             }
         ]
     }
