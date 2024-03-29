@@ -15,6 +15,7 @@
 
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import i18n from '@ohos.i18n';
+import hilog from '@ohos.hilog';
 import { permissionGroups, groups } from '../model/permissionGroup';
 import Constants from '../utils/constant';
 import { BundleInfoUtils } from './bundleInfoUtils';
@@ -42,7 +43,7 @@ export function verifyAccessToken(accessTokenId: number, permission: Permissions
           }
         })
       } catch (err) {
-        console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
         resolve(data);
       }
     }
@@ -207,14 +208,23 @@ export function getGroupIdByPermission(permission: string): number {
   return 0;
 }
 
-const TAG = 'PermissionManager_Log';
-
 export class Log {
-  static info(log: string) {
-    console.info(`Info: ${TAG}  ${log}`);
+  static domain: number = 0x8214;
+  static tag: string = 'PermissionManager_Log';
+
+  public static debug(message: string): void {
+    hilog.debug(Log.domain, Log.tag, message);
   }
 
-  static error(log: string) {
-    console.error(`Error: ${TAG}  ${log}`);
+  public static info(message: string): void {
+    hilog.info(Log.domain, Log.tag, message);
+  }
+
+  public static warn(message: string): void {
+    hilog.warn(Log.domain, Log.tag, message);
+  }
+
+  public static error(message: string): void {
+    hilog.error(Log.domain, Log.tag, message);
   }
 }

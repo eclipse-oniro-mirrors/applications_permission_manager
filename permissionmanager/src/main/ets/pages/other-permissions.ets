@@ -21,7 +21,6 @@ import { verifyAccessToken } from '../common/utils/utils';
 import { OtherPermission, RouterParams3 } from '../common/utils/typedef';
 import { Permissions } from '@ohos.abilityAccessCtrl';
 
-const TAG = 'PermissionManager_MainAbility:';
 let status: number = (router.getParams() as RouterParams3).status; // Status: Allowed, Forbidden
 let permissions: Permissions[] = (router.getParams() as RouterParams3).permission; // permissions name
 let otherPermissionList: OtherPermission[] = []; // otherPermission List
@@ -69,7 +68,6 @@ struct appNamePage {
    * Lifecycle function, triggered once when this page is displayed
    */
   onPageShow() {
-    console.log(TAG + 'onPageShow other-permissions');
     permissions.forEach(permission => {
       verifyAccessToken(this.tokenId, permission).then((data): void => {
         status = data;

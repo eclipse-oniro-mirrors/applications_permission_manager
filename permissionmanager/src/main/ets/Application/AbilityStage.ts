@@ -15,10 +15,6 @@
 
 import AbilityStage from '@ohos.app.ability.AbilityStage';
 
-const TAG = 'PermissionManager_MainAbility:';
-
 export default class MyAbilityStage extends AbilityStage {
-  onCreate(): void {
-    console.info(TAG + 'MyAbilityStage onCreate.');
-  }
+  onCreate(): void {}
 }

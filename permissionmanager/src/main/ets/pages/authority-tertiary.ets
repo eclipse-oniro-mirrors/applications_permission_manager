@@ -19,13 +19,11 @@ import { textInput } from '../common/components/search';
 import router from '@ohos.router';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
-import { verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
+import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
 import { ApplicationObj, PermissionInfo, RouterParams2, PermissionApplications, AppInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
-
-const TAG = 'PermissionManager_MainAbility:';
 
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -155,9 +153,7 @@ struct applicationItem {
       this.permissionNum = num;
     }).catch((error: BusinessError) => {
       this.toggleIsOn[index] = false;
-      console.error(
-        TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error)
-      );
+      Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
     })
   }
 
@@ -225,7 +221,7 @@ struct applicationItem {
               }
             })
           } catch (err) {
-            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+            Log.error('getPermissionFlags error: ' + JSON.stringify(err));
           }
         }
       })

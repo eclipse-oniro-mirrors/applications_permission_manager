@@ -22,14 +22,13 @@ import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
-import { groups, userGrantPermissions, globalGroup, permissionGroups, showSubpermissionsGrop } from '../common/model/permissionGroup';
-import { indexValue, getPermissionGroupByName, getGroupIdByPermission, addLocalTag, sortByName } from '../common/utils/utils';
+import { groups, userGrantPermissions, globalGroup, permissionGroups, showSubPermissionsGroup } from '../common/model/permissionGroup';
+import { Log, indexValue, getPermissionGroupByName, getGroupIdByPermission, addLocalTag, sortByName } from '../common/utils/utils';
 import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import bundleManager from '@ohos.bundle.bundleManager';
 
-const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 let storage = LocalStorage.getShared();
@@ -67,7 +66,7 @@ struct authorityManagementPage {
             .height(Constants.MANAGEMENT_ROW_HEIGHT)
           }
         }.onClick(() => {
-          if (item.group === 'OTHER' || showSubpermissionsGrop.indexOf(item.group) !== -1) {
+          if (item.group === 'OTHER' || showSubPermissionsGroup.indexOf(item.group) !== -1) {
             router.pushUrl({
               url: 'pages/authority-secondary',
               params: { list: this.allPermissionApplications, backTitle: item.groupName, group: item.group }
@@ -260,7 +259,7 @@ struct authorityManagementPage {
    * @param {Object} info bundleInfos Application Information
    */
   async deduplicationPermissions(info: bundleManager.BundleInfo) {
-    console.log(TAG + 'allBundleInfo start: ' + info.name);
+    Log.info('allBundleInfo start: ' + info.name);
     let reqPermissions: Permissions[] = [];
     info.reqPermissionDetails.forEach(item => {
       reqPermissions.push(item.name as Permissions);
@@ -271,7 +270,6 @@ struct authorityManagementPage {
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
-        console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name)
         if ((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
           continue;
         }
@@ -284,12 +282,11 @@ struct authorityManagementPage {
         }
         try {
           let flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
-          console.log(TAG + 'getPermissionFlags: ' + permission + 'app: ' + info.name + 'flag: ' + flag);
           if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
         } catch (err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
+          Log.error('getPermissionFlags error: ' + JSON.stringify(err));
         }
         if (userGrantPermissions.indexOf(permission) != -1) {
           reqUserPermissions.push(permission);
@@ -299,6 +296,10 @@ struct authorityManagementPage {
         }
       }
     }
+    this.getAllBundleInfo(info, reqUserPermissions);
+  }
+
+  getAllBundleInfo(info: bundleManager.BundleInfo, reqUserPermissions: Permissions[]) {
     let groupIds: number[] = [];
     for (let i = 0; i < reqUserPermissions.length; i++) {
       let groupId = getGroupIdByPermission(reqUserPermissions[i])
@@ -323,7 +324,7 @@ struct authorityManagementPage {
       '',
       ''
     );
-    console.log(TAG + 'allBundleInfo.push: ' + info.name);
+    Log.info('allBundleInfo.push: ' + info.name);
     this.allBundleInfo.push(ap);
   }
 
@@ -334,10 +335,10 @@ struct authorityManagementPage {
    * @param {String} labelName Application Name
    */
   async updateAppLabel(info: AppInfo) {
-    console.info(
-      TAG + 'bundleName: ' + JSON.stringify(info.bundleName) +
-      `labelResource: ` + JSON.stringify(info.labelResource) +
-      'labelId: ' + JSON.stringify(info.labelId)
+    Log.info(
+      'bundleName: ' + info.bundleName +
+      ` labelResource: ` + JSON.stringify(info.labelResource) +
+      ' labelId: ' + info.labelId
     );
 
     try {
@@ -348,7 +349,7 @@ struct authorityManagementPage {
         info.label = await resourceManager.getStringValue(info.labelId);
       }
     } catch (error) {
-      console.error(TAG + 'getStringValue promise error is ' + error);
+      Log.error('getStringValue promise error is ' + error);
     }
     addLocalTag(info);
   }
@@ -359,10 +360,10 @@ struct authorityManagementPage {
    * @param {String} bundleName Package names
    */
   async updateAppIcon(info: AppInfo) {
-    console.info(
-      TAG + 'bundleName: ' + JSON.stringify(info.bundleName) +
-      `iconResource: ` + JSON.stringify(info.iconResource) +
-      'iconId: ' + JSON.stringify(info.iconId)
+    Log.info(
+      'bundleName: ' + info.bundleName +
+      ` iconResource: ` + JSON.stringify(info.iconResource) +
+      ' iconId: ' + info.iconId
     );
 
     try {
@@ -375,7 +376,7 @@ struct authorityManagementPage {
         info.icon = iconDescriptor?.getPixelMap();
       }
     } catch (error) {
-      console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
+      Log.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
     }
 
     if (!info.icon) {
@@ -387,7 +388,6 @@ struct authorityManagementPage {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-    console.log(TAG + 'on aboutToAppear, version 1.01');
     this.getAllBundlePermissions();
     let dis = display.getDefaultDisplaySync();
     this.isVertical = dis.height > dis.width ? true : false;

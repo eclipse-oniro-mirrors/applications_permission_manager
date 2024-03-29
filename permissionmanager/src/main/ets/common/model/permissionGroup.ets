@@ -101,7 +101,7 @@ export const userGrantPermissions: string[] = [
     'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY'
 ];
 
-export const showSubpermissionsGrop: string[] = [
+export const showSubPermissionsGroup: string[] = [
     'CALENDAR',
     'CONTACTS',
 ];

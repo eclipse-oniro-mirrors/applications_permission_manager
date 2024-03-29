@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
 import window from '@ohos.window';
@@ -26,7 +26,7 @@ import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../commo
 import { GroupInfo, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
-import { showSubpermissionsGrop, userGrantPermissions } from '../common/model/permissionGroup';
+import { showSubPermissionsGroup, userGrantPermissions } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button)function customizeButton() {
@@ -96,6 +96,7 @@ struct PermissionDialog {
   @State reqPerms: Array<string> = [];
   @State grantGroups: Array<GroupInfo> = [];
   @State userFixedFlag: number = 2; // means user fixed
+  @State grantStatus: number = -1;
   @State appName: string = '';
   @State locationFlag: number = Constants.LOCATION_NONE;
   @State targetVersion: number = 0;
@@ -369,62 +370,33 @@ struct PermissionDialog {
   }
 
   async privacyAccept(group: GroupInfo, accessTokenId: number, permissionList: string[], userFixedFlag: number) {
-    let acManager = abilityAccessCtrl.createAtManager();
     let num = 0;
     group.permissions.forEach(async permission => {
-      let result: number = -1;
-      if (showSubpermissionsGrop.indexOf(group.name) == -1) {
+      this.grantStatus = -1;
+      if (showSubPermissionsGroup.indexOf(group.name) == -1) {
         if (group.name == 'LOCATION' && this.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
           if (fuzzyMarks.includes(this.locationFlag) && permission === FUZZY_LOCATION_PERMISSION) {
-            try {
-              await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-                result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
-              })
-            } catch (err) {
-              Log.error('failed to grant permission:' + permission);
-            }
+            await this.operationPermission(true, accessTokenId, permission, userFixedFlag);
           }
           if (preciseMarks.includes(this.locationFlag) && permission === PRECISE_LOCATION_PERMISSION) {
-            try {
-              await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-                result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
-              })
-            } catch (err) {
-              Log.error('failed to grant permission:' + permission);
-            }
+            await this.operationPermission(true, accessTokenId, permission, userFixedFlag);
           }
         } else {
-          try {
-            await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
-            })
-          } catch (err) {
-            Log.error('failed to grant permission:' + permission);
-          }
+          await this.operationPermission(true, accessTokenId, permission, userFixedFlag);
         }
       } else {
         if (permissionList.includes(permission)) {
-          try {
-            await acManager.grantUserGrantedPermission(accessTokenId, permission, userFixedFlag).then(() => {
-              result = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
-            })
-          } catch (err) {
-            Log.error('failed to grant permission:' + permission);
-          }
+          await this.operationPermission(true, accessTokenId, permission, userFixedFlag);
         }
       }
-      num ++;
-      Log.info('grant permission permission' + permission);
-      if (result == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+      if (this.grantStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         permissionList.forEach((req, idx) => {
           if (req == permission) {
             this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
           }
         })
-        Log.info('grant permission success:' + permission);
-      } else {
-        Log.error('failed to grant permission:' + permission);
       }
+      num ++;
       if (num == group.permissions.length) {
         this.count ++;
       }
@@ -432,41 +404,45 @@ struct PermissionDialog {
   }
 
   async privacyCancel(group: GroupInfo, accessTokenId: number, permissionList: string[], userFixedFlag: number) {
-    let acManager = abilityAccessCtrl.createAtManager();
     group.permissions.forEach(async permission => {
-      if (showSubpermissionsGrop.indexOf(group.name) == -1) {
+      if (showSubPermissionsGroup.indexOf(group.name) == -1) {
         if (group.name == 'LOCATION') {
           if (permissionList.includes(permission) && this.locationFlag !== Constants.LOCATION_UPGRADE) {
-            try {
-              Log.info('revokeUserGrantedPermission' + permission)
-              await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
-            } catch (err) {
-              Log.error('failed to revoke permission:' + permission);
-            }
+            await this.operationPermission(false, accessTokenId, permission, userFixedFlag);
           }
         } else {
-          try {
-            Log.info('revokeUserGrantedPermission' + permission)
-            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
-          } catch (err) {
-            Log.error('failed to revoke permission:' + permission);
-          }
+          await this.operationPermission(false, accessTokenId, permission, userFixedFlag);
         }
       } else {
         if (permissionList.includes(permission)) {
-          try {
-            Log.info('revokeUserGrantedPermission' + permission)
-            await acManager.revokeUserGrantedPermission(accessTokenId, permission, userFixedFlag);
-          } catch (err) {
-            Log.error('failed to revoke permission:' + permission);
-          }
+          await this.operationPermission(false, accessTokenId, permission, userFixedFlag);
         }
       }
     })
     this.count ++;
   }
 
-  getgrantGroups(stateGroup: number[]) {
+  async operationPermission(status: boolean, token: number, permission: Permissions, flag: number) {
+    if (status) {
+      try {
+        Log.info('grantUserGrantedPermission: ' + permission);
+        await abilityAccessCtrl.createAtManager().grantUserGrantedPermission(token, permission, flag).then(() => {
+          this.grantStatus = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
+        })
+      } catch (err) {
+        Log.error('failed to grant permission: ' + permission);
+      }
+    } else {
+      try {
+        Log.info('revokeUserGrantedPermission: ' + permission)
+        await abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(token, permission, flag);
+      } catch (err) {
+        Log.error('failed to revoke permission:' + permission);
+      }
+    }
+  }
+
+  getGrantGroups(stateGroup: number[]) {
     //Processing of positioning
     if (this.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
       if (this.reqPerms.includes(FUZZY_LOCATION_PERMISSION)) {
@@ -488,51 +464,55 @@ struct PermissionDialog {
         this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
         //待授权
       } else if (stateGroup[idx] == Constants.DYNAMIC_OPER) {
-        let group = getPermissionGroup(permission);
         if (!userGrantPermissions.includes(permission)) {
           Log.info('permission not find:' + permission);
         } else {
-          if (group.name === 'FOLDER') {
-            switch (permission) {
-              case DOWNLOAD_PERMISSION:
-                let downloadGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_download_folder'),
-                  group.icon, group.description, group.reason, [DOWNLOAD_PERMISSION], group.isShow)
-                this.grantGroups.push(downloadGroup);
-                break;
-              case DESKTOP_PERMISSION:
-                let desktopGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_desktop_folder'),
-                  group.icon, group.description, group.reason, [DESKTOP_PERMISSION], group.isShow)
-                this.grantGroups.push(desktopGroup);
-                break;
-              case DOCUMENTS_PERMISSION:
-                let documentGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_document_folder'),
-                  group.icon, group.description, group.reason, [DOCUMENTS_PERMISSION], group.isShow)
-                this.grantGroups.push(documentGroup);
-                break;
-            }
-          } else {
-            let exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
-            if (showSubpermissionsGrop.indexOf(group.name) != -1) {
-              let label = getPermissionLabel(permission)
-              if (!exist) {
-                group.description.push(label);
-                this.grantGroups.push(group);
-              } else {
-                if (exist.description.indexOf(label) == -1) {
-                  exist.description.push($r('app.string.and'));
-                  exist.description.push(label);
-                }
-              }
-            } else {
-              if (!exist) {
-                this.grantGroups.push(group);
-              }
-            }
-          }
+          this.addGroup(permission);
         }
       }
     })
     this.initStatus = Constants.INIT_NEED_TO_VERIFY;
+  }
+
+  addGroup(permission: string) {
+    let group = getPermissionGroup(permission);
+    if (group.name === 'FOLDER') {
+      switch (permission) {
+        case DOWNLOAD_PERMISSION:
+          let downloadGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_download_folder'),
+            group.icon, group.description, group.reason, [DOWNLOAD_PERMISSION], group.isShow)
+          this.grantGroups.push(downloadGroup);
+          break;
+        case DESKTOP_PERMISSION:
+          let desktopGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_desktop_folder'),
+            group.icon, group.description, group.reason, [DESKTOP_PERMISSION], group.isShow)
+          this.grantGroups.push(desktopGroup);
+          break;
+        case DOCUMENTS_PERMISSION:
+          let documentGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_document_folder'),
+            group.icon, group.description, group.reason, [DOCUMENTS_PERMISSION], group.isShow)
+          this.grantGroups.push(documentGroup);
+          break;
+      }
+    } else {
+      let exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
+      if (showSubPermissionsGroup.indexOf(group.name) != -1) {
+        let label = getPermissionLabel(permission)
+        if (!exist) {
+          group.description.push(label);
+          this.grantGroups.push(group);
+        } else {
+          if (exist.description.indexOf(label) == -1) {
+            exist.description.push($r('app.string.and'));
+            exist.description.push(label);
+          }
+        }
+      } else {
+        if (!exist) {
+          this.grantGroups.push(group);
+        }
+      }
+    }
   }
 
   getApplicationName(bundleName: string) {
@@ -639,7 +619,7 @@ struct PermissionDialog {
       .then(bundleInfo => {
         this.targetVersion = bundleInfo.targetVersion;
         this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
-        this.getgrantGroups(want.parameters['ohos.user.grant.permission.state']);
+        this.getGrantGroups(want.parameters['ohos.user.grant.permission.state']);
         this.getApplicationName(bundleName);
     }).catch((err: BusinessError) => {
       Log.error('getBundleInfo error :' + JSON.stringify(err));

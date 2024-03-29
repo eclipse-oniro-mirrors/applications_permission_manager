@@ -22,15 +22,13 @@ import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
-import common from '@ohos.app.ability.common';
-import { verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
+import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
 import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { globalDialog } from '../common/components/dialog';
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';
 
-const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
@@ -84,12 +82,10 @@ struct locationInfoPage {
   }
 
   onPageShow() {
-    console.log(TAG + 'onPageShow');
     if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
       let bundleNames: string[] = [];
-      let atManager = abilityAccessCtrl.createAtManager();
-      this.list.forEach(permissionmanager => {
-        permissionmanager.bundleNames.forEach(bundleName => {
+      this.list.forEach(permissionManager => {
+        permissionManager.bundleNames.forEach(bundleName => {
           if (bundleNames.indexOf(bundleName) == -1) {
             bundleNames.push(bundleName);
           }
@@ -102,78 +98,80 @@ struct locationInfoPage {
           bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
           bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION
         ).then(res => {
-          // 0: have permission; -1: no permission
-          this.polymorphismIsOn[index] = true;
-          this.folderStatusArray[index] = [false, false, false];
-          let reqPermissions: string[] = [];
-          res.reqPermissionDetails.forEach(item => {
-            reqPermissions.push(item.name);
-          })
-          if (this.currentGroup === 'LOCATION') {
-            if (
-              !reqPermissions.includes(FUZZY_LOCATION_PERMISSION) &&
-              res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE
-            ) {
-              this.polymorphismIsOn[index] = false;
-            }
-            for (let j = 0; j < this.list.length; j++) {
-              if (
-                (this.list[j].permission == PRECISE_LOCATION_PERMISSION) &&
-                (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)
-              ) {
-                continue;
-              }
-              if (
-                (this.list[j].permission == FUZZY_LOCATION_PERMISSION) &&
-                (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)
-              ) {
-                continue;
-              }
-              if (this.list[j].permission == BACKGROUND_LOCATION_PERMISSION) {
-                continue;
-              }
-              if (reqPermissions.indexOf(this.list[j].permission) == -1) {
-                continue;
-              }
-              verifyAccessToken(res.appInfo.accessTokenId, this.list[j].permission).then((access) => {
-                if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
-                  this.polymorphismIsOn[index] = false;
-                }
-              });
-            }
-          }
-          if (this.currentGroup === 'FOLDER') {
-            for (let j = 0; j < this.list.length; j++) {
-              if (reqPermissions.indexOf(this.list[j].permission) == -1) {
-                continue;
-              }
-              let access = atManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission);
-              if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-                switch (this.list[j].permission) {
-                  case DOWNLOAD_PERMISSION:
-                    this.folderStatusArray[index][0] = true;
-                    break;
-                  case DESKTOP_PERMISSION:
-                    this.folderStatusArray[index][1] = true;
-                    break;
-                  case DOCUMENTS_PERMISSION:
-                    this.folderStatusArray[index][2] = true;
-                    break;
-                }
-              }
-            }
-          }
+          this.getGroupStatus(res, index);
         }).catch((error: BusinessError) => {
-          console.log(TAG + bundleName + 'onPageShow getBundleInfo failed, cause: ' + JSON.stringify(error));
+          Log.error(bundleName + 'onPageShow getBundleInfo failed, cause: ' + JSON.stringify(error));
         })
       })
+    }
+  }
+
+  getGroupStatus(res: bundleManager.BundleInfo, index: number) {
+    this.polymorphismIsOn[index] = true;
+    this.folderStatusArray[index] = [false, false, false];
+    let reqPermissions: string[] = [];
+    res.reqPermissionDetails.forEach(item => {
+      reqPermissions.push(item.name);
+    })
+    if (this.currentGroup === 'LOCATION') {
+      if (
+        !reqPermissions.includes(FUZZY_LOCATION_PERMISSION) && res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE
+      ) {
+        this.polymorphismIsOn[index] = false;
+      }
+      for (let j = 0; j < this.list.length; j++) {
+        if ((this.list[j].permission == PRECISE_LOCATION_PERMISSION) &&
+            (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
+          continue;
+        }
+        if ((this.list[j].permission == FUZZY_LOCATION_PERMISSION) &&
+            (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
+          continue;
+        }
+        if (this.list[j].permission == BACKGROUND_LOCATION_PERMISSION) {
+          continue;
+        }
+        if (reqPermissions.indexOf(this.list[j].permission) == -1) {
+          continue;
+        }
+        verifyAccessToken(res.appInfo.accessTokenId, this.list[j].permission).then((access) => {
+          if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+            this.polymorphismIsOn[index] = false;
+          }
+        });
+      }
+    }
+    if (this.currentGroup === 'FOLDER') {
+      for (let j = 0; j < this.list.length; j++) {
+        if (reqPermissions.indexOf(this.list[j].permission) == -1) {
+          continue;
+        }
+        let atManager = abilityAccessCtrl.createAtManager();
+        let access = atManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission);
+        if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+          this.updateFolderStatus(index, j);
+        }
+      }
+    }
+  }
+
+  updateFolderStatus(index: number, idx: number) {
+    switch (this.list[idx].permission) {
+      case DOWNLOAD_PERMISSION:
+        this.folderStatusArray[index][0] = true;
+        break;
+      case DESKTOP_PERMISSION:
+        this.folderStatusArray[index][1] = true;
+        break;
+      case DOCUMENTS_PERMISSION:
+        this.folderStatusArray[index][2] = true;
+        break;
     }
   }
 }
 
 @Component
 struct applicationItem {
-  private context = getContext(this) as common.UIAbilityContext;
   private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
   private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
@@ -377,9 +375,7 @@ struct applicationItem {
       resolve(0);
     }).catch((error: BusinessError) => {
       resolve(-1);
-      console.error(
-        TAG + 'abilityAccessCtrl.createAtManager.grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error)
-      );
+      Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
     })
   }
 
@@ -396,9 +392,7 @@ struct applicationItem {
       resolve(0);
     }).catch((error: BusinessError) => {
       resolve(-1);
-      console.error(
-        TAG + 'abilityAccessCtrl.createAtManager.revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error)
-      );
+      Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
     })
   }
 
@@ -408,8 +402,8 @@ struct applicationItem {
   aboutToAppear() {
     let bundleNames: string[] = [];
     this.applicationList = [];
-    this.list.forEach(permissionmanager => {
-      permissionmanager.bundleNames.forEach(bundleName => {
+    this.list.forEach(permissionManager => {
+      permissionManager.bundleNames.forEach(bundleName => {
         if (bundleNames.indexOf(bundleName) == -1) {
           bundleNames.push(bundleName);
         }
@@ -421,82 +415,92 @@ struct applicationItem {
       }
     })
 
-    let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
       // Get BundleInfo based on bundle name
       this.allBundleInfo.forEach(bundleInfo => {
         if (bundleInfo.bundleName === bundleNames[i]) {
-          this.applicationList.push(
-            new ApplicationObj(
-              bundleInfo.label,
-              bundleInfo.icon,
-              i,
-              bundleInfo.tokenId,
-              this.list[0].permission,
-              bundleInfo.zhTag,
-              bundleInfo.indexTag,
-              bundleInfo.language,
-              bundleInfo.bundleName) // Get the first letter in the returned initials array
-          );
-          this.isRisk[i] = false;
-          try {
-            atManager.getPermissionFlags(bundleInfo.tokenId, this.list[0].permission).then(data => {
-              if (data == Constants.PERMISSION_POLICY_FIXED) {
-                this.isRisk[i] = true;
-              }
-            })
-          } catch (err) {
-            console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
-          }
-          // 0: have permission; -1: no permission
-          let boole = true;
-          this.permissionNum++;
-          for (let j = 0; j < this.list.length; j++) {
-            if (bundleInfo.permissions.indexOf(this.list[j].permission) == -1) {
-              continue;
-            }
-            verifyAccessToken(bundleInfo.tokenId, this.list[j].permission).then((access) => {
-              if (Number(access) === Constants.PERMISSION_INDEX) {
-                if (boole) {
-                  this.toggleIsOn[i] = true;
-                  this.isFirst[i] = true;
-                }
-              } else {
-                if (boole) {
-                  this.permissionNum--;
-                }
-                boole = false;
-                this.toggleIsOn[i] = false;
-                this.isFirst[i] = false;
-              }
-            });
-          }
+          this.getApplicationList(bundleInfo, i);
         }
       })
     }
+
     if (globalGroup.indexOf(this.currentGroup) !== -1) {
-      this.globalIsOn = globalIsOn;
-      if (this.currentGroup == 'CAMERA') {
-        let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-        cameraManager.on('cameraMute', (err, curMuted) => {
-          console.log(TAG + 'curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
-          this.globalIsOn = !curMuted;
-        })
-      } else {
-        let audioManager = audio.getAudioManager();
-        let audioVolumeManager = audioManager.getVolumeManager();
-        let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
-        audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-          audioVolumeGroupManager.on('micStateChange', micStateChange => {
-            this.globalIsOn = !micStateChange.mute;
-          })
-        })
-      }
+      this.globalListen();
     }
   }
 
   aboutToDisappear() {
     this.privacyDialogController = null;
+  }
+
+  getApplicationList(bundleInfo: AppInfo, i: number) {
+    this.applicationList.push(
+      new ApplicationObj(
+        bundleInfo.label,
+        bundleInfo.icon,
+        i,
+        bundleInfo.tokenId,
+        this.list[0].permission,
+        bundleInfo.zhTag,
+        bundleInfo.indexTag,
+        bundleInfo.language,
+        bundleInfo.bundleName) // Get the first letter in the returned initials array
+    );
+    this.isRisk[i] = false;
+    try {
+      abilityAccessCtrl.createAtManager().getPermissionFlags(bundleInfo.tokenId, this.list[0].permission)
+        .then(data => {
+          if (data == Constants.PERMISSION_POLICY_FIXED) {
+            this.isRisk[i] = true;
+          }
+        })
+    } catch (err) {
+      Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+    }
+    // 0: have permission; -1: no permission
+    let boole = true;
+    this.permissionNum++;
+    for (let j = 0; j < this.list.length; j++) {
+      if (bundleInfo.permissions.indexOf(this.list[j].permission) == -1) {
+        continue;
+      }
+      verifyAccessToken(bundleInfo.tokenId, this.list[j].permission).then((access) => {
+        if (Number(access) === Constants.PERMISSION_INDEX) {
+          if (boole) {
+            this.toggleIsOn[i] = true;
+            this.isFirst[i] = true;
+          }
+        } else {
+          if (boole) {
+            this.permissionNum--;
+          }
+          boole = false;
+          this.toggleIsOn[i] = false;
+          this.isFirst[i] = false;
+        }
+      });
+    }
+  }
+
+  globalListen() {
+    this.globalIsOn = globalIsOn;
+    if (this.currentGroup == 'CAMERA') {
+      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
+      cameraManager.on('cameraMute', (err, curMuted) => {
+        Log.info('curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
+        this.globalIsOn = !curMuted;
+      })
+    } else {
+      let audioManager = audio.getAudioManager();
+      let audioVolumeManager = audioManager.getVolumeManager();
+      let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
+      audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
+        audioVolumeGroupManager.on('micStateChange', micStateChange => {
+          Log.info('micStateChange: ' + JSON.stringify(micStateChange));
+          this.globalIsOn = !micStateChange.mute;
+        })
+      })
+    }
   }
 
   build() {
@@ -531,8 +535,8 @@ struct applicationItem {
                         } else {
                           let audioManager = audio.getAudioManager();
                           let audioVolumeManager = audioManager.getVolumeManager();
-                          let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
-                          audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
+                          let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
+                          audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
                             audioVolumeGroupManager.setMicMute(false)
                           })
                         }

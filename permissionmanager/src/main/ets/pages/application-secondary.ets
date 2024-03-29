@@ -21,11 +21,10 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import { BusinessError } from '@ohos.base';
 import { groups, userGrantPermissions } from '../common/model/permissionGroup';
 import Constants from '../common/utils/constant';
-import { verifyAccessToken, getGroupIdByPermission } from '../common/utils/utils';
+import { Log, verifyAccessToken, getGroupIdByPermission } from '../common/utils/utils';
 import { PermissionObj, AppInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
-const TAG = 'PermissionManager_MainAbility:';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
@@ -45,6 +44,9 @@ struct appNamePlusPage {
   @State bundleName: string = GlobalContext.load('bundleName');
   @State label: string = '';
   @State isTouch: string = '';
+  @State isGranted: boolean = false;
+  @State folderStatus: boolean[] = [false, false, false];
+  @State reqUserPermissions: Permissions[] = [];
 
   @Builder ListItemLayout(item: PermissionObj, status: number) {
     ListItem() {
@@ -105,8 +107,32 @@ struct appNamePlusPage {
     })
   }
 
+  async getReqUserPermissions(info: AppInfo) {
+    let acManager = abilityAccessCtrl.createAtManager();
+    if (info.permissions.length > 0) {
+      for (let j = 0; j < info.permissions.length; j++) {
+        let permission = info.permissions[j];
+        if (userGrantPermissions.indexOf(permission) == -1) {
+          continue;
+        }
+        if ((info.api < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
+          continue;
+        }
+        try {
+          let flag = await acManager.getPermissionFlags(info.tokenId, permission);
+          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
+            continue;
+          }
+        } catch (err) {
+          Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+        }
+        this.reqUserPermissions.push(permission);
+      }
+    }
+  }
+
   async initApplicationInfo(info: AppInfo) {
-    console.info(TAG + `labelResource: ` + JSON.stringify(info.labelResource));
+    Log.info(`labelResource: ` + JSON.stringify(info.labelResource));
     let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
 
     if (info.labelResource.id !== 0) {
@@ -124,43 +150,23 @@ struct appNamePlusPage {
         info.icon = iconDescriptor?.getPixelMap();
       }
     } catch (error) {
-      console.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
+      Log.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
     }
 
     if (!info.icon) {
       info.icon = $r('app.media.icon');
     }
 
-    let reqUserPermissions: Permissions[] = [];
-    let acManager = abilityAccessCtrl.createAtManager();
-    if (info.permissions.length > 0) {
-      for (let j = 0; j < info.permissions.length; j++) {
-        let permission = info.permissions[j];
-        if (userGrantPermissions.indexOf(permission) == -1) {
-          continue;
-        }
-        if ((info.api < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
-          continue;
-        }
-        try {
-          let flag = await acManager.getPermissionFlags(info.tokenId, permission);
-          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue;
-          }
-        } catch (err) {
-          console.log(TAG + 'getPermissionFlags error: ' + JSON.stringify(err));
-        }
-        reqUserPermissions.push(permission);
-      }
-    }
+    this.reqUserPermissions = [];
+    await this.getReqUserPermissions(info);
     let groupIds: number[] = [];
-    for (let i = 0; i < reqUserPermissions.length; i++) {
-      let groupId = getGroupIdByPermission(reqUserPermissions[i])
+    for (let i = 0; i < this.reqUserPermissions.length; i++) {
+      let groupId = getGroupIdByPermission(this.reqUserPermissions[i])
       if (groupIds.indexOf(groupId) == -1) {
         groupIds.push(groupId);
       }
     }
-    info.permissions = reqUserPermissions;
+    info.permissions = this.reqUserPermissions;
     info.groupId = groupIds;
   }
 
@@ -188,55 +194,59 @@ struct appNamePlusPage {
           groupReqPermissons.push(permission);
         }
       }
-      let isGranted = true;
-      let folderStatus = [false, false, false];
+      this.isGranted = true;
+      this.folderStatus = [false, false, false];
       if (
         group === 'LOCATION' &&
         !groupReqPermissons.includes(FUZZY_LOCATION_PERMISSION) &&
         this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE
       ) {
-        isGranted = false;
+        this.isGranted = false;
       }
-      for (let i = 0; i < groupReqPermissons.length; i++) {
-        let permission = groupReqPermissons[i];
-        if (
-          this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION
-        ) {
-          continue;
-        }
-        if (permission == BACKGROUND_LOCATION_PERMISSION) {
-          continue;
-        }
-        let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
-        if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-          isGranted = false;
-        }
-        if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-          switch (permission) {
-            case DOWNLOAD_PERMISSION:
-              folderStatus[0] = true;
-              break;
-            case DESKTOP_PERMISSION:
-              folderStatus[1] = true;
-              break;
-            case DOCUMENTS_PERMISSION:
-             folderStatus[2] = true;
-             break;
-          }
-        }
-      }
+      await this.getStatus(groupReqPermissons, group);
 
-      if (isGranted) {
+      if (this.isGranted) {
         this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
       } else {
-        if (group === 'FOLDER' && folderStatus.includes(true)) {
+        if (group === 'FOLDER' && this.folderStatus.includes(true)) {
           this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
         } else {
           this.bannedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
         }
       }
 
-      GlobalContext.store('folderStatus', folderStatus);
+      GlobalContext.store('folderStatus', this.folderStatus);
+    }
+  }
+
+  async getStatus(groupReqPermissons: Permissions[], group: string) {
+    for (let i = 0; i < groupReqPermissons.length; i++) {
+      let permission = groupReqPermissons[i];
+      if (
+        this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION
+      ) {
+        continue;
+      }
+      if (permission == BACKGROUND_LOCATION_PERMISSION) {
+        continue;
+      }
+      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+      if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        this.isGranted = false;
+      }
+      if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        switch (permission) {
+          case DOWNLOAD_PERMISSION:
+            this.folderStatus[0] = true;
+            break;
+          case DESKTOP_PERMISSION:
+            this.folderStatus[1] = true;
+            break;
+          case DOCUMENTS_PERMISSION:
+            this.folderStatus[2] = true;
+            break;
+        }
+      }
     }
   }
 
@@ -244,7 +254,6 @@ struct appNamePlusPage {
    * Lifecycle function, triggered once when this page is displayed
    */
   onPageShow() {
-    console.log(TAG + 'onPageShow application-secondary');
     this.initialPermissions();
     bundleManager.getApplicationInfo(
       this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT
@@ -258,7 +267,7 @@ struct appNamePlusPage {
         }
       })
     }).catch((error: BusinessError) => {
-      console.error(TAG + 'getApplicationInfo error: ' + JSON.stringify(error));
+      Log.error('getApplicationInfo error: ' + JSON.stringify(error));
     })
   }
 
