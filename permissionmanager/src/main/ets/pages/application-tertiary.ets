@@ -140,9 +140,7 @@ struct mediaDocumentPage {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
         acManager.getPermissionFlags(this.tokenId, PASTE).then(flag => {
-          if (flag == Constants.PERMISSION_ALLOW_THIS_TIME) {
-            this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
-          }
+          flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
         Log.error('getPermissionFlags error: ' + JSON.stringify(err));

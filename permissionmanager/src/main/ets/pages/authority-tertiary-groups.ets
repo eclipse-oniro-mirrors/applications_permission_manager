@@ -135,9 +135,8 @@ struct locationInfoPage {
           continue;
         }
         verifyAccessToken(res.appInfo.accessTokenId, this.list[j].permission).then((access) => {
-          if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
-            this.polymorphismIsOn[index] = false;
-          }
+          Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED ?
+            this.polymorphismIsOn[index] = false : null;
         });
       }
     }
