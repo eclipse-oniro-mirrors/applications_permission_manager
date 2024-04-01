@@ -78,11 +78,11 @@
     },
     {
       "name": "visits",
-      "value": "Number of visits: "
+      "value": "Number of visits: %s"
     },
     {
       "name": "recent_visit",
-      "value": "; Recent visits: "
+      "value": "Number of visits: %s; Recent visits: %s"
     },
     {
       "name": "morning",
@@ -99,10 +99,6 @@
     {
       "name": "record_time_limit",
       "value": "Access records in the last 7 days"
-    },
-    {
-      "name": "number_of_authorized_applications",
-      "value": " applications have this permission"
     },
     {
       "name": "version",
@@ -249,12 +245,8 @@
       "value": "After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
     },
     {
-      "name": "pasteBoard_start",
-      "value": "Content copied from \""
-    },
-    {
-      "name": "pasteBoard_end",
-      "value": "\". "
+      "name": "pasteBoard_app",
+      "value": "Content copied from \"%s\". "
     },
     {
       "name": "pasteBoard_desc",
@@ -327,6 +319,10 @@
     {
       "name": "groupName_folder",
       "value": "Folder"
+    },
+    {
+      "name": "groupName_nearLink",
+      "value": "NearLink"
     },
     {
       "name": "multi_device_collaboration",
@@ -425,92 +421,92 @@
       "value": " access the \"Document\" folder?"
     },
     {
-      "name": "enable_description_start_default",
-      "value": " "
+      "name": "group_label_nearLink",
+      "value": " access NearLink?"
     },
     {
-      "name": "enable_description_start_location",
-      "value": "When the system location service is enabled, "
+      "name": "enable_description_location",
+      "value": "When the system location service is enabled, %s apps are allowed to obtain the location of the device."
     },
     {
-      "name": "enable_description_end_location",
-      "value": " applications are allowed to obtain the location of the device."
+      "name": "enable_description_camera",
+      "value": "%s apps have been allowed to use the camera to take photos and videos. This permission allows the app to use the camera at any time without your confirmation."
     },
     {
-      "name": "enable_description_end_camera",
-      "value": " apps have been allowed to use the camera to take photos and videos. This permission allows the app to use the camera at any time without your confirmation."
+      "name": "enable_description_microphone",
+      "value": "%s apps have been allowed to record audio using microphones. This permission allows the app to record audio at any time without your confirmation."
     },
     {
-      "name": "enable_description_end_microphone",
-      "value": " apps have been allowed to record audio using microphones. This permission allows the app to record audio at any time without your confirmation."
+      "name": "enable_description_read_contacts",
+      "value": "%s apps have been allowed to read data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
     },
     {
-      "name": "enable_description_end_read_contacts",
-      "value": " apps have been allowed to read data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
+      "name": "enable_description_write_contacts",
+      "value": "%s apps have been allowed to modify data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows the app to delete contact data."
     },
     {
-      "name": "enable_description_end_write_contacts",
-      "value": " apps have been allowed to modify data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows the app to delete contact data."
+      "name": "enable_description_read_calendar",
+      "value": "%s apps have been allowed to read all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
     },
     {
-      "name": "enable_description_end_read_calendar",
-      "value": " apps have been allowed to read all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
+      "name": "enable_description_write_calendar",
+      "value": "%s apps have been allowed to send event invitations on behalf of the calendar owner, as well as to add, delete, and change events (including those of friends or colleagues) that you can modify on your device. A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
     },
     {
-      "name": "enable_description_end_write_calendar",
-      "value": " apps have been allowed to send event invitations on behalf of the calendar owner, as well as to add, delete, and change events (including those of friends or colleagues) that you can modify on your device. A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
+      "name": "enable_description_read_whole_calendar",
+      "value": "%s apps are allowed to read the entire calendar."
     },
     {
-      "name": "enable_description_end_read_whole_calendar",
-      "value": " apps are allowed to read the entire calendar."
+      "name": "enable_description_write_whole_calendar",
+      "value": "%s apps have been allowed to add, delete, and change all calendars."
     },
     {
-      "name": "enable_description_end_write_whole_calendar",
-      "value": " apps have been allowed to add, delete, and change all calendars."
+      "name": "enable_description_sport",
+      "value": "%s apps have been allowed to identify your fitness movements."
     },
     {
-      "name": "enable_description_end_sport",
-      "value": " apps have been allowed to identify your fitness movements."
+      "name": "enable_description_health",
+      "value": "%s apps have been allowed to access data from the sensors you use to measure your physical condition, such as your heart rate."
     },
     {
-      "name": "enable_description_end_health",
-      "value": " apps have been allowed to access data from the sensors you use to measure your physical condition, such as your heart rate."
+      "name": "enable_description_distributed_datasync",
+      "value": "%s apps have been allowed to discover and access other devices for collaborative operations between multiple devices."
     },
     {
-      "name": "enable_description_end_distributed_datasync",
-      "value": " applications have been allowed to discover and access other devices for collaborative operations between multiple devices."
+      "name": "enable_description_image",
+      "value": "%s apps have been allowed to access pictures and videos on your device."
     },
     {
-      "name": "enable_description_end_image",
-      "value": " apps have been allowed to access pictures and videos on your device."
+      "name": "enable_description_audios",
+      "value": "%s apps have been allowed to access music and audio on your device."
     },
     {
-      "name": "enable_description_end_audios",
-      "value": " apps have been allowed to access music and audio on your device."
+      "name": "enable_description_documents",
+      "value": "%s apps have been allowed to access files on your device."
     },
     {
-      "name": "enable_description_end_documents",
-      "value": " apps have been allowed to access files on your device."
+      "name": "enable_description_ADS",
+      "value": "%s apps have been allowed to create a profile or show you personalized ads based on your AD identifier."
     },
     {
-      "name": "enable_description_end_ADS",
-      "value": " apps have been allowed to create a profile or show you personalized ads based on your AD identifier."
+      "name": "enable_description_appList",
+      "value": "%s apps are allowed to read the list of installed apps on the local device."
     },
     {
-      "name": "enable_description_end_appList",
-      "value": " apps are allowed to read the list of installed apps on the local device."
+      "name": "enable_description_bluetooth",
+      "value": "%s apps have been allowed to use Bluetooth to find and connect to nearby devices."
     },
     {
-      "name": "enable_description_end_bluetooth",
-      "value": " apps have been allowed to use Bluetooth to find and connect to nearby devices."
+      "name": "enable_description_pasteboard",
+      "value": "%s apps have been allowed to read and write clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
     },
     {
-      "name": "enable_description_end_pasteboard",
-      "value": " apps have been allowed to read and write clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
+      "name": "enable_description_folder",
+      "value": "%s apps have been allowed to access files and folders."
     },
     {
-      "name": "enable_description_end_folder",
-      "value": " apps have been allowed to access files and folders."
+      "name": "enable_description_nearLink",
+      "value": "%s apps have been allowed to access NearLink."
     },
     {
       "name": "forbidden_description_location",
@@ -538,7 +534,7 @@
     },
     {
       "name": "forbidden_description_write_calendar",
-      "value": "The application is prohibited from sending event invitations on behalf of the calendar owner, while allowing it to add, delete, and change events that you can modify on your device (including those of friends or colleagues). A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
+      "value": "Apps are prohibited from sending event invitations on behalf of the calendar owner, while allowing it to add, delete, and change events that you can modify on your device (including those of friends or colleagues). A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
     },
     {
       "name": "forbidden_description_read_whole_calendar",
@@ -558,7 +554,7 @@
     },
     {
       "name": "forbidden_description_distributed_datasync",
-      "value": "Applications are prohibited from discovering and accessing other devices for collaborative operations between multiple devices."
+      "value": "Apps are prohibited from discovering and accessing other devices for collaborative operations between multiple devices."
     },
     {
       "name": "forbidden_description_image",
@@ -578,19 +574,23 @@
     },
     {
       "name": "forbidden_description_appList",
-      "value": "Applications are prohibited from reading the list of installed applications on the local device."
+      "value": "Apps are prohibited from reading the list of installed applications on the local device."
     },
     {
       "name": "forbidden_description_bluetooth",
-      "value": "Applications are prohibited from using Bluetooth to find or connect to nearby devices."
+      "value": "Apps are prohibited from using Bluetooth to find or connect to nearby devices."
     },
     {
       "name": "forbidden_description_pasteboard",
-      "value": "Applications are prohibited from reading or writing clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
+      "value": "Apps are prohibited from reading or writing clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
     },
     {
       "name": "forbidden_description_folder",
-      "value": "Applications have been prevented from accessing files and folders."
+      "value": "Apps have been prevented from accessing files and folders."
+    },
+    {
+      "name": "forbidden_description_nearLink",
+      "value": "Apps have been prohibited from accessing NearLink."
     },
     {
       "name": "risk_warning",

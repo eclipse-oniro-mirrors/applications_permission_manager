@@ -560,11 +560,11 @@ struct applicationItem {
           Flex({ justifyContent: FlexAlign.Start }) {
             if (this.globalIsOn) {
               if (this.getGrantApplicationNumber() > 0) {
-                Text() {
-                  Span(this.groupInfo.enableDescriptionStart ? this.groupInfo.enableDescriptionStart : '')
-                  Span(String(this.getGrantApplicationNumber()))
-                  Span(this.groupInfo.enableDescriptionEnd ? this.groupInfo.enableDescriptionEnd : '')
-                }
+                Text(
+                  this.groupInfo.enableDescription ?
+                  $r(this.groupInfo.enableDescription, String(this.getGrantApplicationNumber())) :
+                  ''
+                )
                   .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                   .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })

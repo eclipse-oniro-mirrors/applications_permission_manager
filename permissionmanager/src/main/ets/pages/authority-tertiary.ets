@@ -243,11 +243,11 @@ struct applicationItem {
         Column() {
           Flex({ justifyContent: FlexAlign.Start }) {
             if (this.permissionNum > 0) {
-              Text() {
-                Span(this.permissionInfo.enableDescriptionStart ? this.permissionInfo.enableDescriptionStart : '')
-                Span(String(this.permissionNum))
-                Span(this.permissionInfo.enableDescriptionEnd ? this.permissionInfo.enableDescriptionEnd : '')
-              }
+              Text(
+                this.permissionInfo.enableDescription ?
+                $r(this.permissionInfo.enableDescription, String(this.permissionNum)) :
+                ''
+              )
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })

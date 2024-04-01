@@ -105,10 +105,7 @@ struct permissionRecordPage {
                   .fontColor($r('sys.color.ohos_id_color_text_primary'))
                   .lineHeight(Constants.TEXT_LINE_HEIGHT)
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
-                Text() {
-                  Span($r('app.string.visits'))
-                  Span(String(item.sum))
-                }
+                Text($r('app.string.visits', String(item.sum)))
                   .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                   .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
@@ -149,12 +146,11 @@ struct permissionRecordPage {
                       .fontColor($r('sys.color.ohos_id_color_text_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
-                    Text() {
-                      Span($r('app.string.visits'))
-                      Span(String(this.getAppRecords(permissionApplication, item.groupName, true)))
-                      Span($r('app.string.recent_visit'))
-                      Span(this.getTime(this.getAppRecords(permissionApplication, item.groupName, false)))
-                    }
+                    Text(
+                      $r('app.string.recent_visit',
+                      String(this.getAppRecords(permissionApplication, item.groupName, true)),
+                      this.getTime(this.getAppRecords(permissionApplication, item.groupName, false)))
+                    )
                       .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                       .fontColor($r('sys.color.ohos_id_color_text_secondary'))
@@ -283,16 +279,11 @@ struct permissionRecordPage {
                       .fontColor($r('sys.color.ohos_id_color_text_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
-                    Text() {
-                      Span($r('app.string.visits'))
-                      Span(String(permission.count))
-                      Span($r('app.string.recent_visit'))
-                      Span(this.getTime(permission.lastTime))
-                    }
-                    .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
-                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                    .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
+                    Text($r('app.string.recent_visit', String(permission.count), this.getTime(permission.lastTime)))
+                      .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
+                      .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                      .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
                   .width(Constants.FULL_WIDTH)

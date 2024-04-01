@@ -187,13 +187,9 @@ struct PermissionDialog {
                           Span($r('app.string.close_exact_position'))
                         } else if (this.currentGroup() === 'PASTEBOARD') {
                           if (this.pasteBoardName) {
-                            Span($r('app.string.pasteBoard_start'))
-                            Span(this.pasteBoardName)
-                            Span($r('app.string.pasteBoard_end'))
-                            Span($r('app.string.pasteBoard_desc'))
-                          } else {
-                            Span($r('app.string.pasteBoard_desc'))
+                            Span($r('app.string.pasteBoard_app', this.pasteBoardName))
                           }
+                          Span($r('app.string.pasteBoard_desc'))
                         } else {
                           if (
                             this.grantGroups[this.count >= this.grantGroups.length ?
