@@ -494,23 +494,23 @@ struct PermissionDialog {
           this.grantGroups.push(documentGroup);
           break;
       }
-    } else {
-      let exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
-      if (showSubPermissionsGroup.indexOf(group.name) != -1) {
-        let label = getPermissionLabel(permission)
-        if (!exist) {
-          group.description.push(label);
-          this.grantGroups.push(group);
-        } else {
-          if (exist.description.indexOf(label) == -1) {
-            exist.description.push($r('app.string.and'));
-            exist.description.push(label);
-          }
-        }
+      return
+    }
+    let exist = this.grantGroups.find(grantGroup => grantGroup.name == group.name);
+    if (showSubPermissionsGroup.indexOf(group.name) != -1) {
+      let label = getPermissionLabel(permission)
+      if (!exist) {
+        group.description.push(label);
+        this.grantGroups.push(group);
       } else {
-        if (!exist) {
-          this.grantGroups.push(group);
+        if (exist.description.indexOf(label) == -1) {
+          exist.description.push($r('app.string.and'));
+          exist.description.push(label);
         }
+      }
+    } else {
+      if (!exist) {
+        this.grantGroups.push(group);
       }
     }
   }

@@ -209,8 +209,8 @@ export function getGroupIdByPermission(permission: string): number {
 }
 
 export class Log {
-  static domain: number = 0x8214;
-  static tag: string = 'PermissionManager_Log';
+  public static domain: number = 0x8214;
+  public static tag: string = 'PermissionManager_Log';
 
   public static debug(message: string): void {
     hilog.debug(Log.domain, Log.tag, message);
