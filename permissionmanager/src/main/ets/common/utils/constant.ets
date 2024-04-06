@@ -364,5 +364,6 @@ export default class Constants {
     public static ROW_PADDING_BOTTOM = 14
 
     public static ACCESS_TOKEN = 'ohos.security.accesstoken.tokencallback'
+    public static SEC_COMP_DIALOG_CALLBACK = 'ohos.security.ISecCompDialogCallback'
 
 }
