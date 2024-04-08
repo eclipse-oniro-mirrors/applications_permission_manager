@@ -70,8 +70,12 @@ struct CustomSecurityDialog {
   @State naviHeight: number = 0
 
   securityParams : Array<Param> = [
-    new Param($r('app.media.ic_public_gps'), $r('app.string.location_desc')),
-    new Param($r('app.media.ic_public_folder'), $r('app.string.media_files_desc'))
+    new Param(
+      $r('app.media.ic_location'), $r('app.string.SecurityTitle_location'), 'app.string.SecurityDescription_location'
+    ),
+    new Param(
+      $r('app.media.file'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityDescription_mediaFiles'
+    )
   ]
 
   GetAppName() {
@@ -141,36 +145,40 @@ struct CustomSecurityDialog {
         }) {
           Row() {
             Column() {
-              Image(this.securityParams[this.index].icon) // icon
-                .width(Constants.SECURITY_ICON_WIDTH)
-                .height(Constants.SECURITY_ICON_HEIGHT)
-                .fillColor($r('sys.color.ohos_id_color_text_primary'))
-                .margin({
-                  top: Constants.SECURITY_ICON_MARGIN_TOP,
-                  bottom: Constants.SECURITY_ICON_MARGIN_BOTTOM
-                })
+              Column() {
+                Image($r('app.media.ic_public_privacy')) // icon
+                  .width(Constants.SECURITY_ICON_WIDTH)
+                  .height(Constants.SECURITY_ICON_HEIGHT)
+                  .fillColor($r('sys.color.ohos_id_color_component_activated'))
+                  .border({
+                    width: Constants.BORDER_WIDTH_1,
+                    color: $r('sys.color.ohos_id_color_button_normal'),
+                    radius: $r('sys.float.ohos_id_corner_radius_default_m')
+                  })
+                  .padding(Constants.PADDING_10)
+                Image(this.securityParams[this.index].icon)
+                  .width(Constants.IMAGE_LENGTH_20)
+                  .height(Constants.IMAGE_LENGTH_20)
+                  .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+              }
+              .backgroundColor($r('sys.color.ohos_id_color_background'))
+              .margin({
+                top: Constants.SECURITY_ICON_MARGIN_TOP,
+                bottom: Constants.SECURITY_ICON_MARGIN_BOTTOM
+              })
               Column() { // content
-                Text() {
-                  Span($r('app.string.Temporarily_authorize'))
-                  Span(this.appName)
-                  Span($r('app.string.To_access'))
-                  Span(this.securityParams[this.index].label)
-                }
+                Text(this.securityParams[this.index].label)
                   .textAlign(TextAlign.Center)
                   .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                  .fontSize($r('sys.float.ohos_id_text_size_body1'))
+                  .fontSize($r('sys.float.ohos_id_text_size_headline8'))
                   .fontWeight(FontWeight.Medium)
+                  .lineHeight(Constants.TEXT_LINE_HEIGHT_27)
 
-                Text() {
-                  Span($r('app.string.location_button_desc'))
-                  Span($r('app.string.only_can_desc'))
-                  Span(this.securityParams[this.index].label)
-                  Span($r('app.string.only_after_desc'))
-                  Span($r('app.string.prevent_desc'))
-                }
+                Text($r(this.securityParams[this.index].description, this.appName))
                   .textAlign(TextAlign.Center)
                   .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .fontSize($r('sys.float.ohos_id_text_size_body2'))
+                  .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   .margin({
                     top: Constants.SECURITY_DESCRIPTOR_DEVIDER_MARGIN_TOP,
                   })
@@ -202,7 +210,7 @@ struct CustomSecurityDialog {
       }
     }.margin({ left: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
       right: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      bottom: this.isBottomPopover ? this.naviHeight : 0})
+      bottom: this.isBottomPopover ? this.naviHeight + 'px' : 0})
   }
 
   aboutToAppear() {

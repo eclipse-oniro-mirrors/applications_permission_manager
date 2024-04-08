@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_location</title>
+    <defs>
+        <path d="M7.6916556,-3.10752092e-16 L12.3083444,3.10752092e-16 C14.9829006,-1.80555915e-16 15.9527593,0.278476833 16.9305371,0.801398111 C17.9083149,1.32431939 18.6756806,2.09168511 19.1986019,3.06946289 C19.7215232,4.04724067 20,5.01709938 20,7.6916556 L20,12.3083444 C20,14.9829006 19.7215232,15.9527593 19.1986019,16.9305371 C18.6756806,17.9083149 17.9083149,18.6756806 16.9305371,19.1986019 C15.9527593,19.7215232 14.9829006,20 12.3083444,20 L7.6916556,20 C5.01709938,20 4.04724067,19.7215232 3.06946289,19.1986019 C2.09168511,18.6756806 1.32431939,17.9083149 0.801398111,16.9305371 C0.278476833,15.9527593 1.2037061e-16,14.9829006 -2.07168062e-16,12.3083444 L2.07168062e-16,7.6916556 C-1.2037061e-16,5.01709938 0.278476833,4.04724067 0.801398111,3.06946289 C1.32431939,2.09168511 2.09168511,1.32431939 3.06946289,0.801398111 C4.04724067,0.278476833 5.01709938,1.80555915e-16 7.6916556,-3.10752092e-16 Z" id="path-1"></path>
+        <pattern id="pattern-3" patternUnits="objectBoundingBox" x="0%" width="100%" height="100%">
+            <use xlink:href="#image-4" transform="scale(0.5,0.5)"></use>
+        </pattern>
+        <image id="image-4" width="40" height="40" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGOfPtRkwAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAKKADAAQAAAABAAAAKAAAAAB65masAAADc0lEQVRYCe2X6ZKiMBRGo4L7vpTv/1a+gpQr4oKKDufqraHscSwC4/jDVKWDkOXku0vShclkcjUfXIofzCZoX8CsFvoq+FUwqwJZx7/NBwuFghXrWwAvl4vZ7/efCYhy5/PZ7HY7Y6PimxS8mmLRbinHSvcUg1ANE5dKpR8KXq+vrwH/BFBNKaaNfW+7DUwURSYMQ4F0XddUKhWp9P0baO6ALHg8Ho3v++J353MU631TSkHoQ61Wq6bdbptGox5D/tks1oAsQNFFdfrVamWomPUGwpeCcRzHdLtdgSZgKEQ2tdPpmF6v98MFGG8FCBQKJc0E0Gw2N0GwuYP9znv0bzQaAsgYoHinm9QNDYdDAec97sEaVoBMwEJBEEhtNpsy2WazeRqtqLb212a/u8EJSfwHUNSlMi+/qfP5QjZrBcjk+A8Vx5/NZtI+SyUsfDqdjDf1hEtBaFutlpgXQJQlgHgfhgdprQHVREyGOWgBxNTPCn1UoVqtJiav1+uyOc/zxBr442AwEEWZ1xpQIdbrtQC2mi2Z2N/4ZrlcCrD20Ra4crksYLhFdIlEfVxDg4rnZqwqATWdTu0BUQOz6RHmuI5xy64AKJC2gJGoSSkohNIEAJtjDuaiUgBdxRscj8fSN5OC5DsSMJOzcxbjnS6mboBapBHUY0MofDgcBEj7yo/4D7/ps91uTb/ft1eQCfERLeycSVkAMApBBBj+djodxWT0UXAd+9jyndTDuEwKKoguoHBEIqbEpIAvFgtRWNV+VE3Ha8t3LDGfz7MBJtMKsPgZaQM4njE7fqZmfwWmgNqSZzMpiFJaOCkwJwl8Fyfj1coTP3tlTh3/rLUGZGGcngAAjlaS8T2fKVha1R5BrQGZCBOPRiNxeiKT1KFJOyuYgloDAoBKFIIAXwM4LzAFtLuHx6Mxp0Ylx1UyYHTyPNrUCqIaipHPKEQsxxI+SNT+VwVZHDB8jfyGgvgetxAimBtJ3iW1iZOnh/ohkMChpvplXqCpATm+kmbkmXMVVUnSpJ48IVMBsjDnI3kvCQEkZyfv8Mc8SypAXbjT6cpRpr9pMT2phmBhE8kNJPulfU4NyMKVSlkuAkkIVMTMnLtck/JKO6kBUQAwbirib/f/eXkvl83Y1JzHKJncAN9tihUgC5Wc280lwSfBw2UzPIYS0Xmo+AvCLA6DEie+JwAAAABJRU5ErkJggg=="></image>
+        <path d="M5.25,0.463772742 C7.90908891,0.463772742 10.0677083,2.58158666 10.0677083,5.19781043 C10.0677083,6.21668395 9.75908848,7.21224626 9.1862649,8.21844029 C8.74404848,8.99521613 8.19128554,9.71564989 7.40039068,10.6090882 C7.10172632,10.9464759 6.70672008,11.3288439 6.21452825,11.7578037 L6.21452825,11.7578037 L6.07125677,11.8816328 C5.6167307,12.2713127 4.94842551,12.2834176 4.47362918,11.907077 L4.47362918,11.907077 L4.43659049,11.8762043 L4.26424991,11.7259029 C3.81143164,11.3287851 3.48132306,11.0208414 3.26812257,10.7952968 L3.26812257,10.7952968 L3.21919612,10.7427446 L3.0984068,10.6079633 C1.36508011,8.65831898 0.432291667,7.00511042 0.432291667,5.19781043 C0.432291667,2.60074195 2.49370358,0.506012003 5.11117112,0.464366977 L5.11117112,0.464366977 Z M5.25229167,3.46377274 C4.24713342,3.46377274 3.43229167,4.2786145 3.43229167,5.28377274 C3.43229167,6.28893099 4.24713342,7.10377274 5.25229167,7.10377274 C6.25744991,7.10377274 7.07229167,6.28893099 7.07229167,5.28377274 C7.07229167,4.2786145 6.25744991,3.46377274 5.25229167,3.46377274 Z" id="path-5"></path>
+    </defs>
+    <g id="保存控件" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="控件使用告知" transform="translate(-184.000000, -577.000000)">
+            <g id="Permissiondialog" transform="translate(40.000000, 542.000000)">
+                <g id="app" transform="translate(116.000000, 7.000000)">
+                    <g id="ic_location" transform="translate(28.000000, 28.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Rectangle-Copy-6">
+                            <use fill="url(#pattern-3)" xlink:href="#path-1"></use>
+                            <path stroke="#EEEEEE" stroke-width="1" d="M7.6916556,0.5 L12.3083444,0.5 C14.841302,0.5 15.7668409,0.746060066 16.6947377,1.24230471 C17.5840924,1.71793682 18.2820632,2.4159076 18.7576953,3.30526232 C19.2539399,4.23315913 19.5,5.15869799 19.5,7.6916556 L19.5,7.6916556 L19.5,12.3083444 C19.5,14.841302 19.2539399,15.7668409 18.7576953,16.6947377 C18.2820632,17.5840924 17.5840924,18.2820632 16.6947377,18.7576953 C15.7668409,19.2539399 14.841302,19.5 12.3083444,19.5 L12.3083444,19.5 L7.6916556,19.5 C5.15869799,19.5 4.23315913,19.2539399 3.30526232,18.7576953 C2.4159076,18.2820632 1.71793682,17.5840924 1.24230471,16.6947377 C0.746060066,15.7668409 0.5,14.841302 0.5,12.3083444 L0.5,12.3083444 L0.5,7.6916556 C0.5,5.15869799 0.746060066,4.23315913 1.24230471,3.30526232 C1.71793682,2.4159076 2.4159076,1.71793682 3.30526232,1.24230471 C4.23315913,0.746060066 5.15869799,0.5 7.6916556,0.5 L7.6916556,0.5 Z" stroke-linejoin="square" fill="#FCFCFC"></path>
+                        </g>
+                        <g id="Public/ic_folder" mask="url(#mask-2)">
+                            <rect id="矩形" fill="#3194F7" x="0" y="0" width="20" height="20"></rect>
+                            <g id="Public/ic_public_music" transform="translate(4.750000, 3.750000)">
+                                <mask id="mask-6" fill="white">
+                                    <use xlink:href="#path-5"></use>
+                                </mask>
+                                <g id="路径" fill-rule="nonzero"></g>
+                                <g id="编组" mask="url(#mask-6)">
+                                    <g transform="translate(-1.000000, 0.000000)" id="Symbol/color-light/colorPrimary">
+                                        <rect id="color/#000000" fill="#FFFFFF" x="0" y="0" width="12.5" height="12.5"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

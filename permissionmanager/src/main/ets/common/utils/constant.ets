@@ -24,15 +24,6 @@ export default class Constants {
     public static BACKBAR_IMAGE_WIDTH = 24;
     public static BACKBAR_MARGIN_RIGHT = 4;
 
-    // dialog
-    public static DIALOG_BORDER_RADIUS = 24;
-    public static DIALOG_HEIGHT = 70;
-    public static DIALOG_WIDTH = 336;
-
-    // text of dialog
-    public static DIALOG_TEXT_FONT_SIZE = 20;
-    public static DIALOG_TEXT_MARGIN_TOP = 25;
-
     // search textInput
     public static TEXTINPUT_PADDING_LEFT = 36;
     public static TEXTINPUT_BORDER_RADIUS = 20;
@@ -81,6 +72,7 @@ export default class Constants {
     public static TEXT_SMALL_FONT_SIZE = 14;
     public static TEXT_SMALLER_FONT_SIZE = 12;
     public static TEXT_LINE_HEIGHT = 22;
+    public static TEXT_LINE_HEIGHT_27 = 27;
     public static TEXT_BIG_LINE_HEIGHT = 28;
     public static TEXT_SMALL_LINE_HEIGHT = 19;
     public static CONSTRAINTSIZE_MINHEIGHT = 48;
@@ -100,6 +92,8 @@ export default class Constants {
     public static IMAGE_WIDTH_RECORD = 24;
     public static IMAGE_HEIGHT_RECORD_APPLICATION = 16;
     public static IMAGE_WIDTH_RECORD_APPLICATION = 16;
+    public static IMAGE_POSITION_28 = 28;
+    public static BORDER_WIDTH_1 = 1;
     public static TITLE_MARGIN_BOTTOM = 16;
     public static SUBTITLE_MIN_HEIGHT = 48;
     public static SUBTITLE_LINE_HEIGHT = 24;
@@ -110,6 +104,7 @@ export default class Constants {
     public static TAB_INNER_PADDING = 8;
     public static TAB_DECORATION_HEIGHT = 2;
     public static TAB_DECORATION_POSITION_Y = 6;
+    public static PADDING_10 = 10;
     public static DEFAULT_PADDING_START = 12;
     public static DEFAULT_PADDING_END = 12;
     public static DEFAULT_PADDING_TOP = 12;
@@ -270,8 +265,8 @@ export default class Constants {
     // icon
     public static SECURITY_ICON_MARGIN_TOP = 24;
     public static SECURITY_ICON_MARGIN_BOTTOM = 16;
-    public static SECURITY_ICON_WIDTH = 24;
-    public static SECURITY_ICON_HEIGHT = 24;
+    public static SECURITY_ICON_WIDTH = 48;
+    public static SECURITY_ICON_HEIGHT = 48;
 
     // content-descriptor
     public static SECURITY_DESCRIPTOR_DEVIDER_MARGIN_TOP = 8;

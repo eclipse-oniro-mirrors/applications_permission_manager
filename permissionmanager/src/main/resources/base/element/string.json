@@ -605,36 +605,20 @@
       "value": "Permission manager"
     },
     {
-      "name": "Temporarily_authorize",
-      "value": "Temporarily authorize \""
+      "name": "SecurityTitle_location",
+      "value": "Secure access to location information"
     },
     {
-      "name": "To_access",
-      "value": "\" to access "
+      "name": "SecurityTitle_mediaFiles",
+      "value": "Secure access to media and files"
     },
     {
-      "name": "location_desc",
-      "value": "location information"
+      "name": "SecurityDescription_location",
+      "value": "This button is certified by the system security and only allows \"%s\" temporary access to location information when you click this button, in order to reduce the continuous access of your private data by applications."
     },
     {
-      "name": "media_files_desc",
-      "value": "media and files"
-    },
-    {
-      "name": "location_button_desc",
-      "value": "This button has passed the system security authentication. "
-    },
-    {
-      "name": "only_can_desc",
-      "value": "The app is allowed to temporarily access your "
-    },
-    {
-      "name": "only_after_desc",
-      "value": " only after you touch this button. "
-    },
-    {
-      "name": "prevent_desc",
-      "value": "This prevents your private data from being continuously obtained by the app."
+      "name": "SecurityDescription_mediaFiles",
+      "value": "This button is certified by the system security and only allows \"%s\" temporary access to media and files when you click this button, in order to reduce the continuous access of your private data by applications."
     },
     {
       "name": "Got_it",

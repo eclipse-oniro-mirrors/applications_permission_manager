@@ -276,7 +276,7 @@ struct PermissionDialog {
       }
     }.margin({ left: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
       right: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      bottom: this.isBottomPopover ? this.naviHeight + "px" : 0})
+      bottom: this.isBottomPopover ? this.naviHeight + 'px' : 0})
   }
 
   showTitle(): ResourceStr {
