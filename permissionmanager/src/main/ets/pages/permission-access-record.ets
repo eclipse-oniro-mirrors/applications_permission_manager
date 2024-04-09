@@ -569,11 +569,8 @@ struct permissionRecordPage {
   }
 
   getInfo(record: privacyManager.BundleUsedRecord, sortFlag: boolean) {
-    bundleManager.getBundleInfo(
-      record.bundleName,
-      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
-      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION
-    ).then(async (info): Promise<boolean> => {
+    bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
+    bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async (info): Promise<boolean> => {
       let appInfo: AppRecordInfo = new AppRecordInfo('', '', '', 0, 0, [], [], [], [], 0);
       let reqPermissions: Permissions[] = [];
       let groupIds: number[] = [];
@@ -597,14 +594,12 @@ struct permissionRecordPage {
           groupIds.push(groupId);
         }
       }
-
       this.allBundleInfo.forEach(bundleInfo => {
         if (bundleInfo.bundleName === info.name) {
           appInfo.groupName = bundleInfo.label;
           appInfo.icon = bundleInfo.icon;
         }
       })
-
       appInfo.name = info.name;
       appInfo.api = info.targetVersion;
       appInfo.accessTokenId = info.appInfo.accessTokenId;

@@ -605,36 +605,20 @@
       "value": "权限管理"
     },
     {
-      "name": "Temporarily_authorize",
-      "value": "临时授权“"
+      "name": "SecurityTitle_location",
+      "value": "安全访问位置信息"
     },
     {
-      "name": "To_access",
-      "value": "”访问"
+      "name": "SecurityTitle_mediaFiles",
+      "value": "安全访问媒体和文件"
     },
     {
-      "name": "location_desc",
-      "value": "位置信息"
+      "name": "SecurityDescription_location",
+      "value": "此按钮通过系统安全认证，仅允许“%s”在您点击此按钮时，临时访问位置信息，以减少您的隐私数据被应用持续获取。"
     },
     {
-      "name": "media_files_desc",
-      "value": "媒体和文件"
-    },
-    {
-      "name": "location_button_desc",
-      "value": "此按钮通过系统安全认证，"
-    },
-    {
-      "name": "only_can_desc",
-      "value": "仅允许应用在您点击此按钮时，临时访问"
-    },
-    {
-      "name": "only_after_desc",
-      "value": "，"
-    },
-    {
-      "name": "prevent_desc",
-      "value": "以减少您的隐私数据被应用持续获取。"
+      "name": "SecurityDescription_mediaFiles",
+      "value": "此按钮通过系统安全认证，仅允许“%s”在您点击此按钮时，临时访问媒体和文件，以减少您的隐私数据被应用持续获取。"
     },
     {
       "name": "Got_it",

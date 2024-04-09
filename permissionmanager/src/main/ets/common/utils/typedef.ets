@@ -205,10 +205,12 @@ export class AppInfoSimple {
 export class Param {
   public icon: Resource
   public label: Resource
+  public description: string
 
-  constructor(icon: Resource, label: Resource) {
+  constructor(icon: Resource, label: Resource, description: string) {
     this.icon = icon
     this.label = label
+    this.description = description
   }
 };
 
