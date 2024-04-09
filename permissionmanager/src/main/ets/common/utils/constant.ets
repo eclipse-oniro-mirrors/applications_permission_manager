@@ -324,6 +324,7 @@ export default class Constants {
     public static RESULT_SUCCESS = 1
     public static RESULT_FAILURE = 0
     public static RESULT_CODE = 0
+    static RESULT_CODE_1 = 1
 
     //location status
     public static LOCATION_NONE = 0

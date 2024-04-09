@@ -343,13 +343,16 @@ struct PermissionDialog {
     })
     let option = new rpc.MessageOption();
     let data = new rpc.MessageSequence();
+    let setDialogData = new rpc.MessageSequence();
     let reply = new rpc.MessageSequence();
     Promise.all([data.writeInterfaceToken(Constants.ACCESS_TOKEN),
       data.writeStringArray(perms),
-      data.writeIntArray(results)
+      data.writeIntArray(results),
+      setDialogData.writeInterfaceToken(Constants.ACCESS_TOKEN),
     ]).then(() => {
       let proxy = want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
       proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
+      proxy.sendMessageRequest(Constants.RESULT_CODE_1, setDialogData, reply, option);
       this.destruction();
     }).catch(() => {
       Log.error('write result failed!');

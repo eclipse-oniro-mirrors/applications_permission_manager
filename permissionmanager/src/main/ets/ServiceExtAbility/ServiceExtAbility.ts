@@ -16,12 +16,15 @@
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
+import rpc from '@ohos.rpc';
 import { GlobalContext } from '../common/utils/globalContext';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
 
 const TAG = 'PermissionManager_Log: ';
 const BG_COLOR = '#00000000';
 const DEFAULT_CORNER_RADIUS_L = 16;
+const RESULT_CODE_1 = 1;
+const ACCESS_TOKEN = 'ohos.security.accesstoken.tokencallback';
 
 export default class ServiceExtensionAbility extends extension {
   /**
@@ -62,6 +65,10 @@ export default class ServiceExtensionAbility extends extension {
   }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
+    let proxy = want.parameters['ohos.ability.params.callback'].value;
+    let option = new rpc.MessageOption();
+    let data = new rpc.MessageSequence();
+    let reply = new rpc.MessageSequence();
     let requestInfo: dialogRequest.RequestInfo;
     try {
       requestInfo = dialogRequest.getRequestInfo(want);
@@ -77,6 +84,13 @@ export default class ServiceExtensionAbility extends extension {
       console.info(TAG + 'createWindow end.');
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
+        Promise.all([
+          data.writeInterfaceToken(ACCESS_TOKEN),
+        ]).then(() => {
+          proxy.sendMessageRequest(RESULT_CODE_1, data, reply, option);
+        }).catch(() => {
+          console.error('write result failed!');
+        })
         let windowNum = GlobalContext.load('windowNum');
         windowNum --;
         GlobalContext.store('windowNum', windowNum);
