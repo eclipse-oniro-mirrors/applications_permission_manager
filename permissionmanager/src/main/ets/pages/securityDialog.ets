@@ -14,6 +14,7 @@
  */
 import bundleManager from '@ohos.bundle.bundleManager';
 import Constants from '../common/utils/constant';
+import rpc from '@ohos.rpc';
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import display from '@ohos.display';
@@ -39,6 +40,19 @@ struct SecurityDialog {
     alignment: DialogAlignment.Bottom,
     customStyle: true,
     cancel: () => {
+      let option = new rpc.MessageOption();
+      let data = new rpc.MessageSequence();
+      let reply = new rpc.MessageSequence();
+      Promise.all([data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
+        data.writeInt(0)
+      ]).then(() => {
+        let proxy = want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
+        if (proxy != undefined) {
+          proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
+        }
+      }).catch(() => {
+        Log.error('write result failed!');
+      })
       win.destroyWindow();
       this.context.terminateSelf();
     }
@@ -96,6 +110,19 @@ struct CustomSecurityDialog {
   }
 
   destruction() {
+    let option = new rpc.MessageOption();
+    let data = new rpc.MessageSequence();
+    let reply = new rpc.MessageSequence();
+    Promise.all([data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
+      data.writeInt(0)
+    ]).then(() => {
+      let proxy = want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
+      if (proxy != undefined) {
+        proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
+      }
+    }).catch(() => {
+      Log.error('write result failed!');
+    })
     win.destroyWindow();
     this.context.terminateSelf();
   }
