@@ -65,10 +65,6 @@ export default class ServiceExtensionAbility extends extension {
   }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
-    let proxy = want.parameters['ohos.ability.params.callback'].value;
-    let option = new rpc.MessageOption();
-    let data = new rpc.MessageSequence();
-    let reply = new rpc.MessageSequence();
     let requestInfo: dialogRequest.RequestInfo;
     try {
       requestInfo = dialogRequest.getRequestInfo(want);
@@ -83,22 +79,7 @@ export default class ServiceExtensionAbility extends extension {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
       console.info(TAG + 'createWindow end.');
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
-      await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
-        Promise.all([
-          data.writeInterfaceToken(ACCESS_TOKEN),
-        ]).then(() => {
-          proxy.sendMessageRequest(RESULT_CODE_1, data, reply, option);
-        }).catch(() => {
-          console.error('write result failed!');
-        })
-        let windowNum = GlobalContext.load('windowNum');
-        windowNum --;
-        GlobalContext.store('windowNum', windowNum);
-        win.destroyWindow();
-        if (windowNum === 0) {
-          this.context.terminateSelf();
-        }
-      });
+      await this.BindDialogTarget(win, want);
       console.info(TAG + 'bindDialogTarget end.');
       await win.moveWindowTo(rectInfo.left, rectInfo.top);
       console.info(TAG + 'moveWindowTo end.');
@@ -118,5 +99,27 @@ export default class ServiceExtensionAbility extends extension {
     } catch {
       console.info(TAG + 'window create failed!');
     }
+  }
+  private async BindDialogTarget(win, want): Promise<void> {
+    let proxy = want.parameters['ohos.ability.params.callback'].value;
+    let option = new rpc.MessageOption();
+    let data = new rpc.MessageSequence();
+    let reply = new rpc.MessageSequence();
+    win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
+      Promise.all([
+        data.writeInterfaceToken(ACCESS_TOKEN),
+      ]).then(() => {
+        proxy.sendMessageRequest(RESULT_CODE_1, data, reply, option);
+      }).catch(() => {
+        console.error('write result failed!');
+      });
+      let windowNum = GlobalContext.load('windowNum');
+      windowNum --;
+      GlobalContext.store('windowNum', windowNum);
+      win.destroyWindow();
+      if (windowNum === 0) {
+        this.context.terminateSelf();
+      }
+    });
   }
 };
