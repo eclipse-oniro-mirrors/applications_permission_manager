@@ -229,8 +229,7 @@ export class PermissionInfo {
   public groupName: string
   public label: ResourceStr
   public groupId: number
-  public enableDescriptionStart?: ResourceStr
-  public enableDescriptionEnd?: ResourceStr
+  public enableDescription?: string
   public forbiddenDescription?: ResourceStr
 
   constructor(
@@ -238,16 +237,14 @@ export class PermissionInfo {
     groupName: string,
     label: ResourceStr,
     groupId: number,
-    enableDescriptionStart?: ResourceStr,
-    enableDescriptionEnd?: ResourceStr,
+    enableDescription?: string,
     forbiddenDescription?: ResourceStr
   ) {
     this.permissionName = permissionName;
     this.groupName = groupName;
     this.label = label;
     this.groupId = groupId;
-    this.enableDescriptionStart = enableDescriptionStart;
-    this.enableDescriptionEnd = enableDescriptionEnd;
+    this.enableDescription = enableDescription;
     this.forbiddenDescription = forbiddenDescription;
   }
 }
@@ -261,8 +258,7 @@ export class GroupInfo {
   public reason: string
   public permissions: Array<Permissions>
   public isShow: boolean
-  public enableDescriptionStart?: ResourceStr
-  public enableDescriptionEnd?: ResourceStr
+  public enableDescription?: string
   public forbiddenDescription?: ResourceStr
 
   constructor(
@@ -274,8 +270,7 @@ export class GroupInfo {
     reason: string,
     permissions: Array<Permissions>,
     isShow: boolean,
-    enableDescriptionStart?: ResourceStr,
-    enableDescriptionEnd?: ResourceStr,
+    enableDescription?: string,
     forbiddenDescription?: ResourceStr
   ) {
     this.name = name;
@@ -286,8 +281,7 @@ export class GroupInfo {
     this.reason = reason;
     this.permissions = permissions;
     this.isShow = isShow;
-    this.enableDescriptionStart = enableDescriptionStart;
-    this.enableDescriptionEnd = enableDescriptionEnd;
+    this.enableDescription = enableDescription;
     this.forbiddenDescription = forbiddenDescription;
   }
 }
