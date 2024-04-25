@@ -121,6 +121,10 @@
       "value": "每次使用询问"
     },
     {
+      "name": "per_inquiry",
+      "value": "每次询问"
+    },
+    {
       "name": "ALLOW",
       "value": "允许"
     },
@@ -139,6 +143,10 @@
     {
       "name": "allowed_only_during_use",
       "value": "仅使用期间允许"
+    },
+    {
+      "name": "allow_this_time",
+      "value": "允许本次使用"
     },
     {
       "name": "precise_location",

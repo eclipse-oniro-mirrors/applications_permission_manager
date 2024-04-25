@@ -104,7 +104,11 @@ export default class Constants {
     public static TAB_INNER_PADDING = 8;
     public static TAB_DECORATION_HEIGHT = 2;
     public static TAB_DECORATION_POSITION_Y = 6;
+    public static MARGIN_4 = 4;
+    public static MARGIN_8 = 8;
+    public static PADDING_8 = 8;
     public static PADDING_10 = 10;
+    public static PADDING_16 = 16;
     public static DEFAULT_PADDING_START = 12;
     public static DEFAULT_PADDING_END = 12;
     public static DEFAULT_PADDING_TOP = 12;
@@ -308,7 +312,6 @@ export default class Constants {
     public static BUTTON_HEIGHT = 40;
 
     public static DIALOG_PRIVACY_BORDER_RADIUS = 32;
-    public static DIALOG_PADDING_BOTTOM = 16;
 
     // initial check status
     public static INIT_NEED_TO_WAIT = 0

@@ -58,6 +58,13 @@ export default class MainAbility extends UIAbility {
         globalThis.refresh = true;
       }
     });
+    bundleMonitor.on('update', (bundleChangeInfo) => {
+      console.log(`${TAG} bundleMonitor.update: ${JSON.stringify(bundleChangeInfo)}`);
+      if (globalThis.currentApp === 'all') {
+        this.getAllApplications();
+        globalThis.refresh = true;
+      }
+    });
   }
 
   onNewWant(want): void {
