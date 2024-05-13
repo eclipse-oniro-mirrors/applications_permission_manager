@@ -255,6 +255,9 @@ struct mediaDocumentItem {
       );
     } else if (this.currentGroup == 'LOCATION') {
       this.selected = this.status ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOWED_ONLY_DURING_USE;
+      this.mediaDocListItem.push(
+        new MediaDocObj($r('app.string.per_inquiry'), this.permissions, Constants.PERMISSION_ONLY_THIS_TIME)
+      );
       if (this.permissions.includes(BACKGROUND_LOCATION_PERMISSION)) {
         this.mediaDocListItem.push(
           new MediaDocObj($r('app.string.always_allow'), this.permissions, Constants.PERMISSION_ALLOW)
@@ -263,7 +266,9 @@ struct mediaDocumentItem {
       if (this.permissions.includes(FUZZY_LOCATION_PERMISSION)) {
         this.mediaDocListItem.push(
           new MediaDocObj(
-            $r('app.string.allowed_only_during_use'), [FUZZY_LOCATION_PERMISSION], Constants.PERMISSION_ALLOWED_ONLY_DURING_USE
+            $r('app.string.allowed_only_during_use'),
+            [FUZZY_LOCATION_PERMISSION],
+            Constants.PERMISSION_ALLOWED_ONLY_DURING_USE
           )
         );
       } else {
@@ -329,23 +334,16 @@ struct mediaDocumentItem {
       let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION);
       this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
       try {
-        acManager.getPermissionFlags(res.appInfo.accessTokenId, this.permissions[0]).then((data) => {
-          Log.info(`getPermissionFlags success, data->${JSON.stringify(data)}`);
-          this.isRisk = (data == Constants.PERMISSION_POLICY_FIXED) ? true : false;
+        let getFlagPermission = this.currentGroup === 'LOCATION' ? FUZZY_LOCATION_PERMISSION : this.permissions[0];
+        acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission).then((flag) => {
+          Log.info(`getPermissionFlags success, data->${JSON.stringify(flag)}`);
+          this.isRisk = (flag == Constants.PERMISSION_POLICY_FIXED) ? true : false;
+          if (flag === Constants.PERMISSION_ALLOW_THIS_TIME) {
+            this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
+          }
         })
       } catch (err) {
         Log.error('acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
-      }
-      if (this.currentGroup == 'PASTEBOARD') {
-        try {
-          acManager.getPermissionFlags(res.appInfo.accessTokenId, PASTE).then(flag => {
-            if (flag == Constants.PERMISSION_ALLOW_THIS_TIME) {
-              this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
-            }
-          })
-        } catch (err) {
-          Log.error('getPermissionFlags error: ' + JSON.stringify(err));
-        }
       }
       if (this.currentGroup == 'LOCATION') {
         let backgroundState = acManager.verifyAccessTokenSync(
@@ -552,6 +550,12 @@ struct mediaDocumentItem {
                               this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
                             }
                           } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
+                            if (
+                              (this.api >= Constants.API_VERSION_SUPPORT_STAGE) &&
+                                (permission == PRECISE_LOCATION_PERMISSION)
+                            ) {
+                              return false;
+                            }
                             this.revokeUserGrantedPermission(
                               accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME
                             );

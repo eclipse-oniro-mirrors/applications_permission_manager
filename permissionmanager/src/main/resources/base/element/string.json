@@ -121,6 +121,10 @@
       "value": "Per-use query"
     },
     {
+      "name": "per_inquiry",
+      "value": "Per inquiry"
+    },
+    {
       "name": "ALLOW",
       "value": "ALLOW"
     },
@@ -139,6 +143,10 @@
     {
       "name": "allowed_only_during_use",
       "value": "Allowed only during use"
+    },
+    {
+      "name": "allow_this_time",
+      "value": "ALLOW THIS TIME"
     },
     {
       "name": "precise_location",

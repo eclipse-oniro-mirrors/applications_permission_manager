@@ -234,37 +234,75 @@ struct PermissionDialog {
                   }
                 }
               }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
-              Row() {
-                Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                  Button($r('app.string.BAN'))
+              if (this.currentGroup() === 'LOCATION' || this.currentGroup() === 'LOCATION_PRECISE') {
+                Column() {
+                  Button($r('app.string.ALLOWED_ONLY_DURING_USE'))
+                    .customizeButton()
+                    .width(Constants.FULL_WIDTH)
+                    .margin({ bottom: Constants.MARGIN_4 })
                     .onClick(() => {
-                      this.privacyCancel(
+                      this.privacyAccept(
                         this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
                       )
-                    }).customizeButton()
-                  Divider()
-                    .color($r('sys.color.ohos_id_color_list_separator'))
-                    .vertical(true)
-                    .strokeWidth(Constants.DIALOG_DIVIDER)
-                    .height(Constants.DIVIDER_HEIGHT)
-                    .opacity(0.2)
-                  Button(this.sureButton)
+                    })
+                  Button($r('app.string.allow_this_time'))
+                    .customizeButton()
+                    .width(Constants.FULL_WIDTH)
+                    .margin({ bottom: Constants.MARGIN_4 })
                     .onClick(() => {
                       this.privacyAccept(
                         this.grantGroups[this.count],
                         this.accessTokenId,
                         this.reqPerms,
-                        this.currentGroup() === 'PASTEBOARD' ? Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag
+                        Constants.PERMISSION_ALLOW_THIS_TIME
                       )
-                    }).customizeButton()
-                }.margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
+                    })
+                  Button($r('app.string.cancel'))
+                    .customizeButton()
+                    .width(Constants.FULL_WIDTH)
+                    .onClick(() => {
+                      this.count ++;
+                    })
+                }
+                .padding({ left: Constants.PADDING_16, right: Constants.PADDING_16 })
+              } else {
+                Row() {
+                  Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                    Button($r('app.string.BAN'))
+                      .onClick(() => {
+                        this.privacyCancel(
+                          this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
+                        )
+                      }).customizeButton()
+                    Divider()
+                      .color($r('sys.color.ohos_id_color_list_separator'))
+                      .vertical(true)
+                      .strokeWidth(Constants.DIALOG_DIVIDER)
+                      .height(Constants.DIVIDER_HEIGHT)
+                      .opacity(0.2)
+                    Button(this.sureButton)
+                      .onClick(() => {
+                        this.privacyAccept(
+                          this.grantGroups[this.count],
+                          this.accessTokenId,
+                          this.reqPerms,
+                          this.currentGroup() === 'PASTEBOARD' ?
+                            Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag
+                        )
+                      }).customizeButton()
+                  }.margin({
+                    left: Constants.BUTTON_MARGIN_LEFT,
+                    right: Constants.BUTTON_MARGIN_RIGHT,
+                    bottom: Constants.MARGIN_8
+                  })
+                }
               }
             }
           }
           .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
           .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
           .width(Constants.FULL_WIDTH)
-          .padding({ bottom: Constants.DIALOG_PADDING_BOTTOM })
+          .padding({ bottom: Constants.PADDING_8 })
           .margin({ bottom: $r('sys.float.ohos_id_dialog_margin_bottom') })
           .clip(true)
         }.width(Constants.FULL_WIDTH)
@@ -405,13 +443,7 @@ struct PermissionDialog {
   async privacyCancel(group: GroupInfo, accessTokenId: number, permissionList: string[], userFixedFlag: number) {
     group.permissions.forEach(async permission => {
       if (showSubPermissionsGroup.indexOf(group.name) == -1) {
-        if (group.name == 'LOCATION') {
-          if (permissionList.includes(permission) && this.locationFlag !== Constants.LOCATION_UPGRADE) {
-            await this.operationPermission(false, accessTokenId, permission, userFixedFlag);
-          }
-        } else {
-          await this.operationPermission(false, accessTokenId, permission, userFixedFlag);
-        }
+        await this.operationPermission(false, accessTokenId, permission, userFixedFlag);
       } else {
         if (permissionList.includes(permission)) {
           await this.operationPermission(false, accessTokenId, permission, userFixedFlag);
