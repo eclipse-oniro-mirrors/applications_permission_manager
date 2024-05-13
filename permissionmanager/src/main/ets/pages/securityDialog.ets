@@ -211,19 +211,43 @@ struct CustomSecurityDialog {
                   })
               }
               Column() {
-                Button($r('app.string.Got_it')) // button
-                  .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                  .fontWeight(FontWeight.Medium)
-                  .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
-                  .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
-                  .height(Constants.SECURITY_BUTTON_HEIGHT)
-                  .width(Constants.FULL_WIDTH)
-                  .onClick(() => {
-                    if (this.controller !== undefined) {
-                      this.controller.close();
-                    }
-                    this.destruction();
-                  })
+                Row() {
+                  Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                    Button($r('app.string.cancel')) // button
+                      .fontSize($r('sys.float.ohos_id_text_size_button1'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+                      .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
+                      .height(Constants.SECURITY_BUTTON_HEIGHT)
+                      .width(Constants.FULL_WIDTH)
+                      .onClick(() => {
+                        if (this.controller !== undefined) {
+                          this.controller.close();
+                        }
+                        win.destroyWindow();
+                        this.context.terminateSelf();
+                      })
+                    Divider()
+                      .color($r('sys.color.ohos_id_color_list_separator'))
+                      .vertical(true)
+                      .strokeWidth(Constants.DIALOG_DIVIDER)
+                      .height(Constants.DIVIDER_HEIGHT)
+                      .opacity(0.2)
+                    Button($r('app.string.ALLOW')) // button
+                      .fontSize($r('sys.float.ohos_id_text_size_button1'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+                      .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
+                      .height(Constants.SECURITY_BUTTON_HEIGHT)
+                      .width(Constants.FULL_WIDTH)
+                      .onClick(() => {
+                        if (this.controller !== undefined) {
+                          this.controller.close();
+                        }
+                        this.destruction(); // Confirm authorization
+                      })
+                  }.margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
+                }
               }
               .margin({ top: Constants.SECURITY_BUTTON_MARGIN_TOP })
               .height(Constants.SECURITY_BUTTON_ROW_HEIGHT)
