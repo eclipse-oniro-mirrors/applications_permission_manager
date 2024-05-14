@@ -16,13 +16,9 @@
 import Constants from '../utils/constant';
 import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
-import deviceInfo from '@ohos.deviceInfo';
-import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
 import { GlobalContext } from '../utils/globalContext';
 import { Log } from '../utils/utils';
-
-let bottomPopoverTypes = ['default', 'phone'];
 
 @Extend(Button)function customizeButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
@@ -38,7 +34,6 @@ export struct globalDialog {
   private context = getContext(this) as common.UIAbilityContext;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @Link globalIsOn: boolean;
-  @State isBottomPopover: boolean = true;
   controller?: CustomDialogController;
 
   build() {
@@ -59,9 +54,7 @@ export struct globalDialog {
           lg: Constants.DIALOG_LG_OFFSET
         }
       }) {
-        Flex({
-          justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center
-        }) {
+        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
           Column() {
             Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
               .fontSize(Constants.TEXT_BIG_FONT_SIZE)
@@ -110,8 +103,7 @@ export struct globalDialog {
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }
-    }.margin({ left: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      right: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN })
+    }.margin({ left: Constants.DIALOG_MARGIN, right: Constants.DIALOG_MARGIN })
   }
 
   confirm() {
@@ -142,12 +134,6 @@ export struct globalDialog {
   }
 
   aboutToAppear() {
-    try {
-      let dis = display.getDefaultDisplaySync();
-      let isVertical = dis.width > dis.height ? false : true;
-      this.isBottomPopover = bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical;
-    } catch (exception) {
-      Log.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
-    };
+    Log.info('global aboutToAppear');
   }
 }

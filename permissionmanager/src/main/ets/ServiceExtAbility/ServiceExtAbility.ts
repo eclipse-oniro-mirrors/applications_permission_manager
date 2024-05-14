@@ -92,8 +92,6 @@ export default class ServiceExtensionAbility extends extension {
       }
       await win.showWindow();
       console.info(TAG + 'showWindow end.');
-      await win.setWindowLayoutFullScreen(true);
-      console.info(TAG + 'setWindowLayoutFullScreen end.');
       globalThis.windowNum ++;
       GlobalContext.store('windowNum', globalThis.windowNum);
     } catch {
