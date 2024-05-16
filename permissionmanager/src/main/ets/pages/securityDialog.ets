@@ -17,13 +17,10 @@ import Constants from '../common/utils/constant';
 import rpc from '@ohos.rpc';
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
-import display from '@ohos.display';
-import deviceInfo from '@ohos.deviceInfo';
 import { BusinessError } from '@ohos.base';
 import { Log } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/utils/typedef';
 
-let bottomPopoverTypes = ['default', 'phone'];
 let storage = LocalStorage.getShared();
 let want: WantInfo;
 let win: window.Window;
@@ -76,12 +73,10 @@ struct SecurityDialog {
 @CustomDialog
 struct CustomSecurityDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
-  @State isBottomPopover: boolean = true;
   controller?: CustomDialogController;
   descriptor: string = ''
   @State appName: string = 'ToBeInstead';
   @State index: number = 0;
-  @State naviHeight: number = 0
 
   securityParams : Array<Param> = [
     new Param(
@@ -127,27 +122,6 @@ struct CustomSecurityDialog {
     this.context.terminateSelf();
   }
 
-  getAvoidWindow() {
-    let type = window.AvoidAreaType.TYPE_SYSTEM;
-    try {
-      let avoidArea = win.getWindowAvoidArea(type);
-      Log.info('avoidArea: ' + JSON.stringify(avoidArea));
-      this.naviHeight = avoidArea.bottomRect.height;
-    } catch (exception) {
-      Log.error('Failed to obtain the area. Cause:' + JSON.stringify(exception));
-    }
-  }
-
-  getPopupPosition() {
-    try {
-      let dis = display.getDefaultDisplaySync();
-      let isVertical = dis.width > dis.height ? false : true;
-      this.isBottomPopover = (bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical) ? true : false;
-    } catch (exception) {
-      Log.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
-    };
-  }
-
   build() {
     GridRow({
       columns: {
@@ -166,10 +140,7 @@ struct CustomSecurityDialog {
           lg: Constants.DIALOG_LG_OFFSET
         }
       }) {
-        Flex({
-          justifyContent: FlexAlign.Center,
-          alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center
-        }) {
+        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
           Row() {
             Column() {
               Column() {
@@ -235,17 +206,13 @@ struct CustomSecurityDialog {
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }
-    }.margin({ left: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      right: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      bottom: this.isBottomPopover ? this.naviHeight + 'px' : 0})
+    }.margin({ left: Constants.DIALOG_MARGIN, right: Constants.DIALOG_MARGIN })
   }
 
   aboutToAppear() {
     Log.info('onAboutToAppear.');
-    this.getAvoidWindow();
     this.GetAppName();
     this.index = want.parameters['ohos.user.security.type'];
-    this.getPopupPosition();
   }
 }
 

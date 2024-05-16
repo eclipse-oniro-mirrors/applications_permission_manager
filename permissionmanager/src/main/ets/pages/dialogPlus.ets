@@ -18,8 +18,6 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import rpc from '@ohos.rpc';
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
-import display from '@ohos.display';
-import deviceInfo from '@ohos.deviceInfo';
 import pasteboard from '@ohos.pasteboard';
 import { BusinessError } from '@ohos.base';
 import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../common/utils/utils';
@@ -46,7 +44,6 @@ const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const fuzzyMarks = [Constants.LOCATION_FUZZY, Constants.LOCATION_BOTH_FUZZY, Constants.LOCATION_BOTH_PRECISE];
 const preciseMarks = [Constants.LOCATION_UPGRADE, Constants.LOCATION_BOTH_PRECISE];
-let bottomPopoverTypes = ['default', 'phone'];
 
 let win: window.Window;
 let want: WantInfo;
@@ -88,7 +85,6 @@ struct dialogPlusPage {
 @CustomDialog
 struct PermissionDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
-  @State isBottomPopover: boolean = true;
   @State count: number = 0;
   @State result: Array<number> = [];
   @State accessTokenId: number = 0;
@@ -101,7 +97,6 @@ struct PermissionDialog {
   @State locationFlag: number = Constants.LOCATION_NONE;
   @State targetVersion: number = 0;
   @State reqPermissionDetails: bundleManager.ReqPermissionDetail[] = [];
-  @State naviHeight: number = 0
   @State refresh: number = 0;
   @State pasteBoardName: string = '';
   @State sureButton: Resource = $r('app.string.ALLOW');
@@ -132,9 +127,7 @@ struct PermissionDialog {
           lg: Constants.DIALOG_LG_OFFSET
         }
       }) {
-        Flex({
-          justifyContent: FlexAlign.Center, alignItems: this.isBottomPopover ? ItemAlign.End : ItemAlign.Center
-        }) {
+        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
           Column() {
             if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
               Image(
@@ -308,9 +301,7 @@ struct PermissionDialog {
         }.width(Constants.FULL_WIDTH)
         .height(Constants.FULL_HEIGHT)
       }
-    }.margin({ left: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      right: this.isBottomPopover ? Constants.DIALOG_MARGIN_VERTICAL : Constants.DIALOG_MARGIN,
-      bottom: this.isBottomPopover ? this.naviHeight + 'px' : 0})
+    }.margin({ left: Constants.DIALOG_MARGIN, right: Constants.DIALOG_MARGIN })
   }
 
   showTitle(): ResourceStr {
@@ -588,33 +579,6 @@ struct PermissionDialog {
     })
   }
 
-  getAvoidWindow() {
-    let type = window.AvoidAreaType.TYPE_SYSTEM;
-    try {
-      win.on('avoidAreaChange', (data) => {
-        if (data.type == window.AvoidAreaType.TYPE_SYSTEM) {
-          Log.info('avoidAreaChange: ' + JSON.stringify(data));
-          this.naviHeight = data.area.bottomRect.height;
-        }
-      });
-      let avoidArea = win.getWindowAvoidArea(type);
-      Log.info('avoidArea: ' + JSON.stringify(avoidArea));
-      this.naviHeight = avoidArea.bottomRect.height;
-    } catch (exception) {
-      Log.error('Failed to obtain the area. Cause:' + JSON.stringify(exception));
-    }
-  }
-
-  getPopupPosition() {
-    try {
-      let dis = display.getDefaultDisplaySync();
-      let isVertical = dis.width > dis.height ? false : true;
-      this.isBottomPopover = (bottomPopoverTypes.includes(deviceInfo.deviceType) && isVertical) ? true : false;
-    } catch (exception) {
-      Log.error('Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
-    };
-  }
-
   getPasteBoardInfo() {
     if (this.reqPerms.includes(PASTE)) {
       let systemPasteboard: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
@@ -642,8 +606,6 @@ struct PermissionDialog {
     Log.info('request permission=' + JSON.stringify(this.reqPerms) + ', tokenId = ' + this.accessTokenId);
     Log.info('permission state=' + JSON.stringify(want.parameters['ohos.user.grant.permission.state']));
     this.result = new Array(this.reqPerms.length).fill(-1);
-    this.getAvoidWindow();
-    this.getPopupPosition();
     this.getPasteBoardInfo();
     let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'];
     bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)

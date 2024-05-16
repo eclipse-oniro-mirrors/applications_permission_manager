@@ -57,7 +57,7 @@ export default class SecurityExtensionAbility extends extension {
   }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
-    console.info(TAG + 'create securitywindow');
+    console.info(TAG + 'create securityWindow');
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
@@ -68,9 +68,8 @@ export default class SecurityExtensionAbility extends extension {
       await win.moveWindowTo(rect.left, rect.top);
       await win.resize(rect.width, rect.height);
       await win.loadContent('pages/securityDialog', storage);
-      await win.setWindowBackgroundColor(BG_COLOR);
+      win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
-      await win.setWindowLayoutFullScreen(true);
     } catch {
       console.info(TAG + 'window create failed!');
     }

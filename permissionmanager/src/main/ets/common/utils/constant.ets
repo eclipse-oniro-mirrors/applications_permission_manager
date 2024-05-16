@@ -51,7 +51,6 @@ export default class Constants {
 
     public static DIALOG_GUTTER = 16;
     public static DIALOG_MARGIN = 16;
-    public static DIALOG_MARGIN_VERTICAL = 12;
     public static DIALOG_MD_SPAN = 4;
     public static DIALOG_MD_OFFSET = 2;
     public static DIALOG_LG_SPAN = 4;
