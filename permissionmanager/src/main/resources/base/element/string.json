@@ -53,14 +53,6 @@
       "value": "BANNED"
     },
     {
-      "name": "Authorization_failed",
-      "value": "Authorization failure！"
-    },
-    {
-      "name": "reason_suffix",
-      "value": " and other permissions. "
-    },
-    {
       "name": "separator",
       "value": ", "
     },

@@ -66,12 +66,14 @@ export default class Constants {
     public static APPLICATION = 0;
     public static LAYOUT_WEIGHT = 1;
     public static FLEX_GROW = 1;
+    public static HEADLINE_HEIGHT = 56;
     public static TEXT_BIG_FONT_SIZE = 20;
     public static TEXT_MIDDLE_FONT_SIZE = 16;
     public static TEXT_SMALL_FONT_SIZE = 14;
     public static TEXT_SMALLER_FONT_SIZE = 12;
+    public static FONT_SIZE_28 = 28;
     public static TEXT_LINE_HEIGHT = 22;
-    public static TEXT_LINE_HEIGHT_27 = 27;
+    public static TEXT_LINE_HEIGHT_24 = 24;
     public static TEXT_BIG_LINE_HEIGHT = 28;
     public static TEXT_SMALL_LINE_HEIGHT = 19;
     public static CONSTRAINTSIZE_MINHEIGHT = 48;
@@ -79,7 +81,6 @@ export default class Constants {
     public static LISTITEM_PADDING_LEFT = 24;
     public static LIST_PADDING_LEFT = 12
     public static LISTITEM_PADDING_RIGHT = 24;
-    public static LISTITEM_PADDING_LEFT_RECORD = 32;
     public static LISTITEM_PADDING_RIGHT_RECORD = 50;
     public static LISTITEM_MARGIN_BOTTOM = 12;
     public static LISTITEM_HEIGHT_PERMISSION = 64;
@@ -92,7 +93,7 @@ export default class Constants {
     public static IMAGE_HEIGHT_RECORD_APPLICATION = 16;
     public static IMAGE_WIDTH_RECORD_APPLICATION = 16;
     public static IMAGE_POSITION_28 = 28;
-    public static BORDER_WIDTH_1 = 1;
+    public static BORDER_WIDTH_1 = '1px';
     public static TITLE_MARGIN_BOTTOM = 16;
     public static SUBTITLE_MIN_HEIGHT = 48;
     public static SUBTITLE_LINE_HEIGHT = 24;
@@ -212,10 +213,6 @@ export default class Constants {
     public static OTHER_GROUP = 3;
     public static EXTRA_GROUP = 4;
 
-    // setTimeout
-    public static DELAY_TIME = 1000;
-    public static DELAY_TIME_MAX = 2000;
-
     // radio
     public static RADIO_ALLOW_INDEX = 0;
     public static RADIO_BAN_INDEX = 1;
@@ -229,11 +226,6 @@ export default class Constants {
     //shape
     public static SHAPE_DIA = 20;
 
-    // utils
-    public static CHAR_CODE = 0;
-    public static UNI_MAX = 40869;
-    public static UNI_MIN = 19968;
-
     public static PERMISSION_INDEX = 0;
 
     public static PERMISSION_NUM = 0;
@@ -246,10 +238,6 @@ export default class Constants {
     public static PERMISSION_COMPONENT_SET = 16;
     public static PERMISSION_POLICY_FIXED = 32;
     public static PERMISSION_ALLOW_THIS_TIME = 64;
-
-    public static DEFAULT_DEVICE_TYPE = 'default'
-    public static PHONE_DEVICE_TYPE = 'phone'
-    public static TABLET_DEVICE_TYPE = 'tablet'
 
     public static START_SUBSCRIPT = 0
     public static END_SUBSCRIPT = 500
@@ -267,12 +255,8 @@ export default class Constants {
 
     // icon
     public static SECURITY_ICON_MARGIN_TOP = 24;
-    public static SECURITY_ICON_MARGIN_BOTTOM = 16;
     public static SECURITY_ICON_WIDTH = 48;
     public static SECURITY_ICON_HEIGHT = 48;
-
-    // content-descriptor
-    public static SECURITY_DESCRIPTOR_DEVIDER_MARGIN_TOP = 8;
 
     //button
     public static SECURITY_BUTTON_MARGIN_TOP = 8;
@@ -338,7 +322,6 @@ export default class Constants {
     public static LOCATION_CANVAS_ZOOM_SCALE = 1.3;
     public static LOCATION_BUTTON_HEIGHT = 32;
     public static LOCATION_BUTTON_RADIUS = 16;
-    public static LOCATION_BUTTON_POSITION_X = 137.5;
     public static LOCATION_BUTTON_POSITION_Y = 16;
     public static LOCATION_ICON_POSITION_X = 228;
     public static LOCATION_ICON_POSITION_Y = 86.5;
