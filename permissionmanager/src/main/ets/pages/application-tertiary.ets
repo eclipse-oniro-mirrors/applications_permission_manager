@@ -152,6 +152,13 @@ struct mediaDocumentPage {
       let backgroundState = acManager.verifyAccessTokenSync(this.tokenId, BACKGROUND_LOCATION_PERMISSION);
       backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
         this.selected = Constants.PERMISSION_ALLOW : null;
+      try {
+        acManager.getPermissionFlags(this.tokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
+          flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
+        })
+      } catch (err) {
+        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+      }
     }
   }
 }
