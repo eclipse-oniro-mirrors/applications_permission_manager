@@ -11,6 +11,14 @@
     {
       "name": "location_circle_color",
       "value": "#254FF7"
+    },
+    {
+      "name": "icon_bg",
+      "value": "#E6ffffff"
+    },
+    {
+      "name": "icon_border",
+      "value": "#33808080"
     }
   ]
 }

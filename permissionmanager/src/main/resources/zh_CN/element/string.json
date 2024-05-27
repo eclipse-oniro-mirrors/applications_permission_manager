@@ -53,14 +53,6 @@
       "value": "已禁止"
     },
     {
-      "name": "Authorization_failed",
-      "value": "授权失败！"
-    },
-    {
-      "name": "reason_suffix",
-      "value": "等权限。"
-    },
-    {
       "name": "separator",
       "value": "、"
     },

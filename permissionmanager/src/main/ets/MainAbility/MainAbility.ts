@@ -44,27 +44,33 @@ export default class MainAbility extends UIAbility {
       globalThis.currentApp = 'all';
       this.getAllApplications();
     }
-    bundleMonitor.on('add', (bundleChangeInfo) => {
-      console.log(`${TAG} bundleMonitor.add: ${JSON.stringify(bundleChangeInfo)}`);
-      if (globalThis.currentApp === 'all') {
-        this.getAllApplications();
-        globalThis.refresh = true;
-      }
-    });
-    bundleMonitor.on('remove', (bundleChangeInfo) => {
-      console.log(`${TAG} bundleMonitor.remove: ${JSON.stringify(bundleChangeInfo)}`);
-      if (globalThis.currentApp === 'all') {
-        this.getAllApplications();
-        globalThis.refresh = true;
-      }
-    });
-    bundleMonitor.on('update', (bundleChangeInfo) => {
-      console.log(`${TAG} bundleMonitor.update: ${JSON.stringify(bundleChangeInfo)}`);
-      if (globalThis.currentApp === 'all') {
-        this.getAllApplications();
-        globalThis.refresh = true;
-      }
-    });
+
+    try {
+      bundleMonitor.on('add', (bundleChangeInfo) => {
+        console.log(`${TAG} bundleMonitor.add: ${JSON.stringify(bundleChangeInfo)}`);
+        if (globalThis.currentApp === 'all') {
+          this.getAllApplications();
+          globalThis.refresh = true;
+        }
+      });
+      bundleMonitor.on('remove', (bundleChangeInfo) => {
+        console.log(`${TAG} bundleMonitor.remove: ${JSON.stringify(bundleChangeInfo)}`);
+        if (globalThis.currentApp === 'all') {
+          this.getAllApplications();
+          globalThis.refresh = true;
+        }
+      });
+      bundleMonitor.on('update', (bundleChangeInfo) => {
+        console.log(`${TAG} bundleMonitor.update: ${JSON.stringify(bundleChangeInfo)}`);
+        if (globalThis.currentApp === 'all') {
+          this.getAllApplications();
+          globalThis.refresh = true;
+        }
+      });
+    } catch (error) {
+      console.error(TAG + 'bundleMonitor failed.');
+    }
+
   }
 
   onNewWant(want): void {

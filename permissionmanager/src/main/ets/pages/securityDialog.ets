@@ -144,13 +144,14 @@ struct CustomSecurityDialog {
           Row() {
             Column() {
               Column() {
-                Image($r('app.media.ic_public_privacy')) // icon
+                SymbolGlyph($r('sys.symbol.person_shield_fill'))
                   .width(Constants.SECURITY_ICON_WIDTH)
                   .height(Constants.SECURITY_ICON_HEIGHT)
-                  .fillColor($r('sys.color.ohos_id_color_component_activated'))
+                  .fontSize(Constants.FONT_SIZE_28)
+                  .fontColor([$r('sys.color.brand')])
                   .border({
                     width: Constants.BORDER_WIDTH_1,
-                    color: $r('sys.color.ohos_id_color_button_normal'),
+                    color: $r('app.color.icon_border'),
                     radius: $r('sys.float.ohos_id_corner_radius_default_m')
                   })
                   .padding(Constants.PADDING_10)
@@ -159,27 +160,26 @@ struct CustomSecurityDialog {
                   .height(Constants.IMAGE_LENGTH_20)
                   .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
               }
-              .backgroundColor($r('sys.color.ohos_id_color_background'))
-              .margin({
-                top: Constants.SECURITY_ICON_MARGIN_TOP,
-                bottom: Constants.SECURITY_ICON_MARGIN_BOTTOM
-              })
+              .backgroundColor($r('app.color.icon_bg'))
+              .margin({ top: Constants.SECURITY_ICON_MARGIN_TOP, })
+              .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
               Column() { // content
-                Text(this.securityParams[this.index].label)
-                  .textAlign(TextAlign.Center)
-                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                  .fontSize($r('sys.float.ohos_id_text_size_headline8'))
-                  .fontWeight(FontWeight.Medium)
-                  .lineHeight(Constants.TEXT_LINE_HEIGHT_27)
+                Column() {
+                  Text(this.securityParams[this.index].label)
+                    .textAlign(TextAlign.Center)
+                    .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                    .fontSize($r('sys.float.ohos_id_text_size_headline8'))
+                    .fontWeight(FontWeight.Bold)
+                    .lineHeight(Constants.TEXT_LINE_HEIGHT_24)
+                }
+                .height(Constants.HEADLINE_HEIGHT)
+                .padding({ top: Constants.PADDING_16, bottom: Constants.PADDING_16 })
 
                 Text($r(this.securityParams[this.index].description, this.appName))
                   .textAlign(TextAlign.Center)
                   .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                   .fontSize($r('sys.float.ohos_id_text_size_body2'))
                   .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
-                  .margin({
-                    top: Constants.SECURITY_DESCRIPTOR_DEVIDER_MARGIN_TOP,
-                  })
               }
               Column() {
                 Row() {
