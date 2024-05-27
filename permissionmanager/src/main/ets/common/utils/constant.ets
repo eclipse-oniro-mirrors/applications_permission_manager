@@ -213,10 +213,6 @@ export default class Constants {
     public static OTHER_GROUP = 3;
     public static EXTRA_GROUP = 4;
 
-    // radio
-    public static RADIO_ALLOW_INDEX = 0;
-    public static RADIO_BAN_INDEX = 1;
-
     //Permission state
     public static PERMISSION_ALLOW = 0;
     public static PERMISSION_BAN = 1;
@@ -227,13 +223,10 @@ export default class Constants {
     public static SHAPE_DIA = 20;
 
     public static PERMISSION_INDEX = 0;
-
     public static PERMISSION_NUM = 0;
 
-    public static PERMISSION_FLAG = 2;
-    public static API_VERSION_SUPPORT_STAGE = 9;
-
     // permission flag
+    public static PERMISSION_FLAG = 2;
     public static PERMISSION_SYSTEM_FIXED = 4;
     public static PERMISSION_COMPONENT_SET = 16;
     public static PERMISSION_POLICY_FIXED = 32;

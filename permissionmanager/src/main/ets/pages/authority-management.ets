@@ -270,14 +270,7 @@ struct authorityManagementPage {
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
-        if ((info.targetVersion < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
-          continue;
-        }
-        if (
-          (info.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) &&
-          (permission == PRECISE_LOCATION_PERMISSION) &&
-          !reqPermissions.includes(FUZZY_LOCATION_PERMISSION)
-        ) {
+        if ((permission == PRECISE_LOCATION_PERMISSION) && !reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
           continue;
         }
         try {

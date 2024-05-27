@@ -402,7 +402,7 @@ struct PermissionDialog {
     group.permissions.forEach(async permission => {
       this.grantStatus = -1;
       if (showSubPermissionsGroup.indexOf(group.name) == -1) {
-        if (group.name == 'LOCATION' && this.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
+        if (group.name == 'LOCATION') {
           if (fuzzyMarks.includes(this.locationFlag) && permission === FUZZY_LOCATION_PERMISSION) {
             await this.operationPermission(true, accessTokenId, permission, userFixedFlag);
           }
@@ -466,15 +466,13 @@ struct PermissionDialog {
 
   getGrantGroups(stateGroup: number[]) {
     //Processing of positioning
-    if (this.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE) {
-      if (this.reqPerms.includes(FUZZY_LOCATION_PERMISSION)) {
-        this.locationFlag = Constants.LOCATION_FUZZY;
-        if (this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
-          this.locationFlag = Constants.LOCATION_BOTH_PRECISE;
-          let fuzzyIndex = this.reqPerms.indexOf(FUZZY_LOCATION_PERMISSION);
-          if (stateGroup[fuzzyIndex] == Constants.PASS_OPER) {
-            this.locationFlag = Constants.LOCATION_UPGRADE;
-          }
+    if (this.reqPerms.includes(FUZZY_LOCATION_PERMISSION)) {
+      this.locationFlag = Constants.LOCATION_FUZZY;
+      if (this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
+        this.locationFlag = Constants.LOCATION_BOTH_PRECISE;
+        let fuzzyIndex = this.reqPerms.indexOf(FUZZY_LOCATION_PERMISSION);
+        if (stateGroup[fuzzyIndex] == Constants.PASS_OPER) {
+          this.locationFlag = Constants.LOCATION_UPGRADE;
         }
       }
     }

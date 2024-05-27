@@ -46,6 +46,7 @@ struct mediaDocumentPage {
   @State folderStatus: boolean[] = GlobalContext.load('folderStatus');
   @State refresh: boolean = false;
   @State selected: number = 0; // Permission status array
+  @State accurateIsOn: boolean = true;
   @State isRefreshReason: number = 0
 
   build() {
@@ -64,7 +65,10 @@ struct mediaDocumentPage {
               Row() {
                 Column() {
                   mediaDocumentItem({
-                    selected: $selected, isRefreshReason: $isRefreshReason, folderStatus: $folderStatus
+                    selected: $selected,
+                    accurateIsOn: $accurateIsOn,
+                    isRefreshReason: $isRefreshReason,
+                    folderStatus: $folderStatus
                   })
                 }.width(Constants.FULL_WIDTH)
               }
@@ -92,27 +96,17 @@ struct mediaDocumentPage {
       this.isRefreshReason ++;
     }
     Log.info('Refresh permission status');
-    let isGranted = true;
+    let isGranted = this.currentGroup === 'LOCATION' ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
     let folderStatus = [false, false, false];
-    if (
-      this.currentGroup === 'LOCATION' &&
-      !this.permissions.includes(FUZZY_LOCATION_PERMISSION) &&
-      api >= Constants.API_VERSION_SUPPORT_STAGE
-    ) {
-      isGranted = false;
-    }
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < this.permissions.length; i++) {
       let permission = this.permissions[i];
-      if (api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION) {
-        continue;
-      }
-      if (permission == BACKGROUND_LOCATION_PERMISSION) {
+      if (this.currentGroup === 'LOCATION') {
         continue;
       }
       let res = atManager.verifyAccessTokenSync(this.tokenId, permission);
       if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-        isGranted = false;
+        isGranted = Constants.PERMISSION_BAN;
       }
       if (this.currentGroup === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         switch (permission) {
@@ -134,8 +128,8 @@ struct mediaDocumentPage {
     this.refreshSelected(isGranted);
   }
 
-  refreshSelected(isGranted: boolean) {
-    this.selected = isGranted ? Constants.PERMISSION_ALLOW : Constants.PERMISSION_BAN;
+  refreshSelected(isGranted: number) {
+    this.selected = isGranted;
     if (this.currentGroup === 'PASTEBOARD') {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
@@ -147,17 +141,21 @@ struct mediaDocumentPage {
       }
     }
     if (this.currentGroup === 'LOCATION') {
-      this.selected = isGranted ? Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : Constants.PERMISSION_BAN;
-      let acManager = abilityAccessCtrl.createAtManager();
-      let backgroundState = acManager.verifyAccessTokenSync(this.tokenId, BACKGROUND_LOCATION_PERMISSION);
-      backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
-        this.selected = Constants.PERMISSION_ALLOW : null;
       try {
+        let acManager = abilityAccessCtrl.createAtManager();
+        let fuzzyState = acManager.verifyAccessTokenSync(this.tokenId, FUZZY_LOCATION_PERMISSION);
+        fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          this.selected = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
+        let accurateStatus = acManager.verifyAccessTokenSync(this.tokenId, PRECISE_LOCATION_PERMISSION);
+        this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
+        let backgroundState = acManager.verifyAccessTokenSync(this.tokenId, BACKGROUND_LOCATION_PERMISSION);
+        backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          this.selected = Constants.PERMISSION_ALLOW : null;
         acManager.getPermissionFlags(this.tokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
-        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+        Log.error('change location status error: ' + JSON.stringify(err));
       }
     }
   }
@@ -175,7 +173,7 @@ struct mediaDocumentItem {
   @Link folderStatus: boolean[];
   @State mediaDocListItem: MediaDocObj[] = []; // Permission information array
   @Link selected: number;
-  @State accurateIsOn: boolean = true;
+  @Link accurateIsOn: boolean;
   @State api: number = 0;
   @State isRisk: boolean = false; // Whether it is a risky application
   @State noForeground: boolean = false;
@@ -261,7 +259,7 @@ struct mediaDocumentItem {
         new MediaDocObj($r('app.string.always_allow'), this.permissions, Constants.PERMISSION_ALLOW)
       );
     } else if (this.currentGroup == 'LOCATION') {
-      this.selected = this.status ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOWED_ONLY_DURING_USE;
+      this.selected = GlobalContext.load('locationStatus');
       this.mediaDocListItem.push(
         new MediaDocObj($r('app.string.per_inquiry'), this.permissions, Constants.PERMISSION_ONLY_THIS_TIME)
       );
@@ -327,7 +325,7 @@ struct mediaDocumentItem {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-    this.selected = this.status ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
+    this.selected = this.status;
     this.getMediaDocList();
     this.getReason();
 
@@ -351,13 +349,6 @@ struct mediaDocumentItem {
         })
       } catch (err) {
         Log.error('acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
-      }
-      if (this.currentGroup == 'LOCATION') {
-        let backgroundState = acManager.verifyAccessTokenSync(
-          res.appInfo.accessTokenId, BACKGROUND_LOCATION_PERMISSION
-        );
-        backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
-          this.selected = Constants.PERMISSION_ALLOW : null;
       }
     }).catch((error: BusinessError) => {
       Log.error('bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
@@ -537,30 +528,19 @@ struct mediaDocumentItem {
                         this.selected = item.index;
                         item.permissions.forEach((permission): boolean => {
                           if (item.index === Constants.PERMISSION_ALLOW) {
-                            if (
-                              (this.api >= Constants.API_VERSION_SUPPORT_STAGE) &&
-                              (permission == PRECISE_LOCATION_PERMISSION)
-                            ) {
+                            if (permission === PRECISE_LOCATION_PERMISSION) {
                               return false;
                             }
                             this.grantUserGrantedPermission(accessTokenId, permission);
                           } else if (item.index === Constants.PERMISSION_BAN) {
-                            if (
-                              (permission == PRECISE_LOCATION_PERMISSION) &&
-                              (this.api >= Constants.API_VERSION_SUPPORT_STAGE)
-                            ) {
-                              if (this.accurateIsOn) {
-                                this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
-                                this.accurateIsOn = false;
-                              }
+                            if (permission == PRECISE_LOCATION_PERMISSION && this.accurateIsOn) {
+                              this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                              this.accurateIsOn = false;
                             } else {
                               this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
                             }
                           } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
-                            if (
-                              (this.api >= Constants.API_VERSION_SUPPORT_STAGE) &&
-                                (permission == PRECISE_LOCATION_PERMISSION)
-                            ) {
+                            if (permission === PRECISE_LOCATION_PERMISSION) {
                               return false;
                             }
                             this.revokeUserGrantedPermission(
@@ -618,7 +598,7 @@ struct mediaDocumentItem {
           endMargin: Constants.DEFAULT_MARGIN_END
         })
 
-        if (this.api >= Constants.API_VERSION_SUPPORT_STAGE && this.permissions.includes(PRECISE_LOCATION_PERMISSION)) {
+        if (this.permissions.includes(PRECISE_LOCATION_PERMISSION)) {
           Column() {
             Row() {
               Text($r('app.string.precise_location'))

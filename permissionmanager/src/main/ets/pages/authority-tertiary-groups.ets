@@ -35,14 +35,13 @@ const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
 const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
 const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
+const locationStatus: Resource[] = [
+  $r('app.string.always_allow'),
+  $r('app.string.ban'),
+  $r('app.string.per_inquiry'),
+  $r('app.string.allowed_only_during_use')
+];
 let globalIsOn: boolean = (router.getParams() as RouterParams1).globalIsOn; // return title name
-
-@Extend(Image)function customizeImage(width: number, height: number) {
-  .objectFit(ImageFit.Contain)
-  .width(width)
-  .height(height)
-  .draggable(false)
-}
 
 @Entry
 @Component
@@ -50,7 +49,7 @@ struct locationInfoPage {
   private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
   private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
-  @State polymorphismIsOn: Array<boolean> = [];
+  @State polymorphismIsOn: Array<number> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
 
   build() {
@@ -107,37 +106,28 @@ struct locationInfoPage {
   }
 
   getGroupStatus(res: bundleManager.BundleInfo, index: number) {
-    this.polymorphismIsOn[index] = true;
+    this.polymorphismIsOn[index] = Constants.PERMISSION_BAN;
     this.folderStatusArray[index] = [false, false, false];
     let reqPermissions: string[] = [];
     res.reqPermissionDetails.forEach(item => {
       reqPermissions.push(item.name);
     })
-    if (this.currentGroup === 'LOCATION') {
-      if (
-        !reqPermissions.includes(FUZZY_LOCATION_PERMISSION) && res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE
-      ) {
-        this.polymorphismIsOn[index] = false;
-      }
-      for (let j = 0; j < this.list.length; j++) {
-        if ((this.list[j].permission == PRECISE_LOCATION_PERMISSION) &&
-            (res.targetVersion >= Constants.API_VERSION_SUPPORT_STAGE)) {
-          continue;
-        }
-        if ((this.list[j].permission == FUZZY_LOCATION_PERMISSION) &&
-            (res.targetVersion < Constants.API_VERSION_SUPPORT_STAGE)) {
-          continue;
-        }
-        if (this.list[j].permission == BACKGROUND_LOCATION_PERMISSION) {
-          continue;
-        }
-        if (reqPermissions.indexOf(this.list[j].permission) == -1) {
-          continue;
-        }
-        verifyAccessToken(res.appInfo.accessTokenId, this.list[j].permission).then((access) => {
-          Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED ?
-            this.polymorphismIsOn[index] = false : null;
-        });
+    let acManager = abilityAccessCtrl.createAtManager();
+    if (this.currentGroup === 'LOCATION' && reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
+      try {
+        let fuzzyState = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, FUZZY_LOCATION_PERMISSION);
+        fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          this.polymorphismIsOn[index] = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
+        let backgroundState =
+          acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, BACKGROUND_LOCATION_PERMISSION);
+        backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          this.polymorphismIsOn[index] = Constants.PERMISSION_ALLOW : null;
+        acManager.getPermissionFlags(res.appInfo.accessTokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
+          flag === Constants.PERMISSION_ALLOW_THIS_TIME ?
+            this.polymorphismIsOn[index] = Constants.PERMISSION_ONLY_THIS_TIME : null;
+        })
+      } catch (err) {
+        Log.error('change location status error: ' + JSON.stringify(err));
       }
     }
     if (this.currentGroup === 'FOLDER') {
@@ -145,8 +135,7 @@ struct locationInfoPage {
         if (reqPermissions.indexOf(this.list[j].permission) == -1) {
           continue;
         }
-        let atManager = abilityAccessCtrl.createAtManager();
-        let access = atManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission);
+        let access = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission);
         if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
           this.updateFolderStatus(index, j);
         }
@@ -179,7 +168,7 @@ struct applicationItem {
   @State isFirst: boolean[] = [];
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
-  @Link polymorphismIsOn: Array<boolean>;
+  @Link polymorphismIsOn: Array<number>;
   @Link folderStatusArray: Array<Array<boolean>>;
   @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
@@ -204,7 +193,10 @@ struct applicationItem {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
               Image(item.icon)
-                .customizeImage(Constants.AUTHORITY_IMAGE_WIDTH, Constants.AUTHORITY_IMAGE_HEIGHT)
+                .objectFit(ImageFit.Contain)
+                .width(Constants.AUTHORITY_IMAGE_WIDTH)
+                .height(Constants.AUTHORITY_IMAGE_HEIGHT)
+                .draggable(false)
                 .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
               Column() {
                 Text(item.label)
@@ -278,14 +270,17 @@ struct applicationItem {
                     .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                     .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
                 } else {
-                  Text(this.polymorphismIsOn[item.index] ? $r('app.string.allow') : $r('app.string.ban'))
+                  Text(locationStatus[this.polymorphismIsOn[item.index]])
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                     .fontColor($r('sys.color.ohos_id_color_text_secondary'))
                     .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
                 }
                 Image($r('app.media.ic_public_arrow_right'))
                   .fillColor($r('sys.color.ohos_id_color_tertiary'))
-                  .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
+                  .objectFit(ImageFit.Contain)
+                  .width(Constants.IMAGE_WIDTH)
+                  .height(Constants.IMAGE_HEIGHT)
+                  .draggable(false)
               }
             }
             .width(Constants.FULL_WIDTH)
@@ -306,13 +301,14 @@ struct applicationItem {
               }
             })
             GlobalContext.store('folderStatus', this.folderStatusArray[item.index]);
+            GlobalContext.store('locationStatus', this.polymorphismIsOn[item.index]);
             router.pushUrl({
               url: 'pages/application-tertiary',
               params: {
                 bundleName: item.bundleName,
                 backTitle: this.backTitle,
                 permission: permissions,
-                status: this.polymorphismIsOn[item.index] ? Constants.RADIO_ALLOW_INDEX : Constants.RADIO_BAN_INDEX,
+                status: Constants.PERMISSION_BAN,
                 tokenId: item.accessTokenId
               }
             });
@@ -354,7 +350,9 @@ struct applicationItem {
         let sum = this.folderStatusArray.filter(item => item.includes(true));
         return sum.length;
       } else {
-        let sum = this.polymorphismIsOn.filter(item => item == true);
+        let sum = this.polymorphismIsOn.filter(
+          item => item !== Constants.PERMISSION_BAN && item !== Constants.PERMISSION_ONLY_THIS_TIME
+        );
         return sum.length;
       }
     } else {
@@ -594,7 +592,10 @@ struct applicationItem {
                   Row() {
                     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
                       Image($r('app.media.searchnoresult'))
-                        .customizeImage(Constants.SEARCHNORESULT_IMAGE_WIDTH, Constants.SEARCHNORESULT_IMAGE_HEIGHT)
+                        .objectFit(ImageFit.Contain)
+                        .width(Constants.SEARCHNORESULT_IMAGE_WIDTH)
+                        .height(Constants.SEARCHNORESULT_IMAGE_HEIGHT)
+                        .draggable(false)
                     }
                   }
                 }
