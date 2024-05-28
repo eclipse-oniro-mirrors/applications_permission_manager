@@ -31,8 +31,6 @@ const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
 const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
 const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
-const allowedStatus = 0; // Status: Allowed
-const bannedStatus = 1; // Status: Banned
 
 @Entry
 @Component
@@ -44,7 +42,7 @@ struct appNamePlusPage {
   @State bundleName: string = GlobalContext.load('bundleName');
   @State label: string = '';
   @State isTouch: string = '';
-  @State isGranted: boolean = false;
+  @State isGranted: number = Constants.PERMISSION_ALLOW;
   @State folderStatus: boolean[] = [false, false, false];
   @State reqUserPermissions: Permissions[] = [];
 
@@ -77,7 +75,7 @@ struct appNamePlusPage {
               bundleName: this.applicationInfo.bundleName,
               backTitle: item.groupName,
               permission: item.permission,
-              status: !status ? allowedStatus : bannedStatus,
+              status,
               tokenId: this.applicationInfo.tokenId
             }
           });
@@ -113,9 +111,6 @@ struct appNamePlusPage {
       for (let j = 0; j < info.permissions.length; j++) {
         let permission = info.permissions[j];
         if (userGrantPermissions.indexOf(permission) == -1) {
-          continue;
-        }
-        if ((info.api < Constants.API_VERSION_SUPPORT_STAGE) && (permission == FUZZY_LOCATION_PERMISSION)) {
           continue;
         }
         try {
@@ -187,31 +182,26 @@ struct appNamePlusPage {
       let id = reqGroupIds[i];
       let groupName = groups[id].groupName;
       let group = groups[id].name;
-      let groupReqPermissons: Permissions[] = [];
+      let groupReqPermissions: Permissions[] = [];
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
         if (groups[id].permissions.indexOf(permission) != -1) {
-          groupReqPermissons.push(permission);
+          groupReqPermissions.push(permission);
         }
       }
-      this.isGranted = true;
+      this.isGranted = group === 'LOCATION' ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
       this.folderStatus = [false, false, false];
-      if (
-        group === 'LOCATION' &&
-        !groupReqPermissons.includes(FUZZY_LOCATION_PERMISSION) &&
-        this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE
-      ) {
-        this.isGranted = false;
-      }
-      await this.getStatus(groupReqPermissons, group);
+      await this.getStatus(groupReqPermissions, group);
 
-      if (this.isGranted) {
-        this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
+      if (
+        this.isGranted === Constants.PERMISSION_ALLOW || this.isGranted === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE
+      ) {
+        this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissions, group));
       } else {
         if (group === 'FOLDER' && this.folderStatus.includes(true)) {
-          this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
+          this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissions, group));
         } else {
-          this.bannedListItem.push(new PermissionObj(groupName, groupReqPermissons, group));
+          this.bannedListItem.push(new PermissionObj(groupName, groupReqPermissions, group));
         }
       }
 
@@ -219,32 +209,45 @@ struct appNamePlusPage {
     }
   }
 
-  async getStatus(groupReqPermissons: Permissions[], group: string) {
-    for (let i = 0; i < groupReqPermissons.length; i++) {
-      let permission = groupReqPermissons[i];
-      if (
-        this.applicationInfo.api >= Constants.API_VERSION_SUPPORT_STAGE && permission == PRECISE_LOCATION_PERMISSION
-      ) {
-        continue;
+  async getStatus(groupReqPermissions: Permissions[], group: string) {
+    if (group === 'LOCATION') {
+      if (groupReqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
+        try {
+          let acManager = abilityAccessCtrl.createAtManager();
+          let fuzzyState = acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION);
+          fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+            this.isGranted = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
+          let backgroundState =
+            acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, BACKGROUND_LOCATION_PERMISSION);
+          backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+            this.isGranted = Constants.PERMISSION_ALLOW : null;
+          await acManager.getPermissionFlags(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
+            flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.isGranted = Constants.PERMISSION_ONLY_THIS_TIME : null;
+          })
+        } catch (err) {
+          Log.error('change location status error: ' + JSON.stringify(err));
+        }
       }
-      if (permission == BACKGROUND_LOCATION_PERMISSION) {
-        continue;
-      }
-      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
-      if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-        this.isGranted = false;
-      }
-      if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-        switch (permission) {
-          case DOWNLOAD_PERMISSION:
-            this.folderStatus[0] = true;
-            break;
-          case DESKTOP_PERMISSION:
-            this.folderStatus[1] = true;
-            break;
-          case DOCUMENTS_PERMISSION:
-            this.folderStatus[2] = true;
-            break;
+      GlobalContext.store('locationStatus', this.isGranted);
+    } else {
+      for (let i = 0; i < groupReqPermissions.length; i++) {
+        let permission = groupReqPermissions[i];
+        let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+        if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+          this.isGranted = Constants.PERMISSION_BAN;
+        }
+        if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+          switch (permission) {
+            case DOWNLOAD_PERMISSION:
+              this.folderStatus[0] = true;
+              break;
+            case DESKTOP_PERMISSION:
+              this.folderStatus[1] = true;
+              break;
+            case DOCUMENTS_PERMISSION:
+              this.folderStatus[2] = true;
+              break;
+          }
         }
       }
     }
@@ -341,7 +344,7 @@ struct appNamePlusPage {
                             Row() {
                               List() {
                                 ForEach(this.allowedListItem, (item: PermissionObj) => {
-                                  this.ListItemLayout(item, Constants.RADIO_ALLOW_INDEX)
+                                  this.ListItemLayout(item, Constants.PERMISSION_ALLOW)
                                 }, (item: PermissionObj) => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
@@ -378,7 +381,7 @@ struct appNamePlusPage {
                             Row() {
                               List() {
                                 ForEach(this.bannedListItem, (item: PermissionObj) => {
-                                  this.ListItemLayout(item, Constants.RADIO_BAN_INDEX)
+                                  this.ListItemLayout(item, Constants.PERMISSION_BAN)
                                 }, (item: PermissionObj) => JSON.stringify(item))
                               }
                               .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
