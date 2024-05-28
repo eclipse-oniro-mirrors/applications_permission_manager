@@ -211,46 +211,45 @@ struct appNamePlusPage {
 
   async getStatus(groupReqPermissions: Permissions[], group: string) {
     if (group === 'LOCATION') {
-      if (groupReqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
-        try {
-          let acManager = abilityAccessCtrl.createAtManager();
-          let fuzzyState = acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION);
-          fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
-            this.isGranted = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
-          let backgroundState =
-            acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, BACKGROUND_LOCATION_PERMISSION);
-          backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
-            this.isGranted = Constants.PERMISSION_ALLOW : null;
-          await acManager.getPermissionFlags(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
-            flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.isGranted = Constants.PERMISSION_ONLY_THIS_TIME : null;
-          })
-        } catch (err) {
-          Log.error('change location status error: ' + JSON.stringify(err));
-        }
+      try {
+        let acManager = abilityAccessCtrl.createAtManager();
+        let fuzzyState = acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION);
+        fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          this.isGranted = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
+        let backgroundState =
+          acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, BACKGROUND_LOCATION_PERMISSION);
+        backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          this.isGranted = Constants.PERMISSION_ALLOW : null;
+        await acManager.getPermissionFlags(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
+          flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.isGranted = Constants.PERMISSION_ONLY_THIS_TIME : null;
+        })
+      } catch (err) {
+        Log.error('change location status error: ' + JSON.stringify(err));
       }
       GlobalContext.store('locationStatus', this.isGranted);
-    } else {
-      for (let i = 0; i < groupReqPermissions.length; i++) {
-        let permission = groupReqPermissions[i];
-        let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
-        if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-          this.isGranted = Constants.PERMISSION_BAN;
-        }
-        if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
-          switch (permission) {
-            case DOWNLOAD_PERMISSION:
-              this.folderStatus[0] = true;
-              break;
-            case DESKTOP_PERMISSION:
-              this.folderStatus[1] = true;
-              break;
-            case DOCUMENTS_PERMISSION:
-              this.folderStatus[2] = true;
-              break;
-          }
+      return true;
+    }
+    for (let i = 0; i < groupReqPermissions.length; i++) {
+      let permission = groupReqPermissions[i];
+      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+      if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        this.isGranted = Constants.PERMISSION_BAN;
+      }
+      if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        switch (permission) {
+          case DOWNLOAD_PERMISSION:
+            this.folderStatus[0] = true;
+            break;
+          case DESKTOP_PERMISSION:
+            this.folderStatus[1] = true;
+            break;
+          case DOCUMENTS_PERMISSION:
+            this.folderStatus[2] = true;
+            break;
         }
       }
     }
+    return true;
   }
 
   /**
