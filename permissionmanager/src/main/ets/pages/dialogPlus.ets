@@ -379,8 +379,14 @@ struct PermissionDialog {
       let proxy = want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
       proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
       proxy.sendMessageRequest(Constants.RESULT_CODE_1, setDialogData, reply, option);
+      data.reclaim();
+      reply.reclaim();
+      setDialogData.reclaim();
       this.destruction();
     }).catch(() => {
+      data.reclaim();
+      reply.reclaim();
+      setDialogData.reclaim();
       Log.error('write result failed!');
       this.destruction();
     })

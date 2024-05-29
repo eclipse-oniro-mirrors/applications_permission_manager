@@ -47,7 +47,11 @@ struct SecurityDialog {
         if (proxy != undefined) {
           proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
         }
+        data.reclaim();
+        reply.reclaim();
       }).catch(() => {
+        data.reclaim();
+        reply.reclaim();
         Log.error('write result failed!');
       })
       win.destroyWindow();
@@ -115,7 +119,11 @@ struct CustomSecurityDialog {
       if (proxy != undefined) {
         proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
       }
+      data.reclaim();
+      reply.reclaim();
     }).catch(() => {
+      data.reclaim();
+      reply.reclaim();
       Log.error('write result failed!');
     })
     win.destroyWindow();
