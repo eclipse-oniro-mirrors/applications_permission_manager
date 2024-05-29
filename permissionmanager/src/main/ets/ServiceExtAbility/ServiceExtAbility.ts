@@ -108,7 +108,11 @@ export default class ServiceExtensionAbility extends extension {
         data.writeInterfaceToken(ACCESS_TOKEN),
       ]).then(() => {
         proxy.sendMessageRequest(RESULT_CODE_1, data, reply, option);
+        data.reclaim();
+        reply.reclaim();
       }).catch(() => {
+        data.reclaim();
+        reply.reclaim();
         console.error('write result failed!');
       });
       let windowNum = GlobalContext.load('windowNum');
