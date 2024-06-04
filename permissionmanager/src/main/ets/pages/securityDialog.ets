@@ -18,12 +18,11 @@ import rpc from '@ohos.rpc';
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
+import { CustomContentDialog  } from '@ohos.arkui.advanced.Dialog'
 import { Log } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/utils/typedef';
 
 let storage = LocalStorage.getShared();
-let want: WantInfo;
-let win: window.Window;
 
 @Entry(storage)
 @Component
@@ -31,56 +30,9 @@ struct SecurityDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
   @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
-
-  securityDialogController: CustomDialogController | null = new CustomDialogController({
-    builder: CustomSecurityDialog(),
-    alignment: DialogAlignment.Bottom,
-    customStyle: true,
-    cancel: () => {
-      let option = new rpc.MessageOption();
-      let data = new rpc.MessageSequence();
-      let reply = new rpc.MessageSequence();
-      Promise.all([data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
-        data.writeInt(0)
-      ]).then(() => {
-        let proxy = want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
-        if (proxy != undefined) {
-          proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
-        }
-        data.reclaim();
-        reply.reclaim();
-      }).catch(() => {
-        data.reclaim();
-        reply.reclaim();
-        Log.error('write result failed!');
-      })
-      win.destroyWindow();
-      this.context.terminateSelf();
-    }
-  })
-
-  build() {}
-
-  aboutToAppear() {
-    if (this.securityDialogController !== null) {
-      this.securityDialogController.open();
-    }
-    want = this.want;
-    win = this.win;
-  }
-
-  aboutToDisappear() {
-    this.securityDialogController = null;
-  }
-}
-
-@CustomDialog
-struct CustomSecurityDialog {
-  private context = getContext(this) as common.ServiceExtensionContext;
-  controller?: CustomDialogController;
-  descriptor: string = ''
   @State appName: string = 'ToBeInstead';
   @State index: number = 0;
+  @State scrollBarWidth: number = Constants.SCROLL_BAR_WIDTH_DEFAULT;
 
   securityParams : Array<Param> = [
     new Param(
@@ -91,8 +43,106 @@ struct CustomSecurityDialog {
     )
   ]
 
+  dialogController: CustomDialogController = new CustomDialogController({
+    builder: CustomContentDialog({
+      contentBuilder: () => {
+        this.buildContent();
+      },
+      contentAreaPadding: { right: 0 },
+      buttons: [
+        {
+          value: $r('app.string.cancel'),
+          buttonStyle: ButtonStyleMode.TEXTUAL,
+          action: () => {
+            this.dialogController.close();
+            this.win.destroyWindow();
+            this.context.terminateSelf();
+          }
+        },
+        {
+          value: $r('app.string.ALLOW'),
+          buttonStyle: ButtonStyleMode.TEXTUAL,
+          action: () => {
+            this.dialogController.close();
+            this.destruction();
+          }
+        }
+      ],
+    }),
+    cancel: () => {
+      this.destruction();
+    }
+  });
+
+  @Builder
+  buildContent(): void {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+      Scroll() {
+        Column() {
+          Column() {
+            SymbolGlyph($r('sys.symbol.person_shield_fill'))
+              .width(Constants.SECURITY_ICON_WIDTH)
+              .height(Constants.SECURITY_ICON_HEIGHT)
+              .fontSize(Constants.FONT_SIZE_28)
+              .fontColor([$r('sys.color.brand')])
+              .border({
+                width: Constants.BORDER_WIDTH_1,
+                color: $r('app.color.icon_border'),
+                radius: $r('sys.float.ohos_id_corner_radius_default_m')
+              })
+              .padding(Constants.PADDING_10)
+            Image(this.securityParams[this.index].icon)
+              .width(Constants.IMAGE_LENGTH_20)
+              .height(Constants.IMAGE_LENGTH_20)
+              .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+          }
+          .backgroundColor($r('app.color.icon_bg'))
+          .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
+          Column() { // content
+            Column() {
+              Text(this.securityParams[this.index].label)
+                .textAlign(TextAlign.Center)
+                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontSize($r('sys.float.ohos_id_text_size_headline8'))
+                .fontWeight(FontWeight.Bold)
+                .lineHeight(Constants.TEXT_LINE_HEIGHT_27)
+            }
+            .height(Constants.HEADLINE_HEIGHT)
+            .padding({ top: Constants.PADDING_16, bottom: Constants.PADDING_16 })
+
+            Text($r(this.securityParams[this.index].description, this.appName))
+              .textAlign(TextAlign.Start)
+              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+              .fontSize($r('sys.float.ohos_id_text_size_body2'))
+              .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
+          }
+        }
+        .clip(true)
+      }
+      .padding({ left: Constants.PADDING_24, right: Constants.PADDING_24 })
+      .margin({ top: Constants.MARGIN_24 })
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
+      .scrollBarWidth(this.scrollBarWidth)
+      .onScrollStart(() => {
+        this.scrollBarWidth = Constants.SCROLL_BAR_WIDTH_ACTIVE;
+      })
+      .onScrollStop(() => {
+        this.scrollBarWidth = Constants.SCROLL_BAR_WIDTH_DEFAULT;
+      })
+    }
+  }
+
+  build() {}
+
+  aboutToAppear() {
+    Log.info('onAboutToAppear.');
+    this.GetAppName();
+    this.index = this.want.parameters['ohos.user.security.type'];
+    this.dialogController.open();
+  }
+
   GetAppName() {
-    let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'];
+    let bundleName: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
     bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT)
       .then(data => {
         this.context.resourceManager.getStringValue(data.labelResource)
@@ -112,140 +162,21 @@ struct CustomSecurityDialog {
     let option = new rpc.MessageOption();
     let data = new rpc.MessageSequence();
     let reply = new rpc.MessageSequence();
-    Promise.all([data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
+    Promise.all([
+      data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
       data.writeInt(0)
     ]).then(() => {
-      let proxy = want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
+      let proxy = this.want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
       if (proxy != undefined) {
         proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
       }
-      data.reclaim();
-      reply.reclaim();
     }).catch(() => {
+      Log.error('write result failed!');
+    }).finally(() => {
       data.reclaim();
       reply.reclaim();
-      Log.error('write result failed!');
+      this.win.destroyWindow();
+      this.context.terminateSelf();
     })
-    win.destroyWindow();
-    this.context.terminateSelf();
-  }
-
-  build() {
-    GridRow({
-      columns: {
-        xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS
-      },
-      gutter: Constants.DIALOG_GUTTER
-    }) {
-      GridCol({
-        span: {
-          xs: Constants.XS_SPAN, sm: Constants.SM_SPAN, md: Constants.DIALOG_MD_SPAN, lg: Constants.DIALOG_LG_SPAN
-        },
-        offset: {
-          xs: Constants.XS_OFFSET,
-          sm: Constants.SM_OFFSET,
-          md: Constants.DIALOG_MD_OFFSET,
-          lg: Constants.DIALOG_LG_OFFSET
-        }
-      }) {
-        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
-          Row() {
-            Column() {
-              Column() {
-                SymbolGlyph($r('sys.symbol.person_shield_fill'))
-                  .width(Constants.SECURITY_ICON_WIDTH)
-                  .height(Constants.SECURITY_ICON_HEIGHT)
-                  .fontSize(Constants.FONT_SIZE_28)
-                  .fontColor([$r('sys.color.brand')])
-                  .border({
-                    width: Constants.BORDER_WIDTH_1,
-                    color: $r('app.color.icon_border'),
-                    radius: $r('sys.float.ohos_id_corner_radius_default_m')
-                  })
-                  .padding(Constants.PADDING_10)
-                Image(this.securityParams[this.index].icon)
-                  .width(Constants.IMAGE_LENGTH_20)
-                  .height(Constants.IMAGE_LENGTH_20)
-                  .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
-              }
-              .backgroundColor($r('app.color.icon_bg'))
-              .margin({ top: Constants.SECURITY_ICON_MARGIN_TOP, })
-              .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
-              Column() { // content
-                Column() {
-                  Text(this.securityParams[this.index].label)
-                    .textAlign(TextAlign.Center)
-                    .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                    .fontSize($r('sys.float.ohos_id_text_size_headline8'))
-                    .fontWeight(FontWeight.Bold)
-                    .lineHeight(Constants.TEXT_LINE_HEIGHT_24)
-                }
-                .height(Constants.HEADLINE_HEIGHT)
-                .padding({ top: Constants.PADDING_16, bottom: Constants.PADDING_16 })
-
-                Text($r(this.securityParams[this.index].description, this.appName))
-                  .textAlign(TextAlign.Center)
-                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                  .fontSize($r('sys.float.ohos_id_text_size_body2'))
-                  .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
-              }
-              Column() {
-                Row() {
-                  Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                    Button($r('app.string.cancel')) // button
-                      .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                      .fontWeight(FontWeight.Medium)
-                      .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
-                      .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
-                      .height(Constants.SECURITY_BUTTON_HEIGHT)
-                      .width(Constants.FULL_WIDTH)
-                      .onClick(() => {
-                        if (this.controller !== undefined) {
-                          this.controller.close();
-                        }
-                        win.destroyWindow();
-                        this.context.terminateSelf();
-                      })
-                    Divider()
-                      .color($r('sys.color.ohos_id_color_list_separator'))
-                      .vertical(true)
-                      .strokeWidth(Constants.DIALOG_DIVIDER)
-                      .height(Constants.DIVIDER_HEIGHT)
-                      .opacity(0.2)
-                    Button($r('app.string.ALLOW')) // button
-                      .fontSize($r('sys.float.ohos_id_text_size_button1'))
-                      .fontWeight(FontWeight.Medium)
-                      .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
-                      .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
-                      .height(Constants.SECURITY_BUTTON_HEIGHT)
-                      .width(Constants.FULL_WIDTH)
-                      .onClick(() => {
-                        if (this.controller !== undefined) {
-                          this.controller.close();
-                        }
-                        this.destruction(); // Confirm authorization
-                      })
-                  }.margin({ left: Constants.BUTTON_MARGIN_LEFT, right: Constants.BUTTON_MARGIN_RIGHT })
-                }
-              }
-              .margin({ top: Constants.SECURITY_BUTTON_MARGIN_TOP })
-              .height(Constants.SECURITY_BUTTON_ROW_HEIGHT)
-            }.margin({ left: Constants.SECURITY_TOTAL_MARGIN_LEFT, right: Constants.SECURITY_TOTAL_MARGIN_RIGHT })
-          }
-          .margin({ bottom: $r('sys.float.ohos_id_dialog_margin_bottom') })
-          .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
-          .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
-          .clip(true)
-        }.width(Constants.FULL_WIDTH)
-        .height(Constants.FULL_HEIGHT)
-      }
-    }.margin({ left: Constants.DIALOG_MARGIN, right: Constants.DIALOG_MARGIN })
-  }
-
-  aboutToAppear() {
-    Log.info('onAboutToAppear.');
-    this.GetAppName();
-    this.index = want.parameters['ohos.user.security.type'];
   }
 }
-

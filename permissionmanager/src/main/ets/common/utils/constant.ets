@@ -74,6 +74,7 @@ export default class Constants {
     public static FONT_SIZE_28 = 28;
     public static TEXT_LINE_HEIGHT = 22;
     public static TEXT_LINE_HEIGHT_24 = 24;
+    public static TEXT_LINE_HEIGHT_27 = 27;
     public static TEXT_BIG_LINE_HEIGHT = 28;
     public static TEXT_SMALL_LINE_HEIGHT = 19;
     public static CONSTRAINTSIZE_MINHEIGHT = 48;
@@ -106,9 +107,11 @@ export default class Constants {
     public static TAB_DECORATION_POSITION_Y = 6;
     public static MARGIN_4 = 4;
     public static MARGIN_8 = 8;
+    public static MARGIN_24 = 24;
     public static PADDING_8 = 8;
     public static PADDING_10 = 10;
     public static PADDING_16 = 16;
+    public static PADDING_24 = 24;
     public static DEFAULT_PADDING_START = 12;
     public static DEFAULT_PADDING_END = 12;
     public static DEFAULT_PADDING_TOP = 12;
@@ -121,6 +124,8 @@ export default class Constants {
     public static DEFAULT_SLIDER_HEIGHT = 40;
     public static OFFSET = 100;
     public static CLICK_SHADOW_LENGTH = 48;
+    public static SCROLL_BAR_WIDTH_DEFAULT = 4;
+    public static SCROLL_BAR_WIDTH_ACTIVE = 8;
     public static DIVIDER = '1px';
     public static DIALOG_DIVIDER = 1;
     public static DIVIDER_HEIGHT = 24;
@@ -242,19 +247,11 @@ export default class Constants {
     public static RECORD_PADDING_BOTTOM = '20%'
 
     //////////////security_dialog///////////////
-    // total
-    public static SECURITY_TOTAL_MARGIN_LEFT = 24;
-    public static SECURITY_TOTAL_MARGIN_RIGHT = 24;
 
     // icon
-    public static SECURITY_ICON_MARGIN_TOP = 24;
     public static SECURITY_ICON_WIDTH = 48;
     public static SECURITY_ICON_HEIGHT = 48;
 
-    //button
-    public static SECURITY_BUTTON_MARGIN_TOP = 8;
-    public static SECURITY_BUTTON_ROW_HEIGHT = 56;
-    public static SECURITY_BUTTON_HEIGHT = 40;
     ////////////////////////////////////////////
 
     // icon of dialog
