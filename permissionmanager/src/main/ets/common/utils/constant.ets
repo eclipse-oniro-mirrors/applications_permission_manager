@@ -67,10 +67,12 @@ export default class Constants {
     public static APPLICATION = 0;
     public static LAYOUT_WEIGHT = 1;
     public static FLEX_GROW = 1;
+    public static HEADLINE_HEIGHT = 56;
     public static TEXT_BIG_FONT_SIZE = 20;
     public static TEXT_MIDDLE_FONT_SIZE = 16;
     public static TEXT_SMALL_FONT_SIZE = 14;
     public static TEXT_SMALLER_FONT_SIZE = 12;
+    public static FONT_SIZE_28 = 28;
     public static TEXT_LINE_HEIGHT = 22;
     public static TEXT_LINE_HEIGHT_27 = 27;
     public static TEXT_BIG_LINE_HEIGHT = 28;
@@ -104,7 +106,10 @@ export default class Constants {
     public static TAB_INNER_PADDING = 8;
     public static TAB_DECORATION_HEIGHT = 2;
     public static TAB_DECORATION_POSITION_Y = 6;
+    public static MARGIN_24 = 24;
     public static PADDING_10 = 10;
+    public static PADDING_16 = 16;
+    public static PADDING_24 = 24;
     public static DEFAULT_PADDING_START = 12;
     public static DEFAULT_PADDING_END = 12;
     public static DEFAULT_PADDING_TOP = 12;
@@ -117,6 +122,8 @@ export default class Constants {
     public static DEFAULT_SLIDER_HEIGHT = 40;
     public static OFFSET = 100;
     public static CLICK_SHADOW_LENGTH = 48;
+    public static SCROLL_BAR_WIDTH_DEFAULT = 4;
+    public static SCROLL_BAR_WIDTH_ACTIVE = 8;
     public static DIVIDER = '1px';
     public static DIALOG_DIVIDER = 1;
     public static DIVIDER_HEIGHT = 24;
