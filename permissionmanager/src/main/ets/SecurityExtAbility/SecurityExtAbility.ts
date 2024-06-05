@@ -54,6 +54,12 @@ export default class SecurityExtensionAbility extends extension {
    */
   onDestroy(): void {
     console.info(TAG + 'SecurityExtensionAbility onDestroy.');
+    try {
+      // 如果通过on注册多个callback，同时关闭所有callback监听
+      display.off('foldStatusChange');
+    } catch (exception) {
+      console.error('Failed to unregister callback. Code: ' + JSON.stringify(exception));
+    }
   }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
@@ -70,8 +76,22 @@ export default class SecurityExtensionAbility extends extension {
       await win.loadContent('pages/securityDialog', storage);
       win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
+      this.monitorFold(win);
     } catch {
-      console.info(TAG + 'window create failed!');
+      console.error(TAG + 'window create failed!');
+    }
+  }
+
+  private monitorFold(win: window.Window) {
+    try {
+      display.on('foldStatusChange', (data) => {
+        console.info(TAG + `monitor foldStatusChange: ${JSON.stringify(data)}`);
+        let dis = display.getDefaultDisplaySync();
+        win.resize(dis.width, dis.height);
+        win.moveWindowTo(0, 0);
+      })
+    } catch (err) {
+      console.error(TAG + `monitor foldStatusChange failed: ${JSON.stringify(err)}`);
     }
   }
 };

@@ -18,7 +18,7 @@ import rpc from '@ohos.rpc';
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
-import { CustomContentDialog  } from '@ohos.arkui.advanced.Dialog'
+import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/utils/typedef';
 
