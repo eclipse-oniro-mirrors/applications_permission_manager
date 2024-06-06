@@ -70,7 +70,7 @@ export default class GlobalExtensionAbility extends extension {
       await win.moveWindowTo(rect.left, rect.top);
       await win.resize(rect.width, rect.height);
       await win.setUIContent('pages/globalSwitch');
-      await win.setWindowBackgroundColor(BG_COLOR);
+      win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
     } catch {
       console.info(TAG + 'window create failed!');

@@ -82,14 +82,14 @@ export default class SecurityExtensionAbility extends extension {
     }
   }
 
-  private monitorFold(win: window.Window) {
+  private monitorFold(win: window.Window): void {
     try {
       display.on('foldStatusChange', (data) => {
         console.info(TAG + `monitor foldStatusChange: ${JSON.stringify(data)}`);
         let dis = display.getDefaultDisplaySync();
         win.resize(dis.width, dis.height);
         win.moveWindowTo(0, 0);
-      })
+      });
     } catch (err) {
       console.error(TAG + `monitor foldStatusChange failed: ${JSON.stringify(err)}`);
     }
