@@ -110,6 +110,7 @@ export default class Constants {
     public static MARGIN_24 = 24;
     public static PADDING_8 = 8;
     public static PADDING_10 = 10;
+    public static PADDING_14 = 14;
     public static PADDING_16 = 16;
     public static PADDING_24 = 24;
     public static DEFAULT_PADDING_START = 12;
@@ -192,8 +193,6 @@ export default class Constants {
     public static MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD = 24;
     public static MANAGEMENT_IMAGE_MARGIN_LEFT = 8;
     public static MANAGEMENT_ROW_HEIGHT = 56;
-    public static MANAGEMENT_LODING_IMAGE_WIDTH = 48;
-    public static MANAGEMENT_LODING_IMAGE_HEIGHT = 48;
     public static MANAGEMENT_ROW_PADDING_LEFT = 12;
     public static MANAGEMENT_ROW_PADDING_RIGHT = 12;
     public static MANAGEMENT_ROW_PADDING_TOP = 8;
@@ -331,8 +330,6 @@ export default class Constants {
 
     //global dialog
     public static ROW_HEIGHT = 56
-    public static ROW_PADDING_TOP = 14
-    public static ROW_PADDING_BOTTOM = 14
 
     public static ACCESS_TOKEN = 'ohos.security.accesstoken.tokencallback'
     public static SEC_COMP_DIALOG_CALLBACK = 'ohos.security.ISecCompDialogCallback'

@@ -22,13 +22,15 @@ import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
+import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
 import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { globalDialog } from '../common/components/dialog';
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';
 
+const CAMERA = 'CAMERA';
+const MICROPHONE = 'MICROPHONE';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
@@ -179,12 +181,75 @@ struct applicationItem {
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
 
-  privacyDialogController: CustomDialogController | null = new CustomDialogController({
-    builder: globalDialog({ globalIsOn: $globalIsOn }),
-    autoCancel: false,
-    alignment: DialogAlignment.Center,
-    customStyle: true
-  })
+  dialogController: CustomDialogController | null = new CustomDialogController({
+    builder: CustomContentDialog({
+      contentBuilder: () => {
+        this.buildContent();
+      },
+      contentAreaPadding: { left: Constants.PADDING_24, right: Constants.PADDING_24 },
+      buttons: [
+        {
+          value: $r('app.string.cancel'),
+          buttonStyle: ButtonStyleMode.TEXTUAL,
+          action: () => {
+            Log.info('global cancel');
+            if (this.dialogController !== null) {
+              this.dialogController.close();
+            }
+          }
+        },
+        {
+          value: $r('app.string.close'),
+          buttonStyle: ButtonStyleMode.TEXTUAL,
+          action: () => {
+            Log.info('global accept');
+            if (this.currentGroup == MICROPHONE) {
+              let audioManager = audio.getAudioManager();
+              let audioVolumeManager = audioManager.getVolumeManager();
+              audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
+                audioVolumeGroupManager.setMicMute(true).then(() => {
+                  if (this.dialogController !== null) {
+                    this.dialogController.close();
+                  }
+                })
+              })
+            } else {
+              let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
+              cameraManager.muteCamera(true);
+              if (this.dialogController !== null) {
+                this.dialogController.close();
+              }
+            }
+          }
+        }
+      ],
+    }),
+    autoCancel: false
+  });
+
+  @Builder
+  buildContent(): void {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+      Column() {
+        Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
+          .fontSize(Constants.TEXT_BIG_FONT_SIZE)
+          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontWeight(FontWeight.Medium)
+          .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
+          .width(Constants.FULL_WIDTH)
+          .padding({ top: Constants.PADDING_14, bottom: Constants.PADDING_14 })
+        Text(
+          this.currentGroup == 'CAMERA' ?
+          $r('app.string.close_camera_desc') :
+          $r('app.string.close_microphone_desc')
+        )
+          .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .lineHeight(Constants.TEXT_LINE_HEIGHT)
+      }
+      .clip(true)
+    }
+  }
 
   @Builder ListItemLayout(item: ApplicationObj) {
     ListItem() {
@@ -427,7 +492,7 @@ struct applicationItem {
   }
 
   aboutToDisappear() {
-    this.privacyDialogController = null;
+    this.dialogController = null;
   }
 
   getApplicationList(bundleInfo: AppInfo, i: number) {
@@ -540,8 +605,8 @@ struct applicationItem {
                       }
                     })
                   Row().onClick(() => {
-                    if (this.privacyDialogController !== null) {
-                      this.privacyDialogController.open()
+                    if (this.dialogController !== null) {
+                      this.dialogController.open();
                     }
                   })
                     .width(Constants.DEFAULT_SLIDER_WIDTH).height(Constants.DEFAULT_SLIDER_HEIGHT)
