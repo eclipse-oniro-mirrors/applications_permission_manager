@@ -73,8 +73,10 @@ struct SecurityDialog {
         }
       ],
     }),
+    autoCancel: false,
     cancel: () => {
-      this.destruction();
+      this.win.destroyWindow();
+      this.context.terminateSelf();
     }
   });
 
