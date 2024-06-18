@@ -481,8 +481,6 @@ struct PermissionDialog {
           this.locationFlag = Constants.LOCATION_UPGRADE;
         }
       }
-    } else if (this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
-      this.locationFlag = Constants.LOCATION_UPGRADE;
     }
 
     this.reqPerms.forEach((permission, idx) => {
