@@ -20,6 +20,7 @@ import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import pasteboard from '@ohos.pasteboard';
 import { BusinessError } from '@ohos.base';
+import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../common/utils/utils';
 import { GroupInfo, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
@@ -28,10 +29,9 @@ import { showSubPermissionsGroup, userGrantPermissions } from '../common/model/p
 import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button)function customizeButton() {
-  .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
+  .buttonStyle(ButtonStyleMode.TEXTUAL)
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
-  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-  .fontWeight(FontWeight.Medium)
+  .fontSize($r('sys.float.ohos_id_text_size_button1'))
   .height(Constants.BUTTON_HEIGHT)
   .width(Constants.HALF_LENGTH)
 }
@@ -44,9 +44,6 @@ const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const fuzzyMarks = [Constants.LOCATION_FUZZY, Constants.LOCATION_BOTH_FUZZY, Constants.LOCATION_BOTH_PRECISE];
 const preciseMarks = [Constants.LOCATION_UPGRADE, Constants.LOCATION_BOTH_PRECISE];
-
-let win: window.Window;
-let want: WantInfo;
 let storage = LocalStorage.getShared();
 
 @Entry(storage)
@@ -54,36 +51,6 @@ let storage = LocalStorage.getShared();
 struct dialogPlusPage {
   @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
-  @State isUpdate: number = -1;
-
-  privacyDialogController: CustomDialogController | null = new CustomDialogController({
-    builder: PermissionDialog({ isUpdate: $isUpdate }),
-    autoCancel: false,
-    alignment: DialogAlignment.Center,
-    customStyle: true
-  })
-
-  build() {}
-
-  aboutToAppear() {
-    win = this.win
-    want = this.want
-    if (this.privacyDialogController !== null) {
-      this.privacyDialogController.open();
-    }
-  }
-
-  aboutToDisappear() {
-    this.privacyDialogController = null;
-  }
-
-  onPageShow() {
-    this.isUpdate ++;
-  }
-}
-
-@CustomDialog
-struct PermissionDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
   @State count: number = 0;
   @State result: Array<number> = [];
@@ -95,214 +62,176 @@ struct PermissionDialog {
   @State grantStatus: number = -1;
   @State appName: string = '';
   @State locationFlag: number = Constants.LOCATION_NONE;
-  @State targetVersion: number = 0;
   @State reqPermissionDetails: bundleManager.ReqPermissionDetail[] = [];
   @State refresh: number = 0;
   @State pasteBoardName: string = '';
-  @State sureButton: Resource = $r('app.string.ALLOW');
-  @Link @Watch('updateReason') isUpdate: number;
-  controller?: CustomDialogController
+  @State isUpdate: number = -1;
 
-  build() {
-    GridRow({
-      columns: {
-        xs: Constants.XS_COLUMNS,
-        sm: Constants.SM_COLUMNS,
-        md: Constants.MD_COLUMNS,
-        lg: Constants.LG_COLUMNS
+  dialogController: CustomDialogController | null = new CustomDialogController({
+    builder: CustomContentDialog({
+      contentBuilder: () => {
+        this.buildContent();
       },
-      gutter: Constants.DIALOG_GUTTER
-    }) {
-      GridCol({
-        span: {
-          xs: Constants.XS_SPAN,
-          sm: Constants.SM_SPAN,
-          md: Constants.DIALOG_MD_SPAN,
-          lg: Constants.DIALOG_LG_SPAN
-        },
-        offset: {
-          xs: Constants.XS_OFFSET,
-          sm: Constants.SM_OFFSET,
-          md: Constants.DIALOG_MD_OFFSET,
-          lg: Constants.DIALOG_LG_OFFSET
-        }
-      }) {
-        Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
-          Column() {
-            if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
-              Image(
-                this.grantGroups[this.count >= this.grantGroups.length ?
-                this.grantGroups.length - 1 :
-                this.count].icon
-              )
-                .width(Constants.DIALOG_ICON_WIDTH)
-                .height(Constants.DIALOG_ICON_HEIGHT)
-                .fillColor($r('sys.color.ohos_id_color_text_primary'))
-                .margin({
-                  top: Constants.DIALOG_ICON_MARGIN_TOP
-                })
-              if (this.grantGroups.length > 1) {
-                Text(`${this.count + 1} / ${this.grantGroups.length}`)
-                  .fontSize(Constants.DIALOG_LABEL_FONT_SIZE)
-                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                  .lineHeight(Constants.DIALOG_LABEL_LINE_HEIGHT)
+      contentAreaPadding: { right: 0 }
+    }),
+    autoCancel: false
+  });
+
+  @Builder
+  buildContent(): void {
+    Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+      Column() {
+        if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
+          Image(this.currentGroup().icon)
+            .width(Constants.DIALOG_ICON_WIDTH)
+            .height(Constants.DIALOG_ICON_HEIGHT)
+            .fillColor($r('sys.color.ohos_id_color_text_primary'))
+            .margin({ top: Constants.DIALOG_ICON_MARGIN_TOP })
+          if (this.grantGroups.length > 1) {
+            Text(`${this.count + 1} / ${this.grantGroups.length}`)
+              .fontSize(Constants.DIALOG_LABEL_FONT_SIZE)
+              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+              .lineHeight(Constants.DIALOG_LABEL_LINE_HEIGHT)
+              .margin({ top: Constants.DIALOG_LABEL_MARGIN_TOP })
+          }
+          Scroll() {
+            Column() {
+              Row() {
+                Flex({ justifyContent: FlexAlign.Start }) {
+                  Text() {
+                    Span($r('app.string.whether_to_allow'))
+                    Span(this.appName)
+                    Span($r('app.string.quotes'))
+                    Span(this.showTitle())
+                  }
+                  .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
+                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  .fontWeight(FontWeight.Medium)
+                  .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
                   .margin({
-                    top: Constants.DIALOG_LABEL_MARGIN_TOP
+                    top: Constants.DIALOG_REQ_MARGIN_TOP,
+                    left: Constants.DIALOG_REQ_MARGIN_LEFT,
+                    right: Constants.DIALOG_REQ_MARGIN_RIGHT
                   })
+                }
               }
-              Scroll() {
-                Column() {
-                  Row() {
-                    Flex({ justifyContent: FlexAlign.Start }) {
-                      Text() {
-                        Span($r('app.string.whether_to_allow'))
-                        Span(this.appName)
-                        Span($r('app.string.quotes'))
-                        Span(this.showTitle())
+
+              Row() {
+                Flex({ justifyContent: FlexAlign.Start }) {
+                  Text() {
+                    if (
+                      this.currentGroup().name === 'LOCATION' &&
+                      ((this.locationFlag == Constants.LOCATION_FUZZY) ||
+                      (this.locationFlag == Constants.LOCATION_BOTH_FUZZY))
+                    ) {
+                      Span($r('app.string.close_exact_position'))
+                    } else if (this.currentGroup().name === 'PASTEBOARD') {
+                      if (this.pasteBoardName) {
+                        Span($r('app.string.pasteBoard_app', this.pasteBoardName))
                       }
-                        .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                        .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                        .fontWeight(FontWeight.Medium)
-                        .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                        .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
-                        .margin({
-                          top: Constants.DIALOG_REQ_MARGIN_TOP,
-                          left: Constants.DIALOG_REQ_MARGIN_LEFT,
-                          right: Constants.DIALOG_REQ_MARGIN_RIGHT
+                      Span($r('app.string.pasteBoard_desc'))
+                    } else {
+                      if (this.currentGroup().description.length > 0) {
+                        ForEach(this.currentGroup().description, (item: ResourceStr) => {
+                          Span(item)
                         })
+                        Span(this.currentGroup().reason ? $r('app.string.comma') : $r('app.string.period'))
+                      }
+                      Span(this.refresh >= 0 ? this.currentGroup().reason : '')
                     }
                   }
-
-                  Row() {
-                    Flex({ justifyContent: FlexAlign.Start }) {
-                      Text() {
-                        if (this.currentGroup() === 'LOCATION') {
-                          Span($r('app.string.close_exact_position'))
-                        } else if (this.currentGroup() === 'PASTEBOARD') {
-                          if (this.pasteBoardName) {
-                            Span($r('app.string.pasteBoard_app', this.pasteBoardName))
-                          }
-                          Span($r('app.string.pasteBoard_desc'))
-                        } else {
-                          if (
-                            this.grantGroups[this.count >= this.grantGroups.length ?
-                            this.grantGroups.length - 1 :
-                            this.count].description.length > 0
-                          ) {
-                            ForEach(
-                              this.grantGroups[this.count >= this.grantGroups.length ?
-                              this.grantGroups.length - 1 :
-                              this.count].description,
-                              (item: ResourceStr) => {
-                                Span(item)
-                              }
-                            )
-                            Span(this.punctuation())
-                          }
-                          Span(this.grantGroups[this.count >= this.grantGroups.length ?
-                            this.grantGroups.length - 1 :
-                            (this.count + this.refresh - this.refresh)].reason)
-                        }
-                      }
-                        .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
-                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-                        .fontSize(Constants.DIALOG_DESP_FONT_SIZE)
-                        .lineHeight(Constants.DIALOG_DESP_LINE_HEIGHT)
-                        .margin({
-                          top: Constants.DIALOG_DESP_MARGIN_TOP,
-                          left: Constants.DIALOG_DESP_MARGIN_LEFT,
-                          right: Constants.DIALOG_DESP_MARGIN_RIGHT,
-                          bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM
-                        })
-                    }
-                  }
-
-                  if (
-                    this.locationFlag > Constants.LOCATION_NONE &&
-                    this.grantGroups[this.count >= this.grantGroups.length ?
-                    this.grantGroups.length - 1 :
-                    this.count].name === 'LOCATION'
-                  ) {
-                    LocationCanvas({ locationFlag: $locationFlag })
-                  }
-                }
-              }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
-              if (this.currentGroup() === 'LOCATION' || this.currentGroup() === 'LOCATION_PRECISE') {
-                Column() {
-                  Button($r('app.string.ALLOWED_ONLY_DURING_USE'))
-                    .customizeButton()
-                    .width(Constants.FULL_WIDTH)
-                    .margin({ bottom: Constants.MARGIN_4 })
-                    .onClick(() => {
-                      this.privacyAccept(
-                        this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
-                      )
-                    })
-                  Button($r('app.string.allow_this_time'))
-                    .customizeButton()
-                    .width(Constants.FULL_WIDTH)
-                    .margin({ bottom: Constants.MARGIN_4 })
-                    .onClick(() => {
-                      this.privacyAccept(
-                        this.grantGroups[this.count],
-                        this.accessTokenId,
-                        this.reqPerms,
-                        Constants.PERMISSION_ALLOW_THIS_TIME
-                      )
-                    })
-                  Button($r('app.string.cancel'))
-                    .customizeButton()
-                    .width(Constants.FULL_WIDTH)
-                    .onClick(() => {
-                      this.count ++;
-                    })
-                }
-                .padding({ left: Constants.PADDING_16, right: Constants.PADDING_16 })
-              } else {
-                Row() {
-                  Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                    Button($r('app.string.BAN'))
-                      .onClick(() => {
-                        this.privacyCancel(
-                          this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
-                        )
-                      }).customizeButton()
-                    Divider()
-                      .color($r('sys.color.ohos_id_color_list_separator'))
-                      .vertical(true)
-                      .strokeWidth(Constants.DIALOG_DIVIDER)
-                      .height(Constants.DIVIDER_HEIGHT)
-                      .opacity(0.2)
-                    Button(this.sureButton)
-                      .onClick(() => {
-                        this.privacyAccept(
-                          this.grantGroups[this.count],
-                          this.accessTokenId,
-                          this.reqPerms,
-                          this.currentGroup() === 'PASTEBOARD' ?
-                            Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag
-                        )
-                      }).customizeButton()
-                  }.margin({
-                    left: Constants.BUTTON_MARGIN_LEFT,
-                    right: Constants.BUTTON_MARGIN_RIGHT,
-                    bottom: Constants.MARGIN_8
+                  .textAlign(TextAlign.Start)
+                  .fontSize($r('sys.float.ohos_id_text_size_body1'))
+                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
+                  .margin({
+                    top: Constants.DIALOG_DESP_MARGIN_TOP,
+                    left: Constants.DIALOG_DESP_MARGIN_LEFT,
+                    right: Constants.DIALOG_DESP_MARGIN_RIGHT,
+                    bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM
                   })
                 }
+              }
+
+              if (this.locationFlag > Constants.LOCATION_NONE && this.currentGroup().name === 'LOCATION') {
+                LocationCanvas({ locationFlag: $locationFlag })
               }
             }
+          }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
+          if (this.currentGroup().name === 'LOCATION') {
+            Column() {
+              Button($r('app.string.ALLOWED_ONLY_DURING_USE'))
+                .customizeButton()
+                .width(Constants.FULL_WIDTH)
+                .margin({ bottom: Constants.MARGIN_4 })
+                .onClick(() => {
+                  this.privacyAccept(
+                    this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
+                  )
+                })
+              Button($r('app.string.allow_this_time'))
+                .customizeButton()
+                .width(Constants.FULL_WIDTH)
+                .margin({ bottom: Constants.MARGIN_4 })
+                .onClick(() => {
+                  this.privacyAccept(
+                    this.grantGroups[this.count],
+                    this.accessTokenId,
+                    this.reqPerms,
+                    Constants.PERMISSION_ALLOW_THIS_TIME
+                  )
+                })
+              Button($r('app.string.cancel'))
+                .customizeButton()
+                .width(Constants.FULL_WIDTH)
+                .onClick(() => {
+                  this.count ++;
+                })
+            }
+            .padding({ left: Constants.PADDING_16, right: Constants.PADDING_16 })
+          } else {
+            Row() {
+              Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                Button($r('app.string.BAN'))
+                  .onClick(() => {
+                    this.privacyCancel(
+                      this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
+                    )
+                  }).customizeButton()
+                Divider()
+                  .color($r('sys.color.ohos_id_color_list_separator'))
+                  .vertical(true)
+                  .strokeWidth(Constants.DIALOG_DIVIDER)
+                  .height(Constants.DIVIDER_HEIGHT)
+                  .opacity(0.2)
+                  .margin({ left: Constants.MARGIN_4, right: Constants.MARGIN_4 })
+                Button(
+                  this.currentGroup().name === 'PASTEBOARD' ? $r('app.string.THIS_TIME_ONLY') : $r('app.string.ALLOW')
+                )
+                  .onClick(() => {
+                    this.privacyAccept(
+                      this.grantGroups[this.count],
+                      this.accessTokenId,
+                      this.reqPerms,
+                      this.currentGroup().name === 'PASTEBOARD' ?
+                      Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag
+                    )
+                  }).customizeButton()
+              }.margin({
+                left: Constants.BUTTON_MARGIN_LEFT,
+                right: Constants.BUTTON_MARGIN_RIGHT,
+                bottom: Constants.MARGIN_8
+              })
+            }
           }
-          .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
-          .borderRadius(Constants.DIALOG_PRIVACY_BORDER_RADIUS)
-          .width(Constants.FULL_WIDTH)
-          .padding({ bottom: Constants.PADDING_8 })
-          .margin({ bottom: $r('sys.float.ohos_id_dialog_margin_bottom') })
-          .clip(true)
-        }.width(Constants.FULL_WIDTH)
-        .height(Constants.FULL_HEIGHT)
+        }
       }
-    }.margin({ left: Constants.DIALOG_MARGIN, right: Constants.DIALOG_MARGIN })
+      .padding({ bottom: Constants.PADDING_8 })
+      .clip(true)
+    }
   }
+
+  build() {}
 
   showTitle(): ResourceStr {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
@@ -317,90 +246,9 @@ struct PermissionDialog {
     return this.grantGroups[index].label;
   }
 
-  currentGroup() {
+  currentGroup(): GroupInfo {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
-    if (this.grantGroups[index].name == 'LOCATION') {
-      this.sureButton = $r('app.string.ALLOWED_ONLY_DURING_USE');
-      if ((this.locationFlag == Constants.LOCATION_FUZZY) || (this.locationFlag == Constants.LOCATION_BOTH_FUZZY)) {
-        return 'LOCATION';
-      }
-      return 'LOCATION_PRECISE';
-    }
-    if (this.grantGroups[index].name == 'PASTEBOARD') {
-      this.sureButton = $r('app.string.THIS_TIME_ONLY');
-      return 'PASTEBOARD';
-    }
-    this.sureButton = $r('app.string.ALLOW');
-    return 'Normal';
-  }
-
-  punctuation() {
-    let reason = this.grantGroups[this.count >= this.grantGroups.length ?
-      this.grantGroups.length - 1 : this.count].reason;
-    return reason ? $r('app.string.comma') : $r('app.string.period');
-  }
-
-  verify() {
-    if ((this.initStatus == Constants.INIT_NEED_TO_TERMINATED) || (this.count >= this.grantGroups.length)) {
-      this.answerRequest();
-      this.initStatus = Constants.INIT_NEED_TO_WAIT;
-      return false;
-    }
-    return true;
-  }
-
-  answerRequest() {
-    let ret: number = Constants.RESULT_SUCCESS;
-    if (this.initStatus == Constants.INIT_NEED_TO_TERMINATED) {
-      ret = Constants.RESULT_FAILURE;
-    }
-    this.answer(ret, this.reqPerms);
-  }
-
-  answer(ret: number, reqPerms: string[]) {
-    Log.info('code:' + ret + ', perms=' + JSON.stringify(reqPerms) + ', result=' + JSON.stringify(this.result));
-    let perms: string[] = [];
-    let results: number[] = [];
-    reqPerms.forEach(perm => {
-      perms.push(perm);
-    })
-    this.result.forEach(result => {
-      results.push(result);
-    })
-    let option = new rpc.MessageOption();
-    let data = new rpc.MessageSequence();
-    let setDialogData = new rpc.MessageSequence();
-    let reply = new rpc.MessageSequence();
-    Promise.all([data.writeInterfaceToken(Constants.ACCESS_TOKEN),
-      data.writeStringArray(perms),
-      data.writeIntArray(results),
-      setDialogData.writeInterfaceToken(Constants.ACCESS_TOKEN),
-    ]).then(() => {
-      let proxy = want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
-      proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
-      proxy.sendMessageRequest(Constants.RESULT_CODE_1, setDialogData, reply, option);
-      data.reclaim();
-      reply.reclaim();
-      setDialogData.reclaim();
-      this.destruction();
-    }).catch(() => {
-      data.reclaim();
-      reply.reclaim();
-      setDialogData.reclaim();
-      Log.error('write result failed!');
-      this.destruction();
-    })
-  }
-
-  destruction() {
-    let windowNum: number = GlobalContext.load('windowNum');
-    windowNum --;
-    Log.info('windowNum:' + windowNum);
-    GlobalContext.store('windowNum', windowNum);
-    win.destroyWindow();
-    if (windowNum == 0) {
-      this.context.terminateSelf();
-    }
+    return this.grantGroups[index];
   }
 
   async privacyAccept(group: GroupInfo, accessTokenId: number, permissionList: string[], userFixedFlag: number) {
@@ -470,8 +318,55 @@ struct PermissionDialog {
     }
   }
 
+  aboutToAppear() {
+    this.count = 0;
+    this.initStatus = Constants.INIT_NEED_TO_WAIT;
+    this.result = [];
+    this.reqPerms = this.want.parameters['ohos.user.grant.permission'];
+    this.accessTokenId = this.want.parameters['ohos.aafwk.param.callerToken'];
+    if (this.reqPerms == undefined || this.accessTokenId == undefined || this.reqPerms.length == 0) {
+      Log.info('invalid parameters');
+      this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
+      return;
+    }
+    Log.info('request permission=' + JSON.stringify(this.reqPerms) + ', tokenId = ' + this.accessTokenId);
+    Log.info('permission state=' + JSON.stringify(this.want.parameters['ohos.user.grant.permission.state']));
+    this.result = new Array(this.reqPerms.length).fill(-1);
+    this.getPasteBoardInfo();
+    let bundleName: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+    bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+    .then(bundleInfo => {
+      this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
+      this.getGrantGroups(this.want.parameters['ohos.user.grant.permission.state']);
+      this.getApplicationName(bundleName);
+      if (this.dialogController !== null) {
+        this.dialogController.open();
+      }
+    }).catch((err: BusinessError) => {
+      Log.error('getBundleInfo error :' + JSON.stringify(err));
+      this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
+    })
+  }
+
+  aboutToDisappear() {
+    this.dialogController = null;
+  }
+
+  onPageShow() {
+    if (this.isUpdate > 0) {
+      this.getApplicationName(this.want.parameters['ohos.aafwk.param.callerBundleName'])
+    }
+    this.isUpdate ++;
+  }
+
+  getPasteBoardInfo() {
+    if (this.reqPerms.includes(PASTE)) {
+      let systemPasteboard: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
+      this.pasteBoardName = systemPasteboard.getDataSource();
+    }
+  }
+
   getGrantGroups(stateGroup: number[]) {
-    //Processing of positioning
     if (this.reqPerms.includes(FUZZY_LOCATION_PERMISSION)) {
       this.locationFlag = Constants.LOCATION_FUZZY;
       if (this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
@@ -486,11 +381,9 @@ struct PermissionDialog {
     }
 
     this.reqPerms.forEach((permission, idx) => {
-      //已授权
       if (stateGroup[idx] == Constants.PASS_OPER) {
         Log.info('permission has been fixed:' + permission);
         this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
-        //待授权
       } else if (stateGroup[idx] == Constants.DYNAMIC_OPER) {
         if (!userGrantPermissions.includes(permission)) {
           Log.info('permission not find:' + permission);
@@ -561,6 +454,7 @@ struct PermissionDialog {
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
     })
     this.grantGroups.forEach((group) => {
+      group.reason = '';
       this.getReason(group, bundleName);
     })
   }
@@ -585,45 +479,64 @@ struct PermissionDialog {
     })
   }
 
-  getPasteBoardInfo() {
-    if (this.reqPerms.includes(PASTE)) {
-      let systemPasteboard: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
-      this.pasteBoardName = systemPasteboard.getDataSource();
+  verify() {
+    if ((this.initStatus == Constants.INIT_NEED_TO_TERMINATED) || (this.count >= this.grantGroups.length)) {
+      this.answerRequest();
+      this.initStatus = Constants.INIT_NEED_TO_WAIT;
+      return false;
     }
+    return true;
   }
 
-  updateReason() {
-    if (this.isUpdate > 0) {
-      this.getApplicationName(want.parameters['ohos.aafwk.param.callerBundleName'])
+  answerRequest() {
+    let ret: number = Constants.RESULT_SUCCESS;
+    if (this.initStatus == Constants.INIT_NEED_TO_TERMINATED) {
+      ret = Constants.RESULT_FAILURE;
     }
+    this.answer(ret, this.reqPerms);
   }
 
-  aboutToAppear() {
-    this.count = 0;
-    this.initStatus = Constants.INIT_NEED_TO_WAIT;
-    this.result = [];
-    this.reqPerms = want.parameters['ohos.user.grant.permission'];
-    this.accessTokenId = want.parameters['ohos.aafwk.param.callerToken'];
-    if (this.reqPerms == undefined || this.accessTokenId == undefined || this.reqPerms.length == 0) {
-      Log.info('invalid parameters');
-      this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
-      return;
-    }
-    Log.info('request permission=' + JSON.stringify(this.reqPerms) + ', tokenId = ' + this.accessTokenId);
-    Log.info('permission state=' + JSON.stringify(want.parameters['ohos.user.grant.permission.state']));
-    this.result = new Array(this.reqPerms.length).fill(-1);
-    this.getPasteBoardInfo();
-    let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'];
-    bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
-      .then(bundleInfo => {
-        this.targetVersion = bundleInfo.targetVersion;
-        this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
-        this.getGrantGroups(want.parameters['ohos.user.grant.permission.state']);
-        this.getApplicationName(bundleName);
-    }).catch((err: BusinessError) => {
-      Log.error('getBundleInfo error :' + JSON.stringify(err));
-      this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
+  answer(ret: number, reqPerms: string[]) {
+    Log.info('code:' + ret + ', perms=' + JSON.stringify(reqPerms) + ', result=' + JSON.stringify(this.result));
+    let perms: string[] = [];
+    let results: number[] = [];
+    reqPerms.forEach(perm => {
+      perms.push(perm);
+    })
+    this.result.forEach(result => {
+      results.push(result);
+    })
+    let option = new rpc.MessageOption();
+    let data = new rpc.MessageSequence();
+    let setDialogData = new rpc.MessageSequence();
+    let reply = new rpc.MessageSequence();
+    Promise.all([
+      data.writeInterfaceToken(Constants.ACCESS_TOKEN),
+      data.writeStringArray(perms),
+      data.writeIntArray(results),
+      setDialogData.writeInterfaceToken(Constants.ACCESS_TOKEN),
+    ]).then(() => {
+      let proxy = this.want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
+      proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
+      proxy.sendMessageRequest(Constants.RESULT_CODE_1, setDialogData, reply, option);
+    }).catch(() => {
+      Log.error('write result failed!');
+    }).finally(() => {
+      data.reclaim();
+      reply.reclaim();
+      setDialogData.reclaim();
+      this.destruction();
     })
   }
-}
 
+  destruction() {
+    let windowNum: number = GlobalContext.load('windowNum');
+    windowNum --;
+    Log.info('windowNum:' + windowNum);
+    GlobalContext.store('windowNum', windowNum);
+    this.win.destroyWindow();
+    if (windowNum == 0) {
+      this.context.terminateSelf();
+    }
+  }
+}
