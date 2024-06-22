@@ -128,7 +128,7 @@ export default class Constants {
     public static SCROLL_BAR_WIDTH_DEFAULT = 4;
     public static SCROLL_BAR_WIDTH_ACTIVE = 8;
     public static DIVIDER = '1px';
-    public static DIALOG_DIVIDER = 1;
+    public static DIALOG_DIVIDER = '2px';
     public static DIVIDER_HEIGHT = 24;
     public static DIVIDER_MARGIN_RIGHT_PERMISSION = 52;
     public static DIVIDER_MARGIN_RIGHT_APPLICATION = 68;
