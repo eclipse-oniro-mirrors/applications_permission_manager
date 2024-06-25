@@ -251,6 +251,9 @@ export default class Constants {
     public static SECURITY_ICON_WIDTH = 48;
     public static SECURITY_ICON_HEIGHT = 48;
 
+    // header
+    public static SECURITY_HEADER_MAX_LINES = 2;
+
     ////////////////////////////////////////////
 
     // icon of dialog
