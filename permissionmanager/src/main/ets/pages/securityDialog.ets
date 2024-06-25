@@ -108,18 +108,22 @@ struct SecurityDialog {
             Column() {
               Text(this.securityParams[this.index].label)
                 .textAlign(TextAlign.Center)
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                .fontSize($r('sys.float.ohos_id_text_size_headline8'))
+                .fontColor($r('sys.color.font_primary'))
+                .fontSize($r('sys.float.Title_S'))
                 .fontWeight(FontWeight.Bold)
-                .lineHeight(Constants.TEXT_LINE_HEIGHT_27)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
+                .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
+                .minFontSize($r('sys.float.Subtitle_M'))
+                .maxFontSize($r('sys.float.Title_S'))
+                .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
             }
             .height(Constants.HEADLINE_HEIGHT)
-            .padding({ top: Constants.PADDING_16, bottom: Constants.PADDING_16 })
+            .justifyContent(FlexAlign.Center)
 
             Text($r(this.securityParams[this.index].description, this.appName))
               .textAlign(TextAlign.Start)
-              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
-              .fontSize($r('sys.float.ohos_id_text_size_body2'))
+              .fontColor($r('sys.color.font_primary'))
+              .fontSize($r('sys.float.Body_L'))
               .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
           }
         }
