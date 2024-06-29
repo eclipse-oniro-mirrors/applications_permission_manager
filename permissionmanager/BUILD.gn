@@ -19,6 +19,7 @@ ohos_hap("permission_manager") {
     ":permission_manager_js_assets",
     ":permission_manager_resources",
   ]
+  publicity_file = "../publicity.xml"
   certificate_profile = "../signature/pm.p7b"
   hap_name = "permission_manager"
   part_name = "prebuilt_hap"
