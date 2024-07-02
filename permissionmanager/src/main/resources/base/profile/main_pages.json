@@ -11,6 +11,8 @@
     "pages/dialogPlus",
     "pages/globalSwitch",
     "pages/securityDialog",
-    "pages/transition"
+    "pages/transition",
+    "PermissionSheet/PermissionStateSheetDialog",
+    "PermissionSheet/GlobalSwitchSheetDialog"
   ]
 }

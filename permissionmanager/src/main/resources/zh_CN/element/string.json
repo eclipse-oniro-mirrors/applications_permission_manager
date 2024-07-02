@@ -647,6 +647,30 @@
     {
       "name": "Document_folder",
       "value": "文档文件夹"
+    },
+    {
+      "name": "PermissionStateSheetAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "PermissionStateSheetAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "PermissionmanagerAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "PermissionmanagerAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "GlobalSwitchSheetAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "GlobalSwitchSheetAbility_label",
+      "value": "label"
     }
   ]
 }

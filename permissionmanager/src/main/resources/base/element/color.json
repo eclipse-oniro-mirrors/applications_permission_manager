@@ -19,6 +19,10 @@
     {
       "name": "icon_border",
       "value": "#33808080"
+    },
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
     }
   ]
 }
