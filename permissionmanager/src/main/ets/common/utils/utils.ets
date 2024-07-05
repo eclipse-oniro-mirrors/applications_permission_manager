@@ -20,7 +20,13 @@ import { permissionGroups, groups } from '../model/permissionGroup';
 import Constants from '../utils/constant';
 import { BundleInfoUtils } from './bundleInfoUtils';
 import { CommonUtils } from './commonUtils';
-import { GroupInfo, AppInfo, ApplicationObj } from './typedef';
+import { GroupInfo, AppInfo, ApplicationObj, PermissionInfo } from './typedef';
+import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
+import uiExtensionHost from '@ohos.uiExtensionHost';
+import window from '@ohos.window';
+import { GlobalContext } from './globalContext';
+
+const TAG = 'PermissionManager_Log '
 
 /**
  * verify permission
@@ -207,6 +213,67 @@ export function getGroupIdByPermission(permission: string): number {
   }
   return 0;
 }
+
+export function PermissionDialogException(code: number, session: UIExtensionContentSession): void {
+  session.terminateSelfWithResult({
+    resultCode: -1,
+    want: {
+      parameters: {
+        'ohos.user.setting.permission.result': [],
+        'ohos.user.setting.error_code': code,
+      }
+    }
+  })
+}
+
+export function PermissionDialogReturn(resultArray: Array<number>, session: UIExtensionContentSession): void {
+  session.terminateSelfWithResult({
+    resultCode: 0,
+    want: {
+      parameters: {
+        'ohos.user.setting.permission.result': resultArray,
+        'ohos.user.setting.error_code': 0
+      }
+    }
+  })
+}
+
+// check if the permissions provided are in the same group
+export function checkPermissionGroup(appPermissions: Permissions[]): string | null {
+  if (appPermissions.length == 0) {
+    return null;
+  }
+  let groupName = '' // index of group in permissionGroup
+  // check if permission is a valid permission
+  for (const permission of appPermissions) {
+    let idx = permissionGroups.findIndex(
+      (item) => {return item.permissionName === permission}
+    );
+    // if permission not found in known permissions , return false
+    if (idx == -1) {
+      Log.error(TAG + 'unknown info ' + permission)
+      return null;
+    }
+    // if groupName not set , set groupName
+    if (groupName == '') {
+      groupName = permissionGroups[idx].groupName;
+    }
+    // if current groupName is not the same to the previous , not the same group
+    if (permissionGroups[idx].groupName != groupName) {
+      Log.error(TAG + 'permission ' + permission + ' is not in current group ' + groupName)
+      return null
+    }
+  }
+  return groupName;
+}
+
+export function  setAvoidArea(proxy: uiExtensionHost.UIExtensionHostWindowProxy) {
+  let avoidArea = proxy.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+  let btmAvoidHeight: string = avoidArea.bottomRect.height.toString();
+  Log.info(TAG + 'avoid area height: ' + btmAvoidHeight + 'px'); // assure unit in pixels
+  GlobalContext.store('avoidAreaHeight', btmAvoidHeight + 'px');
+}
+
 
 export class Log {
   public static domain: number = 0x8214;

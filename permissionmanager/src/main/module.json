@@ -70,6 +70,20 @@
                 "type": "service",
                 "exported": true,
                 "permissions": ["ohos.permission.GET_SENSITIVE_PERMISSIONS"]
+            },
+            {
+                "icon": "$media:icon",
+                "name": "com.ohos.permissionmanager.PermissionStateSheetAbility",
+                "srcEntry": "./ets/PermissionSheet/PermissionStateSheetAbility.ets",
+                "type": "sys/commonUI",
+                "exported": true
+            },
+            {
+                "icon": "$media:icon",
+                "name": "com.ohos.permissionmanager.GlobalSwitchSheetAbility",
+                "srcEntry": "./ets/PermissionSheet/GlobalSwitchSheetAbility.ets",
+                "type": "sys/commonUI",
+                "exported": true
             }
         ],
         "requestPermissions": [
@@ -105,6 +119,9 @@
             },
             {
                 "name": "ohos.permission.ACCESS_SECURITY_PRIVACY_CENTER"
+            },
+            {
+                "name": "ohos.permission.MICROPHONE_CONTROL"
             }
         ]
     }

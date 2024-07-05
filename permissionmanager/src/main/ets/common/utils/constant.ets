@@ -107,11 +107,13 @@ export default class Constants {
     public static TAB_DECORATION_POSITION_Y = 6;
     public static MARGIN_4 = 4;
     public static MARGIN_8 = 8;
+    public static MARGIN_16 = 16;
     public static MARGIN_24 = 24;
     public static PADDING_8 = 8;
     public static PADDING_10 = 10;
     public static PADDING_14 = 14;
     public static PADDING_16 = 16;
+    public static PADDING_20 = 20;
     public static PADDING_24 = 24;
     public static DEFAULT_PADDING_START = 12;
     public static DEFAULT_PADDING_END = 12;
@@ -230,6 +232,7 @@ export default class Constants {
     public static PERMISSION_NUM = 0;
 
     // permission flag
+    public static PERMISSION_DEFAULT = 0;
     public static PERMISSION_FLAG = 2;
     public static PERMISSION_SYSTEM_FIXED = 4;
     public static PERMISSION_COMPONENT_SET = 16;
@@ -337,4 +340,23 @@ export default class Constants {
     public static ACCESS_TOKEN = 'ohos.security.accesstoken.tokencallback'
     public static SEC_COMP_DIALOG_CALLBACK = 'ohos.security.ISecCompDialogCallback'
 
+    // permission dialogs
+    public static GLOBAL_SWITCH_CAMERA = 0;
+    public static GLOBAL_SWITCH_MICROPHONE = 1;
+
+    public static PERMISSION_DIALOG_SUCCESS = 0;
+
+    public static ERR_MODAL_ALREADY_EXIST = 1;
+    public static ERR_PERMISSIONS_NOT_SAME_GROUP = 2;
+    public static ERR_PERMISSIONS_NOT_IN_CONFIG = 3;
+    public static ERR_PERMISSIONS_ALL_GRANTED = 4;
+    public static ERR_PERMISSIONS_FLAG_DEFAULT = 5;
+    public static ERR_PERMISSION_GRANT_EXCEPTION = 6;
+
+    public static ERR_GLOBAL_SWITCH_NOT_SUPPORTED = 2;
+    public static ERR_GLOBAL_SWITCH_IS_ON = 3;
+    public static ERR_GLOBAL_SWITCH_EXCEPTION = 4;
+
+    // permission system error codes
+    public static CREATE_WINDOW_REPEATED = 1300001;
 }

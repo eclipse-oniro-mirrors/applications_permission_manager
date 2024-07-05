@@ -82,9 +82,9 @@ export class GroupPermission {
   public permissions: string[]
   public groupName: ResourceStr
   public icon: ResourceStr
-  public isShow:boolean
+  public isShow: boolean
 
-  constructor(group: string, permissions: string[], groupName: ResourceStr, icon: ResourceStr, isShow:boolean) {
+  constructor(group: string, permissions: string[], groupName: ResourceStr, icon: ResourceStr, isShow: boolean) {
     this.group = group
     this.permissions = permissions
     this.groupName = groupName
@@ -433,4 +433,12 @@ export class CheckboxInfo {
     this.label = label
     this.index = index
   }
+}
+
+export interface CallerBundleInfo {
+  bundleName: string;
+  uId: number;
+  permissionGroup: string[];
+  token: number;
+  globSwitch: number;
 }
