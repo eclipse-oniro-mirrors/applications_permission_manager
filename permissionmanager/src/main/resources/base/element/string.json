@@ -117,20 +117,8 @@
       "value": "Per inquiry"
     },
     {
-      "name": "ALLOW",
-      "value": "ALLOW"
-    },
-    {
-      "name": "BAN",
-      "value": "BAN"
-    },
-    {
-      "name": "THIS_TIME_ONLY",
-      "value": "THIS TIME ONLY"
-    },
-    {
-      "name": "ALLOWED_ONLY_DURING_USE",
-      "value": "ALLOWED ONLY DURING USE"
+      "name": "This_time_only",
+      "value": "This time only"
     },
     {
       "name": "allowed_only_during_use",
@@ -138,7 +126,7 @@
     },
     {
       "name": "allow_this_time",
-      "value": "ALLOW THIS TIME"
+      "value": "Allow this time"
     },
     {
       "name": "precise_location",
@@ -161,32 +149,24 @@
       "value": "When Precise location is turned off, the location obtained by the application is biased."
     },
     {
-      "name": "whether_to_allow",
-      "value": "Whether to allow \""
-    },
-    {
-      "name": "quotes",
-      "value": "\""
-    },
-    {
       "name": "access_general_location",
-      "value": " access the general location?"
+      "value": "Allow \"%s\" access the general location?"
     },
     {
       "name": "fuzzy_to_exact",
-      "value": " position access to change from \"APPROXIMATE POSITION\" to \"EXACT POSITION\"?"
+      "value": "Allow \"%s\" position access to change from \"APPROXIMATE POSITION\" to \"EXACT POSITION\"?"
     },
     {
       "name": "cancel",
-      "value": "CANCEL"
+      "value": "Cancel"
     },
     {
       "name": "open",
-      "value": "OPEN"
+      "value": "Open"
     },
     {
       "name": "close",
-      "value": "CLOSE"
+      "value": "Close"
     },
     {
       "name": "camera",
@@ -330,99 +310,83 @@
     },
     {
       "name": "group_label_location",
-      "value": " access location information?"
+      "value": "Allow \"%s\" access location information?"
     },
     {
       "name": "group_label_camera",
-      "value": " using a camera?"
+      "value": "Allow \"%s\" using a camera?"
     },
     {
       "name": "group_label_microphone",
-      "value": " using a microphone?"
-    },
-    {
-      "name": "group_label_phone",
-      "value": " use to dial a phone?"
-    },
-    {
-      "name": "group_label_sms",
-      "value": " access to information?"
+      "value": "Allow \"%s\" using a microphone?"
     },
     {
       "name": "group_label_contacts",
-      "value": " access the address book?"
-    },
-    {
-      "name": "group_label_call_log",
-      "value": " access to call records?"
-    },
-    {
-      "name": "group_label_media",
-      "value": " access to media and files?"
+      "value": "Allow \"%s\" access the address book?"
     },
     {
       "name": "group_label_calendar",
-      "value": " access to the calendar?"
+      "value": "Allow \"%s\" access to the calendar?"
     },
     {
       "name": "group_label_sport",
-      "value": " visit the gym?"
+      "value": "Allow \"%s\" visit the gym?"
     },
     {
       "name": "group_label_health",
-      "value": " use body sensors?"
+      "value": "Allow \"%s\" use body sensors?"
     },
     {
       "name": "group_label_distributed_datasync",
-      "value": " use multiple device collaboration?"
+      "value": "Allow \"%s\" use multiple device collaboration?"
     },
     {
       "name": "group_label_image_and_videos",
-      "value": " access to pictures and videos?"
+      "value": "Allow \"%s\" access to pictures and videos?"
     },
     {
       "name": "group_label_audios",
-      "value": " access to music and audio?"
+      "value": "Allow \"%s\" access to music and audio?"
     },
     {
       "name": "group_label_document",
-      "value": " access to files?"
+      "value": "Allow \"%s\" access to files?"
     },
     {
       "name": "group_label_ADS",
-      "value": " access AD tracking?"
+      "value": "Allow \"%s\" access AD tracking?"
     },
     {
       "name": "group_label_appList",
-      "value": " read the list of installed apps?"
+      "value": "Allow \"%s\" read the list of installed apps?"
     },
     {
       "name": "group_label_bluetooth",
-      "value": " access Bluetooth?"
+      "value": "Allow \"%s\" access Bluetooth?"
     },
     {
       "name": "group_label_pasteboard",
-      "value": " access Pasteboard?"
+      "value": "Allow \"%s\" access Pasteboard?"
     },
     {
       "name": "group_label_folder",
-      "value": " access Folder?"
+      "value": "Allow \"%s\" access Folder?"
     },
     {
       "name": "group_label_download_folder",
-      "value": " access the \"Downloads\" folder?"
+      "value": "Allow \"%s\" access the \"Downloads\" folder?"
     },
     {
       "name": "group_label_desktop_folder",
-      "value": " access the \"Desktop\" folder?"
+      "value": "Allow \"%s\" access the \"Desktop\" folder?"
     },
     {
       "name": "group_label_document_folder",
-      "value": " access the \"Document\" folder?"
+      "value": "Allow \"%s\" access the \"Document\" folder?"
     },
     {
       "name": "group_label_nearLink",
-      "value": " access NearLink?"
+      "value": "Allow \"%s\" access NearLink?"
     },
     {
       "name": "enable_description_location",

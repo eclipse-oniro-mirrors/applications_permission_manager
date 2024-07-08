@@ -77,8 +77,8 @@ export default class SecurityExtensionAbility extends extension {
       win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
       this.monitorFold(win);
-    } catch {
-      console.error(TAG + 'window create failed!');
+    } catch (err) {
+      console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
     }
   }
 
