@@ -252,7 +252,7 @@ export class PermissionInfo {
 export class GroupInfo {
   public name: string
   public groupName: ResourceStr
-  public label: ResourceStr
+  public label: string
   public icon: ResourceStr
   public description: Array<ResourceStr>
   public reason: string
@@ -264,7 +264,7 @@ export class GroupInfo {
   constructor(
     name: string,
     groupName: ResourceStr,
-    label: ResourceStr,
+    label: string,
     icon: ResourceStr,
     description: Array<ResourceStr>,
     reason: string,

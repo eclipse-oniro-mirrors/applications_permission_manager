@@ -62,7 +62,7 @@ struct SecurityDialog {
           }
         },
         {
-          value: $r('app.string.ALLOW'),
+          value: $r('app.string.allow'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
             if (this.dialogController !== null) {
@@ -119,6 +119,10 @@ struct SecurityDialog {
             }
             .height(Constants.HEADLINE_HEIGHT)
             .justifyContent(FlexAlign.Center)
+            .padding({
+              top: Constants.DEFAULT_PADDING_TOP,
+              bottom: Constants.DEFAULT_PADDING_BOTTOM,
+            })
 
             Text($r(this.securityParams[this.index].description, this.appName))
               .textAlign(TextAlign.Start)

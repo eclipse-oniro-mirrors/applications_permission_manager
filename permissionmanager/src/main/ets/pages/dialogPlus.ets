@@ -97,27 +97,30 @@ struct dialogPlusPage {
           Scroll() {
             Column() {
               Row() {
-                Flex({ justifyContent: FlexAlign.Start }) {
-                  Text() {
-                    Span($r('app.string.whether_to_allow'))
-                    Span(this.appName)
-                    Span($r('app.string.quotes'))
-                    Span(this.showTitle())
-                  }
-                  .fontSize(Constants.DIALOG_REQ_FONT_SIZE)
-                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
-                  .fontWeight(FontWeight.Medium)
-                  .lineHeight(Constants.DIALOG_REQ_LINE_HEIGHT)
-                  .margin({
-                    top: Constants.DIALOG_REQ_MARGIN_TOP,
-                    left: Constants.DIALOG_REQ_MARGIN_LEFT,
-                    right: Constants.DIALOG_REQ_MARGIN_RIGHT
-                  })
+                Column() {
+                  Text($r(this.showTitle(), this.appName))
+                  .textAlign(TextAlign.Center)
+                  .fontSize($r('sys.float.Title_S'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Bold)
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
+                  .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
+                  .minFontSize($r('sys.float.Subtitle_M'))
+                  .maxFontSize($r('sys.float.Title_S'))
+                  .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
                 }
+                .height(Constants.HEADLINE_HEIGHT)
+                .justifyContent(FlexAlign.Center)
+                .padding({
+                  top: Constants.DEFAULT_PADDING_TOP,
+                  bottom: Constants.DEFAULT_PADDING_BOTTOM,
+                  left: Constants.PADDING_24,
+                  right: Constants.PADDING_24
+                })
               }
 
               Row() {
-                Flex({ justifyContent: FlexAlign.Start }) {
+                Flex({ justifyContent: FlexAlign.Center }) {
                   Text() {
                     if (
                       this.currentGroup().name === 'LOCATION' &&
@@ -141,11 +144,10 @@ struct dialogPlusPage {
                     }
                   }
                   .textAlign(TextAlign.Start)
-                  .fontSize($r('sys.float.ohos_id_text_size_body1'))
-                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontSize($r('sys.float.Body_L'))
                   .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   .margin({
-                    top: Constants.DIALOG_DESP_MARGIN_TOP,
                     left: Constants.DIALOG_DESP_MARGIN_LEFT,
                     right: Constants.DIALOG_DESP_MARGIN_RIGHT,
                     bottom: Constants.DIALOG_DESP_MARGIN_BOTTOM
@@ -160,7 +162,7 @@ struct dialogPlusPage {
           }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
           if (this.currentGroup().name === 'LOCATION') {
             Column() {
-              Button($r('app.string.ALLOWED_ONLY_DURING_USE'))
+              Button($r('app.string.allowed_only_during_use'))
                 .customizeButton()
                 .width(Constants.FULL_WIDTH)
                 .margin({ bottom: Constants.MARGIN_4 })
@@ -192,7 +194,7 @@ struct dialogPlusPage {
           } else {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                Button($r('app.string.BAN'))
+                Button($r('app.string.ban'))
                   .onClick(() => {
                     this.privacyCancel(
                       this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
@@ -206,7 +208,7 @@ struct dialogPlusPage {
                   .opacity(0.2)
                   .margin({ left: Constants.MARGIN_4, right: Constants.MARGIN_4 })
                 Button(
-                  this.currentGroup().name === 'PASTEBOARD' ? $r('app.string.THIS_TIME_ONLY') : $r('app.string.ALLOW')
+                  this.currentGroup().name === 'PASTEBOARD' ? $r('app.string.This_time_only') : $r('app.string.allow')
                 )
                   .onClick(() => {
                     this.privacyAccept(
@@ -233,14 +235,14 @@ struct dialogPlusPage {
 
   build() {}
 
-  showTitle(): ResourceStr {
+  showTitle(): string {
     let index = this.count >= this.grantGroups.length ? this.grantGroups.length - 1 : this.count;
     if (this.grantGroups[index].name == 'LOCATION') {
       if (this.locationFlag == Constants.LOCATION_FUZZY) {
-        return $r('app.string.access_general_location');
+        return 'app.string.access_general_location';
       }
       if (this.locationFlag == Constants.LOCATION_UPGRADE) {
-        return $r('app.string.fuzzy_to_exact');
+        return 'app.string.fuzzy_to_exact';
       }
     }
     return this.grantGroups[index].label;
@@ -400,17 +402,17 @@ struct dialogPlusPage {
     if (group.name === 'FOLDER') {
       switch (permission) {
         case DOWNLOAD_PERMISSION:
-          let downloadGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_download_folder'),
+          let downloadGroup = new GroupInfo(group.name, group.groupName, 'app.string.group_label_download_folder',
             group.icon, group.description, group.reason, [DOWNLOAD_PERMISSION], group.isShow)
           this.grantGroups.push(downloadGroup);
           break;
         case DESKTOP_PERMISSION:
-          let desktopGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_desktop_folder'),
+          let desktopGroup = new GroupInfo(group.name, group.groupName, 'app.string.group_label_desktop_folder',
             group.icon, group.description, group.reason, [DESKTOP_PERMISSION], group.isShow)
           this.grantGroups.push(desktopGroup);
           break;
         case DOCUMENTS_PERMISSION:
-          let documentGroup = new GroupInfo(group.name, group.groupName, $r('app.string.group_label_document_folder'),
+          let documentGroup = new GroupInfo(group.name, group.groupName, 'app.string.group_label_document_folder',
             group.icon, group.description, group.reason, [DOCUMENTS_PERMISSION], group.isShow)
           this.grantGroups.push(documentGroup);
           break;
