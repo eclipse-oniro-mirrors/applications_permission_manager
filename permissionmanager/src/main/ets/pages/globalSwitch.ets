@@ -54,21 +54,21 @@ struct globalSwitch {
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMute(false).then(() => {
+                audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
                   this.context.terminateSelf();
                 })
               })
             } else if (this.globalState == CAMERA) {
               let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-              cameraManager.muteCamera(false);
+              cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
               this.context.terminateSelf();
             } else {
               let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-              cameraManager.muteCamera(false);
+              cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMute(false).then(() => {
+                audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
                   this.context.terminateSelf();
                 })
               })
@@ -111,9 +111,7 @@ struct globalSwitch {
 
   aboutToAppear() {
     Log.info('global aboutToAppear');
-    if (this.dialogController !== null) {
-      this.dialogController.open();
-    }
+    this.dialogController?.open();
   }
 
   aboutToDisappear() {
