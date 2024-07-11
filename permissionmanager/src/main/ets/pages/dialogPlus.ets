@@ -339,9 +339,7 @@ struct dialogPlusPage {
       this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
       this.getGrantGroups(this.want.parameters['ohos.user.grant.permission.state']);
       this.getApplicationName(bundleName);
-      if (this.dialogController !== null) {
-        this.dialogController.open();
-      }
+      this.dialogController?.open();
     }).catch((err: BusinessError) => {
       Log.error('getBundleInfo error :' + JSON.stringify(err));
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;

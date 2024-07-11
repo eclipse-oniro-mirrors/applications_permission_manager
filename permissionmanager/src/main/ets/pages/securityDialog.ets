@@ -54,9 +54,7 @@ struct SecurityDialog {
           value: $r('app.string.cancel'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            if (this.dialogController !== null) {
-              this.dialogController.close();
-            }
+            this.dialogController?.close();
             this.win.destroyWindow();
             this.context.terminateSelf();
           }
@@ -65,9 +63,7 @@ struct SecurityDialog {
           value: $r('app.string.ALLOW'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            if (this.dialogController !== null) {
-              this.dialogController.close();
-            }
+            this.dialogController?.close();
             this.destruction();
           }
         }
@@ -148,9 +144,7 @@ struct SecurityDialog {
     Log.info('onAboutToAppear.');
     this.GetAppName();
     this.index = this.want.parameters['ohos.user.security.type'];
-    if (this.dialogController !== null) {
-      this.dialogController.open();
-    }
+    this.dialogController?.open();
   }
 
   aboutToDisappear() {

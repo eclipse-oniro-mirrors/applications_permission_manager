@@ -115,12 +115,6 @@
                 "name": "ohos.permission.PERMISSION_USED_STATS"
             },
             {
-                "name": "ohos.permission.MANAGE_AUDIO_CONFIG"
-            },
-            {
-                "name": "ohos.permission.MANAGE_CAMERA_CONFIG"
-            },
-            {
                 "name": "ohos.permission.GET_INSTALLED_BUNDLE_LIST"
             },
             {
@@ -134,6 +128,9 @@
             },
             {
                 "name": "ohos.permission.MICROPHONE_CONTROL"
+            },
+            {
+                "name": "ohos.permission.CAMERA_CONTROL"
             }
         ]
     }
