@@ -570,19 +570,19 @@
     },
     {
       "name": "SecurityTitle_location",
-      "value": "Secure access to location information"
+      "value": "Secure access to locations"
     },
     {
       "name": "SecurityTitle_mediaFiles",
-      "value": "Secure access to media and files"
+      "value": "Safely store your pictures and videos"
     },
     {
       "name": "SecurityDescription_location",
-      "value": "This button is certified by the system security and only allows \"%s\" temporary access to location information when you click this button, in order to reduce the continuous access of your private data by applications."
+      "value": "\"%s\" is only allowed to access your location when you touch this button. It cannot continuously obtain your private data."
     },
     {
       "name": "SecurityDescription_mediaFiles",
-      "value": "This button is certified by the system security and only allows \"%s\" temporary access to media and files when you click this button, in order to reduce the continuous access of your private data by applications."
+      "value": "\"%s\" is only allowed to save photos and videos to Gallery when you touch this button. It will not be able to continuously obtain your private data."
     },
     {
       "name": "Got_it",
