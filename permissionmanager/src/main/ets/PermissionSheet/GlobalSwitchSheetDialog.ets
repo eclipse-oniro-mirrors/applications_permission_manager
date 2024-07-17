@@ -216,7 +216,7 @@ struct applicationItem {
       Column() {
         Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Medium)
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
           .width(Constants.FULL_WIDTH)
@@ -227,7 +227,7 @@ struct applicationItem {
           $r('app.string.close_microphone_desc')
         )
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
           .lineHeight(Constants.TEXT_LINE_HEIGHT)
       }
       .clip(true)
@@ -295,7 +295,7 @@ struct applicationItem {
             Column() {
               Text(this.backTitle)
                 .align(Alignment.Start)
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontColor($r('sys.color.font_primary'))
                 .maxLines(Constants.MAXIMUM_HEADER_LINES)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_BIG_FONT_SIZE)
@@ -309,12 +309,12 @@ struct applicationItem {
               Row() {
                 Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                   Text(this.currentGroup == 'CAMERA' ? $r('app.string.camera') : $r('app.string.microphone'))
-                    .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_text_primary'))
+                    .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('sys.color.font_primary'))
                     .fontWeight(FontWeight.Medium)
                   Row() {
                     Toggle({ type: ToggleType.Switch, isOn: this.globalIsOn })
-                      .selectedColor($r('sys.color.ohos_id_color_toolbar_icon_actived'))
-                      .switchPointColor($r('sys.color.ohos_id_color_foreground_contrary'))
+                      .selectedColor($r('sys.color.icon_emphasize'))
+                      .switchPointColor($r('sys.color.comp_background_primary_contrary'))
                       .onChange((isOn: boolean) => {
                         if (isOn) {
                           if (this.currentGroup == 'CAMERA') {
@@ -345,7 +345,7 @@ struct applicationItem {
                 }.height(Constants.LISTITEM_ROW_HEIGHT)
                 .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
               }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-              .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+              .backgroundColor($r('sys.color.comp_background_list_card'))
               .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
               .margin({ top: Constants.MARGIN_16 })
             }

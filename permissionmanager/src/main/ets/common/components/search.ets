@@ -30,7 +30,7 @@ export struct textInput {
     Column() {
       Flex({ alignContent: FlexAlign.Start }) {
         TextInput({ placeholder: $r('app.string.textInput_placeholder') })
-          .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+          .backgroundColor($r('sys.color.comp_background_list_card'))
           .padding({ left: Constants.TEXTINPUT_PADDING_LEFT })
           .type(InputType.Normal)
           .border({
@@ -43,7 +43,7 @@ export struct textInput {
             family: 'sans-serif',
             style: FontStyle.Normal
           })
-          .caretColor($r('sys.color.ohos_id_color_text_secondary'))
+          .caretColor($r('sys.color.font_secondary'))
           .height(Constants.TEXTINPUT_HEIGHT)
           .onChange((value: string) => {
             if (value === '' || value === null) {

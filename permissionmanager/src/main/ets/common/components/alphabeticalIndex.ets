@@ -33,10 +33,10 @@ export struct alphabetIndexerComponent {
 
   build() {
     AlphabetIndexer({ arrayValue: indexValue, selected: this.index })
-      .color($r('sys.color.ohos_id_color_text_secondary'))
-      .selectedColor($r('sys.color.ohos_id_color_text_primary_activated')) // selected color
-      .popupColor($r('sys.color.ohos_id_color_text_primary_activated')) // popover color
-      .popupBackground($r('sys.color.ohos_id_color_card_bg')) // popover background color
+      .color($r('sys.color.font_secondary'))
+      .selectedColor($r('sys.color.font_emphasize')) // selected color
+      .popupColor($r('sys.color.font_emphasize')) // popover color
+      .popupBackground($r('comp_background_list_card')) // popover background color
       .usingPopup(this.usingPopup) // whether to show a popup
       .font({ size: $r('sys.float.ohos_id_text_size_body3') })
       .popupFont({ size: $r('sys.float.ohos_id_text_size_headline7') }) // Demo of the popup

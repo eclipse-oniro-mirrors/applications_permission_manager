@@ -16,7 +16,7 @@
 import Constants from '../utils/constant';
 
 @Extend(Button)function locationButton() {
-  .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
+  .backgroundColor($r('sys.color.COMPONENT_ULTRA_THICK'))
   .fontWeight(FontWeight.Medium)
   .fontSize(Constants.TEXT_SMALLER_FONT_SIZE)
   .height(Constants.LOCATION_BUTTON_HEIGHT)
@@ -51,7 +51,7 @@ export struct LocationCanvas {
           playMode: PlayMode.Normal // The animation mode
         })
       Image($r('app.media.ic_public_gps_filled'))
-        .fillColor($r('sys.color.ohos_id_color_emphasize'))
+        .fillColor($r('sys.color.brand'))
         .width(Constants.LOCATION_ICON_WIDTH)
         .height(Constants.LOCATION_ICON_HEIGHT)
         .position({ x: Constants.LOCATION_ICON_POSITION_X, y: Constants.LOCATION_ICON_POSITION_Y })
@@ -101,13 +101,13 @@ export struct LocationCanvas {
         if (this.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
           Button($r('app.string.precise_location_on'))
             .locationButton()
-            .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+            .fontColor($r('sys.color.font_emphasize'))
             .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_FUZZY })
         }
         if (this.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
           Button($r('app.string.precise_location_off'))
             .locationButton()
-            .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+            .fontColor($r('sys.color.font_secondary'))
             .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_PRECISE })
         }
       }.position({ x: 0, y: 0 })

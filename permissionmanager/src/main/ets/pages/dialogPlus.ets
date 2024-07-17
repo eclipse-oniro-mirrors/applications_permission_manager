@@ -30,7 +30,7 @@ import { LocationCanvas } from '../common/components/location';
 
 @Extend(Button)function customizeButton() {
   .buttonStyle(ButtonStyleMode.TEXTUAL)
-  .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+  .fontColor($r('sys.color.font_emphasize'))
   .fontSize($r('sys.float.ohos_id_text_size_button1'))
   .height(Constants.BUTTON_HEIGHT)
   .width(Constants.HALF_LENGTH)
@@ -85,12 +85,12 @@ struct dialogPlusPage {
           Image(this.currentGroup().icon)
             .width(Constants.DIALOG_ICON_WIDTH)
             .height(Constants.DIALOG_ICON_HEIGHT)
-            .fillColor($r('sys.color.ohos_id_color_text_primary'))
+            .fillColor($r('sys.color.font_primary'))
             .margin({ top: Constants.DIALOG_ICON_MARGIN_TOP })
           if (this.grantGroups.length > 1) {
             Text(`${this.count + 1} / ${this.grantGroups.length}`)
               .fontSize(Constants.DIALOG_LABEL_FONT_SIZE)
-              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+              .fontColor($r('sys.color.font_secondary'))
               .lineHeight(Constants.DIALOG_LABEL_LINE_HEIGHT)
               .margin({ top: Constants.DIALOG_LABEL_MARGIN_TOP })
           }
@@ -201,7 +201,7 @@ struct dialogPlusPage {
                     )
                   }).customizeButton()
                 Divider()
-                  .color($r('sys.color.ohos_id_color_list_separator'))
+                  .color($r('sys.color.comp_divider'))
                   .vertical(true)
                   .strokeWidth(Constants.DIALOG_DIVIDER)
                   .height(Constants.DIVIDER_HEIGHT)
