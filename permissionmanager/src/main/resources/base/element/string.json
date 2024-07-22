@@ -226,7 +226,7 @@
     },
     {
       "name": "pasteBoard_app",
-      "value": "Content copied from \"%s\". "
+      "value": "Content copied from \"%s\". Disabling will no longer allow this app to access the clipboard."
     },
     {
       "name": "pasteBoard_desc",

@@ -21,6 +21,7 @@ import Constants from '../utils/constant';
 import { BundleInfoUtils } from './bundleInfoUtils';
 import { CommonUtils } from './commonUtils';
 import { GroupInfo, AppInfo, ApplicationObj, PermissionInfo } from './typedef';
+import systemParameterEnhance from '@ohos.systemParameterEnhance';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import uiExtensionHost from '@ohos.uiExtensionHost';
 import window from '@ohos.window';
@@ -272,6 +273,22 @@ export function  setAvoidArea(proxy: uiExtensionHost.UIExtensionHostWindowProxy)
   let btmAvoidHeight: string = avoidArea.bottomRect.height.toString();
   Log.info(TAG + 'avoid area height: ' + btmAvoidHeight + 'px'); // assure unit in pixels
   GlobalContext.store('avoidAreaHeight', btmAvoidHeight + 'px');
+}
+
+export function getFontSizeScale(): number {
+  const FONT_SIZE_SCALE_PARAM = 'persist.sys.font_scale_for_user0';
+  let fontSizeScale = Number.parseFloat(systemParameterEnhance.getSync(FONT_SIZE_SCALE_PARAM, '1'));
+  return fontSizeScale;
+}
+
+export function getLimitFontSize(
+    fontSizeScale: number, maxScale: number, resMin: Resource, resMax: Resource
+): number | string {
+  if (fontSizeScale <= 1) {
+    return px2vp(getContext().resourceManager.getNumber(resMin.id));
+  }
+  let fontSize = px2vp(getContext().resourceManager.getNumber(resMax.id));
+  return fontSizeScale > maxScale ? `${fontSize * maxScale}vp` : fontSize;
 }
 
 

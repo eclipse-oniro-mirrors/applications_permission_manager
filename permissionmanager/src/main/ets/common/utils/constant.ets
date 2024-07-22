@@ -134,6 +134,7 @@ export default class Constants {
     public static DIVIDER_HEIGHT = 24;
     public static DIVIDER_MARGIN_RIGHT_PERMISSION = 52;
     public static DIVIDER_MARGIN_RIGHT_APPLICATION = 68;
+    public static DIALOG_TITLE_MAX_SCALE = 2;
 
     // application-secondary, authority-secondary
     public static FLEX_MARGIN_TOP = 8;
