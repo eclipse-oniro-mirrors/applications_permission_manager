@@ -28,7 +28,7 @@ import { getCallerBundleInfo } from './PermissionStateSheetDialog';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import common from '@ohos.app.ability.common';
 
-let globalIsOn: boolean ;
+let globalIsOn: boolean;
 let session: UIExtensionContentSession;
 let storage = LocalStorage.getShared();
 
@@ -121,7 +121,7 @@ struct GlobalSwitchSheetDialog {
       return;
     }
 
-    Log.info('isMuted '  + globalIsOn);
+    Log.info('isMuted ' + globalIsOn);
     this.dialogController?.open();
   }
 
@@ -169,7 +169,7 @@ struct applicationItem {
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMutePersistent(true,audio.PolicyType.PRIVACY).then(() => {
+                audioVolumeGroupManager.setMicMutePersistent(true, audio.PolicyType.PRIVACY).then(() => {
                   Log.info('microphone muted');
                   if (this.dialogController !== null) {
                     this.dialogController.close();

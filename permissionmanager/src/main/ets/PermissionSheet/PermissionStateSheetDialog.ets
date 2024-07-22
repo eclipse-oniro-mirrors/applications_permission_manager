@@ -43,7 +43,7 @@ const PASTE = 'ohos.permission.READ_PASTEBOARD';
 let storage = LocalStorage.getShared();
 let accessTokenId: number = 0;
 let session: UIExtensionContentSession;
-let results: Map<string,number> = new Map();
+let results: Map<string, number> = new Map();
 let terminating: boolean = false;
 
 export function ReportDialogResult(wantPermissions: Permissions[]) {
@@ -146,77 +146,67 @@ struct PermissionStateSheetDialog {
     }
   }
 
-  async getSpecifiedApplication(bundleName: string): Promise<AppInfo|undefined> {
+  async getSpecifiedApplication(bundleName: string): Promise<AppInfo | undefined> {
     const flag =
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
-    let promise = new Promise<AppInfo|undefined>((resolve, reject)=>{
-      let permissionGrantMap: Map<string,number> = new Map();
-
-      bundleManager.getBundleInfo(bundleName, flag).then(bundleInfo => {
-        Log.info('app requested permissions ' + JSON.stringify(bundleInfo.reqPermissionDetails));
-        Log.info('want permissions ' + JSON.stringify(this.reqUserPermissions));
-
-        let appPermissions = bundleInfo.reqPermissionDetails;
-        let granted = bundleInfo.permissionGrantStates;
-        // check if all permissions passed from want has been claimed by app config
-        for (const wantPermission of this.reqUserPermissions) {
-          let idx = appPermissions.findIndex(
-            (item) => {return item.name == wantPermission}
-          );
-          Log.info('found app requested permission at ' + idx);
-          if (idx == -1) {
-            Log.error('permission ' + wantPermission + ' not claimed by ' + this.bundleName + ' in module.json');
-            if (terminating == false) {
-              PermissionDialogException(Constants.ERR_PERMISSIONS_NOT_IN_CONFIG, session);
-              terminating = true;
-              this.context.terminateSelf();
-            }
-            return;
-          }
-          permissionGrantMap.set(appPermissions[idx].name, granted[idx]);
-        }
-        // check if all permissions are already granted
-        Log.info('granted states ' +  JSON.stringify(granted));
-        let permissionsAllGranted = true;
-        for (const key of permissionGrantMap.keys()) {
-          if (permissionGrantMap.get(key) === -1) { // -1 means not granted
-            Log.info('permission ' + key + ' not granted');
-            permissionsAllGranted = false;
-          }
-        }
-        // check if all permissions are already granted
-        if (permissionsAllGranted) {
-          Log.error('terminating : ' + terminating + ' requested permissions are all already granted');
-          if (terminating == false) {
-            PermissionDialogException(Constants.ERR_PERMISSIONS_ALL_GRANTED, session);
-            terminating = true;
-            this.context.terminateSelf();
-          }
-        }
-
-        let info: AppInfo = new AppInfo(bundleInfo.name,
-          bundleInfo.targetVersion,
-          bundleInfo.appInfo.accessTokenId,
-          '',
-          bundleInfo.appInfo.iconId,
-          bundleInfo.appInfo.iconResource,
-          '',
-          bundleInfo.appInfo.labelId,
-          bundleInfo.appInfo.labelResource,
-          [],
-          [],
-          '',
-          '',
-          ''
-        );
+    let promise = new Promise<AppInfo | undefined>(async (resolve, reject) => {
+      try {
+        let info = await this.getBundleInfo(bundleName, flag);
         resolve(info);
-      }).catch(() => {
-        this.context.terminateSelf();
+      } catch (e) {
         resolve(undefined);
-      });
+      }
     })
     return promise;
+  }
+
+  async getBundleInfo(bundleName: string, flag: number): Promise<AppInfo | undefined> {
+    return new Promise<AppInfo | undefined>(async (resolve, reject) => {
+      let info: AppInfo | undefined = undefined;
+      let permissionGrantMap: Map<string, number> = new Map();
+      let bundleInfo = await bundleManager.getBundleInfo(bundleName, flag);
+      let appPermissions = bundleInfo.reqPermissionDetails;
+      let granted = bundleInfo.permissionGrantStates;
+      info = new AppInfo(bundleInfo.name, bundleInfo.targetVersion,
+        bundleInfo.appInfo.accessTokenId, '', bundleInfo.appInfo.iconId, bundleInfo.appInfo.iconResource,
+        '', bundleInfo.appInfo.labelId, bundleInfo.appInfo.labelResource, [], [], '', '', ''
+      );
+      resolve(info);
+      // check if all permissions passed from want has been claimed by app config
+      for (const wantPermission of this.reqUserPermissions) {
+        if (terminating) {
+          continue;
+        }
+        let idx = appPermissions.findIndex((item) => {
+          return item.name == wantPermission;
+        });
+        if (idx == -1) {
+          Log.error('permission ' + wantPermission + ' not claimed by ' + this.bundleName + ' in module.json');
+          PermissionDialogException(Constants.ERR_PERMISSIONS_NOT_IN_CONFIG, session);
+          terminating = true;
+          this.context.terminateSelf();
+          return;
+        }
+        permissionGrantMap.set(appPermissions[idx].name, granted[idx]);
+      }
+      // check if all permissions are already granted
+      let permissionsAllGranted = true;
+      for (const key of permissionGrantMap.keys()) {
+        if (permissionGrantMap.get(key) === -1) { // -1 means not granted
+          permissionsAllGranted = false;
+        }
+      }
+      // check if all permissions are already granted
+      if (permissionsAllGranted) {
+        Log.error('terminating : ' + terminating + ' requested permissions are all already granted');
+        if (terminating == false) {
+          PermissionDialogException(Constants.ERR_PERMISSIONS_ALL_GRANTED, session);
+          terminating = true;
+          this.context.terminateSelf();
+        }
+      }
+    })
   }
 
   aboutToDisappear() {
@@ -398,9 +388,9 @@ struct mediaDocumentItem {
     try {
       await abilityAccessCtrl.createAtManager()
         .grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
-        Log.info('grantUserGrantedPermission ' + permission  + ' success.');
+        Log.info('grantUserGrantedPermission ' + permission + ' success.');
         results.set(permission, Constants.PERMISSION_DIALOG_SUCCESS);
-    } catch(e) {
+    } catch (e) {
         results.set(permission, Constants.ERR_PERMISSION_GRANT_EXCEPTION);
         Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(e));
     }
@@ -425,7 +415,7 @@ struct mediaDocumentItem {
     this.refreshStatus();
   }
 
-  refreshStatus() {
+  async refreshStatus() {
     Log.info('Refresh permission status');
     let isGranted = this.currentGroup === 'LOCATION' ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
     let folderStatus = [false, false, false];
@@ -455,10 +445,10 @@ struct mediaDocumentItem {
       }
     }
     this.folderStatus = folderStatus;
-    this.refreshSelected(isGranted);
+    await this.refreshSelected(isGranted);
   }
 
-  refreshSelected(isGranted: number) {
+  async refreshSelected(isGranted: number) {
     this.selected = isGranted;
     if (this.currentGroup === 'PASTEBOARD') {
       try {
@@ -487,25 +477,25 @@ struct mediaDocumentItem {
         Log.error('change location status error: ' + JSON.stringify(err));
       }
     } else {
-      try {
-        for (const permission of this.permissions) {
-          let acManager = abilityAccessCtrl.createAtManager();
-          acManager.getPermissionFlags(this.tokenId, permission).then(flag => {
-            Log.error('permission Flag is ' + flag);
-            if (flag === Constants.PERMISSION_DEFAULT) {
-              if (terminating) {
-                return;
-              }
-              PermissionDialogException(Constants.ERR_PERMISSIONS_FLAG_DEFAULT, session);
-              terminating = true;
-              this.context.terminateSelf();
-              return;
-            }
-          })
+      await this.checkPermissionFlag();
+    }
+  }
+
+  async checkPermissionFlag() {
+    try {
+      for (const permission of this.permissions) {
+        let acManager = abilityAccessCtrl.createAtManager();
+        let flag = await acManager.getPermissionFlags(this.tokenId, permission);
+        Log.error('permission Flag is ' + flag);
+        if (flag === Constants.PERMISSION_DEFAULT && terminating == false) {
+          PermissionDialogException(Constants.ERR_PERMISSIONS_FLAG_DEFAULT, session);
+          terminating = true;
+          this.context.terminateSelf();
+          return;
         }
-      } catch (err) {
-        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
       }
+    } catch (err) {
+      Log.error('getPermissionFlags error: ' + JSON.stringify(err));
     }
   }
 
@@ -564,7 +554,7 @@ struct mediaDocumentItem {
     );
   }
 
-  getReason() {
+  async getReason() {
     this.label = this.applicationInfo.label;
     if (showSubPermissionsGroup.indexOf(this.currentGroup) != -1) {
       this.permissions.forEach((permission, idx) => {
@@ -576,35 +566,36 @@ struct mediaDocumentItem {
       });
     }
     let hasReason = false;
-    bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
-      .then(info => {
-        this.permissions.forEach(permission => {
-          info.reqPermissionDetails.forEach(reqPermissionDetail => {
-            if (reqPermissionDetail.name == permission) {
-              Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
-              let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
-              context.resourceManager.getStringValue(reqPermissionDetail.reasonId).then(value => {
-                if (value !== undefined && !hasReason) {
-                  this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
-                  hasReason = true;
-                }
-              })
-            }
-          })
-        })
-      })
+    let info = await
+      bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+    for (const permission of this.permissions) {
+      for (const reqPermissionDetail of info.reqPermissionDetails) {
+        if (reqPermissionDetail.name != permission) {
+          continue;
+        }
+        Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
+        let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
+        let reason = await context.resourceManager.getStringValue(reqPermissionDetail.reasonId);
+        if (reason !== undefined && !hasReason) {
+          this.reason = reason.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+          hasReason = true;
+        }
+      }
+    }
   }
 
   aboutToAppear() {
     this.refreshStatus();
     this.getMediaDocList();
     this.getReason();
+    this.setState();
+  }
 
+  setState() {
     this.hidden = false;
     this.selected = this.status;
-
     bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
-      .then(res => {
+    .then(async res => {
         this.api = res.targetVersion;
         this.version = res.versionName;
         accessTokenId = res.appInfo.accessTokenId;
@@ -613,19 +604,18 @@ struct mediaDocumentItem {
         this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
         try {
           let getFlagPermission = this.currentGroup === 'LOCATION' ? FUZZY_LOCATION_PERMISSION : this.permissions[0];
-          acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission).then((flag) => {
-            Log.info(`getPermissionFlags success, data->${JSON.stringify(flag)}`);
-            this.isRisk = (flag == Constants.PERMISSION_POLICY_FIXED) ? true : false;
-            if (flag === Constants.PERMISSION_ALLOW_THIS_TIME) {
-              this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
-            }
-          })
+          let flag = await acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission);
+          Log.info(`getPermissionFlags success, data->${JSON.stringify(flag)}`);
+          this.isRisk = (flag == Constants.PERMISSION_POLICY_FIXED) ? true : false;
+          if (flag === Constants.PERMISSION_ALLOW_THIS_TIME) {
+            this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
+          }
         } catch (err) {
           Log.error('acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
         }
       }).catch((error: BusinessError) => {
       Log.error('bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
-    })
+    });
   }
 
   async grantFolderPermission(permission: Permissions) {

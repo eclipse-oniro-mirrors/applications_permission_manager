@@ -47,7 +47,7 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
       state = true;
     }
 
-    let param: Record<string,Object> = {
+    let param: Record<string, Object> = {
       'session': session, 'want': want
     };
 
