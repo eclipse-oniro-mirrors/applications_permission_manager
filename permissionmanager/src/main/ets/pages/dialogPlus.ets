@@ -21,7 +21,14 @@ import common from '@ohos.app.ability.common';
 import pasteboard from '@ohos.pasteboard';
 import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../common/utils/utils';
+import {
+  Log,
+  getPermissionGroup,
+  titleTrim,
+  getPermissionLabel,
+  getFontSizeScale,
+  getLimitFontSize
+} from '../common/utils/utils';
 import { GroupInfo, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
@@ -31,8 +38,6 @@ import { LocationCanvas } from '../common/components/location';
 @Extend(Button)function customizeButton() {
   .buttonStyle(ButtonStyleMode.TEXTUAL)
   .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
-  .fontSize($r('sys.float.ohos_id_text_size_button1'))
-  .height(Constants.BUTTON_HEIGHT)
   .width(Constants.HALF_LENGTH)
 }
 
@@ -83,8 +88,8 @@ struct dialogPlusPage {
       Column() {
         if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
           Image(this.currentGroup().icon)
-            .width(Constants.DIALOG_ICON_WIDTH)
-            .height(Constants.DIALOG_ICON_HEIGHT)
+            .width(Constants.DIALOG_ICON_WIDTH * getFontSizeScale())
+            .height(Constants.DIALOG_ICON_HEIGHT * getFontSizeScale())
             .fillColor($r('sys.color.ohos_id_color_text_primary'))
             .margin({ top: Constants.DIALOG_ICON_MARGIN_TOP })
           if (this.grantGroups.length > 1) {
@@ -105,11 +110,21 @@ struct dialogPlusPage {
                   .fontWeight(FontWeight.Bold)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
-                  .minFontSize($r('sys.float.Subtitle_M'))
-                  .maxFontSize($r('sys.float.Title_S'))
+                  .minFontSize(
+                    getLimitFontSize(getFontSizeScale(),
+                    Constants.DIALOG_TITLE_MAX_SCALE,
+                    $r('sys.float.Subtitle_M'),
+                    $r('sys.float.Title_S'))
+                  )
+                  .maxFontSize(
+                    getLimitFontSize(getFontSizeScale(),
+                    Constants.DIALOG_TITLE_MAX_SCALE,
+                    $r('sys.float.Title_S'),
+                    $r('sys.float.Title_S'))
+                  )
                   .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
                 }
-                .height(Constants.HEADLINE_HEIGHT)
+                .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
                 .justifyContent(FlexAlign.Center)
                 .padding({
                   top: Constants.DEFAULT_PADDING_TOP,
@@ -131,8 +146,9 @@ struct dialogPlusPage {
                     } else if (this.currentGroup().name === 'PASTEBOARD') {
                       if (this.pasteBoardName) {
                         Span($r('app.string.pasteBoard_app', this.pasteBoardName))
+                      } else {
+                        Span($r('app.string.pasteBoard_desc'))
                       }
-                      Span($r('app.string.pasteBoard_desc'))
                     } else {
                       if (this.currentGroup().description.length > 0) {
                         ForEach(this.currentGroup().description, (item: ResourceStr) => {
@@ -146,7 +162,6 @@ struct dialogPlusPage {
                   .textAlign(TextAlign.Start)
                   .fontColor($r('sys.color.font_primary'))
                   .fontSize($r('sys.float.Body_L'))
-                  .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   .margin({
                     left: Constants.DIALOG_DESP_MARGIN_LEFT,
                     right: Constants.DIALOG_DESP_MARGIN_RIGHT,
@@ -206,7 +221,7 @@ struct dialogPlusPage {
                   .strokeWidth(Constants.DIALOG_DIVIDER)
                   .height(Constants.DIVIDER_HEIGHT)
                   .opacity(0.2)
-                  .margin({ left: Constants.MARGIN_4, right: Constants.MARGIN_4 })
+                  .margin({ left: Constants.MARGIN_8, right: Constants.MARGIN_8 })
                 Button(
                   this.currentGroup().name === 'PASTEBOARD' ? $r('app.string.This_time_only') : $r('app.string.allow')
                 )
