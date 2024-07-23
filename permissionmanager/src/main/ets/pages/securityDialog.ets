@@ -21,8 +21,10 @@ import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/utils/typedef';
+import { GlobalContext } from '../common/utils/globalContext';
 
 let storage = LocalStorage.getShared();
+const TAG = 'PermissionManager_Log:';
 
 @Entry(storage)
 @Component
@@ -56,7 +58,13 @@ struct SecurityDialog {
           action: () => {
             this.dialogController?.close();
             this.win.destroyWindow();
-            this.context.terminateSelf();
+            let windowNum: number = GlobalContext.load('windowNum');
+            windowNum --;
+            Log.info(TAG + 'windowNum:' + windowNum);
+            GlobalContext.store('windowNum', windowNum);
+            if (windowNum === 0) {
+              this.context.terminateSelf();
+            }
           }
         },
         {
@@ -72,7 +80,13 @@ struct SecurityDialog {
     autoCancel: false,
     cancel: () => {
       this.win.destroyWindow();
-      this.context.terminateSelf();
+      let windowNum: number = GlobalContext.load('windowNum');
+      windowNum --;
+      Log.info(TAG + 'windowNum:' + windowNum);
+      GlobalContext.store('windowNum', windowNum);
+      if (windowNum === 0) {
+        this.context.terminateSelf();
+      }
     }
   });
 
@@ -190,7 +204,13 @@ struct SecurityDialog {
       data.reclaim();
       reply.reclaim();
       this.win.destroyWindow();
-      this.context.terminateSelf();
+      let windowNum: number = GlobalContext.load('windowNum');
+      windowNum --;
+      Log.info(TAG + 'windowNum:' + windowNum);
+      GlobalContext.store('windowNum', windowNum);
+      if (windowNum === 0) {
+        this.context.terminateSelf();
+      }
     })
   }
 }
