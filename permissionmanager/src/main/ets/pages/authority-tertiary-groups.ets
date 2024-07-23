@@ -193,9 +193,7 @@ struct applicationItem {
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
             Log.info('global cancel');
-            if (this.dialogController !== null) {
-              this.dialogController.close();
-            }
+            this.dialogController?.close();
           }
         },
         {
@@ -207,18 +205,14 @@ struct applicationItem {
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMute(true).then(() => {
-                  if (this.dialogController !== null) {
-                    this.dialogController.close();
-                  }
+                audioVolumeGroupManager.setMicMutePersistent(true, audio.PolicyType.PRIVACY).then(() => {
+                  this.dialogController?.close();
                 })
               })
             } else {
               let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-              cameraManager.muteCamera(true);
-              if (this.dialogController !== null) {
-                this.dialogController.close();
-              }
+              cameraManager.muteCameraPersistent(true, camera.PolicyType.PRIVACY);
+              this.dialogController?.close();
             }
           }
         }
@@ -558,8 +552,9 @@ struct applicationItem {
       let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
       audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
         audioVolumeGroupManager.on('micStateChange', micStateChange => {
-          Log.info('micStateChange: ' + JSON.stringify(micStateChange));
-          this.globalIsOn = !micStateChange.mute;
+          let muteState = audioVolumeGroupManager.isPersistentMicMute();
+          Log.info('micStateChange: ' + JSON.stringify(muteState));
+          this.globalIsOn = !muteState;
         })
       })
     }
@@ -593,21 +588,19 @@ struct applicationItem {
                       if (isOn) {
                         if (this.currentGroup == 'CAMERA') {
                           let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-                          cameraManager.muteCamera(false);
+                          cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
                         } else {
                           let audioManager = audio.getAudioManager();
                           let audioVolumeManager = audioManager.getVolumeManager();
                           let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
                           audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
-                            audioVolumeGroupManager.setMicMute(false)
+                            audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY);
                           })
                         }
                       }
                     })
                   Row().onClick(() => {
-                    if (this.dialogController !== null) {
-                      this.dialogController.open();
-                    }
+                    this.dialogController?.open();
                   })
                     .width(Constants.DEFAULT_SLIDER_WIDTH).height(Constants.DEFAULT_SLIDER_HEIGHT)
                     .position({ x: this.globalIsOn ? 0 : Constants.OFFSET, y: 0 })

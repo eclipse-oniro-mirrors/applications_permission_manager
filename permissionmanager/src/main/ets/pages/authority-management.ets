@@ -86,14 +86,13 @@ struct authorityManagementPage {
               if (item.group == 'MICROPHONE') {
                 let audioManager = audio.getAudioManager();
                 let audioVolumeManager = audioManager.getVolumeManager();
-                let groupid = audio.DEFAULT_VOLUME_GROUP_ID;
-                audioVolumeManager.getVolumeGroupManager(groupid).then(audioVolumeGroupManager => {
-                  audioVolumeGroupManager.isMicrophoneMute().then(value => {
-                    GlobalContext.store('isMuteSupported', true);
-                    router.pushUrl({
-                      url: 'pages/authority-tertiary-groups',
-                      params: { list: dataList, backTitle: item.groupName, globalIsOn: !value }
-                    })
+                let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
+                audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
+                  let muteState = audioVolumeGroupManager.isPersistentMicMute();
+                  GlobalContext.store('isMuteSupported', true);
+                  router.pushUrl({
+                    url: 'pages/authority-tertiary-groups',
+                    params: { list: dataList, backTitle: item.groupName, globalIsOn: !muteState }
                   })
                 })
               } else {

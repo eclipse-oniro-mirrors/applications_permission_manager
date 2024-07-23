@@ -16,6 +16,7 @@
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
+import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
@@ -26,6 +27,8 @@ export default class SecurityExtensionAbility extends extension {
    */
   onCreate(want): void {
     console.info(TAG + 'SecurityExtensionAbility onCreate, ability name is ' + want.abilityName);
+    globalThis.windowNum = 0;
+    console.info(TAG + 'Set windowNum = 0');
   }
 
   /**
@@ -69,16 +72,26 @@ export default class SecurityExtensionAbility extends extension {
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         win.destroyWindow();
-        this.context.terminateSelf();
+        let windowNum: number = GlobalContext.load('windowNum');
+        windowNum --;
+        GlobalContext.store('windowNum', windowNum);
+        console.info(TAG + 'windowNum:' + windowNum);
+        if (windowNum === 0) {
+          this.context.terminateSelf();
+        }
       });
       await win.moveWindowTo(rect.left, rect.top);
       await win.resize(rect.width, rect.height);
       await win.loadContent('pages/securityDialog', storage);
       win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
+      console.info(TAG + 'showWindow end.');
+      globalThis.windowNum ++;
+      console.info(TAG + 'windowNum:' + globalThis.windowNum);
+      GlobalContext.store('windowNum', globalThis.windowNum);
       this.monitorFold(win);
-    } catch {
-      console.error(TAG + 'window create failed!');
+    } catch (err) {
+      console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
     }
   }
 

@@ -21,8 +21,10 @@ import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/utils/typedef';
+import { GlobalContext } from '../common/utils/globalContext';
 
 let storage = LocalStorage.getShared();
+const TAG = 'PermissionManager_Log:';
 
 @Entry(storage)
 @Component
@@ -54,20 +56,22 @@ struct SecurityDialog {
           value: $r('app.string.cancel'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            if (this.dialogController !== null) {
-              this.dialogController.close();
-            }
+            this.dialogController?.close();
             this.win.destroyWindow();
-            this.context.terminateSelf();
+            let windowNum: number = GlobalContext.load('windowNum');
+            windowNum --;
+            Log.info(TAG + 'windowNum:' + windowNum);
+            GlobalContext.store('windowNum', windowNum);
+            if (windowNum === 0) {
+              this.context.terminateSelf();
+            }
           }
         },
         {
-          value: $r('app.string.ALLOW'),
+          value: $r('app.string.allow'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            if (this.dialogController !== null) {
-              this.dialogController.close();
-            }
+            this.dialogController?.close();
             this.destruction();
           }
         }
@@ -76,7 +80,13 @@ struct SecurityDialog {
     autoCancel: false,
     cancel: () => {
       this.win.destroyWindow();
-      this.context.terminateSelf();
+      let windowNum: number = GlobalContext.load('windowNum');
+      windowNum --;
+      Log.info(TAG + 'windowNum:' + windowNum);
+      GlobalContext.store('windowNum', windowNum);
+      if (windowNum === 0) {
+        this.context.terminateSelf();
+      }
     }
   });
 
@@ -119,6 +129,10 @@ struct SecurityDialog {
             }
             .height(Constants.HEADLINE_HEIGHT)
             .justifyContent(FlexAlign.Center)
+            .padding({
+              top: Constants.DEFAULT_PADDING_TOP,
+              bottom: Constants.DEFAULT_PADDING_BOTTOM,
+            })
 
             Text($r(this.securityParams[this.index].description, this.appName))
               .textAlign(TextAlign.Start)
@@ -148,9 +162,7 @@ struct SecurityDialog {
     Log.info('onAboutToAppear.');
     this.GetAppName();
     this.index = this.want.parameters['ohos.user.security.type'];
-    if (this.dialogController !== null) {
-      this.dialogController.open();
-    }
+    this.dialogController?.open();
   }
 
   aboutToDisappear() {
@@ -192,7 +204,13 @@ struct SecurityDialog {
       data.reclaim();
       reply.reclaim();
       this.win.destroyWindow();
-      this.context.terminateSelf();
+      let windowNum: number = GlobalContext.load('windowNum');
+      windowNum --;
+      Log.info(TAG + 'windowNum:' + windowNum);
+      GlobalContext.store('windowNum', windowNum);
+      if (windowNum === 0) {
+        this.context.terminateSelf();
+      }
     })
   }
 }

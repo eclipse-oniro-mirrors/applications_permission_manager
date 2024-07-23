@@ -94,27 +94,26 @@ export default class ServiceExtensionAbility extends extension {
       console.info(TAG + 'showWindow end.');
       globalThis.windowNum ++;
       GlobalContext.store('windowNum', globalThis.windowNum);
-    } catch {
-      console.info(TAG + 'window create failed!');
+    } catch (err) {
+      console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
     }
   }
+
   private async BindDialogTarget(win, want): Promise<void> {
     let proxy = want.parameters['ohos.ability.params.callback'].value;
-    let option = new rpc.MessageOption();
-    let data = new rpc.MessageSequence();
-    let reply = new rpc.MessageSequence();
     win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
-      Promise.all([
-        data.writeInterfaceToken(ACCESS_TOKEN),
-      ]).then(() => {
+      let option = new rpc.MessageOption();
+      let data = new rpc.MessageSequence();
+      let reply = new rpc.MessageSequence();
+      try {
+        data.writeInterfaceToken(ACCESS_TOKEN);
         proxy.sendMessageRequest(RESULT_CODE_1, data, reply, option);
+      } catch (err) {
+        console.error(TAG + `write result failed: ${JSON.stringify(err)}`);
+      } finally {
         data.reclaim();
         reply.reclaim();
-      }).catch(() => {
-        data.reclaim();
-        reply.reclaim();
-        console.error('write result failed!');
-      });
+      }
       let windowNum = GlobalContext.load('windowNum');
       windowNum --;
       GlobalContext.store('windowNum', windowNum);
