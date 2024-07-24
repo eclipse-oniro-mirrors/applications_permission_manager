@@ -1,0 +1,28 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"[TS_950813]_Private access to Gallery"
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"[TS_950727]_To protect your privacy, %s can only briefly access your location when you tap Allow."
+        },
+        {
+            "name":"allow",
+            "value":"[TS_950769]_Allow"
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"[TS_950753]_To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow."
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"[TS_950716]_Private access to location"
+        },
+        {
+            "name":"cancel",
+            "value":"[TS_950731]_Cancel"
+        }
+    ]
+}

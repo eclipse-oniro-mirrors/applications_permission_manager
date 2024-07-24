@@ -1,0 +1,28 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"安全儲存圖片和影片"
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"僅允許「%s」在您輕觸此按鈕時存取位置，無法持續取得您的私人資料。"
+        },
+        {
+            "name":"allow",
+            "value":"允許"
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"僅允許「%s」在您輕觸此按鈕時，將圖片和影片儲存至圖片庫，無法持續取得您的私人資料。"
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"安全存取位置"
+        },
+        {
+            "name":"cancel",
+            "value":"取消"
+        }
+    ]
+}
