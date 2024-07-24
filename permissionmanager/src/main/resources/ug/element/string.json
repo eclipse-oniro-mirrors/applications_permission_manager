@@ -1,0 +1,28 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"بىخەتەر رەسىم ۋە سىن ساقلاش ئىجازىتى"
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"مەخپىيەتلىك قوغداش ئۈچۈن، «%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئورۇن ئۇچۇرىنى ئوقۇيالايدۇ."
+        },
+        {
+            "name":"allow",
+            "value":"رۇخسەت"
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"مەخپىيەتلىك قوغداش ئۈچۈن، «%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئامبارغا رەسىم ۋە سىن ساقلىيالايدۇ."
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"بىخەتەر ئورۇن ئىجازىتى"
+        },
+        {
+            "name":"cancel",
+            "value":"بىكار قىلىش"
+        }
+    ]
+}
