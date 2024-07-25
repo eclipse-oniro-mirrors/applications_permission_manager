@@ -254,9 +254,11 @@ export default class Constants {
     // icon
     public static SECURITY_ICON_WIDTH = 48;
     public static SECURITY_ICON_HEIGHT = 48;
+    public static PADDING_TWICE = 2;
 
     // header
     public static SECURITY_HEADER_MAX_LINES = 2;
+    public static SECURITY_HEADER_MAX_SCALE = 2;
 
     ////////////////////////////////////////////
 

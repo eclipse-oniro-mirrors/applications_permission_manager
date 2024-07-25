@@ -19,7 +19,11 @@ import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import { Log } from '../common/utils/utils';
+import {
+  Log,
+  getFontSizeScale,
+  getLimitFontSize
+} from '../common/utils/utils';
 import { Param, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
@@ -97,8 +101,7 @@ struct SecurityDialog {
         Column() {
           Column() {
             SymbolGlyph($r('sys.symbol.person_shield_fill'))
-              .width(Constants.SECURITY_ICON_WIDTH)
-              .height(Constants.SECURITY_ICON_HEIGHT)
+              .constraintSize({ minWidth: Constants.SECURITY_ICON_WIDTH, minHeight: Constants.SECURITY_ICON_HEIGHT })
               .fontSize(Constants.FONT_SIZE_28)
               .fontColor([$r('sys.color.brand')])
               .border({
@@ -108,9 +111,14 @@ struct SecurityDialog {
               })
               .padding(Constants.PADDING_10)
             Image(this.securityParams[this.index].icon)
-              .width(Constants.IMAGE_LENGTH_20)
-              .height(Constants.IMAGE_LENGTH_20)
-              .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+              .width(Constants.IMAGE_LENGTH_20 * getFontSizeScale())
+              .height(Constants.IMAGE_LENGTH_20 * getFontSizeScale())
+              .position({
+                x: (Constants.FONT_SIZE_28 - Constants.IMAGE_LENGTH_20) * getFontSizeScale() +
+                  Constants.PADDING_10 * Constants.PADDING_TWICE,
+                y: (Constants.FONT_SIZE_28 - Constants.IMAGE_LENGTH_20) * getFontSizeScale() +
+                  Constants.PADDING_10 * Constants.PADDING_TWICE
+              })
           }
           .backgroundColor($r('app.color.icon_bg'))
           .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
@@ -123,11 +131,21 @@ struct SecurityDialog {
                 .fontWeight(FontWeight.Bold)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
-                .minFontSize($r('sys.float.Subtitle_M'))
-                .maxFontSize($r('sys.float.Title_S'))
+                .minFontSize(
+                  getLimitFontSize(getFontSizeScale(),
+                  Constants.SECURITY_HEADER_MAX_SCALE,
+                  $r('sys.float.Subtitle_M'),
+                  $r('sys.float.Title_S'))
+                )
+                .maxFontSize(
+                  getLimitFontSize(getFontSizeScale(),
+                  Constants.SECURITY_HEADER_MAX_SCALE,
+                  $r('sys.float.Title_S'),
+                  $r('sys.float.Title_S'))
+                )
                 .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
             }
-            .height(Constants.HEADLINE_HEIGHT)
+            .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
             .justifyContent(FlexAlign.Center)
             .padding({
               top: Constants.DEFAULT_PADDING_TOP,
