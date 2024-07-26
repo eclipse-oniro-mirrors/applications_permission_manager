@@ -23,6 +23,78 @@
         {
             "name":"cancel",
             "value":"[TS_950731]_Cancel"
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"[TS_950720]_Allow this app to access your precise location. When disabled, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
+        },
+        {
+            "name":"close_exact_position",
+            "value":"[TS_950766]_When Precise location is disabled, the app can only get your approximate location."
+        },
+        {
+            "name":"precise_location",
+            "value":"[TS_950788]_Precise location"
+        },
+        {
+            "name":"always_allow",
+            "value":"[TS_950695]_Always allow"
+        },
+        {
+            "name":"access_general_location",
+            "value":"[TS_950789]_Allow %s to access this device's approximate location?"
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"[TS_950779]_Allow %s to track your activity across other apps?"
+        },
+        {
+            "name":"ban",
+            "value":"[TS_950815]_Deny"
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"[TS_950756]_Allow %s to access the \"Documents\" folder on your device?"
+        },
+        {
+            "name":"per_use_query",
+            "value":"[TS_950801]_Ask each time"
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"[TS_950781]_If denied, this app won't be able to access the clipboard."
+        },
+        {
+            "name":"allow_this_time",
+            "value":"[TS_950750]_Allow this time only"
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"[TS_950834]_Allow while using the app"
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"[TS_950790]_Allow %s to access the \"Home screen\" folder on your device?"
+        },
+        {
+            "name":"per_inquiry",
+            "value":"[TS_950826]_Ask each time"
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"[TS_950807]_Allow %s to access the \"Downloads\" folder on your device?"
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"[TS_950767]_Change %s's location access from approximate to precise?"
+        },
+        {
+            "name":"group_label_appList",
+            "value":"[TS_950708]_Allow %s to read the list of installed apps?"
+        },
+        {
+            "name":"This_time_only",
+            "value":"[TS_950778]_Allow this time only"
         }
     ]
 }

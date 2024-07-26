@@ -1,18 +1,6 @@
 {
     "string":[
         {
-            "name":"permissionmanager_desc",
-            "value":"Permission manager"
-        },
-        {
-            "name":"MainAbility_desc",
-            "value":"manage the permissions of all applications from the permission and application dimensions"
-        },
-        {
-            "name":"MainAbility_label",
-            "value":"Permission manager"
-        },
-        {
             "name":"no_permission",
             "value":"No permission"
         },
@@ -102,7 +90,7 @@
         },
         {
             "name":"ban",
-            "value":"Ban"
+            "value":"Deny"
         },
         {
             "name":"always_allow",
@@ -110,23 +98,23 @@
         },
         {
             "name":"per_use_query",
-            "value":"Per-use query"
+            "value":"Ask each time"
         },
         {
             "name":"per_inquiry",
-            "value":"Per inquiry"
+            "value":"Ask each time"
         },
         {
             "name":"This_time_only",
-            "value":"This time only"
+            "value":"Allow this time only"
         },
         {
             "name":"allowed_only_during_use",
-            "value":"Allowed only during use"
+            "value":"Allow while using the app"
         },
         {
             "name":"allow_this_time",
-            "value":"Allow this time"
+            "value":"Allow this time only"
         },
         {
             "name":"precise_location",
@@ -142,19 +130,19 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Allows this application to get your exact location. When closed, the location obtained by the application will be biased. Some applications that do not support this function may fail to be located."
+            "value":"Allow this app to access your precise location. When disabled, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
         },
         {
             "name":"close_exact_position",
-            "value":"When Precise location is turned off, the location obtained by the application is biased."
+            "value":"When Precise location is disabled, the app can only get your approximate location."
         },
         {
             "name":"access_general_location",
-            "value":"Allow \"%s\" access the general location?"
+            "value":"Allow %s to access this device's approximate location?"
         },
         {
             "name":"fuzzy_to_exact",
-            "value":"Allow \"%s\" position access to change from \"APPROXIMATE POSITION\" to \"EXACT POSITION\"?"
+            "value":"Change %s's location access from approximate to precise?"
         },
         {
             "name":"cancel",
@@ -230,7 +218,7 @@
         },
         {
             "name":"pasteBoard_desc",
-            "value":"Disabling will no longer allow this app to access the clipboard."
+            "value":"If denied, this app won't be able to access the clipboard."
         },
         {
             "name":"groupName_location",
@@ -245,24 +233,8 @@
             "value":"Microphone"
         },
         {
-            "name":"groupName_phone",
-            "value":"Phone"
-        },
-        {
-            "name":"groupName_sms",
-            "value":"Information"
-        },
-        {
             "name":"groupName_contacts",
             "value":"Address book"
-        },
-        {
-            "name":"groupName_call_log",
-            "value":"Call log"
-        },
-        {
-            "name":"groupName_media",
-            "value":"Media & Documents"
         },
         {
             "name":"groupName_calendar",
@@ -354,11 +326,11 @@
         },
         {
             "name":"group_label_ADS",
-            "value":"Allow \"%s\" access AD tracking?"
+            "value":"Allow %s to track your activity across other apps?"
         },
         {
             "name":"group_label_appList",
-            "value":"Allow \"%s\" read the list of installed apps?"
+            "value":"Allow %s to read the list of installed apps?"
         },
         {
             "name":"group_label_bluetooth",
@@ -374,15 +346,15 @@
         },
         {
             "name":"group_label_download_folder",
-            "value":"Allow \"%s\" access the \"Downloads\" folder?"
+            "value":"Allow %s to access the \"Downloads\" folder on your device?"
         },
         {
             "name":"group_label_desktop_folder",
-            "value":"Allow \"%s\" access the \"Desktop\" folder?"
+            "value":"Allow %s to access the \"Home screen\" folder on your device?"
         },
         {
             "name":"group_label_document_folder",
-            "value":"Allow \"%s\" access the \"Document\" folder?"
+            "value":"Allow %s to access the \"Documents\" folder on your device?"
         },
         {
             "name":"group_label_nearLink",
@@ -561,14 +533,6 @@
             "value":"Risk application does not obtain this permission"
         },
         {
-            "name":"SpecificAbility_desc",
-            "value":"Manage application permissions"
-        },
-        {
-            "name":"SpecificAbility_label",
-            "value":"Permission manager"
-        },
-        {
             "name":"SecurityTitle_location",
             "value":"Private access to location"
         },
@@ -583,10 +547,6 @@
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow."
-        },
-        {
-            "name":"Got_it",
-            "value":"OK"
         },
         {
             "name":"Download",
@@ -611,30 +571,6 @@
         {
             "name":"Document_folder",
             "value":"Document folder"
-        },
-        {
-            "name":"PermissionStateSheetAbility_desc",
-            "value":"description"
-        },
-        {
-            "name":"PermissionStateSheetAbility_label",
-            "value":"label"
-        },
-        {
-            "name":"PermissionmanagerAbility_desc",
-            "value":"description"
-        },
-        {
-            "name":"PermissionmanagerAbility_label",
-            "value":"label"
-        },
-        {
-            "name":"GlobalSwitchSheetAbility_desc",
-            "value":"description"
-        },
-        {
-            "name":"GlobalSwitchSheetAbility_label",
-            "value":"label"
         }
     ]
 }

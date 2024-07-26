@@ -18,7 +18,7 @@
     "name": "entry",
     "type": "entry",
     "srcEntry": "./ets/Application/AbilityStage.ts",
-    "description": "$string:entry_desc",
+    "description": "description",
     "mainElement": "MainAbility",
     "deviceTypes": [
       "default"
@@ -38,7 +38,7 @@
         "startWindowBackground": '$color:default_background_color',
         "startWindowIcon": "$media:icon",
         "srcEntry": "./ets/MainAbility/MainAbility.ts",
-        "description": "$string:MainAbility_desc",
+        "description": "description",
         "icon": "$media:icon",
         "label": "$string:MainAbility_label",
         "exported": true,

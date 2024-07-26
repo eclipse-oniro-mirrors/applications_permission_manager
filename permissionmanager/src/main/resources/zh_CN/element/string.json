@@ -1,18 +1,6 @@
 {
   "string": [
     {
-      "name": "permissionmanager_desc",
-      "value": "权限管理"
-    },
-    {
-      "name": "MainAbility_desc",
-      "value": "从权限和应用两个维度来管理所有应用申请的权限。"
-    },
-    {
-      "name": "MainAbility_label",
-      "value": "权限管理"
-    },
-    {
       "name": "no_permission",
       "value": "暂无权限"
     },
@@ -245,24 +233,8 @@
       "value": "麦克风"
     },
     {
-      "name": "groupName_phone",
-      "value": "电话"
-    },
-    {
-      "name": "groupName_sms",
-      "value": "信息"
-    },
-    {
       "name": "groupName_contacts",
       "value": "通讯录"
-    },
-    {
-      "name": "groupName_call_log",
-      "value": "通话记录"
-    },
-    {
-      "name": "groupName_media",
-      "value": "媒体和文件"
     },
     {
       "name": "groupName_calendar",
@@ -561,14 +533,6 @@
       "value": "风险应用禁止获取该权限"
     },
     {
-      "name": "SpecificAbility_desc",
-      "value": "管理应用申请的权限"
-    },
-    {
-      "name": "SpecificAbility_label",
-      "value": "权限管理"
-    },
-    {
       "name": "SecurityTitle_location",
       "value": "安全访问位置"
     },
@@ -583,10 +547,6 @@
     {
       "name": "SecurityDescription_mediaFiles",
       "value": "仅允许“%s”在你点击此按钮时保存图片和视频至图库，无法持续获取你的隐私数据。"
-    },
-    {
-      "name": "Got_it",
-      "value": "知道了"
     },
     {
       "name": "Download",
@@ -611,30 +571,6 @@
     {
       "name": "Document_folder",
       "value": "文档文件夹"
-    },
-    {
-      "name": "PermissionStateSheetAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "PermissionStateSheetAbility_label",
-      "value": "label"
-    },
-    {
-      "name": "PermissionmanagerAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "PermissionmanagerAbility_label",
-      "value": "label"
-    },
-    {
-      "name": "GlobalSwitchSheetAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "GlobalSwitchSheetAbility_label",
-      "value": "label"
     }
   ]
 }

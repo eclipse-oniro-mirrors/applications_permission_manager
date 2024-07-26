@@ -1,6 +1,6 @@
 {
   "displayedMode": "list",
-  "mainTitleResource": "$string:MainAbility_label",
+  "mainTitleResource": "$string:permission_manager",
   "dstAbilityMode": 0,
   "dstAbilityName": "com.ohos.permissionmanager.MainAbility",
   "dstBundleName": "com.ohos.permissionmanager"
