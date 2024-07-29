@@ -44,6 +44,7 @@ import { LocationCanvas } from '../common/components/location';
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const PASTE = 'ohos.permission.READ_PASTEBOARD';
+const APP_TRACKING_CONSENT = 'ohos.permission.APP_TRACKING_CONSENT';
 const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
 const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
@@ -394,7 +395,22 @@ struct dialogPlusPage {
       this.locationFlag = Constants.LOCATION_UPGRADE;
     }
 
-    this.reqPerms.forEach((permission, idx) => {
+    this.reqPerms.forEach(async (permission, idx) => {
+      if (permission === APP_TRACKING_CONSENT) {
+        try {
+          let acManager = abilityAccessCtrl.createAtManager();
+          let toggleStatus = await acManager.getPermissionRequestToggleStatus(APP_TRACKING_CONSENT);
+          Log.info(`APP_TRACKING_CONSENT toggleStatus: ${toggleStatus}.`);
+          if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
+            await acManager.grantUserGrantedPermission(this.accessTokenId, APP_TRACKING_CONSENT, this.userFixedFlag);
+            this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
+            Log.info('APP_TRACKING_CONSENT grant success.');
+            return;
+          }
+        } catch (err) {
+          Log.error(`APP_TRACKING_CONSENT getToggleStatus or grant fail: ${JSON.stringify(err)}`);
+        }
+      }
       if (stateGroup[idx] == Constants.PASS_OPER) {
         Log.info('permission has been fixed:' + permission);
         this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
