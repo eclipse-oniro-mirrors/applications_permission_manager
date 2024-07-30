@@ -397,18 +397,9 @@ struct dialogPlusPage {
 
     this.reqPerms.forEach(async (permission, idx) => {
       if (permission === APP_TRACKING_CONSENT) {
-        try {
-          let acManager = abilityAccessCtrl.createAtManager();
-          let toggleStatus = await acManager.getPermissionRequestToggleStatus(APP_TRACKING_CONSENT);
-          Log.info(`APP_TRACKING_CONSENT toggleStatus: ${toggleStatus}.`);
-          if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
-            await acManager.grantUserGrantedPermission(this.accessTokenId, APP_TRACKING_CONSENT, this.userFixedFlag);
-            this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
-            Log.info('APP_TRACKING_CONSENT grant success.');
-            return;
-          }
-        } catch (err) {
-          Log.error(`APP_TRACKING_CONSENT getToggleStatus or grant fail: ${JSON.stringify(err)}`);
+        let toggleStatus = await this.appTrackHandle(idx);
+        if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
+          return;
         }
       }
       if (stateGroup[idx] == Constants.PASS_OPER) {
@@ -423,6 +414,23 @@ struct dialogPlusPage {
       }
     })
     this.initStatus = Constants.INIT_NEED_TO_VERIFY;
+  }
+
+  async appTrackHandle(index: number): Promise<abilityAccessCtrl.PermissionRequestToggleStatus> {
+    try {
+      let acManager = abilityAccessCtrl.createAtManager();
+      let toggleStatus = await acManager.getPermissionRequestToggleStatus(APP_TRACKING_CONSENT);
+      Log.info(`APP_TRACKING_CONSENT toggleStatus: ${toggleStatus}.`);
+      if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
+        await acManager.grantUserGrantedPermission(this.accessTokenId, APP_TRACKING_CONSENT, this.userFixedFlag);
+        this.result[index] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
+        Log.info('APP_TRACKING_CONSENT grant success.');
+      }
+      return toggleStatus;
+    } catch (err) {
+      Log.error(`APP_TRACKING_CONSENT getToggleStatus or grant fail: ${JSON.stringify(err)}`);
+      return abilityAccessCtrl.PermissionRequestToggleStatus.OPEN;
+    }
   }
 
   addGroup(permission: string) {
