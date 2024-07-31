@@ -18,7 +18,7 @@ import { Log, PermissionDialogException, setAvoidArea } from '../common/utils/ut
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import Want from '@ohos.app.ability.Want';
 import uiExtensionHost from '@ohos.uiExtensionHost';
-import  display from '@ohos.display';
+import display from '@ohos.display';
 import { BusinessError } from '@ohos.base';
 import Constants from '../common/utils/constant';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
@@ -47,7 +47,7 @@ export default class GlobalSwitchSheetAbility extends UIExtensionAbility {
       state = true;
     }
 
-    let param: Record<string,Object> = {
+    let param: Record<string, Object> = {
       'session': session, 'want': want
     };
 
