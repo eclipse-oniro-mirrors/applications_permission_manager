@@ -122,11 +122,11 @@
         },
         {
             "name":"precise_location_on",
-            "value":"Precise position: On"
+            "value":"Precise location: On"
         },
         {
             "name":"precise_location_off",
-            "value":"Precise position: Off"
+            "value":"Precise location: Off"
         },
         {
             "name":"get_the_exact_position",
@@ -282,47 +282,47 @@
         },
         {
             "name":"group_label_location",
-            "value":"Allow \"%s\" access location information?"
+            "value":"Allow %s to access this device's location?"
         },
         {
             "name":"group_label_camera",
-            "value":"Allow \"%s\" using a camera?"
+            "value":"Allow %s to use the camera?"
         },
         {
             "name":"group_label_microphone",
-            "value":"Allow \"%s\" using a microphone?"
+            "value":"Allow %s to use the microphone?"
         },
         {
             "name":"group_label_contacts",
-            "value":"Allow \"%s\" access the address book?"
+            "value":"Allow %s to access your contacts?"
         },
         {
             "name":"group_label_calendar",
-            "value":"Allow \"%s\" access to the calendar?"
+            "value":"Allow %s to access your calendar?"
         },
         {
             "name":"group_label_sport",
-            "value":"Allow \"%s\" visit the gym?"
+            "value":"Allow %s to access your physical activity data?"
         },
         {
             "name":"group_label_health",
-            "value":"Allow \"%s\" use body sensors?"
+            "value":"Allow %s to use body sensors?"
         },
         {
             "name":"group_label_distributed_datasync",
-            "value":"Allow \"%s\" use multiple device collaboration?"
+            "value":"Allow %s to collaborate with other devices?"
         },
         {
             "name":"group_label_image_and_videos",
-            "value":"Allow \"%s\" access to pictures and videos?"
+            "value":"Allow %s to access images and videos on your device?"
         },
         {
             "name":"group_label_audios",
-            "value":"Allow \"%s\" access to music and audio?"
+            "value":"Allow %s to access music and audio files on your device?"
         },
         {
             "name":"group_label_document",
-            "value":"Allow \"%s\" access to files?"
+            "value":"Allow %s to access files on your device?"
         },
         {
             "name":"group_label_ADS",
@@ -334,11 +334,11 @@
         },
         {
             "name":"group_label_bluetooth",
-            "value":"Allow \"%s\" access Bluetooth?"
+            "value":"Allow %s to use Bluetooth?"
         },
         {
             "name":"group_label_pasteboard",
-            "value":"Allow \"%s\" access Pasteboard?"
+            "value":"Allow %s to copy content from the clipboard?"
         },
         {
             "name":"group_label_folder",
@@ -358,7 +358,7 @@
         },
         {
             "name":"group_label_nearLink",
-            "value":"Allow \"%s\" access NearLink?"
+            "value":"Allow %s to use NearLink?"
         },
         {
             "name":"enable_description_location",
