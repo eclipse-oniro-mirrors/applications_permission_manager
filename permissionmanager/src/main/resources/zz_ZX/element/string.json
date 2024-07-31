@@ -95,6 +95,74 @@
         {
             "name":"This_time_only",
             "value":"[TS_950778]_Allow this time only"
+        },
+        {
+            "name":"group_label_health",
+            "value":"[TS_950699]_Allow %s to use body sensors?"
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"[TS_950739]_Allow %s to copy content from the clipboard?"
+        },
+        {
+            "name":"precise_location_on",
+            "value":"[TS_950840]_Precise location: On"
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"[TS_950707]_Allow %s to access your contacts?"
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"[TS_950717]_Allow %s to use Bluetooth?"
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"[TS_950841]_Allow %s to collaborate with other devices?"
+        },
+        {
+            "name":"group_label_document",
+            "value":"[TS_950825]_Allow %s to access files on your device?"
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"[TS_950768]_Allow %s to access your calendar?"
+        },
+        {
+            "name":"precise_location_off",
+            "value":"[TS_950755]_Precise location: Off"
+        },
+        {
+            "name":"group_label_camera",
+            "value":"[TS_950817]_Allow %s to use the camera?"
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"[TS_950761]_Allow %s to use NearLink?"
+        },
+        {
+            "name":"group_label_sport",
+            "value":"[TS_950824]_Allow %s to access your physical activity data?"
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"[TS_950732]_Allow %s to access images and videos on your device?"
+        },
+        {
+            "name":"group_label_location",
+            "value":"[TS_950793]_Allow %s to access this device's location?"
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"[TS_950757]_Allow %s to use the microphone?"
+        },
+        {
+            "name":"group_label_audios",
+            "value":"[TS_950736]_Allow %s to access music and audio files on your device?"
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"[TS_950726]_Content copied from \"%s\". "
         }
     ]
 }
