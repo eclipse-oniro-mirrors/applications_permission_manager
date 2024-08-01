@@ -29,6 +29,7 @@ import { GlobalContext } from '../common/utils/globalContext';
 
 let storage = LocalStorage.getShared();
 const TAG = 'PermissionManager_Log:';
+const RESOURCE_TYPE: number = 10003;
 
 @Entry(storage)
 @Component
@@ -36,7 +37,7 @@ struct SecurityDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
   @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
-  @State appName: string = 'ToBeInstead';
+  @State appName: ResourceStr = 'ToBeInstead';
   @State index: number = 0;
   @State scrollBarWidth: number = Constants.SCROLL_BAR_WIDTH_DEFAULT;
 
@@ -191,13 +192,9 @@ struct SecurityDialog {
     let bundleName: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
     bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT)
       .then(data => {
-        this.context.resourceManager.getStringValue(data.labelResource)
-          .then(data => {
-            this.appName = data;
-          })
-          .catch((error: BusinessError) => {
-            Log.error('getStringValue failed. err is ' + JSON.stringify(error));
-          });
+        data.labelResource.params = [];
+        data.labelResource.type = RESOURCE_TYPE;
+        this.appName = data.labelResource;
       })
       .catch((error: BusinessError) => {
         Log.error('getApplicationInfo failed. err is ' + JSON.stringify(error));
