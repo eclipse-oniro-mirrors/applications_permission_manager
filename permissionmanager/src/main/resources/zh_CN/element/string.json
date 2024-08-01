@@ -1,640 +1,576 @@
 {
-  "string": [
-    {
-      "name": "permissionmanager_desc",
-      "value": "权限管理"
-    },
-    {
-      "name": "MainAbility_desc",
-      "value": "从权限和应用两个维度来管理所有应用申请的权限。"
-    },
-    {
-      "name": "MainAbility_label",
-      "value": "权限管理"
-    },
-    {
-      "name": "no_permission",
-      "value": "暂无权限"
-    },
-    {
-      "name": "access_permission",
-      "value": "访问权限"
-    },
-    {
-      "name": "permission_access_record",
-      "value": "权限访问记录"
-    },
-    {
-      "name": "permission_manager",
-      "value": "权限管理"
-    },
-    {
-      "name": "application",
-      "value": "应用"
-    },
-    {
-      "name": "permission",
-      "value": "权限"
-    },
-    {
-      "name": "right",
-      "value": "项权限"
-    },
-    {
-      "name": "textInput_placeholder",
-      "value": "搜索应用"
-    },
-    {
-      "name": "allowed",
-      "value": "已允许"
-    },
-    {
-      "name": "banned",
-      "value": "已禁止"
-    },
-    {
-      "name": "separator",
-      "value": "、"
-    },
-    {
-      "name": "and",
-      "value": "和"
-    },
-    {
-      "name": "period",
-      "value": "。"
-    },
-    {
-      "name": "comma",
-      "value": "，"
-    },
-    {
-      "name": "visits",
-      "value": "访问次数：%s"
-    },
-    {
-      "name": "recent_visit",
-      "value": "访问次数：%s；最近访问：%s"
-    },
-    {
-      "name": "morning",
-      "value": "上午"
-    },
-    {
-      "name": "afternoon",
-      "value": "下午"
-    },
-    {
-      "name": "no_record",
-      "value": "没有权限访问记录"
-    },
-    {
-      "name": "record_time_limit",
-      "value": "近7天访问记录"
-    },
-    {
-      "name": "version",
-      "value": "版本 "
-    },
-    {
-      "name": "allow",
-      "value": "允许"
-    },
-    {
-      "name": "ban",
-      "value": "禁止"
-    },
-    {
-      "name": "always_allow",
-      "value": "始终允许"
-    },
-    {
-      "name": "per_use_query",
-      "value": "每次使用询问"
-    },
-    {
-      "name": "per_inquiry",
-      "value": "每次询问"
-    },
-    {
-      "name": "This_time_only",
-      "value": "仅本次允许"
-    },
-    {
-      "name": "allowed_only_during_use",
-      "value": "仅使用期间允许"
-    },
-    {
-      "name": "allow_this_time",
-      "value": "允许本次使用"
-    },
-    {
-      "name": "precise_location",
-      "value": "精确位置"
-    },
-    {
-      "name": "precise_location_on",
-      "value": "精确位置：开启"
-    },
-    {
-      "name": "precise_location_off",
-      "value": "精确位置：关闭"
-    },
-    {
-      "name": "get_the_exact_position",
-      "value": "允许此应用获取您的准确位置。关闭后，应用获取的位置会有偏差，部分不支持此功能的应用可能会定位失败。"
-    },
-    {
-      "name": "close_exact_position",
-      "value": "关闭精确位置后，应用获取的位置会有偏差。"
-    },
-    {
-      "name": "access_general_location",
-      "value": "允许“%s”访问大致位置？"
-    },
-    {
-      "name": "fuzzy_to_exact",
-      "value": "允许“%s”的位置访问权限从“大致位置”改为“精确位置”？"
-    },
-    {
-      "name": "cancel",
-      "value": "取消"
-    },
-    {
-      "name": "open",
-      "value": "开启"
-    },
-    {
-      "name": "close",
-      "value": "关闭"
-    },
-    {
-      "name": "camera",
-      "value": "摄像头"
-    },
-    {
-      "name": "microphone",
-      "value": "麦克风"
-    },
-    {
-      "name": "close_camera",
-      "value": "关闭摄像头"
-    },
-    {
-      "name": "close_microphone",
-      "value": "关闭麦克风"
-    },
-    {
-      "name": "global_title_camera",
-      "value": "摄像头未开启"
-    },
-    {
-      "name": "global_title_microphone",
-      "value": "麦克风未开启"
-    },
-    {
-      "name": "global_title_camera_and_microphone",
-      "value": "摄像头和麦克风未开启"
-    },
-    {
-      "name": "global_desc_camera",
-      "value": "有应用正在访问摄像头，点击“开启”后即可恢复正常使用。"
-    },
-    {
-      "name": "global_desc_microphone",
-      "value": "有应用正在访问麦克风，点击“开启”后即可恢复正常使用。"
-    },
-    {
-      "name": "global_desc_camera_and_microphone",
-      "value": "有应用正在访问摄像头和麦克风，点击“开启”后即可恢复正常使用。"
-    },
-    {
-      "name": "microphone_is_off",
-      "value": "麦克风已关闭，当前没有应用可以使用麦克风录制音频。"
-    },
-    {
-      "name": "camera_is_off",
-      "value": "摄像头已关闭，当前没有应用可以使用相机拍摄照片和视频。"
-    },
-    {
-      "name": "close_microphone_desc",
-      "value": "关闭后，所有应用服务都将无法正常使用麦克风通话、录制音频或进行语音唤醒。若需恢复，请打开麦克风开关。"
-    },
-    {
-      "name": "close_camera_desc",
-      "value": "关闭后，所有应用服务都将无法正常使用摄像头拍摄照片、视频或进行人脸识别。若需恢复，请打开摄像头开关。"
-    },
-    {
-      "name": "pasteBoard_app",
-      "value": "内容复制自“%s“。"
-    },
-    {
-      "name": "pasteBoard_desc",
-      "value": "禁止后将不再允许此应用访问剪贴板。"
-    },
-    {
-      "name": "groupName_location",
-      "value": "位置信息"
-    },
-    {
-      "name": "groupName_camera",
-      "value": "相机"
-    },
-    {
-      "name": "groupName_microphone",
-      "value": "麦克风"
-    },
-    {
-      "name": "groupName_phone",
-      "value": "电话"
-    },
-    {
-      "name": "groupName_sms",
-      "value": "信息"
-    },
-    {
-      "name": "groupName_contacts",
-      "value": "通讯录"
-    },
-    {
-      "name": "groupName_call_log",
-      "value": "通话记录"
-    },
-    {
-      "name": "groupName_media",
-      "value": "媒体和文件"
-    },
-    {
-      "name": "groupName_calendar",
-      "value": "日历"
-    },
-    {
-      "name": "groupName_sport",
-      "value": "健身运动"
-    },
-    {
-      "name": "groupName_health",
-      "value": "身体传感器"
-    },
-    {
-      "name": "groupName_other",
-      "value": "其他权限"
-    },
-    {
-      "name": "groupName_ADS",
-      "value": "广告跟踪"
-    },
-    {
-      "name": "groupName_appList",
-      "value": "读取已安装应用列表"
-    },
-    {
-      "name": "groupName_bluetooth",
-      "value": "蓝牙"
-    },
-    {
-      "name": "groupName_pasteboard",
-      "value": "剪贴板"
-    },
-    {
-      "name": "groupName_folder",
-      "value": "文件夹"
-    },
-    {
-      "name": "groupName_nearLink",
-      "value": "星闪"
-    },
-    {
-      "name": "multi_device_collaboration",
-      "value": "多设备协同"
-    },
-    {
-      "name": "group_label_location",
-      "value": "允许“%s”访问位置信息？"
-    },
-    {
-      "name": "group_label_camera",
-      "value": "允许“%s”使用相机？"
-    },
-    {
-      "name": "group_label_microphone",
-      "value": "允许“%s”使用麦克风？"
-    },
-    {
-      "name": "group_label_contacts",
-      "value": "允许“%s”访问通讯录？"
-    },
-    {
-      "name": "group_label_calendar",
-      "value": "允许“%s”访问日历？"
-    },
-    {
-      "name": "group_label_sport",
-      "value": "允许“%s”访问健身运动？"
-    },
-    {
-      "name": "group_label_health",
-      "value": "允许“%s”使用身体传感器？"
-    },
-    {
-      "name": "group_label_distributed_datasync",
-      "value": "允许“%s”使用多设备协同？"
-    },
-    {
-      "name": "group_label_image_and_videos",
-      "value": "允许“%s”访问图片和视频？"
-    },
-    {
-      "name": "group_label_audios",
-      "value": "允许“%s”访问音乐和音频？"
-    },
-    {
-      "name": "group_label_document",
-      "value": "允许“%s”访问文件？"
-    },
-    {
-      "name": "group_label_ADS",
-      "value": "允许“%s”访问广告跟踪？"
-    },
-    {
-      "name": "group_label_appList",
-      "value": "允许“%s”读取已安装应用列表？"
-    },
-    {
-      "name": "group_label_bluetooth",
-      "value": "允许“%s”访问蓝牙？"
-    },
-    {
-      "name": "group_label_pasteboard",
-      "value": "允许“%s”访问剪贴板？"
-    },
-    {
-      "name": "group_label_folder",
-      "value": "允许“%s”访问文件夹？"
-    },
-    {
-      "name": "group_label_download_folder",
-      "value": "允许“%s”访问“下载”文件夹？"
-    },
-    {
-      "name": "group_label_desktop_folder",
-      "value": "允许“%s”访问“桌面”文件夹？"
-    },
-    {
-      "name": "group_label_document_folder",
-      "value": "允许“%s”访问“文档”文件夹？"
-    },
-    {
-      "name": "group_label_nearLink",
-      "value": "允许“%s”访问星闪？"
-    },
-    {
-      "name": "enable_description_location",
-      "value": "系统定位服务开关开启时，已允许%s个应用获取此设备的位置。"
-    },
-    {
-      "name": "enable_description_camera",
-      "value": "已允许%s个应用使用相机拍摄照片和视频。此权限可让应用随时使用相机，而无需您的确认。"
-    },
-    {
-      "name": "enable_description_microphone",
-      "value": "已允许%s个应用使用麦克风录制音频。此权限可让该应用不经您的确认即可随时录制音频。"
-    },
-    {
-      "name": "enable_description_read_contacts",
-      "value": "已允许%s个应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。"
-    },
-    {
-      "name": "enable_description_write_contacts",
-      "value": "已允许%s个应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。"
-    },
-    {
-      "name": "enable_description_read_calendar",
-      "value": "已允许%s个应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。"
-    },
-    {
-      "name": "enable_description_write_calendar",
-      "value": "已允许%s个应用程序以日历所有者名义发送活动邀请，同时允许其添加、删除和更改您能在设备上修改的活动（包括朋友或同事的活动）。拥有此权限的恶意应用程序，可以冒充日历所有者发送垃圾邮件，还可在所有者不知情的情况下，修改活动或添加虚假活动。"
-    },
-    {
-      "name": "enable_description_read_whole_calendar",
-      "value": "已允许%s个应用读取全部日历。"
-    },
-    {
-      "name": "enable_description_write_whole_calendar",
-      "value": "已允许%s个应用添加、删除和更改全部日历。"
-    },
-    {
-      "name": "enable_description_sport",
-      "value": "已允许%s个应用识别您的健身运动。"
-    },
-    {
-      "name": "enable_description_health",
-      "value": "已允许%s个应用访问您用于测量身体状况（如心跳速率）的传感器中的数据。"
-    },
-    {
-      "name": "enable_description_distributed_datasync",
-      "value": "已允许%s个应用发现并访问其他设备，以进行多个设备间的协同操作。"
-    },
-    {
-      "name": "enable_description_image",
-      "value": "已允许%s个应用访问您设备上的图片和视频。"
-    },
-    {
-      "name": "enable_description_audios",
-      "value": "已允许%s个应用访问您设备上的音乐和音频。"
-    },
-    {
-      "name": "enable_description_documents",
-      "value": "已允许%s个应用访问您设备上的文件。"
-    },
-    {
-      "name": "enable_description_ADS",
-      "value": "已允许%s个应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
-    },
-    {
-      "name": "enable_description_appList",
-      "value": "已允许%s个应用读取本机已安装的应用列表。"
-    },
-    {
-      "name": "enable_description_bluetooth",
-      "value": "已允许%s个应用使用蓝牙查找、连接附近设备。"
-    },
-    {
-      "name": "enable_description_pasteboard",
-      "value": "已允许%s个应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
-    },
-    {
-      "name": "enable_description_folder",
-      "value": "已允许%s个应用访问文件和文件夹。"
-    },
-    {
-      "name": "enable_description_nearLink",
-      "value": "已允许%s个应用访问星闪。"
-    },
-    {
-      "name": "forbidden_description_location",
-      "value": "系统定位服务开关开启时，已禁止应用获取此设备的位置。"
-    },
-    {
-      "name": "forbidden_description_camera",
-      "value": "已禁止应用使用相机拍摄照片和视频。此权限可让该应用随时使用相机，而无需您的确认。"
-    },
-    {
-      "name": "forbidden_description_microphone",
-      "value": "已禁止应用使用麦克风录制音频。此权限可让该应用不经您的确认即可随时录制音频。"
-    },
-    {
-      "name": "forbidden_description_read_contacts",
-      "value": "已禁止应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。"
-    },
-    {
-      "name": "forbidden_description_write_contacts",
-      "value": "已禁止应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。"
-    },
-    {
-      "name": "forbidden_description_read_calendar",
-      "value": "已禁止应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。"
-    },
-    {
-      "name": "forbidden_description_write_calendar",
-      "value": "已禁止应用程序以日历所有者名义发送活动邀请，同时允许其添加、删除和更改您能在设备上修改的活动（包括朋友或同事的活动）。拥有此权限的恶意应用程序，可以冒充日历所有者发送垃圾邮件，还可在所有者不知情的情况下，修改活动或添加虚假活动。"
-    },
-    {
-      "name": "forbidden_description_read_whole_calendar",
-      "value": "已禁止应用读取全部日历。"
-    },
-    {
-      "name": "forbidden_description_write_whole_calendar",
-      "value": "已禁止应用添加、删除和更改全部日历。"
-    },
-    {
-      "name": "forbidden_description_sport",
-      "value": "已禁止应用识别您的健身运动。"
-    },
-    {
-      "name": "forbidden_description_health",
-      "value": "已禁止应用访问您用于测量身体状况（如心跳速率）的传感器中的数据。"
-    },
-    {
-      "name": "forbidden_description_distributed_datasync",
-      "value": "已禁止应用发现并访问其他设备，以进行多个设备间的协同操作。"
-    },
-    {
-      "name": "forbidden_description_image",
-      "value": "已禁止应用访问您设备上的图片和视频。"
-    },
-    {
-      "name": "forbidden_description_audios",
-      "value": "已禁止应用访问您设备上的音乐和音频。"
-    },
-    {
-      "name": "forbidden_description_documents",
-      "value": "已禁止应用访问您设备上的文件。"
-    },
-    {
-      "name": "forbidden_description_ADS",
-      "value": "已禁止应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
-    },
-    {
-      "name": "forbidden_description_appList",
-      "value": "已禁止应用读取本机已安装的应用列表。"
-    },
-    {
-      "name": "forbidden_description_bluetooth",
-      "value": "已禁止应用使用蓝牙查找、连接附近设备。"
-    },
-    {
-      "name": "forbidden_description_pasteboard",
-      "value": "已禁止应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
-    },
-    {
-      "name": "forbidden_description_folder",
-      "value": "已禁止应用访问文件和文件夹。"
-    },
-    {
-      "name": "forbidden_description_nearLink",
-      "value": "已禁止应用访问星闪。"
-    },
-    {
-      "name": "risk_warning",
-      "value": "风险应用禁止获取该权限"
-    },
-    {
-      "name": "SpecificAbility_desc",
-      "value": "管理应用申请的权限"
-    },
-    {
-      "name": "SpecificAbility_label",
-      "value": "权限管理"
-    },
-    {
-      "name": "SecurityTitle_location",
-      "value": "安全访问位置"
-    },
-    {
-      "name": "SecurityTitle_mediaFiles",
-      "value": "安全保存图片和视频"
-    },
-    {
-      "name": "SecurityDescription_location",
-      "value": "仅允许“%s”在你点击此按钮时访问位置，无法持续获取你的隐私数据。"
-    },
-    {
-      "name": "SecurityDescription_mediaFiles",
-      "value": "仅允许“%s”在你点击此按钮时保存图片和视频至图库，无法持续获取你的隐私数据。"
-    },
-    {
-      "name": "Got_it",
-      "value": "知道了"
-    },
-    {
-      "name": "Download",
-      "value": "下载"
-    },
-    {
-      "name": "Desktop",
-      "value": "桌面"
-    },
-    {
-      "name": "Document",
-      "value": "文档"
-    },
-    {
-      "name": "Download_folder",
-      "value": "下载文件夹"
-    },
-    {
-      "name": "Desktop_folder",
-      "value": "桌面文件夹"
-    },
-    {
-      "name": "Document_folder",
-      "value": "文档文件夹"
-    },
-    {
-      "name": "PermissionStateSheetAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "PermissionStateSheetAbility_label",
-      "value": "label"
-    },
-    {
-      "name": "PermissionmanagerAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "PermissionmanagerAbility_label",
-      "value": "label"
-    },
-    {
-      "name": "GlobalSwitchSheetAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "GlobalSwitchSheetAbility_label",
-      "value": "label"
-    }
-  ]
+    "string":[
+        {
+            "name":"no_permission",
+            "value":"暂无权限"
+        },
+        {
+            "name":"access_permission",
+            "value":"访问权限"
+        },
+        {
+            "name":"permission_access_record",
+            "value":"权限访问记录"
+        },
+        {
+            "name":"permission_manager",
+            "value":"权限管理"
+        },
+        {
+            "name":"application",
+            "value":"应用"
+        },
+        {
+            "name":"permission",
+            "value":"权限"
+        },
+        {
+            "name":"right",
+            "value":"项权限"
+        },
+        {
+            "name":"textInput_placeholder",
+            "value":"搜索应用"
+        },
+        {
+            "name":"allowed",
+            "value":"已允许"
+        },
+        {
+            "name":"banned",
+            "value":"已禁止"
+        },
+        {
+            "name":"separator",
+            "value":"、"
+        },
+        {
+            "name":"and",
+            "value":"和"
+        },
+        {
+            "name":"period",
+            "value":"。"
+        },
+        {
+            "name":"comma",
+            "value":"，"
+        },
+        {
+            "name":"visits",
+            "value":"访问次数：%s"
+        },
+        {
+            "name":"recent_visit",
+            "value":"访问次数：%s；最近访问：%s"
+        },
+        {
+            "name":"morning",
+            "value":"上午"
+        },
+        {
+            "name":"afternoon",
+            "value":"下午"
+        },
+        {
+            "name":"no_record",
+            "value":"没有权限访问记录"
+        },
+        {
+            "name":"record_time_limit",
+            "value":"近7天访问记录"
+        },
+        {
+            "name":"version",
+            "value":"版本 "
+        },
+        {
+            "name":"allow",
+            "value":"允许"
+        },
+        {
+            "name":"ban",
+            "value":"禁止"
+        },
+        {
+            "name":"always_allow",
+            "value":"始终允许"
+        },
+        {
+            "name":"per_use_query",
+            "value":"每次使用询问"
+        },
+        {
+            "name":"per_inquiry",
+            "value":"每次询问"
+        },
+        {
+            "name":"This_time_only",
+            "value":"仅本次允许"
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"仅使用期间允许"
+        },
+        {
+            "name":"allow_this_time",
+            "value":"允许本次使用"
+        },
+        {
+            "name":"precise_location",
+            "value":"精确位置"
+        },
+        {
+            "name":"precise_location_on",
+            "value":"精确位置：开启"
+        },
+        {
+            "name":"precise_location_off",
+            "value":"精确位置：关闭"
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"允许此应用获取您的准确位置。关闭后，应用获取的位置会有偏差，部分不支持此功能的应用可能会定位失败。"
+        },
+        {
+            "name":"close_exact_position",
+            "value":"关闭精确位置后，应用获取的位置会有偏差。"
+        },
+        {
+            "name":"access_general_location",
+            "value":"允许“%s”访问大致位置？"
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"允许“%s”的位置访问权限从“大致位置”改为“精确位置”？"
+        },
+        {
+            "name":"cancel",
+            "value":"取消"
+        },
+        {
+            "name":"open",
+            "value":"开启"
+        },
+        {
+            "name":"close",
+            "value":"关闭"
+        },
+        {
+            "name":"camera",
+            "value":"摄像头"
+        },
+        {
+            "name":"microphone",
+            "value":"麦克风"
+        },
+        {
+            "name":"close_camera",
+            "value":"关闭摄像头"
+        },
+        {
+            "name":"close_microphone",
+            "value":"关闭麦克风"
+        },
+        {
+            "name":"global_title_camera",
+            "value":"摄像头未开启"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"麦克风未开启"
+        },
+        {
+            "name":"global_title_camera_and_microphone",
+            "value":"摄像头和麦克风未开启"
+        },
+        {
+            "name":"global_desc_camera",
+            "value":"有应用正在访问摄像头，点击“开启”后即可恢复正常使用。"
+        },
+        {
+            "name":"global_desc_microphone",
+            "value":"有应用正在访问麦克风，点击“开启”后即可恢复正常使用。"
+        },
+        {
+            "name":"global_desc_camera_and_microphone",
+            "value":"有应用正在访问摄像头和麦克风，点击“开启”后即可恢复正常使用。"
+        },
+        {
+            "name":"microphone_is_off",
+            "value":"麦克风已关闭，当前没有应用可以使用麦克风录制音频。"
+        },
+        {
+            "name":"camera_is_off",
+            "value":"摄像头已关闭，当前没有应用可以使用相机拍摄照片和视频。"
+        },
+        {
+            "name":"close_microphone_desc",
+            "value":"关闭后，所有应用服务都将无法正常使用麦克风通话、录制音频或进行语音唤醒。若需恢复，请打开麦克风开关。"
+        },
+        {
+            "name":"close_camera_desc",
+            "value":"关闭后，所有应用服务都将无法正常使用摄像头拍摄照片、视频或进行人脸识别。若需恢复，请打开摄像头开关。"
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"内容复制自“%s”。"
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"禁止后将不再允许此应用访问剪贴板。"
+        },
+        {
+            "name":"groupName_location",
+            "value":"位置信息"
+        },
+        {
+            "name":"groupName_camera",
+            "value":"相机"
+        },
+        {
+            "name":"groupName_microphone",
+            "value":"麦克风"
+        },
+        {
+            "name":"groupName_contacts",
+            "value":"通讯录"
+        },
+        {
+            "name":"groupName_calendar",
+            "value":"日历"
+        },
+        {
+            "name":"groupName_sport",
+            "value":"健身运动"
+        },
+        {
+            "name":"groupName_health",
+            "value":"身体传感器"
+        },
+        {
+            "name":"groupName_other",
+            "value":"其他权限"
+        },
+        {
+            "name":"groupName_ADS",
+            "value":"广告跟踪"
+        },
+        {
+            "name":"groupName_appList",
+            "value":"读取已安装应用列表"
+        },
+        {
+            "name":"groupName_bluetooth",
+            "value":"蓝牙"
+        },
+        {
+            "name":"groupName_pasteboard",
+            "value":"剪贴板"
+        },
+        {
+            "name":"groupName_folder",
+            "value":"文件夹"
+        },
+        {
+            "name":"groupName_nearLink",
+            "value":"星闪"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"多设备协同"
+        },
+        {
+            "name":"group_label_location",
+            "value":"允许“%s”访问你的位置？"
+        },
+        {
+            "name":"group_label_camera",
+            "value":"允许“%s”访问你的相机？"
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"允许“%s”访问你的麦克风？"
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"允许“%s”访问通讯录？"
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"允许“%s”访问日历？"
+        },
+        {
+            "name":"group_label_sport",
+            "value":"允许“%s”访问运动数据？"
+        },
+        {
+            "name":"group_label_health",
+            "value":"允许“%s”使用传感器获取你的身体数据？"
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"允许“%s”使用多设备协同？"
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"允许“%s”访问图片和视频？"
+        },
+        {
+            "name":"group_label_audios",
+            "value":"允许“%s”访问音乐和音频？"
+        },
+        {
+            "name":"group_label_document",
+            "value":"允许“%s”访问文件？"
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"允许“%s”访问广告跟踪？"
+        },
+        {
+            "name":"group_label_appList",
+            "value":"允许“%s”读取已安装应用列表？"
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"允许“%s”访问蓝牙？"
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"允许“%s”复制来自剪贴板的内容？"
+        },
+        {
+            "name":"group_label_folder",
+            "value":"允许“%s”访问文件夹？"
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"允许“%s”访问“下载”文件夹？"
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"允许“%s”访问“桌面”文件夹？"
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"允许“%s”访问“文档”文件夹？"
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"允许“%s”访问星闪？"
+        },
+        {
+            "name":"enable_description_location",
+            "value":"系统定位服务开关开启时，已允许%s个应用获取此设备的位置。"
+        },
+        {
+            "name":"enable_description_camera",
+            "value":"已允许%s个应用使用相机拍摄照片和视频。此权限可让应用随时使用相机，而无需您的确认。"
+        },
+        {
+            "name":"enable_description_microphone",
+            "value":"已允许%s个应用使用麦克风录制音频。此权限可让该应用不经您的确认即可随时录制音频。"
+        },
+        {
+            "name":"enable_description_read_contacts",
+            "value":"已允许%s个应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。"
+        },
+        {
+            "name":"enable_description_write_contacts",
+            "value":"已允许%s个应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。"
+        },
+        {
+            "name":"enable_description_read_calendar",
+            "value":"已允许%s个应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。"
+        },
+        {
+            "name":"enable_description_write_calendar",
+            "value":"已允许%s个应用程序以日历所有者名义发送活动邀请，同时允许其添加、删除和更改您能在设备上修改的活动（包括朋友或同事的活动）。拥有此权限的恶意应用程序，可以冒充日历所有者发送垃圾邮件，还可在所有者不知情的情况下，修改活动或添加虚假活动。"
+        },
+        {
+            "name":"enable_description_read_whole_calendar",
+            "value":"已允许%s个应用读取全部日历。"
+        },
+        {
+            "name":"enable_description_write_whole_calendar",
+            "value":"已允许%s个应用添加、删除和更改全部日历。"
+        },
+        {
+            "name":"enable_description_sport",
+            "value":"已允许%s个应用识别您的健身运动。"
+        },
+        {
+            "name":"enable_description_health",
+            "value":"已允许%s个应用访问您用于测量身体状况（如心跳速率）的传感器中的数据。"
+        },
+        {
+            "name":"enable_description_distributed_datasync",
+            "value":"已允许%s个应用发现并访问其他设备，以进行多个设备间的协同操作。"
+        },
+        {
+            "name":"enable_description_image",
+            "value":"已允许%s个应用访问您设备上的图片和视频。"
+        },
+        {
+            "name":"enable_description_audios",
+            "value":"已允许%s个应用访问您设备上的音乐和音频。"
+        },
+        {
+            "name":"enable_description_documents",
+            "value":"已允许%s个应用访问您设备上的文件。"
+        },
+        {
+            "name":"enable_description_ADS",
+            "value":"已允许%s个应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
+        },
+        {
+            "name":"enable_description_appList",
+            "value":"已允许%s个应用读取本机已安装的应用列表。"
+        },
+        {
+            "name":"enable_description_bluetooth",
+            "value":"已允许%s个应用使用蓝牙查找、连接附近设备。"
+        },
+        {
+            "name":"enable_description_pasteboard",
+            "value":"已允许%s个应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
+        },
+        {
+            "name":"enable_description_folder",
+            "value":"已允许%s个应用访问文件和文件夹。"
+        },
+        {
+            "name":"enable_description_nearLink",
+            "value":"已允许%s个应用访问星闪。"
+        },
+        {
+            "name":"forbidden_description_location",
+            "value":"系统定位服务开关开启时，已禁止应用获取此设备的位置。"
+        },
+        {
+            "name":"forbidden_description_camera",
+            "value":"已禁止应用使用相机拍摄照片和视频。此权限可让该应用随时使用相机，而无需您的确认。"
+        },
+        {
+            "name":"forbidden_description_microphone",
+            "value":"已禁止应用使用麦克风录制音频。此权限可让该应用不经您的确认即可随时录制音频。"
+        },
+        {
+            "name":"forbidden_description_read_contacts",
+            "value":"已禁止应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。"
+        },
+        {
+            "name":"forbidden_description_write_contacts",
+            "value":"已禁止应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。"
+        },
+        {
+            "name":"forbidden_description_read_calendar",
+            "value":"已禁止应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。"
+        },
+        {
+            "name":"forbidden_description_write_calendar",
+            "value":"已禁止应用程序以日历所有者名义发送活动邀请，同时允许其添加、删除和更改您能在设备上修改的活动（包括朋友或同事的活动）。拥有此权限的恶意应用程序，可以冒充日历所有者发送垃圾邮件，还可在所有者不知情的情况下，修改活动或添加虚假活动。"
+        },
+        {
+            "name":"forbidden_description_read_whole_calendar",
+            "value":"已禁止应用读取全部日历。"
+        },
+        {
+            "name":"forbidden_description_write_whole_calendar",
+            "value":"已禁止应用添加、删除和更改全部日历。"
+        },
+        {
+            "name":"forbidden_description_sport",
+            "value":"已禁止应用识别您的健身运动。"
+        },
+        {
+            "name":"forbidden_description_health",
+            "value":"已禁止应用访问您用于测量身体状况（如心跳速率）的传感器中的数据。"
+        },
+        {
+            "name":"forbidden_description_distributed_datasync",
+            "value":"已禁止应用发现并访问其他设备，以进行多个设备间的协同操作。"
+        },
+        {
+            "name":"forbidden_description_image",
+            "value":"已禁止应用访问您设备上的图片和视频。"
+        },
+        {
+            "name":"forbidden_description_audios",
+            "value":"已禁止应用访问您设备上的音乐和音频。"
+        },
+        {
+            "name":"forbidden_description_documents",
+            "value":"已禁止应用访问您设备上的文件。"
+        },
+        {
+            "name":"forbidden_description_ADS",
+            "value":"已禁止应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
+        },
+        {
+            "name":"forbidden_description_appList",
+            "value":"已禁止应用读取本机已安装的应用列表。"
+        },
+        {
+            "name":"forbidden_description_bluetooth",
+            "value":"已禁止应用使用蓝牙查找、连接附近设备。"
+        },
+        {
+            "name":"forbidden_description_pasteboard",
+            "value":"已禁止应用不通过系统剪贴控件读写剪贴板信息。推荐使用采用系统剪贴控件的应用，仅在您点击时临时访问剪贴板，以减少隐私数据被获取的风险。"
+        },
+        {
+            "name":"forbidden_description_folder",
+            "value":"已禁止应用访问文件和文件夹。"
+        },
+        {
+            "name":"forbidden_description_nearLink",
+            "value":"已禁止应用访问星闪。"
+        },
+        {
+            "name":"risk_warning",
+            "value":"风险应用禁止获取该权限"
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"安全访问位置"
+        },
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"安全保存图片和视频"
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"仅允许“%s”在你点击此按钮时访问位置，无法持续获取你的隐私数据。"
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"仅允许“%s”在你点击此按钮时保存图片和视频至图库，无法持续获取你的隐私数据。"
+        },
+        {
+            "name":"Download",
+            "value":"下载"
+        },
+        {
+            "name":"Desktop",
+            "value":"桌面"
+        },
+        {
+            "name":"Document",
+            "value":"文档"
+        },
+        {
+            "name":"Download_folder",
+            "value":"下载文件夹"
+        },
+        {
+            "name":"Desktop_folder",
+            "value":"桌面文件夹"
+        },
+        {
+            "name":"Document_folder",
+            "value":"文档文件夹"
+        }
+    ]
 }

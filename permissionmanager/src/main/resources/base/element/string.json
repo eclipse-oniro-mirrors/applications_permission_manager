@@ -1,640 +1,576 @@
 {
-  "string": [
-    {
-      "name": "permissionmanager_desc",
-      "value": "Permission manager"
-    },
-    {
-      "name": "MainAbility_desc",
-      "value": "manage the permissions of all applications from the permission and application dimensions"
-    },
-    {
-      "name": "MainAbility_label",
-      "value": "Permission manager"
-    },
-    {
-      "name": "no_permission",
-      "value": "No permission"
-    },
-    {
-      "name": "access_permission",
-      "value": " access permission"
-    },
-    {
-      "name": "permission_access_record",
-      "value": "Permission access record"
-    },
-    {
-      "name": "permission_manager",
-      "value": "Permission manager"
-    },
-    {
-      "name": "application",
-      "value": "Applications"
-    },
-    {
-      "name": "permission",
-      "value": "Permissions"
-    },
-    {
-      "name": "right",
-      "value": " permissions"
-    },
-    {
-      "name": "textInput_placeholder",
-      "value": "Search application"
-    },
-    {
-      "name": "allowed",
-      "value": "ALLOWED"
-    },
-    {
-      "name": "banned",
-      "value": "BANNED"
-    },
-    {
-      "name": "separator",
-      "value": ", "
-    },
-    {
-      "name": "and",
-      "value": " and "
-    },
-    {
-      "name": "period",
-      "value": "."
-    },
-    {
-      "name": "comma",
-      "value": ", "
-    },
-    {
-      "name": "visits",
-      "value": "Number of visits: %s"
-    },
-    {
-      "name": "recent_visit",
-      "value": "Number of visits: %s; Recent visits: %s"
-    },
-    {
-      "name": "morning",
-      "value": "am"
-    },
-    {
-      "name": "afternoon",
-      "value": "pm"
-    },
-    {
-      "name": "no_record",
-      "value": "No permission access record"
-    },
-    {
-      "name": "record_time_limit",
-      "value": "Access records in the last 7 days"
-    },
-    {
-      "name": "version",
-      "value": "Version "
-    },
-    {
-      "name": "allow",
-      "value": "Allow"
-    },
-    {
-      "name": "ban",
-      "value": "Ban"
-    },
-    {
-      "name": "always_allow",
-      "value": "Always allow"
-    },
-    {
-      "name": "per_use_query",
-      "value": "Per-use query"
-    },
-    {
-      "name": "per_inquiry",
-      "value": "Per inquiry"
-    },
-    {
-      "name": "This_time_only",
-      "value": "This time only"
-    },
-    {
-      "name": "allowed_only_during_use",
-      "value": "Allowed only during use"
-    },
-    {
-      "name": "allow_this_time",
-      "value": "Allow this time"
-    },
-    {
-      "name": "precise_location",
-      "value": "Precise location"
-    },
-    {
-      "name": "precise_location_on",
-      "value": "Precise position: On"
-    },
-    {
-      "name": "precise_location_off",
-      "value": "Precise position: Off"
-    },
-    {
-      "name": "get_the_exact_position",
-      "value": "Allows this application to get your exact location. When closed, the location obtained by the application will be biased. Some applications that do not support this function may fail to be located."
-    },
-    {
-      "name": "close_exact_position",
-      "value": "When Precise location is turned off, the location obtained by the application is biased."
-    },
-    {
-      "name": "access_general_location",
-      "value": "Allow \"%s\" access the general location?"
-    },
-    {
-      "name": "fuzzy_to_exact",
-      "value": "Allow \"%s\" position access to change from \"APPROXIMATE POSITION\" to \"EXACT POSITION\"?"
-    },
-    {
-      "name": "cancel",
-      "value": "Cancel"
-    },
-    {
-      "name": "open",
-      "value": "Open"
-    },
-    {
-      "name": "close",
-      "value": "Close"
-    },
-    {
-      "name": "camera",
-      "value": "Camera"
-    },
-    {
-      "name": "microphone",
-      "value": "Microphone"
-    },
-    {
-      "name": "close_camera",
-      "value": "Turn off the camera"
-    },
-    {
-      "name": "close_microphone",
-      "value": "Turn off the microphone"
-    },
-    {
-      "name": "global_title_camera",
-      "value": "The camera is disabled"
-    },
-    {
-      "name": "global_title_microphone",
-      "value": "Microphone not turned on"
-    },
-    {
-      "name": "global_title_camera_and_microphone",
-      "value": "The camera and microphone are disabled"
-    },
-    {
-      "name": "global_desc_camera",
-      "value": "An application is accessing the camera. Click \"Open\" to resume normal use."
-    },
-    {
-      "name": "global_desc_microphone",
-      "value": "An application is accessing the microphone. Click \"Open\" to resume normal use."
-    },
-    {
-      "name": "global_desc_camera_and_microphone",
-      "value": "An application is accessing the camera and microphone. Click \"Open\" to resume normal use."
-    },
-    {
-      "name": "microphone_is_off",
-      "value": "The microphone is turned off. No application can use the microphone to record audio."
-    },
-    {
-      "name": "camera_is_off",
-      "value": "The camera is turned off and no apps can currently use the camera to take photos and videos."
-    },
-    {
-      "name": "close_microphone_desc",
-      "value": "After the microphone is disabled, all application services cannot use the microphone to make calls, record audio, or voice wake up. To restore data, turn on the microphone switch."
-    },
-    {
-      "name": "close_camera_desc",
-      "value": "After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
-    },
-    {
-      "name": "pasteBoard_app",
-      "value": "Content copied from \"%s\". "
-    },
-    {
-      "name": "pasteBoard_desc",
-      "value": "Disabling will no longer allow this app to access the clipboard."
-    },
-    {
-      "name": "groupName_location",
-      "value": "Location information"
-    },
-    {
-      "name": "groupName_camera",
-      "value": "Camera"
-    },
-    {
-      "name": "groupName_microphone",
-      "value": "Microphone"
-    },
-    {
-      "name": "groupName_phone",
-      "value": "Phone"
-    },
-    {
-      "name": "groupName_sms",
-      "value": "Information"
-    },
-    {
-      "name": "groupName_contacts",
-      "value": "Address book"
-    },
-    {
-      "name": "groupName_call_log",
-      "value": "Call log"
-    },
-    {
-      "name": "groupName_media",
-      "value": "Media & Documents"
-    },
-    {
-      "name": "groupName_calendar",
-      "value": "Calendar"
-    },
-    {
-      "name": "groupName_sport",
-      "value": "Fitness"
-    },
-    {
-      "name": "groupName_health",
-      "value": "Body sensor"
-    },
-    {
-      "name": "groupName_other",
-      "value": "Other rights"
-    },
-    {
-      "name": "groupName_ADS",
-      "value": "Advertising tracking"
-    },
-    {
-      "name": "groupName_appList",
-      "value": "Read the list of installed apps"
-    },
-    {
-      "name": "groupName_bluetooth",
-      "value": "Bluetooth"
-    },
-    {
-      "name": "groupName_pasteboard",
-      "value": "Pasteboard"
-    },
-    {
-      "name": "groupName_folder",
-      "value": "Folder"
-    },
-    {
-      "name": "groupName_nearLink",
-      "value": "NearLink"
-    },
-    {
-      "name": "multi_device_collaboration",
-      "value": "Multi-device collaboration"
-    },
-    {
-      "name": "group_label_location",
-      "value": "Allow \"%s\" access location information?"
-    },
-    {
-      "name": "group_label_camera",
-      "value": "Allow \"%s\" using a camera?"
-    },
-    {
-      "name": "group_label_microphone",
-      "value": "Allow \"%s\" using a microphone?"
-    },
-    {
-      "name": "group_label_contacts",
-      "value": "Allow \"%s\" access the address book?"
-    },
-    {
-      "name": "group_label_calendar",
-      "value": "Allow \"%s\" access to the calendar?"
-    },
-    {
-      "name": "group_label_sport",
-      "value": "Allow \"%s\" visit the gym?"
-    },
-    {
-      "name": "group_label_health",
-      "value": "Allow \"%s\" use body sensors?"
-    },
-    {
-      "name": "group_label_distributed_datasync",
-      "value": "Allow \"%s\" use multiple device collaboration?"
-    },
-    {
-      "name": "group_label_image_and_videos",
-      "value": "Allow \"%s\" access to pictures and videos?"
-    },
-    {
-      "name": "group_label_audios",
-      "value": "Allow \"%s\" access to music and audio?"
-    },
-    {
-      "name": "group_label_document",
-      "value": "Allow \"%s\" access to files?"
-    },
-    {
-      "name": "group_label_ADS",
-      "value": "Allow \"%s\" access AD tracking?"
-    },
-    {
-      "name": "group_label_appList",
-      "value": "Allow \"%s\" read the list of installed apps?"
-    },
-    {
-      "name": "group_label_bluetooth",
-      "value": "Allow \"%s\" access Bluetooth?"
-    },
-    {
-      "name": "group_label_pasteboard",
-      "value": "Allow \"%s\" access Pasteboard?"
-    },
-    {
-      "name": "group_label_folder",
-      "value": "Allow \"%s\" access Folder?"
-    },
-    {
-      "name": "group_label_download_folder",
-      "value": "Allow \"%s\" access the \"Downloads\" folder?"
-    },
-    {
-      "name": "group_label_desktop_folder",
-      "value": "Allow \"%s\" access the \"Desktop\" folder?"
-    },
-    {
-      "name": "group_label_document_folder",
-      "value": "Allow \"%s\" access the \"Document\" folder?"
-    },
-    {
-      "name": "group_label_nearLink",
-      "value": "Allow \"%s\" access NearLink?"
-    },
-    {
-      "name": "enable_description_location",
-      "value": "When the system location service is enabled, %s apps are allowed to obtain the location of the device."
-    },
-    {
-      "name": "enable_description_camera",
-      "value": "%s apps have been allowed to use the camera to take photos and videos. This permission allows the app to use the camera at any time without your confirmation."
-    },
-    {
-      "name": "enable_description_microphone",
-      "value": "%s apps have been allowed to record audio using microphones. This permission allows the app to record audio at any time without your confirmation."
-    },
-    {
-      "name": "enable_description_read_contacts",
-      "value": "%s apps have been allowed to read data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
-    },
-    {
-      "name": "enable_description_write_contacts",
-      "value": "%s apps have been allowed to modify data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows the app to delete contact data."
-    },
-    {
-      "name": "enable_description_read_calendar",
-      "value": "%s apps have been allowed to read all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
-    },
-    {
-      "name": "enable_description_write_calendar",
-      "value": "%s apps have been allowed to send event invitations on behalf of the calendar owner, as well as to add, delete, and change events (including those of friends or colleagues) that you can modify on your device. A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
-    },
-    {
-      "name": "enable_description_read_whole_calendar",
-      "value": "%s apps are allowed to read the entire calendar."
-    },
-    {
-      "name": "enable_description_write_whole_calendar",
-      "value": "%s apps have been allowed to add, delete, and change all calendars."
-    },
-    {
-      "name": "enable_description_sport",
-      "value": "%s apps have been allowed to identify your fitness movements."
-    },
-    {
-      "name": "enable_description_health",
-      "value": "%s apps have been allowed to access data from the sensors you use to measure your physical condition, such as your heart rate."
-    },
-    {
-      "name": "enable_description_distributed_datasync",
-      "value": "%s apps have been allowed to discover and access other devices for collaborative operations between multiple devices."
-    },
-    {
-      "name": "enable_description_image",
-      "value": "%s apps have been allowed to access pictures and videos on your device."
-    },
-    {
-      "name": "enable_description_audios",
-      "value": "%s apps have been allowed to access music and audio on your device."
-    },
-    {
-      "name": "enable_description_documents",
-      "value": "%s apps have been allowed to access files on your device."
-    },
-    {
-      "name": "enable_description_ADS",
-      "value": "%s apps have been allowed to create a profile or show you personalized ads based on your AD identifier."
-    },
-    {
-      "name": "enable_description_appList",
-      "value": "%s apps are allowed to read the list of installed apps on the local device."
-    },
-    {
-      "name": "enable_description_bluetooth",
-      "value": "%s apps have been allowed to use Bluetooth to find and connect to nearby devices."
-    },
-    {
-      "name": "enable_description_pasteboard",
-      "value": "%s apps have been allowed to read and write clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
-    },
-    {
-      "name": "enable_description_folder",
-      "value": "%s apps have been allowed to access files and folders."
-    },
-    {
-      "name": "enable_description_nearLink",
-      "value": "%s apps have been allowed to access NearLink."
-    },
-    {
-      "name": "forbidden_description_location",
-      "value": "When the system positioning service is enabled, applications are not allowed to obtain the location of the device."
-    },
-    {
-      "name": "forbidden_description_camera",
-      "value": "Apps that use cameras to take photos and videos have been banned. This permission allows the app to use the camera at any time without your confirmation."
-    },
-    {
-      "name": "forbidden_description_microphone",
-      "value": "Your app has been disabled from using microphones to record audio. This permission allows the app to record audio at any time without your confirmation."
-    },
-    {
-      "name": "forbidden_description_read_contacts",
-      "value": "Apps are prohibited from reading data about contacts stored on your device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
-    },
-    {
-      "name": "forbidden_description_write_contacts",
-      "value": "Apps are prohibited from modifying data about contacts stored on the device, including how often you communicate with specific individuals by making phone calls, sending emails, or otherwise. This permission allows the app to delete contact data."
-    },
-    {
-      "name": "forbidden_description_read_calendar",
-      "value": "Apps are prohibited from reading all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
-    },
-    {
-      "name": "forbidden_description_write_calendar",
-      "value": "Apps are prohibited from sending event invitations on behalf of the calendar owner, while allowing it to add, delete, and change events that you can modify on your device (including those of friends or colleagues). A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
-    },
-    {
-      "name": "forbidden_description_read_whole_calendar",
-      "value": "Apps have been prevented from reading all calendars."
-    },
-    {
-      "name": "forbidden_description_write_whole_calendar",
-      "value": "Apps are prohibited from adding, deleting, and changing all calendars."
-    },
-    {
-      "name": "forbidden_description_sport",
-      "value": "Apps are prohibited from recognizing your fitness exercise."
-    },
-    {
-      "name": "forbidden_description_health",
-      "value": "Apps are prohibited from accessing data from sensors that you use to measure your physical condition, such as your heart rate."
-    },
-    {
-      "name": "forbidden_description_distributed_datasync",
-      "value": "Apps are prohibited from discovering and accessing other devices for collaborative operations between multiple devices."
-    },
-    {
-      "name": "forbidden_description_image",
-      "value": "Apps have been blocked from accessing pictures and videos on your device."
-    },
-    {
-      "name": "forbidden_description_audios",
-      "value": "Apps have been blocked from accessing music and audio on your device."
-    },
-    {
-      "name": "forbidden_description_documents",
-      "value": "Apps have been prevented from accessing files on your device."
-    },
-    {
-      "name": "forbidden_description_ADS",
-      "value": "Apps are prohibited from creating profiles or showing you personalized ads based on your AD identifier."
-    },
-    {
-      "name": "forbidden_description_appList",
-      "value": "Apps are prohibited from reading the list of installed applications on the local device."
-    },
-    {
-      "name": "forbidden_description_bluetooth",
-      "value": "Apps are prohibited from using Bluetooth to find or connect to nearby devices."
-    },
-    {
-      "name": "forbidden_description_pasteboard",
-      "value": "Apps are prohibited from reading or writing clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
-    },
-    {
-      "name": "forbidden_description_folder",
-      "value": "Apps have been prevented from accessing files and folders."
-    },
-    {
-      "name": "forbidden_description_nearLink",
-      "value": "Apps have been prohibited from accessing NearLink."
-    },
-    {
-      "name": "risk_warning",
-      "value": "Risk application does not obtain this permission"
-    },
-    {
-      "name": "SpecificAbility_desc",
-      "value": "Manage application permissions"
-    },
-    {
-      "name": "SpecificAbility_label",
-      "value": "Permission manager"
-    },
-    {
-      "name": "SecurityTitle_location",
-      "value": "Secure access to locations"
-    },
-    {
-      "name": "SecurityTitle_mediaFiles",
-      "value": "Safely store your pictures and videos"
-    },
-    {
-      "name": "SecurityDescription_location",
-      "value": "\"%s\" is only allowed to access your location when you touch this button. It cannot continuously obtain your private data."
-    },
-    {
-      "name": "SecurityDescription_mediaFiles",
-      "value": "\"%s\" is only allowed to save photos and videos to Gallery when you touch this button. It will not be able to continuously obtain your private data."
-    },
-    {
-      "name": "Got_it",
-      "value": "OK"
-    },
-    {
-      "name": "Download",
-      "value": "Download"
-    },
-    {
-      "name": "Desktop",
-      "value": "Desktop"
-    },
-    {
-      "name": "Document",
-      "value": "Document"
-    },
-    {
-      "name": "Download_folder",
-      "value": "Download folder"
-    },
-    {
-      "name": "Desktop_folder",
-      "value": "Desktop folder"
-    },
-    {
-      "name": "Document_folder",
-      "value": "Document folder"
-    },
-    {
-      "name": "PermissionStateSheetAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "PermissionStateSheetAbility_label",
-      "value": "label"
-    },
-    {
-      "name": "PermissionmanagerAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "PermissionmanagerAbility_label",
-      "value": "label"
-    },
-    {
-      "name": "GlobalSwitchSheetAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "GlobalSwitchSheetAbility_label",
-      "value": "label"
-    }
-  ]
+    "string":[
+        {
+            "name":"no_permission",
+            "value":"No permission"
+        },
+        {
+            "name":"access_permission",
+            "value":" access permission"
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Permission access record"
+        },
+        {
+            "name":"permission_manager",
+            "value":"Permission manager"
+        },
+        {
+            "name":"application",
+            "value":"Applications"
+        },
+        {
+            "name":"permission",
+            "value":"Permissions"
+        },
+        {
+            "name":"right",
+            "value":" permissions"
+        },
+        {
+            "name":"textInput_placeholder",
+            "value":"Search application"
+        },
+        {
+            "name":"allowed",
+            "value":"ALLOWED"
+        },
+        {
+            "name":"banned",
+            "value":"BANNED"
+        },
+        {
+            "name":"separator",
+            "value":", "
+        },
+        {
+            "name":"and",
+            "value":" and "
+        },
+        {
+            "name":"period",
+            "value":"."
+        },
+        {
+            "name":"comma",
+            "value":", "
+        },
+        {
+            "name":"visits",
+            "value":"Number of visits: %s"
+        },
+        {
+            "name":"recent_visit",
+            "value":"Number of visits: %s; Recent visits: %s"
+        },
+        {
+            "name":"morning",
+            "value":"am"
+        },
+        {
+            "name":"afternoon",
+            "value":"pm"
+        },
+        {
+            "name":"no_record",
+            "value":"No permission access record"
+        },
+        {
+            "name":"record_time_limit",
+            "value":"Access records in the last 7 days"
+        },
+        {
+            "name":"version",
+            "value":"Version "
+        },
+        {
+            "name":"allow",
+            "value":"Allow"
+        },
+        {
+            "name":"ban",
+            "value":"Deny"
+        },
+        {
+            "name":"always_allow",
+            "value":"Always allow"
+        },
+        {
+            "name":"per_use_query",
+            "value":"Ask each time"
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Ask each time"
+        },
+        {
+            "name":"This_time_only",
+            "value":"Allow this time only"
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Allow while using the app"
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Allow this time only"
+        },
+        {
+            "name":"precise_location",
+            "value":"Precise location"
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Precise location: On"
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Precise location: Off"
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Allow this app to access your precise location. When disabled, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
+        },
+        {
+            "name":"close_exact_position",
+            "value":"When Precise location is disabled, the app can only get your approximate location."
+        },
+        {
+            "name":"access_general_location",
+            "value":"Allow %s to access this device's approximate location?"
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Change %s's location access from approximate to precise?"
+        },
+        {
+            "name":"cancel",
+            "value":"Cancel"
+        },
+        {
+            "name":"open",
+            "value":"Open"
+        },
+        {
+            "name":"close",
+            "value":"Close"
+        },
+        {
+            "name":"camera",
+            "value":"Camera"
+        },
+        {
+            "name":"microphone",
+            "value":"Microphone"
+        },
+        {
+            "name":"close_camera",
+            "value":"Turn off the camera"
+        },
+        {
+            "name":"close_microphone",
+            "value":"Turn off the microphone"
+        },
+        {
+            "name":"global_title_camera",
+            "value":"The camera is disabled"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"Microphone not turned on"
+        },
+        {
+            "name":"global_title_camera_and_microphone",
+            "value":"The camera and microphone are disabled"
+        },
+        {
+            "name":"global_desc_camera",
+            "value":"An application is accessing the camera. Click \"Open\" to resume normal use."
+        },
+        {
+            "name":"global_desc_microphone",
+            "value":"An application is accessing the microphone. Click \"Open\" to resume normal use."
+        },
+        {
+            "name":"global_desc_camera_and_microphone",
+            "value":"An application is accessing the camera and microphone. Click \"Open\" to resume normal use."
+        },
+        {
+            "name":"microphone_is_off",
+            "value":"The microphone is turned off. No application can use the microphone to record audio."
+        },
+        {
+            "name":"camera_is_off",
+            "value":"The camera is turned off and no apps can currently use the camera to take photos and videos."
+        },
+        {
+            "name":"close_microphone_desc",
+            "value":"After the microphone is disabled, all application services cannot use the microphone to make calls, record audio, or voice wake up. To restore data, turn on the microphone switch."
+        },
+        {
+            "name":"close_camera_desc",
+            "value":"After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Content copied from \"%s\". "
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"If denied, this app won't be able to access the clipboard."
+        },
+        {
+            "name":"groupName_location",
+            "value":"Location information"
+        },
+        {
+            "name":"groupName_camera",
+            "value":"Camera"
+        },
+        {
+            "name":"groupName_microphone",
+            "value":"Microphone"
+        },
+        {
+            "name":"groupName_contacts",
+            "value":"Address book"
+        },
+        {
+            "name":"groupName_calendar",
+            "value":"Calendar"
+        },
+        {
+            "name":"groupName_sport",
+            "value":"Fitness"
+        },
+        {
+            "name":"groupName_health",
+            "value":"Body sensor"
+        },
+        {
+            "name":"groupName_other",
+            "value":"Other rights"
+        },
+        {
+            "name":"groupName_ADS",
+            "value":"Advertising tracking"
+        },
+        {
+            "name":"groupName_appList",
+            "value":"Read the list of installed apps"
+        },
+        {
+            "name":"groupName_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"groupName_pasteboard",
+            "value":"Pasteboard"
+        },
+        {
+            "name":"groupName_folder",
+            "value":"Folder"
+        },
+        {
+            "name":"groupName_nearLink",
+            "value":"NearLink"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Multi-device collaboration"
+        },
+        {
+            "name":"group_label_location",
+            "value":"Allow %s to access this device's location?"
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Allow %s to use the camera?"
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Allow %s to use the microphone?"
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Allow %s to access your contacts?"
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Allow %s to access your calendar?"
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Allow %s to access your physical activity data?"
+        },
+        {
+            "name":"group_label_health",
+            "value":"Allow %s to use body sensors?"
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Allow %s to collaborate with other devices?"
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Allow %s to access images and videos on your device?"
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Allow %s to access music and audio files on your device?"
+        },
+        {
+            "name":"group_label_document",
+            "value":"Allow %s to access files on your device?"
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Allow %s to track your activity across other apps?"
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Allow %s to read the list of installed apps?"
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Allow %s to use Bluetooth?"
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Allow %s to copy content from the clipboard?"
+        },
+        {
+            "name":"group_label_folder",
+            "value":"Allow \"%s\" access Folder?"
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Allow %s to access the \"Downloads\" folder on your device?"
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Allow %s to access the \"Home screen\" folder on your device?"
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Allow %s to access the \"Documents\" folder on your device?"
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Allow %s to use NearLink?"
+        },
+        {
+            "name":"enable_description_location",
+            "value":"When the system location service is enabled, %s apps are allowed to obtain the location of the device."
+        },
+        {
+            "name":"enable_description_camera",
+            "value":"%s apps have been allowed to use the camera to take photos and videos. This permission allows the app to use the camera at any time without your confirmation."
+        },
+        {
+            "name":"enable_description_microphone",
+            "value":"%s apps have been allowed to record audio using microphones. This permission allows the app to record audio at any time without your confirmation."
+        },
+        {
+            "name":"enable_description_read_contacts",
+            "value":"%s apps have been allowed to read data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
+        },
+        {
+            "name":"enable_description_write_contacts",
+            "value":"%s apps have been allowed to modify data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows the app to delete contact data."
+        },
+        {
+            "name":"enable_description_read_calendar",
+            "value":"%s apps have been allowed to read all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
+        },
+        {
+            "name":"enable_description_write_calendar",
+            "value":"%s apps have been allowed to send event invitations on behalf of the calendar owner, as well as to add, delete, and change events (including those of friends or colleagues) that you can modify on your device. A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
+        },
+        {
+            "name":"enable_description_read_whole_calendar",
+            "value":"%s apps are allowed to read the entire calendar."
+        },
+        {
+            "name":"enable_description_write_whole_calendar",
+            "value":"%s apps have been allowed to add, delete, and change all calendars."
+        },
+        {
+            "name":"enable_description_sport",
+            "value":"%s apps have been allowed to identify your fitness movements."
+        },
+        {
+            "name":"enable_description_health",
+            "value":"%s apps have been allowed to access data from the sensors you use to measure your physical condition, such as your heart rate."
+        },
+        {
+            "name":"enable_description_distributed_datasync",
+            "value":"%s apps have been allowed to discover and access other devices for collaborative operations between multiple devices."
+        },
+        {
+            "name":"enable_description_image",
+            "value":"%s apps have been allowed to access pictures and videos on your device."
+        },
+        {
+            "name":"enable_description_audios",
+            "value":"%s apps have been allowed to access music and audio on your device."
+        },
+        {
+            "name":"enable_description_documents",
+            "value":"%s apps have been allowed to access files on your device."
+        },
+        {
+            "name":"enable_description_ADS",
+            "value":"%s apps have been allowed to create a profile or show you personalized ads based on your AD identifier."
+        },
+        {
+            "name":"enable_description_appList",
+            "value":"%s apps are allowed to read the list of installed apps on the local device."
+        },
+        {
+            "name":"enable_description_bluetooth",
+            "value":"%s apps have been allowed to use Bluetooth to find and connect to nearby devices."
+        },
+        {
+            "name":"enable_description_pasteboard",
+            "value":"%s apps have been allowed to read and write clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
+        },
+        {
+            "name":"enable_description_folder",
+            "value":"%s apps have been allowed to access files and folders."
+        },
+        {
+            "name":"enable_description_nearLink",
+            "value":"%s apps have been allowed to access NearLink."
+        },
+        {
+            "name":"forbidden_description_location",
+            "value":"When the system positioning service is enabled, applications are not allowed to obtain the location of the device."
+        },
+        {
+            "name":"forbidden_description_camera",
+            "value":"Apps that use cameras to take photos and videos have been banned. This permission allows the app to use the camera at any time without your confirmation."
+        },
+        {
+            "name":"forbidden_description_microphone",
+            "value":"Your app has been disabled from using microphones to record audio. This permission allows the app to record audio at any time without your confirmation."
+        },
+        {
+            "name":"forbidden_description_read_contacts",
+            "value":"Apps are prohibited from reading data about contacts stored on your device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
+        },
+        {
+            "name":"forbidden_description_write_contacts",
+            "value":"Apps are prohibited from modifying data about contacts stored on the device, including how often you communicate with specific individuals by making phone calls, sending emails, or otherwise. This permission allows the app to delete contact data."
+        },
+        {
+            "name":"forbidden_description_read_calendar",
+            "value":"Apps are prohibited from reading all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
+        },
+        {
+            "name":"forbidden_description_write_calendar",
+            "value":"Apps are prohibited from sending event invitations on behalf of the calendar owner, while allowing it to add, delete, and change events that you can modify on your device (including those of friends or colleagues). A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
+        },
+        {
+            "name":"forbidden_description_read_whole_calendar",
+            "value":"Apps have been prevented from reading all calendars."
+        },
+        {
+            "name":"forbidden_description_write_whole_calendar",
+            "value":"Apps are prohibited from adding, deleting, and changing all calendars."
+        },
+        {
+            "name":"forbidden_description_sport",
+            "value":"Apps are prohibited from recognizing your fitness exercise."
+        },
+        {
+            "name":"forbidden_description_health",
+            "value":"Apps are prohibited from accessing data from sensors that you use to measure your physical condition, such as your heart rate."
+        },
+        {
+            "name":"forbidden_description_distributed_datasync",
+            "value":"Apps are prohibited from discovering and accessing other devices for collaborative operations between multiple devices."
+        },
+        {
+            "name":"forbidden_description_image",
+            "value":"Apps have been blocked from accessing pictures and videos on your device."
+        },
+        {
+            "name":"forbidden_description_audios",
+            "value":"Apps have been blocked from accessing music and audio on your device."
+        },
+        {
+            "name":"forbidden_description_documents",
+            "value":"Apps have been prevented from accessing files on your device."
+        },
+        {
+            "name":"forbidden_description_ADS",
+            "value":"Apps are prohibited from creating profiles or showing you personalized ads based on your AD identifier."
+        },
+        {
+            "name":"forbidden_description_appList",
+            "value":"Apps are prohibited from reading the list of installed applications on the local device."
+        },
+        {
+            "name":"forbidden_description_bluetooth",
+            "value":"Apps are prohibited from using Bluetooth to find or connect to nearby devices."
+        },
+        {
+            "name":"forbidden_description_pasteboard",
+            "value":"Apps are prohibited from reading or writing clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
+        },
+        {
+            "name":"forbidden_description_folder",
+            "value":"Apps have been prevented from accessing files and folders."
+        },
+        {
+            "name":"forbidden_description_nearLink",
+            "value":"Apps have been prohibited from accessing NearLink."
+        },
+        {
+            "name":"risk_warning",
+            "value":"Risk application does not obtain this permission"
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Private access to location"
+        },
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Private access to Gallery"
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"To protect your privacy, %s can only briefly access your location when you tap Allow."
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow."
+        },
+        {
+            "name":"Download",
+            "value":"Download"
+        },
+        {
+            "name":"Desktop",
+            "value":"Desktop"
+        },
+        {
+            "name":"Document",
+            "value":"Document"
+        },
+        {
+            "name":"Download_folder",
+            "value":"Download folder"
+        },
+        {
+            "name":"Desktop_folder",
+            "value":"Desktop folder"
+        },
+        {
+            "name":"Document_folder",
+            "value":"Document folder"
+        }
+    ]
 }

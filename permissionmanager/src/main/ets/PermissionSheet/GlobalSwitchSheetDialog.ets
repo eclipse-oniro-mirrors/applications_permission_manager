@@ -23,14 +23,16 @@ import { GroupInfo, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { globalGroup, groups } from '../common/model/permissionGroup';
-
+import bundleManager from '@ohos.bundle.bundleManager';
 import { getCallerBundleInfo } from './PermissionStateSheetDialog';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import common from '@ohos.app.ability.common';
 
-let globalIsOn: boolean ;
+
+let globalIsOn: boolean;
 let session: UIExtensionContentSession;
 let storage = LocalStorage.getShared();
+let bundleName = '';
 
 @Entry(storage)
 @Component
@@ -82,6 +84,7 @@ struct GlobalSwitchSheetDialog {
     let callerBundle = getCallerBundleInfo(this.want as Object as WantInfo);
     Log.info('GlobalSwitchSheetDialog bundleName ' + callerBundle.bundleName);
     let globalSwitch = callerBundle.globSwitch;
+    bundleName = callerBundle.bundleName;
 
     if (globalSwitch === Constants.GLOBAL_SWITCH_CAMERA) {
       this.groupName = 'CAMERA';
@@ -121,7 +124,7 @@ struct GlobalSwitchSheetDialog {
       return;
     }
 
-    Log.info('isMuted '  + globalIsOn);
+    Log.info('isMuted ' + globalIsOn);
     this.dialogController?.open();
   }
 
@@ -137,10 +140,11 @@ struct GlobalSwitchSheetDialog {
 struct applicationItem {
   private context = getContext(this) as common.ServiceExtensionContext;
   @State globalIsOn: boolean = false;
-  @State backTitle: ResourceStr = '';
+  @State backTitle: string = '';
   @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], false);
   @State currentGroup: string = '';
   @State isMuteSupported: boolean = false;
+  @State appName: ResourceStr = '';
   private controller: CustomDialogController;
 
   dialogController: CustomDialogController | null = new CustomDialogController({
@@ -169,7 +173,7 @@ struct applicationItem {
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMutePersistent(true,audio.PolicyType.PRIVACY).then(() => {
+                audioVolumeGroupManager.setMicMutePersistent(true, audio.PolicyType.PRIVACY).then(() => {
                   Log.info('microphone muted');
                   if (this.dialogController !== null) {
                     this.dialogController.close();
@@ -270,7 +274,16 @@ struct applicationItem {
   /**
    * Lifecycle function, executed when the page is initialized
    */
-  aboutToAppear() {
+  async aboutToAppear() {
+    try {
+      let bundleInfo = await bundleManager.getBundleInfo(
+        bundleName,
+        bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
+      let manager = this.context.createBundleContext(bundleName).resourceManager;
+      this.appName = await manager.getStringValue(bundleInfo.appInfo.labelId);
+    } catch (e) {
+      Log.error('get appName failed ' + JSON.stringify(e));
+    }
     groups.forEach(group => {
       if (group.name === this.currentGroup) {
         this.groupInfo = group;
@@ -293,7 +306,7 @@ struct applicationItem {
         Flex({ alignItems: ItemAlign.Start, justifyContent: FlexAlign.Start }) {
           Column() {
             Column() {
-              Text(this.backTitle)
+              Text($r(this.backTitle, this.appName))
                 .align(Alignment.Start)
                 .fontColor($r('sys.color.font_primary'))
                 .maxLines(Constants.MAXIMUM_HEADER_LINES)

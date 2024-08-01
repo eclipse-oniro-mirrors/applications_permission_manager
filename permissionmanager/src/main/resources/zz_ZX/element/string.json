@@ -1,0 +1,168 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"[TS_950813]_Private access to Gallery"
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"[TS_950727]_To protect your privacy, %s can only briefly access your location when you tap Allow."
+        },
+        {
+            "name":"allow",
+            "value":"[TS_950769]_Allow"
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"[TS_950753]_To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow."
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"[TS_950716]_Private access to location"
+        },
+        {
+            "name":"cancel",
+            "value":"[TS_950731]_Cancel"
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"[TS_950720]_Allow this app to access your precise location. When disabled, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
+        },
+        {
+            "name":"close_exact_position",
+            "value":"[TS_950766]_When Precise location is disabled, the app can only get your approximate location."
+        },
+        {
+            "name":"precise_location",
+            "value":"[TS_950788]_Precise location"
+        },
+        {
+            "name":"always_allow",
+            "value":"[TS_950695]_Always allow"
+        },
+        {
+            "name":"access_general_location",
+            "value":"[TS_950789]_Allow %s to access this device's approximate location?"
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"[TS_950779]_Allow %s to track your activity across other apps?"
+        },
+        {
+            "name":"ban",
+            "value":"[TS_950815]_Deny"
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"[TS_950756]_Allow %s to access the \"Documents\" folder on your device?"
+        },
+        {
+            "name":"per_use_query",
+            "value":"[TS_950801]_Ask each time"
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"[TS_950781]_If denied, this app won't be able to access the clipboard."
+        },
+        {
+            "name":"allow_this_time",
+            "value":"[TS_950750]_Allow this time only"
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"[TS_950834]_Allow while using the app"
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"[TS_950790]_Allow %s to access the \"Home screen\" folder on your device?"
+        },
+        {
+            "name":"per_inquiry",
+            "value":"[TS_950826]_Ask each time"
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"[TS_950807]_Allow %s to access the \"Downloads\" folder on your device?"
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"[TS_950767]_Change %s's location access from approximate to precise?"
+        },
+        {
+            "name":"group_label_appList",
+            "value":"[TS_950708]_Allow %s to read the list of installed apps?"
+        },
+        {
+            "name":"This_time_only",
+            "value":"[TS_950778]_Allow this time only"
+        },
+        {
+            "name":"group_label_health",
+            "value":"[TS_950699]_Allow %s to use body sensors?"
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"[TS_950739]_Allow %s to copy content from the clipboard?"
+        },
+        {
+            "name":"precise_location_on",
+            "value":"[TS_950840]_Precise location: On"
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"[TS_950707]_Allow %s to access your contacts?"
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"[TS_950717]_Allow %s to use Bluetooth?"
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"[TS_950841]_Allow %s to collaborate with other devices?"
+        },
+        {
+            "name":"group_label_document",
+            "value":"[TS_950825]_Allow %s to access files on your device?"
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"[TS_950768]_Allow %s to access your calendar?"
+        },
+        {
+            "name":"precise_location_off",
+            "value":"[TS_950755]_Precise location: Off"
+        },
+        {
+            "name":"group_label_camera",
+            "value":"[TS_950817]_Allow %s to use the camera?"
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"[TS_950761]_Allow %s to use NearLink?"
+        },
+        {
+            "name":"group_label_sport",
+            "value":"[TS_950824]_Allow %s to access your physical activity data?"
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"[TS_950732]_Allow %s to access images and videos on your device?"
+        },
+        {
+            "name":"group_label_location",
+            "value":"[TS_950793]_Allow %s to access this device's location?"
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"[TS_950757]_Allow %s to use the microphone?"
+        },
+        {
+            "name":"group_label_audios",
+            "value":"[TS_950736]_Allow %s to access music and audio files on your device?"
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"[TS_950726]_Content copied from \"%s\". "
+        }
+    ]
+}

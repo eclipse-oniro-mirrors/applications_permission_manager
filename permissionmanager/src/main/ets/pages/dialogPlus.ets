@@ -21,7 +21,14 @@ import common from '@ohos.app.ability.common';
 import pasteboard from '@ohos.pasteboard';
 import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import { Log, getPermissionGroup, titleTrim, getPermissionLabel } from '../common/utils/utils';
+import {
+  Log,
+  getPermissionGroup,
+  titleTrim,
+  getPermissionLabel,
+  getFontSizeScale,
+  getLimitFontSize
+} from '../common/utils/utils';
 import { GroupInfo, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
@@ -31,14 +38,13 @@ import { LocationCanvas } from '../common/components/location';
 @Extend(Button)function customizeButton() {
   .buttonStyle(ButtonStyleMode.TEXTUAL)
   .fontColor($r('sys.color.font_emphasize'))
-  .fontSize($r('sys.float.ohos_id_text_size_button1'))
-  .height(Constants.BUTTON_HEIGHT)
   .width(Constants.HALF_LENGTH)
 }
 
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
 const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 const PASTE = 'ohos.permission.READ_PASTEBOARD';
+const APP_TRACKING_CONSENT = 'ohos.permission.APP_TRACKING_CONSENT';
 const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
 const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
@@ -83,8 +89,8 @@ struct dialogPlusPage {
       Column() {
         if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
           Image(this.currentGroup().icon)
-            .width(Constants.DIALOG_ICON_WIDTH)
-            .height(Constants.DIALOG_ICON_HEIGHT)
+            .width(Constants.DIALOG_ICON_WIDTH * getFontSizeScale())
+            .height(Constants.DIALOG_ICON_HEIGHT * getFontSizeScale())
             .fillColor($r('sys.color.font_primary'))
             .margin({ top: Constants.DIALOG_ICON_MARGIN_TOP })
           if (this.grantGroups.length > 1) {
@@ -105,11 +111,21 @@ struct dialogPlusPage {
                   .fontWeight(FontWeight.Bold)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
-                  .minFontSize($r('sys.float.Subtitle_M'))
-                  .maxFontSize($r('sys.float.Title_S'))
+                  .minFontSize(
+                    getLimitFontSize(getFontSizeScale(),
+                    Constants.DIALOG_TITLE_MAX_SCALE,
+                    $r('sys.float.Subtitle_M'),
+                    $r('sys.float.Title_S'))
+                  )
+                  .maxFontSize(
+                    getLimitFontSize(getFontSizeScale(),
+                    Constants.DIALOG_TITLE_MAX_SCALE,
+                    $r('sys.float.Title_S'),
+                    $r('sys.float.Title_S'))
+                  )
                   .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
                 }
-                .height(Constants.HEADLINE_HEIGHT)
+                .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
                 .justifyContent(FlexAlign.Center)
                 .padding({
                   top: Constants.DEFAULT_PADDING_TOP,
@@ -146,7 +162,6 @@ struct dialogPlusPage {
                   .textAlign(TextAlign.Start)
                   .fontColor($r('sys.color.font_primary'))
                   .fontSize($r('sys.float.Body_L'))
-                  .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   .margin({
                     left: Constants.DIALOG_DESP_MARGIN_LEFT,
                     right: Constants.DIALOG_DESP_MARGIN_RIGHT,
@@ -206,7 +221,7 @@ struct dialogPlusPage {
                   .strokeWidth(Constants.DIALOG_DIVIDER)
                   .height(Constants.DIVIDER_HEIGHT)
                   .opacity(0.2)
-                  .margin({ left: Constants.MARGIN_4, right: Constants.MARGIN_4 })
+                  .margin({ left: Constants.MARGIN_8, right: Constants.MARGIN_8 })
                 Button(
                   this.currentGroup().name === 'PASTEBOARD' ? $r('app.string.This_time_only') : $r('app.string.allow')
                 )
@@ -380,7 +395,13 @@ struct dialogPlusPage {
       this.locationFlag = Constants.LOCATION_UPGRADE;
     }
 
-    this.reqPerms.forEach((permission, idx) => {
+    this.reqPerms.forEach(async (permission, idx) => {
+      if (permission === APP_TRACKING_CONSENT) {
+        let toggleStatus = await this.appTrackHandle(idx);
+        if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
+          return;
+        }
+      }
       if (stateGroup[idx] == Constants.PASS_OPER) {
         Log.info('permission has been fixed:' + permission);
         this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
@@ -393,6 +414,23 @@ struct dialogPlusPage {
       }
     })
     this.initStatus = Constants.INIT_NEED_TO_VERIFY;
+  }
+
+  async appTrackHandle(index: number): Promise<abilityAccessCtrl.PermissionRequestToggleStatus> {
+    try {
+      let acManager = abilityAccessCtrl.createAtManager();
+      let toggleStatus = await acManager.getPermissionRequestToggleStatus(APP_TRACKING_CONSENT);
+      Log.info(`APP_TRACKING_CONSENT toggleStatus: ${toggleStatus}.`);
+      if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
+        await acManager.grantUserGrantedPermission(this.accessTokenId, APP_TRACKING_CONSENT, this.userFixedFlag);
+        this.result[index] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
+        Log.info('APP_TRACKING_CONSENT grant success.');
+      }
+      return toggleStatus;
+    } catch (err) {
+      Log.error(`APP_TRACKING_CONSENT getToggleStatus or grant fail: ${JSON.stringify(err)}`);
+      return abilityAccessCtrl.PermissionRequestToggleStatus.OPEN;
+    }
   }
 
   addGroup(permission: string) {

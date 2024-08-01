@@ -1,0 +1,168 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"بىخەتەر رەسىم ۋە سىن ساقلاش ئىجازىتى"
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"مەخپىيەتلىك قوغداش ئۈچۈن، «%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئورۇن ئۇچۇرىنى ئوقۇيالايدۇ."
+        },
+        {
+            "name":"allow",
+            "value":"رۇخسەت"
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"مەخپىيەتلىك قوغداش ئۈچۈن، «%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئامبارغا رەسىم ۋە سىن ساقلىيالايدۇ."
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"بىخەتەر ئورۇن ئىجازىتى"
+        },
+        {
+            "name":"cancel",
+            "value":"بىكار قىلىش"
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"بۇ ئەپنىڭ ئېنىق ئورۇن بەلگىلىشىگە رۇخسەت قىلىنىدۇ. بۇ ئېتىك ھالەتتە ئەپ پەقەت تەخمىنىي ئورۇن ئۇچۇرىنى ئىگىلەيدۇ. بۇ ئىقتىدارنى قوللىمايدىغان ئەپلەر ئورۇن بەلگىلىيەلمەسلىكى مۇمكىن."
+        },
+        {
+            "name":"close_exact_position",
+            "value":"ئېنىق ئورۇننى ئەتسىڭىز، بۇ ئەپ تەخمىنىي ئورۇن ئۇچۇرىڭىزنىلا ئوقۇيالايدۇ."
+        },
+        {
+            "name":"precise_location",
+            "value":"ئېنىق ئورۇن"
+        },
+        {
+            "name":"always_allow",
+            "value":"ئىزچىل رۇخسەت"
+        },
+        {
+            "name":"access_general_location",
+            "value":"\u200f«%s» تەخمىنىي ئورۇن ئۇچۇرىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"\u200f«%s» ئۈچۈن ئېلان ئىزلاش ئىجازىتى كېرەك، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"ban",
+            "value":"چەكلەش"
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"\u200f«%s» «پۈتۈك» قىسقۇچىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"per_use_query",
+            "value":"ئىزچىل سوراش"
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"چەكلىسىڭىز، بۇ ئەپ كېسىش تاختىسىنى زىيارەت قىلالمايدۇ."
+        },
+        {
+            "name":"allow_this_time",
+            "value":"بۇ قېتىم رۇخسەت"
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"ئىشلەتكەندە رۇخسەت"
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"\u200f«%s» «ئۈستەليۈزى» قىسقۇچىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"per_inquiry",
+            "value":"ئىزچىل سوراش"
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"\u200f«%s» «چۈشۈرۈلمە» قىسقۇچىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"\u200f«%s» نىڭ ئورۇن ئىجازىتى «تەخمىنىي ئورۇن» دىن «ئېنىق ئورۇن» غا ئۆزگىرىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_appList",
+            "value":"\u200f«%s» نىڭ قاچىلىغان ئەپ تىزىملىكىنى ئوقۇشىغا رۇخسەتمۇ؟"
+        },
+        {
+            "name":"This_time_only",
+            "value":"بۇ قېتىم رۇخسەت"
+        },
+        {
+            "name":"group_label_health",
+            "value":"\u200f«%s» بەدەن سەزگۈچ ئارقىلىق بەدەن ئۇچۇرىنى ئوقۇيدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"\u200f«%s» نىڭ كېسىش تاختىسىدىن مەزمۇن كۆچۈرۈشىگە رۇخسەتمۇ؟"
+        },
+        {
+            "name":"precise_location_on",
+            "value":"ئېنىق ئورۇن: ئوچۇق"
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"\u200f«%s» نىڭ ئالاقىداش ئىشلىتىشىگە رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"\u200f«%s» نىڭ كۆكچىش ئىشلىتىشىگە رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"\u200f«%s» نىڭ كۆپ ئۈسكۈنە ھەمكارلىقىغا رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_document",
+            "value":"\u200f«%s» نىڭ ھۆججەت زىيارەت قىلىشىغا رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"\u200f«%s» نىڭ كالېندار ئىشلىتىشىگە رۇخسەتمۇ؟"
+        },
+        {
+            "name":"precise_location_off",
+            "value":"ئېنىق ئورۇن: ئېتىك"
+        },
+        {
+            "name":"group_label_camera",
+            "value":"\u200f«%s» كامېرا ئىشلىتىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"\u200f«%s» نىڭ «ئۇچقۇن» ئىشلىتىشىگە رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_sport",
+            "value":"\u200f«%s» چېنىقىش ئۇچۇرىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"\u200f«%s» نىڭ رەسىم ۋە سىن زىيارەت قىلىشىغا رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_location",
+            "value":"\u200f«%s» ئورۇن ئۇچۇرىڭىزنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"\u200f«%s» مىكروفون ئىشلىتىدۇ، رۇخسەتمۇ؟"
+        },
+        {
+            "name":"group_label_audios",
+            "value":"\u200f«%s» نىڭ مۇزىكا ۋە ئاۋاز ھۆججىتى ئوقۇشىغا رۇخسەتمۇ؟"
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"مەزمۇن مەنبەسى: %s."
+        }
+    ]
+}
