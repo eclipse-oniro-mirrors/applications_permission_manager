@@ -102,8 +102,9 @@ struct SecurityDialog {
         Column() {
           Column() {
             SymbolGlyph($r('sys.symbol.person_shield_fill'))
-              .constraintSize({ minWidth: Constants.SECURITY_ICON_WIDTH, minHeight: Constants.SECURITY_ICON_HEIGHT })
-              .fontSize(Constants.FONT_SIZE_28)
+              .width(Constants.SECURITY_ICON_WIDTH)
+              .height(Constants.SECURITY_ICON_HEIGHT)
+              .fontSize(Constants.FONT_SIZE_28 / getFontSizeScale())
               .fontColor([$r('sys.color.brand')])
               .border({
                 width: Constants.BORDER_WIDTH_1,
@@ -112,14 +113,9 @@ struct SecurityDialog {
               })
               .padding(Constants.PADDING_10)
             Image(this.securityParams[this.index].icon)
-              .width(Constants.IMAGE_LENGTH_20 * getFontSizeScale())
-              .height(Constants.IMAGE_LENGTH_20 * getFontSizeScale())
-              .position({
-                x: (Constants.FONT_SIZE_28 - Constants.IMAGE_LENGTH_20) * getFontSizeScale() +
-                  Constants.PADDING_10 * Constants.PADDING_TWICE,
-                y: (Constants.FONT_SIZE_28 - Constants.IMAGE_LENGTH_20) * getFontSizeScale() +
-                  Constants.PADDING_10 * Constants.PADDING_TWICE
-              })
+              .width(Constants.IMAGE_LENGTH_20)
+              .height(Constants.IMAGE_LENGTH_20)
+              .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
           }
           .backgroundColor($r('app.color.icon_bg'))
           .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
@@ -158,6 +154,7 @@ struct SecurityDialog {
               .fontColor($r('sys.color.font_primary'))
               .fontSize($r('sys.float.Body_L'))
               .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
+              .maxFontScale(Constants.DIALOG_TEXT_MAX_SCALE)
           }
         }
         .clip(true)
