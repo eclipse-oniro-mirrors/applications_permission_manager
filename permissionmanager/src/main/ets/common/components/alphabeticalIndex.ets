@@ -36,7 +36,7 @@ export struct alphabetIndexerComponent {
       .color($r('sys.color.font_secondary'))
       .selectedColor($r('sys.color.font_emphasize')) // selected color
       .popupColor($r('sys.color.font_emphasize')) // popover color
-      .popupBackground($r('comp_background_list_card')) // popover background color
+      .popupBackground($r('sys.color.comp_background_list_card')) // popover background color
       .usingPopup(this.usingPopup) // whether to show a popup
       .font({ size: $r('sys.float.ohos_id_text_size_body3') })
       .popupFont({ size: $r('sys.float.ohos_id_text_size_headline7') }) // Demo of the popup
