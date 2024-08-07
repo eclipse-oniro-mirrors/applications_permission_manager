@@ -278,7 +278,7 @@ export function  setAvoidArea(proxy: uiExtensionHost.UIExtensionHostWindowProxy)
 export function getFontSizeScale(): number {
   const FONT_SIZE_SCALE_PARAM = 'persist.sys.font_scale_for_user0';
   let fontSizeScale = Number.parseFloat(systemParameterEnhance.getSync(FONT_SIZE_SCALE_PARAM, '1'));
-  return fontSizeScale;
+  return fontSizeScale >= Constants.DIALOG_TITLE_MAX_SCALE ? Constants.DIALOG_TITLE_MAX_SCALE : fontSizeScale;
 }
 
 export function getLimitFontSize(

@@ -89,8 +89,8 @@ struct dialogPlusPage {
       Column() {
         if ((this.initStatus != Constants.INIT_NEED_TO_WAIT) && this.verify()) {
           Image(this.currentGroup().icon)
-            .width(Constants.DIALOG_ICON_WIDTH * getFontSizeScale())
-            .height(Constants.DIALOG_ICON_HEIGHT * getFontSizeScale())
+            .width(Constants.DIALOG_ICON_WIDTH)
+            .height(Constants.DIALOG_ICON_HEIGHT)
             .fillColor($r('sys.color.ohos_id_color_text_primary'))
             .margin({ top: Constants.DIALOG_ICON_MARGIN_TOP })
           if (this.grantGroups.length > 1) {
@@ -162,6 +162,7 @@ struct dialogPlusPage {
                   .textAlign(TextAlign.Start)
                   .fontColor($r('sys.color.font_primary'))
                   .fontSize($r('sys.float.Body_L'))
+                  .maxFontScale(Constants.DIALOG_TEXT_MAX_SCALE)
                   .margin({
                     left: Constants.DIALOG_DESP_MARGIN_LEFT,
                     right: Constants.DIALOG_DESP_MARGIN_RIGHT,
