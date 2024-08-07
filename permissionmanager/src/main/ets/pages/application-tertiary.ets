@@ -32,7 +32,7 @@ const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
 const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
 const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const PASTE = 'ohos.permission.READ_PASTEBOARD';
-let api: number = 0;
+const showPrecise: number[] = [Constants.PERMISSION_ALLOW, Constants.PERMISSION_ALLOWED_ONLY_DURING_USE];
 let accessTokenId: number = 0;
 let reqPermissionInfo: bundleManager.ReqPermissionDetail;
 
@@ -174,7 +174,6 @@ struct mediaDocumentItem {
   @State mediaDocListItem: MediaDocObj[] = []; // Permission information array
   @Link selected: number;
   @Link accurateIsOn: boolean;
-  @State api: number = 0;
   @State isRisk: boolean = false; // Whether it is a risky application
   @State noForeground: boolean = false;
   @State isTouch: number = -1;
@@ -331,9 +330,7 @@ struct mediaDocumentItem {
 
     bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
     .then(res => {
-      this.api = res.targetVersion;
       this.version = res.versionName;
-      api = res.targetVersion;
       accessTokenId = res.appInfo.accessTokenId;
       let acManager = abilityAccessCtrl.createAtManager();
       let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, PRECISE_LOCATION_PERMISSION);
@@ -598,7 +595,7 @@ struct mediaDocumentItem {
           endMargin: Constants.DEFAULT_MARGIN_END
         })
 
-        if (this.permissions.includes(PRECISE_LOCATION_PERMISSION)) {
+        if (this.permissions.includes(PRECISE_LOCATION_PERMISSION) && showPrecise.includes(this.selected)) {
           Column() {
             Row() {
               Text($r('app.string.precise_location'))
@@ -622,7 +619,6 @@ struct mediaDocumentItem {
                   }
                 })
                 .padding({ right: 0 })
-                .enabled(this.selected !== Constants.PERMISSION_BAN)
             }.width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
           }.margin({ top: Constants.LOCATION_MARGIN_TOP, bottom: Constants.LOCATION_MARGIN_BOTTOM })
