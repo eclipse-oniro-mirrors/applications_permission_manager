@@ -112,9 +112,14 @@ export default class MainAbility extends UIAbility {
   }
 
   onWindowStageDestroy(): void {
-    bundleMonitor.off('add');
-    bundleMonitor.off('remove');
-    console.log(TAG + 'MainAbility onWindowStageDestroy.');
+    try {
+      bundleMonitor.off('add');
+      bundleMonitor.off('remove');
+      bundleMonitor.off('update');
+      console.log(TAG + 'MainAbility onWindowStageDestroy.');
+    } catch (err) {
+      console.log(`errData is errCode:${err.code}  message:${err.message}`);
+    }
   }
 
   onBackground(): void {
