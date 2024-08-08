@@ -91,7 +91,7 @@ struct globalSwitch {
           this.globalState == CAMERA ? $r('app.string.global_title_camera') :
           $r('app.string.global_title_camera_and_microphone'))
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Medium)
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
           .width(Constants.FULL_WIDTH)
@@ -100,7 +100,7 @@ struct globalSwitch {
           this.globalState == CAMERA ? $r('app.string.global_desc_camera') :
           $r('app.string.global_desc_camera_and_microphone'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
           .lineHeight(Constants.TEXT_LINE_HEIGHT)
       }
       .clip(true)

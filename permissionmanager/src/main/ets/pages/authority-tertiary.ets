@@ -59,9 +59,9 @@ struct locationInfoPage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+        .backgroundColor($r('sys.color.background_secondary'))
       }
-    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+    }.backgroundColor($r('sys.color.background_secondary'))
   }
 }
 
@@ -96,17 +96,17 @@ struct applicationItem {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
-                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  .fontColor($r('sys.color.font_primary'))
                 if (this.isRisk[item.index]) {
                   Text($r('app.string.risk_warning'))
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                    .fontColor($r('sys.color.font_secondary'))
                 }
               }.flexGrow(Constants.FLEX_GROW)
               .alignItems(HorizontalAlign.Start)
               Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
-                .selectedColor($r('sys.color.ohos_id_color_toolbar_icon_actived'))
-                .switchPointColor($r('sys.color.ohos_id_color_foreground_contrary'))
+                .selectedColor($r('sys.color.icon_emphasize'))
+                .switchPointColor($r('sys.color.comp_background_primary_contrary'))
                 .padding({ right: 0 })
                 .width(Constants.AUTHORITY_TOGGLE_WIDTH)
                 .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
@@ -249,12 +249,12 @@ struct applicationItem {
                 ''
               )
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .fontColor($r('sys.color.font_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
             } else {
               Text(this.permissionInfo.forbiddenDescription)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .fontColor($r('sys.color.font_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
             }
           }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
@@ -279,12 +279,12 @@ struct applicationItem {
                       this.ListItemLayout(item)
                     }, (item: ApplicationObj) => JSON.stringify(item))
                   }
-                  .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                  .backgroundColor($r('sys.color.comp_background_list_card'))
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
                   .divider({
                     strokeWidth: Constants.DIVIDER,
-                    color: $r('sys.color.ohos_id_color_list_separator'),
+                    color: $r('sys.color.comp_divider'),
                     startMargin: Constants.DIVIDER_MARGIN_RIGHT_APPLICATION,
                     endMargin: Constants.DEFAULT_MARGIN_END
                   })

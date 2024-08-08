@@ -78,9 +78,9 @@ struct mediaDocumentPage {
           }
           .height(Constants.FULL_HEIGHT)
           .width(Constants.FULL_WIDTH)
-          .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+          .backgroundColor($r('sys.color.background_secondary'))
         }
-      }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+      }.backgroundColor($r('sys.color.background_secondary'))
     }
   }
 
@@ -366,7 +366,7 @@ struct mediaDocumentItem {
                 .maxLines(Constants.MAXIMUM_HEADER_LINES)
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Bold)
                 .textAlign(TextAlign.Start)
             }
@@ -375,11 +375,11 @@ struct mediaDocumentItem {
             Row() {
               Text($r('app.string.version'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .fontColor($r('sys.color.font_secondary'))
                 .textAlign(TextAlign.Start)
               Text(this.version)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .fontColor($r('sys.color.font_secondary'))
                 .textAlign(TextAlign.Start)
             }
             .width(Constants.TERTIARY_HALF_WIDTH)
@@ -400,7 +400,7 @@ struct mediaDocumentItem {
                 Span(this.reason)
               }
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_secondary'))
+                .fontColor($r('sys.color.icon_secondary'))
                 .textAlign(TextAlign.Start)
             }.margin({ left: Constants.TERTIARY_IMAGE_MARGIN_LEFT, right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
           }
@@ -416,17 +416,17 @@ struct mediaDocumentItem {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
               Image($r('app.media.ic_public_fail'))
-                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .fillColor($r('sys.color.icon_secondary'))
                 .width(Constants.TERTIARY_RADIO_IMAGE_WIDTH)
                 .height(Constants.TERTIARY_RADIO_IMAGE_HEIGHT)
                 .margin({ right: Constants.TERTIARY_IMAGE_MARGIN_RIGHT })
               Text($r('app.string.risk_warning'))
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontColor($r('sys.color.font_primary'))
                 .fontSize($r('sys.float.ohos_id_text_size_body1'))
                 .fontWeight(FontWeight.Regular)
             }.margin({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
           }
-        }.backgroundColor($r('sys.color.ohos_id_color_click_effect'))
+        }.backgroundColor($r('sys.color.interactive_click'))
         .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
         .padding({ top: Constants.DEFAULT_PADDING_TOP, bottom: Constants.DEFAULT_PADDING_BOTTOM })
         .margin({ left: Constants.DEFAULT_MARGIN_START, right: Constants.DEFAULT_MARGIN_END })
@@ -437,7 +437,7 @@ struct mediaDocumentItem {
           Span($r('app.string.access_permission'))
         }
           .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_secondary'))
+          .fontColor($r('sys.color.icon_secondary'))
           .fontWeight(FontWeight.Medium)
           .textAlign(TextAlign.Start)
           .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
@@ -454,7 +454,7 @@ struct mediaDocumentItem {
                   Row() {
                     Text(this.getCheckboxInfo(permission).label)
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                      .fontColor($r('sys.color.font_primary'))
                       .fontWeight(FontWeight.Medium)
                       .flexGrow(Constants.FLEX_GROW)
                     Checkbox()
@@ -510,7 +510,7 @@ struct mediaDocumentItem {
                       Row() {
                         Text(item.name)
                           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                          .fontColor($r('sys.color.font_primary'))
                           .fontWeight(FontWeight.Medium)
                           .flexGrow(Constants.FLEX_GROW)
                         Radio({ value: 'Radio', group: 'radioGroup' })
@@ -586,11 +586,11 @@ struct mediaDocumentItem {
           }
         }
         .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
-        .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+        .backgroundColor($r('sys.color.comp_background_list_card'))
         .padding(Constants.LIST_PADDING_TOP)
         .divider({
           strokeWidth: Constants.DIVIDER,
-          color: $r('sys.color.ohos_id_color_list_separator'),
+          color: $r('sys.color.comp_divider'),
           startMargin: Constants.DEFAULT_MARGIN_START,
           endMargin: Constants.DEFAULT_MARGIN_END
         })
@@ -600,12 +600,12 @@ struct mediaDocumentItem {
             Row() {
               Text($r('app.string.precise_location'))
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
               Toggle({ type: ToggleType.Switch, isOn: this.accurateIsOn })
-                .selectedColor($r('sys.color.ohos_id_color_toolbar_icon_actived'))
-                .switchPointColor($r('sys.color.ohos_id_color_foreground_contrary'))
+                .selectedColor($r('sys.color.icon_emphasize'))
+                .switchPointColor($r('sys.color.comp_background_primary_contrary'))
                 .onChange((isOn: boolean) => {
                   let acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
@@ -629,12 +629,12 @@ struct mediaDocumentItem {
             bottom: Constants.TERTIARY_LIST_PADDING_BOTTOM
           })
           .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
-          .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+          .backgroundColor($r('sys.color.comp_background_list_card'))
 
           Row() {
             Text($r('app.string.get_the_exact_position'))
               .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-              .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+              .fontColor($r('sys.color.font_secondary'))
               .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
           }.width(Constants.FULL_WIDTH)
           .padding({
