@@ -71,7 +71,7 @@ export default class Constants {
     public static TEXT_MIDDLE_FONT_SIZE = 16;
     public static TEXT_SMALL_FONT_SIZE = 14;
     public static TEXT_SMALLER_FONT_SIZE = 12;
-    public static FONT_SIZE_28 = 28;
+    public static FONT_SIZE_28 = '28vp';
     public static TEXT_LINE_HEIGHT = 22;
     public static TEXT_LINE_HEIGHT_24 = 24;
     public static TEXT_LINE_HEIGHT_27 = 27;
