@@ -104,7 +104,7 @@ struct SecurityDialog {
             SymbolGlyph($r('sys.symbol.person_shield_fill'))
               .width(Constants.SECURITY_ICON_WIDTH)
               .height(Constants.SECURITY_ICON_HEIGHT)
-              .fontSize(Constants.FONT_SIZE_28 / getFontSizeScale())
+              .fontSize(Constants.FONT_SIZE_28)
               .fontColor([$r('sys.color.brand')])
               .border({
                 width: Constants.BORDER_WIDTH_1,
