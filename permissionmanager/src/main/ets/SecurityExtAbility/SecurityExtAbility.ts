@@ -20,6 +20,7 @@ import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
+const DELAY = 100;
 
 export default class SecurityExtensionAbility extends extension {
   /**
@@ -99,9 +100,11 @@ export default class SecurityExtensionAbility extends extension {
     try {
       display.on('foldStatusChange', (data) => {
         console.info(TAG + `monitor foldStatusChange: ${JSON.stringify(data)}`);
-        let dis = display.getDefaultDisplaySync();
-        win.resize(dis.width, dis.height);
-        win.moveWindowTo(0, 0);
+        setTimeout(() => {
+          let dis = display.getDefaultDisplaySync();
+          win.resize(dis.width, dis.height);
+          win.moveWindowTo(0, 0);
+        }, DELAY);
       });
     } catch (err) {
       console.error(TAG + `monitor foldStatusChange failed: ${JSON.stringify(err)}`);
