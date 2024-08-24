@@ -63,11 +63,12 @@ struct SecurityDialog {
           action: () => {
             this.dialogController?.close();
             this.win.destroyWindow();
-            let windowNum: number = GlobalContext.load('windowNum');
-            windowNum --;
-            Log.info(TAG + 'windowNum:' + windowNum);
-            GlobalContext.store('windowNum', windowNum);
-            if (windowNum === 0) {
+            let dialogSet: Set<string> = GlobalContext.load('dialogSet');
+            let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+            dialogSet.delete(callerToken);
+            Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
+            GlobalContext.store('dialogSet', dialogSet);
+            if (dialogSet.size === 0) {
               this.context.terminateSelf();
             }
           }
@@ -85,11 +86,12 @@ struct SecurityDialog {
     autoCancel: false,
     cancel: () => {
       this.win.destroyWindow();
-      let windowNum: number = GlobalContext.load('windowNum');
-      windowNum --;
-      Log.info(TAG + 'windowNum:' + windowNum);
-      GlobalContext.store('windowNum', windowNum);
-      if (windowNum === 0) {
+      let dialogSet: Set<string> = GlobalContext.load('dialogSet');
+      let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+      dialogSet.delete(callerToken);
+      Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
+      GlobalContext.store('dialogSet', dialogSet);
+      if (dialogSet.size === 0) {
         this.context.terminateSelf();
       }
     }
@@ -216,11 +218,12 @@ struct SecurityDialog {
       data.reclaim();
       reply.reclaim();
       this.win.destroyWindow();
-      let windowNum: number = GlobalContext.load('windowNum');
-      windowNum --;
-      Log.info(TAG + 'windowNum:' + windowNum);
-      GlobalContext.store('windowNum', windowNum);
-      if (windowNum === 0) {
+      let dialogSet: Set<string> = GlobalContext.load('dialogSet');
+      let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+      dialogSet.delete(callerToken);
+      Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
+      GlobalContext.store('dialogSet', dialogSet);
+      if (dialogSet.size === 0) {
         this.context.terminateSelf();
       }
     })

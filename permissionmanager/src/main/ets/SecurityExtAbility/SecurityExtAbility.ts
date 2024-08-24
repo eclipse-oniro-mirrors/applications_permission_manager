@@ -68,16 +68,29 @@ export default class SecurityExtensionAbility extends extension {
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
     console.info(TAG + 'create securityWindow');
+    let dialogSet: Set<string> = GlobalContext.load('dialogSet');
+    if (!dialogSet) {
+      dialogSet = new Set<string>;
+      console.info(TAG + 'new dialogSet');
+      GlobalContext.store('dialogSet', dialogSet);
+    }
+    let callerToken: string = want.parameters['ohos.aafwk.param.callerBundleName'];
+    console.info(TAG + 'callerToken = ' + callerToken);
+    if (dialogSet.has(callerToken)) {
+      console.info(TAG + 'window of ' + callerToken + ' already exists');
+      return;
+    }
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         win.destroyWindow();
-        let windowNum: number = GlobalContext.load('windowNum');
-        windowNum --;
-        GlobalContext.store('windowNum', windowNum);
-        console.info(TAG + 'windowNum:' + windowNum);
-        if (windowNum === 0) {
+        let dialogSet: Set<string> = GlobalContext.load('dialogSet');
+        let callerToken: string = want.parameters['ohos.aafwk.param.callerBundleName'];
+        dialogSet.delete(callerToken);
+        console.info(TAG + 'window of ' + callerToken + ' is destroyed');
+        GlobalContext.store('dialogSet', dialogSet);
+        if (dialogSet.size === 0) {
           this.context.terminateSelf();
         }
       });
@@ -87,9 +100,9 @@ export default class SecurityExtensionAbility extends extension {
       win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
       console.info(TAG + 'showWindow end.');
-      globalThis.windowNum ++;
-      console.info(TAG + 'windowNum:' + globalThis.windowNum);
-      GlobalContext.store('windowNum', globalThis.windowNum);
+      dialogSet.add(callerToken);
+      console.info(TAG + 'window of ' + callerToken + ' is created');
+      GlobalContext.store('dialogSet', dialogSet);
       this.monitorFold(win);
     } catch (err) {
       console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
