@@ -46,7 +46,7 @@ struct SecurityDialog {
       $r('app.media.ic_location'), $r('app.string.SecurityTitle_location'), 'app.string.SecurityDescription_location'
     ),
     new Param(
-      $r('app.media.file'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityDescription_mediaFiles'
+      $r('app.media.photo'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityDescription_mediaFiles'
     )
   ]
 
@@ -116,6 +116,11 @@ struct SecurityDialog {
               .width(Constants.IMAGE_LENGTH_20)
               .height(Constants.IMAGE_LENGTH_20)
               .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+              .border({
+                width: Constants.BORDER_WIDTH_1,
+                color: $r('app.color.icon_border'),
+                radius: Constants.RADIUS_5
+              })
           }
           .backgroundColor($r('app.color.icon_bg'))
           .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
