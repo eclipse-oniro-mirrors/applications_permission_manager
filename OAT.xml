@@ -82,6 +82,7 @@
                 <filteritem type="filepath" name="AppScope/resources/base/media/app_icon.png" desc="icon"/>
                 <filteritem type="filepath" name="entry/src/main/resources/base/media/icon.png" desc="icon"/>
                 <filteritem type="filepath" name="permissionmanager/src/main/resources/base/media/icon.png" desc="icon"/>
+                <filteritem type="filepath" name="permissionmanager/src/main/resources/base/media/photo.png" desc="icon"/>
                 <filteritem type="filepath" name="permissionmanager/src/main/resources/base/media/app_icon.png" desc="icon"/>
             </filefilter>
         </filefilterlist>
