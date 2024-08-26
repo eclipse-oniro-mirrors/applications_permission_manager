@@ -116,15 +116,23 @@ export default class SecurityExtensionAbility extends extension {
         if (data !== foldStatus) {
           console.info(TAG + `monitor foldStatusChange: ${JSON.stringify(data)}`);
           foldStatus = data;
-          setTimeout(() => {
-            let dis = display.getDefaultDisplaySync();
-            win.resize(dis.width, dis.height);
-            win.moveWindowTo(0, 0);
-          }, DELAY);
+          this.windowChange(win);
         }
       });
     } catch (err) {
       console.error(TAG + `monitor foldStatusChange failed: ${JSON.stringify(err)}`);
+    }
+  }
+
+  private windowChange(win: window.Window): void {
+    try {
+      setTimeout(() => {
+        let dis = display.getDefaultDisplaySync();
+        win.resize(dis.width, dis.height);
+        win.moveWindowTo(0, 0);
+      }, DELAY);
+    } catch (err) {
+      console.error(TAG + `change window failed: ${JSON.stringify(err)}`);
     }
   }
 };
