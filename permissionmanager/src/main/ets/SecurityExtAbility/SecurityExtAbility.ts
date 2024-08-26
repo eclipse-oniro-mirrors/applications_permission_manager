@@ -111,13 +111,17 @@ export default class SecurityExtensionAbility extends extension {
 
   private monitorFold(win: window.Window): void {
     try {
+      let foldStatus = display.getFoldStatus();
       display.on('foldStatusChange', (data) => {
-        console.info(TAG + `monitor foldStatusChange: ${JSON.stringify(data)}`);
-        setTimeout(() => {
-          let dis = display.getDefaultDisplaySync();
-          win.resize(dis.width, dis.height);
-          win.moveWindowTo(0, 0);
-        }, DELAY);
+        if (data !== foldStatus) {
+          console.info(TAG + `monitor foldStatusChange: ${JSON.stringify(data)}`);
+          foldStatus = data;
+          setTimeout(() => {
+            let dis = display.getDefaultDisplaySync();
+            win.resize(dis.width, dis.height);
+            win.moveWindowTo(0, 0);
+          }, DELAY);
+        }
       });
     } catch (err) {
       console.error(TAG + `monitor foldStatusChange failed: ${JSON.stringify(err)}`);
