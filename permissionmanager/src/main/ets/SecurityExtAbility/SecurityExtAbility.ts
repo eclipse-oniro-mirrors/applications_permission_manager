@@ -70,14 +70,13 @@ export default class SecurityExtensionAbility extends extension {
     console.info(TAG + 'create securityWindow');
     let dialogSet: Set<string> = GlobalContext.load('dialogSet');
     if (!dialogSet) {
-      dialogSet = new Set<string>;
+      dialogSet = new Set<string>();
       console.info(TAG + 'new dialogSet');
       GlobalContext.store('dialogSet', dialogSet);
     }
     let callerToken: string = want.parameters['ohos.aafwk.param.callerBundleName'];
-    console.info(TAG + 'callerToken = ' + callerToken);
     if (dialogSet.has(callerToken)) {
-      console.info(TAG + 'window of ' + callerToken + ' already exists');
+      console.info(TAG + 'window already exists');
       return;
     }
     try {
@@ -88,7 +87,6 @@ export default class SecurityExtensionAbility extends extension {
         let dialogSet: Set<string> = GlobalContext.load('dialogSet');
         let callerToken: string = want.parameters['ohos.aafwk.param.callerBundleName'];
         dialogSet.delete(callerToken);
-        console.info(TAG + 'window of ' + callerToken + ' is destroyed');
         GlobalContext.store('dialogSet', dialogSet);
         if (dialogSet.size === 0) {
           this.context.terminateSelf();
@@ -101,7 +99,6 @@ export default class SecurityExtensionAbility extends extension {
       await win.showWindow();
       console.info(TAG + 'showWindow end.');
       dialogSet.add(callerToken);
-      console.info(TAG + 'window of ' + callerToken + ' is created');
       GlobalContext.store('dialogSet', dialogSet);
       this.monitorFold(win);
     } catch (err) {
