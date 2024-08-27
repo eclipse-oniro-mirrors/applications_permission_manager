@@ -66,7 +66,6 @@ struct SecurityDialog {
             let dialogSet: Set<string> = GlobalContext.load('dialogSet');
             let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
             dialogSet.delete(callerToken);
-            Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
             GlobalContext.store('dialogSet', dialogSet);
             if (dialogSet.size === 0) {
               this.context.terminateSelf();
@@ -89,7 +88,6 @@ struct SecurityDialog {
       let dialogSet: Set<string> = GlobalContext.load('dialogSet');
       let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
       dialogSet.delete(callerToken);
-      Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
@@ -226,7 +224,6 @@ struct SecurityDialog {
       let dialogSet: Set<string> = GlobalContext.load('dialogSet');
       let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
       dialogSet.delete(callerToken);
-      Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
