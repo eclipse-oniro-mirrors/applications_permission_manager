@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Copyright (c) 2021-2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,21 +11,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import("//build/ohos.gni")
-import("../signature/pm.gni")
+import("signature/pm.gni")
 
-ohos_hap("permission_manager") {
-  hap_profile = "src/main/module.json"
+ohos_app("permission_manager") {
   deps = [
     ":permission_manager_js_assets",
     ":permission_manager_resources",
   ]
-  publicity_file = "../publicity.xml"
-  certificate_profile = "../signature/pm.p7b"
+  publicity_file = "publicity.xml"
+  certificate_profile = "signature/pm.p7b"
   hap_name = "permission_manager"
   part_name = "prebuilt_hap"
   subsystem_name = "applications"
   js_build_mode = "release"
   module_install_dir = "app/com.ohos.permissionmanager"
+  sdk_home = "//prebuilts/ohos-sdk/linux"
+  sdk_type_name = [ "sdk.dir" ]
+  assemble_type = "assembleHap"
+  build_level = "module"
+  build_modules = [ "permissionmanager" ]
   if (defined(sign_hap_py_path)) {
     certificate_profile = "${certificate_profile_path}"
     key_alias = "PermissionManager"
@@ -35,17 +39,17 @@ ohos_hap("permission_manager") {
 }
 
 ohos_app_scope("permission_manager_app_profile") {
-  app_profile = "../AppScope/app.json"
-  sources = [ "../AppScope/resources" ]
+  app_profile = "AppScope/app.json"
+  sources = [ "AppScope/resources" ]
 }
 
 ohos_js_assets("permission_manager_js_assets") {
   ets2abc = true
-  source_dir = "src/main/ets"
+  source_dir = "permissionmanager/src/main/ets"
 }
 
 ohos_resources("permission_manager_resources") {
-  sources = [ "src/main/resources" ]
+  sources = [ "permissionmanager/src/main/resources" ]
   deps = [ ":permission_manager_app_profile" ]
-  hap_profile = "src/main/module.json"
+  hap_profile = "permissionmanager/src/main/module.json"
 }

@@ -105,6 +105,7 @@ export default class Constants {
     public static TAB_INNER_PADDING = 8;
     public static TAB_DECORATION_HEIGHT = 2;
     public static TAB_DECORATION_POSITION_Y = 6;
+    public static RADIUS_5 = 5;
     public static MARGIN_4 = 4;
     public static MARGIN_8 = 8;
     public static MARGIN_16 = 16;
