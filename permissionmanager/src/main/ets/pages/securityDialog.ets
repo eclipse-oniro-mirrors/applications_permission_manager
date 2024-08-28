@@ -112,15 +112,32 @@ struct SecurityDialog {
                 radius: $r('sys.float.ohos_id_corner_radius_default_m')
               })
               .padding(Constants.PADDING_10)
-            Image(this.securityParams[this.index].icon)
-              .width(Constants.IMAGE_LENGTH_20)
-              .height(Constants.IMAGE_LENGTH_20)
-              .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
-              .border({
-                width: Constants.BORDER_WIDTH_1,
-                color: $r('app.color.icon_border'),
-                radius: Constants.RADIUS_5
-              })
+            if(this.index === 1) {
+              Image(this.securityParams[this.index].icon)
+                .width(Constants.IMAGE_LENGTH_20)
+                .height(Constants.IMAGE_LENGTH_20)
+                .syncLoad(true)
+                .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+                .border({
+                  width: Constants.BORDER_WIDTH_1,
+                  color: $r('app.color.icon_border'),
+                  radius: Constants.RADIUS_5
+                })
+            } else {
+              SymbolGlyph($r('sys.symbol.local_fill'))
+                .width(Constants.IMAGE_LENGTH_20)
+                .height(Constants.IMAGE_LENGTH_20)
+                .fontSize(Constants.FONT_SIZE_12)
+                .fontColor([Color.White])
+                .backgroundColor($r('app.color.local_background_color'))
+                .padding(Constants.PADDING_4)
+                .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+                .border({
+                  width: Constants.BORDER_WIDTH_1,
+                  color: $r('app.color.icon_border'),
+                  radius: Constants.RADIUS_5
+                })
+            }
           }
           .backgroundColor($r('app.color.icon_bg'))
           .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))

@@ -23,6 +23,10 @@
     {
       "name": "start_window_background",
       "value": "#FFFFFF"
+    },
+    {
+      "name": "local_background_color",
+      "value": "#3194F7"
     }
   ]
 }
