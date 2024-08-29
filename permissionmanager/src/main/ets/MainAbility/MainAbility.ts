@@ -183,33 +183,37 @@ export default class MainAbility extends UIAbility {
     const flag =
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
-    bundleManager.getBundleInfo(bundleName, flag).then(bundleInfo => {
-      let reqPermissions: Array<string> = [];
-      bundleInfo.reqPermissionDetails.forEach(item => {
-        reqPermissions.push(item.name);
-      });
+    try {
+      bundleManager.getBundleInfo(bundleName, flag).then(bundleInfo => {
+        let reqPermissions: Array<string> = [];
+        bundleInfo.reqPermissionDetails.forEach(item => {
+          reqPermissions.push(item.name);
+        });
 
-      let info = {
-        'bundleName': bundleInfo.name,
-        'api': bundleInfo.targetVersion,
-        'tokenId': bundleInfo.appInfo.accessTokenId,
-        'icon': '',
-        'iconId': bundleInfo.appInfo.iconId,
-        'iconResource': bundleInfo.appInfo.iconResource,
-        'label': '',
-        'labelId': bundleInfo.appInfo.labelId,
-        'labelResource': bundleInfo.appInfo.labelResource,
-        'permissions': reqPermissions,
-        'groupId': [],
-        'zhTag': '',
-        'indexTag': '',
-        'language': ''
-      };
-      GlobalContext.store('applicationInfo', info);
-      globalThis.windowStage.setUIContent(this.context, 'pages/application-secondary', null);
-    }).catch(() => {
-      console.log(TAG + 'MainAbility getSperifiedApplication failed.');
-      this.context.terminateSelf();
-    });
+        let info = {
+          'bundleName': bundleInfo.name,
+          'api': bundleInfo.targetVersion,
+          'tokenId': bundleInfo.appInfo.accessTokenId,
+          'icon': '',
+          'iconId': bundleInfo.appInfo.iconId,
+          'iconResource': bundleInfo.appInfo.iconResource,
+          'label': '',
+          'labelId': bundleInfo.appInfo.labelId,
+          'labelResource': bundleInfo.appInfo.labelResource,
+          'permissions': reqPermissions,
+          'groupId': [],
+          'zhTag': '',
+          'indexTag': '',
+          'language': ''
+        };
+        GlobalContext.store('applicationInfo', info);
+        globalThis.windowStage.setUIContent(this.context, 'pages/application-secondary', null);
+      }).catch((error) => {
+        console.log(TAG + 'Special branch getBundleInfo failed:' + JSON.stringify(error));
+        this.context.terminateSelf();
+      });
+    } catch (error) {
+      console.error(TAG + 'Special branch failed: ' + JSON.stringify(error));
+    }
   }
 };
