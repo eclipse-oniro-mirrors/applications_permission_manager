@@ -112,7 +112,7 @@ struct SecurityDialog {
                 radius: $r('sys.float.ohos_id_corner_radius_default_m')
               })
               .padding(Constants.PADDING_10)
-            if(this.index === 1) {
+            if (this.index === 1) {
               Image(this.securityParams[this.index].icon)
                 .width(Constants.IMAGE_LENGTH_20)
                 .height(Constants.IMAGE_LENGTH_20)
