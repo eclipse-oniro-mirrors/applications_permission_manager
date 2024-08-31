@@ -68,13 +68,13 @@ export default class MainAbility extends UIAbility {
     if (globalThis.currentApp === 'all') {
       if (globalThis.currentApp !== bundleName) {
         console.log(TAG + 'MainAbility onNewWant. all -> app');
-        globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+        globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
         globalThis.currentApp = bundleName;
         GlobalContext.store('bundleName', bundleName);
         this.getSperifiedApplication(bundleName);
       } else {
         if (globalThis.refresh === true) {
-          globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+          globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
           this.getAllApplications();
           globalThis.refresh = false;
         }
@@ -82,13 +82,13 @@ export default class MainAbility extends UIAbility {
     } else {
       if (bundleName === 'all') {
         console.log(TAG + 'MainAbility onNewWant. app -> all');
-        globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+        globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
         globalThis.currentApp = 'all';
         this.getAllApplications();
       } else {
         if (globalThis.currentApp !== bundleName) {
           console.log(TAG + 'MainAbility onNewWant. app -> app');
-          globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+          globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
           globalThis.currentApp = bundleName;
           GlobalContext.store('bundleName', bundleName);
           this.getSperifiedApplication(bundleName);
@@ -147,7 +147,7 @@ export default class MainAbility extends UIAbility {
             initialGroups.push(info);
           }
           let storage: LocalStorage = new LocalStorage({ 'initialGroups': initialGroups });
-          globalThis.windowStage.loadContent('pages/authority-management', storage);
+          globalThis.windowStage?.loadContent('pages/authority-management', storage);
         }).catch((error) => {
           console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
         });
@@ -182,7 +182,7 @@ export default class MainAbility extends UIAbility {
         'language': ''
       };
       GlobalContext.store('applicationInfo', info);
-      globalThis.windowStage.setUIContent(this.context, 'pages/application-secondary', null);
+      globalThis.windowStage?.setUIContent(this.context, 'pages/application-secondary', null);
     }).catch(() => {
       console.log(TAG + 'MainAbility getSperifiedApplication failed.');
       this.context.terminateSelf();
