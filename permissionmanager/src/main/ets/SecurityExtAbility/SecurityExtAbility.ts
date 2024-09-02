@@ -20,7 +20,6 @@ import { GlobalContext } from '../common/utils/globalContext';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
-const DELAY = 100;
 
 export default class SecurityExtensionAbility extends extension {
   /**
@@ -58,12 +57,6 @@ export default class SecurityExtensionAbility extends extension {
    */
   onDestroy(): void {
     console.info(TAG + 'SecurityExtensionAbility onDestroy.');
-    try {
-      // 如果通过on注册多个callback，同时关闭所有callback监听
-      display.off('foldStatusChange');
-    } catch (exception) {
-      console.error('Failed to unregister callback. Code: ' + JSON.stringify(exception));
-    }
   }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
@@ -100,36 +93,8 @@ export default class SecurityExtensionAbility extends extension {
       console.info(TAG + 'showWindow end.');
       dialogSet.add(callerToken);
       GlobalContext.store('dialogSet', dialogSet);
-      this.monitorFold(win);
     } catch (err) {
       console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
-    }
-  }
-
-  private monitorFold(win: window.Window): void {
-    try {
-      let foldStatus = display.getFoldStatus();
-      display.on('foldStatusChange', (data) => {
-        if (data !== foldStatus) {
-          console.info(TAG + `monitor foldStatusChange: ${JSON.stringify(data)}`);
-          foldStatus = data;
-          this.windowChange(win);
-        }
-      });
-    } catch (err) {
-      console.error(TAG + `monitor foldStatusChange failed: ${JSON.stringify(err)}`);
-    }
-  }
-
-  private windowChange(win: window.Window): void {
-    try {
-      setTimeout(() => {
-        let dis = display.getDefaultDisplaySync();
-        win.resize(dis.width, dis.height);
-        win.moveWindowTo(0, 0);
-      }, DELAY);
-    } catch (err) {
-      console.error(TAG + `change window failed: ${JSON.stringify(err)}`);
     }
   }
 };
