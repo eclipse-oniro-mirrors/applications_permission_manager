@@ -81,13 +81,13 @@ export default class MainAbility extends UIAbility {
     if (globalThis.currentApp === 'all') {
       if (globalThis.currentApp !== bundleName) {
         console.log(TAG + 'MainAbility onNewWant. all -> app');
-        globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+        globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
         globalThis.currentApp = bundleName;
         GlobalContext.store('bundleName', bundleName);
         this.getSperifiedApplication(bundleName);
       } else {
         if (globalThis.refresh === true) {
-          globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+          globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
           this.getAllApplications();
           globalThis.refresh = false;
         }
@@ -95,13 +95,13 @@ export default class MainAbility extends UIAbility {
     } else {
       if (bundleName === 'all') {
         console.log(TAG + 'MainAbility onNewWant. app -> all');
-        globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+        globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
         globalThis.currentApp = 'all';
         this.getAllApplications();
       } else {
         if (globalThis.currentApp !== bundleName) {
           console.log(TAG + 'MainAbility onNewWant. app -> app');
-          globalThis.windowStage.setUIContent(this.context, 'pages/transition', null);
+          globalThis.windowStage?.setUIContent(this.context, 'pages/transition', null);
           globalThis.currentApp = bundleName;
           GlobalContext.store('bundleName', bundleName);
           this.getSperifiedApplication(bundleName);
@@ -112,9 +112,14 @@ export default class MainAbility extends UIAbility {
   }
 
   onWindowStageDestroy(): void {
-    bundleMonitor.off('add');
-    bundleMonitor.off('remove');
-    console.log(TAG + 'MainAbility onWindowStageDestroy.');
+    try {
+      bundleMonitor.off('add');
+      bundleMonitor.off('remove');
+      bundleMonitor.off('update');
+      console.log(TAG + 'MainAbility onWindowStageDestroy.');
+    } catch (err) {
+      console.log(`errData is errCode:${err.code}  message:${err.message}`);
+    }
   }
 
   onBackground(): void {
@@ -164,7 +169,7 @@ export default class MainAbility extends UIAbility {
             initialGroups.push(info);
           }
           let storage: LocalStorage = new LocalStorage({ 'initialGroups': initialGroups });
-          globalThis.windowStage.loadContent('pages/authority-management', storage);
+          globalThis.windowStage?.loadContent('pages/authority-management', storage);
         }).catch((error) => {
           console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
         });
@@ -178,33 +183,37 @@ export default class MainAbility extends UIAbility {
     const flag =
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
-    bundleManager.getBundleInfo(bundleName, flag).then(bundleInfo => {
-      let reqPermissions: Array<string> = [];
-      bundleInfo.reqPermissionDetails.forEach(item => {
-        reqPermissions.push(item.name);
-      });
+    try {
+      bundleManager.getBundleInfo(bundleName, flag).then(bundleInfo => {
+        let reqPermissions: Array<string> = [];
+        bundleInfo.reqPermissionDetails.forEach(item => {
+          reqPermissions.push(item.name);
+        });
 
-      let info = {
-        'bundleName': bundleInfo.name,
-        'api': bundleInfo.targetVersion,
-        'tokenId': bundleInfo.appInfo.accessTokenId,
-        'icon': '',
-        'iconId': bundleInfo.appInfo.iconId,
-        'iconResource': bundleInfo.appInfo.iconResource,
-        'label': '',
-        'labelId': bundleInfo.appInfo.labelId,
-        'labelResource': bundleInfo.appInfo.labelResource,
-        'permissions': reqPermissions,
-        'groupId': [],
-        'zhTag': '',
-        'indexTag': '',
-        'language': ''
-      };
-      GlobalContext.store('applicationInfo', info);
-      globalThis.windowStage.setUIContent(this.context, 'pages/application-secondary', null);
-    }).catch(() => {
-      console.log(TAG + 'MainAbility getSperifiedApplication failed.');
-      this.context.terminateSelf();
-    });
+        let info = {
+          'bundleName': bundleInfo.name,
+          'api': bundleInfo.targetVersion,
+          'tokenId': bundleInfo.appInfo.accessTokenId,
+          'icon': '',
+          'iconId': bundleInfo.appInfo.iconId,
+          'iconResource': bundleInfo.appInfo.iconResource,
+          'label': '',
+          'labelId': bundleInfo.appInfo.labelId,
+          'labelResource': bundleInfo.appInfo.labelResource,
+          'permissions': reqPermissions,
+          'groupId': [],
+          'zhTag': '',
+          'indexTag': '',
+          'language': ''
+        };
+        GlobalContext.store('applicationInfo', info);
+        globalThis.windowStage?.setUIContent(this.context, 'pages/application-secondary', null);
+      }).catch((error) => {
+        console.log(TAG + 'Special branch getBundleInfo failed:' + JSON.stringify(error));
+        this.context.terminateSelf();
+      });
+    } catch (error) {
+      console.error(TAG + 'Special branch failed: ' + JSON.stringify(error));
+    }
   }
 };
