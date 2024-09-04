@@ -130,7 +130,7 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Allow this app to access your precise location. When disabled, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
+            "value":"Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
         },
         {
             "name":"close_exact_position",

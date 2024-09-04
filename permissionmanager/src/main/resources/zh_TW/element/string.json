@@ -30,7 +30,7 @@
         },
         {
             "name":"close_exact_position",
-            "value":"停用精確位置後，應用程式取得的位置會有所偏差"
+            "value":"停用精確位置後，應用程式取得的位置會有所偏差。"
         },
         {
             "name":"precise_location",
@@ -58,7 +58,7 @@
         },
         {
             "name":"per_use_query",
-            "value":"每次使用前詢問"
+            "value":"每次使用時詢問"
         },
         {
             "name":"pasteBoard_desc",
