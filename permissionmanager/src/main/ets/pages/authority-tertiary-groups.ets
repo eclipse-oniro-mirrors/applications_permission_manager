@@ -334,12 +334,12 @@ struct applicationItem {
                     .fontColor($r('sys.color.font_secondary'))
                     .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
                 }
-                Image($r('app.media.ic_public_arrow_right'))
-                  .fillColor($r('sys.color.icon_tertiary'))
-                  .objectFit(ImageFit.Contain)
+                SymbolGlyph($r('sys.symbol.chevron_forward'))
                   .width(Constants.IMAGE_WIDTH)
                   .height(Constants.IMAGE_HEIGHT)
-                  .draggable(false)
+                  .fontSize(Constants.FONT_SIZE_18_vp)
+                  .fontColor([$r('sys.color.icon_tertiary')])
+                  .fontWeight(FontWeight.Medium)
               }
             }
             .width(Constants.FULL_WIDTH)
