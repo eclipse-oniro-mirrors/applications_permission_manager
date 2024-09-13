@@ -109,7 +109,7 @@ struct SecurityDialog {
               .border({
                 width: Constants.BORDER_WIDTH_1,
                 color: $r('app.color.icon_border'),
-                radius: $r('sys.float.ohos_id_corner_radius_default_m')
+                radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
               })
               .padding(Constants.PADDING_10)
             if (this.index === 1) {
@@ -121,7 +121,7 @@ struct SecurityDialog {
                 .border({
                   width: Constants.BORDER_WIDTH_1,
                   color: $r('app.color.icon_border'),
-                  radius: Constants.RADIUS_5
+                  radius: Constants.IMAGE_LENGTH_20 * 14 / 54
                 })
             } else {
               SymbolGlyph($r('sys.symbol.local_fill'))
@@ -135,7 +135,7 @@ struct SecurityDialog {
                 .border({
                   width: Constants.BORDER_WIDTH_1,
                   color: $r('app.color.icon_border'),
-                  radius: Constants.RADIUS_5
+                  radius: Constants.IMAGE_LENGTH_20 * 14 / 54
                 })
             }
           }
