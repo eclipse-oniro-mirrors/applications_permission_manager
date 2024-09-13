@@ -31,21 +31,17 @@ export struct backBar {
     Column() {
       Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
         Row() {
-          Image($r('app.media.ic_public_back'))
-            .fillColor($r('sys.color.icon_primary'))
-            .objectFit(ImageFit.Contain)
-            .height(Constants.BACKBAR_IMAGE_HEIGHT)
+          SymbolGlyph($r('sys.symbol.arrow_left'))
             .width(Constants.BACKBAR_IMAGE_WIDTH)
-            .draggable(false)
+            .height(Constants.BACKBAR_IMAGE_HEIGHT)
+            .fontSize(Constants.FONT_SIZE_24_vp)
+            .fontColor([$r('sys.color.icon_primary')])
+            .fontWeight(FontWeight.Medium)
         }.width(Constants.CLICK_SHADOW_LENGTH)
         .height(Constants.CLICK_SHADOW_LENGTH)
         .borderRadius($r('sys.float.ohos_id_corner_radius_clicked'))
         .alignItems(VerticalAlign.Center)
         .justifyContent(FlexAlign.Center)
-        .margin({
-          left: Constants.DEFAULT_MARGIN_START,
-          right: Constants.BACKBAR_MARGIN_RIGHT
-        })
         .backgroundColor(this.isBack ? $r('sys.color.interactive_click') : '')
         .onTouch(event => {
           if (event === undefined) {
@@ -70,6 +66,7 @@ export struct backBar {
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
           .flexGrow(Constants.FLEX_GROW)
           .fontWeight(FontWeight.Bold)
+          .margin({ left: Constants.MARGIN_4, right: Constants.MARGIN_4 })
         if (this.recordable) {
           Row() {
             Image($r('sys.media.ohos_ic_public_more'))
@@ -83,9 +80,6 @@ export struct backBar {
           .borderRadius($r('sys.float.ohos_id_corner_radius_clicked'))
           .alignItems(VerticalAlign.Center)
           .justifyContent(FlexAlign.Center)
-          .margin({
-            right: Constants.DEFAULT_MARGIN_END
-          })
           .bindMenu(this.MenuBuilder())
           .backgroundColor(this.isMore ? $r('sys.color.interactive_click') : '')
           .onTouch(event => {
@@ -101,6 +95,7 @@ export struct backBar {
           })
         }
       }
+      .margin({ left: Constants.DEFAULT_MARGIN_START, right: Constants.DEFAULT_MARGIN_END })
     }
     .height(Constants.BACKBAR_HEIGHT)
     .constraintSize({ minHeight: Constants.BACKBAR_MINHEIGHT })

@@ -71,12 +71,12 @@ struct appNameItem {
                 .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
-              Image($r('app.media.ic_public_arrow_right'))
-                .fillColor($r('sys.color.icon_tertiary'))
-                .objectFit(ImageFit.Contain)
-                .height(Constants.IMAGE_HEIGHT)
+              SymbolGlyph($r('sys.symbol.chevron_forward'))
                 .width(Constants.IMAGE_WIDTH)
-                .draggable(false)
+                .height(Constants.IMAGE_HEIGHT)
+                .fontSize(Constants.FONT_SIZE_18_vp)
+                .fontColor([$r('sys.color.icon_tertiary')])
+                .fontWeight(FontWeight.Medium)
             }
             .width(Constants.FULL_WIDTH)
             .height(Constants.LISTITEM_ROW_HEIGHT)
@@ -164,7 +164,7 @@ struct appNameItem {
               endMargin: Constants.DEFAULT_MARGIN_END
             })
           }.margin({ top: Constants.ROW_MARGIN_TOP })
-        .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.LISTITEM_PADDING_RIGHT })
+        .padding({ left: Constants.LIST_PADDING_LEFT, right: Constants.DEFAULT_PADDING_END })
       }
       .width(Constants.FULL_WIDTH)
       .height(Constants.FULL_HEIGHT)
