@@ -50,7 +50,10 @@
         },
         {
             "name":"ban",
-            "value":"བཀག་འགོག"
+            "value":"མི་ཆོག",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_document_folder",
@@ -78,7 +81,10 @@
         },
         {
             "name":"per_inquiry",
-            "value":"ཐེངས་སོ་སོར་བློ་འདྲི་བ།"
+            "value":"ཐེངས་རེར་བློ་འདྲི་བ།",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_download_folder",
@@ -94,7 +100,10 @@
         },
         {
             "name":"This_time_only",
-            "value":"ཐེངས་གཅིག་ཁ་ནར་ཆོག་པ།"
+            "value":"ཐེངས་འདི་ཁ་ོནར་ཆོག་པ།",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_health",
