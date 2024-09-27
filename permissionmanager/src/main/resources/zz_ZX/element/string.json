@@ -163,6 +163,414 @@
         {
             "name":"pasteBoard_app",
             "value":"[TS_950726]_Content copied from \"%s\". "
+        },
+        {
+            "name":"afternoon",
+            "value":"[TS_950700]_pm"
+        },
+        {
+            "name":"enable_description_location",
+            "value":"[TS_950827]_When the system location service is enabled, %s apps are allowed to obtain the location of the device."
+        },
+        {
+            "name":"groupName_microphone",
+            "value":"[TS_950697]_Microphone"
+        },
+        {
+            "name":"Desktop_folder",
+            "value":"[TS_950711]_Desktop folder"
+        },
+        {
+            "name":"groupName_calendar",
+            "value":"[TS_950820]_Calendar"
+        },
+        {
+            "name":"comma",
+            "value":"[TS_950730]_, "
+        },
+        {
+            "name":"forbidden_description_read_calendar",
+            "value":"[TS_950812]_Apps are prohibited from reading all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
+        },
+        {
+            "name":"permission_manager",
+            "value":"[TS_950705]_Permission manager"
+        },
+        {
+            "name":"groupName_bluetooth",
+            "value":"[TS_950706]_Bluetooth"
+        },
+        {
+            "name":"Document",
+            "value":"[TS_950787]_Document"
+        },
+        {
+            "name":"camera",
+            "value":"[TS_950835]_Camera"
+        },
+        {
+            "name":"groupName_camera",
+            "value":"[TS_950709]_Camera"
+        },
+        {
+            "name":"groupName_sport",
+            "value":"[TS_950724]_Fitness"
+        },
+        {
+            "name":"forbidden_description_write_contacts",
+            "value":"[TS_950796]_Apps are prohibited from modifying data about contacts stored on the device, including how often you communicate with specific individuals by making phone calls, sending emails, or otherwise. This permission allows the app to delete contact data."
+        },
+        {
+            "name":"global_desc_microphone",
+            "value":"[TS_950806]_An application is accessing the microphone. Click \"Open\" to resume normal use."
+        },
+        {
+            "name":"and",
+            "value":"[TS_950684]_ and "
+        },
+        {
+            "name":"global_desc_camera",
+            "value":"[TS_950804]_An application is accessing the camera. Click \"Open\" to resume normal use."
+        },
+        {
+            "name":"groupName_ADS",
+            "value":"[TS_950783]_Advertising tracking"
+        },
+        {
+            "name":"global_title_camera_and_microphone",
+            "value":"[TS_950747]_The camera and microphone are disabled"
+        },
+        {
+            "name":"permission",
+            "value":"[TS_950690]_Permissions"
+        },
+        {
+            "name":"close",
+            "value":"[TS_950719]_Close"
+        },
+        {
+            "name":"enable_description_ADS",
+            "value":"[TS_950754]_%s apps have been allowed to create a profile or show you personalized ads based on your AD identifier."
+        },
+        {
+            "name":"group_label_folder",
+            "value":"[TS_950763]_Allow \"%s\" access Folder?"
+        },
+        {
+            "name":"enable_description_camera",
+            "value":"[TS_950794]_%s apps have been allowed to use the camera to take photos and videos. This permission allows the app to use the camera at any time without your confirmation."
+        },
+        {
+            "name":"forbidden_description_documents",
+            "value":"[TS_950839]_Apps have been prevented from accessing files on your device."
+        },
+        {
+            "name":"groupName_folder",
+            "value":"[TS_950780]_Folder"
+        },
+        {
+            "name":"enable_description_sport",
+            "value":"[TS_950837]_%s apps have been allowed to identify your fitness movements."
+        },
+        {
+            "name":"enable_description_health",
+            "value":"[TS_950751]_%s apps have been allowed to access data from the sensors you use to measure your physical condition, such as your heart rate."
+        },
+        {
+            "name":"microphone_is_off",
+            "value":"[TS_950748]_The microphone is turned off. No application can use the microphone to record audio."
+        },
+        {
+            "name":"global_title_camera",
+            "value":"[TS_950733]_The camera is disabled"
+        },
+        {
+            "name":"period",
+            "value":"[TS_950823]_."
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"[TS_950818]_Microphone not turned on"
+        },
+        {
+            "name":"forbidden_description_ADS",
+            "value":"[TS_950833]_Apps are prohibited from creating profiles or showing you personalized ads based on your AD identifier."
+        },
+        {
+            "name":"forbidden_description_write_calendar",
+            "value":"[TS_950792]_Apps are prohibited from sending event invitations on behalf of the calendar owner, while allowing it to add, delete, and change events that you can modify on your device (including those of friends or colleagues). A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
+        },
+        {
+            "name":"forbidden_description_pasteboard",
+            "value":"[TS_950805]_Apps are prohibited from reading or writing clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
+        },
+        {
+            "name":"forbidden_description_image",
+            "value":"[TS_950765]_Apps have been blocked from accessing pictures and videos on your device."
+        },
+        {
+            "name":"close_camera_desc",
+            "value":"[TS_950764]_After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
+        },
+        {
+            "name":"close_microphone_desc",
+            "value":"[TS_950742]_After the microphone is disabled, all application services cannot use the microphone to make calls, record audio, or voice wake up. To restore data, turn on the microphone switch."
+        },
+        {
+            "name":"enable_description_distributed_datasync",
+            "value":"[TS_950721]_%s apps have been allowed to discover and access other devices for collaborative operations between multiple devices."
+        },
+        {
+            "name":"forbidden_description_read_contacts",
+            "value":"[TS_950798]_Apps are prohibited from reading data about contacts stored on your device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
+        },
+        {
+            "name":"permission_access_record",
+            "value":"[TS_950701]_Permission access record"
+        },
+        {
+            "name":"no_permission",
+            "value":"[TS_950682]_No permission"
+        },
+        {
+            "name":"enable_description_write_calendar",
+            "value":"[TS_950729]_%s apps have been allowed to send event invitations on behalf of the calendar owner, as well as to add, delete, and change events (including those of friends or colleagues) that you can modify on your device. A malicious application with this permission can pose as the calendar owner to send spam, and can also modify the activity or add fake activity without the owner's knowledge."
+        },
+        {
+            "name":"forbidden_description_folder",
+            "value":"[TS_950737]_Apps have been prevented from accessing files and folders."
+        },
+        {
+            "name":"enable_description_documents",
+            "value":"[TS_950799]_%s apps have been allowed to access files on your device."
+        },
+        {
+            "name":"morning",
+            "value":"[TS_950785]_am"
+        },
+        {
+            "name":"version",
+            "value":"[TS_950771]_Version "
+        },
+        {
+            "name":"forbidden_description_write_whole_calendar",
+            "value":"[TS_950712]_Apps are prohibited from adding, deleting, and changing all calendars."
+        },
+        {
+            "name":"groupName_appList",
+            "value":"[TS_950836]_Read the list of installed apps"
+        },
+        {
+            "name":"enable_description_read_whole_calendar",
+            "value":"[TS_950714]_%s apps are allowed to read the entire calendar."
+        },
+        {
+            "name":"Download_folder",
+            "value":"[TS_950718]_Download folder"
+        },
+        {
+            "name":"microphone",
+            "value":"[TS_950710]_Microphone"
+        },
+        {
+            "name":"groupName_health",
+            "value":"[TS_950745]_Body sensor"
+        },
+        {
+            "name":"enable_description_audios",
+            "value":"[TS_950734]_%s apps have been allowed to access music and audio on your device."
+        },
+        {
+            "name":"forbidden_description_microphone",
+            "value":"[TS_950740]_Your app has been disabled from using microphones to record audio. This permission allows the app to record audio at any time without your confirmation."
+        },
+        {
+            "name":"no_record",
+            "value":"[TS_950741]_No permission access record"
+        },
+        {
+            "name":"close_camera",
+            "value":"[TS_950685]_Turn off the camera"
+        },
+        {
+            "name":"forbidden_description_sport",
+            "value":"[TS_950762]_Apps are prohibited from recognizing your fitness exercise."
+        },
+        {
+            "name":"groupName_contacts",
+            "value":"[TS_950816]_Address book"
+        },
+        {
+            "name":"enable_description_microphone",
+            "value":"[TS_950828]_%s apps have been allowed to record audio using microphones. This permission allows the app to record audio at any time without your confirmation."
+        },
+        {
+            "name":"enable_description_read_calendar",
+            "value":"[TS_950786]_%s apps have been allowed to read all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive."
+        },
+        {
+            "name":"allowed",
+            "value":"[TS_950738]_ALLOWED"
+        },
+        {
+            "name":"open",
+            "value":"[TS_950832]_Open"
+        },
+        {
+            "name":"forbidden_description_appList",
+            "value":"[TS_950703]_Apps are prohibited from reading the list of installed applications on the local device."
+        },
+        {
+            "name":"groupName_location",
+            "value":"[TS_950772]_Location information"
+        },
+        {
+            "name":"right",
+            "value":"[TS_950725]_ permissions"
+        },
+        {
+            "name":"forbidden_description_location",
+            "value":"[TS_950688]_When the system positioning service is enabled, applications are not allowed to obtain the location of the device."
+        },
+        {
+            "name":"forbidden_description_bluetooth",
+            "value":"[TS_950743]_Apps are prohibited from using Bluetooth to find or connect to nearby devices."
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"[TS_950795]_Multi-device collaboration"
+        },
+        {
+            "name":"close_microphone",
+            "value":"[TS_950689]_Turn off the microphone"
+        },
+        {
+            "name":"global_desc_camera_and_microphone",
+            "value":"[TS_950693]_An application is accessing the camera and microphone. Click \"Open\" to resume normal use."
+        },
+        {
+            "name":"application",
+            "value":"[TS_950819]_Applications"
+        },
+        {
+            "name":"camera_is_off",
+            "value":"[TS_950752]_The camera is turned off and no apps can currently use the camera to take photos and videos."
+        },
+        {
+            "name":"forbidden_description_distributed_datasync",
+            "value":"[TS_950715]_Apps are prohibited from discovering and accessing other devices for collaborative operations between multiple devices."
+        },
+        {
+            "name":"enable_description_write_contacts",
+            "value":"[TS_950713]_%s apps have been allowed to modify data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows the app to delete contact data."
+        },
+        {
+            "name":"banned",
+            "value":"[TS_950773]_BANNED"
+        },
+        {
+            "name":"enable_description_folder",
+            "value":"[TS_950774]_%s apps have been allowed to access files and folders."
+        },
+        {
+            "name":"access_permission",
+            "value":"[TS_950694]_ access permission"
+        },
+        {
+            "name":"Document_folder",
+            "value":"[TS_950776]_Document folder"
+        },
+        {
+            "name":"separator",
+            "value":"[TS_950696]_, "
+        },
+        {
+            "name":"risk_warning",
+            "value":"[TS_950686]_Risk application does not obtain this permission"
+        },
+        {
+            "name":"forbidden_description_audios",
+            "value":"[TS_950749]_Apps have been blocked from accessing music and audio on your device."
+        },
+        {
+            "name":"enable_description_write_whole_calendar",
+            "value":"[TS_950687]_%s apps have been allowed to add, delete, and change all calendars."
+        },
+        {
+            "name":"Desktop",
+            "value":"[TS_950797]_Desktop"
+        },
+        {
+            "name":"visits",
+            "value":"[TS_950838]_Number of visits: %s"
+        },
+        {
+            "name":"enable_description_read_contacts",
+            "value":"[TS_950704]_%s apps have been allowed to read data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge."
+        },
+        {
+            "name":"forbidden_description_read_whole_calendar",
+            "value":"[TS_950770]_Apps have been prevented from reading all calendars."
+        },
+        {
+            "name":"enable_description_bluetooth",
+            "value":"[TS_950698]_%s apps have been allowed to use Bluetooth to find and connect to nearby devices."
+        },
+        {
+            "name":"recent_visit",
+            "value":"[TS_950814]_Number of visits: %s; Recent visits: %s"
+        },
+        {
+            "name":"forbidden_description_camera",
+            "value":"[TS_950821]_Apps that use cameras to take photos and videos have been banned. This permission allows the app to use the camera at any time without your confirmation."
+        },
+        {
+            "name":"enable_description_nearLink",
+            "value":"[TS_950746]_%s apps have been allowed to access NearLink."
+        },
+        {
+            "name":"record_time_limit",
+            "value":"[TS_950683]_Access records in the last 7 days"
+        },
+        {
+            "name":"forbidden_description_health",
+            "value":"[TS_950691]_Apps are prohibited from accessing data from sensors that you use to measure your physical condition, such as your heart rate."
+        },
+        {
+            "name":"groupName_other",
+            "value":"[TS_950702]_Other rights"
+        },
+        {
+            "name":"enable_description_appList",
+            "value":"[TS_950744]_%s apps are allowed to read the list of installed apps on the local device."
+        },
+        {
+            "name":"enable_description_pasteboard",
+            "value":"[TS_950758]_%s apps have been allowed to read and write clipboard information without using the system clipboard control. It is recommended to use apps that use system clipboard controls that only temporarily access the clipboard when you click to reduce the risk of private data being accessed."
+        },
+        {
+            "name":"enable_description_image",
+            "value":"[TS_950777]_%s apps have been allowed to access pictures and videos on your device."
+        },
+        {
+            "name":"Download",
+            "value":"[TS_950831]_Download"
+        },
+        {
+            "name":"groupName_nearLink",
+            "value":"[TS_950810]_NearLink"
+        },
+        {
+            "name":"textInput_placeholder",
+            "value":"[TS_950803]_Search application"
+        },
+        {
+            "name":"groupName_pasteboard",
+            "value":"[TS_950811]_Pasteboard"
+        },
+        {
+            "name":"forbidden_description_nearLink",
+            "value":"[TS_950728]_Apps have been prohibited from accessing NearLink."
         }
     ]
 }

@@ -86,67 +86,115 @@
         },
         {
             "name":"allow",
-            "value":"允许"
+            "value":"允许",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"ban",
-            "value":"禁止"
+            "value":"禁止",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"always_allow",
-            "value":"始终允许"
+            "value":"始终允许",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"per_use_query",
-            "value":"每次使用询问"
+            "value":"每次使用询问",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"per_inquiry",
-            "value":"每次询问"
+            "value":"每次询问",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"This_time_only",
-            "value":"仅本次允许"
+            "value":"仅本次允许",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"allowed_only_during_use",
-            "value":"仅使用期间允许"
+            "value":"仅使用期间允许",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"allow_this_time",
-            "value":"允许本次使用"
+            "value":"允许本次使用",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"precise_location",
-            "value":"精确位置"
+            "value":"精确位置",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"precise_location_on",
-            "value":"精确位置：开启"
+            "value":"精确位置：开启",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"precise_location_off",
-            "value":"精确位置：关闭"
+            "value":"精确位置：关闭",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"get_the_exact_position",
-            "value":"允许此应用获取您的准确位置。关闭后，应用获取的位置会有偏差，部分不支持此功能的应用可能会定位失败。"
+            "value":"允许此应用获取您的准确位置。关闭后，应用获取的位置会有偏差，部分不支持此功能的应用可能会定位失败。",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"close_exact_position",
-            "value":"关闭精确位置后，应用获取的位置会有偏差。"
+            "value":"关闭精确位置后，应用获取的位置会有偏差。",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"access_general_location",
-            "value":"允许“%s”访问大致位置？"
+            "value":"允许“%s”访问大致位置？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"fuzzy_to_exact",
-            "value":"允许“%s”的位置访问权限从“大致位置”改为“精确位置”？"
+            "value":"允许“%s”的位置访问权限从“大致位置”改为“精确位置”？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"cancel",
-            "value":"取消"
+            "value":"取消",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"open",
@@ -214,11 +262,17 @@
         },
         {
             "name":"pasteBoard_app",
-            "value":"内容复制自“%s”。"
+            "value":"内容复制自“%s”。",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"pasteBoard_desc",
-            "value":"禁止后将不再允许此应用访问剪贴板。"
+            "value":"禁止后将不再允许此应用访问剪贴板。",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"groupName_location",
@@ -282,63 +336,108 @@
         },
         {
             "name":"group_label_location",
-            "value":"允许“%s”访问你的位置？"
+            "value":"允许“%s”访问你的位置？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_camera",
-            "value":"允许“%s”访问你的相机？"
+            "value":"允许“%s”访问你的相机？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_microphone",
-            "value":"允许“%s”访问你的麦克风？"
+            "value":"允许“%s”访问你的麦克风？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_contacts",
-            "value":"允许“%s”访问通讯录？"
+            "value":"允许“%s”访问通讯录？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_calendar",
-            "value":"允许“%s”访问日历？"
+            "value":"允许“%s”访问日历？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_sport",
-            "value":"允许“%s”访问运动数据？"
+            "value":"允许“%s”访问运动数据？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_health",
-            "value":"允许“%s”使用传感器获取你的身体数据？"
+            "value":"允许“%s”使用传感器获取你的身体数据？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_distributed_datasync",
-            "value":"允许“%s”使用多设备协同？"
+            "value":"允许“%s”使用多设备协同？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_image_and_videos",
-            "value":"允许“%s”访问图片和视频？"
+            "value":"允许“%s”访问图片和视频？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_audios",
-            "value":"允许“%s”访问音乐和音频？"
+            "value":"允许“%s”访问音乐和音频？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_document",
-            "value":"允许“%s”访问文件？"
+            "value":"允许“%s”访问文件？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_ADS",
-            "value":"允许“%s”访问广告跟踪？"
+            "value":"允许“%s”访问广告跟踪？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_appList",
-            "value":"允许“%s”读取已安装应用列表？"
+            "value":"允许“%s”读取已安装应用列表？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_bluetooth",
-            "value":"允许“%s”访问蓝牙？"
+            "value":"允许“%s”访问蓝牙？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_pasteboard",
-            "value":"允许“%s”复制来自剪贴板的内容？"
+            "value":"允许“%s”复制来自剪贴板的内容？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_folder",
@@ -346,19 +445,31 @@
         },
         {
             "name":"group_label_download_folder",
-            "value":"允许“%s”访问“下载”文件夹？"
+            "value":"允许“%s”访问“下载”文件夹？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_desktop_folder",
-            "value":"允许“%s”访问“桌面”文件夹？"
+            "value":"允许“%s”访问“桌面”文件夹？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_document_folder",
-            "value":"允许“%s”访问“文档”文件夹？"
+            "value":"允许“%s”访问“文档”文件夹？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_nearLink",
-            "value":"允许“%s”访问星闪？"
+            "value":"允许“%s”访问星闪？",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"enable_description_location",
@@ -534,19 +645,31 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"安全访问位置"
+            "value":"安全访问位置",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"SecurityTitle_mediaFiles",
-            "value":"安全保存图片和视频"
+            "value":"安全保存图片和视频",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"SecurityDescription_location",
-            "value":"仅允许“%s”在你点击此按钮时访问位置，无法持续获取你的隐私数据。"
+            "value":"仅允许“%s”在你点击此按钮时访问位置，无法持续获取你的隐私数据。",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"SecurityDescription_mediaFiles",
-            "value":"仅允许“%s”在你点击此按钮时保存图片和视频至图库，无法持续获取你的隐私数据。"
+            "value":"仅允许“%s”在你点击此按钮时保存图片和视频至图库，无法持续获取你的隐私数据。",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"Download",

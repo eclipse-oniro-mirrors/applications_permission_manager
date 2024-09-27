@@ -86,67 +86,115 @@
         },
         {
             "name":"allow",
-            "value":"Allow"
+            "value":"Allow",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"ban",
-            "value":"Deny"
+            "value":"Deny",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"always_allow",
-            "value":"Always allow"
+            "value":"Always allow",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"per_use_query",
-            "value":"Ask each time"
+            "value":"Ask each time",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"per_inquiry",
-            "value":"Ask each time"
+            "value":"Ask each time",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"This_time_only",
-            "value":"Allow this time only"
+            "value":"Allow this time only",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"allowed_only_during_use",
-            "value":"Allow while using the app"
+            "value":"Allow while using the app",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"allow_this_time",
-            "value":"Allow this time only"
+            "value":"Allow this time only",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"precise_location",
-            "value":"Precise location"
+            "value":"Precise location",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"precise_location_on",
-            "value":"Precise location: On"
+            "value":"Precise location: On",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"precise_location_off",
-            "value":"Precise location: Off"
+            "value":"Precise location: Off",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"get_the_exact_position",
-            "value":"Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
+            "value":"Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location.",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"close_exact_position",
-            "value":"When Precise location is disabled, the app can only get your approximate location."
+            "value":"When Precise location is disabled, the app can only get your approximate location.",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"access_general_location",
-            "value":"Allow %s to access this device's approximate location?"
+            "value":"Allow %s to access this device's approximate location?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"fuzzy_to_exact",
-            "value":"Change %s's location access from approximate to precise?"
+            "value":"Change %s's location access from approximate to precise?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"cancel",
-            "value":"Cancel"
+            "value":"Cancel",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"open",
@@ -214,11 +262,17 @@
         },
         {
             "name":"pasteBoard_app",
-            "value":"Content copied from \"%s\". "
+            "value":"Content copied from \"%s\". ",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"pasteBoard_desc",
-            "value":"If denied, this app won't be able to access the clipboard."
+            "value":"If denied, this app won't be able to access the clipboard.",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"groupName_location",
@@ -282,63 +336,108 @@
         },
         {
             "name":"group_label_location",
-            "value":"Allow %s to access this device's location?"
+            "value":"Allow %s to access this device's location?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_camera",
-            "value":"Allow %s to use the camera?"
+            "value":"Allow %s to use the camera?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_microphone",
-            "value":"Allow %s to use the microphone?"
+            "value":"Allow %s to use the microphone?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_contacts",
-            "value":"Allow %s to access your contacts?"
+            "value":"Allow %s to access your contacts?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_calendar",
-            "value":"Allow %s to access your calendar?"
+            "value":"Allow %s to access your calendar?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_sport",
-            "value":"Allow %s to access your physical activity data?"
+            "value":"Allow %s to access your physical activity data?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_health",
-            "value":"Allow %s to use body sensors?"
+            "value":"Allow %s to use body sensors?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_distributed_datasync",
-            "value":"Allow %s to collaborate with other devices?"
+            "value":"Allow %s to collaborate with other devices?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_image_and_videos",
-            "value":"Allow %s to access images and videos on your device?"
+            "value":"Allow %s to access images and videos on your device?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_audios",
-            "value":"Allow %s to access music and audio files on your device?"
+            "value":"Allow %s to access music and audio files on your device?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_document",
-            "value":"Allow %s to access files on your device?"
+            "value":"Allow %s to access files on your device?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_ADS",
-            "value":"Allow %s to track your activity across other apps?"
+            "value":"Allow %s to track your activity across other apps?",
+            "attr":{
+                "priority":"translate"
+            }
         },
         {
             "name":"group_label_appList",
-            "value":"Allow %s to read the list of installed apps?"
+            "value":"Allow %s to read the list of installed apps?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_bluetooth",
-            "value":"Allow %s to use Bluetooth?"
+            "value":"Allow %s to use Bluetooth?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_pasteboard",
-            "value":"Allow %s to copy content from the clipboard?"
+            "value":"Allow %s to copy content from the clipboard?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_folder",
@@ -346,19 +445,31 @@
         },
         {
             "name":"group_label_download_folder",
-            "value":"Allow %s to access the \"Downloads\" folder on your device?"
+            "value":"Allow %s to access the \"Downloads\" folder on your device?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_desktop_folder",
-            "value":"Allow %s to access the \"Home screen\" folder on your device?"
+            "value":"Allow %s to access the \"Home screen\" folder on your device?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_document_folder",
-            "value":"Allow %s to access the \"Documents\" folder on your device?"
+            "value":"Allow %s to access the \"Documents\" folder on your device?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"group_label_nearLink",
-            "value":"Allow %s to use NearLink?"
+            "value":"Allow %s to use NearLink?",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"enable_description_location",
@@ -534,19 +645,31 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Private access to location"
+            "value":"Private access to location",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"SecurityTitle_mediaFiles",
-            "value":"Private access to Gallery"
+            "value":"Private access to Gallery",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"SecurityDescription_location",
-            "value":"To protect your privacy, %s can only briefly access your location when you tap Allow."
+            "value":"To protect your privacy, %s can only briefly access your location when you tap Allow.",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"SecurityDescription_mediaFiles",
-            "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow."
+            "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow.",
+            "attr":{
+                "priority":"LT"
+            }
         },
         {
             "name":"Download",
