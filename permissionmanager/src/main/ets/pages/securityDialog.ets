@@ -140,7 +140,7 @@ struct SecurityDialog {
             }
           }
           .backgroundColor($r('app.color.icon_bg'))
-          .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
+          .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
           Column() { // content
             Column() {
               Text(this.securityParams[this.index].label)
