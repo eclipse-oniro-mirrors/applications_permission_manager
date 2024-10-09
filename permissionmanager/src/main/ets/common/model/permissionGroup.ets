@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { PermissionInfo, GroupInfo } from '../utils/typedef';
+import { PermissionInfo, GroupInfo } from './typedef';
 
 export const permissionGroups: PermissionInfo[] = [
     new PermissionInfo('ohos.permission.LOCATION_IN_BACKGROUND', 'LOCATION', $r('sys.string.ohos_lab_location_in_background'), 0),

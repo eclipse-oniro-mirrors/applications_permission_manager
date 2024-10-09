@@ -29,7 +29,7 @@ import {
   getFontSizeScale,
   getLimitFontSize
 } from '../common/utils/utils';
-import { GroupInfo, WantInfo } from '../common/utils/typedef';
+import { GroupInfo, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { showSubPermissionsGroup, userGrantPermissions } from '../common/model/permissionGroup';

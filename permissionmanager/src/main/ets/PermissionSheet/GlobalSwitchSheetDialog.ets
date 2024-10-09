@@ -19,7 +19,7 @@ import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, PermissionDialogException, PermissionDialogReturn } from '../common/utils/utils';
-import { GroupInfo, WantInfo } from '../common/utils/typedef';
+import { GroupInfo, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { globalGroup, groups } from '../common/model/permissionGroup';

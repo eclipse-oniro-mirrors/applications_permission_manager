@@ -22,7 +22,7 @@ import { BusinessError } from '@ohos.base';
 import { groups, userGrantPermissions } from '../common/model/permissionGroup';
 import Constants from '../common/utils/constant';
 import { Log, verifyAccessToken, getGroupIdByPermission } from '../common/utils/utils';
-import { PermissionObj, AppInfo } from '../common/utils/typedef';
+import { PermissionObj, AppInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';

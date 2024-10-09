@@ -24,7 +24,7 @@ import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
 import { groups, userGrantPermissions, globalGroup, permissionGroups, showSubPermissionsGroup } from '../common/model/permissionGroup';
 import { Log, indexValue, getPermissionGroupByName, getGroupIdByPermission, addLocalTag, sortByName } from '../common/utils/utils';
-import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/utils/typedef';
+import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import bundleManager from '@ohos.bundle.bundleManager';

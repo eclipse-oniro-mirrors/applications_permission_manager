@@ -18,7 +18,7 @@ import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
 import { verifyAccessToken } from '../common/utils/utils';
-import { OtherPermission, RouterParams3 } from '../common/utils/typedef';
+import { OtherPermission, RouterParams3 } from '../common/model/typedef';
 import { Permissions } from '@ohos.abilityAccessCtrl';
 
 let status: number = (router.getParams() as RouterParams3).status; // Status: Allowed, Forbidden

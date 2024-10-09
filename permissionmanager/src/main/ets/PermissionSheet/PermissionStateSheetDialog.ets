@@ -25,7 +25,7 @@ import {
 import { AppInfo, CallerBundleInfo,
   CheckboxInfo,
   MediaDocObj,
-  WantInfo } from '../common/utils/typedef';
+  WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { groups, showSubPermissionsGroup } from '../common/model/permissionGroup';

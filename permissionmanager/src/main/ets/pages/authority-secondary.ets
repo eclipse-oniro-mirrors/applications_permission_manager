@@ -17,7 +17,7 @@ import { backBar } from '../common/components/backBar';
 import { permissionGroups, groups } from '../common/model/permissionGroup';
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
-import { CalendarObj, RouterParams1, PermissionApplications } from '../common/utils/typedef';
+import { CalendarObj, RouterParams1, PermissionApplications } from '../common/model/typedef';
 
 @Entry
 @Component
