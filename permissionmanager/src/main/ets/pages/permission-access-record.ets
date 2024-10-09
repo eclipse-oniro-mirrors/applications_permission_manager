@@ -22,7 +22,14 @@ import { backBar } from '../common/components/backBar';
 import Constants from '../common/utils/constant';
 import { userGrantPermissions } from '../common/model/permissionGroup';
 import { Log, getPermissionGroup, getGroupIdByPermission } from '../common/utils/utils';
-import { StringObj, AppInfoSimple, AppRecordInfo, AppInfo, GroupRecordInfo, AppGroupRecordInfo } from '../common/utils/typedef';
+import {
+  StringObj,
+  AppInfoSimple,
+  AppRecordInfo,
+  AppInfo,
+  GroupRecordInfo,
+  AppGroupRecordInfo
+} from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 @Extend(Image)function customizeImage(width: number, height: number) {

@@ -24,7 +24,7 @@ import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
-import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppInfo } from '../common/utils/typedef';
+import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';

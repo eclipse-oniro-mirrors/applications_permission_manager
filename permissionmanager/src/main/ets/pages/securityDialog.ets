@@ -24,7 +24,7 @@ import {
   getFontSizeScale,
   getLimitFontSize
 } from '../common/utils/utils';
-import { Param, WantInfo } from '../common/utils/typedef';
+import { Param, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 let storage = LocalStorage.getShared();

@@ -16,7 +16,7 @@
 import Constants from '../utils/constant';
 import { indexValue, sortByName } from '../utils/utils';
 import { GlobalContext } from '../utils/globalContext';
-import { AppInfo, ApplicationObj } from '../utils/typedef';
+import { AppInfo, ApplicationObj } from '../model/typedef';
 
 @Component
 export struct alphabetIndexerComponent {

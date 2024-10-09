@@ -14,7 +14,7 @@
  */
 
 import Constants from '../utils/constant';
-import { AppInfo, ApplicationObj } from '../utils/typedef';
+import { AppInfo, ApplicationObj } from '../model/typedef';
 
 @Component
 export struct textInput {

@@ -20,7 +20,7 @@ import { permissionGroups, groups } from '../model/permissionGroup';
 import Constants from '../utils/constant';
 import { BundleInfoUtils } from './bundleInfoUtils';
 import { CommonUtils } from './commonUtils';
-import { GroupInfo, AppInfo, ApplicationObj, PermissionInfo } from './typedef';
+import { GroupInfo, AppInfo, ApplicationObj, PermissionInfo } from '../model/typedef';
 import systemParameterEnhance from '@ohos.systemParameterEnhance';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import uiExtensionHost from '@ohos.uiExtensionHost';

@@ -20,7 +20,13 @@ import router from '@ohos.router';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
-import { ApplicationObj, PermissionInfo, RouterParams2, PermissionApplications, AppInfo } from '../common/utils/typedef';
+import {
+  ApplicationObj,
+  PermissionInfo,
+  RouterParams2,
+  PermissionApplications,
+  AppInfo
+} from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
