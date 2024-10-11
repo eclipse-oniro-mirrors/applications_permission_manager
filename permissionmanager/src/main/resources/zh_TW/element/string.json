@@ -282,9 +282,9 @@
         },
         {
             "name":"pasteBoard_app",
-            "value":"內容複製自「%s」。",
+            "value":"內容複製自「%s」。禁止後，將不再允許此應用程式存取剪貼簿。",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         }
     ]

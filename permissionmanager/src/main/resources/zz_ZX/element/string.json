@@ -162,7 +162,7 @@
         },
         {
             "name":"pasteBoard_app",
-            "value":"[TS_950726]_Content copied from \"%s\". "
+            "value":"[TS_950726]_Content copied from %s. If you choose Deny, this app won't be able to access the clipboard."
         },
         {
             "name":"afternoon",

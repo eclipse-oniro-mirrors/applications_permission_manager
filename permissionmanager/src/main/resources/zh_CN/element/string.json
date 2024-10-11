@@ -262,7 +262,7 @@
         },
         {
             "name":"pasteBoard_app",
-            "value":"内容复制自“%s”。",
+            "value":"内容复制自“%s”。禁止后将不再允许此应用访问剪贴板。",
             "attr":{
                 "priority":"translate"
             }
