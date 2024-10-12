@@ -147,8 +147,9 @@ struct dialogPlusPage {
                     } else if (this.currentGroup().name === 'PASTEBOARD') {
                       if (this.pasteBoardName) {
                         Span($r('app.string.pasteBoard_app', this.pasteBoardName))
+                      } else {
+                        Span($r('app.string.pasteBoard_desc'))
                       }
-                      Span($r('app.string.pasteBoard_desc'))
                     } else {
                       if (this.currentGroup().description.length > 0) {
                         ForEach(this.currentGroup().description, (item: ResourceStr) => {
