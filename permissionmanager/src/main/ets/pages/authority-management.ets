@@ -50,16 +50,16 @@ struct authorityManagementPage {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
               Image(item.icon)
-                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .fillColor($r('sys.color.icon_secondary'))
                 .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                 .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
               Text(item.groupName)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontWeight(FontWeight.Medium)
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontColor($r('sys.color.font_primary'))
                 .flexGrow(Constants.FLEX_GROW)
               Image($r('app.media.ic_public_arrow_right'))
-                .fillColor($r('sys.color.ohos_id_color_tertiary'))
+                .fillColor($r('sys.color.icon_tertiary'))
                 .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
             }
             .width(Constants.FULL_WIDTH)
@@ -117,7 +117,7 @@ struct authorityManagementPage {
       } : {
         angle: 90,
         direction: GradientDirection.Right,
-        colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
+        colors: [[$r('sys.color.comp_background_list_card'), 1], [$r('sys.color.comp_background_list_card'), 1]]
       })
     .onTouch(event => {
       if (event === undefined) {
@@ -152,7 +152,7 @@ struct authorityManagementPage {
         .fontColor(
           this.currentIndex == index ?
           $r('sys.color.ohos_id_color_subtab_text_on') :
-          $r('sys.color.ohos_id_color_secondary')
+          $r('sys.color.icon_secondary')
         )
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -449,13 +449,13 @@ struct authorityManagementPage {
                                           (item: GroupPermission) => { this.ListItemLayout(item) },
                                           (item: GroupPermission) => JSON.stringify(item)
                                         )
-                                      }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                                      }.backgroundColor($r('sys.color.comp_background_list_card'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                       .divider({
                                         strokeWidth: Constants.DIVIDER,
-                                        color: $r('sys.color.ohos_id_color_list_separator'),
+                                        color: $r('sys.color.comp_divider'),
                                         startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                         endMargin: Constants.DEFAULT_MARGIN_END
                                       })
@@ -468,13 +468,13 @@ struct authorityManagementPage {
                                           (item: GroupPermission) => { this.ListItemLayout(item) },
                                           (item: GroupPermission) => JSON.stringify(item)
                                         )
-                                      }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                                      }.backgroundColor($r('sys.color.comp_background_list_card'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                       .divider({
                                         strokeWidth: Constants.DIVIDER,
-                                        color: $r('sys.color.ohos_id_color_list_separator'),
+                                        color: $r('sys.color.comp_divider'),
                                         startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                         endMargin: Constants.DEFAULT_MARGIN_END
                                       })
@@ -490,13 +490,13 @@ struct authorityManagementPage {
                                             (item: GroupPermission) => { this.ListItemLayout(item) },
                                             (item: GroupPermission) => JSON.stringify(item)
                                           )
-                                        }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                                        }.backgroundColor($r('sys.color.comp_background_list_card'))
                                         .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                         .padding(Constants.LIST_PADDING_TOP)
                                         .margin({ bottom: Constants.LIST_MARGIN_BOTTOM })
                                         .divider({
                                           strokeWidth: Constants.DIVIDER,
-                                          color: $r('sys.color.ohos_id_color_list_separator'),
+                                          color: $r('sys.color.comp_divider'),
                                           startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                           endMargin: Constants.DEFAULT_MARGIN_END
                                         })
@@ -510,12 +510,12 @@ struct authorityManagementPage {
                                           (item: GroupPermission) => { this.ListItemLayout(item) },
                                           (item: GroupPermission) => JSON.stringify(item)
                                         )
-                                      }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                                      }.backgroundColor($r('sys.color.comp_background_list_card'))
                                       .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                       .padding(Constants.LIST_PADDING_TOP)
                                       .divider({
                                         strokeWidth: Constants.DIVIDER,
-                                        color: $r('sys.color.ohos_id_color_list_separator'),
+                                        color: $r('sys.color.comp_divider'),
                                         startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
                                         endMargin: Constants.DEFAULT_MARGIN_END
                                       })
@@ -553,9 +553,9 @@ struct authorityManagementPage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+        .backgroundColor($r('sys.color.background_secondary'))
       }
-    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+    }.backgroundColor($r('sys.color.background_secondary'))
   }
 }
 
@@ -582,17 +582,17 @@ struct applicationItem {
                 .textOverflow({ overflow: TextOverflow.Ellipsis })
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                 .fontWeight(FontWeight.Medium)
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontColor($r('sys.color.font_primary'))
                 .flexGrow(Constants.FLEX_GROW)
               Text(String(item.groupId.length))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .fontColor($r('sys.color.font_secondary'))
               Text($r('app.string.right'))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .fontColor($r('sys.color.font_secondary'))
                 .margin({ right: Constants.APPLICATION_TEXT_MARGIN_RIGHT })
               Image($r('app.media.ic_public_arrow_right'))
-                .fillColor($r('sys.color.ohos_id_color_tertiary'))
+                .fillColor($r('sys.color.icon_tertiary'))
                 .customizeImage(Constants.IMAGE_WIDTH, Constants.IMAGE_HEIGHT)
             }
             .width(Constants.FULL_WIDTH)
@@ -613,7 +613,7 @@ struct applicationItem {
        } : {
          angle: 90,
          direction: GradientDirection.Right,
-         colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
+         colors: [[$r('sys.color.comp_background_list_card'), 1], [$r('sys.color.comp_background_list_card'), 1]]
        })
     .onTouch(event => {
       if (event === undefined) {
@@ -658,12 +658,12 @@ struct applicationItem {
                     ForEach(sortByName(this.applicationItem), (item: AppInfo) => {
                       this.ListItemLayout(item)
                     }, (item: AppInfo) => JSON.stringify(item))
-                  }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                  }.backgroundColor($r('sys.color.comp_background_list_card'))
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding(Constants.LIST_PADDING_TOP)
                   .divider({
                     strokeWidth: Constants.DIVIDER,
-                    color: $r('sys.color.ohos_id_color_list_separator'),
+                    color: $r('sys.color.comp_divider'),
                     startMargin: Constants.DIVIDER_MARGIN_RIGHT_APPLICATION,
                     endMargin: Constants.DEFAULT_MARGIN_END
                   })

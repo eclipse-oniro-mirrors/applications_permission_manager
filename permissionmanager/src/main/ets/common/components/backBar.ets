@@ -32,7 +32,7 @@ export struct backBar {
       Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
         Row() {
           Image($r('app.media.ic_public_back'))
-            .fillColor($r('sys.color.ohos_id_color_primary'))
+            .fillColor($r('sys.color.icon_primary'))
             .objectFit(ImageFit.Contain)
             .height(Constants.BACKBAR_IMAGE_HEIGHT)
             .width(Constants.BACKBAR_IMAGE_WIDTH)
@@ -46,7 +46,7 @@ export struct backBar {
           left: Constants.DEFAULT_MARGIN_START,
           right: Constants.BACKBAR_MARGIN_RIGHT
         })
-        .backgroundColor(this.isBack ? $r('sys.color.ohos_id_color_click_effect') : '')
+        .backgroundColor(this.isBack ? $r('sys.color.interactive_click') : '')
         .onTouch(event => {
           if (event === undefined) {
             return;
@@ -64,7 +64,7 @@ export struct backBar {
         })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
           .maxLines(Constants.MAXIMUM_HEADER_LINES)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
@@ -73,7 +73,7 @@ export struct backBar {
         if (this.recordable) {
           Row() {
             Image($r('sys.media.ohos_ic_public_more'))
-              .fillColor($r('sys.color.ohos_id_color_primary'))
+              .fillColor($r('sys.color.icon_primary'))
               .objectFit(ImageFit.Contain)
               .height(Constants.BACKBAR_IMAGE_WIDTH)
               .width(Constants.BACKBAR_IMAGE_HEIGHT)
@@ -87,7 +87,7 @@ export struct backBar {
             right: Constants.DEFAULT_MARGIN_END
           })
           .bindMenu(this.MenuBuilder())
-          .backgroundColor(this.isMore ? $r('sys.color.ohos_id_color_click_effect') : '')
+          .backgroundColor(this.isMore ? $r('sys.color.interactive_click') : '')
           .onTouch(event => {
             if (event === undefined) {
               return;
@@ -106,7 +106,7 @@ export struct backBar {
     .constraintSize({ minHeight: Constants.BACKBAR_MINHEIGHT })
     .alignItems(HorizontalAlign.Start)
     .justifyContent(FlexAlign.Center)
-    .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 
   @Builder MenuBuilder() {
@@ -115,7 +115,7 @@ export struct backBar {
         Text($r('app.string.permission_access_record'))
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
       }.constraintSize({ minWidth: Constants.MAXIMUM_HEADER_WIDTH })
       .height(Constants.LISTITEM_ROW_HEIGHT)
       .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
@@ -127,7 +127,7 @@ export struct backBar {
         } : {
           angle: 90,
           direction: GradientDirection.Right,
-          colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
+          colors: [[$r('sys.color.comp_background_list_card'), 1], [$r('sys.color.comp_background_list_card'), 1]]
         })
       .onTouch(event => {
         if (event === undefined) {

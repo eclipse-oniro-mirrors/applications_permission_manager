@@ -47,9 +47,9 @@ struct appNamePage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+        .backgroundColor($r('sys.color.background_secondary'))
       }
-    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+    }.backgroundColor($r('sys.color.background_secondary'))
   }
 }
 
@@ -68,11 +68,11 @@ struct appNameItem {
             Row() {
               Text(item.label)
                 .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Medium)
                 .flexGrow(Constants.FLEX_GROW)
               Image($r('app.media.ic_public_arrow_right'))
-                .fillColor($r('sys.color.ohos_id_color_tertiary'))
+                .fillColor($r('sys.color.icon_tertiary'))
                 .objectFit(ImageFit.Contain)
                 .height(Constants.IMAGE_HEIGHT)
                 .width(Constants.IMAGE_WIDTH)
@@ -100,7 +100,7 @@ struct appNameItem {
        } : {
          angle: 90,
          direction: GradientDirection.Right,
-         colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
+         colors: [[$r('sys.color.comp_background_list_card'), 1], [$r('sys.color.comp_background_list_card'), 1]]
        })
     .onTouch(event => {
       if (event === undefined) {
@@ -147,19 +147,19 @@ struct appNameItem {
                   Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
                     Text($r('app.string.no_permission'))
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                      .fontColor($r('sys.color.font_primary'))
                   }
                 }
                 .width(Constants.FULL_WIDTH)
                 .height(Constants.LISTITEM_ROW_HEIGHT)
                 .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
               }
-            }.backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+            }.backgroundColor($r('sys.color.comp_background_list_card'))
             .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .padding(Constants.LIST_PADDING_TOP)
             .divider({
               strokeWidth: Constants.DIVIDER,
-              color: $r('sys.color.ohos_id_color_list_separator'),
+              color: $r('sys.color.comp_divider'),
               startMargin: Constants.DEFAULT_MARGIN_START,
               endMargin: Constants.DEFAULT_MARGIN_END
             })

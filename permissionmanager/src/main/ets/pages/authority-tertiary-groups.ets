@@ -77,9 +77,9 @@ struct locationInfoPage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+        .backgroundColor($r('sys.color.background_secondary'))
       }
-    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+    }.backgroundColor($r('sys.color.background_secondary'))
   }
 
   onPageShow() {
@@ -227,7 +227,7 @@ struct applicationItem {
       Column() {
         Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Medium)
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
           .width(Constants.FULL_WIDTH)
@@ -238,7 +238,7 @@ struct applicationItem {
           $r('app.string.close_microphone_desc')
         )
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-          .fontColor($r('sys.color.ohos_id_color_text_primary'))
+          .fontColor($r('sys.color.font_primary'))
           .lineHeight(Constants.TEXT_LINE_HEIGHT)
       }
       .clip(true)
@@ -264,18 +264,18 @@ struct applicationItem {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
-                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  .fontColor($r('sys.color.font_primary'))
                 if (this.isRisk[item.index]) {
                   Text($r('app.string.risk_warning'))
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                    .fontColor($r('sys.color.font_secondary'))
                 }
               }.flexGrow(Constants.FLEX_GROW)
               .alignItems(HorizontalAlign.Start)
               if (polymorphismGroup.indexOf(this.currentGroup) == -1) {
                 Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
-                  .selectedColor($r('sys.color.ohos_id_color_toolbar_icon_actived'))
-                  .switchPointColor($r('sys.color.ohos_id_color_foreground_contrary'))
+                  .selectedColor($r('sys.color.icon_emphasize'))
+                  .switchPointColor($r('sys.color.comp_background_primary_contrary'))
                   .padding({ right: 0 })
                   .width(Constants.AUTHORITY_TOGGLE_WIDTH)
                   .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
@@ -326,16 +326,16 @@ struct applicationItem {
                     }
                   }
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                    .fontColor($r('sys.color.font_secondary'))
                     .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
                 } else {
                   Text(locationStatus[this.polymorphismIsOn[item.index]])
                     .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                    .fontColor($r('sys.color.font_secondary'))
                     .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
                 }
                 Image($r('app.media.ic_public_arrow_right'))
-                  .fillColor($r('sys.color.ohos_id_color_tertiary'))
+                  .fillColor($r('sys.color.icon_tertiary'))
                   .objectFit(ImageFit.Contain)
                   .width(Constants.IMAGE_WIDTH)
                   .height(Constants.IMAGE_HEIGHT)
@@ -385,7 +385,7 @@ struct applicationItem {
       } : {
         angle: 90,
         direction: GradientDirection.Right,
-        colors: [[$r('sys.color.ohos_id_color_list_card_bg'), 1], [$r('sys.color.ohos_id_color_list_card_bg'), 1]]
+        colors: [[$r('sys.color.comp_background_list_card'), 1], [$r('sys.color.comp_background_list_card'), 1]]
       })
     .onTouch(event => {
       if (event === undefined) {
@@ -577,12 +577,12 @@ struct applicationItem {
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                 Text(this.currentGroup == 'CAMERA' ? $r('app.string.camera') : $r('app.string.microphone'))
-                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('sys.color.font_primary'))
                   .fontWeight(FontWeight.Medium)
                 Row() {
                   Toggle({ type: ToggleType.Switch, isOn: this.globalIsOn })
-                    .selectedColor($r('sys.color.ohos_id_color_toolbar_icon_actived'))
-                    .switchPointColor($r('sys.color.ohos_id_color_foreground_contrary'))
+                    .selectedColor($r('sys.color.icon_emphasize'))
+                    .switchPointColor($r('sys.color.comp_background_primary_contrary'))
                     .padding({ right: 0 })
                     .onChange((isOn: boolean) => {
                       if (isOn) {
@@ -608,7 +608,7 @@ struct applicationItem {
               }.height(Constants.LISTITEM_ROW_HEIGHT)
               .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
             }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-            .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+            .backgroundColor($r('sys.color.comp_background_list_card'))
             .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
           }
@@ -621,12 +621,12 @@ struct applicationItem {
                   ''
                 )
                   .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .fontColor($r('sys.color.font_secondary'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
               } else {
                 Text(this.groupInfo.forbiddenDescription)
                   .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .fontColor($r('sys.color.font_secondary'))
                   .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
               }
             } else {
@@ -636,7 +636,7 @@ struct applicationItem {
                 $r('app.string.microphone_is_off')
               )
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                .fontColor($r('sys.color.font_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
             }
           }.padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
@@ -664,12 +664,12 @@ struct applicationItem {
                       this.ListItemLayout(item)
                     }, (item: ApplicationObj) => JSON.stringify(item))
                   }
-                  .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+                  .backgroundColor($r('sys.color.comp_background_list_card'))
                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                   .padding(Constants.LIST_PADDING_TOP)
                   .divider({
                     strokeWidth: Constants.DIVIDER,
-                    color: $r('sys.color.ohos_id_color_list_separator'),
+                    color: $r('sys.color.comp_divider'),
                     startMargin: Constants.DIVIDER_MARGIN_RIGHT_APPLICATION,
                     endMargin: Constants.DEFAULT_MARGIN_END
                   })

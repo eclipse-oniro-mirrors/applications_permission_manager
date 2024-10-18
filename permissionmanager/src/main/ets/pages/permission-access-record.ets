@@ -63,7 +63,7 @@ struct permissionRecordPage {
         .fontColor(
           this.currentIndex == index ?
           $r('sys.color.ohos_id_color_subtab_text_on') :
-          $r('sys.color.ohos_id_color_secondary')
+          $r('sys.color.icon_secondary')
         )
         .fontWeight(this.currentIndex == index ? FontWeight.Bold : FontWeight.Regular)
         .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -74,7 +74,7 @@ struct permissionRecordPage {
           .fontWeight(FontWeight.Bold)
           .lineHeight(Constants.TAB_LINE_HEIGHT)
           .height(Constants.TAB_DECORATION_HEIGHT)
-          .backgroundColor($r('sys.color.ohos_id_color_subtab_line_on'))
+          .backgroundColor($r('sys.color.comp_background_emphasize'))
       }
     }.height(Constants.TAB_HEIGHT)
     .width(Constants.FULL_WIDTH)
@@ -89,7 +89,7 @@ struct permissionRecordPage {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
               Image(item.icon)
-                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .fillColor($r('sys.color.icon_secondary'))
                 .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                 .margin({
                   right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD,
@@ -102,17 +102,17 @@ struct permissionRecordPage {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
-                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  .fontColor($r('sys.color.font_primary'))
                   .lineHeight(Constants.TEXT_LINE_HEIGHT)
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                 Text($r('app.string.visits', String(item.sum)))
                   .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                  .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                  .fontColor($r('sys.color.font_secondary'))
                   .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
               }.flexGrow(Constants.FLEX_GROW)
               .alignItems(HorizontalAlign.Start)
               Image(index == this.permissionIndex ? $r('app.media.xiangshangjiantou') : $r('app.media.xiangxiajiantou'))
-                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .fillColor($r('sys.color.icon_secondary'))
                 .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
             }
             .width(Constants.FULL_WIDTH)
@@ -135,7 +135,7 @@ struct permissionRecordPage {
                     .margin({ right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT })
                   Column() {
                     Row().width(Constants.FULL_WIDTH).height(Constants.DIVIDER)
-                      .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
+                      .backgroundColor($r('sys.color.comp_divider'))
                       .position({ x: 0, y: 0 })
                     Text(permissionApplication.groupName)
                       .width(Constants.MAXIMUM_HEADER_WIDTH)
@@ -143,7 +143,7 @@ struct permissionRecordPage {
                       .textOverflow({ overflow: TextOverflow.Ellipsis })
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)
-                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                      .fontColor($r('sys.color.font_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text(
@@ -153,7 +153,7 @@ struct permissionRecordPage {
                     )
                       .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                      .fontColor($r('sys.color.font_secondary'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
@@ -187,8 +187,8 @@ struct permissionRecordPage {
                   angle: 90,
                   direction: GradientDirection.Right,
                   colors: [
-                    [$r('sys.color.ohos_id_color_list_card_bg'), 1],
-                    [$r('sys.color.ohos_id_color_list_card_bg'), 1]
+                    [$r('sys.color.comp_background_list_card'), 1],
+                    [$r('sys.color.comp_background_list_card'), 1]
                   ]
                 })
               .onTouch(event => {
@@ -208,7 +208,7 @@ struct permissionRecordPage {
       }
     }.padding(Constants.LIST_PADDING_TOP)
     .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM })
-    .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+    .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
   }
 
@@ -228,13 +228,13 @@ struct permissionRecordPage {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                   .fontWeight(FontWeight.Medium)
-                  .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                  .fontColor($r('sys.color.font_primary'))
                   .lineHeight(Constants.TEXT_LINE_HEIGHT)
                   .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                 Row() {
                   ForEach(item.permissions, (permission: AppGroupRecordInfo) => {
                     Image(permission.icon)
-                      .fillColor($r('sys.color.ohos_id_color_secondary'))
+                      .fillColor($r('sys.color.icon_secondary'))
                       .customizeImage(
                         Constants.IMAGE_WIDTH_RECORD_APPLICATION,
                         Constants.IMAGE_HEIGHT_RECORD_APPLICATION
@@ -247,7 +247,7 @@ struct permissionRecordPage {
               Image(
                 index == this.applicationIndex ? $r('app.media.xiangshangjiantou') : $r('app.media.xiangxiajiantou')
               )
-                .fillColor($r('sys.color.ohos_id_color_secondary'))
+                .fillColor($r('sys.color.icon_secondary'))
                 .customizeImage(Constants.IMAGE_WIDTH_RECORD, Constants.IMAGE_HEIGHT_RECORD)
             }
             .width(Constants.FULL_WIDTH)
@@ -263,7 +263,7 @@ struct permissionRecordPage {
               ListItem() {
                 Row() {
                   Image(permission.icon)
-                    .fillColor($r('sys.color.ohos_id_color_secondary'))
+                    .fillColor($r('sys.color.icon_secondary'))
                     .customizeImage(Constants.MANAGEMENT_IMAGE_WIDTH, Constants.MANAGEMENT_IMAGE_HEIGHT)
                     .margin({
                       right: Constants.MANAGEMENT_IMAGE_MARGIN_RIGHT_RECORD,
@@ -271,18 +271,18 @@ struct permissionRecordPage {
                     })
                   Column() {
                     Row().width(Constants.FULL_WIDTH).height(Constants.DIVIDER)
-                      .backgroundColor($r('sys.color.ohos_id_color_list_separator'))
+                      .backgroundColor($r('sys.color.comp_divider'))
                       .position({ x: 0, y: 0 })
                     Text(permission.groupName)
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontWeight(FontWeight.Medium)
-                      .fontColor($r('sys.color.ohos_id_color_text_primary'))
+                      .fontColor($r('sys.color.font_primary'))
                       .lineHeight(Constants.TEXT_LINE_HEIGHT)
                       .margin({ bottom: Constants.TERTIARY_LABEL_MARGIN_BOTTOM })
                     Text($r('app.string.recent_visit', String(permission.count), this.getTime(permission.lastTime)))
                       .padding({ right: Constants.LISTITEM_PADDING_RIGHT_RECORD })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                      .fontColor($r('sys.color.font_secondary'))
                       .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
                   }.alignItems(HorizontalAlign.Start)
                   .height(Constants.FULL_HEIGHT)
@@ -316,8 +316,8 @@ struct permissionRecordPage {
                    angle: 90,
                    direction: GradientDirection.Right,
                    colors: [
-                     [$r('sys.color.ohos_id_color_list_card_bg'), 1],
-                     [$r('sys.color.ohos_id_color_list_card_bg'), 1]
+                     [$r('sys.color.comp_background_list_card'), 1],
+                     [$r('sys.color.comp_background_list_card'), 1]
                    ]
                  })
               .onTouch(event => {
@@ -337,7 +337,7 @@ struct permissionRecordPage {
       }
     }.padding(Constants.LIST_PADDING_TOP)
     .margin({ bottom: Constants.LISTITEM_MARGIN_BOTTOM })
-    .backgroundColor($r('sys.color.ohos_id_color_list_card_bg'))
+    .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
   }
 
@@ -360,7 +360,7 @@ struct permissionRecordPage {
                     Text($r('app.string.record_time_limit'))
                       .margin({ left: Constants.DEFAULT_MARGIN_START })
                       .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                      .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                      .fontColor($r('sys.color.font_secondary'))
                       .lineHeight(Constants.SUBTITLE_LINE_HEIGHT)
                   }.constraintSize({ minHeight: Constants.SUBTITLE_MIN_HEIGHT })
                   .padding({ top: Constants.SUBTITLE_PADDING_TOP, bottom: Constants.SUBTITLE_PADDING_BOTTOM })
@@ -431,7 +431,7 @@ struct permissionRecordPage {
                         .margin({ left: Constants.NORECORD_IMAGE_MARGIN_LEFT })
                       Text($r('app.string.no_record')).margin({ top: Constants.DIALOG_REQ_MARGIN_TOP })
                         .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                        .fontColor($r('sys.color.ohos_id_color_text_secondary'))
+                        .fontColor($r('sys.color.font_secondary'))
                     }.width(Constants.FULL_WIDTH).height(Constants.FULL_HEIGHT)
                     .padding({ bottom: Constants.RECORD_PADDING_BOTTOM })
                   }
@@ -443,9 +443,9 @@ struct permissionRecordPage {
         }
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
-        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+        .backgroundColor($r('sys.color.background_secondary'))
       }
-    }.backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+    }.backgroundColor($r('sys.color.background_secondary'))
   }
 
   /**
