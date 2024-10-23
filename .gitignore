@@ -5,3 +5,4 @@
 /.hvigor
 /oh_modules
 /dependencies
+.clang-format

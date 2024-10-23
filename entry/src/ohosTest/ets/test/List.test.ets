@@ -1,5 +1,6 @@
+import indexTest from './index.test'
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,11 +14,9 @@
  * limitations under the License.
  */
 
-{
-  "hvigorVersion": "3.0.2",
-//  "modelVersion": "5.0.0",    //本地IDE配置
-  "dependencies": {
-    "@ohos/hvigor-ohos-plugin": "3.0.2"
-//    "@ohos/hvigor-ohos-plugin": "5.8.5"    //本地IDE配置
-  }
+import abilityTest from './Ability.test';
+
+export default function testsuite() {
+  abilityTest();
+  indexTest()
 }
