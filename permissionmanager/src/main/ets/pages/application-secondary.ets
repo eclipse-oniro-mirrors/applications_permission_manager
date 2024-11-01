@@ -24,13 +24,7 @@ import Constants from '../common/utils/constant';
 import { Log, verifyAccessToken, getGroupIdByPermission } from '../common/utils/utils';
 import { PermissionObj, AppInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
-const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
-const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
-const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
-const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
+import { Permission } from '../common/model/definition';
 
 @Entry
 @Component
@@ -213,14 +207,18 @@ struct appNamePlusPage {
     if (group === 'LOCATION') {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
-        let fuzzyState = acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION);
+        let fuzzyState = acManager.verifyAccessTokenSync(
+          this.applicationInfo.tokenId, Permission.APPROXIMATELY_LOCATION
+        );
         fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.isGranted = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
-        let backgroundState =
-          acManager.verifyAccessTokenSync(this.applicationInfo.tokenId, BACKGROUND_LOCATION_PERMISSION);
+        let backgroundState = acManager.verifyAccessTokenSync(
+          this.applicationInfo.tokenId, Permission.LOCATION_IN_BACKGROUND
+        );
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.isGranted = Constants.PERMISSION_ALLOW : null;
-        await acManager.getPermissionFlags(this.applicationInfo.tokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
+        await acManager.getPermissionFlags(this.applicationInfo.tokenId, Permission.APPROXIMATELY_LOCATION )
+        .then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.isGranted = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
@@ -237,13 +235,13 @@ struct appNamePlusPage {
       }
       if (group === 'FOLDER' && res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         switch (permission) {
-          case DOWNLOAD_PERMISSION:
+          case Permission.READ_WRITE_DOWNLOAD_DIRECTORY:
             this.folderStatus[0] = true;
             break;
-          case DESKTOP_PERMISSION:
+          case Permission.READ_WRITE_DESKTOP_DIRECTORY:
             this.folderStatus[1] = true;
             break;
-          case DOCUMENTS_PERMISSION:
+          case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
             this.folderStatus[2] = true;
             break;
         }

@@ -26,17 +26,10 @@ import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
 import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
+import { Permission, PermissionGroup } from '../common/model/definition';
 import Constants from '../common/utils/constant';
 import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';
 
-const CAMERA = 'CAMERA';
-const MICROPHONE = 'MICROPHONE';
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
-const BACKGROUND_LOCATION_PERMISSION = 'ohos.permission.LOCATION_IN_BACKGROUND';
-const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
-const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
-const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const locationStatus: Resource[] = [
   $r('app.string.always_allow'),
   $r('app.string.ban'),
@@ -115,16 +108,16 @@ struct locationInfoPage {
       reqPermissions.push(item.name);
     })
     let acManager = abilityAccessCtrl.createAtManager();
-    if (this.currentGroup === 'LOCATION' && reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
+    if (this.currentGroup === 'LOCATION' && reqPermissions.includes(Permission.APPROXIMATELY_LOCATION)) {
       try {
-        let fuzzyState = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, FUZZY_LOCATION_PERMISSION);
+        let fuzzyState = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.APPROXIMATELY_LOCATION);
         fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.polymorphismIsOn[index] = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
         let backgroundState =
-          acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, BACKGROUND_LOCATION_PERMISSION);
+          acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION_IN_BACKGROUND);
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.polymorphismIsOn[index] = Constants.PERMISSION_ALLOW : null;
-        acManager.getPermissionFlags(res.appInfo.accessTokenId, FUZZY_LOCATION_PERMISSION ).then(flag => {
+        acManager.getPermissionFlags(res.appInfo.accessTokenId, Permission.APPROXIMATELY_LOCATION ).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ?
             this.polymorphismIsOn[index] = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
@@ -147,13 +140,13 @@ struct locationInfoPage {
 
   updateFolderStatus(index: number, idx: number) {
     switch (this.list[idx].permission) {
-      case DOWNLOAD_PERMISSION:
+      case Permission.READ_WRITE_DOWNLOAD_DIRECTORY:
         this.folderStatusArray[index][0] = true;
         break;
-      case DESKTOP_PERMISSION:
+      case Permission.READ_WRITE_DESKTOP_DIRECTORY:
         this.folderStatusArray[index][1] = true;
         break;
-      case DOCUMENTS_PERMISSION:
+      case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
         this.folderStatusArray[index][2] = true;
         break;
     }
@@ -175,7 +168,7 @@ struct applicationItem {
   @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
   @State isTouch: string = '';
-  @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], false);
+  @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], [], false);
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State isMuteSupported: boolean = GlobalContext.load('isMuteSupported');
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
@@ -201,7 +194,7 @@ struct applicationItem {
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
             Log.info('global accept');
-            if (this.currentGroup == MICROPHONE) {
+            if (this.currentGroup == PermissionGroup.MICROPHONE) {
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {

@@ -26,11 +26,10 @@ import { groups, userGrantPermissions, globalGroup, permissionGroups, showSubPer
 import { Log, indexValue, getPermissionGroupByName, getGroupIdByPermission, addLocalTag, sortByName } from '../common/utils/utils';
 import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
+import { Permission } from '../common/model/definition';
 import Constants from '../common/utils/constant';
 import bundleManager from '@ohos.bundle.bundleManager';
 
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
 let storage = LocalStorage.getShared();
 
 @Extend(Image)function customizeImage(width: number, height: number) {
@@ -272,7 +271,7 @@ struct authorityManagementPage {
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
-        if ((permission == PRECISE_LOCATION_PERMISSION) && !reqPermissions.includes(FUZZY_LOCATION_PERMISSION)) {
+        if ((permission == Permission.LOCATION) && !reqPermissions.includes(Permission.APPROXIMATELY_LOCATION)) {
           continue;
         }
         try {

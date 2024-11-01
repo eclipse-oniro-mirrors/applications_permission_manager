@@ -141,7 +141,7 @@ struct applicationItem {
   private context = getContext(this) as common.ServiceExtensionContext;
   @State globalIsOn: boolean = false;
   @State backTitle: string = '';
-  @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], false);
+  @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], [], false);
   @State currentGroup: string = '';
   @State isMuteSupported: boolean = false;
   @State appName: ResourceStr = '';
