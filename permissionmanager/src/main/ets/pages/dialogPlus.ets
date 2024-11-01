@@ -29,11 +29,13 @@ import {
   getFontSizeScale,
   getLimitFontSize
 } from '../common/utils/utils';
+import { Permission, ButtonStatus } from '../common/model/definition';
 import { GroupInfo, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
-import { showSubPermissionsGroup, userGrantPermissions } from '../common/model/permissionGroup';
+import { showSubPermissionsGroup, userGrantPermissions, buttonResource } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
+import { MeasureText } from '@kit.ArkUI';
 
 @Extend(Button)function customizeButton() {
   .buttonStyle(ButtonStyleMode.TEXTUAL)
@@ -41,13 +43,6 @@ import { LocationCanvas } from '../common/components/location';
   .width(Constants.HALF_LENGTH)
 }
 
-const FUZZY_LOCATION_PERMISSION = 'ohos.permission.APPROXIMATELY_LOCATION';
-const PRECISE_LOCATION_PERMISSION = 'ohos.permission.LOCATION';
-const PASTE = 'ohos.permission.READ_PASTEBOARD';
-const APP_TRACKING_CONSENT = 'ohos.permission.APP_TRACKING_CONSENT';
-const DOWNLOAD_PERMISSION = 'ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY';
-const DESKTOP_PERMISSION = 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY';
-const DOCUMENTS_PERMISSION = 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY';
 const fuzzyMarks = [Constants.LOCATION_FUZZY, Constants.LOCATION_BOTH_FUZZY, Constants.LOCATION_BOTH_PRECISE];
 const preciseMarks = [Constants.LOCATION_UPGRADE, Constants.LOCATION_BOTH_PRECISE];
 let storage = LocalStorage.getShared();
@@ -177,46 +172,15 @@ struct dialogPlusPage {
               }
             }
           }.constraintSize({ maxHeight: Constants.MAXIMUM_HEADER_HEIGHT })
-          if (this.currentGroup().name === 'LOCATION') {
-            Column() {
-              Button($r('app.string.allowed_only_during_use'))
-                .customizeButton()
-                .width(Constants.FULL_WIDTH)
-                .margin({ bottom: Constants.MARGIN_4 })
-                .onClick(() => {
-                  this.privacyAccept(
-                    this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
-                  )
-                })
-              Button($r('app.string.allow_this_time'))
-                .customizeButton()
-                .width(Constants.FULL_WIDTH)
-                .margin({ bottom: Constants.MARGIN_4 })
-                .onClick(() => {
-                  this.privacyAccept(
-                    this.grantGroups[this.count],
-                    this.accessTokenId,
-                    this.reqPerms,
-                    Constants.PERMISSION_ALLOW_THIS_TIME
-                  )
-                })
-              Button($r('app.string.cancel'))
-                .customizeButton()
-                .width(Constants.FULL_WIDTH)
-                .onClick(() => {
-                  this.count ++;
-                })
-            }
-            .padding({ left: Constants.PADDING_16, right: Constants.PADDING_16 })
-          } else {
+          if (this.currentGroup().buttons.length <= 2 && this.calculateButtonWidth(this.currentGroup().buttons)) {
+            //横向布局
             Row() {
               Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
-                Button($r('app.string.ban'))
+                Button(buttonResource.get(this.currentGroup().buttons[0]))
+                  .customizeButton()
                   .onClick(() => {
-                    this.privacyCancel(
-                      this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag
-                    )
-                  }).customizeButton()
+                    this.clickHandle(this.currentGroup().buttons[0]);
+                  })
                 Divider()
                   .color($r('sys.color.comp_divider'))
                   .vertical(true)
@@ -224,24 +188,31 @@ struct dialogPlusPage {
                   .height(Constants.DIVIDER_HEIGHT)
                   .opacity(0.2)
                   .margin({ left: Constants.MARGIN_8, right: Constants.MARGIN_8 })
-                Button(
-                  this.currentGroup().name === 'PASTEBOARD' ? $r('app.string.This_time_only') : $r('app.string.allow')
-                )
+                Button(buttonResource.get(this.currentGroup().buttons[1]))
+                  .customizeButton()
                   .onClick(() => {
-                    this.privacyAccept(
-                      this.grantGroups[this.count],
-                      this.accessTokenId,
-                      this.reqPerms,
-                      this.currentGroup().name === 'PASTEBOARD' ?
-                      Constants.PERMISSION_ALLOW_THIS_TIME : this.userFixedFlag
-                    )
-                  }).customizeButton()
+                    this.clickHandle(this.currentGroup().buttons[1]);
+                  })
               }.margin({
                 left: Constants.BUTTON_MARGIN_LEFT,
                 right: Constants.BUTTON_MARGIN_RIGHT,
                 bottom: Constants.MARGIN_8
               })
             }
+          } else {
+            //纵向布局
+            Column() {
+              ForEach(this.currentGroup().buttons, (buttonStatus: ButtonStatus, idx: number) => {
+                Button(buttonResource.get(buttonStatus))
+                  .customizeButton()
+                  .width(Constants.FULL_WIDTH)
+                  .margin({ bottom: idx + 1 < this.currentGroup().buttons.length ? Constants.MARGIN_4 : 0 })
+                  .onClick(() => {
+                    this.clickHandle(buttonStatus);
+                  })
+              })
+            }
+            .padding({ left: Constants.PADDING_16, right: Constants.PADDING_16 })
           }
         }
       }
@@ -270,16 +241,59 @@ struct dialogPlusPage {
     return this.grantGroups[index];
   }
 
+  calculateButtonWidth(buttonStatus: ButtonStatus[]): boolean {
+    let denyText = buttonResource.get(buttonStatus[0]);
+    let allowText = buttonResource.get(buttonStatus[1]);
+    let maxButtonTextLength = Math.max(
+      MeasureText.measureText({ textContent: denyText }),
+      MeasureText.measureText({ textContent: allowText })
+    )
+
+    Log.info(`px2vp(maxButtonTextLength): ${px2vp(maxButtonTextLength)}`);
+    if (px2vp(maxButtonTextLength) > Constants.DIALOG_BUTTON_MAX_WIDTH) {
+      return false;
+    }
+
+    return true;
+  }
+
+  clickHandle(buttonStatus: ButtonStatus) {
+    switch (buttonStatus) {
+      case ButtonStatus.ALLOW:
+        this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag);
+        return;
+      case ButtonStatus.DENY:
+        this.privacyCancel(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag);
+        return;
+      case ButtonStatus.CANCEL:
+        this.count ++;
+        return;
+      case ButtonStatus.THIS_TIME_ONLY:
+        this.privacyAccept(
+          this.grantGroups[this.count], this.accessTokenId, this.reqPerms, Constants.PERMISSION_ALLOW_THIS_TIME
+        );
+        return;
+      case ButtonStatus.ALLOW_THIS_TIME:
+        this.privacyAccept(
+          this.grantGroups[this.count], this.accessTokenId, this.reqPerms, Constants.PERMISSION_ALLOW_THIS_TIME
+        );
+        return;
+      case ButtonStatus.ALLOW_ONLY_DURING_USE:
+        this.privacyAccept(this.grantGroups[this.count], this.accessTokenId, this.reqPerms, this.userFixedFlag);
+        return;
+    }
+  }
+
   async privacyAccept(group: GroupInfo, accessTokenId: number, permissionList: string[], userFixedFlag: number) {
     let num = 0;
     group.permissions.forEach(async permission => {
       this.grantStatus = -1;
       if (showSubPermissionsGroup.indexOf(group.name) == -1) {
         if (group.name == 'LOCATION') {
-          if (fuzzyMarks.includes(this.locationFlag) && permission === FUZZY_LOCATION_PERMISSION) {
+          if (fuzzyMarks.includes(this.locationFlag) && permission === Permission.APPROXIMATELY_LOCATION) {
             await this.operationPermission(true, accessTokenId, permission, userFixedFlag);
           }
-          if (preciseMarks.includes(this.locationFlag) && permission === PRECISE_LOCATION_PERMISSION) {
+          if (preciseMarks.includes(this.locationFlag) && permission === Permission.LOCATION) {
             await this.operationPermission(true, accessTokenId, permission, userFixedFlag);
           }
         } else {
@@ -377,28 +391,28 @@ struct dialogPlusPage {
   }
 
   getPasteBoardInfo() {
-    if (this.reqPerms.includes(PASTE)) {
+    if (this.reqPerms.includes(Permission.READ_PASTEBOARD)) {
       let systemPasteboard: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
       this.pasteBoardName = systemPasteboard.getDataSource();
     }
   }
 
   getGrantGroups(stateGroup: number[]) {
-    if (this.reqPerms.includes(FUZZY_LOCATION_PERMISSION)) {
+    if (this.reqPerms.includes(Permission.APPROXIMATELY_LOCATION)) {
       this.locationFlag = Constants.LOCATION_FUZZY;
-      if (this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
+      if (this.reqPerms.includes(Permission.LOCATION)) {
         this.locationFlag = Constants.LOCATION_BOTH_PRECISE;
-        let fuzzyIndex = this.reqPerms.indexOf(FUZZY_LOCATION_PERMISSION);
+        let fuzzyIndex = this.reqPerms.indexOf(Permission.APPROXIMATELY_LOCATION);
         if (stateGroup[fuzzyIndex] == Constants.PASS_OPER) {
           this.locationFlag = Constants.LOCATION_UPGRADE;
         }
       }
-    } else if (this.reqPerms.includes(PRECISE_LOCATION_PERMISSION)) {
+    } else if (this.reqPerms.includes(Permission.LOCATION)) {
       this.locationFlag = Constants.LOCATION_UPGRADE;
     }
 
     this.reqPerms.forEach(async (permission, idx) => {
-      if (permission === APP_TRACKING_CONSENT) {
+      if (permission === Permission.APP_TRACKING_CONSENT) {
         let toggleStatus = await this.appTrackHandle(idx);
         if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
           return;
@@ -421,10 +435,12 @@ struct dialogPlusPage {
   async appTrackHandle(index: number): Promise<abilityAccessCtrl.PermissionRequestToggleStatus> {
     try {
       let acManager = abilityAccessCtrl.createAtManager();
-      let toggleStatus = await acManager.getPermissionRequestToggleStatus(APP_TRACKING_CONSENT);
+      let toggleStatus = await acManager.getPermissionRequestToggleStatus(Permission.APP_TRACKING_CONSENT);
       Log.info(`APP_TRACKING_CONSENT toggleStatus: ${toggleStatus}.`);
       if (toggleStatus === abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED) {
-        await acManager.grantUserGrantedPermission(this.accessTokenId, APP_TRACKING_CONSENT, this.userFixedFlag);
+        await acManager.grantUserGrantedPermission(
+          this.accessTokenId, Permission.APP_TRACKING_CONSENT, this.userFixedFlag
+        );
         this.result[index] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
         Log.info('APP_TRACKING_CONSENT grant success.');
       }
@@ -439,19 +455,25 @@ struct dialogPlusPage {
     let group = getPermissionGroup(permission);
     if (group.name === 'FOLDER') {
       switch (permission) {
-        case DOWNLOAD_PERMISSION:
-          let downloadGroup = new GroupInfo(group.name, group.groupName, 'app.string.group_label_download_folder',
-            group.icon, group.description, group.reason, [DOWNLOAD_PERMISSION], group.isShow)
+        case Permission.READ_WRITE_DOWNLOAD_DIRECTORY:
+          let downloadGroup = new GroupInfo(
+            group.name, group.groupName, 'app.string.group_label_download_folder', group.icon, group.description,
+            group.reason, [Permission.READ_WRITE_DOWNLOAD_DIRECTORY], group.buttons, group.isShow
+          )
           this.grantGroups.push(downloadGroup);
           break;
-        case DESKTOP_PERMISSION:
-          let desktopGroup = new GroupInfo(group.name, group.groupName, 'app.string.group_label_desktop_folder',
-            group.icon, group.description, group.reason, [DESKTOP_PERMISSION], group.isShow)
+        case Permission.READ_WRITE_DESKTOP_DIRECTORY:
+          let desktopGroup = new GroupInfo(
+            group.name, group.groupName, 'app.string.group_label_desktop_folder', group.icon, group.description,
+            group.reason, [Permission.READ_WRITE_DESKTOP_DIRECTORY], group.buttons, group.isShow
+          )
           this.grantGroups.push(desktopGroup);
           break;
-        case DOCUMENTS_PERMISSION:
-          let documentGroup = new GroupInfo(group.name, group.groupName, 'app.string.group_label_document_folder',
-            group.icon, group.description, group.reason, [DOCUMENTS_PERMISSION], group.isShow)
+        case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
+          let documentGroup = new GroupInfo(
+            group.name, group.groupName, 'app.string.group_label_document_folder', group.icon, group.description,
+            group.reason, [Permission.READ_WRITE_DOCUMENTS_DIRECTORY], group.buttons, group.isShow
+          )
           this.grantGroups.push(documentGroup);
           break;
       }

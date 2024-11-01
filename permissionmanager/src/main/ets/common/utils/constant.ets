@@ -141,6 +141,7 @@ export default class Constants {
     public static DIVIDER_MARGIN_RIGHT_APPLICATION = 68;
     public static DIALOG_TITLE_MAX_SCALE = 2;
     public static DIALOG_TEXT_MAX_SCALE = 3.2;
+    public static DIALOG_BUTTON_MAX_WIDTH = 135;
 
     // application-secondary, authority-secondary
     public static FLEX_MARGIN_TOP = 8;

@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 import { Permissions } from '@ohos.abilityAccessCtrl';
+import { ButtonStatus } from './definition';
 
 export class AppInfo {
   public bundleName: string
@@ -257,6 +258,7 @@ export class GroupInfo {
   public description: Array<ResourceStr>
   public reason: string
   public permissions: Array<Permissions>
+  public buttons: Array<ButtonStatus>
   public isShow: boolean
   public enableDescription?: string
   public forbiddenDescription?: ResourceStr
@@ -269,6 +271,7 @@ export class GroupInfo {
     description: Array<ResourceStr>,
     reason: string,
     permissions: Array<Permissions>,
+    buttons: Array<ButtonStatus>,
     isShow: boolean,
     enableDescription?: string,
     forbiddenDescription?: ResourceStr
@@ -280,6 +283,7 @@ export class GroupInfo {
     this.description = description;
     this.reason = reason;
     this.permissions = permissions;
+    this.buttons = buttons;
     this.isShow = isShow;
     this.enableDescription = enableDescription;
     this.forbiddenDescription = forbiddenDescription;
