@@ -161,6 +161,10 @@
             "value":"[TS_950736]_Allow %s to access music and audio files on your device?"
         },
         {
+            "name":"group_label_screenCapture",
+            "value":"[TS_988622]_Allow %s to capture your screen?"
+        },
+        {
             "name":"pasteBoard_app",
             "value":"[TS_950726]_Content copied from %s. If you choose Deny, this app won't be able to access the clipboard."
         },

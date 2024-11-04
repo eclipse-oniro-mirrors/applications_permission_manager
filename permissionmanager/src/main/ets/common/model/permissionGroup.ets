@@ -47,7 +47,8 @@ export const permissionGroups: PermissionInfo[] = [
     new PermissionInfo(Permission.READ_WRITE_DOWNLOAD_DIRECTORY, PermissionGroup.FOLDER, $r('sys.string.ohos_lab_read_write_download_directory'), 16),
     new PermissionInfo(Permission.READ_WRITE_DESKTOP_DIRECTORY, PermissionGroup.FOLDER, $r('sys.string.ohos_lab_read_write_desktop_directory'), 16),
     new PermissionInfo(Permission.READ_WRITE_DOCUMENTS_DIRECTORY, PermissionGroup.FOLDER, $r('sys.string.ohos_lab_read_write_documents_directory'), 16),
-    new PermissionInfo(Permission.ACCESS_NEARLINK, PermissionGroup.NEARLINK, $r('sys.string.ohos_lab_access_nearlink'), 17)
+    new PermissionInfo(Permission.ACCESS_NEARLINK, PermissionGroup.NEARLINK, $r('sys.string.ohos_lab_access_nearlink'), 17),
+    new PermissionInfo(Permission.CUSTOM_SCREEN_CAPTURE, PermissionGroup.CUSTOM_SCREEN_CAPTURE, $r('sys.string.ohos_lab_custom_screen_capture'), 18)
 ]
 
 export const groups: GroupInfo[] = [
@@ -68,7 +69,8 @@ export const groups: GroupInfo[] = [
     new GroupInfo(PermissionGroup.BLUETOOTH, $r('app.string.groupName_bluetooth'), 'app.string.group_label_bluetooth', $r('app.media.ic_public_bluetooth'), [], '', ['ohos.permission.ACCESS_BLUETOOTH'], [ButtonStatus.DENY, ButtonStatus.ALLOW], false, 'app.string.enable_description_bluetooth', $r('app.string.forbidden_description_bluetooth')),
     new GroupInfo(PermissionGroup.PASTEBOARD, $r('app.string.groupName_pasteboard'), 'app.string.group_label_pasteboard', $r('app.media.ic_clipboard'), [], '', ['ohos.permission.READ_PASTEBOARD'], [ButtonStatus.DENY, ButtonStatus.THIS_TIME_ONLY], false, 'app.string.enable_description_pasteboard', $r('app.string.forbidden_description_pasteboard')),
     new GroupInfo(PermissionGroup.FOLDER, $r('app.string.groupName_folder'), 'app.string.group_label_folder', $r('app.media.ic_public_folder'), [], '', ['ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY', 'ohos.permission.READ_WRITE_DESKTOP_DIRECTORY', 'ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY'], [ButtonStatus.DENY, ButtonStatus.ALLOW], false, 'app.string.enable_description_folder', $r('app.string.forbidden_description_folder')),
-    new GroupInfo(PermissionGroup.NEARLINK, $r('app.string.groupName_nearLink'), 'app.string.group_label_nearLink', $r('app.media.ic_nearLink'), [], '', ['ohos.permission.ACCESS_NEARLINK'], [ButtonStatus.DENY, ButtonStatus.ALLOW], false, 'app.string.enable_description_nearLink', $r('app.string.forbidden_description_nearLink'))
+    new GroupInfo(PermissionGroup.NEARLINK, $r('app.string.groupName_nearLink'), 'app.string.group_label_nearLink', $r('app.media.ic_nearLink'), [], '', ['ohos.permission.ACCESS_NEARLINK'], [ButtonStatus.DENY, ButtonStatus.ALLOW], false, 'app.string.enable_description_nearLink', $r('app.string.forbidden_description_nearLink')),
+    new GroupInfo(PermissionGroup.CUSTOM_SCREEN_CAPTURE, $r('app.string.groupName_screenCapture'), 'app.string.group_label_screenCapture', $r('app.media.ic_public_screen_capture'), [], '', ['ohos.permission.CUSTOM_SCREEN_CAPTURE'], [ButtonStatus.DENY, ButtonStatus.ALLOW], false, 'app.string.enable_description_screenCapture', $r('app.string.forbidden_description_screenCapture'))
 ];
 
 export const userGrantPermissions: string[] = [
@@ -102,7 +104,8 @@ export const userGrantPermissions: string[] = [
     Permission.READ_WRITE_DOWNLOAD_DIRECTORY,
     Permission.READ_WRITE_DESKTOP_DIRECTORY,
     Permission.READ_WRITE_DOCUMENTS_DIRECTORY,
-    Permission.ACCESS_NEARLINK
+    Permission.ACCESS_NEARLINK,
+    Permission.CUSTOM_SCREEN_CAPTURE
 ];
 
 export const buttonResource: Map<ButtonStatus, Resource> = new Map([

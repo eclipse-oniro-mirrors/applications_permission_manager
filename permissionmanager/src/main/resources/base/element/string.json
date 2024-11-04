@@ -331,6 +331,10 @@
             "value":"NearLink"
         },
         {
+            "name":"groupName_screenCapture",
+            "value":"Screen capture"
+        },
+        {
             "name":"multi_device_collaboration",
             "value":"Multi-device collaboration"
         },
@@ -472,6 +476,13 @@
             }
         },
         {
+            "name":"group_label_screenCapture",
+            "value":"Allow %s to capture your screen?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"enable_description_location",
             "value":"When the system location service is enabled, %s apps are allowed to obtain the location of the device."
         },
@@ -556,6 +567,10 @@
             "value":"%s apps have been allowed to access NearLink."
         },
         {
+            "name":"enable_description_screenCapture",
+            "value":"%s apps have been allowed to use screenshots."
+        },
+        {
             "name":"forbidden_description_location",
             "value":"When the system positioning service is enabled, applications are not allowed to obtain the location of the device."
         },
@@ -638,6 +653,10 @@
         {
             "name":"forbidden_description_nearLink",
             "value":"Apps have been prohibited from accessing NearLink."
+        },
+        {
+            "name":"forbidden_description_screenCapture",
+            "value":"Screenshots have been disabled."
         },
         {
             "name":"risk_warning",
