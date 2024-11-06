@@ -331,6 +331,10 @@
             "value":"星闪"
         },
         {
+            "name":"groupName_screenCapture",
+            "value":"截屏"
+        },
+        {
             "name":"multi_device_collaboration",
             "value":"多设备协同"
         },
@@ -472,6 +476,13 @@
             }
         },
         {
+            "name":"group_label_screenCapture",
+            "value":"允许“%s”截取您的屏幕？",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"enable_description_location",
             "value":"系统定位服务开关开启时，已允许%s个应用获取此设备的位置。"
         },
@@ -556,6 +567,10 @@
             "value":"已允许%s个应用访问星闪。"
         },
         {
+            "name":"enable_description_screenCapture",
+            "value":"已允许%s个应用使用截屏。"
+        },
+        {
             "name":"forbidden_description_location",
             "value":"系统定位服务开关开启时，已禁止应用获取此设备的位置。"
         },
@@ -638,6 +653,10 @@
         {
             "name":"forbidden_description_nearLink",
             "value":"已禁止应用访问星闪。"
+        },
+        {
+            "name":"forbidden_description_screenCapture",
+            "value":"已禁止应用使用截屏。"
         },
         {
             "name":"risk_warning",

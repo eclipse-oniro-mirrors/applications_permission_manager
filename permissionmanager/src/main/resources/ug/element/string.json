@@ -281,6 +281,13 @@
             }
         },
         {
+            "name":"group_label_screenCapture",
+            "value":"\u200f«%s» ئېكران تۇتىدۇ، رۇخسەتمۇ؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"pasteBoard_app",
             "value":"بۇ مەزمۇن «%s» دىن كەلگەن. چەكلىسىڭىز، بۇ ئەپ كېسىش تاختىسىنى زىيارەت قىلالمايدۇ.",
             "attr":{
