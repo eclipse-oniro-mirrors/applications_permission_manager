@@ -678,14 +678,14 @@
         },
         {
             "name":"SecurityDescription_location",
-            "value":"仅允许“%s”在你点击此按钮时访问位置，无法持续获取你的隐私数据。",
+            "value":"仅允许“%s”在您点击此按钮时访问位置。",
             "attr":{
                 "priority":"translate"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
-            "value":"仅允许“%s”在你点击此按钮时保存图片和视频至图库，无法持续获取你的隐私数据。",
+            "value":"仅允许“%s”在您点击此按钮时保存图片和视频至图库。",
             "attr":{
                 "priority":"translate"
             }
