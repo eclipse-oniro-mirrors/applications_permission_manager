@@ -9,9 +9,9 @@
         },
         {
             "name":"SecurityDescription_location",
-            "value":"僅允許「%s」在您輕觸此按鈕時存取位置，無法持續取得您的私隱資訊。",
+            "value":"僅允許「%s」在您輕觸此按鈕時存取位置。",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -23,9 +23,9 @@
         },
         {
             "name":"SecurityDescription_mediaFiles",
-            "value":"僅允許「%s」在您輕觸此按鈕時儲存圖片和影片至圖片庫，無法持續取得您的私隱資訊。",
+            "value":"僅允許「%s」在您輕觸此按鈕時儲存圖片和影片至圖片庫。",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
