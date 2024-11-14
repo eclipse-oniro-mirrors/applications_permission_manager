@@ -177,7 +177,7 @@
         },
         {
             "name":"access_general_location",
-            "value":"Allow %s to access this device's approximate location?",
+            "value":"Allow %s to access your approximate location?",
             "attr":{
                 "priority":"LT"
             }
@@ -340,7 +340,7 @@
         },
         {
             "name":"group_label_location",
-            "value":"Allow %s to access this device's location?",
+            "value":"Allow %s to access your location?",
             "attr":{
                 "priority":"LT"
             }
@@ -382,7 +382,7 @@
         },
         {
             "name":"group_label_health",
-            "value":"Allow %s to use body sensors?",
+            "value":"Allow %s to access body sensor data?",
             "attr":{
                 "priority":"LT"
             }
@@ -417,7 +417,7 @@
         },
         {
             "name":"group_label_ADS",
-            "value":"Allow %s to track your activity across other apps?",
+            "value":"Allow %s to track your activity in other apps?",
             "attr":{
                 "priority":"translate"
             }
