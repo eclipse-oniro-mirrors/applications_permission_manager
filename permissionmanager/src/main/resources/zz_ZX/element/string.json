@@ -42,11 +42,11 @@
         },
         {
             "name":"access_general_location",
-            "value":"[TS_950789]_Allow %s to access this device's approximate location?"
+            "value":"[TS_950789]_Allow %s to access your approximate location?"
         },
         {
             "name":"group_label_ADS",
-            "value":"[TS_950779]_Allow %s to track your activity across other apps?"
+            "value":"[TS_950779]_Allow %s to track your activity in other apps?"
         },
         {
             "name":"ban",
@@ -98,7 +98,7 @@
         },
         {
             "name":"group_label_health",
-            "value":"[TS_950699]_Allow %s to use body sensors?"
+            "value":"[TS_950699]_Allow %s to access body sensor data?"
         },
         {
             "name":"group_label_pasteboard",
@@ -150,7 +150,7 @@
         },
         {
             "name":"group_label_location",
-            "value":"[TS_950793]_Allow %s to access this device's location?"
+            "value":"[TS_950793]_Allow %s to access your location?"
         },
         {
             "name":"group_label_microphone",
