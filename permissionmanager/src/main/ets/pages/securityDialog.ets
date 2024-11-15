@@ -63,8 +63,8 @@ struct SecurityDialog {
           action: () => {
             this.dialogController?.close();
             this.win.destroyWindow();
-            let dialogSet: Set<string> = GlobalContext.load('dialogSet');
-            let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+            let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+            let callerToken: number = this.want.parameters['ohos.caller.uid'];
             dialogSet.delete(callerToken);
             GlobalContext.store('dialogSet', dialogSet);
             if (dialogSet.size === 0) {
@@ -85,8 +85,8 @@ struct SecurityDialog {
     autoCancel: false,
     cancel: () => {
       this.win.destroyWindow();
-      let dialogSet: Set<string> = GlobalContext.load('dialogSet');
-      let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+      let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+      let callerToken: number = this.want.parameters['ohos.caller.uid'];
       dialogSet.delete(callerToken);
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
@@ -238,8 +238,8 @@ struct SecurityDialog {
       data.reclaim();
       reply.reclaim();
       this.win.destroyWindow();
-      let dialogSet: Set<string> = GlobalContext.load('dialogSet');
-      let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+      let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+      let callerToken: number = this.want.parameters['ohos.caller.uid'];
       dialogSet.delete(callerToken);
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
