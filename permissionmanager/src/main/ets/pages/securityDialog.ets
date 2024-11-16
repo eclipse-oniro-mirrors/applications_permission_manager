@@ -26,10 +26,10 @@ import {
 } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
+import { preferences } from '@kit.ArkData';
+import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 
 let storage = LocalStorage.getShared();
-const TAG = 'PermissionManager_Log:';
-const RESOURCE_TYPE: number = 10003;
 
 @Entry(storage)
 @Component
@@ -37,7 +37,9 @@ struct SecurityDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
   @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
-  @State appName: ResourceStr = 'ToBeInstead';
+  @LocalStorageLink('dataPreferences') dataPreferences: preferences.Preferences | null = null;
+  @State appName: ResourceStr = 'Application';
+  @State refreshAppName: boolean = false;
   @State index: number = 0;
   @State scrollBarWidth: number = Constants.SCROLL_BAR_WIDTH_DEFAULT;
 
@@ -201,6 +203,11 @@ struct SecurityDialog {
     this.GetAppName();
     this.index = this.want.parameters['ohos.user.security.type'];
     this.dialogController?.open();
+    this.dataPreferences?.on('change', (key: string) => {
+      Log.info('dataPreferences change.');
+      this.refreshAppName = true;
+      this.GetAppName();
+    })
   }
 
   aboutToDisappear() {
@@ -208,16 +215,22 @@ struct SecurityDialog {
   }
 
   GetAppName() {
-    let bundleName: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
-    bundleManager.getApplicationInfo(bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT)
-      .then(data => {
-        data.labelResource.params = [];
-        data.labelResource.type = RESOURCE_TYPE;
-        this.appName = data.labelResource;
+    let resourceFlag = bundleResourceManager.ResourceFlag.GET_RESOURCE_INFO_ALL;
+    let uid: number = this.want.parameters['ohos.caller.uid'];
+    try {
+      bundleManager.getAppCloneIdentity(uid).then(cloneInfo => {
+        Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}`);
+        let resourceInfo =
+          bundleResourceManager.getBundleResourceInfo(cloneInfo.bundleName, resourceFlag, cloneInfo.appIndex);
+        this.appName === resourceInfo?.label && this.refreshAppName ?
+        this.GetAppName() : this.appName = resourceInfo?.label;
+        this.refreshAppName = false;
+      }).catch((err: BusinessError) => {
+        Log.error(`getAppCloneIdentity failed: ${JSON.stringify(err)}`);
       })
-      .catch((error: BusinessError) => {
-        Log.error('getApplicationInfo failed. err is ' + JSON.stringify(error));
-      });
+    } catch (err) {
+      Log.error(`get appName failed: ${JSON.stringify(err)}`);
+    }
   }
 
   destruction() {

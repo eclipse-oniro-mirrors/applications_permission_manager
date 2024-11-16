@@ -17,9 +17,12 @@ import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
 import { GlobalContext } from '../common/utils/globalContext';
+import { preferences } from '@kit.ArkData';
+import { Configuration } from '@ohos.app.ability.Configuration';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
+let dataPreferences: preferences.Preferences | null = null;
 
 export default class SecurityExtensionAbility extends extension {
   /**
@@ -46,6 +49,8 @@ export default class SecurityExtensionAbility extends extension {
         width: dis.width,
         height: dis.height
       };
+      let options: preferences.Options = { name: 'myStore' };
+      dataPreferences = preferences.getPreferencesSync(this.context, options);
       this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
     } catch (exception) {
       console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
@@ -57,6 +62,14 @@ export default class SecurityExtensionAbility extends extension {
    */
   onDestroy(): void {
     console.info(TAG + 'SecurityExtensionAbility onDestroy.');
+  }
+
+  onConfigurationUpdate(newConfig: Configuration): void {
+    console.info(TAG + 'onConfigurationUpdate: ' + JSON.stringify(newConfig));
+    dataPreferences?.putSync('language', newConfig.language);
+    dataPreferences?.flush(() => {
+      console.info(TAG + 'dataPreferences update.');
+    });
   }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
@@ -74,7 +87,7 @@ export default class SecurityExtensionAbility extends extension {
     }
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
-      let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
+      let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win, 'dataPreferences': dataPreferences });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         win.destroyWindow();
         let dialogSet: Set<number> = GlobalContext.load('dialogSet');
