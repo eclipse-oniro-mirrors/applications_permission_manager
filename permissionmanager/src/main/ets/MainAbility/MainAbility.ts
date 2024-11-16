@@ -14,10 +14,10 @@
  */
 
 import UIAbility from '@ohos.app.ability.UIAbility';
-import bundleManager from '@ohos.bundle.bundleManager';
 import bundleMonitor from '@ohos.bundle.bundleMonitor';
 import account_osAccount from '@ohos.account.osAccount';
 import { GlobalContext } from '../common/utils/globalContext';
+import { abilityAccessCtrl, bundleManager } from '@kit.AbilityKit';
 
 const TAG = 'PermissionManager_Log:';
 const USER_ID = 100;
@@ -25,6 +25,11 @@ const USER_ID = 100;
 export default class MainAbility extends UIAbility {
   onCreate(want, launchParam): void {
     console.log(TAG + 'MainAbility onCreate, ability name is ' + want.abilityName + '.');
+
+    if (!this.permissionCheck()) {
+      this.context.terminateSelf();
+      return;
+    }
 
     globalThis.bundleName = want.parameters.bundleName;
     GlobalContext.store('bundleName', want.parameters.bundleName);
@@ -77,6 +82,14 @@ export default class MainAbility extends UIAbility {
     console.log(TAG + 'MainAbility onNewWant. want: ' + JSON.stringify(want));
     console.log(TAG + 'MainAbility onNewWant. bundleName: ' + JSON.stringify(want.parameters.bundleName));
 
+    if (!this.permissionCheck()) {
+      this.context.terminateSelf();
+      return;
+    }
+
+    if (globalThis.currentApp === undefined) {
+      this.context.terminateSelf();
+    }
     let bundleName = want.parameters.bundleName ? want.parameters.bundleName : 'all';
     if (globalThis.currentApp === 'all') {
       if (globalThis.currentApp !== bundleName) {
@@ -134,6 +147,24 @@ export default class MainAbility extends UIAbility {
     console.log(TAG + ' onForeground.');
   }
 
+  private permissionCheck(): boolean {
+    try {
+      let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
+      let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag);
+      let atManager =abilityAccessCtrl.createAtManager();
+      let status =
+        atManager.verifyAccessTokenSync(bundleInfo.appInfo.accessTokenId, 'ohos.permission.GET_INSTALLED_BUNDLE_LIST');
+      if (status === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+        console.log(TAG + 'permission status is denied.');
+        return false;
+      }
+      return true;
+    } catch (err) {
+      console.error(TAG + 'verifyAccessTokenSync failed.');
+      return false;
+    }
+  }
+
   getAllApplications(): void {
     const flag =
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
@@ -147,6 +178,7 @@ export default class MainAbility extends UIAbility {
         bundleManager.getAllBundleInfo(flag, userId || USER_ID).then(async(bundleInfos) => {
           if (bundleInfos.length <= 0) {
             console.info(TAG + 'bundle.getAllBundleInfo result.length less than or equal to zero');
+            this.context.terminateSelf();
             return;
           }
           let initialGroups = [];
@@ -172,10 +204,12 @@ export default class MainAbility extends UIAbility {
           globalThis.windowStage?.loadContent('pages/authority-management', storage);
         }).catch((error) => {
           console.error(TAG + 'bundle.getAllBundleInfo failed. Cause: ' + JSON.stringify(error));
+          this.context.terminateSelf();
         });
       });
     } catch (e) {
       console.error(TAG + 'getActivatedOsAccountLocalIds exception: ' + JSON.stringify(e));
+      this.context.terminateSelf();
     }
   }
 
@@ -214,6 +248,7 @@ export default class MainAbility extends UIAbility {
       });
     } catch (error) {
       console.error(TAG + 'Special branch failed: ' + JSON.stringify(error));
+      this.context.terminateSelf();
     }
   }
 };

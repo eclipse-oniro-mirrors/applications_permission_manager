@@ -17,6 +17,9 @@ import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import display from '@ohos.display';
 import { GlobalContext } from '../common/utils/globalContext';
+import { abilityAccessCtrl, bundleManager } from '@kit.AbilityKit';
+import { camera } from '@kit.CameraKit';
+import { audio } from '@kit.AudioKit';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
@@ -31,6 +34,16 @@ export default class GlobalExtensionAbility extends extension {
 
     GlobalContext.store('globalState', want.parameters['ohos.sensitive.resource']);
     GlobalContext.store('context', this.context);
+
+    if (!this.permissionCheck()) {
+      this.context.terminateSelf();
+      return;
+    }
+
+    if (!this.statusCheck(want.parameters['ohos.sensitive.resource'])) {
+      this.context.terminateSelf();
+      return;
+    }
 
     try {
       let dis = display.getDefaultDisplaySync();
@@ -59,7 +72,83 @@ export default class GlobalExtensionAbility extends extension {
   onDestroy(): void {
     console.info(TAG + 'ServiceExtensionAbility onDestroy.');
     let win = GlobalContext.load('globalWin');
-    win.destroyWindow();
+    win?.destroyWindow();
+  }
+
+  private permissionCheck(): boolean {
+    try {
+      let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
+      let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag);
+      let atManager =abilityAccessCtrl.createAtManager();
+      let status =
+        atManager.verifyAccessTokenSync(bundleInfo.appInfo.accessTokenId, 'ohos.permission.MICROPHONE_CONTROL');
+      if (status === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
+        console.log(TAG + 'permission status is denied.');
+        return false;
+      }
+      return true;
+    } catch (err) {
+      console.error(TAG + 'verifyAccessTokenSync failed.');
+      return false;
+    }
+  }
+
+  private statusCheck(resource: string): boolean {
+    switch (resource) {
+      case 'microphone':
+        if (this.microphoneStatus()) {
+          return true;
+        } else {
+          console.log(TAG + 'The microphone is not disabled on this device.');
+          return false;
+        }
+      case 'camera':
+        if (this.cameraStatus()) {
+          return true;
+        } else {
+          console.log(TAG + 'The camera is not disabled on this device.');
+          return false;
+        }
+      default:
+        if (this.microphoneStatus() && this.cameraStatus()) {
+          return true;
+        } else {
+          console.log(TAG + 'The microphone and camera is not disabled on this device.');
+          return false;
+        }
+    }
+  }
+
+  private microphoneStatus(): boolean {
+    try {
+      let audioManager = audio.getAudioManager();
+      let audioVolumeManager = audioManager.getVolumeManager();
+      let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
+      let audioVolumeGroupManager = audioVolumeManager.getVolumeGroupManagerSync(groupId);
+      let muteState = audioVolumeGroupManager.isPersistentMicMute();
+      console.log(TAG + 'microphoneStatus: ' + muteState);
+      return muteState;
+    } catch (err) {
+      console.error(TAG + 'Failed to obtain the microphone disabled status.');
+      return false;
+    }
+  }
+
+  private cameraStatus(): boolean {
+    try {
+      let cameraManager = camera.getCameraManager(this.context);
+      let isMuteSupported = cameraManager.isCameraMuteSupported();
+      if (!isMuteSupported) {
+        console.log(TAG + 'The current device does not support disabling the camera.');
+        return false;
+      }
+      let muteState = cameraManager.isCameraMuted();
+      console.log(TAG + 'cameraStatus: ' + muteState);
+      return muteState;
+    } catch (err) {
+      console.error(TAG + 'Failed to obtain the camera disabled status.');
+      return false;
+    }
   }
 
   private async createWindow(name: string, windowType: number, rect): Promise<void> {
