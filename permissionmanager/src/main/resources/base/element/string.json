@@ -138,7 +138,7 @@
         },
         {
             "name":"access_general_location",
-            "value":"Allow %s to access this device's approximate location?"
+            "value":"Allow %s to access your approximate location?"
         },
         {
             "name":"fuzzy_to_exact",
@@ -282,7 +282,7 @@
         },
         {
             "name":"group_label_location",
-            "value":"Allow %s to access this device's location?"
+            "value":"Allow %s to access your location?"
         },
         {
             "name":"group_label_camera",
@@ -306,7 +306,7 @@
         },
         {
             "name":"group_label_health",
-            "value":"Allow %s to use body sensors?"
+            "value":"Allow %s to access body sensor data?"
         },
         {
             "name":"group_label_distributed_datasync",
@@ -326,7 +326,7 @@
         },
         {
             "name":"group_label_ADS",
-            "value":"Allow %s to track your activity across other apps?"
+            "value":"Allow %s to track your activity in other apps?"
         },
         {
             "name":"group_label_appList",
