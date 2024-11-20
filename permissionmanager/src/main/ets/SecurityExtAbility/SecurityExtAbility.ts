@@ -61,14 +61,13 @@ export default class SecurityExtensionAbility extends extension {
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
     console.info(TAG + 'create securityWindow');
-    let dialogSet: Set<string> = GlobalContext.load('dialogSet');
+    let dialogSet: Set<number> = GlobalContext.load('dialogSet');
     if (!dialogSet) {
-      dialogSet = new Set<string>();
+      dialogSet = new Set<number>();
       console.info(TAG + 'new dialogSet');
       GlobalContext.store('dialogSet', dialogSet);
     }
-    let callerToken: string = want.parameters['ohos.aafwk.param.callerBundleName'];
-    console.info(TAG + 'callerToken = ' + callerToken);
+    let callerToken: number = want.parameters['ohos.caller.uid'];
     if (dialogSet.has(callerToken)) {
       console.info(TAG + 'window of ' + callerToken + ' already exists');
       return;
@@ -78,8 +77,8 @@ export default class SecurityExtensionAbility extends extension {
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         win.destroyWindow();
-        let dialogSet: Set<string> = GlobalContext.load('dialogSet');
-        let callerToken: string = want.parameters['ohos.aafwk.param.callerBundleName'];
+        let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+        let callerToken: number = want.parameters['ohos.caller.uid'];
         dialogSet.delete(callerToken);
         console.info(TAG + 'window of ' + callerToken + ' is destroyed');
         GlobalContext.store('dialogSet', dialogSet);

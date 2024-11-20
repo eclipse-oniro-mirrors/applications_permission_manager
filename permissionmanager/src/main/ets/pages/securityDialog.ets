@@ -28,7 +28,6 @@ import { Param, WantInfo } from '../common/utils/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 
 let storage = LocalStorage.getShared();
-const TAG = 'PermissionManager_Log:';
 const RESOURCE_TYPE: number = 10003;
 
 @Entry(storage)
@@ -63,10 +62,9 @@ struct SecurityDialog {
           action: () => {
             this.dialogController?.close();
             this.win.destroyWindow();
-            let dialogSet: Set<string> = GlobalContext.load('dialogSet');
-            let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+            let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+            let callerToken: number = this.want.parameters['ohos.caller.uid'];
             dialogSet.delete(callerToken);
-            Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
             GlobalContext.store('dialogSet', dialogSet);
             if (dialogSet.size === 0) {
               this.context.terminateSelf();
@@ -86,10 +84,9 @@ struct SecurityDialog {
     autoCancel: false,
     cancel: () => {
       this.win.destroyWindow();
-      let dialogSet: Set<string> = GlobalContext.load('dialogSet');
-      let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+      let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+      let callerToken: number = this.want.parameters['ohos.caller.uid'];
       dialogSet.delete(callerToken);
-      Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
@@ -240,10 +237,9 @@ struct SecurityDialog {
       data.reclaim();
       reply.reclaim();
       this.win.destroyWindow();
-      let dialogSet: Set<string> = GlobalContext.load('dialogSet');
-      let callerToken: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
+      let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+      let callerToken: number = this.want.parameters['ohos.caller.uid'];
       dialogSet.delete(callerToken);
-      Log.info(TAG + 'window of ' + callerToken + ' is destroyed');
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
