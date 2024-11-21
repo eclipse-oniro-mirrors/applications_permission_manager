@@ -26,11 +26,6 @@ export default class MainAbility extends UIAbility {
   onCreate(want, launchParam): void {
     console.log(TAG + 'MainAbility onCreate, ability name is ' + want.abilityName + '.');
 
-    if (!this.permissionCheck()) {
-      this.context.terminateSelf();
-      return;
-    }
-
     globalThis.bundleName = want.parameters.bundleName;
     GlobalContext.store('bundleName', want.parameters.bundleName);
     GlobalContext.store('context', this.context);
@@ -41,6 +36,11 @@ export default class MainAbility extends UIAbility {
     console.log(TAG + 'MainAbility onWindowStageCreate.');
     globalThis.windowStage = windowStage;
     globalThis.refresh = false;
+    if (!this.permissionCheck()) {
+      windowStage.loadContent('pages/transition');
+      this.context.terminateSelf();
+      return;
+    }
 
     if (globalThis.bundleName) {
       globalThis.currentApp = globalThis.bundleName;
@@ -82,14 +82,6 @@ export default class MainAbility extends UIAbility {
     console.log(TAG + 'MainAbility onNewWant. want: ' + JSON.stringify(want));
     console.log(TAG + 'MainAbility onNewWant. bundleName: ' + JSON.stringify(want.parameters.bundleName));
 
-    if (!this.permissionCheck()) {
-      this.context.terminateSelf();
-      return;
-    }
-
-    if (globalThis.currentApp === undefined) {
-      this.context.terminateSelf();
-    }
     let bundleName = want.parameters.bundleName ? want.parameters.bundleName : 'all';
     if (globalThis.currentApp === 'all') {
       if (globalThis.currentApp !== bundleName) {
@@ -151,7 +143,7 @@ export default class MainAbility extends UIAbility {
     try {
       let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
       let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag);
-      let atManager =abilityAccessCtrl.createAtManager();
+      let atManager = abilityAccessCtrl.createAtManager();
       let status =
         atManager.verifyAccessTokenSync(bundleInfo.appInfo.accessTokenId, 'ohos.permission.GET_INSTALLED_BUNDLE_LIST');
       if (status === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
