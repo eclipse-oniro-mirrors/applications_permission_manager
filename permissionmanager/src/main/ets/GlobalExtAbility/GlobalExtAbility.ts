@@ -79,7 +79,7 @@ export default class GlobalExtensionAbility extends extension {
     try {
       let flag = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
       let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag);
-      let atManager =abilityAccessCtrl.createAtManager();
+      let atManager = abilityAccessCtrl.createAtManager();
       let status =
         atManager.verifyAccessTokenSync(bundleInfo.appInfo.accessTokenId, 'ohos.permission.MICROPHONE_CONTROL');
       if (status === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
