@@ -141,6 +141,7 @@ struct SecurityDialog {
                 })
             }
           }
+          .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
           .backgroundColor($r('app.color.icon_bg'))
           .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
           Column() { // content
