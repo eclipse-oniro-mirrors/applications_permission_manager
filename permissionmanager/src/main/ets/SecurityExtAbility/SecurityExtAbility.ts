@@ -42,7 +42,8 @@ export default class SecurityExtensionAbility extends extension {
     console.info(TAG + 'want: ' + JSON.stringify(want));
 
     try {
-      let dis = display.getDefaultDisplaySync();
+      let displayId = want.parameters['ohos.display.id'];
+      let dis = display.getDisplayByIdSync(displayId);
       let navigationBarRect = {
         left: 0,
         top: 0,
