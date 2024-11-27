@@ -322,29 +322,27 @@ struct mediaDocumentItem {
     this.getMediaDocList();
     this.getReason();
 
-    bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
-    .then(res => {
-      this.version = res.versionName;
-      accessTokenId = res.appInfo.accessTokenId;
-      let acManager = abilityAccessCtrl.createAtManager();
-      let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION);
-      this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
-      try {
-        let getFlagPermission =
-          this.currentGroup === 'LOCATION' ? Permission.APPROXIMATELY_LOCATION : this.permissions[0];
-        acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission).then((flag) => {
-          Log.info(`getPermissionFlags success, data->${JSON.stringify(flag)}`);
-          this.isRisk = (flag == Constants.PERMISSION_POLICY_FIXED) ? true : false;
-          if (flag === Constants.PERMISSION_ALLOW_THIS_TIME) {
-            this.selected = Constants.PERMISSION_ONLY_THIS_TIME;
-          }
+    try {
+      bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
+        .then(res => {
+          this.version = res.versionName;
+          accessTokenId = res.appInfo.accessTokenId;
+          let acManager = abilityAccessCtrl.createAtManager();
+          let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION);
+          this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
+          let getFlagPermission =
+            this.currentGroup === 'LOCATION' ? Permission.APPROXIMATELY_LOCATION : this.permissions[0];
+          acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission).then((flag) => {
+            Log.info(`getPermissionFlags success, data->${JSON.stringify(flag)}`);
+            this.isRisk = (flag == Constants.PERMISSION_POLICY_FIXED) ? true : false;
+            flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
+          })
+        }).catch((error: BusinessError) => {
+          Log.error('bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
         })
-      } catch (err) {
-        Log.error('acManager.getPermissionFlags failed. Cause: ' + JSON.stringify(err));
-      }
-    }).catch((error: BusinessError) => {
-      Log.error('bundle.getBundleInfo failed. Cause: ' + JSON.stringify(error));
-    })
+    } catch (err) {
+      Log.error('bundle.getBundleInfo failed. Cause: ' + JSON.stringify(err));
+    }
   }
 
   build() {

@@ -17,9 +17,10 @@ import { backBar } from '../common/components/backBar';
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { permissionGroups } from '../common/model/permissionGroup';
-import { verifyAccessToken } from '../common/utils/utils';
+import { Log, verifyAccessToken } from '../common/utils/utils';
 import { OtherPermission, RouterParams3 } from '../common/model/typedef';
 import { Permissions } from '@ohos.abilityAccessCtrl';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 let status: number = (router.getParams() as RouterParams3).status; // Status: Allowed, Forbidden
 let permissions: Permissions[] = (router.getParams() as RouterParams3).permission; // permissions name
@@ -70,8 +71,10 @@ struct appNamePage {
   onPageShow() {
     permissions.forEach(permission => {
       verifyAccessToken(this.tokenId, permission).then((data): void => {
-        status = data;
-      });
+          status = data;
+        }).catch((err: BusinessError) => {
+          Log.error(`verifyAccessToken failed: ${JSON.stringify(err)}`)
+        });
     })
   }
 }

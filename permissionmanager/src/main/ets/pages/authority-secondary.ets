@@ -122,6 +122,9 @@ struct appNameItem {
     let permissionsList = groups.filter((item) => {
       return item.name === this.group;
     })
+    if (!permissionsList.length) {
+      return;
+    }
     for (let i = 0; i < permissionsList[0].permissions.length; i++) {
       permissionGroups.forEach((item) => {
         if (item.permissionName === permissionsList[0].permissions[i]) {

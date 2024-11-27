@@ -196,15 +196,15 @@ struct applicationItem {
             Log.info('global accept');
             if (this.currentGroup == PermissionGroup.MICROPHONE) {
               let audioManager = audio.getAudioManager();
-              let audioVolumeManager = audioManager.getVolumeManager();
-              audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
+              let audioVolumeManager = audioManager?.getVolumeManager();
+              audioVolumeManager?.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
                 audioVolumeGroupManager.setMicMutePersistent(true, audio.PolicyType.PRIVACY).then(() => {
                   this.dialogController?.close();
                 })
               })
             } else {
               let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-              cameraManager.muteCameraPersistent(true, camera.PolicyType.PRIVACY);
+              cameraManager?.muteCameraPersistent(true, camera.PolicyType.PRIVACY);
               this.dialogController?.close();
             }
           }
