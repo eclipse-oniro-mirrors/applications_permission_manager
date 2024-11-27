@@ -30,6 +30,7 @@ import { preferences } from '@kit.ArkData';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 
 let storage = LocalStorage.getShared();
+const RESOURCE_TYPE: number = 10003;
 
 @Entry(storage)
 @Component
@@ -39,7 +40,7 @@ struct SecurityDialog {
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
   @LocalStorageLink('dataPreferences') dataPreferences: preferences.Preferences | null = null;
   @State appName: ResourceStr = 'Application';
-  @State refreshAppName: boolean = false;
+  @State appIndex: number = 0;
   @State index: number = 0;
   @State scrollBarWidth: number = Constants.SCROLL_BAR_WIDTH_DEFAULT;
 
@@ -205,8 +206,7 @@ struct SecurityDialog {
     this.dialogController?.open();
     this.dataPreferences?.on('change', (key: string) => {
       Log.info('dataPreferences change.');
-      this.refreshAppName = true;
-      this.GetAppName();
+      this.appIndex === 0 ? null : this.GetAppName();
     })
   }
 
@@ -215,21 +215,43 @@ struct SecurityDialog {
   }
 
   GetAppName() {
-    let resourceFlag = bundleResourceManager.ResourceFlag.GET_RESOURCE_INFO_ALL;
     let uid: number = this.want.parameters['ohos.caller.uid'];
     try {
       bundleManager.getAppCloneIdentity(uid).then(cloneInfo => {
         Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}`);
-        let resourceInfo =
-          bundleResourceManager.getBundleResourceInfo(cloneInfo.bundleName, resourceFlag, cloneInfo.appIndex);
-        this.appName === resourceInfo?.label && this.refreshAppName ?
-        this.GetAppName() : this.appName = resourceInfo?.label;
-        this.refreshAppName = false;
+        this.appIndex = cloneInfo.appIndex;
+        cloneInfo.appIndex === 0 ? this.getSelfName(cloneInfo) : this.getCloneName(cloneInfo);
       }).catch((err: BusinessError) => {
         Log.error(`getAppCloneIdentity failed: ${JSON.stringify(err)}`);
       })
     } catch (err) {
       Log.error(`get appName failed: ${JSON.stringify(err)}`);
+    }
+  }
+
+  getSelfName(cloneInfo: bundleManager.AppCloneIdentity) {
+    try {
+      bundleManager.getApplicationInfo(cloneInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT)
+        .then(data => {
+          data.labelResource.params = [];
+          data.labelResource.type = RESOURCE_TYPE;
+          this.appName = data.labelResource;
+        }).catch((error: BusinessError) => {
+          Log.error('getApplicationInfo failed. err is ' + JSON.stringify(error));
+        });
+    } catch (err) {
+      Log.error('getSelfName failed. err is ' + JSON.stringify(err));
+    }
+  }
+
+  getCloneName(cloneInfo: bundleManager.AppCloneIdentity) {
+    try {
+      let resourceFlag = bundleResourceManager.ResourceFlag.GET_RESOURCE_INFO_ALL;
+      let resourceInfo =
+        bundleResourceManager.getBundleResourceInfo(cloneInfo.bundleName, resourceFlag, cloneInfo.appIndex);
+      this.appName = resourceInfo?.label;
+    } catch (err) {
+      Log.error('getCloneName failed. err is ' + JSON.stringify(err));
     }
   }
 
