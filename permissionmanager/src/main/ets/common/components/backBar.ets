@@ -16,6 +16,7 @@
 import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import Constants from '../utils/constant';
+import { Log } from '../utils/utils';
 
 @Component
 export struct backBar {
@@ -45,6 +46,7 @@ export struct backBar {
         .backgroundColor(this.isBack ? $r('sys.color.interactive_click') : '')
         .onTouch(event => {
           if (event === undefined) {
+            Log.info('touch event is undefined.');
             return;
           }
           if (event.type === TouchType.Down) {
@@ -84,6 +86,7 @@ export struct backBar {
           .backgroundColor(this.isMore ? $r('sys.color.interactive_click') : '')
           .onTouch(event => {
             if (event === undefined) {
+              Log.info('touch event is undefined.');
               return;
             }
             if (event.type === TouchType.Down) {
@@ -126,6 +129,7 @@ export struct backBar {
         })
       .onTouch(event => {
         if (event === undefined) {
+          Log.info('touch event is undefined.');
           return;
         }
         if (event.type === TouchType.Down) {

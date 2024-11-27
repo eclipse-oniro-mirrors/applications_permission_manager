@@ -20,6 +20,7 @@ import common from '@ohos.app.ability.common';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log } from '../common/utils/utils';
 import { GlobalContext } from '../common/utils/globalContext';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 const MICROPHONE = 'microphone';
 const CAMERA = 'camera';
@@ -54,10 +55,12 @@ struct globalSwitch {
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
-                  this.context.terminateSelf();
+                  audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
+                    this.context.terminateSelf();
+                  })
+                }).catch((err: BusinessError) => {
+                  Log.error(`getVolumeGroupManager failed: ${JSON.stringify(err)}`);
                 })
-              })
             } else if (this.globalState == CAMERA) {
               let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
               cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
@@ -68,10 +71,12 @@ struct globalSwitch {
               let audioManager = audio.getAudioManager();
               let audioVolumeManager = audioManager.getVolumeManager();
               audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
-                  this.context.terminateSelf();
+                  audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
+                    this.context.terminateSelf();
+                  })
+                }).catch((err: BusinessError) => {
+                  Log.error(`getVolumeGroupManager failed: ${JSON.stringify(err)}`);
                 })
-              })
             }
           }
         }

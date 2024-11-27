@@ -367,16 +367,21 @@ struct dialogPlusPage {
     this.result = new Array(this.reqPerms.length).fill(-1);
     this.getPasteBoardInfo();
     let bundleName: string = this.want.parameters['ohos.aafwk.param.callerBundleName'];
-    bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
-    .then(bundleInfo => {
-      this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
-      this.getGrantGroups(this.want.parameters['ohos.user.grant.permission.state']);
-      this.getApplicationName(bundleName);
-      this.dialogController?.open();
-    }).catch((err: BusinessError) => {
+    try {
+      bundleManager.getBundleInfo(bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+        .then(bundleInfo => {
+          this.reqPermissionDetails = bundleInfo.reqPermissionDetails;
+          this.getGrantGroups(this.want.parameters['ohos.user.grant.permission.state']);
+          this.getApplicationName(bundleName);
+          this.dialogController?.open();
+        }).catch((err: BusinessError) => {
+          Log.error('getBundleInfo error :' + JSON.stringify(err));
+          this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
+        })
+    } catch (err) {
       Log.error('getBundleInfo error :' + JSON.stringify(err));
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
-    })
+    }
   }
 
   aboutToDisappear() {
