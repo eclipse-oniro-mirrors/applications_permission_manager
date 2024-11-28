@@ -20,6 +20,7 @@ import { GlobalContext } from '../common/utils/globalContext';
 import { preferences } from '@kit.ArkData';
 import { Configuration } from '@ohos.app.ability.Configuration';
 
+const DELAY = 1000;
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
 let dataPreferences: preferences.Preferences | null = null;
@@ -68,9 +69,11 @@ export default class SecurityExtensionAbility extends extension {
   onConfigurationUpdate(newConfig: Configuration): void {
     console.info(TAG + 'onConfigurationUpdate: ' + JSON.stringify(newConfig));
     dataPreferences?.putSync('language', newConfig.language);
-    dataPreferences?.flush(() => {
-      console.info(TAG + 'dataPreferences update.');
-    });
+    setTimeout(() => {
+      dataPreferences?.flush(() => {
+        console.info(TAG + 'dataPreferences update.');
+      });
+    }, DELAY);
   }
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
