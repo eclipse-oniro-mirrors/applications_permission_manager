@@ -24,7 +24,9 @@
             "third_party": []
         },
         "build": {
-            "sub_component": [],
+            "sub_component": [
+                "//applications/standard/permission_manager:permission_manager"
+            ],
             "inner_kits": [],
             "test": []
         }
