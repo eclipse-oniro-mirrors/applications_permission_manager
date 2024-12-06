@@ -21,7 +21,7 @@ ohos_app("permission_manager") {
   publicity_file = "publicity.xml"
   certificate_profile = "signature/pm.p7b"
   hap_name = "permission_manager"
-  part_name = "prebuilt_hap"
+  part_name = "permission_manager"
   subsystem_name = "applications"
   js_build_mode = "release"
   module_install_dir = "app/com.ohos.permissionmanager"
