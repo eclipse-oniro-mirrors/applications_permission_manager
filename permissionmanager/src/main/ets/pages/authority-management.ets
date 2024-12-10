@@ -383,9 +383,13 @@ struct authorityManagementPage {
    */
   aboutToAppear() {
     this.getAllBundlePermissions();
-    let dis = display.getDefaultDisplaySync();
-    this.isVertical = dis.height > dis.width ? true : false;
-    GlobalContext.store('isVertical', dis.height > dis.width ? true : false);
+    try {
+      let dis = display.getDefaultDisplaySync();
+      this.isVertical = dis.height > dis.width ? true : false;
+      GlobalContext.store('isVertical', dis.height > dis.width ? true : false);
+    } catch (error) {
+      Log.error(`getDefaultDisplaySync failed. ${JSON.stringify(error)}`);
+    }
   }
 
   getPermissionGroup(allGroup: GroupPermission[], order: number): GroupPermission[] {

@@ -156,10 +156,14 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
         return;
       }
     }
-    let dis = display.getDefaultDisplaySync();
-    await this.subWindowForHost?.resize(dis.width, dis.height).catch((err: BusinessError) => {
-      Log.error('resize window error: ' + err.code + ' ' + err.message);
-    });
+    try {
+      let dis = display.getDefaultDisplaySync();
+      await this.subWindowForHost?.resize(dis.width, dis.height).catch((err: BusinessError) => {
+        Log.error('resize window error: ' + err.code + ' ' + err.message);
+      });
+    } catch (error) {
+      Log.error('getDefaultDisplaySync error: ' + error.code + ' ' + error.message);
+    }
     this.subWindowForHost?.on('windowEvent', (eventType: window.WindowEventType) => {
       Log.info('window event type is: ' + eventType);
       storage.setOrCreate('permissionWindow', eventType);

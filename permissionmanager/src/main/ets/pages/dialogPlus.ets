@@ -362,7 +362,7 @@ struct dialogPlusPage {
       this.initStatus = Constants.INIT_NEED_TO_TERMINATED;
       return;
     }
-    Log.info('request permission=' + JSON.stringify(this.reqPerms) + ', tokenId = ' + this.accessTokenId);
+    Log.info(`request permission: ${JSON.stringify(this.reqPerms)}.`);
     Log.info('permission state=' + JSON.stringify(this.want.parameters['ohos.user.grant.permission.state']));
     this.result = new Array(this.reqPerms.length).fill(-1);
     this.getPasteBoardInfo();
