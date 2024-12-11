@@ -26,8 +26,7 @@ import {
   getPermissionGroup,
   titleTrim,
   getPermissionLabel,
-  getFontSizeScale,
-  getLimitFontSize
+  getFontSizeScale
 } from '../common/utils/utils';
 import { Permission, ButtonStatus } from '../common/model/definition';
 import { GroupInfo, WantInfo } from '../common/model/typedef';
@@ -41,6 +40,14 @@ import { MeasureText } from '@kit.ArkUI';
   .buttonStyle(ButtonStyleMode.TEXTUAL)
   .fontColor($r('sys.color.font_emphasize'))
   .width(Constants.HALF_LENGTH)
+}
+
+@Extend(Text)function titleText() {
+  .fontWeight(FontWeight.Bold)
+  .fontColor($r('sys.color.font_primary'))
+  .textAlign(TextAlign.Center)
+  .textOverflow({ overflow: TextOverflow.Ellipsis })
+  .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
 }
 
 const fuzzyMarks = [Constants.LOCATION_FUZZY, Constants.LOCATION_BOTH_FUZZY, Constants.LOCATION_BOTH_PRECISE];
@@ -79,6 +86,33 @@ struct dialogPlusPage {
   });
 
   @Builder
+  DialogTitle() {
+    Row() {
+      Column() {
+        if (getFontSizeScale()) {
+          Text($r(this.showTitle(), this.appName))
+            .titleText()
+            .fontSize($r('sys.float.Title_S'))
+        } else {
+          Text($r(this.showTitle(), this.appName))
+            .titleText()
+            .minFontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+            .maxFontSize($r('sys.float.Title_S'))
+            .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
+        }
+      }
+      .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
+      .justifyContent(FlexAlign.Center)
+      .padding({
+        top: Constants.DEFAULT_PADDING_TOP,
+        bottom: Constants.DEFAULT_PADDING_BOTTOM,
+        left: Constants.PADDING_24,
+        right: Constants.PADDING_24
+      })
+    }
+  }
+
+  @Builder
   buildContent(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Column() {
@@ -97,38 +131,7 @@ struct dialogPlusPage {
           }
           Scroll() {
             Column() {
-              Row() {
-                Column() {
-                  Text($r(this.showTitle(), this.appName))
-                  .textAlign(TextAlign.Center)
-                  .fontSize($r('sys.float.Title_S'))
-                  .fontColor($r('sys.color.font_primary'))
-                  .fontWeight(FontWeight.Bold)
-                  .textOverflow({ overflow: TextOverflow.Ellipsis })
-                  .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
-                  .minFontSize(
-                    getLimitFontSize(getFontSizeScale(),
-                    Constants.DIALOG_TITLE_MAX_SCALE,
-                    $r('sys.float.Subtitle_M'),
-                    $r('sys.float.Title_S'))
-                  )
-                  .maxFontSize(
-                    getLimitFontSize(getFontSizeScale(),
-                    Constants.DIALOG_TITLE_MAX_SCALE,
-                    $r('sys.float.Title_S'),
-                    $r('sys.float.Title_S'))
-                  )
-                  .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
-                }
-                .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
-                .justifyContent(FlexAlign.Center)
-                .padding({
-                  top: Constants.DEFAULT_PADDING_TOP,
-                  bottom: Constants.DEFAULT_PADDING_BOTTOM,
-                  left: Constants.PADDING_24,
-                  right: Constants.PADDING_24
-                })
-              }
+              this.DialogTitle();
 
               Row() {
                 Flex({ justifyContent: FlexAlign.Center }) {
