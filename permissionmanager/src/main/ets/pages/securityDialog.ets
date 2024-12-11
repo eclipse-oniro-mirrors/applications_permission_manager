@@ -19,17 +19,21 @@ import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import {
-  Log,
-  getFontSizeScale,
-  getLimitFontSize
-} from '../common/utils/utils';
+import { Log, getFontSizeScale } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { preferences } from '@kit.ArkData';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 
 let storage = LocalStorage.getShared();
+
+@Extend(Text)function titleText() {
+  .fontWeight(FontWeight.Bold)
+  .fontColor($r('sys.color.font_primary'))
+  .textAlign(TextAlign.Center)
+  .textOverflow({ overflow: TextOverflow.Ellipsis })
+  .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
+}
 
 @Entry(storage)
 @Component
@@ -98,6 +102,29 @@ struct SecurityDialog {
   });
 
   @Builder
+  DialogTitle() {
+    Column() {
+      if (getFontSizeScale()) {
+        Text(this.securityParams[this.index].label)
+          .titleText()
+          .fontSize($r('sys.float.Title_S'))
+      } else {
+        Text(this.securityParams[this.index].label)
+          .titleText()
+          .minFontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+          .maxFontSize($r('sys.float.Title_S'))
+          .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
+      }
+    }
+    .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
+    .justifyContent(FlexAlign.Center)
+    .padding({
+      top: Constants.DEFAULT_PADDING_TOP,
+      bottom: Constants.DEFAULT_PADDING_BOTTOM,
+    })
+  }
+
+  @Builder
   buildContent(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Scroll() {
@@ -114,6 +141,7 @@ struct SecurityDialog {
                 radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
               })
               .padding(Constants.PADDING_10)
+              .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
             if (this.index === 1) {
               Image(this.securityParams[this.index].icon)
                 .width(Constants.IMAGE_LENGTH_20)
@@ -145,34 +173,7 @@ struct SecurityDialog {
           .backgroundColor($r('app.color.icon_bg'))
           .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
           Column() { // content
-            Column() {
-              Text(this.securityParams[this.index].label)
-                .textAlign(TextAlign.Center)
-                .fontColor($r('sys.color.font_primary'))
-                .fontSize($r('sys.float.Title_S'))
-                .fontWeight(FontWeight.Bold)
-                .textOverflow({ overflow: TextOverflow.Ellipsis })
-                .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
-                .minFontSize(
-                  getLimitFontSize(getFontSizeScale(),
-                  Constants.SECURITY_HEADER_MAX_SCALE,
-                  $r('sys.float.Subtitle_M'),
-                  $r('sys.float.Title_S'))
-                )
-                .maxFontSize(
-                  getLimitFontSize(getFontSizeScale(),
-                  Constants.SECURITY_HEADER_MAX_SCALE,
-                  $r('sys.float.Title_S'),
-                  $r('sys.float.Title_S'))
-                )
-                .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
-            }
-            .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
-            .justifyContent(FlexAlign.Center)
-            .padding({
-              top: Constants.DEFAULT_PADDING_TOP,
-              bottom: Constants.DEFAULT_PADDING_BOTTOM,
-            })
+            this.DialogTitle();
 
             Text($r(this.securityParams[this.index].description, this.appName))
               .textAlign(TextAlign.Start)

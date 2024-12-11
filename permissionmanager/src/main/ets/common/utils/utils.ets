@@ -268,29 +268,18 @@ export function checkPermissionGroup(appPermissions: Permissions[]): string | nu
   return groupName;
 }
 
-export function  setAvoidArea(proxy: uiExtensionHost.UIExtensionHostWindowProxy) {
+export function setAvoidArea(proxy: uiExtensionHost.UIExtensionHostWindowProxy) {
   let avoidArea = proxy.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
   let btmAvoidHeight: string = avoidArea.bottomRect.height.toString();
   Log.info(TAG + 'avoid area height: ' + btmAvoidHeight + 'px'); // assure unit in pixels
   GlobalContext.store('avoidAreaHeight', btmAvoidHeight + 'px');
 }
 
-export function getFontSizeScale(): number {
+export function getFontSizeScale(): boolean {
   const FONT_SIZE_SCALE_PARAM = 'persist.sys.font_scale_for_user0';
   let fontSizeScale = Number.parseFloat(systemParameterEnhance.getSync(FONT_SIZE_SCALE_PARAM, '1'));
-  return fontSizeScale >= Constants.DIALOG_TITLE_MAX_SCALE ? Constants.DIALOG_TITLE_MAX_SCALE : fontSizeScale;
+  return fontSizeScale > 1;
 }
-
-export function getLimitFontSize(
-    fontSizeScale: number, maxScale: number, resMin: Resource, resMax: Resource
-): number | string {
-  if (fontSizeScale <= 1) {
-    return px2vp(getContext().resourceManager.getNumber(resMin.id));
-  }
-  let fontSize = px2vp(getContext().resourceManager.getNumber(resMax.id));
-  return fontSizeScale > maxScale ? `${fontSize * maxScale}vp` : fontSize;
-}
-
 
 export class Log {
   public static domain: number = 0x8214;
