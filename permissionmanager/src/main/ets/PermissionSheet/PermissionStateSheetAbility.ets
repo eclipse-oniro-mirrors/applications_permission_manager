@@ -68,7 +68,7 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
     })
   }
 
-  onSessionDestroy(session: UIExtensionContentSession): void {
+  onSessionDestroy(): void {
     Log.info('OnSessionDestroy start');
     try {
       Log.info('try to reshow non-secure windows.');

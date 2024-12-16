@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { Permissions } from '@ohos.abilityAccessCtrl';
-import { ButtonStatus } from './definition';
+import { ButtonStatus, Permission } from './definition';
 
 export class AppInfo {
   public bundleName: string
@@ -25,7 +25,7 @@ export class AppInfo {
   public label: string
   public labelId: number
   public labelResource: Resource
-  public permissions: Permissions[]
+  public permissions: Permission[]
   public groupId: number[]
   public zhTag: string
   public indexTag: string
@@ -41,7 +41,7 @@ export class AppInfo {
     label: string,
     labelId: number,
     labelResource: Resource,
-    permissions: Permissions[],
+    permissions: Permission[],
     groupId: number[],
     zhTag: string,
     indexTag: string,
@@ -65,12 +65,12 @@ export class AppInfo {
 };
 
 export class PermissionApplications {
-  public permission: Permissions
+  public permission: Permission
   public groupName: string
   public bundleNames: string[]
   public icon: ResourceStr
 
-  constructor(permission: Permissions, groupName: string, bundleNames: string[], icon: ResourceStr) {
+  constructor(permission: Permission, groupName: string, bundleNames: string[], icon: ResourceStr) {
     this.permission = permission
     this.groupName = groupName
     this.bundleNames = bundleNames
@@ -129,12 +129,12 @@ export class ApplicationObj {
 }
 
 export class CalendarObj {
-  public permissionName: string
+  public permissionName: Permission
   public groupName: string
   public label: ResourceStr
   public index: number
 
-  constructor(permissionName: string, groupName: string, label: ResourceStr, index: number) {
+  constructor(permissionName: Permission, groupName: string, label: ResourceStr, index: number) {
     this.permissionName = permissionName
     this.groupName = groupName
     this.label = label
@@ -226,7 +226,7 @@ export class OtherPermission {
 }
 
 export class PermissionInfo {
-  public permissionName: string
+  public permissionName: Permission
   public groupName: string
   public label: ResourceStr
   public groupId: number
@@ -234,7 +234,7 @@ export class PermissionInfo {
   public forbiddenDescription?: ResourceStr
 
   constructor(
-    permissionName: string,
+    permissionName: Permission,
     groupName: string,
     label: ResourceStr,
     groupId: number,
@@ -257,7 +257,7 @@ export class GroupInfo {
   public icon: ResourceStr
   public description: Array<ResourceStr>
   public reason: string
-  public permissions: Array<Permissions>
+  public permissions: Array<Permission>
   public buttons: Array<ButtonStatus>
   public isShow: boolean
   public enableDescription?: string
@@ -270,7 +270,7 @@ export class GroupInfo {
     icon: ResourceStr,
     description: Array<ResourceStr>,
     reason: string,
-    permissions: Array<Permissions>,
+    permissions: Array<Permission>,
     buttons: Array<ButtonStatus>,
     isShow: boolean,
     enableDescription?: string,
@@ -396,9 +396,9 @@ export class RouterParams1 {
 export class RouterParams2 {
   public list: PermissionApplications[]
   public backTitle: ResourceStr
-  public permissionName: string
+  public permissionName: Permission
 
-  constructor(list: PermissionApplications[], backTitle: ResourceStr, permissionName: string) {
+  constructor(list: PermissionApplications[], backTitle: ResourceStr, permissionName: Permission) {
     this.list = list
     this.backTitle = backTitle
     this.permissionName = permissionName
@@ -408,11 +408,11 @@ export class RouterParams2 {
 export class RouterParams3 {
   public bundleName: string
   public backTitle: ResourceStr
-  public permission: Permissions[]
+  public permission: Permission[]
   public status: number
   public tokenId: number
 
-  constructor(bundleName: string, backTitle: ResourceStr, permission: Permissions[], status: number, tokenId: number) {
+  constructor(bundleName: string, backTitle: ResourceStr, permission: Permission[], status: number, tokenId: number) {
     this.bundleName = bundleName
     this.backTitle = backTitle
     this.permission = permission

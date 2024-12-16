@@ -14,7 +14,7 @@
  */
 
 import { backBar } from '../common/components/backBar';
-import { permissionGroups, groups } from '../common/model/permissionGroup';
+import { permissionInfos, groups } from '../common/model/permissionGroup';
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { CalendarObj, RouterParams1, PermissionApplications } from '../common/model/typedef';
@@ -126,13 +126,13 @@ struct appNameItem {
       return;
     }
     for (let i = 0; i < permissionsList[0].permissions.length; i++) {
-      permissionGroups.forEach((item) => {
-        if (item.permissionName === permissionsList[0].permissions[i]) {
-          this.calendarListItem.push(
-            new CalendarObj(item.permissionName, item.groupName, item.label, i)
-          )
-        }
-      })
+      let permissionInfo = permissionInfos.get(permissionsList[0].permissions[i]);
+      if (!permissionInfo) {
+        continue;
+      }
+      this.calendarListItem.push(
+        new CalendarObj(permissionInfo.permissionName, permissionInfo.groupName, permissionInfo.label, i)
+      );
     }
   }
 

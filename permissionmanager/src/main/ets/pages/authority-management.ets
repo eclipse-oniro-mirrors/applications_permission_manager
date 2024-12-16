@@ -22,8 +22,16 @@ import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
-import { groups, userGrantPermissions, globalGroup, permissionGroups, showSubPermissionsGroup } from '../common/model/permissionGroup';
-import { Log, indexValue, getPermissionGroupByName, getGroupIdByPermission, addLocalTag, sortByName } from '../common/utils/utils';
+import { groups, userGrantPermissions, globalGroup, showSubPermissionsGroup } from '../common/model/permissionGroup';
+import {
+  Log,
+  indexValue,
+  addLocalTag,
+  sortByName,
+  getPermissionGroup,
+  getGroupIdByPermission,
+  getPermissionGroupByName
+} from '../common/utils/utils';
 import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission } from '../common/model/definition';
@@ -138,7 +146,7 @@ struct authorityManagementPage {
   @LocalStorageLink('initialGroups') initialGroups: bundleManager.BundleInfo[] = [];
   @State allPermissionApplications: PermissionApplications [] = []; // All app permissions
   @State allGroupPermission: GroupPermission[] = []; // All group permissions
-  @State allUserPermissions: Permissions[] = [];
+  @State allUserPermissions: Permission[] = [];
   @State allBundleInfo: AppInfo[] = [];
   @State allGroups: string[] = [];
   @State currentIndex: number = 0;
@@ -188,20 +196,6 @@ struct authorityManagementPage {
   }
 
   /**
-   * Get the corresponding permission group id according to the permission
-   * @param {String} permission app name id
-   * @return {Number} groupId
-   */
-  getPermissionGroupByPermission(permission: string): GroupInfo {
-    for (let i = 0; i < permissionGroups.length; i++) {
-      if (permissionGroups[i].permissionName == permission) {
-        return groups[permissionGroups[i].groupId];
-      }
-    }
-    return groups[0];
-  }
-
-  /**
    * Get all permission label
    */
   getLabelAndIcon() {
@@ -216,8 +210,8 @@ struct authorityManagementPage {
    */
   getAllPermissionApplications() {
     for (let i = 0; i < this.allUserPermissions.length; i++) {
-      let permission: Permissions = this.allUserPermissions[i];
-      let permissionGroup: GroupInfo = this.getPermissionGroupByPermission(permission);
+      let permission: Permission = this.allUserPermissions[i];
+      let permissionGroup: GroupInfo = getPermissionGroup(permission);
       let icon: ResourceStr = permissionGroup.icon;
       let bundleNames: string[] = [];
       for (let j = 0; j < this.allBundleInfo.length; j++) {
@@ -239,8 +233,8 @@ struct authorityManagementPage {
         this.allGroups.push(item.name);
       }
     })
-    this.allUserPermissions.forEach((userPermission: Permissions) => {
-      let groupId = getGroupIdByPermission(userPermission)
+    this.allUserPermissions.forEach((userPermission: Permission) => {
+      let groupId = getGroupIdByPermission(userPermission);
       if (this.allGroups.indexOf(groups[groupId].name) == -1) {
         this.allGroups.push(groups[groupId].name);
       }
@@ -261,12 +255,12 @@ struct authorityManagementPage {
    */
   async deduplicationPermissions(info: bundleManager.BundleInfo) {
     Log.info('allBundleInfo start: ' + info.name);
-    let reqPermissions: Permissions[] = [];
+    let reqPermissions: Permission[] = [];
     info.reqPermissionDetails.forEach(item => {
-      reqPermissions.push(item.name as Permissions);
+      reqPermissions.push(item.name as Permission);
     })
     let reqPermissionsLen = reqPermissions.length;
-    let reqUserPermissions: Permissions[] = [];
+    let reqUserPermissions: Permission[] = [];
     let acManager = abilityAccessCtrl.createAtManager()
     if (reqPermissionsLen > 0) {
       for (let j = 0; j < reqPermissions.length; j++) {
@@ -293,7 +287,7 @@ struct authorityManagementPage {
     this.getAllBundleInfo(info, reqUserPermissions);
   }
 
-  getAllBundleInfo(info: bundleManager.BundleInfo, reqUserPermissions: Permissions[]) {
+  getAllBundleInfo(info: bundleManager.BundleInfo, reqUserPermissions: Permission[]) {
     let groupIds: number[] = [];
     for (let i = 0; i < reqUserPermissions.length; i++) {
       let groupId = getGroupIdByPermission(reqUserPermissions[i])

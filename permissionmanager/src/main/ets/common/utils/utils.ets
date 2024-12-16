@@ -16,11 +16,12 @@
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import i18n from '@ohos.i18n';
 import hilog from '@ohos.hilog';
-import { permissionGroups, groups } from '../model/permissionGroup';
+import { permissionInfos, groups } from '../model/permissionGroup';
+import { Permission } from '../model/definition';
 import Constants from '../utils/constant';
 import { BundleInfoUtils } from './bundleInfoUtils';
 import { CommonUtils } from './commonUtils';
-import { GroupInfo, AppInfo, ApplicationObj, PermissionInfo } from '../model/typedef';
+import { GroupInfo, AppInfo, ApplicationObj } from '../model/typedef';
 import systemParameterEnhance from '@ohos.systemParameterEnhance';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import uiExtensionHost from '@ohos.uiExtensionHost';
@@ -164,13 +165,12 @@ export function sortByName(appArray: Array<AppInfo | ApplicationObj>): Array<App
  * Get permission label
  * @param {String} permission name
  */
-export function getPermissionLabel(permission: string): ResourceStr {
-  for (let i = 0; i < permissionGroups.length; i++) {
-    if (permissionGroups[i].permissionName == permission) {
-      return permissionGroups[i].label
-    }
+export function getPermissionLabel(permission: Permission): ResourceStr {
+  let permissionInfo = permissionInfos.get(permission);
+  if (!permissionInfo) {
+    return '';
   }
-  return '';
+  return permissionInfo.label;
 }
 
 /**
@@ -178,13 +178,12 @@ export function getPermissionLabel(permission: string): ResourceStr {
  * @param {String} permission app name id
  * @return {GroupInfo} group
  */
-export function getPermissionGroup(permission: string): GroupInfo {
-  for (let i = 0; i < permissionGroups.length; i++) {
-    if (permissionGroups[i].permissionName == permission) {
-      return groups[permissionGroups[i].groupId];
-    }
+export function getPermissionGroup(permission: Permission): GroupInfo {
+  let permissionInfo = permissionInfos.get(permission);
+  if (!permissionInfo) {
+    return new GroupInfo('', '', '', '', [], '', [], [], false);
   }
-  return groups[0];
+  return groups[permissionInfo.groupId];
 }
 
 /**
@@ -206,13 +205,12 @@ export function getPermissionGroupByName(name: string): GroupInfo {
  * @param {String} permission name
  * @return {number} groupId
  */
-export function getGroupIdByPermission(permission: string): number {
-  for (let i = 0; i < permissionGroups.length; i++) {
-    if (permissionGroups[i].permissionName === permission) {
-      return permissionGroups[i].groupId;
-    }
+export function getGroupIdByPermission(permission: Permission): number {
+  let permissionInfo = permissionInfos.get(permission);
+  if (!permissionInfo) {
+    return -1;
   }
-  return 0;
+  return permissionInfo.groupId;
 }
 
 export function PermissionDialogException(code: number, session: UIExtensionContentSession): void {
@@ -240,27 +238,25 @@ export function PermissionDialogReturn(resultArray: Array<number>, session: UIEx
 }
 
 // check if the permissions provided are in the same group
-export function checkPermissionGroup(appPermissions: Permissions[]): string | null {
+export function checkPermissionGroup(appPermissions: Permission[]): string | null {
   if (appPermissions.length == 0) {
     return null;
   }
   let groupName = '' // index of group in permissionGroup
   // check if permission is a valid permission
   for (const permission of appPermissions) {
-    let idx = permissionGroups.findIndex(
-      (item) => {return item.permissionName === permission}
-    );
+    let permissionInfo = permissionInfos.get(permission);
     // if permission not found in known permissions , return false
-    if (idx == -1) {
+    if (!permissionInfo) {
       Log.error(TAG + 'unknown info ' + permission)
       return null;
     }
     // if groupName not set , set groupName
     if (groupName == '') {
-      groupName = permissionGroups[idx].groupName;
+      groupName = permissionInfo.groupName;
     }
     // if current groupName is not the same to the previous , not the same group
-    if (permissionGroups[idx].groupName != groupName) {
+    if (permissionInfo.groupName != groupName) {
       Log.error(TAG + 'permission ' + permission + ' is not in current group ' + groupName)
       return null
     }

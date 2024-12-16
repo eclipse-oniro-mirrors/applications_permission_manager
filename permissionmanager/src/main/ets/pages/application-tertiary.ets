@@ -160,7 +160,7 @@ struct mediaDocumentItem {
   private context = getContext(this) as common.UIAbilityContext;
   private backTitle: ResourceStr = (router.getParams() as RouterParams3).backTitle;
   private bundleName: string = (router.getParams() as RouterParams3).bundleName;
-  private permissions: Permissions[] = (router.getParams() as RouterParams3).permission;
+  private permissions: Permission[] = (router.getParams() as RouterParams3).permission;
   private status: number = (router.getParams() as RouterParams3).status;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo');

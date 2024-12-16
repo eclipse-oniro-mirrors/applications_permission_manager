@@ -31,6 +31,7 @@ import {
   AppGroupRecordInfo
 } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
+import { Permission } from '../common/model/definition';
 
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -55,7 +56,7 @@ struct permissionRecordPage {
   @State show: boolean = false;
   @State isTouch: string = '';
   @State reqUserRecords: privacyManager.PermissionUsedRecord[] = [];
-  @State reqUserPermissions: string[] = [];
+  @State reqUserPermissions: Permission[] = [];
   @State permissionGroups: AppGroupRecordInfo[] = [];
   @State groupNames: ResourceStr[] = [];
   @State appLastTime: number = 0;
@@ -520,7 +521,7 @@ struct permissionRecordPage {
     }
   }
 
-  async getReqUserPermissions(reqPermissions: Permissions[], info: bundleManager.BundleInfo) {
+  async getReqUserPermissions(reqPermissions: Permission[], info: bundleManager.BundleInfo) {
     let acManager = abilityAccessCtrl.createAtManager();
     for (let k = 0; k < reqPermissions.length; k++) {
       let reqPermission = reqPermissions[k];
@@ -540,7 +541,7 @@ struct permissionRecordPage {
 
   getPermissionGroups() {
     this.reqUserRecords.forEach(reqUserRecord => {
-      let group = getPermissionGroup(reqUserRecord.permissionName);
+      let group = getPermissionGroup(reqUserRecord.permissionName as Permission);
       if (!group) {
         Log.info('permission not find:' + reqUserRecord.permissionName);
       } else {
@@ -570,7 +571,7 @@ struct permissionRecordPage {
     bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
     bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async (info): Promise<boolean> => {
       let appInfo: AppRecordInfo = new AppRecordInfo('', '', '', 0, 0, [], [], [], [], 0);
-      let reqPermissions: Permissions[] = [];
+      let reqPermissions: Permission[] = [];
       let groupIds: number[] = [];
       this.reqUserPermissions = [];
       this.reqUserRecords = [];
@@ -578,7 +579,7 @@ struct permissionRecordPage {
       this.groupNames = [];
       this.appLastTime = 0;
       info.reqPermissionDetails.forEach(item => {
-        reqPermissions.push(item.name as Permissions);
+        reqPermissions.push(item.name as Permission);
       });
       await this.getReqUserRecords(record, info);
       await this.getReqUserPermissions(reqPermissions, info);
@@ -659,7 +660,7 @@ struct permissionRecordPage {
         } catch (err) {
           Log.error('getPermissionFlags error: ' + JSON.stringify(err));
         }
-        let group = getPermissionGroup(permissionRecord.permissionName);
+        let group = getPermissionGroup(permissionRecord.permissionName as Permission);
         if (group) {
           let exist = groupArray.find(permissionGroup => permissionGroup.name == group.name);
           let lastTime = permissionRecord.lastAccessTime;

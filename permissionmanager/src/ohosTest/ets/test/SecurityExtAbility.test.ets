@@ -13,11 +13,26 @@
  * limitations under the License.
  */
 
-import { hilog } from '@kit.PerformanceAnalysisKit';
 import { describe, beforeAll, beforeEach, afterEach, afterAll, it, expect } from '@ohos/hypium';
+import { Want } from '@kit.AbilityKit';
+import { Configuration } from '@ohos.app.ability.Configuration';
+import { Log } from '../../../main/ets/common/utils/utils';
+import SecurityExtAbility from '../../../main/ets/SecurityExtAbility/SecurityExtAbility';
 
-export default function abilityTest() {
-  describe('ActsAbilityTest', () => {
+let want: Want = {
+  abilityName: '',
+  parameters: {
+    'ohos.sensitive.resource': 'microphone',
+    'ohos.display.id': 0
+  }
+};
+
+let configuration: Configuration = {
+  language: ''
+}
+
+export default function SecurityExtAbilityTest() {
+  describe('SecurityExtAbilityTest', () => {
     // Defines a test suite. Two parameters are supported: test suite name and test suite function.
     beforeAll(() => {
       // Presets an action, which is performed only once before all test cases of the test suite start.
@@ -37,14 +52,29 @@ export default function abilityTest() {
       // Presets a clear action, which is performed after all test cases of the test suite end.
       // This API supports only one parameter: clear action function.
     })
-    it('assertContain', 0, () => {
-      // Defines a test case. This API supports three parameters: test case name, filter parameter, and test case function.
-      hilog.info(0x0000, 'testTag', '%{public}s', 'it begin');
-      let a = 'abc';
-      let b = 'b';
-      // Defines a variety of assertion methods, which are used to declare expected boolean conditions.
-      expect(a).assertContain(b);
-      expect(a).assertEqual(a);
+
+    it('SecurityExtAbilityTest_000', 0, () => {
+      Log.info(`SecurityExtAbilityTest_000 begin`);
+      let ability = new SecurityExtAbility();
+      ability.onCreate(want);
+    })
+
+    it('SecurityExtAbilityTest_001', 0, () => {
+      Log.info(`SecurityExtAbilityTest_001 begin`);
+      let ability = new SecurityExtAbility();
+      ability.onRequest(want, 1);
+    })
+
+    it('SecurityExtAbilityTest_002', 0, () => {
+      Log.info(`SecurityExtAbilityTest_002 begin`);
+      let ability = new SecurityExtAbility();
+      ability.onConfigurationUpdate(configuration);
+    })
+
+    it('SecurityExtAbilityTest_003', 0, () => {
+      Log.info(`SecurityExtAbilityTest_003 begin`);
+      let ability = new SecurityExtAbility();
+      ability.onDestroy();
     })
   })
 }
