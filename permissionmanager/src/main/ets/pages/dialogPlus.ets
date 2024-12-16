@@ -64,7 +64,7 @@ struct dialogPlusPage {
   @State result: Array<number> = [];
   @State accessTokenId: number = 0;
   @State initStatus: number = Constants.INIT_NEED_TO_WAIT;
-  @State reqPerms: Array<string> = [];
+  @State reqPerms: Array<Permission> = [];
   @State grantGroups: Array<GroupInfo> = [];
   @State userFixedFlag: number = 2; // means user fixed
   @State grantStatus: number = -1;
@@ -459,7 +459,7 @@ struct dialogPlusPage {
     }
   }
 
-  addGroup(permission: string) {
+  addGroup(permission: Permission) {
     let group = getPermissionGroup(permission);
     if (group.name === 'FOLDER') {
       switch (permission) {

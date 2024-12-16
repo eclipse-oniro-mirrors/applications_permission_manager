@@ -36,12 +36,12 @@ export default class GlobalExtensionAbility extends extension {
     GlobalContext.store('context', this.context);
 
     if (!this.permissionCheck()) {
-      this.context.terminateSelf();
+      this.context?.terminateSelf();
       return;
     }
 
     if (!this.statusCheck(want.parameters['ohos.sensitive.resource'])) {
-      this.context.terminateSelf();
+      this.context?.terminateSelf();
       return;
     }
 

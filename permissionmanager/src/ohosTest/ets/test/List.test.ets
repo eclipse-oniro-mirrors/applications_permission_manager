@@ -13,10 +13,20 @@
  * limitations under the License.
  */
 
+import GlobalExtAbilityTest from './GlobalExtAbility.test'
+import MainAbilityTest from './MainAbility.test'
+import SecurityExtAbilityTest from './SecurityExtAbility.test';
+import ServiceExtAbilityTest from './ServiceExtAbility.test';
+import GlobalSwitchSheetAbilityTest from './GlobalSwitchSheetAbility.test';
+import PermissionStateSheetAbilityTest from './PermissionStateSheetAbility.test'
 import utilsTest from './utils.test';
-import abilityTest from './Ability.test';
 
 export default function testsuite() {
-  abilityTest();
+  GlobalExtAbilityTest();
+  MainAbilityTest();
+  SecurityExtAbilityTest();
+  ServiceExtAbilityTest();
+  GlobalSwitchSheetAbilityTest();
+  PermissionStateSheetAbilityTest()
   utilsTest();
 }

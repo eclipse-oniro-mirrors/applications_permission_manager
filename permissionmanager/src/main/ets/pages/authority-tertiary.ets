@@ -29,7 +29,8 @@ import {
 } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
-import { permissionGroups } from '../common/model/permissionGroup';
+import { permissionInfos } from '../common/model/permissionGroup';
+import { Permission } from '../common/model/definition';
 
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -74,7 +75,7 @@ struct locationInfoPage {
 @Component
 struct applicationItem {
   private list: PermissionApplications[] = (router.getParams() as RouterParams2).list;
-  private permissionName: string = (router.getParams() as RouterParams2).permissionName;
+  private permissionName: Permission = (router.getParams() as RouterParams2).permissionName;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
@@ -82,7 +83,7 @@ struct applicationItem {
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
-  @State permissionInfo: PermissionInfo = new PermissionInfo('', '', '', 0);
+  @State permissionInfo: PermissionInfo | undefined = undefined;
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
 
@@ -186,11 +187,7 @@ struct applicationItem {
    */
   aboutToAppear() {
     let bundleNames = this.list.length > 0 ? this.list[0].bundleNames : this.list;
-    permissionGroups.forEach(permission => {
-      if (permission.permissionName === this.permissionName) {
-        this.permissionInfo = permission;
-      }
-    })
+    this.permissionInfo = permissionInfos.get(this.permissionName);
 
     let atManager = abilityAccessCtrl.createAtManager();
     for (let i = 0; i < bundleNames.length; i++) {
@@ -250,7 +247,7 @@ struct applicationItem {
           Flex({ justifyContent: FlexAlign.Start }) {
             if (this.permissionNum > 0) {
               Text(
-                this.permissionInfo.enableDescription ?
+                this.permissionInfo?.enableDescription ?
                 $r(this.permissionInfo.enableDescription, String(this.permissionNum)) :
                 ''
               )
@@ -258,7 +255,7 @@ struct applicationItem {
                 .fontColor($r('sys.color.font_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
             } else {
-              Text(this.permissionInfo.forbiddenDescription)
+              Text(this.permissionInfo?.forbiddenDescription)
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.font_secondary'))
                 .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })

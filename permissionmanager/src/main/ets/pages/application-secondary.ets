@@ -38,7 +38,7 @@ struct appNamePlusPage {
   @State isTouch: string = '';
   @State isGranted: number = Constants.PERMISSION_ALLOW;
   @State folderStatus: boolean[] = [false, false, false];
-  @State reqUserPermissions: Permissions[] = [];
+  @State reqUserPermissions: Permission[] = [];
 
   @Builder ListItemLayout(item: PermissionObj, status: number) {
     ListItem() {
@@ -103,7 +103,7 @@ struct appNamePlusPage {
     let acManager = abilityAccessCtrl.createAtManager();
     if (info.permissions.length > 0) {
       for (let j = 0; j < info.permissions.length; j++) {
-        let permission = info.permissions[j];
+        let permission = info.permissions[j] as Permission;
         if (userGrantPermissions.indexOf(permission) == -1) {
           continue;
         }

@@ -82,7 +82,7 @@ struct PermissionStateSheetDialog {
     storage.get<UIExtensionContentSession>('session') as UIExtensionContentSession;
   @State applicationInfo: AppInfo | undefined = undefined;
   @State folderStatus: boolean[] = [false, false, false];
-  @State reqUserPermissions: Permissions[] = [];
+  @State reqUserPermissions: Permission[] = [];
   @State bundleName: string = '';
   @State isGranted: number = Constants.PERMISSION_ALLOW;
   @State groupName: ResourceStr = '';
@@ -210,7 +210,7 @@ struct PermissionStateSheetDialog {
   async GetAppInfo() {
     let callerBundle: CallerBundleInfo = getCallerBundleInfo(this.want as Object as WantInfo);
     this.bundleName = callerBundle.bundleName;
-    this.reqUserPermissions = callerBundle.permissionGroup as Permissions[]; // user permission is passed from wantInfo
+    this.reqUserPermissions = callerBundle.permissionGroup as Permission[]; // user permission is passed from wantInfo
     // check if wanted permissions are in the same permission group
     let groupName = checkPermissionGroup(this.reqUserPermissions);
     if (groupName == null) {
@@ -352,7 +352,7 @@ struct mediaDocumentItem {
   private context = getContext(this) as common.UIAbilityContext;
   private backTitle: ResourceStr = '';
   private bundleName: string = '';
-  private permissions: Permissions[] = [];
+  private permissions: Permission[] = [];
   private status: number = 0;
   private tokenId: number = 0;
   private controller: CustomDialogController;

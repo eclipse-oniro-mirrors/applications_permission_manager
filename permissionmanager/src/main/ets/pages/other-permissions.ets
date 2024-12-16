@@ -16,18 +16,22 @@
 import { backBar } from '../common/components/backBar';
 import router from '@ohos.router';
 import Constants from '../common/utils/constant';
-import { permissionGroups } from '../common/model/permissionGroup';
+import { permissionInfos } from '../common/model/permissionGroup';
 import { Log, verifyAccessToken } from '../common/utils/utils';
 import { OtherPermission, RouterParams3 } from '../common/model/typedef';
-import { Permissions } from '@ohos.abilityAccessCtrl';
+import { Permission } from '../common/model/definition';
 import { BusinessError } from '@kit.BasicServicesKit';
 
 let status: number = (router.getParams() as RouterParams3).status; // Status: Allowed, Forbidden
-let permissions: Permissions[] = (router.getParams() as RouterParams3).permission; // permissions name
+let permissions: Permission[] = (router.getParams() as RouterParams3).permission; // permissions name
 let otherPermissionList: OtherPermission[] = []; // otherPermission List
 for (let i = 0; i < permissions.length; i++) {
+  let permissionInfo = permissionInfos.get(permissions[i]);
+  if (!permissionInfo) {
+    continue;
+  }
   otherPermissionList.push(
-    new OtherPermission(permissionGroups.filter(item => item.permissionName == permissions[i])[0].label, permissions[i])
+    new OtherPermission(permissionInfo.label, permissions[i])
   );
 }
 
