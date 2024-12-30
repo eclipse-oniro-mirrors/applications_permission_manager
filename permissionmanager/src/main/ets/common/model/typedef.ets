@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { Permissions } from '@ohos.abilityAccessCtrl';
-import { ButtonStatus, Permission } from './definition';
+import { ButtonStatus, Permission, PermissionGroup } from './definition';
 
 export class AppInfo {
   public bundleName: string
@@ -79,13 +79,19 @@ export class PermissionApplications {
 };
 
 export class GroupPermission {
-  public group: string
+  public group: PermissionGroup
   public permissions: string[]
   public groupName: ResourceStr
   public icon: ResourceStr
   public isShow: boolean
 
-  constructor(group: string, permissions: string[], groupName: ResourceStr, icon: ResourceStr, isShow: boolean) {
+  constructor(
+    group: PermissionGroup,
+    permissions: string[],
+    groupName: ResourceStr,
+    icon: ResourceStr,
+    isShow: boolean
+  ) {
     this.group = group
     this.permissions = permissions
     this.groupName = groupName
@@ -227,7 +233,7 @@ export class OtherPermission {
 
 export class PermissionInfo {
   public permissionName: Permission
-  public groupName: string
+  public groupName: PermissionGroup
   public label: ResourceStr
   public groupId: number
   public enableDescription?: string
@@ -235,7 +241,7 @@ export class PermissionInfo {
 
   constructor(
     permissionName: Permission,
-    groupName: string,
+    groupName: PermissionGroup,
     label: ResourceStr,
     groupId: number,
     enableDescription?: string,
@@ -251,7 +257,7 @@ export class PermissionInfo {
 }
 
 export class GroupInfo {
-  public name: string
+  public name: PermissionGroup
   public groupName: ResourceStr
   public label: string
   public icon: ResourceStr
@@ -264,7 +270,7 @@ export class GroupInfo {
   public forbiddenDescription?: ResourceStr
 
   constructor(
-    name: string,
+    name: PermissionGroup,
     groupName: ResourceStr,
     label: string,
     icon: ResourceStr,

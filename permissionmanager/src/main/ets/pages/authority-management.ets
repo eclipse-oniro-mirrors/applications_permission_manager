@@ -17,24 +17,25 @@ import { backBar } from '../common/components/backBar';
 import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
 import { textInput } from '../common/components/search';
 import router from '@ohos.router';
-import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
-import { groups, userGrantPermissions, globalGroup, showSubPermissionsGroup } from '../common/model/permissionGroup';
+import { groups, globalGroup, showSubPermissionsGroup } from '../common/model/permissionGroup';
 import {
   Log,
   indexValue,
   addLocalTag,
   sortByName,
+  supportPermission,
   getPermissionGroup,
   getGroupIdByPermission,
   getPermissionGroupByName
 } from '../common/utils/utils';
 import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { Permission } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
 import Constants from '../common/utils/constant';
 import bundleManager from '@ohos.bundle.bundleManager';
 
@@ -148,7 +149,7 @@ struct authorityManagementPage {
   @State allGroupPermission: GroupPermission[] = []; // All group permissions
   @State allUserPermissions: Permission[] = [];
   @State allBundleInfo: AppInfo[] = [];
-  @State allGroups: string[] = [];
+  @State allGroups: PermissionGroup[] = [];
   @State currentIndex: number = 0;
   @State isTouch: string = '';
   @State isVertical: boolean = true;
@@ -276,7 +277,8 @@ struct authorityManagementPage {
         } catch (err) {
           Log.error('getPermissionFlags error: ' + JSON.stringify(err));
         }
-        if (userGrantPermissions.indexOf(permission) != -1) {
+        let supportPermissions = supportPermission();
+        if (supportPermissions.indexOf(permission) != -1) {
           reqUserPermissions.push(permission);
           if (this.allUserPermissions.indexOf(permission) == -1) {
             this.allUserPermissions.push(permission);

@@ -27,6 +27,7 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import { getCallerBundleInfo } from './PermissionStateSheetDialog';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import common from '@ohos.app.ability.common';
+import { PermissionGroup } from '../common/model/definition';
 
 
 let globalIsOn: boolean;
@@ -42,7 +43,7 @@ struct GlobalSwitchSheetDialog {
     storage.get<UIExtensionContentSession>('session') as UIExtensionContentSession;
   private context = getContext(this) as common.ServiceExtensionContext;
   private muteSuppoted = false;
-  private groupName: string = '';
+  private groupName: PermissionGroup = PermissionGroup.OTHER;
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
       contentBuilder: () => {
@@ -87,9 +88,9 @@ struct GlobalSwitchSheetDialog {
     bundleName = callerBundle.bundleName;
 
     if (globalSwitch === Constants.GLOBAL_SWITCH_CAMERA) {
-      this.groupName = 'CAMERA';
+      this.groupName = PermissionGroup.CAMERA;
     } else if (globalSwitch === Constants.GLOBAL_SWITCH_MICROPHONE) {
-      this.groupName = 'MICROPHONE';
+      this.groupName = PermissionGroup.MICROPHONE;
     } else {
       Log.error('global switch not suppoted');
       PermissionDialogException(Constants.ERR_GLOBAL_SWITCH_NOT_SUPPORTED, session);
@@ -141,8 +142,8 @@ struct applicationItem {
   private context = getContext(this) as common.ServiceExtensionContext;
   @State globalIsOn: boolean = false;
   @State backTitle: string = '';
-  @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], [], false);
-  @State currentGroup: string = '';
+  @State groupInfo: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
+  @State currentGroup: PermissionGroup = PermissionGroup.OTHER;
   @State isMuteSupported: boolean = false;
   @State appName: ResourceStr = '';
   private controller: CustomDialogController;

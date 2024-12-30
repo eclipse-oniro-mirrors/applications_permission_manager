@@ -24,7 +24,7 @@ import { Log, getPermissionLabel } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
 import { MediaDocObj, RouterParams3, AppInfo, CheckboxInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { Permission } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
 
 const showPrecise: number[] = [Constants.PERMISSION_ALLOW, Constants.PERMISSION_ALLOWED_ONLY_DURING_USE];
 let accessTokenId: number = 0;
@@ -162,7 +162,7 @@ struct mediaDocumentItem {
   private bundleName: string = (router.getParams() as RouterParams3).bundleName;
   private permissions: Permission[] = (router.getParams() as RouterParams3).permission;
   private status: number = (router.getParams() as RouterParams3).status;
-  @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
+  @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo');
   @Link folderStatus: boolean[];
   @State mediaDocListItem: MediaDocObj[] = []; // Permission information array

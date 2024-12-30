@@ -27,7 +27,7 @@ import { AppInfo, CallerBundleInfo,
   MediaDocObj,
   WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { Permission } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { groups, showSubPermissionsGroup } from '../common/model/permissionGroup';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
@@ -86,7 +86,7 @@ struct PermissionStateSheetDialog {
   @State bundleName: string = '';
   @State isGranted: number = Constants.PERMISSION_ALLOW;
   @State groupName: ResourceStr = '';
-  @State currentGroup: string = '';
+  @State currentGroup: PermissionGroup = PermissionGroup.OTHER;
 
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
@@ -357,7 +357,7 @@ struct mediaDocumentItem {
   private tokenId: number = 0;
   private controller: CustomDialogController;
   @State hidden: boolean = false;
-  @State currentGroup: string = '';
+  @State currentGroup: PermissionGroup = PermissionGroup.OTHER;
   @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo');
   @State folderStatus: boolean[] = [];
   @State mediaDocListItem: MediaDocObj[] = []; // Permission information array

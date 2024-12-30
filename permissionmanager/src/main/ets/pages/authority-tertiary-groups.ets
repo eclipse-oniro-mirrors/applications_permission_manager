@@ -43,7 +43,7 @@ let globalIsOn: boolean = (router.getParams() as RouterParams1).globalIsOn; // r
 struct locationInfoPage {
   private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
   private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
-  @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
+  @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State polymorphismIsOn: Array<number> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
 
@@ -168,8 +168,8 @@ struct applicationItem {
   @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
   @State isTouch: string = '';
-  @State groupInfo: GroupInfo = new GroupInfo('', '', '', '', [], '', [], [], false);
-  @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
+  @State groupInfo: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
+  @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State isMuteSupported: boolean = GlobalContext.load('isMuteSupported');
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
