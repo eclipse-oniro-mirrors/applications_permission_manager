@@ -16,12 +16,11 @@
 import bundleManager from '@ohos.bundle.bundleManager';
 import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
-import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager';
 import { backBar } from '../common/components/backBar';
 import Constants from '../common/utils/constant';
-import { userGrantPermissions } from '../common/model/permissionGroup';
-import { Log, getPermissionGroup, getGroupIdByPermission } from '../common/utils/utils';
+import { Log, getPermissionGroup, getGroupIdByPermission, supportPermission } from '../common/utils/utils';
 import {
   StringObj,
   AppInfoSimple,
@@ -506,7 +505,7 @@ struct permissionRecordPage {
 
   async getReqUserRecords(record: privacyManager.BundleUsedRecord, info: bundleManager.BundleInfo) {
     for (let j = 0; j < record.permissionRecords.length; j++) {
-      let permission = record.permissionRecords[j].permissionName;
+      let permission = record.permissionRecords[j].permissionName as Permission;
       try {
         let flag = await abilityAccessCtrl.createAtManager().getPermissionFlags(info.appInfo.accessTokenId, permission);
         if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
@@ -515,7 +514,8 @@ struct permissionRecordPage {
       } catch (err) {
         Log.error('getPermissionFlags error: ' + JSON.stringify(err));
       }
-      if (userGrantPermissions.indexOf(permission) != -1) {
+      let supportPermissions = supportPermission();
+      if (supportPermissions.indexOf(permission) != -1) {
         this.reqUserRecords.push(record.permissionRecords[j]);
       }
     }
@@ -533,7 +533,8 @@ struct permissionRecordPage {
       } catch (err) {
         Log.error('getPermissionFlags error: ' + JSON.stringify(err));
       }
-      if (userGrantPermissions.indexOf(reqPermission) != -1) {
+      let supportPermissions = supportPermission();
+      if (supportPermissions.indexOf(reqPermission) != -1) {
         this.reqUserPermissions.push(reqPermission);
       }
     }

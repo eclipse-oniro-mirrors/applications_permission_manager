@@ -19,9 +19,9 @@ import common from '@ohos.app.ability.common';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { BusinessError } from '@ohos.base';
-import { groups, userGrantPermissions } from '../common/model/permissionGroup';
+import { groups } from '../common/model/permissionGroup';
 import Constants from '../common/utils/constant';
-import { Log, verifyAccessToken, getGroupIdByPermission } from '../common/utils/utils';
+import { Log, verifyAccessToken, getGroupIdByPermission, supportPermission } from '../common/utils/utils';
 import { PermissionObj, AppInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission } from '../common/model/definition';
@@ -104,7 +104,8 @@ struct appNamePlusPage {
     if (info.permissions.length > 0) {
       for (let j = 0; j < info.permissions.length; j++) {
         let permission = info.permissions[j] as Permission;
-        if (userGrantPermissions.indexOf(permission) == -1) {
+        let supportPermissions = supportPermission();
+        if (supportPermissions.indexOf(permission) == -1) {
           continue;
         }
         try {

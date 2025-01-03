@@ -16,8 +16,13 @@
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import i18n from '@ohos.i18n';
 import hilog from '@ohos.hilog';
-import { permissionInfos, groups } from '../model/permissionGroup';
-import { Permission } from '../model/definition';
+import {
+  permissionInfos,
+  groups,
+  userGrantPermissions,
+  only2in1AndTabletSupportedPermissions
+} from '../model/permissionGroup';
+import { Permission, PermissionGroup } from '../model/definition';
 import Constants from '../utils/constant';
 import { BundleInfoUtils } from './bundleInfoUtils';
 import { CommonUtils } from './commonUtils';
@@ -26,6 +31,7 @@ import systemParameterEnhance from '@ohos.systemParameterEnhance';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import uiExtensionHost from '@ohos.uiExtensionHost';
 import window from '@ohos.window';
+import { deviceInfo } from '@kit.BasicServicesKit';
 import { GlobalContext } from './globalContext';
 
 const TAG = 'PermissionManager_Log '
@@ -181,7 +187,7 @@ export function getPermissionLabel(permission: Permission): ResourceStr {
 export function getPermissionGroup(permission: Permission): GroupInfo {
   let permissionInfo = permissionInfos.get(permission);
   if (!permissionInfo) {
-    return new GroupInfo('', '', '', '', [], '', [], [], false);
+    return new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
   }
   return groups[permissionInfo.groupId];
 }
@@ -238,27 +244,27 @@ export function PermissionDialogReturn(resultArray: Array<number>, session: UIEx
 }
 
 // check if the permissions provided are in the same group
-export function checkPermissionGroup(appPermissions: Permission[]): string | null {
+export function checkPermissionGroup(appPermissions: Permission[]): PermissionGroup | null {
   if (appPermissions.length == 0) {
     return null;
   }
-  let groupName = '' // index of group in permissionGroup
+  let groupName = PermissionGroup.OTHER; // index of group in permissionGroup
   // check if permission is a valid permission
   for (const permission of appPermissions) {
     let permissionInfo = permissionInfos.get(permission);
     // if permission not found in known permissions , return false
     if (!permissionInfo) {
-      Log.error(TAG + 'unknown info ' + permission)
+      Log.error(TAG + 'unknown info ' + permission);
       return null;
     }
     // if groupName not set , set groupName
-    if (groupName == '') {
+    if (groupName == PermissionGroup.OTHER) {
       groupName = permissionInfo.groupName;
     }
     // if current groupName is not the same to the previous , not the same group
     if (permissionInfo.groupName != groupName) {
-      Log.error(TAG + 'permission ' + permission + ' is not in current group ' + groupName)
-      return null
+      Log.error(TAG + 'permission ' + permission + ' is not in current group ' + groupName);
+      return null;
     }
   }
   return groupName;
@@ -275,6 +281,16 @@ export function getFontSizeScale(): boolean {
   const FONT_SIZE_SCALE_PARAM = 'persist.sys.font_scale_for_user0';
   let fontSizeScale = Number.parseFloat(systemParameterEnhance.getSync(FONT_SIZE_SCALE_PARAM, '1'));
   return fontSizeScale > 1;
+}
+
+export function supportPermission(): Permission[] {
+  if (deviceInfo.deviceType === '2in1' || deviceInfo.deviceType === 'tablet') {
+    return userGrantPermissions;
+  }
+  let supportGroup: Permission[] = [];
+  supportGroup =
+    userGrantPermissions.filter(permission => only2in1AndTabletSupportedPermissions.includes(permission) === false);
+  return supportGroup;
 }
 
 export class Log {

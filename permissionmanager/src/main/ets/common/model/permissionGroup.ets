@@ -73,7 +73,7 @@ export const groups: GroupInfo[] = [
     new GroupInfo(PermissionGroup.CUSTOM_SCREEN_CAPTURE, $r('app.string.groupName_screenCapture'), 'app.string.group_label_screenCapture', $r('app.media.ic_public_screen_capture'), [], '', [Permission.CUSTOM_SCREEN_CAPTURE], [ButtonStatus.DENY, ButtonStatus.ALLOW], false, 'app.string.enable_description_screenCapture', $r('app.string.forbidden_description_screenCapture'))
 ];
 
-export const userGrantPermissions: string[] = [
+export const userGrantPermissions: Permission[] = [
     Permission.LOCATION_IN_BACKGROUND,
     Permission.APPROXIMATELY_LOCATION,
     Permission.LOCATION,
@@ -108,6 +108,13 @@ export const userGrantPermissions: string[] = [
     Permission.CUSTOM_SCREEN_CAPTURE
 ];
 
+export const only2in1AndTabletSupportedPermissions: Permission[] = [
+    Permission.READ_WRITE_DOWNLOAD_DIRECTORY,
+    Permission.READ_WRITE_DESKTOP_DIRECTORY,
+    Permission.READ_WRITE_DOCUMENTS_DIRECTORY,
+    Permission.CUSTOM_SCREEN_CAPTURE
+]
+
 export const buttonResource: Map<ButtonStatus, Resource> = new Map([
     [ButtonStatus.ALLOW, $r('app.string.allow')],
     [ButtonStatus.DENY, $r('app.string.ban')],
@@ -117,17 +124,17 @@ export const buttonResource: Map<ButtonStatus, Resource> = new Map([
     [ButtonStatus.ALLOW_ONLY_DURING_USE, $r('app.string.allowed_only_during_use')]
 ])
 
-export const showSubPermissionsGroup: string[] = [
+export const showSubPermissionsGroup: PermissionGroup[] = [
     PermissionGroup.CALENDAR,
     PermissionGroup.CONTACTS,
 ];
 
-export const polymorphismGroup: string[] = [
+export const polymorphismGroup: PermissionGroup[] = [
     PermissionGroup.LOCATION,
     PermissionGroup.FOLDER
 ]
 
-export const globalGroup: string[] = [
+export const globalGroup: PermissionGroup[] = [
     PermissionGroup.MICROPHONE,
     PermissionGroup.CAMERA
 ]

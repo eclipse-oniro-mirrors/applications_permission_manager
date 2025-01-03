@@ -26,13 +26,14 @@ import {
   getPermissionGroup,
   titleTrim,
   getPermissionLabel,
-  getFontSizeScale
+  getFontSizeScale,
+  supportPermission
 } from '../common/utils/utils';
 import { Permission, ButtonStatus } from '../common/model/definition';
 import { GroupInfo, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
-import { showSubPermissionsGroup, userGrantPermissions, buttonResource } from '../common/model/permissionGroup';
+import { showSubPermissionsGroup, buttonResource } from '../common/model/permissionGroup';
 import { LocationCanvas } from '../common/components/location';
 import { MeasureText } from '@kit.ArkUI';
 
@@ -430,8 +431,9 @@ struct dialogPlusPage {
         Log.info('permission has been fixed:' + permission);
         this.result[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
       } else if (stateGroup[idx] == Constants.DYNAMIC_OPER) {
-        if (!userGrantPermissions.includes(permission)) {
-          Log.info('permission not find:' + permission);
+        let supportPermissions = supportPermission();
+        if (!supportPermissions.includes(permission)) {
+          Log.info('The permission does not exist or is not supported by the current device: ' + permission);
         } else {
           this.addGroup(permission);
         }
