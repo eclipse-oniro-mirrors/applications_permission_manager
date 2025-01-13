@@ -221,6 +221,14 @@ export class Param {
   }
 };
 
+export class DialogInfo {
+  public index: number = 0;
+  public securityParams: Array<Param> = [];
+  public appName: ResourceStr = '';
+  public isWearable: boolean = false;
+  public appIndex: number = 0;
+}
+
 export class OtherPermission {
   public permissionLabel: ResourceStr
   public permission: string

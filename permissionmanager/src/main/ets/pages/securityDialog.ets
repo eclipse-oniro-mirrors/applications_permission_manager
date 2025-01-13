@@ -20,19 +20,193 @@ import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, getFontSizeScale } from '../common/utils/utils';
-import { Param, WantInfo } from '../common/model/typedef';
+import { Param, WantInfo, DialogInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
+import deviceInfo from '@ohos.deviceInfo';
 
 let storage = LocalStorage.getShared();
 const RESOURCE_TYPE: number = 10003;
 
-@Extend(Text)function titleText() {
+@Extend(Text)
+function titleText(isWearable: boolean) {
   .fontWeight(FontWeight.Bold)
-  .fontColor($r('sys.color.font_primary'))
+  .fontColor(isWearable ? '#FFFFFF' : $r('sys.color.font_primary'))
   .textAlign(TextAlign.Center)
   .textOverflow({ overflow: TextOverflow.Ellipsis })
   .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
+}
+
+@Extend(Button)
+function customizeButton() {
+  .padding({
+    left: Constants.PADDING_16,
+    right: Constants.PADDING_16,
+    top: Constants.PADDING_11,
+    bottom: Constants.PADDING_11
+  })
+  .width(Constants.CUSTOMIZE_BUTTON_WIDTH)
+  .margin({ bottom : Constants.MARGIN_12 })
+}
+
+@Extend(Text)
+function customizeButtonText() {
+  .minFontSize(Constants.CUSTOMIZE_BUTTON_TEXT_MIN_SIZE)
+  .maxFontSize(Constants.CUSTOMIZE_BUTTON_TEXT_MAX_SIZE)
+  .textAlign(TextAlign.Center)
+  .fontSize(Constants.CUSTOMIZE_BUTTON_TEXT_MAX_SIZE)
+  .fontWeight(FontWeight.Medium)
+  .textOverflow({ overflow: TextOverflow.MARQUEE })
+}
+
+@Builder
+function dialogTitle(index: number, securityParams: Array<Param>, isWearable: boolean) {
+  Column() {
+    if (getFontSizeScale()) {
+      Text(securityParams[index].label)
+        .titleText(isWearable)
+        .fontSize($r('sys.float.Title_S'))
+    } else {
+      Text(securityParams[index].label)
+        .titleText(isWearable)
+        .minFontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
+        .maxFontSize($r('sys.float.Title_S'))
+        .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
+    }
+  }
+  .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
+  .justifyContent(FlexAlign.Center)
+  .padding({
+    top: Constants.DEFAULT_PADDING_TOP,
+    bottom: Constants.DEFAULT_PADDING_BOTTOM,
+  })
+}
+
+@Builder
+function dialogContentsArea(params: DialogInfo) {
+  Column() {
+    Column() {
+      SymbolGlyph($r('sys.symbol.person_shield_fill'))
+        .width(Constants.SECURITY_ICON_WIDTH)
+        .height(Constants.SECURITY_ICON_HEIGHT)
+        .fontSize(Constants.FONT_SIZE_28)
+        .fontColor([$r('sys.color.brand')])
+        .border({
+          width: Constants.BORDER_WIDTH_1,
+          color: $r('app.color.icon_border'),
+          radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
+        })
+        .padding(Constants.PADDING_11)
+        .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
+      if (params.index === 1) {
+        Image(params.securityParams[params.index].icon)
+          .width(Constants.IMAGE_LENGTH_20)
+          .height(Constants.IMAGE_LENGTH_20)
+          .syncLoad(true)
+          .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+          .border({
+            width: Constants.BORDER_WIDTH_1,
+            color: $r('app.color.icon_border'),
+            radius: Constants.IMAGE_LENGTH_20 * 14 / 54
+          })
+      } else {
+        SymbolGlyph($r('sys.symbol.local_fill'))
+          .width(Constants.IMAGE_LENGTH_20)
+          .height(Constants.IMAGE_LENGTH_20)
+          .fontSize(Constants.FONT_SIZE_12)
+          .fontColor([Color.White])
+          .backgroundColor($r('app.color.local_background_color'))
+          .padding(Constants.PADDING_4)
+          .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+          .border({
+            width: Constants.BORDER_WIDTH_1,
+            color: $r('app.color.icon_border'),
+            radius: Constants.IMAGE_LENGTH_20 * 14 / 54
+          })
+      }
+    }
+    .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
+    .backgroundColor($r('app.color.icon_bg'))
+    .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
+    .margin(params.isWearable ? { top: Constants.MARGIN_12 } : {})
+    Column() { // content
+      dialogTitle(params.index, params.securityParams, params.isWearable);
+      Text($r(
+        params.securityParams[params.index].description,
+        params.appName,
+        params.appIndex === 0 ? '' : String(params.appIndex)
+      ))
+        .textAlign(params.isWearable ? TextAlign.Center : TextAlign.Start)
+        .fontColor(params.isWearable ? '#A8FFFFFF' : $r('sys.color.font_primary') )
+        .fontSize($r('sys.float.Body_L'))
+        .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
+        .maxFontScale(Constants.DIALOG_TEXT_MAX_SCALE)
+        .margin(params.isWearable ? {
+          left: Constants.MARGIN_26,
+          right: Constants.MARGIN_26,
+          bottom: Constants.MARGIN_12
+        } : {})
+    }
+  }
+  .clip(true)
+}
+
+@CustomDialog
+struct CustomDialogWearable {
+  cancel?: () => void;
+  confirm?: () => void;
+  dialogControllerForWearable: CustomDialogController;
+  @Link index: number;
+  @Link appName: ResourceStr;
+  @Link securityParams: Array<Param>;
+  @Link isWearable: boolean;
+  @Link appIndex: number;
+
+  build() {
+    Scroll() {
+      Column() {
+        dialogContentsArea({
+          index: this.index,
+          securityParams: this.securityParams,
+          appName: this.appName,
+          isWearable: this.isWearable,
+          appIndex: this.appIndex
+        })
+        Button({ type: ButtonType.Capsule, stateEffect: true }) {
+          Text($r('app.string.allow'))
+            .customizeButtonText()
+            .fontColor('#FFFFFF')
+        }
+        .customizeButton()
+        .backgroundColor('#1F71FF')
+        .onClick(() => {
+          Log.info('allow click start');
+          this.dialogControllerForWearable?.close();
+          if (this.confirm) {
+            this.confirm();
+          }
+        })
+        Button({ type: ButtonType.Capsule, stateEffect: true }) {
+          Text($r('app.string.cancel'))
+            .customizeButtonText()
+            .fontColor('#5EA1FF')
+        }
+        .customizeButton()
+        .backgroundColor('#405EA1FF')
+        .onClick(() => {
+          Log.info('cancel click start');
+          this.dialogControllerForWearable?.close();
+          if (this.cancel) {
+            this.cancel();
+          }
+        })
+      }
+    }
+    .edgeEffect(EdgeEffect.Spring)
+    .backgroundColor(Color.Black)
+    .width(Constants.FULL_WIDTH)
+    .height(Constants.FULL_HEIGHT)
+  }
 }
 
 @Entry(storage)
@@ -45,8 +219,9 @@ struct SecurityDialog {
   @State appIndex: number = 0;
   @State index: number = 0;
   @State scrollBarWidth: number = Constants.SCROLL_BAR_WIDTH_DEFAULT;
+  @State isWearable: boolean = false;
 
-  securityParams : Array<Param> = [
+  @State securityParams : Array<Param> = [
     new Param(
       $r('app.media.ic_location'), $r('app.string.SecurityTitle_location'), 'app.string.SecurityText_location'
     ),
@@ -54,6 +229,23 @@ struct SecurityDialog {
       $r('app.media.rawfile'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityText_mediaFiles'
     )
   ]
+
+  dialogControllerForWearable: CustomDialogController | null = new CustomDialogController({
+    builder: CustomDialogWearable({
+      cancel: () => {
+        this.onCancel()
+      },
+      confirm: () => {
+        this.onAccept()
+      },
+      index: $index,
+      appName: $appName,
+      isWearable: $isWearable,
+      securityParams: $securityParams,
+      appIndex: $appIndex
+    }),
+    customStyle: true,
+  })
 
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
@@ -101,92 +293,16 @@ struct SecurityDialog {
   });
 
   @Builder
-  DialogTitle() {
-    Column() {
-      if (getFontSizeScale()) {
-        Text(this.securityParams[this.index].label)
-          .titleText()
-          .fontSize($r('sys.float.Title_S'))
-      } else {
-        Text(this.securityParams[this.index].label)
-          .titleText()
-          .minFontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
-          .maxFontSize($r('sys.float.Title_S'))
-          .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
-      }
-    }
-    .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
-    .justifyContent(FlexAlign.Center)
-    .padding({
-      top: Constants.DEFAULT_PADDING_TOP,
-      bottom: Constants.DEFAULT_PADDING_BOTTOM,
-    })
-  }
-
-  @Builder
   buildContent(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Scroll() {
-        Column() {
-          Column() {
-            SymbolGlyph($r('sys.symbol.person_shield_fill'))
-              .width(Constants.SECURITY_ICON_WIDTH)
-              .height(Constants.SECURITY_ICON_HEIGHT)
-              .fontSize(Constants.FONT_SIZE_28)
-              .fontColor([$r('sys.color.brand')])
-              .border({
-                width: Constants.BORDER_WIDTH_1,
-                color: $r('app.color.icon_border'),
-                radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
-              })
-              .padding(Constants.PADDING_10)
-              .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
-            if (this.index === 1) {
-              Image(this.securityParams[this.index].icon)
-                .width(Constants.IMAGE_LENGTH_20)
-                .height(Constants.IMAGE_LENGTH_20)
-                .syncLoad(true)
-                .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
-                .border({
-                  width: Constants.BORDER_WIDTH_1,
-                  color: $r('app.color.icon_border'),
-                  radius: Constants.IMAGE_LENGTH_20 * 14 / 54
-                })
-            } else {
-              SymbolGlyph($r('sys.symbol.local_fill'))
-                .width(Constants.IMAGE_LENGTH_20)
-                .height(Constants.IMAGE_LENGTH_20)
-                .fontSize(Constants.FONT_SIZE_12)
-                .fontColor([Color.White])
-                .backgroundColor($r('app.color.local_background_color'))
-                .padding(Constants.PADDING_4)
-                .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
-                .border({
-                  width: Constants.BORDER_WIDTH_1,
-                  color: $r('app.color.icon_border'),
-                  radius: Constants.IMAGE_LENGTH_20 * 14 / 54
-                })
-            }
-          }
-          .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
-          .backgroundColor($r('app.color.icon_bg'))
-          .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
-          Column() { // content
-            this.DialogTitle();
-
-            Text($r(
-              this.securityParams[this.index].description,
-              this.appName,
-              this.appIndex === 0 ? '' : String(this.appIndex)
-            ))
-              .textAlign(TextAlign.Start)
-              .fontColor($r('sys.color.font_primary'))
-              .fontSize($r('sys.float.Body_L'))
-              .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
-              .maxFontScale(Constants.DIALOG_TEXT_MAX_SCALE)
-          }
-        }
-        .clip(true)
+        dialogContentsArea({
+          index: this.index,
+          securityParams: this.securityParams,
+          appName: this.appName,
+          isWearable: this.isWearable,
+          appIndex: this.appIndex
+        })
       }
       .padding({ left: Constants.PADDING_24, right: Constants.PADDING_24 })
       .margin({ top: Constants.MARGIN_24 })
@@ -207,11 +323,36 @@ struct SecurityDialog {
     Log.info('onAboutToAppear.');
     this.GetAppName();
     this.index = this.want.parameters['ohos.user.security.type'];
-    this.dialogController?.open();
+    if (deviceInfo.deviceType === 'wearable') {
+      this.dialogControllerForWearable?.open();
+      this.isWearable = true;
+    } else {
+      this.dialogController?.open();
+      this.isWearable = false;
+    }
   }
 
   aboutToDisappear() {
+    Log.info('aboutToDisappear.');
     this.dialogController = null;
+    this.dialogControllerForWearable = null;
+  }
+
+  onCancel() {
+    Log.info('Callback when the first button is clicked');
+    this.win.destroyWindow();
+    let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+    let callerToken: number = this.want.parameters['ohos.caller.uid'];
+    dialogSet.delete(callerToken);
+    GlobalContext.store('dialogSet', dialogSet);
+    if (dialogSet.size === 0) {
+      this.context.terminateSelf();
+    }
+  }
+
+  onAccept() {
+    Log.info('Callback when the second button is clicked');
+    this.destruction();
   }
 
   GetAppName() {
