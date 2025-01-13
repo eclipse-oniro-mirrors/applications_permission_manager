@@ -29,6 +29,20 @@
             }
         },
         {
+            "name":"SecurityText_location",
+            "value":"\u200f«%1$s %2$s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتا ئورۇن ئۇچۇرىنى ئوقۇيالايدۇ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"\u200f«%1$s %2$s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتا ئامبارغا رەسىم ۋە سىن ساقلىيالايدۇ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"SecurityTitle_location",
             "value":"بىخەتەر ئورۇن ئىجازىتى",
             "attr":{
