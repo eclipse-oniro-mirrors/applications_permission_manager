@@ -691,6 +691,20 @@
             }
         },
         {
+            "name":"SecurityText_location",
+            "value":"仅允许“%1$s%2$s”在您点击此按钮时访问位置。",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"仅允许“%1$s%2$s”在您点击此按钮时保存图片和视频至图库。",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"Download",
             "value":"下载"
         },

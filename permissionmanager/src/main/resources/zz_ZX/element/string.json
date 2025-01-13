@@ -17,6 +17,14 @@
             "value":"[TS_950753]_To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow."
         },
         {
+            "name":"SecurityText_location",
+            "value":"[TS_1015861]_To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow."
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"[TS_1015860]_To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow."
+        },
+        {
             "name":"SecurityTitle_location",
             "value":"[TS_950716]_Private access to location"
         },

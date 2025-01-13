@@ -22,7 +22,6 @@ import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, getFontSizeScale } from '../common/utils/utils';
 import { Param, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { preferences } from '@kit.ArkData';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 
 let storage = LocalStorage.getShared();
@@ -42,7 +41,6 @@ struct SecurityDialog {
   private context = getContext(this) as common.ServiceExtensionContext;
   @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
-  @LocalStorageLink('dataPreferences') dataPreferences: preferences.Preferences | null = null;
   @State appName: ResourceStr = 'Application';
   @State appIndex: number = 0;
   @State index: number = 0;
@@ -50,10 +48,10 @@ struct SecurityDialog {
 
   securityParams : Array<Param> = [
     new Param(
-      $r('app.media.ic_location'), $r('app.string.SecurityTitle_location'), 'app.string.SecurityDescription_location'
+      $r('app.media.ic_location'), $r('app.string.SecurityTitle_location'), 'app.string.SecurityText_location'
     ),
     new Param(
-      $r('app.media.rawfile'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityDescription_mediaFiles'
+      $r('app.media.rawfile'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityText_mediaFiles'
     )
   ]
 
@@ -176,7 +174,11 @@ struct SecurityDialog {
           Column() { // content
             this.DialogTitle();
 
-            Text($r(this.securityParams[this.index].description, this.appName))
+            Text($r(
+              this.securityParams[this.index].description,
+              this.appName,
+              this.appIndex === 0 ? '' : String(this.appIndex)
+            ))
               .textAlign(TextAlign.Start)
               .fontColor($r('sys.color.font_primary'))
               .fontSize($r('sys.float.Body_L'))
@@ -206,10 +208,6 @@ struct SecurityDialog {
     this.GetAppName();
     this.index = this.want.parameters['ohos.user.security.type'];
     this.dialogController?.open();
-    this.dataPreferences?.on('change', (key: string) => {
-      Log.info('dataPreferences change.');
-      this.appIndex === 0 ? null : this.GetAppName();
-    })
   }
 
   aboutToDisappear() {
@@ -222,7 +220,7 @@ struct SecurityDialog {
       bundleManager.getAppCloneIdentity(uid).then(cloneInfo => {
         Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}`);
         this.appIndex = cloneInfo.appIndex;
-        cloneInfo.appIndex === 0 ? this.getSelfName(cloneInfo) : this.getCloneName(cloneInfo);
+        this.getSelfName(cloneInfo);
       }).catch((err: BusinessError) => {
         Log.error(`getAppCloneIdentity failed: ${JSON.stringify(err)}`);
       })
