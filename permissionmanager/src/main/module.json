@@ -20,6 +20,9 @@
             {
               "name": "ArkTSPartialUpdate",
               "value": "true"
+            },
+            {
+              "name": "ohos.graphics2d.text.adapter_text_height"
             }
           ],
         "abilities": [

@@ -139,7 +139,6 @@ function dialogContentsArea(params: DialogInfo) {
         .textAlign(params.isWearable ? TextAlign.Center : TextAlign.Start)
         .fontColor(params.isWearable ? '#A8FFFFFF' : $r('sys.color.font_primary') )
         .fontSize($r('sys.float.Body_L'))
-        .lineHeight(Constants.TEXT_SMALL_LINE_HEIGHT)
         .maxFontScale(Constants.DIALOG_TEXT_MAX_SCALE)
         .margin(params.isWearable ? {
           left: Constants.MARGIN_26,
