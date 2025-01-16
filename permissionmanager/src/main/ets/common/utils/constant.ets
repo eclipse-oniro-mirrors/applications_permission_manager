@@ -111,11 +111,14 @@ export default class Constants {
     public static RADIUS_5 = 5;
     public static MARGIN_4 = 4;
     public static MARGIN_8 = 8;
+    public static MARGIN_12 = 12;
     public static MARGIN_16 = 16;
     public static MARGIN_24 = 24;
+    public static MARGIN_26 = 26;
     public static PADDING_4 = 4;
     public static PADDING_8 = 8;
     public static PADDING_10 = 10;
+    public static PADDING_11 = 11;
     public static PADDING_14 = 14;
     public static PADDING_16 = 16;
     public static PADDING_20 = 20;
@@ -369,4 +372,8 @@ export default class Constants {
 
     // permission system error codes
     public static CREATE_WINDOW_REPEATED = 1300001;
+
+    public static CUSTOMIZE_BUTTON_WIDTH = 152;
+    public static CUSTOMIZE_BUTTON_TEXT_MIN_SIZE = 12;
+    public static CUSTOMIZE_BUTTON_TEXT_MAX_SIZE = 15;
 }
