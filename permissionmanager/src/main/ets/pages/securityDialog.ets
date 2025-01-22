@@ -71,7 +71,7 @@ function dialogTitle(index: number, securityParams: Array<Param>, isWearable: bo
         .titleText(isWearable)
         .minFontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
         .maxFontSize($r('sys.float.Title_S'))
-        .heightAdaptivePolicy(TextHeightAdaptivePolicy.MIN_FONT_SIZE_FIRST)
+        .heightAdaptivePolicy(TextHeightAdaptivePolicy.MAX_LINES_FIRST)
     }
   }
   .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
