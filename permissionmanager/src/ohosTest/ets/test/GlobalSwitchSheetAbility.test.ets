@@ -61,13 +61,6 @@ export default function GlobalSwitchSheetAbilityTest() {
       ability.onCreate(param);
     })
 
-    it('GlobalSwitchSheetAbilityTest_001', 0, () => {
-      Log.info(`GlobalSwitchSheetAbilityTest_001 begin`);
-      let ability = new GlobalSwitchSheetAbility();
-      // let session = new UIExtensionContentSession();
-      // ability.onSessionCreate(want, session);
-    })
-
     it('GlobalSwitchSheetAbilityTest_002', 0, () => {
       Log.info(`GlobalSwitchSheetAbilityTest_002 begin`);
       let ability = new GlobalSwitchSheetAbility();

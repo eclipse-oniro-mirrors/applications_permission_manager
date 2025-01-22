@@ -61,13 +61,6 @@ export default function PermissionStateSheetAbilityTest() {
       ability.onCreate(param);
     })
 
-    it('PermissionStateSheetAbilityTest_001', 0, () => {
-      Log.info(`PermissionStateSheetAbilityTest_001 begin`);
-      let ability = new PermissionStateSheetAbility();
-      // let session = new UIExtensionContentSession();
-      // ability.onSessionCreate(want, session);
-    })
-
     it('PermissionStateSheetAbilityTest_002', 0, () => {
       Log.info(`PermissionStateSheetAbilityTest_002 begin`);
       let ability = new PermissionStateSheetAbility();

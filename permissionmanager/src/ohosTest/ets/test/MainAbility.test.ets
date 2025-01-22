@@ -57,12 +57,6 @@ export default function MainAbilityTest() {
       ability.onCreate(want, null);
     })
 
-    it('MainAbilityTest_001', 0, () => {
-      Log.info(`MainAbilityTest_001 begin`);
-      let ability = new MainAbility();
-      // ability.onWindowStageCreate();
-    })
-
     it('MainAbilityTest_002', 0, () => {
       Log.info(`MainAbilityTest_002 begin`);
       let ability = new MainAbility();
