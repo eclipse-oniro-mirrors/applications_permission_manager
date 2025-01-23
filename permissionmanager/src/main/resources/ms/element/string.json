@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Akses peribadi ke Galeri",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses lokasi anda secara ringkas apabila anda mengetik Benarkan.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Benarkan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses Galeri anda secara ringkas untuk menyimpan item apabila anda mengetik Benarkan.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Akses peribadi ke lokasi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Batalkan",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

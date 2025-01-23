@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Privétoegang tot Foto's",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Om uw privacy te beschermen, krijgt %s slechts kort toegang tot uw locatie wanneer u op Toestaan tikt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Toestaan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Om uw privacy te beschermen, krijgt %s slechts kort toegang tot Foto's wanneer u op Toestaan tikt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Privétoegang tot locatie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Annuleren",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

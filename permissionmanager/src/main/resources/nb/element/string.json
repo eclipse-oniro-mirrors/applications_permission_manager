@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Privat tilgang til Galleri",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til posisjonen din når du trykker på Tillat.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Tillat",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til Galleriet ditt når du trykker på Tillat.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Privat tilgang til posisjon",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Avbryt",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

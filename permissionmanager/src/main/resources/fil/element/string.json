@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Pribadong access sa Gallery",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Para protektahan ang privacy mo, maa-access lang ni %s ang lokasyon mo kapag i-tap mo ang Payagan.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Payagan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Para protektahan ang privacy mo, maa-access lang ni %s ang Gallery mo kapag i-tap mo ang Payagan.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Pribadong access sa lokasyon",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Kanselahin",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

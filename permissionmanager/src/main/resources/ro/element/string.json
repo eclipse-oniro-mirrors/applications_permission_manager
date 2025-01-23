@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Acces privat la Galerie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Pentru a vă proteja confidențialitatea, %s vă va putea accesa locația doar pentru scurt timp atunci când veți atinge Permitere.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Permitere",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Pentru a vă proteja confidențialitatea, %s vă va putea accesa Galeria pentru a salva elemente doar când veți atinge Permitere.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Acces privat la locație",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Anulare",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

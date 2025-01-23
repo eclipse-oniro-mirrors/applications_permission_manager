@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Privat åtkomst till Galleri",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"För att skydda din sekretess kan %s bara kortvarigt komma åt din plats när du trycker på Tillåt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Tillåt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"För att skydda din sekretess kan %s bara kortvarigt komma åt ditt Galleri för att spara objekt när du trycker på Tillåt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Privat åtkomst till plats",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Avbryt",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

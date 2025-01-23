@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Accesso privato a Galleria",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Per proteggere la tua privacy, %s può accedere solo brevemente alla tua posizione quando tocchi Consenti.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Consenti",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Per proteggere la tua privacy, %s può accedere solo brevemente alla tua Galleria per salvare gli elementi quando tocchi Consenti.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Accesso privato alla posizione",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Annulla",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

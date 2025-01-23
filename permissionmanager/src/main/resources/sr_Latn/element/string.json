@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Privatni pristup Galeriji",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Radi zaštite vaše privatnosti, aplikacija %s može samo nakratko da pristupi vašoj lokaciji kada dodirnete opciju Dozvoli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Dozvoli",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Radi zaštite vaše privatnosti, aplikacija %s može samo nakratko da pristupi vašoj Galeriji radi čuvanja stavki kada dodirnete opciju Dozvoli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Privatni pristup lokaciji",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Otkaži",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}
