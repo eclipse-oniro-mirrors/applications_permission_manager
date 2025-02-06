@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Privāta piekļuve lietotnei Galerija",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu atrašanās vietai, ja pieskaraties Atļaut.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Atļaut",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu lietotnei Galerija, ja pieskaraties Atļaut.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Privāta piekļuve atrašanās vietai",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Atcelt",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

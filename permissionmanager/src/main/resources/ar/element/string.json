@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"الوصول الخاص إلى المعرض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"لحماية خصوصيتك، سيتمكن تطبيق %s من الوصول إلى موقعك لفترة وجيزة فقط عند النقر على «سماح».",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"سماح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"لحماية خصوصيتك، سيتمكن تطبيق %s من الوصول إلى المعرض لحفظ العناصر لفترة وجيزة فقط عند النقر على «سماح».",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"الوصول الخاص إلى الموقع",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"إلغاء",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

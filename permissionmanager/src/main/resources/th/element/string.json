@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"การเข้าถึงแกลเลอรีแบบรักษาความเป็นส่วนตัว",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงตำแหน่งของคุณได้เพียงชั่วครู่เมื่อคุณแตะ อนุญาต",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"อนุญาต",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงแกลเลอรีของคุณได้เพียงชั่วครู่เพื่อบันทึกรายการต่าง ๆ เมื่อคุณแตะ อนุญาต",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"การเข้าถึงตำแหน่งแบบรักษาความเป็นส่วนตัว",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"ยกเลิก",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Acesso privado à Galeria",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Para proteger a sua privacidade, a aplicação %s apenas pode aceder momentaneamente à localização quando toca em Permitir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Permitir",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Para proteger a sua privacidade, a aplicação %s apenas pode aceder momentaneamente à Galeria para guardar itens quando toca em Permitir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Acesso privado à localização",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Cancelar",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

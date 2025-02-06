@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Személyes hozzáférés a Galériához",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a tartózkodási helyéhez, ha az Engedélyezés gombra koppint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Engedélyezés",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a Galériához a képek mentéséhez, ha az Engedélyezés gombra koppint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Személyes hozzáférés a helyhez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Mégse",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

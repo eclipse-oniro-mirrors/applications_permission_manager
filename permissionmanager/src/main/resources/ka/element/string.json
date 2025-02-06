@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"პირადი წვდომა გალერეაზე",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"თქვენივე კონფიდენციალურობის დასაცავად, %s შეძლებს თქვენს მდებარეობაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"დაშვება",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"თქვენი კონფიდენციალურობის დასაცავად, %s შეძლებს ელემენტების შესანახად გალერეაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"პირადი წვდომა მდებარეობაზე",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"გაუქმება",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

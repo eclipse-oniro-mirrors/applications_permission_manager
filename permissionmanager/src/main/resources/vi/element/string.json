@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Quyền truy cập riêng tư vào Bộ sưu tập",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào vị trí của bạn khi bạn chạm vào Cho phép.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Cho phép",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào Bộ sưu tập của bạn để lưu các mục khi bạn chạm vào Cho phép.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Quyền truy cập riêng tư vào vị trí",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Hủy",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

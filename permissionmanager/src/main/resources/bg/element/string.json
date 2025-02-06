@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Личен достъп до „Галерия“",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"За защита на поверителността ви %s може само за кратко да получи достъп до местоположението ви, когато докоснете „Позволи“.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Позволи",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"За защита на поверителността ви %s може само за кратко да получи достъп до вашата „Галерия“ за запис на елементи, когато докоснете „Позволи“.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Личен достъп до местоположението",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Отказ",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

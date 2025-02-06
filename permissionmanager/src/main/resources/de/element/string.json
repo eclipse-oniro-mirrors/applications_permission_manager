@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Privater Zugriff auf Galerie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Um Ihre Privatsphäre zu schützen, kann %s nur kurz auf Ihren Standort zugreifen, wenn Sie auf Zulassen tippen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Zulassen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Um Ihre Privatsphäre zu schützen, kann %s nur kurz auf die Galerie zugreifen, um Elemente zu speichern, wenn Sie auf Zulassen tippen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Privater Zugriff auf Standort",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Abbrechen",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

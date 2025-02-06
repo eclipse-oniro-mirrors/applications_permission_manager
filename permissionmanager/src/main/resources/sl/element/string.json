@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Zasebni dostop do aplikacije Galerija",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Da se zaščiti vaša zasebnost, lahko aplikacija %s do vaše lokacije dostopi le za kratek čas, ko se dotaknete možnosti Dovoli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Dovoli",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Da se zaščiti vaša zasebnost, lahko aplikacija %s do aplikacije Galerija dostopi le za kratek čas in shrani elemente, ko se dotaknete možnosti Dovoli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Zasebni dostop do lokacije",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Prekliči",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

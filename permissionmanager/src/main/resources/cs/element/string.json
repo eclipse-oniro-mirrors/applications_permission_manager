@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Soukromý přístup ke galerii",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší poloze jen krátce, když klepnete na možnost Povolit.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Povolit",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší galerii jen krátce, když klepnete na možnost Povolit.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Soukromý přístup k poloze",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Zrušit",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

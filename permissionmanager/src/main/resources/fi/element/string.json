@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Gallerian yksityinen käyttöoikeus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Tietosuojan suojaamisen takia voi %s hetkellisesti käyttää sijaintitietoa, kun valitset Salli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Salli",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Tietosuojan suojaamisen takia voi %s hetkellisesti käyttää Galleriaa kohteiden tallentamiseen, kun valitset Salli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Sijainnin yksityinen käyttöoikeus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Peruuta",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"गैलरी तक निजी पहुँच",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %s संक्षिप्त रूप से आपके स्थान तक पहुँच प्राप्त कर सकता है।",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"अनुमति दें",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %s आइटम सहेजने हेतु संक्षिप्त रूप से आपकी गैलरी तक पहुँच प्राप्त कर सकता है।",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"स्थान तक निजी पहुँच",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"रद्द करें",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

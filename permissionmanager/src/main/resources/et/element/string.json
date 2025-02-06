@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Privaatne juurdepääs Galeriile",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel teie asukohale ligi vaid lühiajaliselt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Luba",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel üksuste salvestamiseks Galeriile ligi vaid lühiajaliselt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Privaatne juurdepääs asukohale",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Tühista",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

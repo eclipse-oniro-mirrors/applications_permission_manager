@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"دسترسی خصوصی به «گالری»",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"برای حفاظت از حریم خصوصی شما، %s فقط زمانی که روی گزینه «اجازه دادن» ضربه بزنید، به‌مدت کوتاهی می‌تواند به موقعیت مکانی شما دسترسی داشته باشد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"اجازه دادن",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"برای حفاظت از حریم خصوصی شما، %s فقط زمانی که روی گزینه «اجازه دادن» ضربه بزنید، به‌مدت کوتاهی می‌تواند به «گالری» شما برای ذخیره کردن موارد دسترسی داشته باشد.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"دسترسی خصوصی به موقعیت مکانی",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"لغو کردن",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

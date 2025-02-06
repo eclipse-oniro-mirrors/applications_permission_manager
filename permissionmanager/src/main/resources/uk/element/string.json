@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Контрольований доступ до додатка \"Галерея\"",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Щоб захистити вашу конфіденційність, додаток \"%s\" зможе отримати доступ до розташування на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Дозволити",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Щоб захистити вашу конфіденційність, додаток \"%s\" зможе отримати доступ до додатка \"Галерея\" для збереження вмісту на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Контрольований доступ до розташування",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Скасувати",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

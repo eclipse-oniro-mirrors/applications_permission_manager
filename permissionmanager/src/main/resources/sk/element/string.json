@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Súkromný prístup ku Galérii",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Aby sa chránilo vaše súkromie, aplikácia %s môže k vašej polohe pristupovať len krátky čas po ťuknutí na možnosť Povoliť.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Povoliť",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Aby sa chránilo vaše súkromie, aplikácia %s môže k vašej Galérii pristupovať len krátky čas po ťuknutí na možnosť Povoliť, aby uložila položky.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Súkromný prístup k polohe",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Zrušiť",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

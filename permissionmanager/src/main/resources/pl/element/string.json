@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Dostęp do Galerii z zachowaniem prywatności",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Aby chronić prywatność użytkownika, aplikacja %s może uzyskać dostęp do lokalizacji tylko na chwilę po dotknięciu opcji Zezwalaj.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Zezwól",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Aby chronić prywatność użytkownika, aplikacja %s może uzyskać dostęp do Galerii użytkownika tylko na chwilę po dotknięciu opcji Zezwalaj.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Dostęp do lokalizacji z zachowaniem prywatności",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Anuluj",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

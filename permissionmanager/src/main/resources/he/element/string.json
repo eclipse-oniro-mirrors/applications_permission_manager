@@ -1,0 +1,46 @@
+{
+    "string":[
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"גישה פרטית ל'גלריה'",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"כדי להגן על פרטיותך, %s יוכל לגשת למיקום שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"אפשר",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"כדי להגן על פרטיותך, %s יוכל לגשת ל'גלריה' שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"גישה פרטית למיקום",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"ביטול",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}
