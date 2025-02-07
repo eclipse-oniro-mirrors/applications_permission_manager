@@ -40,13 +40,13 @@ export default class SecurityExtensionAbility extends extension {
     console.info(TAG + 'want: ' + JSON.stringify(want));
 
     try {
-      let displayId = want.parameters['ohos.display.id'];
-      let dis = display.getDisplayByIdSync(displayId);
+      let width = want.parameters['ohos.display.width'];
+      let height = want.parameters['ohos.display.height'];
       let navigationBarRect = {
         left: 0,
         top: 0,
-        width: dis.width,
-        height: dis.height
+        width: width,
+        height: height
       };
       this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
     } catch (exception) {
