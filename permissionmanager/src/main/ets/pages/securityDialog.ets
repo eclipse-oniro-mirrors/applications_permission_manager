@@ -288,7 +288,8 @@ struct SecurityDialog {
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
       }
-    }
+    },
+    offset: { dx: 0, dy: 0 - this.want.parameters['ohos.dialog.offset'] + 'px' }
   });
 
   @Builder
