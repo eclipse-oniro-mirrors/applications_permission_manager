@@ -19,7 +19,7 @@ import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import { Log, getFontSizeScale } from '../common/utils/utils';
+import { Log, getFontSizeScale, isTibetanLanguage } from '../common/utils/utils';
 import { Param, WantInfo, DialogInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
@@ -140,6 +140,7 @@ function dialogContentsArea(params: DialogInfo) {
         .fontColor(params.isWearable ? '#A8FFFFFF' : $r('sys.color.font_primary') )
         .fontSize($r('sys.float.Body_L'))
         .maxFontScale(Constants.DIALOG_TEXT_MAX_SCALE)
+        .lineHeight(isTibetanLanguage() ? Constants.TEXT_BIG_LINE_HEIGHT : 0)
         .margin(params.isWearable ? {
           left: Constants.MARGIN_26,
           right: Constants.MARGIN_26,
