@@ -22,6 +22,7 @@ import display from '@ohos.display';
 import { BusinessError } from '@ohos.base';
 import Constants from '../common/utils/constant';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
+import deviceInfo from '@ohos.deviceInfo';
 
 let terminating: boolean = false;
 let state: boolean = false;
@@ -32,6 +33,11 @@ export default class GlobalSwitchSheetAbility extends UIExtensionAbility {
 
   onCreate(launchParam: AbilityConstant.LaunchParam): void {
     Log.info('GlobalSwitchSheetAbility on create');
+    if (deviceInfo.deviceType === 'wearable') {
+      this.context.terminateSelf();
+      Log.info('GlobalSwitchSheetAbility terminateSelf');
+      return;
+    }
   }
 
   onSessionCreate(want: Want, session: UIExtensionContentSession): void {

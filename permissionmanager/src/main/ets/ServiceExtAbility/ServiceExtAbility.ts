@@ -19,6 +19,7 @@ import display from '@ohos.display';
 import rpc from '@ohos.rpc';
 import { GlobalContext } from '../common/utils/globalContext';
 import dialogRequest from '@ohos.app.ability.dialogRequest';
+import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'PermissionManager_Log: ';
 const BG_COLOR = '#00000000';
@@ -42,6 +43,11 @@ export default class ServiceExtensionAbility extends extension {
   onRequest(want, startId): void {
     console.info(TAG + 'ServiceExtensionAbility onRequest. start id is ' + startId);
     console.info(TAG + 'want: ' + JSON.stringify(want));
+    if (deviceInfo.deviceType === 'wearable') {
+      this.context.terminateSelf();
+      console.info(TAG + 'ServiceExtensionAbility terminateSelf');
+      return;
+    }
 
     try {
       let dis = display.getDefaultDisplaySync();
