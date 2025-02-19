@@ -42,8 +42,8 @@ function customizeButton() {
   .padding({
     left: Constants.PADDING_16,
     right: Constants.PADDING_16,
-    top: Constants.PADDING_11,
-    bottom: Constants.PADDING_11
+    top: Constants.PADDING_10,
+    bottom: Constants.PADDING_10
   })
   .width(Constants.CUSTOMIZE_BUTTON_WIDTH)
   .margin({ bottom : Constants.MARGIN_12 })
@@ -87,17 +87,8 @@ function dialogContentsArea(params: DialogInfo) {
   Column() {
     Column() {
       SymbolGlyph($r('sys.symbol.person_shield_fill'))
-        .width(Constants.SECURITY_ICON_WIDTH)
-        .height(Constants.SECURITY_ICON_HEIGHT)
         .fontSize(Constants.FONT_SIZE_28)
         .fontColor([$r('sys.color.brand')])
-        .border({
-          width: Constants.BORDER_WIDTH_1,
-          color: $r('app.color.icon_border'),
-          radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
-        })
-        .padding(Constants.PADDING_11)
-        .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
       if (params.index === 1) {
         Image(params.securityParams[params.index].icon)
           .width(Constants.IMAGE_LENGTH_20)
@@ -125,10 +116,18 @@ function dialogContentsArea(params: DialogInfo) {
           })
       }
     }
+    .width(Constants.SECURITY_ICON_WIDTH)
+    .height(Constants.SECURITY_ICON_HEIGHT)
+    .justifyContent(FlexAlign.Center)
     .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
     .backgroundColor($r('app.color.icon_bg'))
     .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
     .margin(params.isWearable ? { top: Constants.MARGIN_12 } : {})
+    .border({
+      width: Constants.BORDER_WIDTH_1,
+      color: $r('app.color.icon_border'),
+      radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
+    })
     Column() { // content
       dialogTitle(params.index, params.securityParams, params.isWearable);
       Text($r(

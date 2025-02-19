@@ -118,7 +118,6 @@ export default class Constants {
     public static PADDING_4 = 4;
     public static PADDING_8 = 8;
     public static PADDING_10 = 10;
-    public static PADDING_11 = 11;
     public static PADDING_14 = 14;
     public static PADDING_16 = 16;
     public static PADDING_20 = 20;
