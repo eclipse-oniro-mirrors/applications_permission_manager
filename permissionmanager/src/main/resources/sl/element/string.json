@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Za zaščito vaše zasebnosti lahko aplikacija %1$s%2$s do vaše lokacije dostopi le za kratek čas, ko se dotaknete možnosti Dovoli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Za zaščito vaše zasebnosti lahko aplikacija %1$s%2$s do aplikacije Galerija dostopi le za kratek čas in shrani elemente, ko se dotaknete možnosti Dovoli.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

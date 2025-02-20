@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"لحماية خصوصيتك، سيتمكن %1$s%2$s من الوصول إلى موقعك لفترة وجيزة فقط عند النقر على «سماح».",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"لحماية خصوصيتك، سيتمكن %1$s%2$s من الوصول إلى المعرض لحفظ العناصر لفترة وجيزة فقط عند النقر على «سماح».",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

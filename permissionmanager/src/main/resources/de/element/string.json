@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Um Ihre Privatsphäre zu schützen, kann %1$s%2$s nur kurz auf Ihren Standort zugreifen, wenn Sie auf Zulassen tippen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Um Ihre Privatsphäre zu schützen, kann %1$s%2$s nur kurz auf Ihre Galerie zugreifen, um Elemente zu speichern, wenn Sie auf Zulassen tippen.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

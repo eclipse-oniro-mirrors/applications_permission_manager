@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"För att skydda din sekretess kan %1$s%2$s bara kortvarigt komma åt din plats när du trycker på Tillåt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"För att skydda din sekretess kan %1$s%2$s bara kortvarigt komma åt ditt Galleri för att spara objekt när du trycker på Tillåt.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

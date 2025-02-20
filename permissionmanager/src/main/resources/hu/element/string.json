@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Az Ön személyes adatainak védelme érdekében a(z) %1$s%2$s csak rövid ideig férhet hozzá a tartózkodási helyéhez, ha az Engedélyezés gombra koppint.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Az Ön személyes adatainak védelme érdekében a(z) %1$s%2$s csak rövid ideig férhet hozzá a Galériához a képek mentéséhez, ha az Engedélyezés gombra koppint.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

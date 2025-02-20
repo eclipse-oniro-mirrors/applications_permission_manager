@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Para proteger a sua privacidade, a aplicação %1$s%2$s apenas pode aceder momentaneamente à localização quando toca em Permitir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Para proteger a sua privacidade, a aplicação %1$s%2$s apenas pode aceder momentaneamente à Galeria para guardar itens quando toca em Permitir.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

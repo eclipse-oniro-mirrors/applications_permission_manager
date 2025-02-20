@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu ubicación si presionas Permitir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu Galería para guardar elementos si presionas Permitir.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

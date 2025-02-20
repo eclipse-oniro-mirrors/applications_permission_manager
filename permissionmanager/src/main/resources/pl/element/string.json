@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Aby chronić Twoją prywatność, aplikacja %1$s%2$s może uzyskać dostęp do lokalizacji tylko na chwilę po dotknięciu opcji Zezwól.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Aby chronić prywatność użytkownika, aplikacja %1$s%2$s może uzyskać dostęp do Twojej Galerii tylko na chwilę po dotknięciu opcji Zezwól.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

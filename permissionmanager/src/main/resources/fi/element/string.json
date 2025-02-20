@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Tietosuojan suojaamisen takia %1$s%2$s voi hetkellisesti käyttää sijaintitietoa, kun valitset Salli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Tietosuojan suojaamisen takia %1$s%2$s voi hetkellisesti käyttää Galleriaa kohteiden tallentamiseen, kun valitset Salli.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

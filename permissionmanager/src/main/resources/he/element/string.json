@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"כדי להגן על פרטיותך, %1$s%2$s יוכל לגשת למיקום שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"כדי להגן על פרטיותך, %1$s%2$s יוכל לגשת ל'גלריה' שלך רק לזמן קצר כדי לשמור פריטים כאשר תקיש על 'אפשר'.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

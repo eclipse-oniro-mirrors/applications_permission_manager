@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Para protektahan ang privacy mo, panandaliang maa-access lang ng %1$s%2$s ang lokasyon mo kapag na-tap mo ang Payagan.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Para protektahan ang privacy mo, panandaliang maa-access lang ng %1$s%2$s ang Gallery mo para mag-save ng mga item kapag na-tap mo ang Payagan.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

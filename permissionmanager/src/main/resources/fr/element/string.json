@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Pour protéger votre vie privée, %1$s%2$s ne peut accéder brièvement à votre localisation que lorsque vous touchez Autoriser.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Pour protéger votre vie privée, %1$s%2$s ne peut accéder brièvement à Galerie pour enregistrer des éléments que lorsque vous touchez Autoriser.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }
