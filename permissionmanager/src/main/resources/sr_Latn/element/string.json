@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Radi zaštite vaše privatnosti, aplikacija %1$s%2$s može samo nakratko da pristupi vašoj lokaciji kada dodirnete opciju Dozvoli.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Radi zaštite vaše privatnosti, aplikacija %1$s%2$s može samo nakratko da pristupi vašoj Galeriji radi čuvanja stavki kada dodirnete opciju Dozvoli.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

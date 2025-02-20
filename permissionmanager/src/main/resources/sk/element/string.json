@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Aby sa chránilo vaše súkromie, aplikácia %1$s%2$s môže k vašej polohe pristupovať len krátky čas po ťuknutí na možnosť Povoliť.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Aby sa chránilo vaše súkromie, aplikácia %1$s%2$s môže k vašej Galérii pristupovať len krátky čas po ťuknutí na možnosť Povoliť, aby uložila položky.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

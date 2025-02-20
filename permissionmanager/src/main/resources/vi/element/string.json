@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Để bảo vệ quyền riêng tư của bạn, %1$s%2$s chỉ có thể truy cập tạm thời vào vị trí của bạn khi bạn chạm vào Cho phép.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Để bảo vệ quyền riêng tư của bạn, %1$s%2$s chỉ có thể truy cập tạm thời vào Bộ sưu tập của bạn để lưu các mục khi bạn chạm vào Cho phép.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

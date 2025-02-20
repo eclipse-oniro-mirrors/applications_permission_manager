@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Untuk melindungi privasi anda, %2$s%1$s hanya boleh mengakses lokasi anda secara ringkas apabila anda mengetik Benarkan.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Untuk melindungi privasi anda, %2$s%1$s hanya boleh mengakses Galeri anda secara ringkas untuk menyimpan item apabila anda mengetik Benarkan.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

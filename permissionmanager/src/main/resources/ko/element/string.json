@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"개인 정보 보호를 위해 %1$s 앱(%2$s)은 허용을 탭할 때만 위치에 잠시 액세스할 수 있습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"개인 정보 보호를 위해 %1$s 앱(%2$s)은 허용을 탭할 때만 항목을 저장하기 위해 갤러리에 잠시 액세스할 수 있습니다.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

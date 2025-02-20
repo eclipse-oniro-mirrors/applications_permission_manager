@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"For å beskytte personvernet ditt, kan %1$s%2$s bare få kort tilgang til posisjonen din når du trykker på Tillat.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"For å beskytte personvernet ditt, kan %1$s%2$s bare få kort tilgang til Galleri når du trykker på Tillat.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Gizliliğinizi korumak için, İzin veriyorum düğmesine dokunduğunuzda %1$s%2$s, konumunuza yalnızca kısa bir süreliğine erişebilir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Gizliliğinizi korumak için, İzin veriyorum düğmesine dokunduğunuzda %1$s%2$s, Galeri'ye yalnızca kısa bir süreliğine öğeleri kaydetmek için erişebilir.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

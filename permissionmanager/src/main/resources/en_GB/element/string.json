@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

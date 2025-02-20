@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"プライバシー保護のため、[許可]をタップした場合、%1$s%2$sは位置情報に短時間だけアクセスできます。",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"プライバシー保護のため、[許可]をタップした場合、%1$s%2$sはギャラリーに短時間だけアクセスしてアイテムを保存できます。",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

@@ -41,6 +41,20 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"Om uw privacy te beschermen, krijgt %1$s%2$s slechts kort toegang tot uw locatie wanneer u op Toestaan tikt.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Om uw privacy te beschermen, krijgt %1$s%2$s slechts kort toegang tot Foto's wanneer u op Toestaan tikt.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }
