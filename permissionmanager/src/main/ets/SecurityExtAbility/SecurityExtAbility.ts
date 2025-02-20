@@ -67,14 +67,16 @@ export default class SecurityExtensionAbility extends extension {
 
   private async createWindow(name: string, windowType, rect, want): Promise<void> {
     console.info(TAG + 'create securityWindow');
-    let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+    let dialogSet: Set<String> = GlobalContext.load('dialogSet');
     if (!dialogSet) {
-      dialogSet = new Set<number>();
+      dialogSet = new Set<String>();
       console.info(TAG + 'new dialogSet');
       GlobalContext.store('dialogSet', dialogSet);
     }
     let callerToken: number = want.parameters['ohos.caller.uid'];
-    if (dialogSet.has(callerToken)) {
+    let windId: number = want.parameters['ohos.ability.params.windowId'];
+    let token: String = String(callerToken) + '_' + String(windId);
+    if (dialogSet.has(token)) {
       console.info(TAG + 'window already exists');
       return;
     }
@@ -83,9 +85,11 @@ export default class SecurityExtensionAbility extends extension {
       let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
       await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
         win.destroyWindow();
-        let dialogSet: Set<number> = GlobalContext.load('dialogSet');
+        let dialogSet: Set<String> = GlobalContext.load('dialogSet');
         let callerToken: number = want.parameters['ohos.caller.uid'];
-        dialogSet.delete(callerToken);
+        let windId: number = want.parameters['ohos.ability.params.windowId'];
+        let token: String = String(callerToken) + '_' + String(windId);
+        dialogSet.delete(token);
         GlobalContext.store('dialogSet', dialogSet);
         if (dialogSet.size === 0) {
           this.context.terminateSelf();
@@ -97,7 +101,7 @@ export default class SecurityExtensionAbility extends extension {
       win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
       console.info(TAG + 'showWindow end.');
-      dialogSet.add(callerToken);
+      dialogSet.add(token);
       GlobalContext.store('dialogSet', dialogSet);
     } catch (err) {
       console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
