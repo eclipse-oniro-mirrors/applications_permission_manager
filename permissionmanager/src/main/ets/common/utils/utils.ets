@@ -35,7 +35,6 @@ import { deviceInfo } from '@kit.BasicServicesKit';
 import { GlobalContext } from './globalContext';
 
 const TAG = 'PermissionManager_Log ';
-const TIBETAN_LANGUAGE: string[] = ['bo'];
 
 /**
  * verify permission
@@ -292,12 +291,6 @@ export function supportPermission(): Permission[] {
   supportGroup =
     userGrantPermissions.filter(permission => only2in1AndTabletSupportedPermissions.includes(permission) === false);
   return supportGroup;
-}
-
-export function isTibetanLanguage(): boolean {
-  let locale = new Intl.Locale(i18n.System.getSystemLanguage()).toString();
-  Log.info(`isTibetanLanguage: ${locale}`);
-  return TIBETAN_LANGUAGE.includes(locale);
 }
 
 export class Log {
