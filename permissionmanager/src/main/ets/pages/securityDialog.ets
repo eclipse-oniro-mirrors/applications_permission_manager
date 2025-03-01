@@ -86,9 +86,20 @@ function dialogTitle(index: number, securityParams: Array<Param>, isWearable: bo
 function dialogContentsArea(params: DialogInfo) {
   Column() {
     Column() {
-      SymbolGlyph($r('sys.symbol.person_shield_fill'))
-        .fontSize(Constants.FONT_SIZE_28)
-        .fontColor([$r('sys.color.brand')])
+      Row() {
+        SymbolGlyph($r('sys.symbol.person_shield_fill'))
+          .fontSize(Constants.FONT_SIZE_28)
+          .fontColor([$r('sys.color.brand')])
+      }
+      .width(Constants.SECURITY_ICON_WIDTH)
+      .height(Constants.SECURITY_ICON_HEIGHT)
+      .justifyContent(FlexAlign.Center)
+      .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
+      .border({
+        width: Constants.BORDER_WIDTH_1,
+        color: $r('app.color.icon_border'),
+        radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
+      })
       if (params.index === 1) {
         Image(params.securityParams[params.index].icon)
           .width(Constants.IMAGE_LENGTH_20)
@@ -101,33 +112,27 @@ function dialogContentsArea(params: DialogInfo) {
             radius: Constants.IMAGE_LENGTH_20 * 14 / 54
           })
       } else {
-        SymbolGlyph($r('sys.symbol.local_fill'))
-          .width(Constants.IMAGE_LENGTH_20)
-          .height(Constants.IMAGE_LENGTH_20)
-          .fontSize(Constants.FONT_SIZE_12)
-          .fontColor([Color.White])
-          .backgroundColor($r('app.color.local_background_color'))
-          .padding(Constants.PADDING_4)
-          .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
-          .border({
-            width: Constants.BORDER_WIDTH_1,
-            color: $r('app.color.icon_border'),
-            radius: Constants.IMAGE_LENGTH_20 * 14 / 54
-          })
+        Row() {
+          SymbolGlyph($r('sys.symbol.local_fill'))
+            .fontSize(Constants.FONT_SIZE_12)
+            .fontColor([Color.White])
+        }
+        .width(Constants.IMAGE_LENGTH_20)
+        .height(Constants.IMAGE_LENGTH_20)
+        .justifyContent(FlexAlign.Center)
+        .backgroundColor($r('app.color.local_background_color'))
+        .position({ x: Constants.IMAGE_POSITION_28, y: Constants.IMAGE_POSITION_28 })
+        .border({
+          width: Constants.BORDER_WIDTH_1,
+          color: $r('app.color.icon_border'),
+          radius: Constants.IMAGE_LENGTH_20 * 14 / 54
+        })
       }
     }
-    .width(Constants.SECURITY_ICON_WIDTH)
-    .height(Constants.SECURITY_ICON_HEIGHT)
-    .justifyContent(FlexAlign.Center)
     .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
     .backgroundColor($r('app.color.icon_bg'))
     .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
     .margin(params.isWearable ? { top: Constants.MARGIN_12 } : {})
-    .border({
-      width: Constants.BORDER_WIDTH_1,
-      color: $r('app.color.icon_border'),
-      radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
-    })
     Column() { // content
       dialogTitle(params.index, params.securityParams, params.isWearable);
       Text($r(
@@ -136,7 +141,7 @@ function dialogContentsArea(params: DialogInfo) {
         params.appIndex === 0 ? '' : String(params.appIndex)
       ))
         .textAlign(params.isWearable ? TextAlign.Center : TextAlign.Start)
-        .fontColor(params.isWearable ? '#A8FFFFFF' : $r('sys.color.font_primary') )
+        .fontColor($r('sys.color.font_primary'))
         .fontSize($r('sys.float.Body_L'))
         .maxFontScale(Constants.DIALOG_TEXT_MAX_SCALE)
         .margin(params.isWearable ? {

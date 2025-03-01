@@ -18,6 +18,7 @@ import window from '@ohos.window';
 import display from '@ohos.display';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Configuration } from '@ohos.app.ability.Configuration';
+import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
@@ -95,8 +96,10 @@ export default class SecurityExtensionAbility extends extension {
           this.context.terminateSelf();
         }
       });
-      await win.moveWindowTo(rect.left, rect.top);
-      await win.resize(rect.width, rect.height);
+      if (deviceInfo.deviceType !== 'wearable') {
+        await win.moveWindowTo(rect.left, rect.top);
+        await win.resize(rect.width, rect.height);
+      };
       await win.loadContent('pages/securityDialog', storage);
       win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
