@@ -91,7 +91,8 @@ struct SecurityDialog {
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
       }
-    }
+    },
+    offset: { dx: 0, dy: 0 - this.want.parameters['ohos.dialog.offset'] + 'px' }
   });
 
   @Builder
@@ -138,6 +139,7 @@ struct SecurityDialog {
                 })
             }
           }
+          .pixelRound({ start: PixelRoundCalcPolicy.NO_FORCE_ROUND, end: PixelRoundCalcPolicy.NO_FORCE_ROUND })
           .backgroundColor($r('app.color.icon_bg'))
           .borderRadius($r('sys.float.ohos_id_corner_radius_default_m'))
           Column() { // content
