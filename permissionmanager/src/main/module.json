@@ -55,7 +55,7 @@
             {
                 "icon": "$media:app_icon",
                 "name": "com.ohos.permissionmanager.GrantAbility",
-                "srcEntry": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
+                "srcEntry": "./ets/ServiceExtAbility/ServiceExtAbility.ets",
                 "type": "service",
                 "exported": true
             },

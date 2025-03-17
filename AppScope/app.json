@@ -4,14 +4,10 @@
   "app": {
     "bundleName": "com.ohos.permissionmanager",
     "vendor": "example",
-    "versionCode": 1000076,
-    "versionName": "1.7.6",
+    "versionCode": 1000080,
+    "versionName": "1.8.0",
     "icon": "$media:app_icon",
     "label": "$string:app_name",
-    "minAPIVersion": 14,
-    "targetAPIVersion": 14,
-    "distributedNotificationEnabled": true,
-    "apiReleaseType": "Beta5",
     "configuration": "$profile:configuration"
   }
 }

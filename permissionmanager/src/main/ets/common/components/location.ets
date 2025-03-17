@@ -14,6 +14,7 @@
  */
 
 import Constants from '../utils/constant';
+import { GrantDialogViewState } from '../../ServiceExtAbility/GrantDialogViewState';
 
 @Extend(Button)function locationButton() {
   .backgroundColor($r('sys.color.ohos_id_color_dialog_bg'))
@@ -25,7 +26,7 @@ import Constants from '../utils/constant';
 
 @Component
 export struct LocationCanvas {
-  @Link locationFlag: number;
+  @Link viewState: GrantDialogViewState;
 
   build() {
     Column() {
@@ -35,13 +36,13 @@ export struct LocationCanvas {
         .height(Constants.FULL_HEIGHT)
         .scale({
           x: (
-               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
-               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+               (this.viewState.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE)
              )
           ? Constants.LOCATION_CANVAS_ZOOM_SCALE : Constants.LOCATION_CANVAS_INITIAL_SCALE,
           y: (
-               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
-               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+               (this.viewState.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE)
              )
             ? Constants.LOCATION_CANVAS_ZOOM_SCALE : Constants.LOCATION_CANVAS_INITIAL_SCALE
         })
@@ -57,23 +58,24 @@ export struct LocationCanvas {
         .position({ x: Constants.LOCATION_ICON_POSITION_X, y: Constants.LOCATION_ICON_POSITION_Y })
         .opacity(
           (
-            (this.locationFlag == Constants.LOCATION_UPGRADE) ||
-            (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+            (this.viewState.locationFlag == Constants.LOCATION_UPGRADE) ||
+            (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE)
           ) ? 1 : 0
         )
         .scale({
           x: (
-               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
-               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+               (this.viewState.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE)
              ) ? 1 : 0.8,
           y: (
-               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
-               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+               (this.viewState.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE)
              ) ? 1 : 0.8
         })
         .animation({
           duration: Constants.LOCATION_ANIMATION_DURATION / 2, // Animation duration
-          delay: this.locationFlag == Constants.LOCATION_BOTH_PRECISE ? (Constants.LOCATION_ANIMATION_DURATION / 2) : 0,
+          delay: this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE ?
+            (Constants.LOCATION_ANIMATION_DURATION / 2) : 0,
           curve: Curve.Smooth, // The animation curve
           playMode: PlayMode.Normal // The animation mode
         })
@@ -84,12 +86,12 @@ export struct LocationCanvas {
         .stroke($r('app.color.location_circle_color'))
         .scale({
           x: (
-               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
-               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+               (this.viewState.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE)
              ) ? 0 : 1,
           y: (
-               (this.locationFlag == Constants.LOCATION_UPGRADE) ||
-               (this.locationFlag == Constants.LOCATION_BOTH_PRECISE)
+               (this.viewState.locationFlag == Constants.LOCATION_UPGRADE) ||
+               (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE)
              ) ? 0 : 1
         })
         .animation({
@@ -98,17 +100,17 @@ export struct LocationCanvas {
           playMode: PlayMode.Normal // The animation mode
         })
       Row() {
-        if (this.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
+        if (this.viewState.locationFlag == Constants.LOCATION_BOTH_PRECISE) {
           Button($r('app.string.precise_location_on'))
             .locationButton()
             .fontColor($r('sys.color.font_emphasize'))
-            .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_FUZZY })
+            .onClick(() => { this.viewState.locationFlag = Constants.LOCATION_BOTH_FUZZY })
         }
-        if (this.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
+        if (this.viewState.locationFlag == Constants.LOCATION_BOTH_FUZZY) {
           Button($r('app.string.precise_location_off'))
             .locationButton()
             .fontColor($r('sys.color.font_secondary'))
-            .onClick(() => { this.locationFlag = Constants.LOCATION_BOTH_PRECISE })
+            .onClick(() => { this.viewState.locationFlag = Constants.LOCATION_BOTH_PRECISE })
         }
       }.position({ x: 0, y: 0 })
       .width(Constants.FULL_WIDTH)

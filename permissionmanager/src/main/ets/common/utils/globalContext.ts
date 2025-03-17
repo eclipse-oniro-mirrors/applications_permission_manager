@@ -48,4 +48,23 @@ export class GlobalContext {
   set(key: string, objectClass: Object): void {
     this._objects.set(key, objectClass);
   }
+
+  public getWindowNum(): number {
+    return globalThis.windowNum || 0;
+  }
+
+  public increaseAndGetWindowNum(): number {
+    globalThis.windowNum ++;
+    return globalThis.windowNum;
+  }
+
+  public decreaseAndGetWindowNum(): number {
+    globalThis.windowNum --;
+    return globalThis.windowNum;
+  }
+
+  public setAndGetWindowNum(num: number): number {
+    globalThis.windowNum = num;
+    return globalThis.windowNum || 0;
+  }
 }

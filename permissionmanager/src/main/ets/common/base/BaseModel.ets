@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,14 +12,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-{
-  "app": {
-    "bundleName": "com.ohos.permissionmanager",
-    "vendor": "example",
-    "versionCode": 1000080,
-    "versionName": "1.8.0",
-    "icon": "$media:app_icon",
-    "label": "$string:app_name",
-    "configuration": "$profile:configuration"
-  }
+
+export class BaseModel {
 }
