@@ -12,8 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import rpc from '@ohos.rpc';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import { bundleManager } from '@kit.AbilityKit';
 import { Permissions } from '@ohos.abilityAccessCtrl';
-import { ButtonStatus, Permission, PermissionGroup } from './definition';
+import { ButtonStatus, Permission, PermissionGroup, PermissionOption } from './definition';
 
 export class AppInfo {
   public bundleName: string
@@ -459,4 +463,64 @@ export interface CallerBundleInfo {
   permissionGroup: string[];
   token: number;
   globSwitch: number;
+}
+
+export class Property {
+  public value: Object
+
+  constructor(value: Object) {
+    this.value = value
+  }
+}
+
+export interface CallerAppInfo {
+  readonly bundleName: string;
+  readonly tokenId: number;
+  readonly reqPerms: Permission[];
+  readonly reqPermsState: number[];
+  readonly reqPermsDetails: bundleManager.ReqPermissionDetail[];
+  readonly proxy: rpc.RemoteObject;
+  grantResult: number[];
+  groupWithPermission: Map<PermissionGroup, Set<Permission>>;
+}
+
+export class PermissionGroupConfig {
+  public readonly groupName: PermissionGroup;
+  public readonly permissions: Permission[];
+  public icon: Resource;
+  public readonly title: ResourceStr;
+  public readonly readAndWrite?: ResourceStr;
+  public readonly reason: ResourceStr;
+  public readonly buttonList: ButtonStatus[];
+
+
+  constructor(param: GroupConfig) {
+    this.groupName = param.groupName;
+    this.permissions = param.permissions;
+    this.icon = param.icon;
+    this.title = param.title;
+    this.readAndWrite = param.readAndWrite;
+    this.reason = param.reason;
+    this.buttonList = param.buttonList;
+  }
+}
+
+export interface GroupConfig {
+  readonly groupName: PermissionGroup;
+  readonly permissions: Permission[];
+  icon: Resource;
+  readonly title: ResourceStr;
+  readonly readAndWrite?: ResourceStr;
+  readonly reason: ResourceStr;
+  readonly buttonList: ButtonStatus[];
+}
+
+export interface PermissionWithOption {
+  permission: Permission;
+  permissionOption: PermissionOption;
+}
+
+export interface optionAndState {
+  operationResult: number;
+  permissionState: abilityAccessCtrl.GrantStatus;
 }

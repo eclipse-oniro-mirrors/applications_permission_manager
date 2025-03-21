@@ -282,32 +282,7 @@ export default class Constants {
     public static DIALOG_LABEL_LINE_HEIGHT = 14;
 
     // request text of dialog
-    public static DIALOG_REQ_FONT_SIZE = 16;
     public static DIALOG_REQ_MARGIN_TOP = 16;
-    public static DIALOG_REQ_MARGIN_LEFT = 24;
-    public static DIALOG_REQ_MARGIN_RIGHT = 24;
-    public static DIALOG_REQ_LINE_HEIGHT = 22;
-
-    // description text of dialog
-    public static DIALOG_DESP_FONT_SIZE = 14;
-    public static DIALOG_DESP_MARGIN_TOP = 2;
-    public static DIALOG_DESP_MARGIN_LEFT = 24;
-    public static DIALOG_DESP_MARGIN_RIGHT = 24;
-    public static DIALOG_DESP_MARGIN_BOTTOM = 8;
-    public static DIALOG_DESP_LINE_HEIGHT = 19;
-
-    public static BUTTON_MARGIN_TOP = 8;
-    public static BUTTON_MARGIN_LEFT = 16;
-    public static BUTTON_MARGIN_RIGHT = 16;
-    public static BUTTON_HEIGHT = 40;
-
-    public static DIALOG_PRIVACY_BORDER_RADIUS = 32;
-
-    // initial check status
-    public static INIT_NEED_TO_WAIT = 0
-    public static INIT_NEED_TO_VERIFY = 1
-    public static INIT_NEED_TO_TERMINATED = 2
-    public static INIT_NEED_TO_REFRESH = 3
 
     public static RESULT_SUCCESS = 1
     public static RESULT_FAILURE = 0
