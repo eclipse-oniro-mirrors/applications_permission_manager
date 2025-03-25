@@ -15,10 +15,8 @@
 
 export class GlobalContext {
   currentPermissionGroup: string;
-  isMuteSupported: boolean;
   isVertical: boolean;
   bundleName: string;
-  globalState: string;
   windowNum: number;
   dialogSet: Set<String>;
 

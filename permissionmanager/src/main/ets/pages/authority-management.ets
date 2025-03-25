@@ -18,8 +18,6 @@ import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex
 import { textInput } from '../common/components/search';
 import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
-import audio from '@ohos.multimedia.audio'
-import camera from '@ohos.multimedia.camera'
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
 import { groups, globalGroup, showSubPermissionsGroup } from '../common/model/permissionGroup';
@@ -36,6 +34,7 @@ import {
 import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission, PermissionGroup } from '../common/model/definition';
+import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
 import Constants from '../common/utils/constant';
 import bundleManager from '@ohos.bundle.bundleManager';
 
@@ -94,27 +93,7 @@ struct authorityManagementPage {
                 params: { list: dataList, backTitle: item.groupName }
               })
             } else {
-              if (item.group == 'MICROPHONE') {
-                let audioManager = audio.getAudioManager();
-                let audioVolumeManager = audioManager.getVolumeManager();
-                let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
-                audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
-                  let muteState = audioVolumeGroupManager.isPersistentMicMute();
-                  GlobalContext.store('isMuteSupported', true);
-                  router.pushUrl({
-                    url: 'pages/authority-tertiary-groups',
-                    params: { list: dataList, backTitle: item.groupName, globalIsOn: !muteState }
-                  })
-                })
-              } else {
-                let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-                let mute = cameraManager.isCameraMuted();
-                GlobalContext.store('isMuteSupported', cameraManager.isCameraMuteSupported());
-                router.pushUrl({
-                  url: 'pages/authority-tertiary-groups',
-                  params: { list: dataList, backTitle: item.groupName, globalIsOn: !mute }
-                })
-              }
+              GlobalDialogModel.getInstance().getMuteStateAndGoto(this.context, item.group, item.groupName, dataList);
             }
           }
         })

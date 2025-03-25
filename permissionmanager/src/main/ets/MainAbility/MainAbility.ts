@@ -28,7 +28,6 @@ export default class MainAbility extends UIAbility {
 
     globalThis.bundleName = want.parameters.bundleName;
     GlobalContext.store('bundleName', want.parameters.bundleName);
-    GlobalContext.store('context', this.context);
   }
 
   onWindowStageCreate(windowStage): void {
