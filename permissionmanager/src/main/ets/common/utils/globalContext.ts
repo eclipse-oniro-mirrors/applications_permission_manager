@@ -20,7 +20,7 @@ export class GlobalContext {
   bundleName: string;
   globalState: string;
   windowNum: number;
-  dialogSet: Set<String>;
+  dialogSet: Set<number>;
 
   public static getContext(): GlobalContext {
     if (!GlobalContext.instance) {

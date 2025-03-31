@@ -263,11 +263,9 @@ struct SecurityDialog {
           action: () => {
             this.dialogController?.close();
             this.win.destroyWindow();
-            let dialogSet: Set<String> = GlobalContext.load('dialogSet');
+            let dialogSet: Set<number> = GlobalContext.load('dialogSet');
             let callerToken: number = this.want.parameters['ohos.caller.uid'];
-            let windId: number = this.want.parameters['ohos.ability.params.windowId'];
-            let token: String = String(callerToken) + '_' + String(windId);
-            dialogSet.delete(token);
+            dialogSet.delete(callerToken);
             GlobalContext.store('dialogSet', dialogSet);
             if (dialogSet.size === 0) {
               this.context.terminateSelf();
@@ -287,16 +285,15 @@ struct SecurityDialog {
     autoCancel: false,
     cancel: () => {
       this.win.destroyWindow();
-      let dialogSet: Set<String> = GlobalContext.load('dialogSet');
+      let dialogSet: Set<number> = GlobalContext.load('dialogSet');
       let callerToken: number = this.want.parameters['ohos.caller.uid'];
-      let windId: number = this.want.parameters['ohos.ability.params.windowId'];
-      let token: String = String(callerToken) + '_' + String(windId);
-      dialogSet.delete(token);
+      dialogSet.delete(callerToken);
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
       }
     },
+    offset: { dx: 0, dy: 0 - this.want.parameters['ohos.dialog.offset'] + 'px' }
   });
 
   @Builder
@@ -348,11 +345,9 @@ struct SecurityDialog {
   onCancel() {
     Log.info('Callback when the first button is clicked');
     this.win.destroyWindow();
-    let dialogSet: Set<String> = GlobalContext.load('dialogSet');
+    let dialogSet: Set<number> = GlobalContext.load('dialogSet');
     let callerToken: number = this.want.parameters['ohos.caller.uid'];
-    let windId: number = this.want.parameters['ohos.ability.params.windowId'];
-    let token: String = String(callerToken) + '_' + String(windId);
-    dialogSet.delete(token);
+    dialogSet.delete(callerToken);
     GlobalContext.store('dialogSet', dialogSet);
     if (dialogSet.size === 0) {
       this.context.terminateSelf();
@@ -423,11 +418,9 @@ struct SecurityDialog {
       data.reclaim();
       reply.reclaim();
       this.win.destroyWindow();
-      let dialogSet: Set<String> = GlobalContext.load('dialogSet');
+      let dialogSet: Set<number> = GlobalContext.load('dialogSet');
       let callerToken: number = this.want.parameters['ohos.caller.uid'];
-      let windId: number = this.want.parameters['ohos.ability.params.windowId'];
-      let token: String = String(callerToken) + '_' + String(windId);
-      dialogSet.delete(token);
+      dialogSet.delete(callerToken);
       GlobalContext.store('dialogSet', dialogSet);
       if (dialogSet.size === 0) {
         this.context.terminateSelf();
