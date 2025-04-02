@@ -28,7 +28,9 @@ import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppIn
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission, PermissionGroup } from '../common/model/definition';
 import Constants from '../common/utils/constant';
+import common from '@ohos.app.ability.common';
 import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';
+import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
 
 const locationStatus: Resource[] = [
   $r('app.string.always_allow'),
@@ -36,6 +38,8 @@ const locationStatus: Resource[] = [
   $r('app.string.per_inquiry'),
   $r('app.string.allowed_only_during_use')
 ];
+let cameraManager: camera.CameraManager;
+let audioVolumeGroupManager: audio.AudioVolumeGroupManager;
 let globalIsOn: boolean = (router.getParams() as RouterParams1).globalIsOn; // return title name
 
 @Entry
@@ -155,8 +159,10 @@ struct locationInfoPage {
 
 @Component
 struct applicationItem {
+  private context = getContext(this) as common.UIAbilityContext;
   private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
   private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
+  private isMuteSupported: boolean | undefined = (router.getParams() as RouterParams1).isMuteSupported;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
@@ -170,7 +176,6 @@ struct applicationItem {
   @State isTouch: string = '';
   @State groupInfo: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
   @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
-  @State isMuteSupported: boolean = GlobalContext.load('isMuteSupported');
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
 
@@ -185,7 +190,6 @@ struct applicationItem {
           value: $r('app.string.cancel'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            Log.info('global cancel');
             this.dialogController?.close();
           }
         },
@@ -193,20 +197,7 @@ struct applicationItem {
           value: $r('app.string.close'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            Log.info('global accept');
-            if (this.currentGroup == PermissionGroup.MICROPHONE) {
-              let audioManager = audio.getAudioManager();
-              let audioVolumeManager = audioManager?.getVolumeManager();
-              audioVolumeManager?.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                audioVolumeGroupManager.setMicMutePersistent(true, audio.PolicyType.PRIVACY).then(() => {
-                  this.dialogController?.close();
-                })
-              })
-            } else {
-              let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-              cameraManager?.muteCameraPersistent(true, camera.PolicyType.PRIVACY);
-              this.dialogController?.close();
-            }
+            GlobalDialogModel.getInstance().setMuteState(this.context, this.currentGroup, true, false);
           }
         }
       ],
@@ -479,6 +470,8 @@ struct applicationItem {
   }
 
   aboutToDisappear() {
+    cameraManager?.off('cameraMute');
+    audioVolumeGroupManager?.off('micStateChange');
     this.dialogController = null;
   }
 
@@ -534,7 +527,7 @@ struct applicationItem {
   globalListen() {
     this.globalIsOn = globalIsOn;
     if (this.currentGroup == 'CAMERA') {
-      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
+      cameraManager = camera.getCameraManager(this.context);
       cameraManager.on('cameraMute', (err, curMuted) => {
         Log.info('curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
         this.globalIsOn = !curMuted;
@@ -543,12 +536,11 @@ struct applicationItem {
       let audioManager = audio.getAudioManager();
       let audioVolumeManager = audioManager.getVolumeManager();
       let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
-      audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
-        audioVolumeGroupManager.on('micStateChange', micStateChange => {
-          let muteState = audioVolumeGroupManager.isPersistentMicMute();
-          Log.info('micStateChange: ' + JSON.stringify(muteState));
-          this.globalIsOn = !muteState;
-        })
+      audioVolumeGroupManager = audioVolumeManager.getVolumeGroupManagerSync(groupId);
+      audioVolumeGroupManager.on('micStateChange', micStateChange => {
+        let muteState = audioVolumeGroupManager.isPersistentMicMute();
+        Log.info('micStateChange: ' + JSON.stringify(muteState));
+        this.globalIsOn = !muteState;
       })
     }
   }
@@ -579,17 +571,7 @@ struct applicationItem {
                     .padding({ right: 0 })
                     .onChange((isOn: boolean) => {
                       if (isOn) {
-                        if (this.currentGroup == 'CAMERA') {
-                          let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-                          cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
-                        } else {
-                          let audioManager = audio.getAudioManager();
-                          let audioVolumeManager = audioManager.getVolumeManager();
-                          let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
-                          audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
-                            audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY);
-                          })
-                        }
+                        GlobalDialogModel.getInstance().setMuteState(this.context, this.currentGroup, false, false);
                       }
                     })
                   Row().onClick(() => {

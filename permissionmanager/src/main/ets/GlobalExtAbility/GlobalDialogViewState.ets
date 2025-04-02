@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,8 +13,17 @@
  * limitations under the License.
  */
 
-import utilsTest from './utils.test';
+import { BaseState } from '../common/base/BaseState';
 
-export default function testsuite() {
-  utilsTest();
+@Observed
+export class GlobalDialogViewState extends BaseState {
+  // 全局开关类型
+  public type: string | undefined = '';
+
+  // 全局弹窗标题
+  public title: ResourceStr = '';
+
+  // 全局弹窗文本
+  public text: ResourceStr = '';
+
 }

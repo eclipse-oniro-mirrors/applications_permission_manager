@@ -62,7 +62,7 @@
             {
                 "icon": "$media:app_icon",
                 "name": "com.ohos.permissionmanager.GlobalExtAbility",
-                "srcEntry": "./ets/GlobalExtAbility/GlobalExtAbility.ts",
+                "srcEntry": "./ets/GlobalExtAbility/GlobalExtAbility.ets",
                 "type": "service",
                 "exported": true,
                 "permissions": ["ohos.permission.GET_SENSITIVE_PERMISSIONS"]

@@ -14,22 +14,20 @@
  */
 
 import Constants from '../common/utils/constant';
-import audio from '@ohos.multimedia.audio';
-import camera from '@ohos.multimedia.camera';
 import common from '@ohos.app.ability.common';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import { Log } from '../common/utils/utils';
-import { GlobalContext } from '../common/utils/globalContext';
-import { BusinessError } from '@kit.BasicServicesKit';
+import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
+import { GlobalDialogViewState } from '../GlobalExtAbility/GlobalDialogViewState';
 
-const MICROPHONE = 'microphone';
-const CAMERA = 'camera';
+let storage = LocalStorage.getShared();
+let globalState: string = storage.get('globalState') as string;
+let globalDialogModel: GlobalDialogModel = new GlobalDialogModel();
 
 @Entry
 @Component
 struct globalSwitch {
   private context = getContext(this) as common.ServiceExtensionContext;
-  @State globalState: string = GlobalContext.load('globalState');
+  @State viewState: GlobalDialogViewState = globalDialogModel.initViewState(globalState);
 
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
@@ -42,7 +40,6 @@ struct globalSwitch {
           value: $r('app.string.cancel'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            Log.info('global cancel');
             this.context.terminateSelf();
           }
         },
@@ -50,34 +47,7 @@ struct globalSwitch {
           value: $r('app.string.open'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            Log.info('global accept');
-            if (this.globalState == MICROPHONE) {
-              let audioManager = audio.getAudioManager();
-              let audioVolumeManager = audioManager.getVolumeManager();
-              audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                  audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
-                    this.context.terminateSelf();
-                  })
-                }).catch((err: BusinessError) => {
-                  Log.error(`getVolumeGroupManager failed: ${JSON.stringify(err)}`);
-                })
-            } else if (this.globalState == CAMERA) {
-              let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-              cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
-              this.context.terminateSelf();
-            } else {
-              let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
-              cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
-              let audioManager = audio.getAudioManager();
-              let audioVolumeManager = audioManager.getVolumeManager();
-              audioVolumeManager.getVolumeGroupManager(audio.DEFAULT_VOLUME_GROUP_ID).then(audioVolumeGroupManager => {
-                  audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY).then(() => {
-                    this.context.terminateSelf();
-                  })
-                }).catch((err: BusinessError) => {
-                  Log.error(`getVolumeGroupManager failed: ${JSON.stringify(err)}`);
-                })
-            }
+            globalDialogModel.setMuteState(this.context, globalState, false, true);
           }
         }
       ],
@@ -92,18 +62,14 @@ struct globalSwitch {
   buildContent(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Column() {
-        Text(this.globalState == MICROPHONE ? $r('app.string.global_title_microphone') :
-          this.globalState == CAMERA ? $r('app.string.global_title_camera') :
-          $r('app.string.global_title_camera_and_microphone'))
+        Text(this.viewState.title)
           .fontSize(Constants.TEXT_BIG_FONT_SIZE)
           .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Medium)
           .lineHeight(Constants.TEXT_BIG_LINE_HEIGHT)
           .width(Constants.FULL_WIDTH)
           .padding({ top: Constants.PADDING_14, bottom: Constants.PADDING_14 })
-        Text(this.globalState == MICROPHONE ? $r('app.string.global_desc_microphone') :
-          this.globalState == CAMERA ? $r('app.string.global_desc_camera') :
-          $r('app.string.global_desc_camera_and_microphone'))
+        Text(this.viewState.text)
           .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
           .fontColor($r('sys.color.font_primary'))
           .lineHeight(Constants.TEXT_LINE_HEIGHT)
@@ -115,7 +81,6 @@ struct globalSwitch {
   build() {}
 
   aboutToAppear() {
-    Log.info('global aboutToAppear');
     this.dialogController?.open();
   }
 

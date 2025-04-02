@@ -41,7 +41,7 @@ struct GlobalSwitchSheetDialog {
   @LocalStorageLink('want') want: Want | null = storage.get<Want>('want') || null;
   @LocalStorageLink('session') session: UIExtensionContentSession =
     storage.get<UIExtensionContentSession>('session') as UIExtensionContentSession;
-  private context = getContext(this) as common.ServiceExtensionContext;
+  private context = getContext(this) as common.UIExtensionContext;
   private muteSuppoted = false;
   private groupName: PermissionGroup = PermissionGroup.OTHER;
   dialogController: CustomDialogController | null = new CustomDialogController({
@@ -106,7 +106,7 @@ struct GlobalSwitchSheetDialog {
       this.muteSuppoted = true;
       globalIsOn = !audioVolumeGroupManager.isPersistentMicMute();
     } else {
-      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
+      let cameraManager = camera.getCameraManager(this.context);
       this.muteSuppoted = cameraManager.isCameraMuteSupported();
       globalIsOn = !cameraManager.isCameraMuted();
     }
@@ -139,7 +139,7 @@ struct GlobalSwitchSheetDialog {
 
 @CustomDialog
 struct applicationItem {
-  private context = getContext(this) as common.ServiceExtensionContext;
+  private context = getContext(this) as common.UIExtensionContext;
   @State globalIsOn: boolean = false;
   @State backTitle: string = '';
   @State groupInfo: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
@@ -197,7 +197,7 @@ struct applicationItem {
 
   globalListen() {
     if (this.currentGroup == 'CAMERA') {
-      let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
+      let cameraManager = camera.getCameraManager(this.context);
       cameraManager.on('cameraMute', (err, curMuted) => {
         Log.info('curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
         this.globalIsOn = !curMuted;
@@ -332,7 +332,7 @@ struct applicationItem {
                       .onChange((isOn: boolean) => {
                         if (isOn) {
                           if (this.currentGroup == 'CAMERA') {
-                            let cameraManager = camera.getCameraManager(GlobalContext.load('context'));
+                            let cameraManager = camera.getCameraManager(this.context);
                             cameraManager.muteCamera(false);
                             PermissionDialogReturn([Constants.PERMISSION_DIALOG_SUCCESS], session);
                             this.context.terminateSelf();
