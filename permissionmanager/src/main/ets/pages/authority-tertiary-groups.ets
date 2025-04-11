@@ -525,23 +525,27 @@ struct applicationItem {
   }
 
   globalListen() {
-    this.globalIsOn = globalIsOn;
-    if (this.currentGroup == 'CAMERA') {
-      cameraManager = camera.getCameraManager(this.context);
-      cameraManager.on('cameraMute', (err, curMuted) => {
-        Log.info('curMuted: ' + JSON.stringify(curMuted) + ' err: ' + JSON.stringify(err));
-        this.globalIsOn = !curMuted;
-      })
-    } else {
-      let audioManager = audio.getAudioManager();
-      let audioVolumeManager = audioManager.getVolumeManager();
-      let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
-      audioVolumeGroupManager = audioVolumeManager.getVolumeGroupManagerSync(groupId);
-      audioVolumeGroupManager.on('micStateChange', micStateChange => {
-        let muteState = audioVolumeGroupManager.isPersistentMicMute();
-        Log.info('micStateChange: ' + JSON.stringify(muteState));
-        this.globalIsOn = !muteState;
-      })
+    try {
+      this.globalIsOn = globalIsOn;
+      if (this.currentGroup === 'CAMERA') {
+        cameraManager = camera.getCameraManager(this.context);
+        cameraManager.on('cameraMute', (err, curMuted) => {
+          Log.info('curMuted: ' + curMuted + ' err: ' + JSON.stringify(err));
+          this.globalIsOn = !curMuted;
+        })
+      } else {
+        let audioManager = audio.getAudioManager();
+        let audioVolumeManager = audioManager.getVolumeManager();
+        let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
+        audioVolumeGroupManager = audioVolumeManager.getVolumeGroupManagerSync(groupId);
+        audioVolumeGroupManager.on('micStateChange', micStateChange => {
+          let muteState = audioVolumeGroupManager.isPersistentMicMute();
+          Log.info('micStateChange: ' + muteState);
+          this.globalIsOn = !muteState;
+        })
+      }
+    } catch (error) {
+      Log.error(`Register listening failed, code: ${error.code}, message: ${error.message}.`);
     }
   }
 
