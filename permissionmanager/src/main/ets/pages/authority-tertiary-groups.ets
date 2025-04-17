@@ -16,7 +16,6 @@
 import { backBar } from '../common/components/backBar';
 import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
 import { textInput } from '../common/components/search';
-import router from '@ohos.router';
 import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
@@ -40,13 +39,12 @@ const locationStatus: Resource[] = [
 ];
 let cameraManager: camera.CameraManager;
 let audioVolumeGroupManager: audio.AudioVolumeGroupManager;
-let globalIsOn: boolean = (router.getParams() as RouterParams1).globalIsOn; // return title name
 
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
-  private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1).backTitle;
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1).list;
   @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State polymorphismIsOn: Array<number> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
@@ -159,10 +157,12 @@ struct locationInfoPage {
 
 @Component
 struct applicationItem {
-  private context = getContext(this) as common.UIAbilityContext;
-  private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
-  private list: PermissionApplications[] = (router.getParams() as RouterParams1).list;
-  private isMuteSupported: boolean | undefined = (router.getParams() as RouterParams1).isMuteSupported;
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1).backTitle;
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1).list;
+  private isMuteSupported: boolean | undefined =
+    (this.getUIContext().getRouter().getParams() as RouterParams1).isMuteSupported;
+  @State globalIsOn: boolean = (this.getUIContext().getRouter().getParams() as RouterParams1).globalIsOn ?? true;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
@@ -171,7 +171,6 @@ struct applicationItem {
   @State searchResult: boolean = true; // search results
   @Link polymorphismIsOn: Array<number>;
   @Link folderStatusArray: Array<Array<boolean>>;
-  @State globalIsOn: boolean = true;
   @State selectedIndex: number = 0;
   @State isTouch: string = '';
   @State groupInfo: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
@@ -345,7 +344,7 @@ struct applicationItem {
             })
             GlobalContext.store('folderStatus', this.folderStatusArray[item.index]);
             GlobalContext.store('locationStatus', this.polymorphismIsOn[item.index]);
-            router.pushUrl({
+            this.getUIContext().getRouter().pushUrl({
               url: 'pages/application-tertiary',
               params: {
                 bundleName: item.bundleName,
@@ -526,7 +525,6 @@ struct applicationItem {
 
   globalListen() {
     try {
-      this.globalIsOn = globalIsOn;
       if (this.currentGroup === 'CAMERA') {
         cameraManager = camera.getCameraManager(this.context);
         cameraManager.on('cameraMute', (err, curMuted) => {

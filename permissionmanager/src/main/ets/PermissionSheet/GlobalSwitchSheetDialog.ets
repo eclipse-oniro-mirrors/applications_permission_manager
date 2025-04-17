@@ -32,16 +32,14 @@ import { PermissionGroup } from '../common/model/definition';
 
 let globalIsOn: boolean;
 let session: UIExtensionContentSession;
-let storage = LocalStorage.getShared();
 let bundleName = '';
 
-@Entry(storage)
+@Entry({ useSharedStorage: true })
 @Component
 struct GlobalSwitchSheetDialog {
-  @LocalStorageLink('want') want: Want | null = storage.get<Want>('want') || null;
-  @LocalStorageLink('session') session: UIExtensionContentSession =
-    storage.get<UIExtensionContentSession>('session') as UIExtensionContentSession;
-  private context = getContext(this) as common.UIExtensionContext;
+  @LocalStorageLink('want') want: Want | null = null;
+  @LocalStorageLink('session') session: UIExtensionContentSession = {} as UIExtensionContentSession;
+  private context = this.getUIContext().getHostContext() as common.UIExtensionContext;
   private muteSuppoted = false;
   private groupName: PermissionGroup = PermissionGroup.OTHER;
   dialogController: CustomDialogController | null = new CustomDialogController({
@@ -139,7 +137,7 @@ struct GlobalSwitchSheetDialog {
 
 @CustomDialog
 struct applicationItem {
-  private context = getContext(this) as common.UIExtensionContext;
+  private context = this.getUIContext().getHostContext() as common.UIExtensionContext;
   @State globalIsOn: boolean = false;
   @State backTitle: string = '';
   @State groupInfo: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
@@ -183,7 +181,7 @@ struct applicationItem {
               })
             } else {
               let cameraManager = camera.getCameraManager(this.context);
-              cameraManager.muteCamera(true);
+              cameraManager.muteCameraPersistent(true, camera.PolicyType.PRIVACY);
               if (this.dialogController !== null) {
                 this.dialogController.close();
               }
@@ -333,7 +331,7 @@ struct applicationItem {
                         if (isOn) {
                           if (this.currentGroup == 'CAMERA') {
                             let cameraManager = camera.getCameraManager(this.context);
-                            cameraManager.muteCamera(false);
+                            cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
                             PermissionDialogReturn([Constants.PERMISSION_DIALOG_SUCCESS], session);
                             this.context.terminateSelf();
                           } else {

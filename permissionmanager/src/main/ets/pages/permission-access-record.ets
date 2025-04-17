@@ -14,7 +14,6 @@
  */
 
 import bundleManager from '@ohos.bundle.bundleManager';
-import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager';
@@ -42,7 +41,7 @@ import { Permission } from '../common/model/definition';
 @Entry
 @Component
 struct permissionRecordPage {
-  private context = getContext(this) as common.UIAbilityContext;
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
   @State isVertical: boolean = GlobalContext.load('isVertical');
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   @State groups: GroupRecordInfo[] = [];
@@ -179,7 +178,7 @@ struct permissionRecordPage {
                   permissionApplication.groupIds
                 )
                 GlobalContext.store('applicationInfo', info);
-                router.pushUrl({ url: 'pages/application-secondary' });
+                this.getUIContext().getRouter().pushUrl({ url: 'pages/application-secondary' });
               })
               .padding({
                 left: $r('sys.float.ohos_id_card_margin_start'),
@@ -308,7 +307,7 @@ struct permissionRecordPage {
                   item.groupIds
                 );
                 GlobalContext.store('applicationInfo', info);
-                router.pushUrl({ url: 'pages/application-secondary' });
+                this.getUIContext().getRouter().pushUrl({ url: 'pages/application-secondary' });
               })
               .padding({
                 left: $r('sys.float.ohos_id_card_margin_start'),

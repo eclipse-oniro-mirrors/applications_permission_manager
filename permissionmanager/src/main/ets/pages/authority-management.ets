@@ -16,7 +16,6 @@
 import { backBar } from '../common/components/backBar';
 import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
 import { textInput } from '../common/components/search';
-import router from '@ohos.router';
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
@@ -38,8 +37,6 @@ import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
 import Constants from '../common/utils/constant';
 import bundleManager from '@ohos.bundle.bundleManager';
 
-let storage = LocalStorage.getShared();
-
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
   .width(width)
@@ -47,7 +44,7 @@ let storage = LocalStorage.getShared();
   .draggable(false)
 };
 
-@Entry(storage)
+@Entry({ useSharedStorage: true })
 @Component
 struct authorityManagementPage {
   @Builder ListItemLayout(item: GroupPermission) {
@@ -77,7 +74,7 @@ struct authorityManagementPage {
           }
         }.onClick(() => {
           if (item.group === 'OTHER' || showSubPermissionsGroup.indexOf(item.group) !== -1) {
-            router.pushUrl({
+            this.getUIContext().getRouter().pushUrl({
               url: 'pages/authority-secondary',
               params: { list: this.allPermissionApplications, backTitle: item.groupName, group: item.group }
             })
@@ -88,12 +85,14 @@ struct authorityManagementPage {
 
             GlobalContext.store('currentPermissionGroup', item.group);
             if (globalGroup.indexOf(item.group) == -1) {
-              router.pushUrl({
+              this.getUIContext().getRouter().pushUrl({
                 url: 'pages/authority-tertiary-groups',
                 params: { list: dataList, backTitle: item.groupName }
               })
             } else {
-              GlobalDialogModel.getInstance().getMuteStateAndGoto(this.context, item.group, item.groupName, dataList);
+              GlobalDialogModel.getInstance().getMuteStateAndGoto(
+                this.getUIContext(), item.group, item.groupName, dataList
+              );
             }
           }
         })
@@ -122,7 +121,7 @@ struct authorityManagementPage {
     })
   }
 
-  private context = getContext(this) as common.UIAbilityContext;
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
   @LocalStorageLink('initialGroups') initialGroups: bundleManager.BundleInfo[] = [];
   @State allPermissionApplications: PermissionApplications [] = []; // All app permissions
   @State allGroupPermission: GroupPermission[] = []; // All group permissions
@@ -585,7 +584,7 @@ struct applicationItem {
           }
         }.onClick(() => {
           GlobalContext.store('applicationInfo', item);
-          router.pushUrl({ url: 'pages/application-secondary' });
+          this.getUIContext().getRouter().pushUrl({ url: 'pages/application-secondary' });
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })

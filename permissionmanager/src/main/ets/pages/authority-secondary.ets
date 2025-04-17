@@ -15,14 +15,13 @@
 
 import { backBar } from '../common/components/backBar';
 import { permissionInfos, groups } from '../common/model/permissionGroup';
-import router from '@ohos.router';
 import Constants from '../common/utils/constant';
 import { CalendarObj, RouterParams1, PermissionApplications } from '../common/model/typedef';
 
 @Entry
 @Component
 struct appNamePage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams1).backTitle;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1).backTitle;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -55,9 +54,9 @@ struct appNamePage {
 
 @Component
 struct appNameItem {
-  @State calendarListItem: CalendarObj[] = []; // Permission management secondary interface data array
-  private list: PermissionApplications[] = (router.getParams() as RouterParams1).list; // Routing jump data
-  private group: string = (router.getParams() as RouterParams1).group;
+  @State calendarListItem: CalendarObj[] = [];
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1).list;
+  private group: string = (this.getUIContext().getRouter().getParams() as RouterParams1).group;
   @State isTouch: string = '';
 
   @Builder ListItemLayout(item: CalendarObj) {
@@ -85,7 +84,7 @@ struct appNameItem {
           let dataList = this.list.filter((ele) => {
             return ele.permission === item.permissionName;
           })
-          router.pushUrl({
+          this.getUIContext().getRouter().pushUrl({
             url: 'pages/authority-tertiary',
             params: { list: dataList, backTitle: item.label, permissionName: item.permissionName }
           });

@@ -33,7 +33,6 @@ import { groups, showSubPermissionsGroup } from '../common/model/permissionGroup
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog'
 
-let storage = LocalStorage.getShared();
 let accessTokenId: number = 0;
 let session: UIExtensionContentSession;
 let results: Map<string, number> = new Map();
@@ -73,13 +72,12 @@ export function getCallerBundleInfo(want: WantInfo): CallerBundleInfo {
   return callerBundle;
 }
 
-@Entry(storage)
+@Entry({ useSharedStorage: true })
 @Component
 struct PermissionStateSheetDialog {
-  private context = getContext(this) as common.ServiceExtensionContext;
-  @LocalStorageLink('want') want: Want | null = storage.get<Want>('want') || null;
-  @LocalStorageLink('session') session: UIExtensionContentSession =
-    storage.get<UIExtensionContentSession>('session') as UIExtensionContentSession;
+  private context = this.getUIContext().getHostContext() as common.ServiceExtensionContext;
+  @LocalStorageLink('want') want: Want | null = null;
+  @LocalStorageLink('session') session: UIExtensionContentSession = {} as UIExtensionContentSession;
   @State applicationInfo: AppInfo | undefined = undefined;
   @State folderStatus: boolean[] = [false, false, false];
   @State reqUserPermissions: Permission[] = [];
@@ -349,7 +347,7 @@ struct PermissionStateSheetDialog {
 
 @CustomDialog
 struct mediaDocumentItem {
-  private context = getContext(this) as common.UIAbilityContext;
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
   private backTitle: ResourceStr = '';
   private bundleName: string = '';
   private permissions: Permission[] = [];

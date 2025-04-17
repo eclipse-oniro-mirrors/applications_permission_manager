@@ -21,7 +21,6 @@ import { Log } from '../common/utils/utils';
 import { PermissionGroup } from '../common/model/definition';
 import { PermissionApplications } from '../common/model/typedef';
 import { GlobalDialogViewState } from './GlobalDialogViewState';
-import router from '@ohos.router';
 import window from '@ohos.window';
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
@@ -189,7 +188,7 @@ export class GlobalDialogModel extends BaseModel {
    * return
    */
   public getMuteStateAndGoto(
-    context: common.UIAbilityContext,
+    context: UIContext,
     type: PermissionGroup,
     backTitle: ResourceStr,
     list: PermissionApplications[]
@@ -201,16 +200,16 @@ export class GlobalDialogModel extends BaseModel {
         let audioVolumeGroupManager = audioVolumeManager.getVolumeGroupManagerSync(audio.DEFAULT_VOLUME_GROUP_ID);
         let muteState = audioVolumeGroupManager.isPersistentMicMute();
         Log.info(`get muteState success: ${muteState}.`);
-        router.pushUrl({
+        context.getRouter().pushUrl({
           url: 'pages/authority-tertiary-groups',
           params: { list, backTitle, globalIsOn: !muteState, isMuteSupported: true }
         })
       } else {
-        let cameraManager = camera.getCameraManager(context);
+        let cameraManager = camera.getCameraManager(context.getHostContext());
         let mute = cameraManager.isCameraMuted();
         let isCameraMuteSupported = cameraManager.isCameraMuteSupported();
         Log.info(`get muteState success: ${mute}.`);
-        router.pushUrl({
+        context.getRouter().pushUrl({
           url: 'pages/authority-tertiary-groups',
           params: { list, backTitle, globalIsOn: !mute, isMuteSupported: isCameraMuteSupported }
         })
