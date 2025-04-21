@@ -92,7 +92,10 @@ export default class SecurityExtensionAbility extends extension {
           this.context.terminateSelf();
         }
       });
-      if (deviceInfo.deviceType !== 'wearable') {
+      try {
+        await win.setFollowParentWindowLayoutEnabled(true);
+      } catch(error) {
+        console.error(TAG + `setFollowParentWindowLayoutEnabled error: ${JSON.stringify(error)}`);
         await win.moveWindowTo(rect.left, rect.top);
         await win.resize(rect.width, rect.height);
       };
