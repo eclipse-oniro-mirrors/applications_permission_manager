@@ -16,7 +16,6 @@
 import { backBar } from '../common/components/backBar';
 import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
 import { textInput } from '../common/components/search';
-import router from '@ohos.router';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
@@ -41,7 +40,7 @@ import { Permission } from '../common/model/definition';
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (router.getParams() as RouterParams2).backTitle;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams2).backTitle;
 
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
@@ -74,8 +73,8 @@ struct locationInfoPage {
 
 @Component
 struct applicationItem {
-  private list: PermissionApplications[] = (router.getParams() as RouterParams2).list;
-  private permissionName: Permission = (router.getParams() as RouterParams2).permissionName;
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams2).list;
+  private permissionName: Permission = (this.getUIContext().getRouter().getParams() as RouterParams2).permissionName;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];

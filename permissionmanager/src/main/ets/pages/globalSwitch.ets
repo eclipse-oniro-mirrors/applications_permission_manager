@@ -19,15 +19,14 @@ import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
 import { GlobalDialogViewState } from '../GlobalExtAbility/GlobalDialogViewState';
 
-let storage = LocalStorage.getShared();
-let globalState: string = storage.get('globalState') as string;
 let globalDialogModel: GlobalDialogModel = new GlobalDialogModel();
 
-@Entry
+@Entry({ useSharedStorage: true })
 @Component
 struct globalSwitch {
-  private context = getContext(this) as common.ServiceExtensionContext;
-  @State viewState: GlobalDialogViewState = globalDialogModel.initViewState(globalState);
+  private context = this.getUIContext().getHostContext() as common.ServiceExtensionContext;
+  @LocalStorageLink('globalState') globalState: string = '';
+  @State viewState: GlobalDialogViewState = globalDialogModel.initViewState(this.globalState);
 
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
@@ -47,7 +46,7 @@ struct globalSwitch {
           value: $r('app.string.open'),
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
-            globalDialogModel.setMuteState(this.context, globalState, false, true);
+            globalDialogModel.setMuteState(this.context, this.globalState, false, true);
           }
         }
       ],

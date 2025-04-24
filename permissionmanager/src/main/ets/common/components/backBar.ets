@@ -13,14 +13,13 @@
  * limitations under the License.
  */
 
-import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import Constants from '../utils/constant';
 import { Log } from '../utils/utils';
 
 @Component
 export struct backBar {
-  private context = getContext(this) as common.UIAbilityContext;
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
   @Prop title: string = ''; // return title name
   @Prop recordable: boolean = false;
   @State record: string = '';
@@ -57,6 +56,7 @@ export struct backBar {
           }
         })
         .onClick(() => {
+          let router = this.getUIContext().getRouter();
           let length = router.getLength();
           Number(length) == 1 ? this.context.terminateSelf() : router.back();
         })
@@ -140,7 +140,7 @@ export struct backBar {
         }
       })
       .onClick(() => {
-        router.pushUrl({ url: 'pages/permission-access-record' })
+        this.getUIContext().getRouter().pushUrl({ url: 'pages/permission-access-record' })
       })
     }
   }

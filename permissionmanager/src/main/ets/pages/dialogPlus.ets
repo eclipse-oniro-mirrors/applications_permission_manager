@@ -16,7 +16,6 @@
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import Constants from '../common/utils/constant';
-import { MeasureText } from '@kit.ArkUI';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { Log, getFontSizeScale, } from '../common/utils/utils';
 import { EventObserver } from '../common/observer/EventObserver';
@@ -43,25 +42,24 @@ import { GrantDialogViewState } from '../ServiceExtAbility/GrantDialogViewState'
 }
 
 const EVENT_BUNDLE_RESOURCES_CHANGED = 'usual.event.BUNDLE_RESOURCES_CHANGED';
-let storage = LocalStorage.getShared();
-let callerAppInfo: CallerAppInfo = storage.get('callerAppInfo') as CallerAppInfo;
-let win: window.Window = storage.get('win') as window.Window;
-let viewModel: GrantDialogViewModel = new GrantDialogViewModel(callerAppInfo, win);
 
-@Entry(storage)
+@Entry({ useSharedStorage: true })
 @Component
 struct dialogPlusPage {
-  private context = getContext(this) as common.ServiceExtensionContext;
+  private context = this.getUIContext().getHostContext() as common.ServiceExtensionContext;
   private resourceChangeObserver: EventObserver = new EventObserver([EVENT_BUNDLE_RESOURCES_CHANGED]);
-  @State viewState: GrantDialogViewState = viewModel.getViewState();
+  @LocalStorageLink('callerAppInfo') callerAppInfo: CallerAppInfo = {} as CallerAppInfo;
+  @LocalStorageLink('win') win: window.Window = {} as window.Window;
+  @State viewModel: GrantDialogViewModel = new GrantDialogViewModel(this.callerAppInfo, this.win);
+  @State viewState: GrantDialogViewState = this.viewModel.getViewState();
   private refreshData = (): void => {
-    if (callerAppInfo === undefined) {
+    if (this.callerAppInfo === undefined) {
       Log.error(`event error, callerAppInfo is undefined.`);
       return;
     }
     try {
-      viewModel.processIntent(
-        new GrantDialogIntent.RefreshIntent(this.context, callerAppInfo)
+      this.viewModel.processIntent(
+        new GrantDialogIntent.RefreshIntent(this.context, this.callerAppInfo)
       );
     } catch (error) {
       Log.error(`try to refresh data faild, code: ${error.code}, message: ${error.message}.`);
@@ -228,12 +226,12 @@ struct dialogPlusPage {
     let denyText = buttonResource.get(buttonStatus[0]);
     let allowText = buttonResource.get(buttonStatus[1]);
     let maxButtonTextLength = Math.max(
-      MeasureText.measureText({ textContent: denyText }),
-      MeasureText.measureText({ textContent: allowText })
+      this.getUIContext().getMeasureUtils().measureText({ textContent: denyText }),
+      this.getUIContext().getMeasureUtils().measureText({ textContent: allowText })
     )
 
-    Log.info(`px2vp(maxButtonTextLength): ${px2vp(maxButtonTextLength)}`);
-    if (px2vp(maxButtonTextLength) > Constants.DIALOG_BUTTON_MAX_WIDTH) {
+    Log.info(`px2vp(maxButtonTextLength): ${this.getUIContext().px2vp(maxButtonTextLength)}`);
+    if (this.getUIContext().px2vp(maxButtonTextLength) > Constants.DIALOG_BUTTON_MAX_WIDTH) {
       return false;
     }
 
@@ -241,7 +239,7 @@ struct dialogPlusPage {
   }
 
   aboutToAppear() {
-    viewModel.processIntent(new GrantDialogIntent.InitIntent(this.context)).then(result => {
+    this.viewModel.processIntent(new GrantDialogIntent.InitIntent(this.context)).then(result => {
       this.dialogController?.open();
     })
     this.context.eventHub.on('refresh', () => {
@@ -258,13 +256,13 @@ struct dialogPlusPage {
 
   processClick(buttonStatus: ButtonStatus) {
     let groupConfig: PermissionGroupConfig = this.viewState.grantGroups[this.viewState.curIndex];
-    if (callerAppInfo === undefined) {
+    if (this.callerAppInfo === undefined) {
       Log.error(`processClick faild, callerAppInfo is undefined.`);
       return;
     }
     let clickIntent: GrantDialogIntent.ClickIntent =
-      new GrantDialogIntent.ClickIntent(this.context, groupConfig, callerAppInfo, buttonStatus);
-    viewModel.processIntent(clickIntent);
+      new GrantDialogIntent.ClickIntent(this.context, groupConfig, this.callerAppInfo, buttonStatus);
+    this.viewModel.processIntent(clickIntent);
   }
 
 }

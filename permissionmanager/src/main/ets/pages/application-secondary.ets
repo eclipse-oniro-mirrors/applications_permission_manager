@@ -14,7 +14,6 @@
  */
 
 import { backBar } from '../common/components/backBar';
-import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
@@ -29,7 +28,7 @@ import { Permission } from '../common/model/definition';
 @Entry
 @Component
 struct appNamePlusPage {
-  private context = getContext(this) as common.UIAbilityContext;
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
   @State allowedListItem: PermissionObj[] = []; // Array of allowed permissions
   @State bannedListItem: PermissionObj[] = []; // array of forbidden permissions
   @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo'); // Routing jump data
@@ -63,8 +62,8 @@ struct appNamePlusPage {
           }
         }.onClick(() => {
           GlobalContext.store('currentPermissionGroup', item.group);
-          router.pushUrl({
-            url: item.group == 'OTHER' ? 'pages/other-permissions' : 'pages/application-tertiary',
+          this.getUIContext().getRouter().pushUrl({
+            url: 'pages/application-tertiary',
             params: {
               bundleName: this.applicationInfo.bundleName,
               backTitle: item.groupName,
@@ -259,7 +258,7 @@ struct appNamePlusPage {
     bundleManager.getApplicationInfo(
       this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT
     ).then(appInfo => {
-      let bundleContext = this.context.createBundleContext(this.applicationInfo.bundleName)
+      let bundleContext = this.context.createBundleContext(this.applicationInfo.bundleName);
       bundleContext.resourceManager.getStringValue(appInfo.labelId, (error, value) => {
         if (value) {
           this.applicationInfo.label = value;

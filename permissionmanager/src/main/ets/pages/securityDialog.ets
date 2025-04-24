@@ -25,7 +25,6 @@ import { GlobalContext } from '../common/utils/globalContext';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 import deviceInfo from '@ohos.deviceInfo';
 
-let storage = LocalStorage.getShared();
 const RESOURCE_TYPE: number = 10003;
 
 @Extend(Text)
@@ -212,10 +211,10 @@ struct CustomDialogWearable {
   }
 }
 
-@Entry(storage)
+@Entry({ useSharedStorage: true })
 @Component
 struct SecurityDialog {
-  private context = getContext(this) as common.ServiceExtensionContext;
+  private context = this.getUIContext().getHostContext() as common.ServiceExtensionContext;
   @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
   @State appName: ResourceStr = 'Application';
