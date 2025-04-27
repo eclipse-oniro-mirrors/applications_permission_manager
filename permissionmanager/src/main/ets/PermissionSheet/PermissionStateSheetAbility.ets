@@ -177,6 +177,8 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
     let promise: Promise<window.Window> | undefined = window.createWindow(config);
     await promise.then((floatWindow: window.Window) => {
       this.subWindowForHost = floatWindow;
+      session.loadContent('');
+      session.setWindowBackgroundColor('#00000000');
     }).catch((err: BusinessError) => {
       Log.error('create floating window error:' + err.message + ' ' + err.code);
       // if modal already exist , return
