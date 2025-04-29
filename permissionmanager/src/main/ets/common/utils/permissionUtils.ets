@@ -64,4 +64,31 @@ export class PermissionUtils {
     }
   }
 
+  /**
+   * 撤销权限并返回操作结果
+   * @param permission 操作权限
+   * @param flag 授权flag
+   * @param tokenId 应用token
+   * return
+   */
+  public static async revokePermissionWithResult(
+    permission: Permission, flag: number, tokenId: number
+  ): Promise<optionAndState> {
+    try {
+      let atManager = abilityAccessCtrl.createAtManager();
+      await atManager.revokeUserGrantedPermission(tokenId, permission, flag);
+      Log.info(`revoke permission success, permission: ${permission}.`);
+      return {
+        operationResult: Constants.RESULT_SUCCESS,
+        permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED
+      }
+    } catch (error) {
+      Log.error(`revoke permission faild, permission: ${permission}, code: ${error.code}, message: ${error.message}.`);
+      return {
+        operationResult: Constants.RESULT_FAILURE,
+        permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED
+      }
+    }
+  }
+
 }

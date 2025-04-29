@@ -154,10 +154,10 @@ export class CalendarObj {
 
 export class MediaDocObj {
   public name: Resource
-  public permissions: Array<Permissions>
+  public permissions: Array<Permission>
   public index: number
 
-  constructor(name: Resource, permissions: Array<Permissions>, index: number) {
+  constructor(name: Resource, permissions: Array<Permission>, index: number) {
     this.name = name
     this.permissions = permissions
     this.index = index

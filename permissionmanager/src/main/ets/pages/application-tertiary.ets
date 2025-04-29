@@ -16,7 +16,7 @@
 import { backBar } from '../common/components/backBar';
 import common from '@ohos.app.ability.common';
 import bundleManager from '@ohos.bundle.bundleManager';
-import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import { showSubPermissionsGroup } from '../common/model/permissionGroup';
 import { Log, getPermissionLabel } from '../common/utils/utils';
@@ -24,6 +24,7 @@ import Constants from '../common/utils/constant';
 import { MediaDocObj, RouterParams3, AppInfo, CheckboxInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission, PermissionGroup } from '../common/model/definition';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 
 const showPrecise: number[] = [Constants.PERMISSION_ALLOW, Constants.PERMISSION_ALLOWED_ONLY_DURING_USE];
 let accessTokenId: number = 0;
@@ -33,14 +34,14 @@ let reqPermissionInfo: bundleManager.ReqPermissionDetail;
 @Component
 struct mediaDocumentPage {
   private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams3).backTitle;
-  private permissions: Permissions[] = (this.getUIContext().getRouter().getParams() as RouterParams3).permission;
+  private permissions: Permission[] = (this.getUIContext().getRouter().getParams() as RouterParams3).permission;
   private tokenId: number = (this.getUIContext().getRouter().getParams() as RouterParams3).tokenId;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State folderStatus: boolean[] = GlobalContext.load('folderStatus');
   @State refresh: boolean = false;
   @State selected: number = 0; // Permission status array
-  @State accurateIsOn: boolean = true;
-  @State isRefreshReason: number = 0
+  @State accurateIsOn: boolean = false;
+  @State isRefreshReason: number = 0;
 
   build() {
     Column() {
@@ -178,32 +179,6 @@ struct mediaDocumentItem {
   @Link @Watch('updateReason') isRefreshReason: number;
 
   /**
-   * Grant permissions to the app
-   * @param {Number} accessTokenId
-   * @param {String} permission permission name
-   */
-  grantUserGrantedPermission(accessTokenId: number, permission: Permissions) {
-    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
-      .then(() => {})
-      .catch((error: BusinessError) => {
-        Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
-      })
-  }
-
-  /**
-   * Deauthorize the app
-   * @param {Number} accessTokenId
-   * @param {String} permission permission name
-   */
-  revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, flag: number) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, flag)
-      .then(() => {})
-      .catch((error: BusinessError) => {
-        Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
-      })
-  }
-
-  /**
    * Update reason
    */
   updateReason() {
@@ -229,7 +204,7 @@ struct mediaDocumentItem {
     })
   }
 
-  getCheckboxInfo(permission: Permissions): CheckboxInfo {
+  getCheckboxInfo(permission: Permission): CheckboxInfo {
     switch (permission) {
       case Permission.READ_WRITE_DOWNLOAD_DIRECTORY:
         return new CheckboxInfo($r('app.string.Download_folder'), 0);
@@ -440,7 +415,7 @@ struct mediaDocumentItem {
       Column() {
         List() {
           if (this.currentGroup === 'FOLDER') {
-            ForEach(this.permissions, (permission: Permissions) => {
+            ForEach(this.permissions, (permission: Permission) => {
               ListItem() {
                 Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
                   Row() {
@@ -457,10 +432,10 @@ struct mediaDocumentItem {
                   .height(Constants.LISTITEM_ROW_HEIGHT)
                   .onClick(() => {
                     if (this.folderStatus[this.getCheckboxInfo(permission).index]) {
-                      this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                      PermissionUtils.revokePermissionWithResult(permission, Constants.PERMISSION_FLAG, accessTokenId);
                       this.folderStatus[this.getCheckboxInfo(permission).index] = false;
                     } else {
-                      this.grantUserGrantedPermission(accessTokenId, permission);
+                      PermissionUtils.grantPermissionWithResult(permission, Constants.PERMISSION_FLAG, accessTokenId);
                       this.folderStatus[this.getCheckboxInfo(permission).index] = true;
                     }
                   })
@@ -492,7 +467,7 @@ struct mediaDocumentItem {
                   this.isCheck = '';
                 }
               })
-            }, (permission: Permissions) => JSON.stringify(permission))
+            }, (permission: Permission) => JSON.stringify(permission))
           } else {
             ForEach(this.mediaDocListItem, (item: MediaDocObj) => {
               ListItem() {
@@ -520,25 +495,33 @@ struct mediaDocumentItem {
                             if (permission === Permission.LOCATION) {
                               return false;
                             }
-                            this.grantUserGrantedPermission(accessTokenId, permission);
+                            PermissionUtils.grantPermissionWithResult(
+                              permission, Constants.PERMISSION_FLAG, accessTokenId
+                            );
                           } else if (item.index === Constants.PERMISSION_BAN) {
                             if (permission == Permission.LOCATION && this.accurateIsOn) {
-                              this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                              PermissionUtils.revokePermissionWithResult(
+                                permission, Constants.PERMISSION_FLAG, accessTokenId
+                              );
                               this.accurateIsOn = false;
                             } else {
-                              this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+                              PermissionUtils.revokePermissionWithResult(
+                                permission, Constants.PERMISSION_FLAG, accessTokenId
+                              );
                             }
                           } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
                             if (permission === Permission.LOCATION) {
                               return false;
                             }
-                            this.revokeUserGrantedPermission(
-                              accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME
+                            PermissionUtils.revokePermissionWithResult(
+                              permission, Constants.PERMISSION_ALLOW_THIS_TIME, accessTokenId
                             );
                           } else if (item.index === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE) {
-                            this.grantUserGrantedPermission(accessTokenId, permission);
-                            this.revokeUserGrantedPermission(
-                              accessTokenId, Permission.LOCATION_IN_BACKGROUND, Constants.PERMISSION_FLAG
+                            PermissionUtils.grantPermissionWithResult(
+                              permission, Constants.PERMISSION_FLAG, accessTokenId
+                            );
+                            PermissionUtils.revokePermissionWithResult(
+                              Permission.LOCATION_IN_BACKGROUND, Constants.PERMISSION_FLAG, accessTokenId
                             );
                           }
                           return true;
@@ -599,17 +582,16 @@ struct mediaDocumentItem {
                 .selectedColor($r('sys.color.icon_emphasize'))
                 .switchPointColor($r('sys.color.comp_background_primary_contrary'))
                 .onChange((isOn: boolean) => {
-                  let acManager = abilityAccessCtrl.createAtManager();
                   if (isOn) {
-                    acManager.grantUserGrantedPermission(accessTokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
-                      .then(() => {
-                        this.accurateIsOn = true;
-                      })
+                    PermissionUtils.grantPermissionWithResult(
+                      Permission.LOCATION, Constants.PERMISSION_FLAG, accessTokenId
+                    );
+                    this.accurateIsOn = true;
                   } else {
-                    acManager.revokeUserGrantedPermission(accessTokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
-                      .then(() => {
-                        this.accurateIsOn = false;
-                      })
+                    PermissionUtils.revokePermissionWithResult(
+                      Permission.LOCATION, Constants.PERMISSION_FLAG, accessTokenId
+                    );
+                    this.accurateIsOn = false;
                   }
                 })
                 .padding({ right: 0 })
