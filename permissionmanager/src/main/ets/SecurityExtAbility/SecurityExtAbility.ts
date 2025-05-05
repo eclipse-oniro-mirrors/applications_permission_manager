@@ -15,13 +15,16 @@
 
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
-import display from '@ohos.display';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Configuration } from '@ohos.app.ability.Configuration';
-import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
+
+enum NotifyType {
+  Toast = 1,
+  Dialog = 0
+}
 
 export default class SecurityExtensionAbility extends extension {
   /**
@@ -41,15 +44,26 @@ export default class SecurityExtensionAbility extends extension {
     console.info(TAG + 'want: ' + JSON.stringify(want));
 
     try {
-      let width = want.parameters['ohos.display.width'];
-      let height = want.parameters['ohos.display.height'];
+      let width = want.parameters['ohos.display.width'] ?? 0;
+      let height = want.parameters['ohos.display.height'] ?? 0;
+      let top = want.parameters['ohos.display.top'] ?? 0;
       let navigationBarRect = {
         left: 0,
-        top: 0,
+        top: top,
         width: width,
         height: height
       };
-      this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
+      let notifyType = want.parameters['ohos.ability.notify.type'] ?? 0;
+      if (notifyType === NotifyType.Toast) {
+        try {
+          startId > 1 && window.findWindow(`SaveButtonTip${startId - 1}`).destroyWindow();
+        } catch (exception) {
+          console.error(`Failed to find the Window. Cause code: ${exception.code}, message: ${exception.message}`);
+        }
+        this.createToast('SaveButtonTip' + startId, window.WindowType.TYPE_SYSTEM_TOAST, navigationBarRect, want);
+      } else {
+        this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
+      }
     } catch (exception) {
       console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
     };
@@ -98,8 +112,8 @@ export default class SecurityExtensionAbility extends extension {
       });
       try {
         await win.setFollowParentWindowLayoutEnabled(true);
-      } catch(error) {
-        console.error(TAG + `setFollowParentWindowLayoutEnabled error: ${JSON.stringify(error)}`);
+      } catch (error) {
+        console.error(TAG + `setFollowParentWindowLayoutEnabled error: ${JSON.stringify(error)}.`);
         await win.moveWindowTo(rect.left, rect.top);
         await win.resize(rect.width, rect.height);
       };
@@ -111,6 +125,24 @@ export default class SecurityExtensionAbility extends extension {
       GlobalContext.store('dialogSet', dialogSet);
     } catch (err) {
       console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
+    }
+  }
+
+  private async createToast(name: string, windowType, rect, want): Promise<void> {
+    try {
+      const win = await window.createWindow({ ctx: this.context, name, windowType });
+      let property: Record<string, Object> = { 'want': want, 'win': win };
+      let storage: LocalStorage = new LocalStorage(property);
+      await win.moveWindowTo(rect.left, rect.top);
+      await win.resize(rect.width, rect.height);
+      await win.setSystemAvoidAreaEnabled(true);
+      await win.loadContent('pages/securityToast', storage);
+      win.setWindowBackgroundColor(BG_COLOR);
+      await win.setWindowTouchable(false);
+      await win.setWindowFocusable(false);
+      await win.showWindow();
+    } catch (error) {
+      console.error(TAG + `window create failed! err: ${JSON.stringify(error)} `);
     }
   }
 };

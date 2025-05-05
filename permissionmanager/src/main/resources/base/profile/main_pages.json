@@ -10,6 +10,7 @@
     "pages/dialogPlus",
     "pages/globalSwitch",
     "pages/securityDialog",
+    "pages/securityToast",
     "pages/transition",
     "PermissionSheet/PermissionStateSheetDialog",
     "PermissionSheet/GlobalSwitchSheetDialog"

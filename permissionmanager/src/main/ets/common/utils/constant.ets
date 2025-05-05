@@ -350,4 +350,22 @@ export default class Constants {
     public static CUSTOMIZE_BUTTON_WIDTH = 152;
     public static CUSTOMIZE_BUTTON_TEXT_MIN_SIZE = 12;
     public static CUSTOMIZE_BUTTON_TEXT_MAX_SIZE = 15;
+
+    // SecurityToast
+    public static TOAST_SYMBOLGLYPH_FONTSIZE = 16;
+    public static TOAST_POSITION_Y_UP = 15;
+    public static TOAST_POSITION_Y_UNDER = -15;
+    public static TOAST_ANIMATION_OFFSET = 80;
+    public static TOAST_ANIMATION_TIMEOUT_START = 100;
+    public static TOAST_ANIMATION_TIMEOUT_END = 3100;
+    public static TOAST_ANIMATION_TIMEOUT_ID = 3500;
+    public static TOAST_ICON_FONTSIZE_4 = 4;
+    public static TOAST_ICON_FONTSIZE_2 = 2;
+    public static TOAST_ICON_FONTSIZE_16 = 16;
+    public static TOAST_ICON_FONTSIZE_14 = 14;
+    public static TOAST_MAX_FONT_SCALE = 1;
+    public static TOAST_CONSTRAINT_SIZE_MAX_WIDTH = 400;
+    public static TOAST_CONSTRAINT_SIZE_MIN_HEIGHT = 36;
+    public static TOAST_COLUMN_WIDTH = '100%';
+    public static TOAST_COLUMN_HEIGHT = '100%';
 }
