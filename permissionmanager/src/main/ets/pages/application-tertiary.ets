@@ -46,8 +46,8 @@ struct mediaDocumentPage {
   @State folderStatus: boolean[] = GlobalContext.load('folderStatus');
   @State refresh: boolean = false;
   @State selected: number = 0; // Permission status array
-  @State accurateIsOn: boolean = true;
-  @State isRefreshReason: number = 0
+  @State accurateIsOn: boolean = false;
+  @State isRefreshReason: number = 0;
 
   build() {
     Column() {
