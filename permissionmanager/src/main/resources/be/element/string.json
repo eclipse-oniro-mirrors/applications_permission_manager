@@ -1,0 +1,60 @@
+{
+    "string":[
+        {
+            "name":"SecurityText_location",
+            "value":"Калі вы націснеце «Дазволіць», то для абароны прыватнасці праграма «%1$s%2$s» зможа атрымліваць доступ да вашага месцазнаходжання толькі на кароткі час.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Прыватны доступ да Галерэі",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Калі вы націснеце «Дазволіць», то для абароны прыватнасці праграма «%1$s%2$s» зможа атрымліваць доступ да Галерэі для захоўвання элементаў толькі на кароткі час.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Калі вы націснеце «Дазволіць», то для абароны прыватнасці праграма «%s» зможа атрымліваць доступ да вашага месцазнаходжання толькі на кароткі час.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Дазволіць",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Калі вы націснеце «Дазволіць», то для абароны прыватнасці праграма «%s» зможа атрымліваць доступ да Галерэі для захоўвання элементаў толькі на кароткі час.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Прыватны доступ да месцазнаходжання",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Адмяніць",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

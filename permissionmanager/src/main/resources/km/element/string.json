@@ -1,0 +1,60 @@
+{
+    "string":[
+        {
+            "name":"SecurityText_location",
+            "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %1$s%2$s អាចចូលប្រើទីតាំងរបស់អ្នកតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"ការចូលប្រើវិចិត្រសាលលក្ខណៈឯកជន",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %1$s%2$s អាចចូលប្រើវិចិត្រសាលរបស់អ្នកដើម្បីរក្សាទុកធាតុនានាតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %s អាចចូលប្រើទីតាំងរបស់អ្នកតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"អនុញ្ញាត",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %s អាចចូលប្រើវិចិត្រសាលរបស់អ្នកដើម្បីរក្សាទុកធាតុនានាតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"ការចូលប្រើទីតាំងលក្ខណៈឯកជន",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"បោះបង់",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

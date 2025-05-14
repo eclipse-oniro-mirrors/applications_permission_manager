@@ -32,14 +32,14 @@
             "name":"SecurityText_location",
             "value":"༼%1$s%2$s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་འདིར་རྡེབ་སྐབས་ཁོ་ནར་གནས་ཡུལ་ལ་ལྟ་སྤྱོད་བྱ་ཆོག",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"༼%1$s%2$s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་འདིར་རྡེབ་སྐབས་ཁོ་ནར་པར་མཛོད་དུ་འདྲ་པར་དང་བརྙན་ཟློས་ཉར་ཚགས་ཁོ་ན་བྱ་ཆོག",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
