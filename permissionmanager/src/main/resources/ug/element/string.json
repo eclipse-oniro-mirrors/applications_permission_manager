@@ -46,7 +46,7 @@
             "name":"SecurityTitle_location",
             "value":"بىخەتەر ئورۇن ئىجازىتى",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -298,14 +298,14 @@
             "name":"group_label_screenCapture",
             "value":"\u200f«%s» ئېكران تۇتىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"pasteBoard_app",
             "value":"بۇ مەزمۇن «%s» دىن كەلگەن. چەكلىسىڭىز، بۇ ئەپ كېسىش تاختىسىنى زىيارەت قىلالمايدۇ.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]
