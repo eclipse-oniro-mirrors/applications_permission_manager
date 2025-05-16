@@ -44,9 +44,9 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"གནས་ཡུལ་ལ་བདེ་འཇགས་ངང་ལྟ་སྤྱོད་བྱེད་པ།",
+            "value":"གནས་ཡུལ་ལ་བདེ་འཇགས་ངང་ལྟ་སྤྱོད།",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -298,14 +298,14 @@
             "name":"group_label_screenCapture",
             "value":"༼%s༽ཡིས་ཁྱེད་ཀྱི་བརྙན་ཡོལ་གཅོད་ལེན་བྱ་ཆོག་པར་བྱེད་དམ།",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"pasteBoard_app",
             "value":"ནང་དོན་༼%s༽ལས་འདྲ་བཤུས་བྱས། བཀག་རྗེས་ཉེར་སྤྱོད་དེས་དྲས་སྦྱར་པང་ལ་ལྟ་སྤྱོད་བྱ་མི་ཆོག",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

@@ -46,7 +46,7 @@
             "name":"SecurityTitle_location",
             "value":"安全存取位置",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -298,14 +298,14 @@
             "name":"group_label_screenCapture",
             "value":"允許「%s」截取您的屏幕？",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"pasteBoard_app",
             "value":"複製內容來自「%s」。禁止後將不再允許此應用程式存取剪貼簿。",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

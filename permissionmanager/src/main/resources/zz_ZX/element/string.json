@@ -583,6 +583,18 @@
         {
             "name":"forbidden_description_nearLink",
             "value":"[TS_950728]_Apps have been prohibited from accessing NearLink."
+        },
+        {
+            "name":"enable_description_screenCapture",
+            "value":"[TS_995261]_%s apps have been allowed to use screenshots."
+        },
+        {
+            "name":"groupName_screenCapture",
+            "value":"[TS_995262]_Screen capture"
+        },
+        {
+            "name":"forbidden_description_screenCapture",
+            "value":"[TS_995263]_Screenshots have been disabled."
         }
     ]
 }
