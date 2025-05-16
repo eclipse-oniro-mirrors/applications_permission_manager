@@ -1,0 +1,60 @@
+{
+    "string":[
+        {
+            "name":"SecurityText_location",
+            "value":"Ruxsat tugmasini bosganingizda, maxfiyligingizni himoyalash uchun %1$s%2$s joylashuv axborotingizga faqat qisqa vaqtga kira oladi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Galereyaga xavfsiz kirish",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Ruxsat tugmasini bosganingizda, elementlarni saqlash uchun %1$s%2$s Galereyaga faqat qisqa vaqtga kira oladi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Ruxsat tugmasini bosganingizda, maxfiyligingizni himoyalash uchun %s joylashuv axborotingizga faqat qisqa vaqtga kira oladi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Ruxsat",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Ruxsat tugmasini bosganingizda, elementlarni saqlash uchun %s Galereyaga faqat qisqa vaqtga kira oladi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Joylashuv axborotiga xavfsiz kirish",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Bekor qilish",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

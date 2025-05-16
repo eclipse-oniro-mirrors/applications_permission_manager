@@ -1,0 +1,60 @@
+{
+    "string":[
+        {
+            "name":"SecurityText_location",
+            "value":"Құпиялықты қорғау үшін %1$s%2$s сіз «Рұқсат ету» түймесін түрткенде ғана орналасқан жеріңізге қысқа уақыт бойы қатынаса алады.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"Галереяға жеке қатынасу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"Құпиялығыңызды қорғау үшін %1$s%2$s сіз «Рұқсат ету» түймесін түрткенде элементтерді сақтау үшін «Галерея» қолданбаңызға қысқа уақыт бойы ғана қатынаса алады.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"Құпиялықты қорғау үшін %s сіз «Рұқсат ету» түймесін түрткенде ғана орналасқан жеріңізге қысқа уақыт бойы қатынаса алады.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"Рұқсат ету",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"Құпиялығыңызды қорғау үшін %s сіз «Рұқсат ету» түймесін түрткенде элементтерді сақтау үшін «Галерея» қолданбаңызға қысқа уақыт бойы ғана қатынаса алады.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"Орынға жеке қатынасу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"Бас тарту",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

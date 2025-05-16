@@ -32,14 +32,14 @@
             "name":"SecurityText_location",
             "value":"在您輕觸此按鈕時，僅允許「%1$s%2$s」存取位置。",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"在您輕觸此按鈕時，僅允許「%1$s%2$s」將圖片和影片儲存至圖片庫。",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
