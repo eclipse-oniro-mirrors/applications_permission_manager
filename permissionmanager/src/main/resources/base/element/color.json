@@ -27,6 +27,10 @@
     {
       "name": "local_background_color",
       "value": "#3194F7"
+    },
+    {
+      "name": "outline",
+      "value": "#1A000000"
     }
   ]
 }
