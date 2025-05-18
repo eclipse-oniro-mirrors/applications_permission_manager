@@ -135,7 +135,11 @@ export default class SecurityExtensionAbility extends extension {
       let storage: LocalStorage = new LocalStorage(property);
       await win.moveWindowTo(rect.left, rect.top);
       await win.resize(rect.width, rect.height);
-      await win.setSystemAvoidAreaEnabled(true);
+      try {
+        await win.setSystemAvoidAreaEnabled(true);
+      } catch (error) {
+        console.error(TAG + `setSystemAvoidAreaEnabled error: ${JSON.stringify(error)}.`);
+      };
       await win.loadContent('pages/securityToast', storage);
       win.setWindowBackgroundColor(BG_COLOR);
       await win.setWindowTouchable(false);
