@@ -131,18 +131,18 @@ struct SecurityToast {
     Column() {
       Flex({ alignItems: ItemAlign.Center }) {
         SymbolGlyph($r('sys.symbol.security_shield'))
-          .maxFontScale(Constants.TOAST_MAX_FONT_SCALE)
-          .minFontScale(Constants.TOAST_MAX_FONT_SCALE)
           .fontSize(Constants.TOAST_SYMBOLGLYPH_FONTSIZE)
           .fontColor([$r('sys.color.icon_primary'), $r('sys.color.icon_emphasize')])
           .renderingStrategy(SymbolRenderingStrategy.MULTIPLE_COLOR)
         Blank()
           .width('4vp')
         Text($r('app.string.SecurityTitle_mediaFiles'))
-          .maxFontScale(Constants.TOAST_MAX_FONT_SCALE)
-          .minFontScale(Constants.TOAST_MAX_FONT_SCALE)
-          .fontSize($r('sys.float.Body_M'))
           .fontColor($r('sys.color.font_primary'))
+          .minFontSize(Constants.TOAST_TEXT_MIDDLE_FONT_SIZE)
+          .maxFontSize($r('sys.float.Body_M'))
+          .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
+          .heightAdaptivePolicy(TextHeightAdaptivePolicy.MAX_LINES_FIRST)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
           .onAppear(() => {
             this.getAnnounceForAccessibility();
           })

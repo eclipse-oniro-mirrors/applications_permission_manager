@@ -352,7 +352,8 @@ export default class Constants {
     public static CUSTOMIZE_BUTTON_TEXT_MAX_SIZE = 15;
 
     // SecurityToast
-    public static TOAST_SYMBOLGLYPH_FONTSIZE = 16;
+    public static TOAST_SYMBOLGLYPH_FONTSIZE = '16vp';
+    public static TOAST_TEXT_MIDDLE_FONT_SIZE = '12vp';
     public static TOAST_POSITION_Y_UP = 15;
     public static TOAST_POSITION_Y_UNDER = -15;
     public static TOAST_ANIMATION_OFFSET = 80;
