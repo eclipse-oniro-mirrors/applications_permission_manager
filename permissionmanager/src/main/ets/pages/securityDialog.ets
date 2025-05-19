@@ -86,9 +86,10 @@ function dialogContentsArea(params: DialogInfo) {
   Column() {
     Column() {
       Row() {
-        SymbolGlyph($r('sys.symbol.person_shield_fill'))
+        SymbolGlyph($r('sys.symbol.security_shield'))
           .fontSize(Constants.FONT_SIZE_28)
-          .fontColor([$r('sys.color.brand')])
+          .renderingStrategy(SymbolRenderingStrategy.MULTIPLE_COLOR)
+          .fontColor(['#E5000000', '#0A59F7'])
       }
       .width(Constants.SECURITY_ICON_WIDTH)
       .height(Constants.SECURITY_ICON_HEIGHT)
