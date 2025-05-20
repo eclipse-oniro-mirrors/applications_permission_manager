@@ -294,7 +294,7 @@ export class GrantDialogModel extends BaseModel {
     let systemPasteboardDataSource: string = '';
     try {
       let systemPasteboard: pasteboard.SystemPasteboard = pasteboard.getSystemPasteboard();
-      let data: string = systemPasteboard.getDataSource();
+      let data = systemPasteboard.getDataSource();
       systemPasteboardDataSource = data || '';
     } catch (error) {
       Log.error(`getSystemPasteboard faild, code: ${error.code}, message: ${error.message}.`);
