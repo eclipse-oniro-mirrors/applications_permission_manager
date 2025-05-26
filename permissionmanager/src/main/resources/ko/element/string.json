@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"%s에서 신체 센서 데이터에 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"%s에서 클립보드로부터 콘텐츠 복사를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"정확한 위치: 켜짐",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"%s의 연락처 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"이 앱이 정확한 내 위치에 액세스할 수 있도록 허용합니다. 이 기능이 꺼져 있으면 이 앱은 대략적인 위치에만 액세스할 수 있습니다. 이 기능을 지원하지 않는 일부 앱은 위치 정보를 얻지 못할 수도 있습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"정확한 위치가 종료되면 앱은 대략적인 위치만 가져올 수 있습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"%s의 블루투스 사용을 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"정확한 위치",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"%s에서 다른 장치와의 콜라보를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"항상 허용",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"%s에서 장치의 파일에 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"%s의 대략적인 위치 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"%s의 다른 앱에 대한 활동 추적을 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"거부",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"%s에서 장치의 \"문서\" 폴더에 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"항상 묻기",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"%s의 캘린더 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"정확한 위치: 꺼짐",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"%s의 카메라 사용을 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"거부되면 이 앱은 클립보드에 액세스할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"%s의 화면 캡처를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"%s의 NearLink 사용을 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"이번만 허용",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"%s의 신체 활동 데이터 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"앱 사용 중에 허용",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"%s에서 장치의 \"홈 화면\" 폴더에 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"항상 묻기",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"%s에서 장치의 이미지와 비디오에 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"%s에서 장치의 \"다운로드\" 폴더에 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"%s의 위치 액세스를 대략적인 위치에서 정확한 위치로 변경하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"%s에서 설치된 앱 목록을 읽도록 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"이번만 허용",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"%s의 위치 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"%s의 마이크 사용을 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"%s에서 장치의 음악 및 오디오 파일에 액세스를 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"콘텐츠가 %s에서 복사되었습니다. 거부를 선택하면 이 앱은 클립보드에 액세스할 수 없습니다.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }
