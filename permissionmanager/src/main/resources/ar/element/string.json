@@ -55,6 +55,62 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"عندما يكون الموقع الدقيق مغلق، سيتمكن التطبيق من الحصول على موقعك التقريبي فقط.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"الموقع الدقيق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"السماح دومًا",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"رفض",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"السؤال في كل مرة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"السماح لمرة واحدة فقط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"السؤال في كل مرة",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"السماح لمرة واحدة فقط",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

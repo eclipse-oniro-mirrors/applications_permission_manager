@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Autoriser %s à accéder aux données des capteurs corporels ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Autoriser %s à copier le contenu du presse-papiers ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Localisation précise : Activée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Autoriser %s à accéder à vos contacts ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Autoriser cette application à accéder à votre localisation précise. Lorsqu'elle est désactivée, l'application ne peut accéder qu'à votre localisation approximative. Certaines applications qui ne prennent pas en charge cette fonctionnalité peuvent ne pas obtenir de localisation.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Les informations approximatives de localisation sont accessibles si les informations précises de localisation ne le sont pas.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Autoriser %s à utiliser le Bluetooth ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Informations précises de localisation",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Autoriser %s à collaborer avec d'autres appareils ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Toujours autoriser",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Autoriser %s à accéder aux fichiers de votre appareil ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Autoriser %s à accéder à votre localisation approximative ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Autoriser %s à suivre votre activité dans d'autres applications ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Refuser",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Autoriser %s à accéder au dossier \"Documents\" de votre appareil ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Demander chaque fois",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Autoriser %s à accéder à votre agenda ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Localisation précise : Désactivée",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Autoriser %s à utiliser l'appareil photo ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Si l'accès est refusé, cette application ne pourra pas accéder au presse-papiers.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Autoriser %s à capturer votre écran ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Autoriser %s à utiliser NearLink ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Autoriser cette fois seulement",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Autoriser %s à accéder à vos données d'activité physique ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Autoriser lors de l'utilisation de l'application",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Autoriser %s à accéder au dossier \"Écran d'accueil\" de votre appareil ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Demander chaque fois",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Autoriser %s à accéder aux images et aux vidéos de votre appareil ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Autoriser %s à accéder au dossier \"Téléchargements\" de votre appareil ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Changer l'accès à la position de %s d'approximatif à précis ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Autoriser %s à lire la liste des applications installées ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Autoriser cette fois uniquement",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Autoriser %s à accéder à votre localisation ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Autoriser %s à utiliser le microphone ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Autoriser %s à accéder aux fichiers audio et musique de votre appareil ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Contenu copié à partir de %s. Si vous choisissez Refuser, cette application ne pourra pas accéder au presse-papier.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

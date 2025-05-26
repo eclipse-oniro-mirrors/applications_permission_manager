@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"¿Permitir que %s acceda a los datos de los sensores corporales?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"¿Permitir que %s copie contenido del portapapeles?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Ubicación precisa: Activada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"¿Permitir que %s acceda a tus contactos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Permite que esta aplicación acceda a tu ubicación precisa. Cuando esta opción esté desactivada, la aplicación solo podrá acceder a la ubicación aproximada. Es posible que algunas aplicaciones que no admiten esta función no puedan obtener ninguna ubicación.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Cuando se deshabilite Ubicación precisa, la aplicación solo podrá obtener tu ubicación aproximada.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"¿Permitir que %s use Bluetooth?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Ubicación precisa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"¿Permitir que %s colabore con otros dispositivos?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Permitir siempre",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"¿Permitir que %s acceda a los archivos del dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"¿Permitir que %s acceda a la ubicación aproximada?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"¿Permitir que %s realice un seguimiento de tu actividad en otras aplicaciones?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Denegar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"¿Permitir que %s acceda a la carpeta \"Documentos\" del dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Preguntar cada vez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"¿Permitir que %s acceda a tu calendario?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Ubicación precisa: Desactivada",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"¿Permitir que %s use la cámara?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Si deniegas el acceso, esta aplicación no podrá acceder al portapapeles.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"¿Permitir que %s capture la pantalla?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"¿Permitir que %s use NearLink?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Permitir solo esta vez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"¿Permitir que %s acceda a tus datos de actividad física?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Permitir mientras se usa la aplicación",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"¿Permitir que %s acceda a la carpeta \"Pantalla principal\" del dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Preguntar cada vez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"¿Permitir que %s acceda a las imágenes y vídeos del dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"¿Permitir que %s acceda a la carpeta \"Descargas\" del dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"¿Deseas cambiar el acceso a la ubicación de %s de aproximado a preciso?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"¿Permitir que %s lea la lista de aplicaciones instaladas?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Permitir solo esta vez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"¿Permitir que %s acceda a tu ubicación?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"¿Permitir que %s use el micrófono?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"¿Permitir que %s acceda a los archivos de música y audio del dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Contenido copiado de %s. Si seleccionas Denegar, esta aplicación no podrá acceder al portapapeles.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

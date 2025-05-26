@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Cho phép %s truy cập dữ liệu cảm biến cơ thể?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Cho phép %s sao chép nội dung từ bộ nhớ tạm?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Vị trí chính xác: Đang bật",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Cho phép %s truy cập danh bạ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Cho phép ứng dụng này truy cập vị trí chính xác của bạn. Khi tắt chức năng này, ứng dụng này chỉ truy cập được vị trí gần đúng của bạn. Một số ứng dụng không hỗ trợ tính năng này có thể không nhận được bất kỳ thông tin vị trí nào.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Khi tùy chọn Vị trí chính xác bị tắt, ứng dụng chỉ có thể nhận được vị trí gần đúng của bạn.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Cho phép %s sử dụng Bluetooth?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Vị trí chính xác",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Cho phép %s phối hợp với các thiết bị khác?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Luôn cho phép",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Cho phép %s truy cập các tệp tin trên thiết bị của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Cho phép %s truy cập vị trí gần đúng của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Cho phép %s theo dõi hoạt động của bạn trong các ứng dụng khác?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Từ chối",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Cho phép %s truy cập thư mục \"Tài liệu\" trên thiết bị của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Luôn hỏi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Cho phép %s truy cập lịch của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Vị trí chính xác: Đã tắt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Cho phép %s sử dụng máy ảnh?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Nếu bị từ chối, ứng dụng này sẽ không thể truy cập bộ nhớ tạm.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Cho phép %s chụp màn hình của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Cho phép %s sử dụng NearLink?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Chỉ cho phép lần này",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Cho phép %s truy cập dữ liệu về hoạt động thể chất?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Cho phép khi sử dụng ứng dụng",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Cho phép %s truy cập thư mục \"Màn hình chính\" trên thiết bị của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Luôn hỏi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Cho phép %s truy cập hình ảnh và video trên thiết bị của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Cho phép %s truy cập thư mục \"Tải xuống\" trên thiết bị của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Thay đổi quyền truy cập vị trí của %s từ gần đúng thành chính xác?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Cho phép %s đọc danh sách ứng dụng đã cài đặt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Chỉ cho phép lần này",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Cho phép %s truy cập vị trí của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Cho phép %s sử dụng micrô?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Cho phép %s truy cập nhạc và tệp tin âm thanh trên thiết bị của bạn?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Đã sao chép nội dung từ %s. Nếu bạn chọn Từ chối, ứng dụng này sẽ không thể truy cập bộ nhớ tạm.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }
