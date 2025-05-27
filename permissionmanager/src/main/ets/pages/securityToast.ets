@@ -140,6 +140,7 @@ struct SecurityToast {
           .fontColor($r('sys.color.font_primary'))
           .minFontSize(Constants.TOAST_TEXT_MIDDLE_FONT_SIZE)
           .maxFontSize($r('sys.float.Body_M'))
+          .fontSize($r('sys.float.Body_M'))
           .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
           .heightAdaptivePolicy(TextHeightAdaptivePolicy.MAX_LINES_FIRST)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
