@@ -166,7 +166,17 @@ struct SecurityToast {
         bottom: Constants.PADDING_8,
         left: Constants.PADDING_16
       })
-      .shadow(DeviceUtil.isPC() ? ShadowStyle.OUTER_DEFAULT_SM : ShadowStyle.OUTER_DEFAULT_MD)
+      .shadow(DeviceUtil.isPC() ? {
+        radius: Constants.TOAST_FLEX_SHADOW_RADIUS_40,
+        color: $r('app.color.outerDefaultSMColor'),
+        offsetX: Constants.TOAST_FLEX_SHADOW_OFFSET_X,
+        offsetY: Constants.TOAST_FLEX_SHADOW_OFFSET_Y
+      } : {
+        radius: Constants.TOAST_FLEX_SHADOW_RADIUS_60,
+        color: $r('app.color.outerDefaultMDColor'),
+        offsetX: Constants.TOAST_FLEX_SHADOW_OFFSET_X,
+        offsetY: Constants.TOAST_FLEX_SHADOW_OFFSET_Y
+      })
       .borderRadius(DeviceUtil.isPC() ? $r('sys.float.corner_radius_level4') : $r('sys.float.corner_radius_level9'))
       .backgroundBlurStyle(DeviceUtil.isPC() ? BlurStyle.COMPONENT_REGULAR : BlurStyle.COMPONENT_ULTRA_THICK)
       .border(DeviceUtil.isPC() ? { width: '1px', color: '#33ffffff' } : {})

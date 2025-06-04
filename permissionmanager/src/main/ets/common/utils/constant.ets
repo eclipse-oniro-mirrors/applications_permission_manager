@@ -369,4 +369,8 @@ export default class Constants {
     public static TOAST_CONSTRAINT_SIZE_MIN_HEIGHT = 36;
     public static TOAST_COLUMN_WIDTH = '100%';
     public static TOAST_COLUMN_HEIGHT = '100%';
+    public static TOAST_FLEX_SHADOW_RADIUS_40 = 40;
+    public static TOAST_FLEX_SHADOW_RADIUS_60 = 60;
+    public static TOAST_FLEX_SHADOW_OFFSET_X = 0;
+    public static TOAST_FLEX_SHADOW_OFFSET_Y = 10;
 }
