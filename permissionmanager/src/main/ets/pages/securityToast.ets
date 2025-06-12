@@ -59,14 +59,23 @@ struct SecurityToast {
 
   getWinAvoidArea() {
     let type = window.AvoidAreaType.TYPE_SYSTEM;
-    let avoidArea = this.win?.getWindowAvoidArea(type);
-    this.topRectHeight = avoidArea.topRect.height;
+    try {
+      let avoidArea = this.win?.getWindowAvoidArea(type);
+      this.topRectHeight = avoidArea.topRect.height;
+    } catch (error) {
+      Log.error(`Failed to obtain the area. Cause code: ${error.code}, message: ${error.message}`);
+    };
   }
 
   aboutToAppear(): void {
     Log.info('onAboutToAppear');
-    this.rotationInit = display.getDefaultDisplaySync().orientation;
-    this.densityDPIInit = display.getDefaultDisplaySync().densityDPI;
+    try {
+      let dis = display.getDefaultDisplaySync();
+      this.rotationInit = dis.orientation;
+      this.densityDPIInit = dis.densityDPI;
+    } catch (error) {
+      Log.error(`Failed to get default display. Cause code: ${error.code}, message: ${error.message}`);
+    };
     this.setPosition = this.want.parameters['ohos.toast.position'] ?? false;
     this.positionY = this.setPosition ? Constants.TOAST_POSITION_Y_UP : Constants.TOAST_POSITION_Y_UNDER;
     this.setOffset = this.want.parameters['ohos.toast.offset'] ?? Constants.TOAST_ANIMATION_OFFSET;
@@ -100,7 +109,7 @@ struct SecurityToast {
   screenMonitor() {
     try {
       display.on('foldStatusChange', (data: display.FoldStatus) => {
-        Log.info(`Listening enabled. Data: ${JSON.stringify(data)}`);
+        Log.info(`Listening foldStatusChange. Data: ${JSON.stringify(data)}`);
         this.win?.destroyWindow();
       });
     } catch (exception) {
@@ -109,7 +118,7 @@ struct SecurityToast {
 
     try {
       display.on('change', (data: number) => {
-        Log.info(`Listening enabled. Data: ${JSON.stringify(data)}`);
+        Log.info(`Listening change. Data: ${JSON.stringify(data)}`);
         let rotation: number = display.getDefaultDisplaySync().orientation;
         let densityDPI = display.getDefaultDisplaySync().densityDPI;
         if (rotation !== this.rotationInit) {
