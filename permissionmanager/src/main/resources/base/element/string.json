@@ -88,7 +88,7 @@
             "name":"allow",
             "value":"Allow",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -193,7 +193,7 @@
             "name":"cancel",
             "value":"Cancel",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -666,7 +666,7 @@
             "name":"SecurityTitle_location",
             "value":"Private access to location",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
