@@ -18,7 +18,7 @@ import { BusinessError } from '@ohos.base';
 import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import { Log, PermissionDialogException, PermissionDialogReturn } from '../common/utils/utils';
+import { Log, PermissionDialogException, PermissionDialogReturn, GlobalDialogReturn } from '../common/utils/utils';
 import { GroupInfo, WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
@@ -62,7 +62,7 @@ struct GlobalSwitchSheetDialog {
       bottomRight: 0
     },
     cancel: () => {
-      PermissionDialogReturn([Constants.ERR_GLOBAL_SWITCH_EXCEPTION], session);
+      GlobalDialogReturn(false, session);
       this.context.terminateSelf();
       this.dialogController?.close();
     }
@@ -332,7 +332,7 @@ struct applicationItem {
                           if (this.currentGroup == 'CAMERA') {
                             let cameraManager = camera.getCameraManager(this.context);
                             cameraManager.muteCameraPersistent(false, camera.PolicyType.PRIVACY);
-                            PermissionDialogReturn([Constants.PERMISSION_DIALOG_SUCCESS], session);
+                            GlobalDialogReturn(true, session);
                             this.context.terminateSelf();
                           } else {
                             let audioManager = audio.getAudioManager();
@@ -340,7 +340,7 @@ struct applicationItem {
                             let groupId = audio.DEFAULT_VOLUME_GROUP_ID;
                             audioVolumeManager.getVolumeGroupManager(groupId).then(audioVolumeGroupManager => {
                               audioVolumeGroupManager.setMicMutePersistent(false, audio.PolicyType.PRIVACY);
-                              PermissionDialogReturn([Constants.PERMISSION_DIALOG_SUCCESS], session);
+                              GlobalDialogReturn(true, session);
                               this.context.terminateSelf();
                             })
                           }

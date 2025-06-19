@@ -243,6 +243,18 @@ export function PermissionDialogReturn(resultArray: Array<number>, session: UIEx
   })
 }
 
+export function GlobalDialogReturn(result: boolean, session: UIExtensionContentSession): void {
+  session.terminateSelfWithResult({
+    resultCode: 0,
+    want: {
+      parameters: {
+        'ohos.user.setting.global_switch.result': result,
+        'ohos.user.setting.error_code': 0
+      }
+    }
+  })
+}
+
 // check if the permissions provided are in the same group
 export function checkPermissionGroup(appPermissions: Permission[]): PermissionGroup | null {
   if (appPermissions.length == 0) {
