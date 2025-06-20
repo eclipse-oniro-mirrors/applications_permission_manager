@@ -248,6 +248,9 @@ struct SecurityDialog {
       appIndex: $appIndex
     }),
     customStyle: true,
+    cancel: () => {
+      this.onCancel();
+    },
   })
 
   dialogController: CustomDialogController | null = new CustomDialogController({
