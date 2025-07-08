@@ -54,14 +54,7 @@ export default class SecurityExtensionAbility extends extension {
         height: height
       };
       let notifyType = want.parameters['ohos.ability.notify.type'] ?? 0;
-      if (notifyType === NotifyType.Toast) {
-        try {
-          startId > 1 && window.findWindow(`SaveButtonTip${startId - 1}`).destroyWindow();
-        } catch (exception) {
-          console.error(`Failed to find the Window. Cause code: ${exception.code}, message: ${exception.message}`);
-        }
-        this.createToast('SaveButtonTip' + startId, window.WindowType.TYPE_SYSTEM_TOAST, navigationBarRect, want);
-      } else {
+      if (notifyType === NotifyType.Dialog) {
         this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
       }
     } catch (exception) {
