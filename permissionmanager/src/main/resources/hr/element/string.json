@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Privatni pristup aplikaciji Galerija",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Radi zaštite privatnosti aplikacija %s može samo nakratko pristupiti vašoj lokaciji kada dodirnete opciju Dopusti.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Dopusti",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Radi zaštite privatnosti aplikacija %s može samo nakratko pristupiti aplikaciji Galerija kako bi spremila stavke kada dodirnete opciju Dopusti.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Privatni pristup lokaciji",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Odustani",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Radi zaštite privatnosti aplikacija %1$s%2$s može samo nakratko pristupiti vašoj lokaciji kada dodirnete opciju Dopusti.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Radi zaštite privatnosti aplikacija %1$s%2$s može samo nakratko pristupiti aplikaciji Galerija kako bi spremila stavke kada dodirnete opciju Dopusti.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

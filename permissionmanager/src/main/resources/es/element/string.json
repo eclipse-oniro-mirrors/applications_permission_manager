@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Acceso restringido a Galería",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu ubicación si pulsas Permitir.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Permitir",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu Galería para guardar elementos si pulsas Permitir.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Acceso restringido a ubicaciones",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Cancelar",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu ubicación si pulsas Permitir.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu Galería para guardar elementos si pulsas Permitir.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -156,7 +156,7 @@
         },
         {
             "name":"group_label_document_folder",
-            "value":"¿Permitir que %s acceda a la carpeta \"Documentos\" del dispositivo?",
+            "value":"¿Permitir que %s acceda a la carpeta “Documentos” del dispositivo?",
             "attr":{
                 "priority":"translate"
             }
@@ -233,7 +233,7 @@
         },
         {
             "name":"group_label_desktop_folder",
-            "value":"¿Permitir que %s acceda a la carpeta \"Pantalla principal\" del dispositivo?",
+            "value":"¿Permitir que %s acceda a la carpeta “Pantalla principal” del dispositivo?",
             "attr":{
                 "priority":"translate"
             }
@@ -254,7 +254,7 @@
         },
         {
             "name":"group_label_download_folder",
-            "value":"¿Permitir que %s acceda a la carpeta \"Descargas\" del dispositivo?",
+            "value":"¿Permitir que %s acceda a la carpeta “Descargas” del dispositivo?",
             "attr":{
                 "priority":"translate"
             }

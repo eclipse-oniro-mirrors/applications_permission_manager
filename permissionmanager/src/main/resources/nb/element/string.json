@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Privat tilgang til Galleri",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til posisjonen din når du trykker på Tillat.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Tillat",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
-            "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til Galleriet ditt når du trykker på Tillat.",
+            "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til ditt Galleri for å lagre filer når du trykker på Tillat.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Privat tilgang til posisjon",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Avbryt",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"For å beskytte personvernet ditt, kan %1$s%2$s bare få kort tilgang til posisjonen din når du trykker på Tillat.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"For å beskytte personvernet ditt, kan %1$s%2$s bare få kort tilgang til Galleri når du trykker på Tillat.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

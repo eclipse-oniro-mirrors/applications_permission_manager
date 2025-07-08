@@ -4,54 +4,110 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Akses peribadi ke Galeri",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses lokasi anda secara ringkas apabila anda mengetik Benarkan.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Benarkan",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses Galeri anda secara ringkas untuk menyimpan item apabila anda mengetik Benarkan.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Akses peribadi ke lokasi",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Batalkan",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Untuk melindungi privasi anda, %2$s%1$s hanya boleh mengakses lokasi anda secara ringkas apabila anda mengetik Benarkan.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Untuk melindungi privasi anda, %2$s%1$s hanya boleh mengakses Galeri anda secara ringkas untuk menyimpan item apabila anda mengetik Benarkan.",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Apabila Lokasi tepat dinyahdayakan, aplikasi hanya boleh mendapat lokasi anggaran anda.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Lokasi tepat",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Sentiasa benarkan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Tolak",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Tanya setiap kali",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Benarkan pada kali ini sahaja",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Tanya setiap kali",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Benarkan pada kali ini sahaja",
             "attr":{
                 "priority":"translate"
             }

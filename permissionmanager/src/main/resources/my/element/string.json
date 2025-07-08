@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"ပုံပြခန်းကို သီးသန့်ဝင်ရောက်သုံးစွဲခွင့်",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"သင့်ကိုယ်ရေးလုံခြုံမှုကို ကာကွယ်ရန် သင်က ခွင့်ပြုမည်ကို နှိပ်လိုက်သည့်အခါ %s သည် သင့်တည်နေရာကို အနည်းငယ်သာ ဝင်ရောက် သုံးစွဲနိုင်ပါသည်။",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"ခွင့်ပြုမည်",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"သင့်ကိုယ်ရေးလုံခြုံမှုကို ကာကွယ်ရန် သင်က ခွင့်ပြုမည်ကို နှိပ်လိုက်သည့်အခါ %s သည် ဖိုင်များကို သိမ်းရန် သင့်ပုံပြခန်းကို အနည်းငယ်သာ ဝင်ရောက် သုံးစွဲနိုင်ပါသည်။",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"တည်နေရာကို သီးသန့်ဝင်ရောက်သုံးစွဲခွင့်",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"ပယ်ဖျက်မည်",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"သင့်ကိုယ်ရေးလုံခြုံမှုကို ကာကွယ်ရန် သင်က ခွင့်ပြုမည်ကို နှိပ်လိုက်သည့်အခါ %1$s%2$s သည် သင့်တည်နေရာကို အနည်းငယ်သာ ဝင်ရောက် သုံးစွဲနိုင်ပါသည်။",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"သင့်ကိုယ်ရေးလုံခြုံမှုကို ကာကွယ်ရန် သင်က ခွင့်ပြုမည်ကို နှိပ်လိုက်သည့်အခါ %1$s%2$s သည် ဖိုင်များကို သိမ်းရန် သင့်ပုံပြခန်းကို အနည်းငယ်သာ ဝင်ရောက် သုံးစွဲနိုင်ပါသည်။",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

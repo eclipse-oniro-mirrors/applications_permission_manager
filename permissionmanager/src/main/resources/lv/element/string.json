@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Privāta piekļuve lietotnei Galerija",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu atrašanās vietai, ja pieskaraties Atļaut.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Atļaut",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu lietotnei Galerija, ja pieskaraties Atļaut.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Privāta piekļuve atrašanās vietai",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Atcelt",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %1$s%2$s var tikai uz īsu brīdi piekļūt jūsu atrašanās vietai, kad pieskarieties pie Atļaut.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %1$s%2$s var tikai uz īsu brīdi piekļūt jūsu lietotnei Galerija, lai saglabātu vienumus, kad pieskarieties pie Atļaut.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

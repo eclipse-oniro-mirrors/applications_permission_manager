@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Private access to Gallery",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"To protect your privacy, %s can only briefly access your location when you tap Allow.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Allow",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Private access to location",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Cancel",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

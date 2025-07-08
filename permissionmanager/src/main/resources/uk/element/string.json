@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Контрольований доступ до додатка \"Галерея\"",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%s\" зможе отримати доступ до розташування на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Дозволити",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%s\" зможе отримати доступ до додатка \"Галерея\" для збереження вмісту на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Контрольований доступ до розташування",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Скасувати",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%1$s\" %2$s зможе отримати доступ до розташування на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%1$s\" %2$s зможе отримати доступ до додатка \"Галерея\" для збереження вмісту на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Akses privat ke Galeri",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses lokasi Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Izinkan",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses Galeri Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Akses privat ke lokasi",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Batal",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Untuk melindungi privasi Anda, %1$s%2$s hanya dapat mengakses lokasi Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Untuk melindungi privasi Anda, %1$s%2$s hanya dapat mengakses Galeri Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

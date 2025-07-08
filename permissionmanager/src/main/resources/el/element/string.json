@@ -4,7 +4,7 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Ιδιωτική πρόσβαση στη Συλλογή",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"allow",
             "value":"Να επιτραπεί",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -32,28 +32,28 @@
             "name":"SecurityTitle_location",
             "value":"Ιδιωτική πρόσβαση στην τοποθεσία",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Ακύρωση",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Για την προστασία του απορρήτου σας, η εφαρμογή %1$s%2$s μπορεί μόνο για σύντομο χρονικό διάστημα να έχει πρόσβαση στην τοποθεσία σας όταν πατήσετε Να επιτραπεί.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Για την προστασία του απορρήτου σας, η εφαρμογή %1$s%2$s μπορεί μόνο για σύντομο χρονικό διάστημα να έχει πρόσβαση στη Συλλογή σας για να αποθηκεύσει στοιχεία όταν πατήσετε Να επιτραπεί.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

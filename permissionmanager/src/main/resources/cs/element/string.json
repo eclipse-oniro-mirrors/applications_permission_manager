@@ -4,28 +4,28 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Soukromý přístup ke galerii",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší poloze jen krátce, když klepnete na možnost Povolit.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Povolit",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší galerii jen krátce, když klepnete na možnost Povolit.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -39,21 +39,21 @@
             "name":"cancel",
             "value":"Zrušit",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"V zájmu ochrany vašeho soukromí může mít %1$s%2$s přístup k vaší poloze jen krátce, když klepnete na možnost Povolit.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"V zájmu ochrany vašeho soukromí může mít %1$s%2$s přístup k vaší galerii jen krátce, když klepnete na možnost Povolit.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]
