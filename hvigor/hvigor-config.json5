@@ -14,10 +14,10 @@
  */
 
 {
-  "hvigorVersion": "3.0.2",
+  "hvigorVersion": "4.0.9",
 //  "modelVersion": "5.0.0",    //本地IDE配置
   "dependencies": {
-    "@ohos/hvigor-ohos-plugin": "3.0.2"
+    "@ohos/hvigor-ohos-plugin": "4.0.9"
 //    "@ohos/hvigor-ohos-plugin": "5.8.5"    //本地IDE配置
   }
 }
