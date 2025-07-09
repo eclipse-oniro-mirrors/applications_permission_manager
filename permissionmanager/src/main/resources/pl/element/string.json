@@ -4,7 +4,7 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Dostęp do Galerii z zachowaniem prywatności",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -18,42 +18,42 @@
             "name":"allow",
             "value":"Zezwól",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Aby chronić prywatność użytkownika, aplikacja %s może uzyskać dostęp do Galerii użytkownika tylko na chwilę po dotknięciu opcji Zezwalaj.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Dostęp do lokalizacji z zachowaniem prywatności",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Anuluj",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Aby chronić Twoją prywatność, aplikacja %1$s%2$s może uzyskać dostęp do lokalizacji tylko na chwilę po dotknięciu opcji Zezwól.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Aby chronić prywatność użytkownika, aplikacja %1$s%2$s może uzyskać dostęp do Twojej Galerii tylko na chwilę po dotknięciu opcji Zezwól.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

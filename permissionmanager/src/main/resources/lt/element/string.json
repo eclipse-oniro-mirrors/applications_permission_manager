@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Privati prieiga prie Galerijos",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Siekiant apsaugoti jūsų privatumą, %s gali tik trumpam pasiekti jūsų buvimo vietą, kai bakstelėjate „Leisti“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Leisti",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Siekiant apsaugoti jūsų privatumą, %s gali tik trumpam pasiekti jūsų Galeriją, kad įrašytų elementus, kai bakstelėjate „Leisti“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Privati prieiga prie buvimo vietos informacijos",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Atšaukti",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Siekiant apsaugoti jūsų privatumą, %1$s%2$s gali tik trumpam pasiekti jūsų buvimo vietą, kai bakstelėjate „Leisti“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Siekiant apsaugoti jūsų privatumą, %1$s%2$s gali tik trumpam pasiekti jūsų Galeriją, kad įrašytų elementus, kai bakstelėjate „Leisti“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

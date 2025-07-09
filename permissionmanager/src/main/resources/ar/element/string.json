@@ -4,21 +4,21 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"الوصول الخاص إلى المعرض",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"لحماية خصوصيتك، سيتمكن تطبيق %s من الوصول إلى موقعك لفترة وجيزة فقط عند النقر على «سماح».",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"سماح",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -32,28 +32,28 @@
             "name":"SecurityTitle_location",
             "value":"الوصول الخاص إلى الموقع",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"إلغاء",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
-            "value":"لحماية خصوصيتك، سيتمكن %1$s%2$s من الوصول إلى موقعك لفترة وجيزة فقط عند النقر على «سماح».",
+            "value":"لحماية خصوصيتك، سيتمكن تطبيق %1$s%2$s من الوصول إلى موقعك لفترة وجيزة فقط عند النقر على \"سماح\".",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
-            "value":"لحماية خصوصيتك، سيتمكن %1$s%2$s من الوصول إلى المعرض لحفظ العناصر لفترة وجيزة فقط عند النقر على «سماح».",
+            "value":"لحماية خصوصيتك، سيتمكن تطبيق %1$s%2$s من الوصول إلى المعرض لحفظ العناصر لفترة وجيزة فقط عند النقر على \"سماح\".",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -108,6 +108,202 @@
         {
             "name":"This_time_only",
             "value":"السماح لمرة واحدة فقط",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_health",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى بيانات مستشعرات الجسم؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"هل تسمح لتطبيق \"%s\" بنسخ المحتوى من الحافظة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"الموقع الدقيق: مُشغّل",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى جهات الاتصال الخاصة بك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"السماح لهذا التطبيق بالوصول إلى موقعك الدقيق. عند إيقاف تشغيل هذا الخيار، يمكن لهذا التطبيق الوصول إلى موقعك التقريبي فقط، وقد تفشل بعض التطبيقات التي لا تدعم هذه الميزة في الحصول على أي موقع.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"هل تسمح لتطبيق \"%s\" باستخدام البلوتوث؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"هل تسمح لتطبيق \"%s\" بالتعاون مع الأجهزة الأخرى؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى الملفات على جهازك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"هل تسمح لتطبيق %s بالوصول إلى الموقع التقريبي؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"هل تسمح لتطبيق \"%s\" بتتبع أنشطتك في التطبيقات الأخرى؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى مجلد المستندات على جهازك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى التقويم؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"الموقع الدقيق: مغلق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"هل تسمح لتطبيق \"%s\" باستخدام الكاميرا؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"إذا رفضت منح هذا الإذن، فلن يتمكن هذا التطبيق من الوصول إلى الحافظة.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"هل تسمح لتطبيق \"%s\" بالتقاط لقطة لشاشتك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"هل تسمح لتطبيق \"%s\" باستخدام ميزة NearLink؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى بيانات نشاطك البدني؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"السماح أثناء استخدام التطبيق",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى مجلد الشاشة الرئيسية على جهازك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى الصور والفيديوهات على جهازك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى مجلد التنزيلات على جهازك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"هل تريد تغيير الوصول إلى الموقع في تطبيق %s من الوصول التقريبي إلى الوصول الدقيق؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"هل تسمح لتطبيق \"%s\" بقراءة قائمة التطبيقات المُثبتّة؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى موقعك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"هل تسمح لتطبيق \"%s\" باستخدام الميكروفون؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى ملفات الموسيقى والصوتيات على جهازك؟",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"تم نسخ المحتوى من تطبيق \"%s\". إذا اخترت \"رفض\"، فلن يتمكن هذا التطبيق من الوصول إلى الحافظة.",
             "attr":{
                 "priority":"translate"
             }

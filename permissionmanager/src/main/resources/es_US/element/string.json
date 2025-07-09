@@ -4,7 +4,7 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Acceso restringido a Galería",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"allow",
             "value":"Permitir",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"SecurityTitle_location",
             "value":"Acceso restringido a ubicaciones",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Cancelar",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {

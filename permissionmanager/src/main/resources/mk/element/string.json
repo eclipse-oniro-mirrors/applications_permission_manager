@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Приватен пристап до Галерија",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата локација кога ќе допрете Дозволи.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Дозволи",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата Галерија за да зачува ставки кога ќе допрете Дозволи.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Приватен пристап до локацијата",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Откажи",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"За да се заштити вашата приватност, %1$s%2$s може само кратко да пристапи до вашата локација кога ќе допрете Дозволи.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"За да се заштити вашата приватност, %1$s%2$s може само кратко да пристапи до вашата Галерија за да зачува ставки кога ќе допрете Дозволи.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

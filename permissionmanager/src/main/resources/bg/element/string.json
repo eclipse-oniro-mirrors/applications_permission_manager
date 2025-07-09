@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Личен достъп до „Галерия“",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"За защита на поверителността ви %s може само за кратко да получи достъп до местоположението ви, когато докоснете „Позволи“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Позволи",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"За защита на поверителността ви %s може само за кратко да получи достъп до вашата „Галерия“ за запис на елементи, когато докоснете „Позволи“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Личен достъп до местоположението",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Отказ",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"За защита на поверителността ви %1$s%2$s може само за кратко да получи достъп до местоположението ви, когато докоснете „Позволи“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"За защита на поверителността ви %1$s%2$s може само за кратко да получи достъп до вашата „Галерия“ за запис на елементи, когато докоснете „Позволи“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Személyes hozzáférés a Galériához",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a tartózkodási helyéhez, ha az Engedélyezés gombra koppint.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Engedélyezés",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a Galériához a képek mentéséhez, ha az Engedélyezés gombra koppint.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Személyes hozzáférés a helyhez",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Mégse",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Az Ön személyes adatainak védelme érdekében a(z) %1$s%2$s csak rövid ideig férhet hozzá a tartózkodási helyéhez, ha az Engedélyezés gombra koppint.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Az Ön személyes adatainak védelme érdekében a(z) %1$s%2$s csak rövid ideig férhet hozzá a Galériához a képek mentéséhez, ha az Engedélyezés gombra koppint.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

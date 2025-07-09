@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"პირადი წვდომა გალერეაზე",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"თქვენივე კონფიდენციალურობის დასაცავად, %s შეძლებს თქვენს მდებარეობაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"დაშვება",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"თქვენი კონფიდენციალურობის დასაცავად, %s შეძლებს ელემენტების შესანახად გალერეაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"პირადი წვდომა მდებარეობაზე",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"გაუქმება",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"თქვენივე კონფიდენციალურობის დასაცავად %1$s%2$s შეძლებს თქვენს მდებარეობაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"თქვენი კონფიდენციალურობის დასაცავად, %1$s%2$s შეძლებს ელემენტების შესანახად გალერეაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

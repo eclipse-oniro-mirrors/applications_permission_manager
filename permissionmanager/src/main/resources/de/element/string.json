@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Privater Zugriff auf Galerie",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Um Ihre Privatsphäre zu schützen, kann %s nur kurz auf Ihren Standort zugreifen, wenn Sie auf Zulassen tippen.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Zulassen",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Um Ihre Privatsphäre zu schützen, kann %s nur kurz auf die Galerie zugreifen, um Elemente zu speichern, wenn Sie auf Zulassen tippen.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Privater Zugriff auf Standort",
+            "value":"Privater Zugriff auf den Standort",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Abbrechen",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Um Ihre Privatsphäre zu schützen, kann %1$s%2$s nur kurz auf Ihren Standort zugreifen, wenn Sie auf Zulassen tippen.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Um Ihre Privatsphäre zu schützen, kann %1$s%2$s nur kurz auf Ihre Galerie zugreifen, um Elemente zu speichern, wenn Sie auf Zulassen tippen.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

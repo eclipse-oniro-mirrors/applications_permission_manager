@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Privaatne juurdepääs Galeriile",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel teie asukohale ligi vaid lühiajaliselt.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Luba",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel üksuste salvestamiseks Galeriile ligi vaid lühiajaliselt.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Privaatne juurdepääs asukohale",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Tühista",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Rakendus %1$s%2$s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel teie asukohale ligi vaid lühiajaliselt.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Rakendus %1$s%2$s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel üksuste salvestamiseks Galeriile ligi vaid lühiajaliselt.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

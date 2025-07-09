@@ -4,56 +4,56 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Privat adgang til Galleri",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"For at beskytte dine personlige oplysninger kan %s kun tilgå din placering kortvarigt, når du trykker på Tillad.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Tillad",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_mediaFiles",
             "value":"For at beskytte dine personlige oplysninger kan %s kun tilgå din Galleri kortvarigt for at gemme elementer, når du trykker på Tillad.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityTitle_location",
             "value":"Privat adgang til placering",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Annuller",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"For at beskytte dine personlige oplysninger kan %1$s%2$s kun tilgå din placering kortvarigt, når du trykker på Tillad.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"For at beskytte dine personlige oplysninger kan %1$s%2$s kun tilgå dit Galleri kortvarigt for at gemme elementer, når du trykker på Tillad.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

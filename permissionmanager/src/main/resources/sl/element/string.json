@@ -4,7 +4,7 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Zasebni dostop do aplikacije Galerija",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"allow",
             "value":"Dovoli",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -32,28 +32,28 @@
             "name":"SecurityTitle_location",
             "value":"Zasebni dostop do lokacije",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Prekliči",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_location",
             "value":"Za zaščito vaše zasebnosti lahko aplikacija %1$s%2$s do vaše lokacije dostopi le za kratek čas, ko se dotaknete možnosti Dovoli.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityText_mediaFiles",
             "value":"Za zaščito vaše zasebnosti lahko aplikacija %1$s%2$s do aplikacije Galerija dostopi le za kratek čas in shrani elemente, ko se dotaknete možnosti Dovoli.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         }
     ]

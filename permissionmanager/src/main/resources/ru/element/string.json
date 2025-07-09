@@ -4,21 +4,21 @@
             "name":"SecurityTitle_mediaFiles",
             "value":"Разрешенный доступ к Галерее",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"SecurityDescription_location",
             "value":"В целях обеспечения конфиденциальности после нажатия кнопки Разрешить приложению %s будет предоставлен ограниченный доступ к вашим геоданным.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"allow",
             "value":"Разрешить",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"SecurityTitle_location",
             "value":"Разрешенный доступ к геолокации",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
             "name":"cancel",
             "value":"Отмена",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -108,6 +108,202 @@
         {
             "name":"This_time_only",
             "value":"Разрешить только сейчас",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Разрешить приложению %s доступ к данным датчиков состояния организма?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Разрешить приложению %s копировать контент из буфера обмена?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Точные геоданные: включено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Разрешить приложению %s доступ к контактам?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Это приложение получит доступ к вашим точным геоданным. Когда эта опция выключена, у этого приложения будет доступ только к вашим приблизительным геоданным. Некоторым приложениям, не поддерживающим эту функцию, может не удастся получить никаких геоданных.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Разрешить приложению %s использовать Bluetooth?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Разрешить приложению %s взаимодействовать с другими устройствами?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Разрешить приложению %s доступ к файлам на этом устройстве?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Разрешить приложению %s доступ к вашим приблизительным геоданным?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Разрешить приложению %s отслеживать вашу активность в других приложениях?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Разрешить приложению %s доступ к папке Документы на этом устройстве?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Разрешить приложению %s доступ к календарю?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Точные геоданные: выключено",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Разрешить приложению %s использовать камеру?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Если запретить, это приложение не сможет осуществлять доступ к буферу обмена.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Разрешить приложению %s съемку скриншотов и запись с экрана?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Разрешить приложению %s использовать NearLink?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Разрешить приложению %s доступ к данным вашей физической активности?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"При использовании приложения",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Разрешить приложению %s доступ к папке Рабочий экран на этом устройстве?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Разрешить приложению %s доступ к изображениям и видео на этом устройстве?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Разрешить приложению %s доступ к папке Загрузки на этом устройстве?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Изменить формат доступа к геоданным с приблизительного на точный для приложения %s?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Разрешить приложению %s читать список установленных приложений?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Разрешить приложению %s доступ к вашим геоданным?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Разрешить приложению %s использовать микрофон?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Разрешить приложению %s доступ к музыке и аудиофайлам на этом устройстве?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Контент скопирован из приложения %s. Если выбрать Запретить, это приложение не сможет осуществлять доступ к буферу обмена.",
             "attr":{
                 "priority":"translate"
             }
