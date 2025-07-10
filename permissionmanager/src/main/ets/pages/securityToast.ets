@@ -21,9 +21,44 @@ import { DeviceUtil } from '../common/utils/deviceUtil';
 import Constants from '../common/utils/constant';
 import { WantInfo } from '../common/model/typedef';
 
+class ToastFlexModifier implements AttributeModifier<FlexAttribute> {
+
+  applyNormalAttribute(instance: FlexAttribute): void {
+    if (DeviceUtil.isPC()) {
+      instance.padding($r('sys.float.padding_level4'))
+      instance.shadow({
+        radius: Constants.TOAST_FLEX_SHADOW_RADIUS_40,
+        color: $r('app.color.outerDefaultSMColor'),
+        offsetX: Constants.TOAST_FLEX_SHADOW_OFFSET_X,
+        offsetY: Constants.TOAST_FLEX_SHADOW_OFFSET_Y
+      })
+      instance.borderRadius($r('sys.float.corner_radius_level4'))
+      instance.backgroundBlurStyle(BlurStyle.COMPONENT_REGULAR)
+      instance.border({ width: '1px', color: '#33ffffff' })
+      instance.outline({ width: '1px', color: $r('app.color.outline'), radius: $r('sys.float.corner_radius_level4') })
+    } else {
+      instance.padding({
+        top: Constants.PADDING_8,
+        right: Constants.PADDING_16,
+        bottom: Constants.PADDING_8,
+        left: Constants.PADDING_16
+      })
+      instance.shadow({
+        radius: Constants.TOAST_FLEX_SHADOW_RADIUS_60,
+        color: $r('app.color.outerDefaultMDColor'),
+        offsetX: Constants.TOAST_FLEX_SHADOW_OFFSET_X,
+        offsetY: Constants.TOAST_FLEX_SHADOW_OFFSET_Y
+      })
+      instance.borderRadius($r('sys.float.corner_radius_level9'))
+      instance.backgroundBlurStyle(BlurStyle.COMPONENT_ULTRA_THICK)
+    }
+  }
+}
+
 @Entry({ useSharedStorage: true })
 @Component
 struct SecurityToast {
+  @State modifier: ToastFlexModifier = new ToastFlexModifier();
   @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
   @State alpha: number = 0;
@@ -54,7 +89,7 @@ struct SecurityToast {
         });
     } catch (error) {
       Log.error(`sendAccessibilityEvent failed, error code: ${error.code}, message: ${error.message}.`);
-    }
+    };
   }
 
   getWinAvoidArea() {
@@ -103,7 +138,7 @@ struct SecurityToast {
       display.off('change');
     } catch (exception) {
       Log.error(`Failed to unregister callback. Cause code: ${exception.code}, message: ${exception.message}`);
-    }
+    };
   }
 
   screenMonitor() {
@@ -114,7 +149,7 @@ struct SecurityToast {
       });
     } catch (exception) {
       Log.error(`Failed to register callback. Code: ${JSON.stringify(exception)}`);
-    }
+    };
 
     try {
       display.on('change', (data: number) => {
@@ -133,7 +168,7 @@ struct SecurityToast {
       });
     } catch (exception) {
       Log.error(`Failed to register callback. Code: ${JSON.stringify(exception)}`);
-    }
+    };
   }
 
   build() {
@@ -169,28 +204,7 @@ struct SecurityToast {
         minHeight: Constants.TOAST_CONSTRAINT_SIZE_MIN_HEIGHT
       })
       .margin(this.setPosition ? { top: this.setOffset - px2vp(this.topRectHeight) } : { bottom: this.setOffset })
-      .padding(DeviceUtil.isPC() ? $r('sys.float.padding_level4') : {
-        top: Constants.PADDING_8,
-        right: Constants.PADDING_16,
-        bottom: Constants.PADDING_8,
-        left: Constants.PADDING_16
-      })
-      .shadow(DeviceUtil.isPC() ? {
-        radius: Constants.TOAST_FLEX_SHADOW_RADIUS_40,
-        color: $r('app.color.outerDefaultSMColor'),
-        offsetX: Constants.TOAST_FLEX_SHADOW_OFFSET_X,
-        offsetY: Constants.TOAST_FLEX_SHADOW_OFFSET_Y
-      } : {
-        radius: Constants.TOAST_FLEX_SHADOW_RADIUS_60,
-        color: $r('app.color.outerDefaultMDColor'),
-        offsetX: Constants.TOAST_FLEX_SHADOW_OFFSET_X,
-        offsetY: Constants.TOAST_FLEX_SHADOW_OFFSET_Y
-      })
-      .borderRadius(DeviceUtil.isPC() ? $r('sys.float.corner_radius_level4') : $r('sys.float.corner_radius_level9'))
-      .backgroundBlurStyle(DeviceUtil.isPC() ? BlurStyle.COMPONENT_REGULAR : BlurStyle.COMPONENT_ULTRA_THICK)
-      .border(DeviceUtil.isPC() ? { width: '1px', color: '#33ffffff' } : {})
-      .outline(DeviceUtil.isPC() ?
-        { width: '1px', color: $r('app.color.outline'), radius: $r('sys.float.corner_radius_level4') } : {})
+      .attributeModifier(this.modifier)
     }
     .width(Constants.TOAST_COLUMN_WIDTH)
     .height(Constants.TOAST_COLUMN_HEIGHT)

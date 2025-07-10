@@ -17,48 +17,44 @@ import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import window from '@ohos.window';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Configuration } from '@ohos.app.ability.Configuration';
+import Want from '@ohos.app.ability.Want';
+import { Property, NavigationBarRect } from '../common/model/typedef';
+import { NotifyType } from '../common/model/definition';
+import { Log } from '../common/utils/utils';
 
-const TAG = 'PermissionManager_Log:';
 const BG_COLOR = '#00000000';
-
-enum NotifyType {
-  Toast = 1,
-  Dialog = 0
-}
 
 export default class SecurityExtensionAbility extends extension {
   /**
    * Lifecycle function, called back when a service extension is started for initialization.
    */
-  onCreate(want): void {
-    console.info(TAG + 'SecurityExtensionAbility onCreate, ability name is ' + want.abilityName);
+  onCreate(want: Want): void {
+    Log.info(`SecurityExtensionAbility onCreate, ability name is ${want.abilityName}.`);
     globalThis.windowNum = 0;
-    console.info(TAG + 'Set windowNum = 0');
   }
 
   /**
    * Lifecycle function, called back when a service extension is started or recall.
    */
-  onRequest(want, startId): void {
-    console.info(TAG + 'SecurityExtensionAbility onRequest. start id is ' + startId);
-    console.info(TAG + 'want: ' + JSON.stringify(want));
+  onRequest(want: Want, startId: number): void {
+    Log.info(`SecurityExtensionAbility onRequest. start id is ${startId}.`);
 
     try {
-      let width = want.parameters['ohos.display.width'] ?? 0;
-      let height = want.parameters['ohos.display.height'] ?? 0;
-      let top = want.parameters['ohos.display.top'] ?? 0;
-      let navigationBarRect = {
+      let width = want.parameters?.['ohos.display.width'] as number ?? 0;
+      let height = want.parameters?.['ohos.display.height'] as number ?? 0;
+      let top = want.parameters?.['ohos.display.top'] as number ?? 0;
+      let navigationBarRect: NavigationBarRect = {
         left: 0,
         top: top,
         width: width,
         height: height
       };
-      let notifyType = want.parameters['ohos.ability.notify.type'] ?? 0;
+      let notifyType = want.parameters?.['ohos.ability.notify.type'] ?? 0;
       if (notifyType === NotifyType.Dialog) {
         this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
       }
     } catch (exception) {
-      console.error(TAG + 'Failed to obtain the default display object. Code: ' + JSON.stringify(exception));
+      Log.error(`Failed to obtain the default display object. Code: ${JSON.stringify(exception)}.`);
     };
   }
 
@@ -66,36 +62,39 @@ export default class SecurityExtensionAbility extends extension {
    * Lifecycle function, called back before a service extension is destroyed.
    */
   onDestroy(): void {
-    console.info(TAG + 'SecurityExtensionAbility onDestroy.');
+    Log.info('SecurityExtensionAbility onDestroy.');
   }
 
   onConfigurationUpdate(newConfig: Configuration): void {
-    console.info(TAG + 'onConfigurationUpdate: ' + JSON.stringify(newConfig));
+    Log.info(`onConfigurationUpdate: ${JSON.stringify(newConfig)}.`);
   }
 
-  private async createWindow(name: string, windowType, rect, want): Promise<void> {
-    console.info(TAG + 'create securityWindow');
+  private async createWindow(name: string, windowType: window.WindowType, rect: NavigationBarRect,
+    want: Want): Promise<void> {
+    Log.info('create securityWindow.');
     let dialogSet: Set<String> = GlobalContext.load('dialogSet');
     if (!dialogSet) {
       dialogSet = new Set<String>();
-      console.info(TAG + 'new dialogSet');
+      Log.info('new dialogSet.');
       GlobalContext.store('dialogSet', dialogSet);
     }
-    let callerToken: number = want.parameters['ohos.caller.uid'];
-    let windId: number = want.parameters['ohos.ability.params.windowId'];
+    let callerToken: number = want.parameters?.['ohos.caller.uid'] as number;
+    let windId: number = want.parameters?.['ohos.ability.params.windowId'] as number;
     let token: String = String(callerToken) + '_' + String(windId);
     if (dialogSet.has(token)) {
-      console.info(TAG + 'window already exists');
+      Log.info('window already exists.');
       return;
     }
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
-      let storage: LocalStorage = new LocalStorage({ 'want': want, 'win': win });
-      await win.bindDialogTarget(want.parameters['ohos.ability.params.token'].value, () => {
+      let property: Record<string, Object> = { 'want': want, 'win': win };
+      let storage: LocalStorage = new LocalStorage(property);
+      let tokenValue = want.parameters?.['ohos.ability.params.token'] as Property;
+      await win.bindDialogTarget(tokenValue.value, () => {
         win.destroyWindow();
         let dialogSet: Set<String> = GlobalContext.load('dialogSet');
-        let callerToken: number = want.parameters['ohos.caller.uid'];
-        let windId: number = want.parameters['ohos.ability.params.windowId'];
+        let callerToken: number = want.parameters?.['ohos.caller.uid'] as number;
+        let windId: number = want.parameters?.['ohos.ability.params.windowId'] as number;
         let token: String = String(callerToken) + '_' + String(windId);
         dialogSet.delete(token);
         GlobalContext.store('dialogSet', dialogSet);
@@ -106,22 +105,23 @@ export default class SecurityExtensionAbility extends extension {
       try {
         await win.setFollowParentWindowLayoutEnabled(true);
       } catch (error) {
-        console.error(TAG + `setFollowParentWindowLayoutEnabled error: ${JSON.stringify(error)}.`);
+        Log.error(`setFollowParentWindowLayoutEnabled error: ${JSON.stringify(error)}.`);
         await win.moveWindowTo(rect.left, rect.top);
         await win.resize(rect.width, rect.height);
       };
       await win.loadContent('pages/securityDialog', storage);
       win.setWindowBackgroundColor(BG_COLOR);
       await win.showWindow();
-      console.info(TAG + 'showWindow end.');
+      Log.info('showWindow end.');
       dialogSet.add(token);
       GlobalContext.store('dialogSet', dialogSet);
     } catch (err) {
-      console.error(TAG + `window create failed! err: ${JSON.stringify(err)}`);
-    }
+      Log.error(`window create failed! err: ${JSON.stringify(err)}.`);
+    };
   }
 
-  private async createToast(name: string, windowType, rect, want): Promise<void> {
+  private async createToast(name: string, windowType: window.WindowType, rect: NavigationBarRect,
+    want: Want): Promise<void> {
     try {
       const win = await window.createWindow({ ctx: this.context, name, windowType });
       let property: Record<string, Object> = { 'want': want, 'win': win };
@@ -131,7 +131,7 @@ export default class SecurityExtensionAbility extends extension {
       try {
         await win.setSystemAvoidAreaEnabled(true);
       } catch (error) {
-        console.error(TAG + `setSystemAvoidAreaEnabled error: ${JSON.stringify(error)}.`);
+        Log.error(`setSystemAvoidAreaEnabled error: ${JSON.stringify(error)}.`);
       };
       await win.loadContent('pages/securityToast', storage);
       win.setWindowBackgroundColor(BG_COLOR);
@@ -139,7 +139,7 @@ export default class SecurityExtensionAbility extends extension {
       await win.setWindowFocusable(false);
       await win.showWindow();
     } catch (error) {
-      console.error(TAG + `window create failed! err: ${JSON.stringify(error)} `);
-    }
+      Log.error(`window create failed! err: ${JSON.stringify(error)}.`);
+    };
   }
 };

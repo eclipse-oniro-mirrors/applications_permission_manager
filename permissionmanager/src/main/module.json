@@ -70,7 +70,7 @@
             {
                 "icon": "$media:icon",
                 "name": "com.ohos.permissionmanager.SecurityExtAbility",
-                "srcEntry": "./ets/SecurityExtAbility/SecurityExtAbility.ts",
+                "srcEntry": "./ets/SecurityExtAbility/SecurityExtAbility.ets",
                 "type": "service",
                 "exported": true,
                 "permissions": ["ohos.permission.GET_SENSITIVE_PERMISSIONS"]

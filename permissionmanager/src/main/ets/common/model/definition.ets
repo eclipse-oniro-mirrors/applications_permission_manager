@@ -99,3 +99,8 @@ export enum PermissionOption {
   // 不操作
   SKIP = 'SKIP'
 }
+
+export enum NotifyType {
+  Toast = 1,
+  Dialog = 0
+}
