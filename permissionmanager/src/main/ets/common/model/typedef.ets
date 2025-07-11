@@ -532,3 +532,10 @@ export interface optionAndState {
   operationResult: number;
   permissionState: abilityAccessCtrl.GrantStatus;
 }
+
+export interface NavigationBarRect {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}

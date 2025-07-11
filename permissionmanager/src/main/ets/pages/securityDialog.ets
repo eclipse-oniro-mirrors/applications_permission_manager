@@ -183,7 +183,7 @@ struct CustomDialogWearable {
         .customizeButton()
         .backgroundColor('#1F71FF')
         .onClick(() => {
-          Log.info('allow click start');
+          Log.info('Allow click start.');
           this.dialogControllerForWearable?.close();
           if (this.confirm) {
             this.confirm();
@@ -197,7 +197,7 @@ struct CustomDialogWearable {
         .customizeButton()
         .backgroundColor('#405EA1FF')
         .onClick(() => {
-          Log.info('cancel click start');
+          Log.info('cancel click start.');
           this.dialogControllerForWearable?.close();
           if (this.cancel) {
             this.cancel();
@@ -236,10 +236,10 @@ struct SecurityDialog {
   dialogControllerForWearable: CustomDialogController | null = new CustomDialogController({
     builder: CustomDialogWearable({
       cancel: () => {
-        this.onCancel()
+        this.loadCancel();
       },
       confirm: () => {
-        this.onAccept()
+        this.onAccept();
       },
       index: $index,
       appName: $appName,
@@ -249,7 +249,7 @@ struct SecurityDialog {
     }),
     customStyle: true,
     cancel: () => {
-      this.onCancel();
+      this.loadCancel();
     },
   })
 
@@ -265,16 +265,7 @@ struct SecurityDialog {
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
             this.dialogController?.close();
-            this.win.destroyWindow();
-            let dialogSet: Set<String> = GlobalContext.load('dialogSet');
-            let callerToken: number = this.want.parameters['ohos.caller.uid'];
-            let windId: number = this.want.parameters['ohos.ability.params.windowId'];
-            let token: String = String(callerToken) + '_' + String(windId);
-            dialogSet.delete(token);
-            GlobalContext.store('dialogSet', dialogSet);
-            if (dialogSet.size === 0) {
-              this.context.terminateSelf();
-            }
+            this.loadCancel();
           }
         },
         {
@@ -289,16 +280,7 @@ struct SecurityDialog {
     }),
     autoCancel: false,
     cancel: () => {
-      this.win.destroyWindow();
-      let dialogSet: Set<String> = GlobalContext.load('dialogSet');
-      let callerToken: number = this.want.parameters['ohos.caller.uid'];
-      let windId: number = this.want.parameters['ohos.ability.params.windowId'];
-      let token: String = String(callerToken) + '_' + String(windId);
-      dialogSet.delete(token);
-      GlobalContext.store('dialogSet', dialogSet);
-      if (dialogSet.size === 0) {
-        this.context.terminateSelf();
-      }
+      this.loadCancel();
     },
   });
 
@@ -348,9 +330,9 @@ struct SecurityDialog {
     this.dialogControllerForWearable = null;
   }
 
-  onCancel() {
-    Log.info('Callback when the first button is clicked');
-    this.win.destroyWindow();
+  loadCancel() {
+    Log.info('Callback when the first button is clicked.');
+    this.win?.destroyWindow();
     let dialogSet: Set<String> = GlobalContext.load('dialogSet');
     let callerToken: number = this.want.parameters['ohos.caller.uid'];
     let windId: number = this.want.parameters['ohos.ability.params.windowId'];
@@ -363,7 +345,7 @@ struct SecurityDialog {
   }
 
   onAccept() {
-    Log.info('Callback when the second button is clicked');
+    Log.info('Callback when the second button is clicked.');
     this.destruction();
   }
 
@@ -371,15 +353,15 @@ struct SecurityDialog {
     let uid: number = this.want.parameters['ohos.caller.uid'];
     try {
       bundleManager.getAppCloneIdentity(uid).then(cloneInfo => {
-        Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}`);
+        Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}.`);
         this.appIndex = cloneInfo.appIndex;
         this.getSelfName(cloneInfo);
       }).catch((err: BusinessError) => {
-        Log.error(`getAppCloneIdentity failed: ${JSON.stringify(err)}`);
+        Log.error(`getAppCloneIdentity failed: ${JSON.stringify(err)}.`);
       })
     } catch (err) {
-      Log.error(`get appName failed: ${JSON.stringify(err)}`);
-    }
+      Log.error(`get appName failed: ${JSON.stringify(err)}.`);
+    };
   }
 
   getSelfName(cloneInfo: bundleManager.AppCloneIdentity) {
@@ -390,11 +372,11 @@ struct SecurityDialog {
           data.labelResource.type = RESOURCE_TYPE;
           this.appName = data.labelResource;
         }).catch((error: BusinessError) => {
-          Log.error('getApplicationInfo failed. err is ' + JSON.stringify(error));
+          Log.error(`getApplicationInfo failed. err is ${JSON.stringify(error)}.`);
         });
     } catch (err) {
-      Log.error('getSelfName failed. err is ' + JSON.stringify(err));
-    }
+      Log.error(`getSelfName failed. err is ${JSON.stringify(err)}.`);
+    };
   }
 
   getCloneName(cloneInfo: bundleManager.AppCloneIdentity) {
@@ -404,8 +386,8 @@ struct SecurityDialog {
         bundleResourceManager.getBundleResourceInfo(cloneInfo.bundleName, resourceFlag, cloneInfo.appIndex);
       this.appName = resourceInfo?.label;
     } catch (err) {
-      Log.error('getCloneName failed. err is ' + JSON.stringify(err));
-    }
+      Log.error(`getCloneName failed. err is ${JSON.stringify(err)}.`);
+    };
   }
 
   destruction() {
@@ -425,16 +407,7 @@ struct SecurityDialog {
     }).finally(() => {
       data.reclaim();
       reply.reclaim();
-      this.win.destroyWindow();
-      let dialogSet: Set<String> = GlobalContext.load('dialogSet');
-      let callerToken: number = this.want.parameters['ohos.caller.uid'];
-      let windId: number = this.want.parameters['ohos.ability.params.windowId'];
-      let token: String = String(callerToken) + '_' + String(windId);
-      dialogSet.delete(token);
-      GlobalContext.store('dialogSet', dialogSet);
-      if (dialogSet.size === 0) {
-        this.context.terminateSelf();
-      }
+      this.loadCancel();
     })
   }
 }
