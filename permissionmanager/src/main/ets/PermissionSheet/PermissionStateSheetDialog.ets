@@ -55,11 +55,11 @@ export function ReportDialogResult(wantPermissions: Permissions[]) {
 }
 
 export function getCallerBundleInfo(want: WantInfo): CallerBundleInfo {
-  let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'];
+  let bundleName: string = want.parameters['ohos.aafwk.param.callerBundleName'] ?? '';
   let uId: number = want.parameters['ohos.aafwk.param.callerUid'] ?? 0;
   let token: number = want.parameters['ohos.aafwk.param.callerToken'] ?? 0;
-  let permissions: Permissions[] = want.parameters['ohos.user.setting.permission'];
-  let globSwitch: number = want.parameters['ohos.user.setting.global_switch'];
+  let permissions: Permissions[] = want.parameters['ohos.user.setting.permission'] ?? [];
+  let globSwitch: number = want.parameters['ohos.user.setting.global_switch'] ?? -1;
 
   const callerBundle: CallerBundleInfo = {
     bundleName: bundleName,

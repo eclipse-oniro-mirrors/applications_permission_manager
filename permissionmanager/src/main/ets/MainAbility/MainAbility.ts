@@ -21,13 +21,14 @@ import { abilityAccessCtrl, bundleManager } from '@kit.AbilityKit';
 
 const TAG = 'PermissionManager_Log:';
 const USER_ID = 100;
+let callerBundleName: string;
 
 export default class MainAbility extends UIAbility {
   onCreate(want, launchParam): void {
     console.log(TAG + 'MainAbility onCreate, ability name is ' + want.abilityName + '.');
 
-    globalThis.bundleName = want.parameters.bundleName;
-    GlobalContext.store('bundleName', want.parameters.bundleName);
+    callerBundleName = want.parameters?.bundleName as string ?? '';
+    GlobalContext.store('bundleName', callerBundleName);
   }
 
   onWindowStageCreate(windowStage): void {
@@ -41,9 +42,9 @@ export default class MainAbility extends UIAbility {
       return;
     }
 
-    if (globalThis.bundleName) {
-      globalThis.currentApp = globalThis.bundleName;
-      this.getSperifiedApplication(globalThis.bundleName);
+    if (callerBundleName) {
+      globalThis.currentApp = callerBundleName;
+      this.getSperifiedApplication(callerBundleName);
     } else {
       globalThis.currentApp = 'all';
       this.getAllApplications();
@@ -79,9 +80,8 @@ export default class MainAbility extends UIAbility {
 
   onNewWant(want): void {
     console.log(TAG + 'MainAbility onNewWant. want: ' + JSON.stringify(want));
-    console.log(TAG + 'MainAbility onNewWant. bundleName: ' + JSON.stringify(want.parameters.bundleName));
 
-    let bundleName = want.parameters.bundleName ? want.parameters.bundleName : 'all';
+    let bundleName = want.parameters?.bundleName ? want.parameters.bundleName : 'all';
     if (globalThis.currentApp === 'all') {
       if (globalThis.currentApp !== bundleName) {
         console.log(TAG + 'MainAbility onNewWant. all -> app');
