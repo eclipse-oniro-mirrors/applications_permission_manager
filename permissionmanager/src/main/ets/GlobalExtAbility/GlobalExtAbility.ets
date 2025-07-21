@@ -33,13 +33,14 @@ export default class GlobalExtensionAbility extends extension {
     if (!want.parameters) {
       return;
     }
+    let resource: string = want.parameters['ohos.sensitive.resource'] as string ?? '';
 
     if (!globalDialogModel.permissionCheck()) {
       this.context?.terminateSelf();
       return;
     }
 
-    if (!globalDialogModel.statusCheck(this.context, want.parameters['ohos.sensitive.resource'] as string)) {
+    if (!globalDialogModel.statusCheck(this.context, resource)) {
       this.context?.terminateSelf();
       return;
     }
@@ -53,7 +54,7 @@ export default class GlobalExtensionAbility extends extension {
         height: dis.height
       };
       Log.info('want: ' + JSON.stringify(want));
-      let property: Record<string, Object> = { 'globalState': want.parameters['ohos.sensitive.resource'] };
+      let property: Record<string, Object> = { 'globalState': resource };
       let storage: LocalStorage = new LocalStorage(property);
       globalDialogModel.createWindow(this.context, navigationBarRect, storage).then(window => {
         globalWindow = window;
