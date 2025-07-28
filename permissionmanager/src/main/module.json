@@ -24,7 +24,7 @@
             {
               "name": "ohos.graphics2d.text.adapter_text_height"
             }
-          ],
+        ],
         "abilities": [
             {
                 "name": "com.ohos.permissionmanager.MainAbility",
