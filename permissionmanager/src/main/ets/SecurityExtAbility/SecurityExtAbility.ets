@@ -19,7 +19,6 @@ import { GlobalContext } from '../common/utils/globalContext';
 import { Configuration } from '@ohos.app.ability.Configuration';
 import Want from '@ohos.app.ability.Want';
 import { Property, NavigationBarRect } from '../common/model/typedef';
-import { NotifyType } from '../common/model/definition';
 import { Log } from '../common/utils/utils';
 
 const BG_COLOR = '#00000000';
@@ -42,17 +41,13 @@ export default class SecurityExtensionAbility extends extension {
     try {
       let width = want.parameters?.['ohos.display.width'] as number ?? 0;
       let height = want.parameters?.['ohos.display.height'] as number ?? 0;
-      let top = want.parameters?.['ohos.display.top'] as number ?? 0;
       let navigationBarRect: NavigationBarRect = {
         left: 0,
-        top: top,
+        top: 0,
         width: width,
         height: height
       };
-      let notifyType = want.parameters?.['ohos.ability.notify.type'] ?? 0;
-      if (notifyType === NotifyType.Dialog) {
-        this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
-      }
+      this.createWindow('SecurityDialog' + startId, window.WindowType.TYPE_DIALOG, navigationBarRect, want);
     } catch (exception) {
       Log.error(`Failed to obtain the default display object. Code: ${JSON.stringify(exception)}.`);
     };
@@ -117,29 +112,6 @@ export default class SecurityExtensionAbility extends extension {
       GlobalContext.store('dialogSet', dialogSet);
     } catch (err) {
       Log.error(`window create failed! err: ${JSON.stringify(err)}.`);
-    };
-  }
-
-  private async createToast(name: string, windowType: window.WindowType, rect: NavigationBarRect,
-    want: Want): Promise<void> {
-    try {
-      const win = await window.createWindow({ ctx: this.context, name, windowType });
-      let property: Record<string, Object> = { 'want': want, 'win': win };
-      let storage: LocalStorage = new LocalStorage(property);
-      await win.moveWindowTo(rect.left, rect.top);
-      await win.resize(rect.width, rect.height);
-      try {
-        await win.setSystemAvoidAreaEnabled(true);
-      } catch (error) {
-        Log.error(`setSystemAvoidAreaEnabled error: ${JSON.stringify(error)}.`);
-      };
-      await win.loadContent('pages/securityToast', storage);
-      win.setWindowBackgroundColor(BG_COLOR);
-      await win.setWindowTouchable(false);
-      await win.setWindowFocusable(false);
-      await win.showWindow();
-    } catch (error) {
-      Log.error(`window create failed! err: ${JSON.stringify(error)}.`);
     };
   }
 };
