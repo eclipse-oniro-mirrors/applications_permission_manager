@@ -27,18 +27,6 @@
     {
       "name": "local_background_color",
       "value": "#3194F7"
-    },
-    {
-      "name": "outline",
-      "value": "#1A000000"
-    },
-    {
-      "name": "outerDefaultMDColor",
-      "value": "#33000000"
-    },
-    {
-      "name": "outerDefaultSMColor",
-      "value": "#26000000"
     }
   ]
 }
