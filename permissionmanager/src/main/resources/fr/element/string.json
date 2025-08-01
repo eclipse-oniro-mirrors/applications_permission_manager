@@ -44,9 +44,9 @@
         },
         {
             "name":"SecurityText_location",
-            "value":"Pour protéger votre vie privée, %1$s%2$s ne peut accéder brièvement à votre localisation que lorsque vous touchez Autoriser.",
+            "value":"Pour protéger votre vie privée, %1$s%2$s ne peut accéder brièvement à vos informations de localisation que lorsque vous touchez Autoriser.",
             "attr":{
-                "priority":"translate"
+                "priority":"LT"
             }
         },
         {
@@ -72,7 +72,7 @@
         },
         {
             "name":"precise_location_on",
-            "value":"Localisation précise : Activée",
+            "value":"Localisation précise : activée",
             "attr":{
                 "priority":"translate"
             }
@@ -177,7 +177,7 @@
         },
         {
             "name":"precise_location_off",
-            "value":"Localisation précise : Désactivée",
+            "value":"Localisation précise : désactivée",
             "attr":{
                 "priority":"translate"
             }
@@ -261,7 +261,7 @@
         },
         {
             "name":"fuzzy_to_exact",
-            "value":"Changer l'accès à la position de %s d'approximatif à précis ?",
+            "value":"Changer l'accès à la localisation de %s d'approximative à précise ?",
             "attr":{
                 "priority":"translate"
             }

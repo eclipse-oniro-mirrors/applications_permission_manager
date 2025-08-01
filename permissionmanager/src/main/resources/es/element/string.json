@@ -261,7 +261,7 @@
         },
         {
             "name":"fuzzy_to_exact",
-            "value":"¿Deseas cambiar el acceso a la ubicación de %s de aproximado a preciso?",
+            "value":"¿Quieres cambiar el acceso a la ubicación de %s de aproximado a preciso?",
             "attr":{
                 "priority":"translate"
             }
