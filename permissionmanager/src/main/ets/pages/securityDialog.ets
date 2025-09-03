@@ -14,14 +14,14 @@
  */
 import bundleManager from '@ohos.bundle.bundleManager';
 import Constants from '../common/utils/constant';
-import rpc from '@ohos.rpc';
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
-import { Log, getFontSizeScale } from '../common/utils/utils';
-import { Param, WantInfo, DialogInfo } from '../common/model/typedef';
+import { Log, getFontSizeScale, destruction } from '../common/utils/utils';
+import { Param, DialogInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
+import { PermissionType } from '../common/model/definition';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 import deviceInfo from '@ohos.deviceInfo';
 
@@ -219,7 +219,7 @@ struct CustomDialogWearable {
 @Component
 struct SecurityDialog {
   private context = this.getUIContext().getHostContext() as common.ServiceExtensionContext;
-  @LocalStorageLink('want') want: WantInfo = new WantInfo([]);
+  @LocalStorageLink('want') want: Want | null = null;
   @LocalStorageLink('win') win: window.Window = {} as window.Window;
   @State appName: ResourceStr = 'Application';
   @State appIndex: number = 0;
@@ -237,10 +237,13 @@ struct SecurityDialog {
   dialogControllerForWearable: CustomDialogController | null = new CustomDialogController({
     builder: CustomDialogWearable({
       cancel: () => {
+        destruction(this.want, PermissionType.CANCELED);
         this.loadCancel();
       },
       confirm: () => {
-        this.onAccept();
+        this.dialogControllerForWearable?.close();
+        destruction(this.want, PermissionType.GRANT);
+        this.loadCancel();
       },
       index: $index,
       appName: $appName,
@@ -265,6 +268,7 @@ struct SecurityDialog {
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
             this.dialogController?.close();
+            destruction(this.want, PermissionType.CANCELED);
             this.loadCancel();
           }
         },
@@ -273,7 +277,8 @@ struct SecurityDialog {
           buttonStyle: ButtonStyleMode.TEXTUAL,
           action: () => {
             this.dialogController?.close();
-            this.destruction();
+            destruction(this.want, PermissionType.GRANT);
+            this.loadCancel();
           }
         }
       ],
@@ -315,7 +320,7 @@ struct SecurityDialog {
   async aboutToAppear() {
     Log.info('onAboutToAppear.');
     await this.GetAppName();
-    this.index = this.want.parameters['ohos.user.security.type'];
+    this.index = this.want?.parameters?.['ohos.user.security.type'] as number;
     if (deviceInfo.deviceType === 'wearable') {
       this.dialogControllerForWearable?.open();
       this.isWearable = true;
@@ -335,8 +340,8 @@ struct SecurityDialog {
     Log.info('Callback when the first button is clicked.');
     this.win?.destroyWindow();
     let dialogSet: Set<String> = GlobalContext.load('dialogSet');
-    let callerToken: number = this.want.parameters['ohos.caller.uid'];
-    let windId: number = this.want.parameters['ohos.ability.params.windowId'];
+    let callerToken: number = this.want?.parameters?.['ohos.caller.uid'] as number;
+    let windId: number = this.want?.parameters?.['ohos.ability.params.windowId'] as number;
     let token: String = String(callerToken) + '_' + String(windId);
     dialogSet.delete(token);
     GlobalContext.store('dialogSet', dialogSet);
@@ -345,13 +350,8 @@ struct SecurityDialog {
     }
   }
 
-  onAccept() {
-    Log.info('Callback when the second button is clicked.');
-    this.destruction();
-  }
-
   async GetAppName() {
-    let uid: number = this.want.parameters['ohos.caller.uid'];
+    let uid: number = this.want?.parameters?.['ohos.caller.uid'] as number;
     try {
       const cloneInfo = await bundleManager.getAppCloneIdentity(uid);
       Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}.`);
@@ -383,26 +383,5 @@ struct SecurityDialog {
     } catch (err) {
       Log.error(`getCloneName failed. err is ${JSON.stringify(err)}.`);
     };
-  }
-
-  destruction() {
-    let option = new rpc.MessageOption();
-    let data = new rpc.MessageSequence();
-    let reply = new rpc.MessageSequence();
-    Promise.all([
-      data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
-      data.writeInt(0)
-    ]).then(() => {
-      let proxy = this.want.parameters['ohos.ability.params.callback'].value as rpc.RemoteObject;
-      if (proxy != undefined) {
-        proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option);
-      }
-    }).catch(() => {
-      Log.error('write result failed!');
-    }).finally(() => {
-      data.reclaim();
-      reply.reclaim();
-      this.loadCancel();
-    })
   }
 }
