@@ -45,7 +45,7 @@ function customizeButton() {
     bottom: Constants.PADDING_10
   })
   .width(Constants.CUSTOMIZE_BUTTON_WIDTH)
-  .margin({ bottom : Constants.MARGIN_12 })
+  .margin({ bottom: Constants.MARGIN_12 })
 }
 
 @Extend(Text)
@@ -100,6 +100,7 @@ function dialogContentsArea(params: DialogInfo) {
         color: $r('app.color.icon_border'),
         radius: Constants.SECURITY_ICON_WIDTH * 14 / 54
       })
+
       if (params.index === 1) {
         Image(params.securityParams[params.index].icon)
           .width(Constants.IMAGE_LENGTH_20)
@@ -133,6 +134,7 @@ function dialogContentsArea(params: DialogInfo) {
     .backgroundColor($r('app.color.icon_bg'))
     .borderRadius(Constants.SECURITY_ICON_WIDTH * 14 / 54)
     .margin(params.isWearable ? { top: Constants.MARGIN_12 } : {})
+
     Column() { // content
       dialogTitle(params.index, params.securityParams, params.isWearable);
       Text($r(
@@ -189,6 +191,7 @@ struct CustomDialogWearable {
             this.confirm();
           }
         })
+
         Button({ type: ButtonType.Capsule, stateEffect: true }) {
           Text($r('app.string.cancel'))
             .customizeButtonText()
@@ -223,8 +226,7 @@ struct SecurityDialog {
   @State index: number = 0;
   @State scrollBarWidth: number = Constants.SCROLL_BAR_WIDTH_DEFAULT;
   @State isWearable: boolean = false;
-
-  @State securityParams : Array<Param> = [
+  @State securityParams: Array<Param> = [
     new Param(
       $r('app.media.ic_location'), $r('app.string.SecurityTitle_location'), 'app.string.SecurityText_location'
     ),
@@ -232,7 +234,6 @@ struct SecurityDialog {
       $r('app.media.rawfile'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityText_mediaFiles'
     )
   ]
-
   dialogControllerForWearable: CustomDialogController | null = new CustomDialogController({
     builder: CustomDialogWearable({
       cancel: () => {
@@ -252,7 +253,6 @@ struct SecurityDialog {
       this.loadCancel();
     },
   })
-
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
       contentBuilder: () => {
@@ -309,11 +309,12 @@ struct SecurityDialog {
     }
   }
 
-  build() {}
+  build() {
+  }
 
-  aboutToAppear() {
+  async aboutToAppear() {
     Log.info('onAboutToAppear.');
-    this.GetAppName();
+    await this.GetAppName();
     this.index = this.want.parameters['ohos.user.security.type'];
     if (deviceInfo.deviceType === 'wearable') {
       this.dialogControllerForWearable?.open();
@@ -349,31 +350,25 @@ struct SecurityDialog {
     this.destruction();
   }
 
-  GetAppName() {
+  async GetAppName() {
     let uid: number = this.want.parameters['ohos.caller.uid'];
     try {
-      bundleManager.getAppCloneIdentity(uid).then(cloneInfo => {
-        Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}.`);
-        this.appIndex = cloneInfo.appIndex;
-        this.getSelfName(cloneInfo);
-      }).catch((err: BusinessError) => {
-        Log.error(`getAppCloneIdentity failed: ${JSON.stringify(err)}.`);
-      })
+      const cloneInfo = await bundleManager.getAppCloneIdentity(uid);
+      Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}.`);
+      this.appIndex = cloneInfo.appIndex;
+      await this.getSelfName(cloneInfo);
     } catch (err) {
       Log.error(`get appName failed: ${JSON.stringify(err)}.`);
     };
   }
 
-  getSelfName(cloneInfo: bundleManager.AppCloneIdentity) {
+  async getSelfName(cloneInfo: bundleManager.AppCloneIdentity) {
     try {
-      bundleManager.getApplicationInfo(cloneInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT)
-        .then(data => {
-          data.labelResource.params = [];
-          data.labelResource.type = RESOURCE_TYPE;
-          this.appName = data.labelResource;
-        }).catch((error: BusinessError) => {
-          Log.error(`getApplicationInfo failed. err is ${JSON.stringify(error)}.`);
-        });
+      const data = await bundleManager.getApplicationInfo(cloneInfo.bundleName,
+        bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT);
+      data.labelResource.params = [];
+      data.labelResource.type = RESOURCE_TYPE;
+      this.appName = data.labelResource;
     } catch (err) {
       Log.error(`getSelfName failed. err is ${JSON.stringify(err)}.`);
     };
