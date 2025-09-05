@@ -19,7 +19,8 @@ import { GlobalContext } from '../common/utils/globalContext';
 import { Configuration } from '@ohos.app.ability.Configuration';
 import Want from '@ohos.app.ability.Want';
 import { Property, NavigationBarRect } from '../common/model/typedef';
-import { Log } from '../common/utils/utils';
+import { Log, destruction } from '../common/utils/utils';
+import { PermissionType } from '../common/model/definition';
 
 const BG_COLOR = '#00000000';
 
@@ -112,6 +113,7 @@ export default class SecurityExtensionAbility extends extension {
       GlobalContext.store('dialogSet', dialogSet);
     } catch (err) {
       Log.error(`window create failed! err: ${JSON.stringify(err)}.`);
+      destruction(want, PermissionType.FAILED);
     };
   }
 };

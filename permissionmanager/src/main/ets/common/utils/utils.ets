@@ -31,6 +31,7 @@ import systemParameterEnhance from '@ohos.systemParameterEnhance';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import uiExtensionHost from '@ohos.uiExtensionHost';
 import window from '@ohos.window';
+import rpc from '@ohos.rpc';
 import { deviceInfo } from '@kit.BasicServicesKit';
 import { GlobalContext } from './globalContext';
 
@@ -303,6 +304,33 @@ export function supportPermission(): Permission[] {
   supportGroup =
     userGrantPermissions.filter(permission => only2in1AndTabletSupportedPermissions.includes(permission) === false);
   return supportGroup;
+}
+
+export function destruction(want: Want | null, typeData: number) {
+  let option = new rpc.MessageOption();
+  let data = new rpc.MessageSequence();
+  let reply = new rpc.MessageSequence();
+  Promise.all([
+    data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
+    data.writeInt(typeData)
+  ]).then(() => {
+    let proxyValue = want?.parameters?.['ohos.ability.params.callback'] as Record<string, object>;
+    if (proxyValue != undefined) {
+      let proxy = proxyValue.value as rpc.RemoteObject;
+      if (proxy != undefined) {
+        proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option)
+      } else {
+        Log.error('Write result failed! Proxy is undefined.');
+      }
+    } else {
+      Log.error('Write result failed! ProxyValue is undefined.');
+    }
+  }).catch(() => {
+    Log.error('Write result failed!');
+  }).finally(() => {
+    data.reclaim();
+    reply.reclaim();
+  })
 }
 
 export class Log {

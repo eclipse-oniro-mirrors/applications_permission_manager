@@ -99,3 +99,12 @@ export enum PermissionOption {
   // 不操作
   SKIP = 'SKIP'
 }
+
+export enum PermissionType {
+  // 允许
+  GRANT = 0,
+  // 弹窗失败
+  FAILED = 1,
+  // 取消
+  CANCELED = 2,
+}
