@@ -86,7 +86,7 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Autoriser cette application à accéder à votre localisation précise. Lorsqu'elle est désactivée, l'application ne peut accéder qu'à votre localisation approximative. Certaines applications qui ne prennent pas en charge cette fonctionnalité peuvent ne pas obtenir de localisation.",
+            "value":"Autoriser cette application à accéder à votre localisation précise. Lorsque cette option est désactivée, l'application ne peut accéder qu'à votre localisation approximative. Certaines applications qui ne prennent pas en charge cette fonctionnalité peuvent ne pas obtenir de localisation.",
             "attr":{
                 "priority":"translate"
             }
@@ -191,7 +191,7 @@
         },
         {
             "name":"pasteBoard_desc",
-            "value":"Si l'accès est refusé, cette application ne pourra pas accéder au presse-papiers.",
+            "value":"Si l'accès est refusé, cette application ne pourra pas accéder au presse-papier.",
             "attr":{
                 "priority":"translate"
             }
@@ -303,7 +303,7 @@
         },
         {
             "name":"pasteBoard_app",
-            "value":"Contenu copié à partir de %s. Si vous choisissez Refuser, cette application ne pourra pas accéder au presse-papier.",
+            "value":"Contenu copié depuis %s. Si vous sélectionnez Refuser, cette application ne pourra pas accéder au presse-papier.",
             "attr":{
                 "priority":"translate"
             }
