@@ -69,7 +69,7 @@ struct dialogPlusPage {
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
       contentBuilder: () => {
-        this.buildContent();
+        this.buildContentComp();
       },
       contentAreaPadding: { right: 0 }
     }),
@@ -104,7 +104,7 @@ struct dialogPlusPage {
   }
 
   @Builder
-  buildContent(): void {
+  buildContentComp(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Column() {
           Image(this.viewState.grantGroups[this.viewState.curIndex].icon)

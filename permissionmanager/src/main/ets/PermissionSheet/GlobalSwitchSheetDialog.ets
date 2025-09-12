@@ -149,7 +149,7 @@ struct applicationItem {
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
       contentBuilder: () => {
-        this.buildContent();
+        this.buildContentComp();
       },
       contentAreaPadding: { left: Constants.PADDING_24, right: Constants.PADDING_24 },
       buttons: [
@@ -214,7 +214,7 @@ struct applicationItem {
   }
 
   @Builder
-  buildContent(): void {
+  buildContentComp(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Column() {
         Text(this.currentGroup == 'CAMERA' ? $r('app.string.close_camera') : $r('app.string.close_microphone'))

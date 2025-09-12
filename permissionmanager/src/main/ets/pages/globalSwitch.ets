@@ -31,7 +31,7 @@ struct globalSwitch {
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
       contentBuilder: () => {
-        this.buildContent();
+        this.buildContentComp();
       },
       contentAreaPadding: { left: Constants.PADDING_24, right: Constants.PADDING_24 },
       buttons: [
@@ -58,7 +58,7 @@ struct globalSwitch {
   });
 
   @Builder
-  buildContent(): void {
+  buildContentComp(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Column() {
         Text(this.viewState.title)
