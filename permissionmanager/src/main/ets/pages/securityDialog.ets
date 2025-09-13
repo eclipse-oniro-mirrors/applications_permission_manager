@@ -82,7 +82,7 @@ function dialogTitle(index: number, securityParams: Array<Param>, isWearable: bo
 }
 
 @Builder
-function dialogContentsArea(params: DialogInfo) {
+function buildDialogContentsAreaComp(params: DialogInfo) {
   Column() {
     Column() {
       Row() {
@@ -170,7 +170,7 @@ struct CustomDialogWearable {
   build() {
     Scroll() {
       Column() {
-        dialogContentsArea({
+        buildDialogContentsAreaComp({
           index: this.index,
           securityParams: this.securityParams,
           appName: this.appName,
@@ -259,7 +259,7 @@ struct SecurityDialog {
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
       contentBuilder: () => {
-        this.buildContent();
+        this.buildContentComp();
       },
       contentAreaPadding: { right: 0 },
       buttons: [
@@ -290,10 +290,10 @@ struct SecurityDialog {
   });
 
   @Builder
-  buildContent(): void {
+  buildContentComp(): void {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
       Scroll() {
-        dialogContentsArea({
+        buildDialogContentsAreaComp({
           index: this.index,
           securityParams: this.securityParams,
           appName: this.appName,
