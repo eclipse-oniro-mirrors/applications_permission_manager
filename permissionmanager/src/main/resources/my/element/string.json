@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"%s ကို ခန္ဓာကိုယ် အာရုံခံ စနစ် ဒေတာများကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"%s ကို ကလစ်ဘုတ်မှ အကြောင်းအရာ ကူးခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"တည်နေရာ အတိအကျ- ဖွင့်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"%s အား သင့်အဆက်အသွယ်များ ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"ဤအက်ပ်ကို သင့်တည်နေရာ အတိအကျ ဝင်ရောက် သုံးစွဲခွင့်ပြုပါသည်။ ၎င်းကို ပိတ်ထားချိန်၌ ဤအက်ပ်သည် သင်၏ ခန့်မှန်းတည်နေရာကိုသာ ဝင်ရောက် သုံးစွဲနိုင်သည်။ ဤလုပ်ဆောင်ချက်ကို မပံ့ပိုးသော အက်ပ်အချို့၌ မည်သည့်တည်နေရာကိုမျှ မရယူနိုင်ခြင်းမျိုး ဖြစ်နိုင်ပါသည်။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"တည်နေရာ အတိအကျကို ပိတ်ထားချိန်တွင် အက်ပ်သည် သင့်ခန့်မှန်း တည်နေရာကိုသာ ရရှိနိုင်ပါသည်။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"%s အား ဘလူးတုသ် သုံးခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"တည်နေရာ အတိအကျ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"%s အား အခြားစက်များနှင့် ပူးတွဲလုပ်ဆောင်ခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"အမြဲတမ်း ခွင့်ပြုရန်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"%s ကို သင့်စက်ရှိ ဖိုင်များကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"%s ကို ခန့်မှန်းတည်နေရာ ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"%s ကို အခြားအက်ပ်များ၌ သင့်လှုပ်ရှားမှုကို ခြေရာခံခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"ငြင်းပယ်ရန်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"%s အား သင့်စက်ရှိ \"Documents\" ဖိုင်တွဲကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"အကြိမ်တိုင်း မေးမြန်းရန်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"%s အား သင့်ပြက္ခဒိန်ကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"တည်နေရာ အတိအကျ- ပိတ်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"%s ကို ကင်မရာ သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"ငြင်းပယ်လိုက်ပါက ဤအက်ပ်သည် ကလစ်ဘုတ်ကို ဝင်ရောက်သုံးစွဲ၍ မရနိုင်ပါ။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"%s ကို မျက်နှာပြင် ရိုက်ကူးခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"%s ကို NearLink သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"ဤတစ်ကြိမ်အတွက်သာ ခွင့်ပြုရန်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"%s ကို သင့်ကိုယ်လက်လှုပ်ရှားမှု ဒေတာများ ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"အက်ပ် သုံးနေစဉ်တွင် ခွင့်ပြုရန်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"%s အား သင့်စက်ရှိ \"Home Screen\" ဖိုင်တွဲကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"အကြိမ်တိုင်း မေးမြန်းရန်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"%s အား သင့်စက်တွင် ရုပ်ပုံများနှင့် ဗီဒီယိုများကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"%s အား သင့်စက်ရှိ \"Downloads\" ဖိုင်တွဲကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"%s ၏ တည်နေရာ ဝင်ရောက် သုံးစွဲခွင့်ကို ခန့်မှန်း မှ အတိအကျ သို့ ပြောင်းမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"%s အား ထည့်သွင်းထားသော အက်ပ်များစာရင်းကို ဖတ်ခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"ဤတစ်ကြိမ်အတွက်သာ ခွင့်ပြုရန်",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"%s အား သင့်တည်နေရာကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"%s ကို မိုက်ခရိုဖုန်း သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"%s အား သင့်စက်တွင် တေးဂီတနှင့် အသံဖိုင်များကို ဝင်ရောက် သုံးစွဲခွင့်ပြုမည်လား။",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"%s မှ အကြောင်းအရာ ကူးယူပြီးပါပြီ။ ငြင်းပယ်ရန်ကို ရွေးပါက ဤအက်ပ်သည် ကလစ်ဘုတ်ကို ဝင်ရောက်သုံးစွဲ၍ မရနိုင်ပါ။",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

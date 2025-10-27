@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Zulassen, dass %s auf Körpersensordaten zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Zulassen, dass %s Inhalte aus der Zwischenablage kopiert?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Genauer Standort: Ein",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Zulassen, dass %s auf Ihre Kontakte zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Dieser App Zugriff auf Ihren genauen Standort zulassen. Wenn diese Option deaktiviert ist, kann diese App nur auf Ihren ungefähren Standort zugreifen. Einige Apps, die diese Funktion nicht unterstützen, können möglicherweise keinen Standort abrufen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Bei Deaktivierung der Funktion für den genauen Standort kann die App nur Ihren ungefähren Standort abrufen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Zulassen, dass %s Bluetooth nutzt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Genauer Standort",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Zulassen, dass %s mit anderen Geräten zusammenarbeitet?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Immer zulassen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Zulassen, dass %s auf Dateien auf Ihrem Gerät zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Zulassen, dass %s auf Ihren ungefähren Standort zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Zulassen, dass %s Ihre Aktivitäten in anderen Apps verfolgt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Verweigern",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Zulassen, dass %s auf den Ordner „Dokumente“ auf Ihrem Gerät zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Immer fragen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Zulassen, dass %s auf Ihren Kalender zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Genauer Standort: Aus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Zulassen, dass %s die Kamera nutzt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Wenn dies abgelehnt wird, kann diese App nicht auf die Zwischenablage zugreifen.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Zulassen, dass %s Ihren Bildschirm aufnimmt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Zulassen, dass %s NearLink nutzt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Nur dieses Mal zulassen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Zulassen, dass %s auf Ihre körperlichen Aktivitätsdaten zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Während der App-Nutzung zulassen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Zulassen, dass %s auf den Ordner „Startbildschirm“ auf Ihrem Gerät zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Immer fragen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Zulassen, dass %s auf Bilder und Videos auf Ihrem Gerät zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Zulassen, dass %s auf den Ordner „Downloads“ auf Ihrem Gerät zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Standortzugriff von %s von ungefähr zu genau ändern?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Zulassen, dass %s die Liste installierter Apps liest?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Nur dieses Mal zulassen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Zulassen, dass %s auf Ihren Standort zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Zulassen, dass %s das Mikrofon nutzt?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Zulassen, dass %s auf Musik- und Audiodateien auf Ihrem Gerät zugreift?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Inhalt aus %s kopiert. Wenn Sie Ablehnen wählen, kann diese App nicht auf die Zwischenablage zugreifen.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

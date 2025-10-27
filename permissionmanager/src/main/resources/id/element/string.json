@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Izinkan %s untuk mengakses data sensor tubuh?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Izinkan %s untuk menyalin konten dari papan klip?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Lokasi presisi: Hidup",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Izinkan %s untuk mengakses kontak Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Izinkan aplikasi ini untuk mengakses lokasi tepat Anda. Dengan ini dimatikan, aplikasi ini hanya dapat mengakses lokasi perkiraan Anda. Beberapa aplikasi yang tidak mendukung fitur ini dapat gagal mendapatkan lokasi apa pun.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Ketika Lokasi presisi dinonaktifkan, aplikasi hanya dapat memperoleh lokasi perkiraan Anda.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Izinkan %s untuk menggunakan Bluetooth?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Lokasi presisi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Izinkan %s untuk berkolaborasi dengan perangkat Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Selalu izinkan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Izinkan %s untuk mengakses file di perangkat Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Izinkan %s untuk mengakses lokasi perkiraan Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Izinkan %s untuk melacak aktivitas Anda di aplikasi lainnya?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Tolak",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Izinkan %s untuk mengakses folder \"Dokumen\" di perangkat Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Selalu tanyakan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Izinkan %s untuk mengakses kalender Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Lokasi presisi: Mati",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Izinkan %s untuk menggunakan kamera?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Jika ditolak, aplikasi ini tidak akan dapat mengakses papan klip.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Izinkan %s untuk menangkap layar Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Izinkan %s untuk menggunakan NearLink?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Izinkan kali ini saja",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Izinkan %s untuk mengakses data aktivitas fisik Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Izinkan saat menggunakan aplikasi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Izinkan %s untuk mengakses folder \"Layar beranda\" di perangkat Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Selalu tanyakan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Izinkan %s untuk mengakses gambar dan video di perangkat Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Izinkan %s untuk mengakses folder \"Unduhan\" di perangkat Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Ubah akses lokasi %s dari perkiraan menjadi tepat?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Izinkan %s untuk membaca daftar aplikasi terpasang?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Izinkan kali ini saja",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Izinkan %s untuk mengakses lokasi Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Izinkan %s untuk menggunakan mikrofon?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Izinkan %s untuk mengakses file musik dan audio di perangkat Anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Konten disalin dari %s. Jika Anda memilih Tolak, aplikasi ini tidak akan dapat mengakses papan klip.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }
