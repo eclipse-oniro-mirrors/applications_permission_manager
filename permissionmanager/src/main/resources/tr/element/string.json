@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"%s uygulamasının vücut sensörü verilerine erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"%s uygulamasının panodan içerik kopyalamasına izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Kesin konum: Açık",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"%s uygulamasının kişilerinize erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Uygulamanın kesin konumunuza erişmesine izin verilir. Bu kapalıyken, bu uygulama yalnızca yaklaşık konumunuza erişebilir. Bu özelliği desteklemeyen bazı uygulamalar konum alamayabilir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Kesin konum devre dışı bırakıldığında uygulama yalnızca yaklaşık konumunuzu alabilir.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"%s uygulamasının Bluetooth'u kullanmasına izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Kesin konum",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"%s uygulamasının diğer cihazlarla iş birliği yapmasına izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Her zaman izin ver",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"%s uygulamasının cihazınızdaki dosyalara erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"%s uygulamasının yaklaşık konumunuza erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"%s uygulamasının diğer uygulamalardaki aktivitelerinizi takip etmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Reddet",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"%s uygulamasının cihazınızdaki \"Belgeler\" klasörüne erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Her defasında sor",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"%s uygulamasının takviminize erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Kesin konum: Kapalı",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"%s uygulamasının kamerayı kullanmasına izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Reddedilmesi halinde bu uygulama panoya erişemez.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"%s uygulamasının ekran görüntüsü almasına izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"%s uygulamasının NearLink'i kullanmasına izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Sadece bu seferlik izin ver",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"%s uygulamasının fiziksel aktivite verilerinize erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Uygulamayı kullanırken izin ver",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"%s uygulamasının cihazınızdaki \"Başlangıç ekranı\" klasörüne erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Her defasında sor",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"%s uygulamasının cihazınızdaki görsellere ve videolara erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"%s uygulamasının cihazınızdaki \"İndirilenler\" klasörüne erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"%s uygulamasının konum erişimi yaklaşık konumdan kesin konuma değiştirilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"%s uygulamasına yüklü uygulamaların listesini okuma izni verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Sadece bu seferlik izin ver",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"%s uygulamasının konumunuza erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"%s uygulamasının mikrofonu kullanmasına izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"%s uygulamasının cihazınızdaki müzik ve ses dosyalarına erişmesine izin verilsin mi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"%s uygulamasından içerik kopyalandı. Reddet seçimini yaparsanız bu uygulama panoya erişemez.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

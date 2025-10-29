@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Allow %s to access body sensor data?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Allow %s to copy content from the clipboard?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Precise location: On",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Allow %s to access your contacts?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"When Precise location is disabled, the app can only get your approximate location.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Allow %s to use Bluetooth?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Precise location",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Allow %s to collaborate with other devices?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Always allow",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Allow %s to access files on your device?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Allow %s to access your approximate location?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Allow %s to track your activity in other apps?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Deny",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Allow %s to access the \"Documents\" folder on your device?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Ask each time",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Allow %s to access your calendar?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Precise location: Off",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Allow %s to use the camera?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"If denied, this app won't be able to access the clipboard.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Allow %s to capture your screen?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Allow %s to use NearLink?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Allow this time only",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Allow %s to access your physical activity data?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Allow while using the app",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Allow %s to access the \"Home screen\" folder on your device?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Ask each time",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Allow %s to access images and videos on your device?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Allow %s to access the \"Downloads\" folder on your device?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Change %s's location access from approximate to precise?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Allow %s to read the list of installed apps?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Allow this time only",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Allow %s to access your location?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Allow %s to use the microphone?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Allow %s to access music and audio files on your device?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Content copied from %s. If you choose Deny, this app won't be able to access the clipboard.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

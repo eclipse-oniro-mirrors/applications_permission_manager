@@ -1,0 +1,263 @@
+{
+    "string":[
+        {
+            "name":"group_label_health",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງຂໍ້ມູນເຊັນເຊີບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"ອະນຸຍາດໃຫ້ %s ອັດສຳເນົາເນື້ອຫາຈາກຄລິບບອດບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"ທີ່ຕັ້ງທີ່ຖືກຕ້ອງ: ເປີດ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງລາຍຊື່ຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"ອະນຸຍາດໃຫ້ແອັບນີ້ເຂົ້າເຖິງທີ່ຕັ້ງທີ່ຖືກຕ້ອງຂອງທ່ານ. ເມື່ອອັນນີ້ປິດ, ແອັບນີ້ສາມາດເຂົ້າເຖິງທີ່ຕັ້ງໂດຍປະມານຂອງທ່ານເທົ່ານັ້ນ. ບາງແອັບທີ່ບໍ່ຮອງຮັບຄຸນສົມບັດນີ້ອາດຈະບໍ່ສາມາດເອົາທີ່ຕັ້ງໃດໄດ້.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"ເມື່ອ​ປິດໃຊ້​ງານທີ່​ຕັ້ງ​ທີ່​ຖືກ​ຕ້ອງ​ແລ້ວ, ແອັບ​ສາ​ມາດ​ຮັບ​ຂໍ້​ມູນ​ໂດຍ​ປະ​ມານ​ຂອງ​ທ່ານ​ໄດ້​ເທົ່າ​ນັ້ນ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"ອະນຸຍາດໃຫ້ %s ໃຊ້ Bluetooth ບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"ທີ່​ຕັ້ງ​ທີ່​ຖືກ​ຕ້ອງ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"ອະນຸຍາດໃຫ້ %s ຮ່ວມມືກັບອຸປະກອນອື່ນບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"ອະນຸຍາດ​ສະ​ເໝີ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງໄຟລ໌ໃນອຸປະກອນຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງທີ່ຕັ້ງໂດຍປະມານຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"ອະນຸຍາດໃຫ້ %s ຕິດຕາມກິດຈະກຳຂອງທ່ານຢູ່ໃນແອັບອື່ນໆບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"ປະ​ຕິ​ເສດ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງໂຟລເດີ \"ເອກະສານ\" ໃນອຸປະກອນຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"ຖາມແຕ່ລະຄັ້ງ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງປະຕິທິນຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"ທີ່ຕັ້ງທີ່ຖືກຕ້ອງ: ປິດ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"ອະນຸຍາດໃຫ້ %s ໃຊ້ກ້ອງຖ່າຍຮູບບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"ຖ້າປະຕິເສດແລ້ວ, ແອັບນີ້ຈະບໍ່ສາມາດເຂົ້າເຖິງຄລິບບອດໄດ້.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"ອະນຸຍາດໃຫ້ %s ແຄັບເຈີໜ້າຈໍຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"ອະນຸຍາດໃຫ້ %s ນຳໃຊ້ NearLink ບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"ອະນຸຍາດຄັ້ງນີ້ເທົ່ານັ້ນ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງຂໍ້ມູນການເຄື່ອນໄຫວຮ່າງກາຍຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"ອະນຸຍາດໃນຂະນະກຳລັງໃຊ້ແອັບ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງໂຟລເດີ \"ໜ້າຈໍຫຼັກ\" ໃນອຸປະກອນຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"ຖາມທຸກຄັ້ງ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"ອະນຸຍາດໃຫ້ແອັບ %s ເຂົ້າເຖິງຮູບພາບ ແລະ ວິດີໂອໃນອຸປະກອນຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງໂຟລເດີ \"ການດາວໂຫລດ\" ໃນອຸປະກອນຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"ປ່ຽນການເຂົ້າເຖິງທີ່ຕັ້ງຂອງ %s ຈາກໂດຍປະມານຫາທີ່ຖືກຕ້ອງ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"ອະນຸຍາດໃຫ້ %s ອ່ານລາຍການແອັບທີ່ຕິດຕັ້ງແລ້ວບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_location",
+            "value":"ການເຂົ້າເຖິງທີ່ຕັ້ງແບບສ່ວນຕົວ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"ອະນຸຍາດ​ຄັ້ງນີ້ເທົ່ານັ້ນ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງທີ່ຕັ້ງຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"ອະນຸຍາດໃຫ້ %s ໃຊ້ໄມໂຄຣໂຟນບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງໄຟລ໌ດົນຕີ ແລະ ສຽງໃນອຸປະກອນຂອງທ່ານບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"ເນື້ອຫາໄດ້ອັດສຳເນົາຈາກ %s. ຖ້າທ່ານເລືອກປະຕິເສດ, ແອັບນີ້ຈະບໍ່ສາມາດເຂົ້າເຖິງຄລິບບອດໄດ້.",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

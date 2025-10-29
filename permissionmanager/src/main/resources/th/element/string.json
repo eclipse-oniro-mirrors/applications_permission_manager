@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"อนุญาตให้ %s เข้าถึงข้อมูลเซ็นเซอร์ร่างกายหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"อนุญาตให้ %s คัดลอกเนื้อหาจากคลิปบอร์ดหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"ตำแหน่งที่แม่นยำ: เปิด",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"อนุญาตให้ %s เข้าถึงรายชื่อของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"อนุญาตให้แอปนี้เข้าถึงตำแหน่งที่แม่นยำของคุณ เมื่อปิดใช้งาน แอปนี้จะสามารถเข้าถึงตำแหน่งโดยประมาณของคุณได้เท่านั้น แอปบางแอปที่ไม่รองรับฟีเจอร์นี้อาจล้มเหลวในการระบุตำแหน่ง",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"เมื่อปิดใช้งานตำแหน่งที่แม่นยำ แอปจะได้รับเฉพาะตำแหน่งโดยประมาณของคุณเท่านั้น",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"อนุญาตให้ %s ใช้บลูทูธหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"ตำแหน่งที่แม่นยำ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"อนุญาตให้ %s ทํางานร่วมกับอุปกรณ์อื่น ๆ หรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"อนุญาตเสมอ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"อนุญาตให้ %s เข้าถึงไฟล์บนอุปกรณ์ของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"อนุญาตให้ %s เข้าถึงตำแหน่งโดยประมาณของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"อนุญาตให้ %s ติดตามกิจกรรมของคุณในแอปอื่นหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"ปฏิเสธ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"อนุญาตให้ %s เข้าถึงโฟลเดอร์ \"เอกสาร\" บนอุปกรณ์ของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"ถามทุกครั้ง",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"อนุญาตให้ %s เข้าถึงปฏิทินของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"ตำแหน่งที่แม่นยำ: ปิด",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"อนุญาตให้ %s ใช้กล้องถ่ายรูปหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"หากปฏิเสธ แอปนี้จะไม่สามารถเข้าถึงคลิปบอร์ดได้",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"อนุญาตให้ %s จับภาพหน้าจอของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"อนุญาตให้ %s ใช้ NearLink หรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"อนุญาตเฉพาะครั้งนี้เท่านั้น",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"อนุญาตให้ %s เข้าถึงข้อมูลกิจกรรมการเคลื่อนไหวร่างกายของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"อนุญาตขณะใช้งานแอป",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"อนุญาตให้ %s เข้าถึงโฟลเดอร์ \"หน้าจอหลัก\" บนอุปกรณ์ของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"ถามในแต่ละครั้ง",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"อนุญาตให้ %s เข้าถึงรูปภาพและวิดีโอบนอุปกรณ์ของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"อนุญาตให้ %s เข้าถึงโฟลเดอร์ \"การดาวน์โหลด\" บนอุปกรณ์ของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"เปลี่ยนการเข้าถึงตำแหน่งของ %s จากตำแหน่งโดยประมาณเป็นตำแหน่งที่แม่นยำหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"อนุญาตให้ %s อ่านรายการแอปที่ติดตั้งไว้หรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"อนุญาตในครั้งนี้เท่านั้น",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"อนุญาตให้ %s เข้าถึงตำแหน่งของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"อนุญาตให้ %s ใช้ไมโครโฟนหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"อนุญาตให้ %s เข้าถึงไฟล์เพลงและเสียงบนอุปกรณ์ของคุณหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"เนื้อหานี้คัดลอกมาจาก %s หากคุณเลือก ปฏิเสธ แอปนี้จะไม่สามารถเข้าถึงคลิปบอร์ดได้",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

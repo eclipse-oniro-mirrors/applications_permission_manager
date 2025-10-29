@@ -55,6 +55,258 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Vuoi consentire a %s di accedere ai dati relativi ai sensori del corpo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Vuoi consentire a %s di copiare il contenuto dagli appunti?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Posizione precisa: Attivata",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Vuoi consentire a %s di accedere ai contatti?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Consenti a questa app di accedere alla tua posizione precisa. Quando questa opzione è disattivata, l'app può accedere solo alla tua posizione approssimativa. Alcune app che non supportano questa funzione potrebbero non riuscire a rilevare la posizione.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"close_exact_position",
+            "value":"Quando la Posizione precisa è disattivata, l'app può ottenere solo la tua posizione approssimativa.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Vuoi consentire a %s di usare Bluetooth?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location",
+            "value":"Posizione precisa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Vuoi consentire a %s di collaborare con altri dispositivi?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"always_allow",
+            "value":"Consenti sempre",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Vuoi consentire a %s di accedere ai file sul tuo dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Vuoi consentire a %s di accedere alla tua posizione approssimativa?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Vuoi consentire a %s di monitorare la tua attività su altre app?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"ban",
+            "value":"Nega",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Vuoi consentire a %s di accedere alla cartella \"Documenti\" sul tuo dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Chiedi ogni volta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Vuoi consentire a %s l'accesso al calendario?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Posizione precisa: Disattivata",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Vuoi consentire a %s di utilizzare la fotocamera?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Se l'autorizzazione è negata, l'app non potrà accedere agli appunti.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Vuoi consentire a %s di acquisire lo schermo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Vuoi consentire a %s di usare NearLink?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow_this_time",
+            "value":"Consenti solo questa volta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Vuoi consentire a %s di accedere ai dati sull'attività fisica?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Consenti durante l'utilizzo dell'app",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Vuoi consentire a %s di accedere alla cartella \"Schermata Home\" sul dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_inquiry",
+            "value":"Chiedi ogni volta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Vuoi consentire a %s di accedere alle immagini e ai video sul dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Vuoi consentire a %s di accedere alla cartella \"Download\" sul tuo dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Vuoi modificare l'accesso alla posizione di %s da approssimativa a precisa?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Vuoi consentire a %s di leggere l'elenco delle app installate?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"This_time_only",
+            "value":"Consenti solo questa volta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Vuoi consentire a %s di accedere alla tua posizione?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Vuoi consentire a %s di utilizzare il microfono?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Vuoi consentire a %s di accedere a file musicali e audio sul dispositivo?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Contenuto copiato da %s. Se scegli Nega, questa app non potrà accedere agli appunti.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }

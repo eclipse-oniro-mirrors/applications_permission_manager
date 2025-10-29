@@ -111,6 +111,202 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"group_label_health",
+            "value":"Benarkan %s mengakses data pengesan badan?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_pasteboard",
+            "value":"Benarkan %s menyalin kandungan daripada papan klip?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_on",
+            "value":"Lokasi tepat: Dihidupkan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_contacts",
+            "value":"Benarkan %s mengakses kenalan anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"get_the_exact_position",
+            "value":"Benarkan aplikasi ini mengakses lokasi tepat anda. Apabila ciri ini dimatikan, aplikasi ini hanya boleh mengakses lokasi anggaran anda. Sesetengah aplikasi yang tidak menyokong ciri ini mungkin gagal mendapat sebarang lokasi.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_bluetooth",
+            "value":"Benarkan %s menggunakan Bluetooth?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_distributed_datasync",
+            "value":"Benarkan %s bekerjasama dengan peranti lain?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document",
+            "value":"Benarkan %s mengakses fail pada peranti anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"access_general_location",
+            "value":"Benarkan %s mengakses lokasi anggaran anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_ADS",
+            "value":"Benarkan %s menjejak aktiviti anda dalam aplikasi lain?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_document_folder",
+            "value":"Benarkan %s mengakses folder \"Dokumen\" pada peranti anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_calendar",
+            "value":"Benarkan %s mengakses kalendar anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"precise_location_off",
+            "value":"Lokasi tepat: Dimatikan",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_camera",
+            "value":"Benarkan %s menggunakan kamera?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_desc",
+            "value":"Jika ditolak, aplikasi ini tidak akan dapat mengakses papan klip.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screenCapture",
+            "value":"Benarkan %s menangkap skrin anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_nearLink",
+            "value":"Benarkan %s menggunakan NearLink?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_sport",
+            "value":"Benarkan %s mengakses data aktiviti fizikal anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allowed_only_during_use",
+            "value":"Benarkan semasa menggunakan aplikasi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_desktop_folder",
+            "value":"Benarkan %s mengakses folder \"Skrin utama\" pada peranti anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_image_and_videos",
+            "value":"Benarkan %s mengakses imej dan video pada peranti anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_download_folder",
+            "value":"Benarkan %s mengakses folder \"Muat turun\" pada peranti anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"fuzzy_to_exact",
+            "value":"Tukar akses lokasi %s daripada anggaran kepada tepat?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_appList",
+            "value":"Benarkan %s membaca senarai aplikasi yang dipasang?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_location",
+            "value":"Benarkan %s mengakses lokasi anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_microphone",
+            "value":"Benarkan %s menggunakan mikrofon?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_audios",
+            "value":"Benarkan %s mengakses fail muzik dan audio pada peranti anda?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"pasteBoard_app",
+            "value":"Kandungan disalin daripada %s. Jika anda memilih Tolak, aplikasi ini tidak akan dapat mengakses papan klip.",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }
