@@ -258,6 +258,55 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"SecurityText_location",
+            "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %1$s%2$s ສາມາດເຂົ້າເຖິງທີ່ຕັ້ງຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityTitle_mediaFiles",
+            "value":"ການເຂົ້າເຖິງແກເລີຣີແບບສ່ວນຕົວ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityText_mediaFiles",
+            "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %1$s%2$s ສາມາດເຂົ້າເຖິງແກເລີຣີຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເພື່ອບັນທຶກລາຍການເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_location",
+            "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %s ສາມາດເຂົ້າເຖິງທີ່ຕັ້ງຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"allow",
+            "value":"ອະນຸຍາດ",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"SecurityDescription_mediaFiles",
+            "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %s ສາມາດເຂົ້າເຖິງແກເລີຣີຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເພື່ອບັນທຶກລາຍການເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"ຍົກເລີກ",
+            "attr":{
+                "priority":"translate"
+            }
         }
     ]
 }
