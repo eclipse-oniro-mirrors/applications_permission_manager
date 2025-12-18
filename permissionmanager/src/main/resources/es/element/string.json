@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Acceso restringido a ubicaciones",
+            "value":"Acceso privado a la ubicación",
             "attr":{
                 "priority":"LT"
             }
