@@ -86,7 +86,7 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Dieser App Zugriff auf Ihren genauen Standort zulassen. Wenn diese Option deaktiviert ist, kann diese App nur auf Ihren ungefähren Standort zugreifen. Einige Apps, die diese Funktion nicht unterstützen, können möglicherweise keinen Standort abrufen.",
+            "value":"Zugriff dieser App auf Ihren genauen Standort zulassen. Wenn diese Option deaktiviert ist, kann diese App nur auf Ihren ungefähren Standort zugreifen. Einige Apps, die diese Funktion nicht unterstützen, können möglicherweise keinen Standort abrufen.",
             "attr":{
                 "priority":"translate"
             }
@@ -219,7 +219,7 @@
         },
         {
             "name":"group_label_sport",
-            "value":"Zulassen, dass %s auf Ihre körperlichen Aktivitätsdaten zugreift?",
+            "value":"Zulassen, dass %s auf Daten zu Ihrer physischen Aktivität zugreift?",
             "attr":{
                 "priority":"translate"
             }
@@ -261,14 +261,14 @@
         },
         {
             "name":"fuzzy_to_exact",
-            "value":"Standortzugriff von %s von ungefähr zu genau ändern?",
+            "value":"Standortzugriff von %s von Ungefähr zu Genau ändern?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
             "name":"group_label_appList",
-            "value":"Zulassen, dass %s die Liste installierter Apps liest?",
+            "value":"Zulassen, dass %s die Liste der installierten Apps liest?",
             "attr":{
                 "priority":"translate"
             }
