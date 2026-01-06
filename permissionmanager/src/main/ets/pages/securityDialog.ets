@@ -65,12 +65,14 @@ function dialogTitle(index: number, securityParams: Array<Param>, isWearable: bo
       Text(securityParams[index].label)
         .titleText(isWearable)
         .fontSize($r('sys.float.Title_S'))
+        .fallbackLineSpacing(true)
     } else {
       Text(securityParams[index].label)
         .titleText(isWearable)
         .minFontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
         .maxFontSize($r('sys.float.Title_S'))
         .heightAdaptivePolicy(TextHeightAdaptivePolicy.MAX_LINES_FIRST)
+        .fallbackLineSpacing(true)
     }
   }
   .constraintSize({ minHeight: Constants.HEADLINE_HEIGHT })
@@ -151,6 +153,7 @@ function buildDialogContentsAreaComp(params: DialogInfo) {
           right: Constants.MARGIN_26,
           bottom: Constants.MARGIN_12
         } : {})
+        .fallbackLineSpacing(true)
     }
   }
   .clip(true)
