@@ -2,7 +2,7 @@
     "string":[
         {
             "name":"SecurityTitle_mediaFiles",
-            "value":"Accesso privato a Galleria",
+            "value":"Accesso privato alla Galleria",
             "attr":{
                 "priority":"LT"
             }
@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Accesso privato alla posizione",
+            "value":"Accesso limitato alla posizione",
             "attr":{
                 "priority":"LT"
             }
