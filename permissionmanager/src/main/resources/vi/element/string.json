@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Quyền truy cập riêng tư vào vị trí",
+            "value":"Hạn chế truy cập vào vị trí",
             "attr":{
                 "priority":"LT"
             }
