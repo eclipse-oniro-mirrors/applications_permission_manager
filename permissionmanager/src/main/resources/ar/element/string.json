@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"الوصول الخاص إلى الموقع",
+            "value":"الوصول المحدود إلى الموقع",
             "attr":{
                 "priority":"LT"
             }
