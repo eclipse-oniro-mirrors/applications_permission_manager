@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Akses privat ke lokasi",
+            "value":"Akses terbatas ke lokasi",
             "attr":{
                 "priority":"LT"
             }
