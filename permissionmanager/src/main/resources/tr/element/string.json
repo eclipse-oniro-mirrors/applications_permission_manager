@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Konuma özel erişim",
+            "value":"Konuma sınırlı erişim",
             "attr":{
                 "priority":"LT"
             }

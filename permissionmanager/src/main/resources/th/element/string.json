@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"การเข้าถึงตำแหน่งแบบรักษาความเป็นส่วนตัว",
+            "value":"จำกัดการเข้าถึงตำแหน่ง",
             "attr":{
                 "priority":"LT"
             }
@@ -114,7 +114,7 @@
         },
         {
             "name":"group_label_distributed_datasync",
-            "value":"อนุญาตให้ %s ทํางานร่วมกับอุปกรณ์อื่น ๆ หรือไม่",
+            "value":"อนุญาตให้ %s ทำงานร่วมกับอุปกรณ์อื่น ๆ หรือไม่",
             "attr":{
                 "priority":"translate"
             }

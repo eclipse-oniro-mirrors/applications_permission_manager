@@ -664,7 +664,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Private access to location",
+            "value":"Limited access to location",
             "attr":{
                 "priority":"LT"
             }

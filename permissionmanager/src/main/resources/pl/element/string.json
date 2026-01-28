@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"Dostęp do lokalizacji z zachowaniem prywatności",
+            "value":"Ograniczony dostęp do lokalizacji",
             "attr":{
                 "priority":"LT"
             }

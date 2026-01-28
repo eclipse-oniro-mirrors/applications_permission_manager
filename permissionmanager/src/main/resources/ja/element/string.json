@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"位置情報へのプライベートアクセス",
+            "value":"位置情報へのアクセス制限",
             "attr":{
                 "priority":"LT"
             }

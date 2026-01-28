@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"위치에 비공개 액세스",
+            "value":"위치에 제한된 액세스",
             "attr":{
                 "priority":"LT"
             }
