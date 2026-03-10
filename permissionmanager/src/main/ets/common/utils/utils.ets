@@ -292,8 +292,13 @@ export function setAvoidArea(proxy: uiExtensionHost.UIExtensionHostWindowProxy) 
 
 export function getFontSizeScale(): boolean {
   const FONT_SIZE_SCALE_PARAM = 'persist.sys.font_scale_for_user0';
-  let fontSizeScale = Number.parseFloat(systemParameterEnhance.getSync(FONT_SIZE_SCALE_PARAM, '1'));
-  return fontSizeScale > 1;
+  try {
+    let fontSizeScale = Number.parseFloat(systemParameterEnhance.getSync(FONT_SIZE_SCALE_PARAM, '1'));
+    return fontSizeScale > 1;
+  } catch (error) {
+    Log.error('getFontSizeScale error: ' + JSON.stringify(error));
+    return false;
+  }
 }
 
 export function supportPermission(): Permission[] {
@@ -310,10 +315,11 @@ export function destruction(want: Want | null, typeData: number) {
   let option = new rpc.MessageOption();
   let data = new rpc.MessageSequence();
   let reply = new rpc.MessageSequence();
-  Promise.all([
-    data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
-    data.writeInt(typeData)
-  ]).then(() => {
+  try {
+    Promise.all([
+      data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
+      data.writeInt(typeData)
+    ]).then(() => {
     let proxyValue = want?.parameters?.['ohos.ability.params.callback'] as Record<string, object>;
     if (proxyValue != undefined) {
       let proxy = proxyValue.value as rpc.RemoteObject;
@@ -331,6 +337,9 @@ export function destruction(want: Want | null, typeData: number) {
     data.reclaim();
     reply.reclaim();
   })
+  } catch (error) {
+    Log.error('destruction function error: ' + JSON.stringify(error));
+  }
 }
 
 export class Log {

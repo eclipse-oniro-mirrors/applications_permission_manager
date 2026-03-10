@@ -560,8 +560,8 @@ struct mediaDocumentItem {
       });
     }
     let hasReason = false;
-    let info = await
-      bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+    try {
+      const info = await bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
     for (const permission of this.permissions) {
       for (const reqPermissionDetail of info.reqPermissionDetails) {
         if (reqPermissionDetail.name != permission) {
@@ -575,6 +575,9 @@ struct mediaDocumentItem {
           hasReason = true;
         }
       }
+    } catch (error) {
+      Log.error('getBundleInfo error in getReason: ' + JSON.stringify(error));
+      return;
     }
   }
 
