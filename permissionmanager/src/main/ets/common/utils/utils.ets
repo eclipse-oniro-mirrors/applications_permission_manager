@@ -320,23 +320,23 @@ export function destruction(want: Want | null, typeData: number) {
       data.writeInterfaceToken(Constants.SEC_COMP_DIALOG_CALLBACK),
       data.writeInt(typeData)
     ]).then(() => {
-    let proxyValue = want?.parameters?.['ohos.ability.params.callback'] as Record<string, object>;
-    if (proxyValue != undefined) {
-      let proxy = proxyValue.value as rpc.RemoteObject;
-      if (proxy != undefined) {
-        proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option)
+      let proxyValue = want?.parameters?.['ohos.ability.params.callback'] as Record<string, object>;
+      if (proxyValue != undefined) {
+        let proxy = proxyValue.value as rpc.RemoteObject;
+        if (proxy != undefined) {
+          proxy.sendMessageRequest(Constants.RESULT_CODE, data, reply, option)
+        } else {
+          Log.error('Write result failed! Proxy is undefined.');
+        }
       } else {
-        Log.error('Write result failed! Proxy is undefined.');
+        Log.error('Write result failed! ProxyValue is undefined.');
       }
-    } else {
-      Log.error('Write result failed! ProxyValue is undefined.');
-    }
-  }).catch(() => {
-    Log.error('Write result failed!');
-  }).finally(() => {
-    data.reclaim();
-    reply.reclaim();
-  })
+    }).catch(() => {
+      Log.error('Write result failed!');
+    }).finally(() => {
+      data.reclaim();
+      reply.reclaim();
+    })
   } catch (error) {
     Log.error('destruction function error: ' + JSON.stringify(error));
   }

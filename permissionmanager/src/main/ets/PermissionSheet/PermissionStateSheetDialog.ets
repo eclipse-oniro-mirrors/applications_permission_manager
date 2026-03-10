@@ -561,18 +561,20 @@ struct mediaDocumentItem {
     }
     let hasReason = false;
     try {
-      const info = await bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
-    for (const permission of this.permissions) {
-      for (const reqPermissionDetail of info.reqPermissionDetails) {
-        if (reqPermissionDetail.name != permission) {
-          continue;
-        }
-        Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
-        let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
-        let reason = await context.resourceManager.getStringValue(reqPermissionDetail.reasonId);
-        if (reason !== undefined && !hasReason) {
-          this.reason = reason.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
-          hasReason = true;
+      const info = await bundleManager.getBundleInfo(this.bundleName,
+        bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+      for (const permission of this.permissions) {
+        for (const reqPermissionDetail of info.reqPermissionDetails) {
+          if (reqPermissionDetail.name != permission) {
+            continue;
+          }
+          Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
+          let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
+          let reason = await context.resourceManager.getStringValue(reqPermissionDetail.reasonId);
+          if (reason !== undefined && !hasReason) {
+            this.reason = reason.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+            hasReason = true;
+          }
         }
       }
     } catch (error) {
