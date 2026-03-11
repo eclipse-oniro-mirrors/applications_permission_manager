@@ -568,54 +568,60 @@ struct permissionRecordPage {
   }
 
   getInfo(record: privacyManager.BundleUsedRecord, sortFlag: boolean) {
-    bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
-    bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async (info): Promise<boolean> => {
-      let appInfo: AppRecordInfo = new AppRecordInfo('', '', '', 0, 0, [], [], [], [], 0);
-      let reqPermissions: Permission[] = [];
-      let groupIds: number[] = [];
-      this.reqUserPermissions = [];
-      this.reqUserRecords = [];
-      this.permissionGroups = [];
-      this.groupNames = [];
-      this.appLastTime = 0;
-      info.reqPermissionDetails.forEach(item => {
-        reqPermissions.push(item.name as Permission);
-      });
-      await this.getReqUserRecords(record, info);
-      await this.getReqUserPermissions(reqPermissions, info);
-      if (this.reqUserRecords.length == 0) {
-        return false;
-      }
-      this.getPermissionGroups();
-      for (let i = 0; i < this.reqUserPermissions.length; i++) {
-        let groupId = getGroupIdByPermission(this.reqUserPermissions[i])
-        if (groupIds.indexOf(groupId) == -1) {
-          groupIds.push(groupId);
+    try {
+      bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async (info): Promise<boolean> => {
+        let appInfo: AppRecordInfo = new AppRecordInfo('', '', '', 0, 0, [], [], [], [], 0);
+        let reqPermissions: Permission[] = [];
+        let groupIds: number[] = [];
+        this.reqUserPermissions = [];
+        this.reqUserRecords = [];
+        this.permissionGroups = [];
+        this.groupNames = [];
+        this.appLastTime = 0;
+        info.reqPermissionDetails.forEach(item => {
+          reqPermissions.push(item.name as Permission);
+        });
+        await this.getReqUserRecords(record, info);
+        await this.getReqUserPermissions(reqPermissions, info);
+        if (this.reqUserRecords.length == 0) {
+          return false;
         }
-      }
-      this.allBundleInfo.forEach(bundleInfo => {
-        if (bundleInfo.bundleName === info.name) {
-          appInfo.groupName = bundleInfo.label;
-          appInfo.icon = bundleInfo.icon;
+        this.getPermissionGroups();
+        for (let i = 0; i < this.reqUserPermissions.length; i++) {
+          let groupId = getGroupIdByPermission(this.reqUserPermissions[i])
+          if (groupIds.indexOf(groupId) == -1) {
+            groupIds.push(groupId);
+          }
         }
+        this.allBundleInfo.forEach(bundleInfo => {
+          if (bundleInfo.bundleName === info.name) {
+            appInfo.groupName = bundleInfo.label;
+            appInfo.icon = bundleInfo.icon;
+          }
+        })
+        appInfo.name = info.name;
+        appInfo.api = info.targetVersion;
+        appInfo.accessTokenId = info.appInfo.accessTokenId;
+        appInfo.reqUserPermissions = this.reqUserPermissions;
+        appInfo.permissions = this.permissionGroups;
+        appInfo.groupNames = this.groupNames;
+        appInfo.groupIds = groupIds;
+        appInfo.appLastTime = this.appLastTime;
+        this.applicationInfos.push(appInfo);
+        if (sortFlag) {
+          let appInfos: AppRecordInfo[] = [];
+          this.applicationInfos.forEach(item => { appInfos.push(item) });
+          appInfos.sort((a, b) => { return b.appLastTime - a.appLastTime });
+          this.applicationInfos = appInfos;
+        }
+        return true;
       })
-      appInfo.name = info.name;
-      appInfo.api = info.targetVersion;
-      appInfo.accessTokenId = info.appInfo.accessTokenId;
-      appInfo.reqUserPermissions = this.reqUserPermissions;
-      appInfo.permissions = this.permissionGroups;
-      appInfo.groupNames = this.groupNames;
-      appInfo.groupIds = groupIds;
-      appInfo.appLastTime = this.appLastTime;
-      this.applicationInfos.push(appInfo);
-      if (sortFlag) {
-        let appInfos: AppRecordInfo[] = [];
-        this.applicationInfos.forEach(item => { appInfos.push(item) });
-        appInfos.sort((a, b) => { return b.appLastTime - a.appLastTime });
-        this.applicationInfos = appInfos;
-      }
       return true;
-    })
+    } catch (error) {
+      Log.error('getBundleInfo error in getInfo: ' + JSON.stringify(error));
+      return false;
+    }
   }
 
   getAllRecords() {

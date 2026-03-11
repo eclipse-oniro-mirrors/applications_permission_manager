@@ -268,24 +268,28 @@ struct mediaDocumentItem {
       })
     }
     let hasReason = false;
-    bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
-      .then(info => {
-        this.permissions.forEach(permission => {
-          info.reqPermissionDetails.forEach(reqPermissionDetail => {
-            if (reqPermissionDetail.name == permission) {
-              Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
-              let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
-              context.resourceManager.getStringValue(reqPermissionDetail.reasonId).then(value => {
-                if (value !== undefined && !hasReason) {
-                  this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
-                  reqPermissionInfo = reqPermissionDetail;
-                  hasReason = true;
-                }
-              })
-            }
+    try {
+      bundleManager.getBundleInfo(this.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION)
+        .then(info => {
+          this.permissions.forEach(permission => {
+            info.reqPermissionDetails.forEach(reqPermissionDetail => {
+              if (reqPermissionDetail.name == permission) {
+                Log.info('reqPermissionDetail: ' + JSON.stringify(reqPermissionDetail));
+                let context = this.context.createModuleContext(this.bundleName, reqPermissionDetail.moduleName);
+                context.resourceManager.getStringValue(reqPermissionDetail.reasonId).then(value => {
+                  if (value !== undefined && !hasReason) {
+                    this.reason = value.slice(Constants.START_SUBSCRIPT, Constants.END_SUBSCRIPT);
+                    reqPermissionInfo = reqPermissionDetail;
+                    hasReason = true;
+                  }
+                })
+              }
+            })
           })
         })
-      })
+    } catch (error) {
+      Log.error('getBundleInfo error in getReason: ' + JSON.stringify(error));
+    }
   }
 
   /**
