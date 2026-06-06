@@ -82,7 +82,6 @@ struct authorityManagementPage {
             let dataList = this.allPermissionApplications.filter((ele) => {
               return ele.groupName === item.group;
             })
-
             GlobalContext.store('currentPermissionGroup', item.group);
             if (globalGroup.indexOf(item.group) == -1) {
               this.getUIContext().getRouter().pushUrl({
@@ -130,6 +129,7 @@ struct authorityManagementPage {
   @State allGroups: PermissionGroup[] = [];
   @State currentIndex: number = 0;
   @State isTouch: string = '';
+  @State statusBarHeight: number = 0
   @State isVertical: boolean = true;
   @Builder TabBuilder(index: number) {
     Flex({
@@ -365,6 +365,7 @@ struct authorityManagementPage {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
+      this.statusBarHeight = AppStorage.get('STATUS_BAR_HEIGHT') as number
     this.getAllBundlePermissions();
     try {
       let dis = display.getDefaultDisplaySync();
@@ -543,6 +544,7 @@ struct authorityManagementPage {
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
         .backgroundColor($r('sys.color.background_secondary'))
+        .padding({top:this.statusBarHeight})
       }
     }.backgroundColor($r('sys.color.background_secondary'))
   }

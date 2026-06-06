@@ -22,7 +22,10 @@ import { CalendarObj, RouterParams1, PermissionApplications } from '../common/mo
 @Component
 struct appNamePage {
   private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1).backTitle;
-
+  @State statusBarHeight: number = 0;
+  aboutToAppear(): void {
+    this.statusBarHeight = (AppStorage.get('STATUS_BAR_HEIGHT') as number) ?? 0
+  }
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
@@ -47,6 +50,7 @@ struct appNamePage {
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
         .backgroundColor($r('sys.color.background_secondary'))
+        .padding({top:this.statusBarHeight})
       }
     }.backgroundColor($r('sys.color.background_secondary'))
   }

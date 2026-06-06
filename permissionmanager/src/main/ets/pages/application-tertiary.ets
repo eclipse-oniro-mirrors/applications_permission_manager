@@ -42,7 +42,11 @@ struct mediaDocumentPage {
   @State selected: number = 0; // Permission status array
   @State accurateIsOn: boolean = false;
   @State isRefreshReason: number = 0;
+  @State statusBarHeight: number = 0;
+  aboutToAppear(): void {
+    this.statusBarHeight = (AppStorage.get('STATUS_BAR_HEIGHT') as number) ?? 0
 
+  }
   build() {
     Column() {
       GridRow({ gutter: Constants.GUTTER, columns: {
@@ -73,6 +77,7 @@ struct mediaDocumentPage {
           .height(Constants.FULL_HEIGHT)
           .width(Constants.FULL_WIDTH)
           .backgroundColor($r('sys.color.background_secondary'))
+          .padding({top:this.statusBarHeight})
         }
       }.backgroundColor($r('sys.color.background_secondary'))
     }

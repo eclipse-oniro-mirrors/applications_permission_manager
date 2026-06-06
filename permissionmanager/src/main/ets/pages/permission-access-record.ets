@@ -346,7 +346,7 @@ struct permissionRecordPage {
     .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
   }
-
+  @State statusBarHeight: number = 0;
   build() {
     GridRow({ gutter: Constants.GUTTER, columns: {
       xs: Constants.XS_COLUMNS, sm: Constants.SM_COLUMNS, md: Constants.MD_COLUMNS, lg: Constants.LG_COLUMNS } }) {
@@ -450,6 +450,7 @@ struct permissionRecordPage {
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
         .backgroundColor($r('sys.color.background_secondary'))
+        .padding({top:this.statusBarHeight})
       }
     }.backgroundColor($r('sys.color.background_secondary'))
   }
@@ -686,6 +687,7 @@ struct permissionRecordPage {
   }
 
   aboutToAppear() {
+    this.statusBarHeight = (AppStorage.get('STATUS_BAR_HEIGHT') as number) ?? 0
     this.getStrings();
     this.getAllRecords();
   }
