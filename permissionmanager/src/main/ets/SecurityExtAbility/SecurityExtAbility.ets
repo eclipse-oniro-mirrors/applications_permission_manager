@@ -29,7 +29,7 @@ export default class SecurityExtensionAbility extends extension {
    * Lifecycle function, called back when a service extension is started for initialization.
    */
   onCreate(want: Want): void {
-    Log.info(`SecurityExtensionAbility onCreate, ability name is ${want.abilityName}.`);
+    Log.info(`SecurityExtensionAbility onCreate, ability name is ${want?.abilityName}.`);
     globalThis.windowNum = 0;
   }
 
