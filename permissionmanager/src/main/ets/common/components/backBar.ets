@@ -59,9 +59,20 @@ export struct backBar {
         .onClick(() => {
           let router = this.getUIContext().getRouter();
           let length = router.getLength();
-          const intent: Record<string, Object> = { 'action': 'exit' };
-          const session = globalThis.windowStage as UIExtensionContentSession
-          Number(length) === 1 ? session.sendData(intent) : router.back();
+          if (Number(length) > 1) {
+            router.back();
+            return;
+          }
+          // 路由栈仅剩1页，需关闭当前Ability
+          if (globalThis.isUIExtensionMode) {
+            // UIExtension拉起方式：通过session通知宿主退出
+            const session = globalThis.windowStage as UIExtensionContentSession;
+            const intent: Record<string, Object> = { 'action': 'exit' };
+            session.sendData(intent);
+          } else {
+            // MainAbility拉起方式：直接终止自身Ability
+            this.context.terminateSelf();
+          }
         })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
