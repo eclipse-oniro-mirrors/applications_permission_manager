@@ -30,7 +30,7 @@
         },
         {
             "name":"SecurityTitle_location",
-            "value":"จำกัดการเข้าถึงตำแหน่ง",
+            "value":"การเข้าถึงตำแหน่งแบบจำกัด",
             "attr":{
                 "priority":"LT"
             }
