@@ -37,6 +37,6 @@ export class ScreenCaptureStrategy extends BasePermissionStrategy {
   }
 
   public override isSupport(permission: Permission): boolean {
-    return DeviceUtil.isPC() || DeviceUtil.isTablet();
+    return DeviceUtil.isPC() || DeviceUtil.isTablet() || DeviceUtil.isPhone();
   }
 }
