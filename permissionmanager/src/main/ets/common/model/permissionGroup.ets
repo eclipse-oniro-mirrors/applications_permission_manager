@@ -112,7 +112,6 @@ export const only2in1AndTabletSupportedPermissions: Permission[] = [
     Permission.READ_WRITE_DOWNLOAD_DIRECTORY,
     Permission.READ_WRITE_DESKTOP_DIRECTORY,
     Permission.READ_WRITE_DOCUMENTS_DIRECTORY,
-    Permission.CUSTOM_SCREEN_CAPTURE
 ]
 
 export const buttonResource: Map<ButtonStatus, Resource> = new Map([
