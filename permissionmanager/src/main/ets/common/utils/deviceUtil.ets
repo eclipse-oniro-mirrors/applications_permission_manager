@@ -16,22 +16,34 @@
 import deviceInfo from '@ohos.deviceInfo';
 import display from '@ohos.display';
 
+enum DeviceType {
+  DEFAULT = 'default',
+  TWO_IN_ONE = '2in1',
+  TABLET = 'tablet',
+  PHONE = 'phone'
+};
+
 export class DeviceUtil {
   constructor() {
   }
 
   public static isPC(): boolean {
-    return deviceInfo.deviceType === '2in1';
+    return deviceInfo.deviceType === DeviceType.TWO_IN_ONE;
   }
 
   public static isTablet(): boolean {
-    return deviceInfo.deviceType === 'tablet';
+    return deviceInfo.deviceType === DeviceType.TABLET;
+  }
+
+  public static isPhone(): boolean {
+    return deviceInfo.deviceType === DeviceType.PHONE;
   }
 
   // 折叠屏
   public static isFold(): boolean {
     try {
-      return ((deviceInfo.deviceType === 'default' || deviceInfo.deviceType === 'phone') && display.isFoldable());
+      return ((deviceInfo.deviceType === DeviceType.DEFAULT || deviceInfo.deviceType === DeviceType.PHONE) &&
+        display.isFoldable());
     } catch (error) {
       return false;
     }
@@ -39,6 +51,7 @@ export class DeviceUtil {
 
   // 直板机
   public static isCandyBar(): boolean {
-    return ((deviceInfo.deviceType === 'default' || deviceInfo.deviceType === 'phone') && !DeviceUtil.isFold());
+    return ((deviceInfo.deviceType === DeviceType.DEFAULT || deviceInfo.deviceType === DeviceType.PHONE) &&
+      !DeviceUtil.isFold());
   }
 }
