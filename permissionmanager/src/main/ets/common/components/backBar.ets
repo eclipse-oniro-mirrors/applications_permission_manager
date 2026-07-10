@@ -16,6 +16,7 @@
 import common from '@ohos.app.ability.common';
 import Constants from '../utils/constant';
 import { Log } from '../utils/utils';
+import { UIExtensionAbility, UIExtensionContentSession } from '@kit.AbilityKit';
 
 @Component
 export struct backBar {
@@ -58,7 +59,9 @@ export struct backBar {
         .onClick(() => {
           let router = this.getUIContext().getRouter();
           let length = router.getLength();
-          Number(length) == 1 ? this.context.terminateSelf() : router.back();
+          const intent: Record<string, Object> = { 'action': 'exit' };
+          const session = globalThis.windowStage as UIExtensionContentSession
+          Number(length) === 1 ? session.sendData(intent) : router.back();
         })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
