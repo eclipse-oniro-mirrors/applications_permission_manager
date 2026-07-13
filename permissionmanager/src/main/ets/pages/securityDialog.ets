@@ -35,7 +35,6 @@ function titleText(isWearable: boolean) {
   .textOverflow({ overflow: TextOverflow.Ellipsis })
   .maxLines(Constants.SECURITY_HEADER_MAX_LINES)
   .wordBreak(WordBreak.HYPHENATION)
-  .orphanCharOptimization(true)
 }
 
 @Extend(Button)
@@ -157,7 +156,6 @@ function buildDialogContentsAreaComp(params: DialogInfo) {
         } : {})
         .fallbackLineSpacing(true)
         .wordBreak(WordBreak.HYPHENATION)
-        .orphanCharOptimization(true)
     }
   }
   .clip(true)
