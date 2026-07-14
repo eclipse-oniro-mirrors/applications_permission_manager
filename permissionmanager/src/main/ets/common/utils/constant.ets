@@ -20,8 +20,8 @@ export default class Constants {
     // backBar
     public static BACKBAR_HEIGHT = 56;
     public static BACKBAR_MINHEIGHT = 56;
-    public static BACKBAR_IMAGE_HEIGHT = 24;
-    public static BACKBAR_IMAGE_WIDTH = 24;
+    public static BACKBAR_IMAGE_HEIGHT = 32;
+    public static BACKBAR_IMAGE_WIDTH = 32;
     public static BACKBAR_MARGIN_RIGHT = 4;
 
     // search textInput
@@ -133,7 +133,7 @@ export default class Constants {
     public static DEFAULT_SLIDER_WIDTH = 60;
     public static DEFAULT_SLIDER_HEIGHT = 40;
     public static OFFSET = 100;
-    public static CLICK_SHADOW_LENGTH = 48;
+    public static CLICK_SHADOW_LENGTH = 34;
     public static SCROLL_BAR_WIDTH_DEFAULT = 4;
     public static SCROLL_BAR_WIDTH_ACTIVE = 8;
     public static DIVIDER = '1px';
