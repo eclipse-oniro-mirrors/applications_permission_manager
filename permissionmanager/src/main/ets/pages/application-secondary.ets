@@ -38,6 +38,7 @@ struct appNamePlusPage {
   @State isGranted: number = Constants.PERMISSION_ALLOW;
   @State folderStatus: boolean[] = [false, false, false];
   @State reqUserPermissions: Permission[] = [];
+  @State statusBarHeight: number = 0;
 
   @Builder ListItemLayout(item: PermissionObj, status: number) {
     ListItem() {
@@ -258,6 +259,7 @@ struct appNamePlusPage {
     bundleManager.getApplicationInfo(
       this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT
     ).then(appInfo => {
+      this.statusBarHeight = (AppStorage.get('STATUS_BAR_HEIGHT') as number) ?? 0
       let bundleContext = this.context.createBundleContext(this.applicationInfo.bundleName);
       bundleContext.resourceManager.getStringValue(appInfo.labelId, (error, value) => {
         if (value) {
@@ -410,6 +412,7 @@ struct appNamePlusPage {
           .height(Constants.FULL_HEIGHT)
           .width(Constants.FULL_WIDTH)
           .backgroundColor($r('sys.color.background_secondary'))
+          .padding({top:this.statusBarHeight})
         }
       }.backgroundColor($r('sys.color.background_secondary'))
     }

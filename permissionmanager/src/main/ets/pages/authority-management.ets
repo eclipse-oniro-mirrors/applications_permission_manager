@@ -82,7 +82,6 @@ struct authorityManagementPage {
             let dataList = this.allPermissionApplications.filter((ele) => {
               return ele.groupName === item.group;
             })
-
             GlobalContext.store('currentPermissionGroup', item.group);
             if (globalGroup.indexOf(item.group) == -1) {
               this.getUIContext().getRouter().pushUrl({
@@ -130,6 +129,7 @@ struct authorityManagementPage {
   @State allGroups: PermissionGroup[] = [];
   @State currentIndex: number = 0;
   @State isTouch: string = '';
+  @State statusBarHeight: number = 0
   @State isVertical: boolean = true;
   @Builder TabBuilder(index: number) {
     Flex({
@@ -309,8 +309,13 @@ struct authorityManagementPage {
       ' labelId: ' + info.labelId
     );
 
+    const labelResourceId = info.labelResource?.id ?? 0;
+    if (labelResourceId === 0 && (info.labelId === undefined || info.labelId === 0)) {
+      addLocalTag(info);
+      return;
+    }
     try {
-      if (info.labelResource.id !== 0) {
+      if (labelResourceId !== 0) {
         info.label = await this.context.resourceManager.getStringValue(info.labelResource);
       } else {
         let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
@@ -334,8 +339,13 @@ struct authorityManagementPage {
       ' iconId: ' + info.iconId
     );
 
+    const iconResourceId = info.iconResource?.id ?? 0;
+    if (iconResourceId === 0 && (info.iconId === undefined || info.iconId === 0)) {
+      info.icon = $r('app.media.icon');
+      return;
+    }
     try {
-      if (info.iconResource.id !== 0) {
+      if (iconResourceId !== 0) {
         let iconDescriptor = this.context.resourceManager.getDrawableDescriptor(info.iconResource);
         info.icon = iconDescriptor?.getPixelMap();
       } else {
@@ -346,7 +356,6 @@ struct authorityManagementPage {
     } catch (error) {
       Log.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
     }
-
     if (!info.icon) {
       info.icon = $r('app.media.icon');
     }
@@ -356,6 +365,7 @@ struct authorityManagementPage {
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
+      this.statusBarHeight = AppStorage.get('STATUS_BAR_HEIGHT') as number
     this.getAllBundlePermissions();
     try {
       let dis = display.getDefaultDisplaySync();
@@ -534,6 +544,7 @@ struct authorityManagementPage {
         .height(Constants.FULL_HEIGHT)
         .width(Constants.FULL_WIDTH)
         .backgroundColor($r('sys.color.background_secondary'))
+        .padding({top:this.statusBarHeight})
       }
     }.backgroundColor($r('sys.color.background_secondary'))
   }
@@ -553,9 +564,14 @@ struct applicationItem {
         Column() {
           Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
             Row() {
-              Image(item.icon)
-                .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
-                .margin({ right: Constants.APPLICATION_IMAGE_MARGIN_RIGHT })
+              Row(){
+                Image(item.icon)
+                  .customizeImage(Constants.APPLICATION_IMAGE_WIDTH, Constants.APPLICATION_IMAGE_HEIGHT)
+              }.width(Constants.APPLICATION_IMAGE_WIDTH)
+              .height(Constants.APPLICATION_IMAGE_HEIGHT)
+              .borderRadius(12)
+              .clip(true)
+              .margin({ right: Constants.APPLICATION_IMAGE_MARGIN_RIGHT })
               Text(item.label)
                 .width(Constants.OFFSET)
                 .maxLines(Constants.MAXIMUM_HEADER_LINES)

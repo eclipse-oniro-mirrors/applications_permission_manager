@@ -16,6 +16,7 @@
 import common from '@ohos.app.ability.common';
 import Constants from '../utils/constant';
 import { Log } from '../utils/utils';
+import { UIExtensionAbility, UIExtensionContentSession } from '@kit.AbilityKit';
 
 @Component
 export struct backBar {
@@ -31,18 +32,18 @@ export struct backBar {
     Column() {
       Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
         Row() {
-          SymbolGlyph($r('sys.symbol.arrow_left'))
+          Image($r('app.media.ic_back'))
+            .fillColor($r('sys.color.ohos_id_color_primary'))
+            .objectFit(ImageFit.Contain)
             .width(Constants.BACKBAR_IMAGE_WIDTH)
             .height(Constants.BACKBAR_IMAGE_HEIGHT)
-            .fontSize(Constants.FONT_SIZE_24_vp)
-            .fontColor([$r('sys.color.icon_primary')])
-            .fontWeight(FontWeight.Medium)
+            .draggable(false)
         }.width(Constants.CLICK_SHADOW_LENGTH)
         .height(Constants.CLICK_SHADOW_LENGTH)
-        .borderRadius($r('sys.float.ohos_id_corner_radius_clicked'))
+        .borderRadius(Constants.CLICK_SHADOW_LENGTH/2)
         .alignItems(VerticalAlign.Center)
         .justifyContent(FlexAlign.Center)
-        .backgroundColor(this.isBack ? $r('sys.color.interactive_click') : '')
+        .backgroundColor(this.isBack ? $r('sys.color.interactive_click') : '#d9e2e2e2')
         .onTouch(event => {
           if (event === undefined) {
             Log.info('touch event is undefined.');
@@ -58,7 +59,9 @@ export struct backBar {
         .onClick(() => {
           let router = this.getUIContext().getRouter();
           let length = router.getLength();
-          Number(length) == 1 ? this.context.terminateSelf() : router.back();
+          const intent: Record<string, Object> = { 'action': 'exit' };
+          const session = globalThis.windowStage as UIExtensionContentSession
+          Number(length) === 1 ? session.sendData(intent) : router.back();
         })
         Text(JSON.parse(this.title))
           .align(Alignment.Start)
