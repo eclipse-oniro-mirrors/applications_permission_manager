@@ -43,6 +43,7 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
       // TODO: Implement error handling.
     }
     globalThis.windowStage = session;
+    globalThis.isUIExtensionMode = true;
     globalThis.refresh = false;
     if (!this.permissionCheck()) {
       session.loadContent('pages/transition');

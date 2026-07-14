@@ -35,6 +35,7 @@ export default class MainAbility extends UIAbility {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
     globalThis.windowStage = windowStage;
+    globalThis.isUIExtensionMode = false;
     globalThis.refresh = false;
     if (!this.permissionCheck()) {
       windowStage.loadContent('pages/transition');
