@@ -32,7 +32,7 @@ ohos_app("permission_manager") {
   build_modules = [ "permissionmanager" ]
   if (defined(sign_hap_py_path)) {
     certificate_profile = "${certificate_profile_path}"
-    key_alias = "PermissionManager"
+    key_alias = "PermissionManager V2"
     private_key_path = "PermissionManager"
     compatible_version = "9"
   }
