@@ -1,3 +1,5 @@
 -enable-toplevel-obfuscation
 -enable-export-obfuscation
 -enable-property-obfuscation
+-enable-string-property-obfuscation
+-enable-dead-code-elimination

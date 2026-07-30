@@ -27,18 +27,6 @@
   },
   "modules": [
     {
-      "name": "entry",
-      "srcPath": "./entry",
-      "targets": [
-        {
-          "name": "default",
-          "applyToProducts": [
-            "default"
-          ]
-        }
-      ]
-    },
-    {
       "name": "permissionmanager",
       "srcPath": "./permissionmanager",
       "targets": [
