@@ -15,7 +15,7 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundleMonitor from '@ohos.bundle.bundleMonitor';
 import account_osAccount from '@ohos.account.osAccount';
-import { GlobalContext } from '../common/utils/globalContext';
+import { BundleInfoUtils, GlobalContext } from '../common/utils/globalContext';
 import { abilityAccessCtrl, bundleManager, UIExtensionAbility, UIExtensionContentSession, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
 
@@ -33,13 +33,13 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
     try {
-      const extensionWindow =  session.getUIExtensionWindowProxy();
-      const  area = extensionWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM)
-      const statusBarHeight =px2vp(area.topRect.height)
-      AppStorage.setOrCreate('STATUS_BAR_HEIGHT',statusBarHeight)
-      console.log(TAG,JSON.stringify(statusBarHeight))
+      const extensionWindow = session.getUIExtensionWindowProxy();
+      const area = extensionWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+      const statusBarHeight = px2vp(area.topRect.height);
+      AppStorage.setOrCreate('STATUS_BAR_HEIGHT', statusBarHeight);
+      console.log(TAG, JSON.stringify(statusBarHeight));
     } catch (error) {
-      console.error(TAG,'onSessionCreate error.code:'+error?.code+' error.message:'+error?.message)
+      console.error(TAG, 'onSessionCreate error.code: ' + error?.code + ' error.message: ' + error?.message);
       // TODO: Implement error handling.
     }
     globalThis.windowStage = session;
@@ -96,11 +96,11 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
     } catch (err) {
       console.log(`errData is errCode:${err.code}  message:${err.message}`);
     }
-    console.info(TAG,'onSessionDestroy')
+    console.info(TAG, 'onSessionDestroy');
   }
 
   onDestroy(): void {
-    console.info(TAG,'onDestroy')
+    console.info(TAG, 'onDestroy');
   }
 
 
@@ -138,25 +138,7 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
             this.context.terminateSelf();
             return;
           }
-          let initialGroups = [];
-          for (let i = 0; i < bundleInfos.length; i++) {
-            let info = bundleInfos[i];
-            // Filter blank icon icon and text label resources
-            try {
-              await bundleManager.queryAbilityInfo({
-                bundleName: info.name,
-                action: 'action.system.home',
-                entities: ['entity.system.home']
-              }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
-            } catch (error) {
-              console.error(
-                TAG + 'queryAbilityByWant catch app: ' + JSON.stringify(info.name) + 'err: ' + JSON.stringify(error)
-              );
-              continue;
-            }
-
-            initialGroups.push(info);
-          }
+          let initialGroups = await BundleInfoUtils.filterBundleInfos(bundleInfos);
           let storage: LocalStorage = new LocalStorage({ 'initialGroups': initialGroups });
           globalThis.windowStage?.loadContent('pages/authority-management', storage);
         }).catch((error) => {
