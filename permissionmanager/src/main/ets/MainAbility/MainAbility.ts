@@ -16,7 +16,7 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import bundleMonitor from '@ohos.bundle.bundleMonitor';
 import account_osAccount from '@ohos.account.osAccount';
-import { GlobalContext } from '../common/utils/globalContext';
+import { BundleInfoUtils, GlobalContext } from '../common/utils/globalContext';
 import { abilityAccessCtrl, bundleManager } from '@kit.AbilityKit';
 
 const TAG = 'PermissionManager_Log:';
@@ -173,25 +173,7 @@ export default class MainAbility extends UIAbility {
             this.context.terminateSelf();
             return;
           }
-          let initialGroups = [];
-          for (let i = 0; i < bundleInfos.length; i++) {
-            let info = bundleInfos[i];
-            // Filter blank icon icon and text label resources
-            try {
-              await bundleManager.queryAbilityInfo({
-                bundleName: info.name,
-                action: 'action.system.home',
-                entities: ['entity.system.home']
-              }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
-            } catch (error) {
-              console.error(
-                TAG + 'queryAbilityByWant catch app: ' + JSON.stringify(info.name) + 'err: ' + JSON.stringify(error)
-              );
-              continue;
-            }
-
-            initialGroups.push(info);
-          }
+          let initialGroups = await BundleInfoUtils.filterBundleInfos(bundleInfos);
           let storage: LocalStorage = new LocalStorage({ 'initialGroups': initialGroups });
           globalThis.windowStage?.loadContent('pages/authority-management', storage);
         }).catch((error) => {

@@ -13,6 +13,34 @@
  * limitations under the License.
  */
 
+import { bundleManager } from '@kit.AbilityKit';
+
+const TAG = 'GlobalContext';
+
+export class BundleInfoUtils {
+  static async filterBundleInfos(bundleInfos: bundleManager.BundleInfo[]): Promise<bundleManager.BundleInfo[]> {
+    let initialGroups: bundleManager.BundleInfo[] = [];
+    for (let i = 0; i < bundleInfos.length; i++) {
+      let info = bundleInfos[i];
+      // Filter blank icon icon and text label resources
+      try {
+        await bundleManager.queryAbilityInfo({
+          bundleName: info.name,
+          action: 'action.system.home',
+          entities: ['entity.system.home']
+        }, bundleManager.AbilityFlag.GET_ABILITY_INFO_WITH_APPLICATION);
+      } catch (error) {
+        console.error(
+          TAG + 'queryAbilityByWant catch app: ' + JSON.stringify(info.name) + 'err: ' + JSON.stringify(error)
+        );
+        continue;
+      }
+      initialGroups.push(info);
+    }
+    return initialGroups;
+  }
+}
+
 export class GlobalContext {
   currentPermissionGroup: string;
   isVertical: boolean;
@@ -31,7 +59,7 @@ export class GlobalContext {
   private static instance: GlobalContext;
   private _objects = new Map<string, Object>();
 
-  static load(name: string): any {
+  static load<T>(name: string): T {
     return globalThis[name];
   }
 
