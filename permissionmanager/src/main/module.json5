@@ -50,7 +50,7 @@
                 "permissions": ["ohos.permission.ACCESS_SECURITY_PRIVACY_CENTER"],
                 "skills": [
                     {
-                        "actions": ["action.access.privacy.center"]
+                        "actions": ["action.system.home", "action.access.privacy.center"]
                     }
                 ],
                 "metadata": [
