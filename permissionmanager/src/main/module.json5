@@ -15,7 +15,7 @@
 {
     "module": {
         "name": "permissionmanager",
-        "type": "feature",
+        "type": "entry",
         "srcEntry": "./ets/Application/AbilityStage.ts",
         "description": "PermissionManager",
         "mainElement": "MainAbility",

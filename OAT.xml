@@ -80,10 +80,8 @@
                 <filteritem type="filepath" name="figures/application-framework.png" desc="icon"/>
                 <filteritem type="filepath" name="figures/application-framework_en.png" desc="icon"/>
                 <filteritem type="filepath" name="AppScope/resources/base/media/app_icon.png" desc="icon"/>
-                <filteritem type="filepath" name="entry/src/main/resources/base/media/icon.png" desc="icon"/>
                 <filteritem type="filepath" name="permissionmanager/src/main/resources/base/media/icon.png" desc="icon"/>
-                <filteritem type="filepath" name="permissionmanager/src/main/resources/base/media/rawfile.png" desc="icon"/>
-                <filteritem type="filepath" name="permissionmanager/src/main/resources/base/media/app_icon.png" desc="icon"/>
+                <filteritem type="filepath" name="permissionmanager/src/main/resources/base/media/rawfile.svg" desc="icon"/>
             </filefilter>
         </filefilterlist>
     </oatconfig>
