@@ -41,6 +41,7 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
   }
 
   onSessionCreate(want: Want, session: UIExtensionContentSession): void {
+    Log.info('PermissionStateSheetAbility on session create');
     Log.info('current state:' + state);
     if (state == true) {
       this.shouldChangeState = false;
@@ -58,20 +59,31 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
     };
 
     let storage: LocalStorage = new LocalStorage(param);
-    this.createSubWindow(session, storage).then(() => {
-      // if met error, do not load window,
-      // in case of nested error codes passed to applications
-      if (terminating) {
-        this.context.terminateSelf();
-        return;
-      }
-      this.loadContentAndSetColor(storage).then((result: boolean) => {
+    this.createSubWindow(session, storage)
+      .then(() => {
+        Log.info('PermissionStateSheetAbility create sub window finished');
+        // if met error, do not load window,
+        // in case of nested error codes passed to applications
+        if (terminating) {
+          this.context.terminateSelf();
+          return false;
+        }
+        return this.loadContentAndSetColor(storage);
+      })
+      .then((result: boolean) => {
+        Log.info('PermissionStateSheetAbility load content result: ' + result);
         if (!result) {
+          terminating = true;
+          this.context.terminateSelf();
           return;
         }
         this.showWindow();
       })
-    })
+      .catch((error: BusinessError) => {
+        terminating = true;
+        Log.error('PermissionStateSheetAbility session create failed. Cause: ' + JSON.stringify(error));
+        this.context.terminateSelf();
+      });
   }
 
   onSessionDestroy(): void {
@@ -115,22 +127,23 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
   }
 
   async loadContentAndSetColor(storage: LocalStorage): Promise<boolean> {
-    let promise: Promise<void> | undefined =
-      this.subWindowForHost?.loadContent('PermissionSheet/PermissionStateSheetDialog', storage);
-    if (promise) {
-      await promise.then(() => {
-        Log.info('Succeeded in loading the content');
-        try {
-          this.subWindowForHost?.setWindowBackgroundColor('#00000000');
-        } catch (error) {
-          Log.error(`setWindowBackgroundColor failed, error code ${JSON.stringify(error)}`);
-        }
-      }).catch((err: BusinessError) => {
-        Log.error('Failed to load the content. Cause:' + JSON.stringify(err));
-        return false;
-      })
+    if (!this.subWindowForHost) {
+      Log.error('Failed to load the content because subwindow is null');
+      return false;
     }
-    return true;
+    try {
+      await this.subWindowForHost.loadContent('PermissionSheet/PermissionStateSheetDialog', storage);
+      Log.info('Succeeded in loading the content');
+      try {
+        this.subWindowForHost.setWindowBackgroundColor('#00000000');
+      } catch (error) {
+        Log.error(`setWindowBackgroundColor failed, error code ${JSON.stringify(error)}`);
+      }
+      return true;
+    } catch (error) {
+      Log.error('Failed to load the content. Cause:' + JSON.stringify(error));
+      return false;
+    }
   }
 
   async createSubWindow(session: UIExtensionContentSession, storage: LocalStorage): Promise<void> {
@@ -207,6 +220,7 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
   }
 
   showWindow(): void {
+    Log.info('PermissionStateSheetAbility show window');
     this.subWindowForHost?.showWindow((err) => {
       if (err && err.code !== 0) {
         Log.error(`failed to showWindow for subWindow, ${JSON.stringify(err)}`);
