@@ -33,22 +33,26 @@ import { groups, showSubPermissionsGroup } from '../common/model/permissionGroup
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog'
 
-let accessTokenId: number = 0;
 let session: UIExtensionContentSession;
-let results: Map<string, number> = new Map();
 let terminating: boolean = false;
 
-export function ReportDialogResult(wantPermissions: Permissions[]) {
+function getCurrentPermissionState(tokenId: number, permission: Permissions): number {
+  return abilityAccessCtrl.createAtManager().verifyAccessTokenSync(tokenId, permission);
+}
+
+export function ReportDialogResult(wantPermissions: Permissions[], tokenId: number): void {
   let resultArray: number[] = [];
-  Log.info('processed result:' + JSON.stringify(results));
-  for (const permission of wantPermissions) {
-    // check if corresponding result is set
-    if (results.has(permission)) {
-      resultArray.push(results.get(permission)!);
-    } else {
-      Log.error(permission + ' is not processed!');
-      resultArray.push(Constants.ERR_PERMISSION_GRANT_EXCEPTION);
+  try {
+    for (const permission of wantPermissions) {
+      resultArray.push(getCurrentPermissionState(tokenId, permission));
     }
+  } catch (error) {
+    Log.error('get current permission state failed. Cause: ' + JSON.stringify(error));
+    if (!terminating) {
+      terminating = true;
+      PermissionDialogException(Constants.ERR_PERMISSION_GRANT_EXCEPTION, session);
+    }
+    return;
   }
   Log.info('terminating session with return array ' + JSON.stringify(resultArray));
   PermissionDialogReturn(resultArray, session);
@@ -101,7 +105,7 @@ struct PermissionStateSheetDialog {
     autoCancel: false,
     cornerRadius: {topLeft: 32, topRight: 32, bottomLeft: 0, bottomRight: 0},
     cancel: () => {
-      ReportDialogResult(this.reqUserPermissions);
+      ReportDialogResult(this.reqUserPermissions, this.applicationInfo?.tokenId ?? 0);
       this.context.terminateSelf();
       this.dialogController?.close();
     }
@@ -126,13 +130,17 @@ struct PermissionStateSheetDialog {
 
   async aboutToAppear() {
     session = this.session;
+    terminating = false;
+    Log.info('PermissionStateSheetDialog aboutToAppear');
     await this.GetAppInfo();
+    Log.info('PermissionStateSheetDialog GetAppInfo finished, terminating=' + terminating);
 
     if (!this.applicationInfo) {
       this.context.terminateSelf();
     }
 
     if (this.dialogController !== null && terminating == false) {
+      Log.info('PermissionStateSheetDialog open dialog');
       this.dialogController.open();
     }
   }
@@ -153,17 +161,15 @@ struct PermissionStateSheetDialog {
   }
 
   async getBundleInfo(bundleName: string, flag: number): Promise<AppInfo | undefined> {
-    return new Promise<AppInfo | undefined>(async (resolve, reject) => {
+    try {
       let info: AppInfo | undefined = undefined;
       let permissionGrantMap: Map<string, number> = new Map();
       let bundleInfo = await bundleManager.getBundleInfo(bundleName, flag);
       let appPermissions = bundleInfo.reqPermissionDetails;
-      let granted = bundleInfo.permissionGrantStates;
       info = new AppInfo(bundleInfo.name, bundleInfo.targetVersion,
         bundleInfo.appInfo.accessTokenId, '', bundleInfo.appInfo.iconId, bundleInfo.appInfo.iconResource,
         '', bundleInfo.appInfo.labelId, bundleInfo.appInfo.labelResource, [], [], '', '', ''
       );
-      resolve(info);
       // check if all permissions passed from want has been claimed by app config
       for (const wantPermission of this.reqUserPermissions) {
         if (terminating) {
@@ -179,12 +185,14 @@ struct PermissionStateSheetDialog {
           this.context.terminateSelf();
           return;
         }
-        permissionGrantMap.set(appPermissions[idx].name, granted[idx]);
+        permissionGrantMap.set(appPermissions[idx].name,
+          abilityAccessCtrl.createAtManager().verifyAccessTokenSync(
+            bundleInfo.appInfo.accessTokenId, wantPermission));
       }
       // check if all permissions are already granted
       let permissionsAllGranted = true;
       for (const key of permissionGrantMap.keys()) {
-        if (permissionGrantMap.get(key) === -1) { // -1 means not granted
+        if (permissionGrantMap.get(key) !== abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
           permissionsAllGranted = false;
         }
       }
@@ -197,7 +205,11 @@ struct PermissionStateSheetDialog {
           this.context.terminateSelf();
         }
       }
-    })
+      return info;
+    } catch (error) {
+      Log.error('getBundleInfo failed. Cause: ' + JSON.stringify(error));
+      return undefined;
+    }
   }
 
   aboutToDisappear() {
@@ -343,16 +355,17 @@ struct PermissionStateSheetDialog {
       GlobalContext.store('folderStatus', this.folderStatus);
     }
   }
+
 }
 
 @CustomDialog
 struct mediaDocumentItem {
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-  private backTitle: ResourceStr = '';
-  private bundleName: string = '';
-  private permissions: Permission[] = [];
-  private status: number = 0;
-  private tokenId: number = 0;
+  @Prop backTitle: ResourceStr = '';
+  @Prop bundleName: string = '';
+  @Prop permissions: Permission[] = [];
+  @Prop status: number = 0;
+  @Prop tokenId: number = 0;
   private controller: CustomDialogController;
   @State hidden: boolean = false;
   @State currentGroup: PermissionGroup = PermissionGroup.OTHER;
@@ -377,16 +390,16 @@ struct mediaDocumentItem {
    * @param {Number} accessTokenId
    * @param {String} permission permission name
    */
-  async grantUserGrantedPermission(accessTokenId: number, permission: Permissions) {
+  async grantUserGrantedPermission(accessTokenId: number, permission: Permissions): Promise<boolean> {
     Log.info('granting permission ' + permission);
     try {
       await abilityAccessCtrl.createAtManager()
         .grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
-        Log.info('grantUserGrantedPermission ' + permission + ' success.');
-        results.set(permission, Constants.PERMISSION_DIALOG_SUCCESS);
+      Log.info('grantUserGrantedPermission ' + permission + ' success.');
+      return true;
     } catch (e) {
-        results.set(permission, Constants.ERR_PERMISSION_GRANT_EXCEPTION);
-        Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(e));
+      Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(e));
+      return false;
     }
   }
 
@@ -395,14 +408,17 @@ struct mediaDocumentItem {
    * @param {Number} accessTokenId
    * @param {String} permission permission name
    */
-  async revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, flag: number) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, flag)
-      .then(() => {
-        Log.error('revokeUserGrantedPermission ' + permission + ' success');
-      })
-      .catch((error: BusinessError) => {
-        Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
-      })
+  async revokeUserGrantedPermission(
+    accessTokenId: number, permission: Permissions, flag: number
+  ): Promise<boolean> {
+    try {
+      await abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, flag);
+      Log.info('revokeUserGrantedPermission ' + permission + ' success');
+      return true;
+    } catch (error) {
+      Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+      return false;
+    }
   }
 
   onPageShow(): void {
@@ -435,7 +451,6 @@ struct mediaDocumentItem {
             folderStatus[2] = true;
             break;
         }
-        results.set(permission, Constants.PERMISSION_DIALOG_SUCCESS);
       }
     }
     this.folderStatus = folderStatus;
@@ -597,7 +612,6 @@ struct mediaDocumentItem {
     .then(async res => {
         this.api = res.targetVersion;
         this.version = res.versionName;
-        accessTokenId = res.appInfo.accessTokenId;
         let acManager = abilityAccessCtrl.createAtManager();
         let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION);
         this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
@@ -618,61 +632,58 @@ struct mediaDocumentItem {
     });
   }
 
-  async grantFolderPermission(permission: Permissions) {
+  async grantFolderPermission(permission: Permissions): Promise<void> {
     if (this.folderStatus[this.getCheckboxInfo(permission).index]) {
-      this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
-      this.folderStatus[this.getCheckboxInfo(permission).index] = false;
-      results.set(permission, Constants.ERR_PERMISSION_GRANT_EXCEPTION);
+      if (await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG)) {
+        this.folderStatus[this.getCheckboxInfo(permission).index] = false;
+      }
     } else {
-      await this.grantUserGrantedPermission(accessTokenId, permission);
-      this.folderStatus[this.getCheckboxInfo(permission).index] = true;
+      if (await this.grantUserGrantedPermission(this.tokenId, permission)) {
+        this.folderStatus[this.getCheckboxInfo(permission).index] = true;
+      }
     }
-    // check if every permission has been granted
     let allGranted = true;
     for (const permission of this.permissions) {
-      if (!results.has(permission)) {
-        Log.info('permission ' + permission + ' not granted, continue');
-        return;
-      }
-      if (results.get(permission) !== Constants.PERMISSION_DIALOG_SUCCESS) {
+      if (getCurrentPermissionState(this.tokenId, permission) !==
+        abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         allGranted = false;
+        break;
       }
     }
-    // if all granted , return status
     if (allGranted) {
-      ReportDialogResult(this.permissions);
+      ReportDialogResult(this.permissions, this.tokenId);
     }
   }
 
-  async grantOtherPermissions(item: MediaDocObj) {
+  async grantOtherPermissions(item: MediaDocObj): Promise<boolean> {
     this.selected = item.index;
     for (const permission of item.permissions) {
       Log.info('item click index:' + item.index);
       if (item.index === Constants.PERMISSION_ALLOW) {
         if (permission !== Permission.LOCATION) {
-          await this.grantUserGrantedPermission(accessTokenId, permission);
+          await this.grantUserGrantedPermission(this.tokenId, permission);
         }
       } else if (item.index === Constants.PERMISSION_BAN) {
         if (permission == Permission.LOCATION && this.accurateIsOn) {
-          this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+          await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG);
           this.accurateIsOn = false;
         } else {
-          this.revokeUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+          await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG);
         }
       } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
         if (permission !== Permission.LOCATION) {
           await this.revokeUserGrantedPermission(
-            accessTokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME
+            this.tokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME
           );
         }
       } else if (item.index === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE) {
-        await this.grantUserGrantedPermission(accessTokenId, permission);
+        await this.grantUserGrantedPermission(this.tokenId, permission);
         await this.revokeUserGrantedPermission(
-          accessTokenId, Permission.LOCATION_IN_BACKGROUND, Constants.PERMISSION_FLAG
+          this.tokenId, Permission.LOCATION_IN_BACKGROUND, Constants.PERMISSION_FLAG
         );
       }
     }
-    ReportDialogResult(this.permissions);
+    ReportDialogResult(this.permissions, this.tokenId);
     return true;
   }
 
@@ -894,12 +905,12 @@ struct mediaDocumentItem {
                 .onChange((isOn: boolean) => {
                   let acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
-                    acManager.grantUserGrantedPermission(accessTokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
+                    acManager.grantUserGrantedPermission(this.tokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
                     .then(() => {
                       this.accurateIsOn = true
                     })
                   } else {
-                    acManager.revokeUserGrantedPermission(accessTokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
+                    acManager.revokeUserGrantedPermission(this.tokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
                     .then(() => {
                       this.accurateIsOn = false
                     })
