@@ -32,6 +32,7 @@ import {
 } from '../common/utils/utils';
 import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 import { Permission, PermissionGroup } from '../common/model/definition';
 import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
 import Constants from '../common/utils/constant';
@@ -83,7 +84,14 @@ struct authorityManagementPage {
               return ele.groupName === item.group;
             })
             GlobalContext.store('currentPermissionGroup', item.group);
-            if (globalGroup.indexOf(item.group) == -1) {
+            if (item.group === PermissionGroup.ADS) {
+              PermissionUtils.isPermissionQueryEnabled(Permission.APP_TRACKING_CONSENT).then((enabled: boolean) => {
+                this.getUIContext().getRouter().pushUrl({
+                  url: 'pages/authority-tertiary-groups',
+                  params: { list: dataList, backTitle: item.groupName, adsToggleOn: enabled }
+                })
+              })
+            } else if (globalGroup.indexOf(item.group) == -1) {
               this.getUIContext().getRouter().pushUrl({
                 url: 'pages/authority-tertiary-groups',
                 params: { list: dataList, backTitle: item.groupName }

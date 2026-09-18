@@ -30,6 +30,7 @@ import Constants from '../common/utils/constant';
 import common from '@ohos.app.ability.common';
 import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';
 import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 
 const locationStatus: Resource[] = [
   $r('app.string.always_allow'),
@@ -167,6 +168,8 @@ struct applicationItem {
   private isMuteSupported: boolean | undefined =
     (this.getUIContext().getRouter().getParams() as RouterParams1).isMuteSupported;
   @State globalIsOn: boolean = (this.getUIContext().getRouter().getParams() as RouterParams1).globalIsOn ?? true;
+  @State adsToggleOn: boolean =
+    (this.getUIContext().getRouter().getParams() as RouterParams1).adsToggleOn ?? false;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
@@ -470,6 +473,12 @@ struct applicationItem {
     if (globalGroup.indexOf(this.currentGroup) !== -1) {
       this.globalListen();
     }
+
+    if (this.currentGroup === PermissionGroup.ADS) {
+      PermissionUtils.isPermissionQueryEnabled(Permission.APP_TRACKING_CONSENT).then((enabled: boolean) => {
+        this.adsToggleOn = enabled;
+      })
+    }
   }
 
   aboutToDisappear() {
@@ -593,8 +602,42 @@ struct applicationItem {
             .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
           }
+          if (this.currentGroup === PermissionGroup.ADS) {
+            Row() {
+              Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                Text($r('app.string.request_association_toggle'))
+                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Medium)
+                Row() {
+                  Toggle({ type: ToggleType.Switch, isOn: this.adsToggleOn })
+                    .selectedColor($r('sys.color.icon_emphasize'))
+                    .switchPointColor($r('sys.color.comp_background_primary_contrary'))
+                    .padding({ right: 0 })
+                    .onChange((isOn: boolean) => {
+                      PermissionUtils.setPermissionQueryEnabled(Permission.APP_TRACKING_CONSENT, isOn)
+                        .then((success: boolean) => {
+                          if (success) {
+                            this.adsToggleOn = isOn;
+                          }
+                        })
+                    })
+                }.clip(true)
+              }.height(Constants.LISTITEM_ROW_HEIGHT)
+              .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+            }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+            .backgroundColor($r('sys.color.comp_background_list_card'))
+            .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
+            .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
+          }
           Flex({ justifyContent: FlexAlign.Start }) {
-            if (this.globalIsOn) {
+            if (this.currentGroup === PermissionGroup.ADS) {
+              Text(this.adsToggleOn ?
+                $r('app.string.request_association_on') :
+                $r('app.string.request_association_off'))
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                .fontColor($r('sys.color.font_secondary'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
+            } else if (this.globalIsOn) {
               if (this.getGrantApplicationNumber() > 0) {
                 Text(
                   this.groupInfo.enableDescription ?

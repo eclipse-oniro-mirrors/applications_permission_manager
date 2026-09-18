@@ -311,6 +311,18 @@
             "value":"Advertising tracking"
         },
         {
+            "name":"request_association_toggle",
+            "value":"Require apps to request association"
+        },
+        {
+            "name":"request_association_on",
+            "value":"App association is on. Apps need your consent to link their activity with other apps, providing personalized experiences."
+        },
+        {
+            "name":"request_association_off",
+            "value":"App association is off. Apps can link their activity with other apps without your consent, providing personalized experiences."
+        },
+        {
             "name":"groupName_appList",
             "value":"Read the list of installed apps"
         },
