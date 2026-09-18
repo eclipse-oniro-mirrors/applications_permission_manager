@@ -1,40 +1,40 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"[TS_950813]_Private access to Gallery"
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"[TS_950727]_To protect your privacy, %s can only briefly access your location when you tap Allow."
         },
         {
             "name":"allow",
-            "value":"[TS_950769]_Allow"
+            "value":"[TW_948684]_Allow"
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"[TS_950753]_To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow."
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"[TS_1015861]_To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow."
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"[TS_1015860]_To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow."
         },
         {
-            "name":"SecurityTitle_location",
-            "value":"[TS_950716]_Private access to location"
+            "name":"security_title_location",
+            "value":"[TS_975804]_Limited access to location"
         },
         {
             "name":"cancel",
-            "value":"[TS_950731]_Cancel"
+            "value":"[TS_900639]_Cancel"
         },
         {
             "name":"get_the_exact_position",
-            "value":"[TS_950720]_Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
+            "value":"[TS_878181]_Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location."
         },
         {
             "name":"close_exact_position",
@@ -42,23 +42,23 @@
         },
         {
             "name":"precise_location",
-            "value":"[TS_950788]_Precise location"
+            "value":"[TS_873116]_Precise location"
         },
         {
             "name":"always_allow",
-            "value":"[TS_950695]_Always allow"
+            "value":"[TS_899712]_Allow all the time"
         },
         {
             "name":"access_general_location",
             "value":"[TS_950789]_Allow %s to access your approximate location?"
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"[TS_950779]_Allow %s to track your activity in other apps?"
         },
         {
             "name":"ban",
-            "value":"[TS_950815]_Deny"
+            "value":"[TS_878605]_Deny"
         },
         {
             "name":"group_label_document_folder",
@@ -66,10 +66,10 @@
         },
         {
             "name":"per_use_query",
-            "value":"[TS_950801]_Ask each time"
+            "value":"[TW_948656]_Ask each time"
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"[TS_950781]_If denied, this app won't be able to access the clipboard."
         },
         {
@@ -78,7 +78,7 @@
         },
         {
             "name":"allowed_only_during_use",
-            "value":"[TS_950834]_Allow while using the app"
+            "value":"[TS_878622]_Allow while using the app"
         },
         {
             "name":"group_label_desktop_folder",
@@ -86,7 +86,7 @@
         },
         {
             "name":"per_inquiry",
-            "value":"[TS_950826]_Ask each time"
+            "value":"[TV_1057591]_Ask each time"
         },
         {
             "name":"group_label_download_folder",
@@ -97,20 +97,20 @@
             "value":"[TS_950767]_Change %s's location access from approximate to precise?"
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"[TS_950708]_Allow %s to read the list of installed apps?"
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"[TS_950778]_Allow this time only"
         },
         {
             "name":"group_label_health",
-            "value":"[TS_950699]_Allow %s to access body sensor data?"
+            "value":"[TS_942385]_Allow %s to access body sensor data?"
         },
         {
             "name":"group_label_pasteboard",
-            "value":"[TS_950739]_Allow %s to copy content from the clipboard?"
+            "value":"[TS_953166]_Allow %s to copy content from the clipboard?"
         },
         {
             "name":"precise_location_on",
@@ -142,10 +142,10 @@
         },
         {
             "name":"group_label_camera",
-            "value":"[TS_950817]_Allow %s to use the camera?"
+            "value":"[TS_942366]_Allow %s to use the camera?"
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"[TS_950761]_Allow %s to use NearLink?"
         },
         {
@@ -158,22 +158,22 @@
         },
         {
             "name":"group_label_location",
-            "value":"[TS_950793]_Allow %s to access your location?"
+            "value":"[TS_942379]_Allow %s to access your location?"
         },
         {
             "name":"group_label_microphone",
-            "value":"[TS_950757]_Allow %s to use the microphone?"
+            "value":"[TS_942373]_Allow %s to use the microphone?"
         },
         {
             "name":"group_label_audios",
             "value":"[TS_950736]_Allow %s to access music and audio files on your device?"
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"[TS_988622]_Allow %s to capture your screen?"
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"[TS_950726]_Content copied from %s. If you choose Deny, this app won't be able to access the clipboard."
         },
         {
@@ -185,16 +185,16 @@
             "value":"[TS_950827]_When the system location service is enabled, %s apps are allowed to obtain the location of the device."
         },
         {
-            "name":"groupName_microphone",
-            "value":"[TS_950697]_Microphone"
+            "name":"group_name_microphone",
+            "value":"[TW_948647]_Microphone"
         },
         {
-            "name":"Desktop_folder",
-            "value":"[TS_950711]_Desktop folder"
+            "name":"desktop_folder",
+            "value":"[TS_899642]_Home screen folder"
         },
         {
-            "name":"groupName_calendar",
-            "value":"[TS_950820]_Calendar"
+            "name":"group_name_calendar",
+            "value":"[TW_948653]_Calendar"
         },
         {
             "name":"comma",
@@ -206,27 +206,27 @@
         },
         {
             "name":"permission_manager",
-            "value":"[TS_950705]_Permission manager"
+            "value":"[TS_876490]_Permission manager"
         },
         {
-            "name":"groupName_bluetooth",
-            "value":"[TS_950706]_Bluetooth"
+            "name":"group_name_bluetooth",
+            "value":"[TW_948597]_Bluetooth"
         },
         {
-            "name":"Document",
-            "value":"[TS_950787]_Document"
+            "name":"document",
+            "value":"[TV_1057619]_Documents"
         },
         {
             "name":"camera",
             "value":"[TS_950835]_Camera"
         },
         {
-            "name":"groupName_camera",
-            "value":"[TS_950709]_Camera"
+            "name":"group_name_camera",
+            "value":"[TW_948618]_Camera"
         },
         {
-            "name":"groupName_sport",
-            "value":"[TS_950724]_Fitness"
+            "name":"group_name_sport",
+            "value":"[TW_948594]_Physical activity"
         },
         {
             "name":"forbidden_description_write_contacts",
@@ -245,8 +245,8 @@
             "value":"[TS_950804]_An application is accessing the camera. Click \"Open\" to resume normal use."
         },
         {
-            "name":"groupName_ADS",
-            "value":"[TS_950783]_Advertising tracking"
+            "name":"group_name_ads",
+            "value":"[TW_948590]_Activity tracking"
         },
         {
             "name":"global_title_camera_and_microphone",
@@ -254,14 +254,14 @@
         },
         {
             "name":"permission",
-            "value":"[TS_950690]_Permissions"
+            "value":"[TW_948661]_Permissions"
         },
         {
             "name":"close",
-            "value":"[TS_950719]_Close"
+            "value":"[TS_900626]_Disable"
         },
         {
-            "name":"enable_description_ADS",
+            "name":"enable_description_ads",
             "value":"[TS_950754]_%s apps have been allowed to create a profile or show you personalized ads based on your AD identifier."
         },
         {
@@ -277,8 +277,8 @@
             "value":"[TS_950839]_Apps have been prevented from accessing files on your device."
         },
         {
-            "name":"groupName_folder",
-            "value":"[TS_950780]_Folder"
+            "name":"group_name_folder",
+            "value":"[TW_948668]_Folders"
         },
         {
             "name":"enable_description_sport",
@@ -302,10 +302,10 @@
         },
         {
             "name":"global_title_microphone",
-            "value":"[TS_950818]_Microphone not turned on"
+            "value":"[TS_900634]_Microphone disabled"
         },
         {
-            "name":"forbidden_description_ADS",
+            "name":"forbidden_description_ads",
             "value":"[TS_950833]_Apps are prohibited from creating profiles or showing you personalized ads based on your AD identifier."
         },
         {
@@ -338,7 +338,7 @@
         },
         {
             "name":"permission_access_record",
-            "value":"[TS_950701]_Permission access record"
+            "value":"[TW_948600]_Dashboard"
         },
         {
             "name":"no_permission",
@@ -369,24 +369,24 @@
             "value":"[TS_950712]_Apps are prohibited from adding, deleting, and changing all calendars."
         },
         {
-            "name":"groupName_appList",
-            "value":"[TS_950836]_Read the list of installed apps"
+            "name":"group_name_app_list",
+            "value":"[TW_948595]_App list"
         },
         {
             "name":"enable_description_read_whole_calendar",
             "value":"[TS_950714]_%s apps are allowed to read the entire calendar."
         },
         {
-            "name":"Download_folder",
-            "value":"[TS_950718]_Download folder"
+            "name":"download_folder",
+            "value":"[TS_899653]_Downloads folder"
         },
         {
             "name":"microphone",
-            "value":"[TS_950710]_Microphone"
+            "value":"[TW_948647]_Microphone"
         },
         {
-            "name":"groupName_health",
-            "value":"[TS_950745]_Body sensor"
+            "name":"group_name_health",
+            "value":"[TW_948620]_Body sensors"
         },
         {
             "name":"enable_description_audios",
@@ -409,8 +409,8 @@
             "value":"[TS_950762]_Apps are prohibited from recognizing your fitness exercise."
         },
         {
-            "name":"groupName_contacts",
-            "value":"[TS_950816]_Address book"
+            "name":"group_name_contacts",
+            "value":"[TW_948679]_Contacts"
         },
         {
             "name":"enable_description_microphone",
@@ -422,18 +422,18 @@
         },
         {
             "name":"allowed",
-            "value":"[TS_950738]_ALLOWED"
+            "value":"[TW_948607]_Allowed"
         },
         {
             "name":"open",
-            "value":"[TS_950832]_Open"
+            "value":"[TS_900623]_Enable"
         },
         {
-            "name":"forbidden_description_appList",
+            "name":"forbidden_description_app_list",
             "value":"[TS_950703]_Apps are prohibited from reading the list of installed applications on the local device."
         },
         {
-            "name":"groupName_location",
+            "name":"group_name_location",
             "value":"[TS_950772]_Location information"
         },
         {
@@ -450,11 +450,11 @@
         },
         {
             "name":"multi_device_collaboration",
-            "value":"[TS_950795]_Multi-device collaboration"
+            "value":"[TW_999030]_Device connection"
         },
         {
             "name":"close_microphone",
-            "value":"[TS_950689]_Turn off the microphone"
+            "value":"[TS_900632]_Disable the microphone?"
         },
         {
             "name":"global_desc_camera_and_microphone",
@@ -462,7 +462,7 @@
         },
         {
             "name":"application",
-            "value":"[TS_950819]_Applications"
+            "value":"[TV_1230070]_Apps"
         },
         {
             "name":"camera_is_off",
@@ -478,7 +478,7 @@
         },
         {
             "name":"banned",
-            "value":"[TS_950773]_BANNED"
+            "value":"[TW_948678]_Denied"
         },
         {
             "name":"enable_description_folder",
@@ -489,8 +489,8 @@
             "value":"[TS_950694]_ access permission"
         },
         {
-            "name":"Document_folder",
-            "value":"[TS_950776]_Document folder"
+            "name":"document_folder",
+            "value":"[TS_899646]_Documents folder"
         },
         {
             "name":"separator",
@@ -509,8 +509,8 @@
             "value":"[TS_950687]_%s apps have been allowed to add, delete, and change all calendars."
         },
         {
-            "name":"Desktop",
-            "value":"[TS_950797]_Desktop"
+            "name":"desktop",
+            "value":"[TV_1057620]_Home screen"
         },
         {
             "name":"visits",
@@ -537,7 +537,7 @@
             "value":"[TS_950821]_Apps that use cameras to take photos and videos have been banned. This permission allows the app to use the camera at any time without your confirmation."
         },
         {
-            "name":"enable_description_nearLink",
+            "name":"enable_description_near_link",
             "value":"[TS_950746]_%s apps have been allowed to access NearLink."
         },
         {
@@ -549,11 +549,11 @@
             "value":"[TS_950691]_Apps are prohibited from accessing data from sensors that you use to measure your physical condition, such as your heart rate."
         },
         {
-            "name":"groupName_other",
+            "name":"group_name_other",
             "value":"[TS_950702]_Other rights"
         },
         {
-            "name":"enable_description_appList",
+            "name":"enable_description_app_list",
             "value":"[TS_950744]_%s apps are allowed to read the list of installed apps on the local device."
         },
         {
@@ -565,36 +565,126 @@
             "value":"[TS_950777]_%s apps have been allowed to access pictures and videos on your device."
         },
         {
-            "name":"Download",
-            "value":"[TS_950831]_Download"
+            "name":"download",
+            "value":"[TV_1057558]_Downloads"
         },
         {
-            "name":"groupName_nearLink",
-            "value":"[TS_950810]_NearLink"
+            "name":"group_name_near_link",
+            "value":"[TW_948612]_NearLink"
         },
         {
-            "name":"textInput_placeholder",
-            "value":"[TS_950803]_Search application"
+            "name":"text_input_placeholder",
+            "value":"[TS_873107]_Search apps"
         },
         {
-            "name":"groupName_pasteboard",
-            "value":"[TS_950811]_Pasteboard"
+            "name":"group_name_pasteboard",
+            "value":"[TS_981386]_Clipboard"
         },
         {
-            "name":"forbidden_description_nearLink",
+            "name":"forbidden_description_near_link",
             "value":"[TS_950728]_Apps have been prohibited from accessing NearLink."
         },
         {
-            "name":"enable_description_screenCapture",
+            "name":"enable_description_screen_capture",
             "value":"[TS_995261]_%s apps have been allowed to use screenshots."
         },
         {
-            "name":"groupName_screenCapture",
-            "value":"[TS_995262]_Screen capture"
+            "name":"group_name_screen_capture",
+            "value":"[TV_1057489]_Screen capture"
         },
         {
-            "name":"forbidden_description_screenCapture",
+            "name":"forbidden_description_screen_capture",
             "value":"[TS_995263]_Screenshots have been disabled."
+        },
+        {
+            "name":"read_and_modify",
+            "value":"[TW_1058460]_Read & modify",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"[TW_1058461]_Read only",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"[TW_1058458]_Modify only",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"[TW_948634]_All files",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_only",
+            "value":"[TV_1057454]_Media only",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"go_to_settings",
+            "value":"[TS_1133457]_Allow in Settings"
+        },
+        {
+            "name":"request_association_toggle",
+            "value":"[TV_1057597]_Require consent to track"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"[TS_1204625]_Files & folders"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"[TW_948642]_Dropzone"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"[TS_1123443]_Input assistance"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"[TS_1123435]_Screen sharing"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"[TS_1198530]_Device control"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"[TW_948642]_Dropzone"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"[TS_1123443]_Input assistance"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"[TS_1123435]_Screen sharing"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"[TS_1198530]_Device control"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"[TS_1133403]_Allow %s to provide input assistance?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"confirm",
+            "value":"[TS_1184600]_Confirm"
         }
     ]
 }

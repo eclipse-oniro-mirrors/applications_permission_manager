@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Akses privat ke Galeri",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses lokasi Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses Galeri Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Akses terbatas ke lokasi",
             "attr":{
                 "priority":"LT"
@@ -43,14 +43,14 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Untuk melindungi privasi Anda, %1$s%2$s hanya dapat mengakses lokasi Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Untuk melindungi privasi Anda, %1$s%2$s hanya dapat mengakses Galeri Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
                 "priority":"LT"
@@ -107,7 +107,7 @@
         },
         {
             "name":"precise_location",
-            "value":"Lokasi presisi",
+            "value":"Lokasi yang tepat",
             "attr":{
                 "priority":"translate"
             }
@@ -141,7 +141,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"Izinkan %s untuk melacak aktivitas Anda di aplikasi lainnya?",
             "attr":{
                 "priority":"translate"
@@ -190,21 +190,21 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"Jika ditolak, aplikasi ini tidak akan dapat mengakses papan klip.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"Izinkan %s untuk menangkap layar Anda?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"Izinkan %s untuk menggunakan NearLink?",
             "attr":{
                 "priority":"translate"
@@ -267,14 +267,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"Izinkan %s untuk membaca daftar aplikasi terpasang?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"Izinkan kali ini saja",
             "attr":{
                 "priority":"translate"
@@ -282,7 +282,7 @@
         },
         {
             "name":"group_label_location",
-            "value":"Izinkan %s untuk mengakses lokasi Anda?",
+            "value":"Izinkan %s mengakses lokasi Anda?",
             "attr":{
                 "priority":"translate"
             }
@@ -302,11 +302,198 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"Konten disalin dari %s. Jika Anda memilih Tolak, aplikasi ini tidak akan dapat mengakses papan klip.",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Dasbor"
+        },
+        {
+            "name":"permission_manager",
+            "value":"Pengelola izin"
+        },
+        {
+            "name":"permission",
+            "value":"Izin"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"Cari aplikasi"
+        },
+        {
+            "name":"allowed",
+            "value":"Diizinkan"
+        },
+        {
+            "name":"banned",
+            "value":"Ditolak"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Baca & ubah",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Baca saja",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Ubah saja",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Semua file",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"Aktifkan"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"Izinkan di Pengaturan"
+        },
+        {
+            "name":"close",
+            "value":"Nonaktifkan"
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"close_microphone",
+            "value":"Nonaktifkan mikrofon?"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"Mikrofon dinonaktifkan"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Kamera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Kontak"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalender"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Aktivitas fisik"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Sensor tubuh"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Pelacakan aktivitas"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Daftar aplikasi"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"Papan klip"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Folder"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"File & folder"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"Bantuan masukan"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"Berbagi layar"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"Kontrol perangkat"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"Bantuan masukan"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"Berbagi layar"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"Kontrol perangkat"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Koneksi perangkat"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"Izinkan %s untuk menyediakan bantuan masukan?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"Folder Unduhan"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"Folder layar beranda"
+        },
+        {
+            "name":"document_folder",
+            "value":"Folder Dokumen"
+        },
+        {
+            "name":"confirm",
+            "value":"Konfirmasi"
         }
     ]
 }

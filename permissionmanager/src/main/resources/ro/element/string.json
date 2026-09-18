@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Acces privat la Galerie",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Pentru a vă proteja confidențialitatea, %s vă va putea accesa locația doar pentru scurt timp atunci când veți atinge Permitere.",
             "attr":{
                 "priority":"LT"
@@ -16,20 +16,20 @@
         },
         {
             "name":"allow",
-            "value":"Permitere",
+            "value":"Permiteți",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Pentru a vă proteja confidențialitatea, %s vă va putea accesa Galeria pentru a salva elemente doar când veți atinge Permitere.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Acces privat la locație",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Pentru a vă proteja confidențialitatea, %1$s%2$s vă va putea accesa locația doar pentru scurt timp, atunci când veți atinge Permitere.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Pentru a vă proteja confidențialitatea, %1$s%2$s vă va putea accesa Galeria pentru a salva elemente doar pentru scurt timp, atunci când veți atinge Permitere.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Tablou de bord"
+        },
+        {
+            "name":"permission",
+            "value":"Permisiuni"
+        },
+        {
+            "name":"allowed",
+            "value":"Permisiune acordată"
+        },
+        {
+            "name":"banned",
+            "value":"Refuzat"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Citire și modificare",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Doar citire",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Doar modificare",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Toate fișierele",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Întreabă de fiecare dată",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Microfon"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Cameră foto"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Microfon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Agendă"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Calendar"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Activitate fizică"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Senzori de corp"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Urmărirea activității"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Lista de aplicații"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Foldere"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Conexiune la dispozitiv"
         }
     ]
 }

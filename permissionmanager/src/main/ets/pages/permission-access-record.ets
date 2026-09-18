@@ -19,7 +19,14 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager';
 import { backBar } from '../common/components/backBar';
 import Constants from '../common/utils/constant';
-import { Log, getPermissionGroup, getGroupIdByPermission, supportPermission } from '../common/utils/utils';
+import { Log, getPermissionGroup } from '../common/utils/utils';
+import {
+  supportPermission,
+  buildGroupIds,
+  collectSupportedUserPermissions,
+  getRequestedPermissions,
+  shouldCollectUserPermission
+} from '../common/utils/bundlePermissionCollector';
 import {
   StringObj,
   AppInfoSimple,
@@ -504,40 +511,21 @@ struct permissionRecordPage {
   }
 
   async getReqUserRecords(record: privacyManager.BundleUsedRecord, info: bundleManager.BundleInfo) {
+    let supportPermissions = supportPermission();
     for (let j = 0; j < record.permissionRecords.length; j++) {
-      let permission = record.permissionRecords[j].permissionName as Permission;
-      try {
-        let flag = await abilityAccessCtrl.createAtManager().getPermissionFlags(info.appInfo.accessTokenId, permission);
-        if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
-          continue;
-        }
-      } catch (err) {
-        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
+      // Only records with successful accesses are displayed; rejected-only or grant-only rows are skipped.
+      if (record.permissionRecords[j].accessCount <= 0) {
+        continue;
       }
-      let supportPermissions = supportPermission();
-      if (supportPermissions.indexOf(permission) != -1) {
+      let permission = record.permissionRecords[j].permissionName as Permission;
+      if (await shouldCollectUserPermission(info.appInfo.accessTokenId, permission, supportPermissions)) {
         this.reqUserRecords.push(record.permissionRecords[j]);
       }
     }
   }
 
   async getReqUserPermissions(reqPermissions: Permission[], info: bundleManager.BundleInfo) {
-    let acManager = abilityAccessCtrl.createAtManager();
-    for (let k = 0; k < reqPermissions.length; k++) {
-      let reqPermission = reqPermissions[k];
-      try {
-        let reqFlag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, reqPermission);
-        if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
-          continue;
-        }
-      } catch (err) {
-        Log.error('getPermissionFlags error: ' + JSON.stringify(err));
-      }
-      let supportPermissions = supportPermission();
-      if (supportPermissions.indexOf(reqPermission) != -1) {
-        this.reqUserPermissions.push(reqPermission);
-      }
-    }
+    this.reqUserPermissions = await collectSupportedUserPermissions(info.appInfo.accessTokenId, reqPermissions);
   }
 
   getPermissionGroups() {
@@ -568,23 +556,8 @@ struct permissionRecordPage {
     })
   }
 
-  getRequestedPermissions(info: bundleManager.BundleInfo): Permission[] {
-    let reqPermissions: Permission[] = [];
-    info.reqPermissionDetails.forEach(item => {
-      reqPermissions.push(item.name as Permission);
-    });
-    return reqPermissions;
-  }
-
   getAppGroupIds(): number[] {
-    let groupIds: number[] = [];
-    for (let i = 0; i < this.reqUserPermissions.length; i++) {
-      let groupId = getGroupIdByPermission(this.reqUserPermissions[i]);
-      if (groupIds.indexOf(groupId) == -1) {
-        groupIds.push(groupId);
-      }
-    }
-    return groupIds;
+    return buildGroupIds(this.reqUserPermissions);
   }
 
   createAppRecordInfo(info: bundleManager.BundleInfo): AppRecordInfo {
@@ -614,7 +587,7 @@ struct permissionRecordPage {
 
   async buildAppRecordInfo(record: privacyManager.BundleUsedRecord,
     info: bundleManager.BundleInfo): Promise<AppRecordInfo | undefined> {
-    let reqPermissions: Permission[] = this.getRequestedPermissions(info);
+    let reqPermissions: Permission[] = getRequestedPermissions(info);
     this.reqUserPermissions = [];
     this.reqUserRecords = [];
     this.permissionGroups = [];
@@ -662,6 +635,13 @@ struct permissionRecordPage {
       flag: 1
     }
     privacyManager.getPermissionUsedRecord(request).then(records => {
+      // Reset accumulated state only after new records arrive, so the old content
+      // stays visible during the query and reloading does not duplicate entries.
+      this.groups = [];
+      this.applicationInfos = [];
+      this.permissionApplications = [];
+      this.permissionIndex = -1;
+      this.applicationIndex = -1;
       this.getRecord(records);
     })
   }
@@ -669,6 +649,7 @@ struct permissionRecordPage {
   async getRecord(records: privacyManager.PermissionUsedResponse) {
     let groupArray: GroupRecordInfo[] = [];
     let acManager = abilityAccessCtrl.createAtManager();
+    let supportPermissions = supportPermission();
     for (let i = 0; i < records.bundleRecords.length; i++) {
       let record = records.bundleRecords[i];
       Log.info('bundleName: ' + record.bundleName + 'permissionRecords: ' + JSON.stringify(record.permissionRecords));
@@ -684,6 +665,17 @@ struct permissionRecordPage {
       this.getInfo(record, (i + 1) == records.bundleRecords.length);
       for (let j = 0; j < record.permissionRecords.length; j++) {
         let permissionRecord = record.permissionRecords[j];
+        // Only records with successful accesses are displayed; rejected-only or grant-only rows are skipped.
+        if (permissionRecord.accessCount <= 0) {
+          continue;
+        }
+        // Keep the group list consistent with the permission settings page:
+        // groups not supported on the current device (e.g. control device on non-PC) are excluded.
+        if (!(await shouldCollectUserPermission(
+          record.tokenId, permissionRecord.permissionName as Permission, supportPermissions
+        ))) {
+          continue;
+        }
         try {
           let reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName);
           if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
@@ -720,6 +712,13 @@ struct permissionRecordPage {
   aboutToAppear() {
     this.statusBarHeight = (AppStorage.get('STATUS_BAR_HEIGHT') as number) ?? 0
     this.getStrings();
+  }
+
+  /**
+   * Lifecycle function, triggered whenever this page is displayed.
+   * Reload records so that returning from background refreshes the data.
+   */
+  onPageShow() {
     this.getAllRecords();
   }
 }

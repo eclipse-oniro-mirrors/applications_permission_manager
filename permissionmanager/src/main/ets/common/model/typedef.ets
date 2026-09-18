@@ -153,11 +153,11 @@ export class CalendarObj {
 }
 
 export class MediaDocObj {
-  public name: Resource
+  public name: ResourceStr
   public permissions: Array<Permission>
   public index: number
 
-  constructor(name: Resource, permissions: Array<Permission>, index: number) {
+  constructor(name: ResourceStr, permissions: Array<Permission>, index: number) {
     this.name = name
     this.permissions = permissions
     this.index = index
@@ -403,19 +403,22 @@ export class RouterParams1 {
   public group: string
   public globalIsOn: boolean
   public isMuteSupported?: boolean
+  public adsToggleOn?: boolean
 
   constructor(
     list: PermissionApplications[],
     backTitle: ResourceStr,
     group: string,
     globalIsOn: boolean,
-    isMuteSupported?: boolean
+    isMuteSupported?: boolean,
+    adsToggleOn?: boolean
   ) {
     this.list = list
     this.backTitle = backTitle
     this.group = group
     this.globalIsOn = globalIsOn
     this.isMuteSupported = isMuteSupported
+    this.adsToggleOn = adsToggleOn
   }
 }
 

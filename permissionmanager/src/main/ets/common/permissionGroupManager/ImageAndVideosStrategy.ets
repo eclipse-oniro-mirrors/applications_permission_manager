@@ -14,24 +14,39 @@
  */
 
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
-import { Permission, PermissionGroup } from '../model/definition';
-import { PermissionGroupConfig } from '../model/typedef';
-
-const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
-  groupName: PermissionGroup.IMAGE_AND_VIDEOS,
-  permissions: [Permission.READ_IMAGEVIDEO, Permission.WRITE_IMAGEVIDEO, Permission.MEDIA_LOCATION],
-  icon: $r('app.media.ic_public_picture'),
-  title: '',
-  reason: '',
-  buttonList: []
-})
+import { Permission, PermissionGroup, ButtonStatus, PermissionOption } from '../model/definition';
+import { CallerAppInfo, PermissionGroupConfig } from '../model/typedef';
+import { DeviceUtil } from '../utils/deviceUtil';
 
 export class ImageAndVideosStrategy extends BasePermissionStrategy {
   public override getPermissionGroupConfig(): PermissionGroupConfig {
-    return groupConfig;
+    return new PermissionGroupConfig({
+      groupName: PermissionGroup.IMAGE_AND_VIDEOS,
+      permissions: [Permission.READ_IMAGEVIDEO, Permission.WRITE_IMAGEVIDEO, Permission.MEDIA_LOCATION],
+      icon: $r('app.media.ic_public_picture'),
+      title: '',
+      reason: '',
+      buttonList: []
+    });
   }
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
     return $r('app.string.group_label_image_and_videos', appName);
+  }
+
+  public override isSupport(permission: Permission): boolean {
+    return DeviceUtil.isPhone() || DeviceUtil.isTablet() || DeviceUtil.isPC() || DeviceUtil.isTv();
+  }
+
+  public override grantHandle(
+    permission: Permission, callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
+  ): PermissionOption {
+    return this.isPermissionPendingGrant(permission, callerAppInfo) ? PermissionOption.GRANT : PermissionOption.SKIP;
+  }
+
+  public override denyHandle(
+    permission: Permission, callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
+  ): PermissionOption {
+    return this.isPermissionPendingGrant(permission, callerAppInfo) ? PermissionOption.REVOKE : PermissionOption.SKIP;
   }
 }

@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Private access to Gallery",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"To protect your privacy, %s can only briefly access your location when you tap Allow.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Limited access to location",
             "attr":{
                 "priority":"LT"
@@ -43,14 +43,14 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow.",
             "attr":{
                 "priority":"LT"
@@ -121,7 +121,7 @@
         },
         {
             "name":"always_allow",
-            "value":"Always allow",
+            "value":"Allow all the time",
             "attr":{
                 "priority":"translate"
             }
@@ -141,7 +141,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"Allow %s to track your activity in other apps?",
             "attr":{
                 "priority":"translate"
@@ -190,21 +190,21 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"If denied, this app won't be able to access the clipboard.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"Allow %s to capture your screen?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"Allow %s to use NearLink?",
             "attr":{
                 "priority":"translate"
@@ -267,14 +267,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"Allow %s to read the list of installed apps?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"Allow this time only",
             "attr":{
                 "priority":"translate"
@@ -302,11 +302,198 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"Content copied from %s. If you choose Deny, this app won't be able to access the clipboard.",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Dashboard"
+        },
+        {
+            "name":"permission_manager",
+            "value":"Permission manager"
+        },
+        {
+            "name":"permission",
+            "value":"Permissions"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"Search apps"
+        },
+        {
+            "name":"allowed",
+            "value":"Allowed"
+        },
+        {
+            "name":"banned",
+            "value":"Denied"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Read & modify",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Read only",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Modify only",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"All files",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"Enable"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"Allow in Settings"
+        },
+        {
+            "name":"close",
+            "value":"Disable"
+        },
+        {
+            "name":"microphone",
+            "value":"Microphone"
+        },
+        {
+            "name":"close_microphone",
+            "value":"Disable the microphone?"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"Microphone disabled"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Camera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Microphone"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Contacts"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Calendar"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Physical activity"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Body sensors"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Activity tracking"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"App list"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"Clipboard"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Folders"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"Files & folders"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"Input assistance"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"Screen sharing"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"Device control"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"Input assistance"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"Screen sharing"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"Device control"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Device connection"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"Allow %s to provide input assistance?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"Downloads folder"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"Home screen folder"
+        },
+        {
+            "name":"document_folder",
+            "value":"Documents folder"
+        },
+        {
+            "name":"confirm",
+            "value":"Confirm"
         }
     ]
 }

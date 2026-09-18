@@ -14,15 +14,16 @@
  */
 
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
-import { PermissionUtils } from '../utils/permissionUtils';
 import { Permission, PermissionGroup, PermissionOption } from '../model/definition';
 import { PermissionGroupConfig, PermissionWithOption } from '../model/typedef';
 import Constants from '../utils/constant';
+import { DeviceUtil } from '../utils/deviceUtil';
+import { PermissionUtils } from '../utils/permissionUtils';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.ADS,
   permissions: [Permission.APP_TRACKING_CONSENT],
-  icon: $r('app.media.track'),
+  icon: $r('app.media.ic_public_application_tracing'),
   title: '',
   reason: '',
   buttonList: []
@@ -34,7 +35,7 @@ export class AdsStrategy extends BasePermissionStrategy {
   }
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
-    return $r('app.string.group_label_ADS', appName);
+    return $r('app.string.group_label_ads', appName);
   }
 
   public override async preProcessingPermission(
@@ -50,5 +51,8 @@ export class AdsStrategy extends BasePermissionStrategy {
       permissionWithOptionList.push({ permission, permissionOption: PermissionOption.GRANT });
     }
     return permissionWithOptionList;
+  }
+  public override isSupport(permission: Permission): boolean {
+    return DeviceUtil.isPhone() || DeviceUtil.isTablet() || DeviceUtil.isPC() || DeviceUtil.isTv();
   }
 }

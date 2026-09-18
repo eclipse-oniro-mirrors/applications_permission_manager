@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Soukromý přístup ke galerii",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší poloze jen krátce, když klepnete na možnost Povolit.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší galerii jen krátce, když klepnete na možnost Povolit.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Soukromý přístup k poloze",
             "attr":{
                 "priority":"translate"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"V zájmu ochrany vašeho soukromí může mít %1$s%2$s přístup k vaší poloze jen krátce, když klepnete na možnost Povolit.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"V zájmu ochrany vašeho soukromí může mít %1$s%2$s přístup k vaší galerii jen krátce, když klepnete na možnost Povolit.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Ovládací panel"
+        },
+        {
+            "name":"permission",
+            "value":"Oprávnění"
+        },
+        {
+            "name":"allowed",
+            "value":"Povoleno"
+        },
+        {
+            "name":"banned",
+            "value":"Odmítnuto"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Čtení a úpravy",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Pouze pro čtení",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Pouze pro úpravy",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Všechny soubory",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Vždy se zeptat",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Fotoaparát"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Kontakty"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalendář"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Fyzická aktivita"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Čidla na těle"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Sledování aktivit"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Seznam aplikací"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Složky"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Vyskakovací okna"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Vyskakovací okna"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Připojení zařízení"
         }
     ]
 }

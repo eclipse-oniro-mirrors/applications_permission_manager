@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Akses peribadi ke Galeri",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses lokasi anda secara ringkas apabila anda mengetik Benarkan.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses Galeri anda secara ringkas untuk menyimpan item apabila anda mengetik Benarkan.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Akses terhad ke lokasi",
             "attr":{
                 "priority":"LT"
@@ -43,14 +43,14 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Untuk melindungi privasi anda, %2$s%1$s hanya boleh mengakses lokasi anda secara ringkas apabila anda mengetik Benarkan.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Untuk melindungi privasi anda, %2$s%1$s hanya boleh mengakses Galeri anda secara ringkas untuk menyimpan item apabila anda mengetik Benarkan.",
             "attr":{
                 "priority":"LT"
@@ -72,7 +72,7 @@
         },
         {
             "name":"always_allow",
-            "value":"Sentiasa benarkan",
+            "value":"Benarkan setiap masa",
             "attr":{
                 "priority":"translate"
             }
@@ -106,7 +106,7 @@
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"Benarkan pada kali ini sahaja",
             "attr":{
                 "priority":"translate"
@@ -142,7 +142,7 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Benarkan aplikasi ini mengakses lokasi tepat anda. Apabila ciri ini dimatikan, aplikasi ini hanya boleh mengakses lokasi anggaran anda. Sesetengah aplikasi yang tidak menyokong ciri ini mungkin gagal mendapat sebarang lokasi.",
+            "value":"Benarkan aplikasi ini mengakses lokasi tepat anda. Apabila ciri ini dimatikan, aplikasi ini hanya boleh mengakses lokasi anggaran anda. Sesetengah aplikasi yang tidak menyokong ciri ini mungkin gagal mendapatkan sebarang lokasi.",
             "attr":{
                 "priority":"translate"
             }
@@ -176,7 +176,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"Benarkan %s menjejak aktiviti anda dalam aplikasi lain?",
             "attr":{
                 "priority":"translate"
@@ -211,21 +211,21 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"Jika ditolak, aplikasi ini tidak akan dapat mengakses papan klip.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"Benarkan %s menangkap skrin anda?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"Benarkan %s menggunakan NearLink?",
             "attr":{
                 "priority":"translate"
@@ -274,7 +274,7 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"Benarkan %s membaca senarai aplikasi yang dipasang?",
             "attr":{
                 "priority":"translate"
@@ -302,11 +302,198 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"Kandungan disalin daripada %s. Jika anda memilih Tolak, aplikasi ini tidak akan dapat mengakses papan klip.",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Papan pemuka"
+        },
+        {
+            "name":"permission_manager",
+            "value":"Pengurus kebenaran"
+        },
+        {
+            "name":"permission",
+            "value":"Kebenaran"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"Cari aplikasi"
+        },
+        {
+            "name":"allowed",
+            "value":"Dibenarkan"
+        },
+        {
+            "name":"banned",
+            "value":"Ditolak"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Baca & ubah suai",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Baca sahaja",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Ubah suai sahaja",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Semua fail",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"Dayakan"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"Benarkan dalam Tetapan"
+        },
+        {
+            "name":"close",
+            "value":"Nyahdayakan"
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"close_microphone",
+            "value":"Nyahdayakan mikrofon?"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"Mikrofon dinyahdayakan"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Kamera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Kenalan"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalendar"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Aktiviti fizikal"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Pengesan badan"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Penjejakan aktiviti"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Senarai aplikasi"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"Papan klip"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Folder"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"Fail & folder"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Zon jatuh"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"Bantuan input"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"Perkongsian skrin"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"Kawalan peranti"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Zon jatuh"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"Bantuan input"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"Perkongsian skrin"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"Kawalan peranti"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Sambungan peranti"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"Benarkan %s memberikan bantuan input?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"Folder Muat turun"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"Folder Skrin utama"
+        },
+        {
+            "name":"document_folder",
+            "value":"Folder Dokumen"
+        },
+        {
+            "name":"confirm",
+            "value":"Sahkan"
         }
     ]
 }

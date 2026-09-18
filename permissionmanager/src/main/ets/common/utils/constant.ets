@@ -226,7 +226,6 @@ export default class Constants {
     //group number
     public static FIXED_GROUP = 1;
     public static CHANGE_GROUP = 2;
-    public static OTHER_GROUP = 3;
     public static EXTRA_GROUP = 4;
 
     //Permission state
@@ -234,6 +233,11 @@ export default class Constants {
     public static PERMISSION_BAN = 1;
     public static PERMISSION_ONLY_THIS_TIME = 2;
     public static PERMISSION_ALLOWED_ONLY_DURING_USE = 3;
+    // Semantic aliases reused by split read/write and documents/folders states.
+    public static PERMISSION_READ_ONLY = 2;
+    public static PERMISSION_WRITE_ONLY = 3;
+    public static PERMISSION_DOCUMENT_MEDIA_ONLY = 2;
+    public static PERMISSION_FOLDER_MEDIA_ONLY = 2;
 
     //shape
     public static SHAPE_DIA = 20;
@@ -248,6 +252,8 @@ export default class Constants {
     public static PERMISSION_COMPONENT_SET = 16;
     public static PERMISSION_POLICY_FIXED = 32;
     public static PERMISSION_ALLOW_THIS_TIME = 64;
+    public static PERMISSION_FIXED_BY_ADMIN_POLICY = 128;
+    public static PERMISSION_ADMIN_POLICIES_CANCEL = 256;
 
     public static START_SUBSCRIPT = 0
     public static END_SUBSCRIPT = 500
@@ -332,6 +338,12 @@ export default class Constants {
     public static GLOBAL_SWITCH_MICROPHONE = 1;
 
     public static PERMISSION_DIALOG_SUCCESS = 0;
+
+    public static MANUAL_SETTING_USER_REJECTED = -1;
+    public static MANUAL_SETTING_USER_OPENED = 0;
+    public static MANUAL_SETTING_ALREADY_GRANTED = 1;
+    public static MANUAL_SETTING_PERM_IS_NOT_DECLARED = 2;
+    public static MANUAL_SETTING_PERM_IS_NOT_SUPPORTED = 3;
 
     public static ERR_MODAL_ALREADY_EXIST = 1;
     public static ERR_PERMISSIONS_NOT_SAME_GROUP = 2;

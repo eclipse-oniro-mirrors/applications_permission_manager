@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"การเข้าถึงแกลเลอรีแบบรักษาความเป็นส่วนตัว",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงตำแหน่งของคุณได้เพียงชั่วครู่เมื่อคุณแตะ อนุญาต",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงแกลเลอรีของคุณได้เพียงชั่วครู่เพื่อบันทึกรายการต่าง ๆ เมื่อคุณแตะ อนุญาต",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"การเข้าถึงตำแหน่งแบบจำกัด",
             "attr":{
                 "priority":"LT"
@@ -43,14 +43,14 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %1$s%2$s จะสามารถเข้าถึงตำแหน่งของคุณได้เพียงชั่วครู่เมื่อคุณแตะ อนุญาต",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %1$s%2$s จะสามารถเข้าถึงแกลเลอรีของคุณได้เพียงชั่วครู่เพื่อบันทึกรายการต่าง ๆ เมื่อคุณแตะ อนุญาต",
             "attr":{
                 "priority":"LT"
@@ -121,7 +121,7 @@
         },
         {
             "name":"always_allow",
-            "value":"อนุญาตเสมอ",
+            "value":"อนุญาตตลอดเวลา",
             "attr":{
                 "priority":"translate"
             }
@@ -141,7 +141,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"อนุญาตให้ %s ติดตามกิจกรรมของคุณในแอปอื่นหรือไม่",
             "attr":{
                 "priority":"translate"
@@ -184,27 +184,27 @@
         },
         {
             "name":"group_label_camera",
-            "value":"อนุญาตให้ %s ใช้กล้องถ่ายรูปหรือไม่",
+            "value":"อนุญาตให้%sใช้กล้องถ่ายรูปหรือไม่",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"หากปฏิเสธ แอปนี้จะไม่สามารถเข้าถึงคลิปบอร์ดได้",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"อนุญาตให้ %s จับภาพหน้าจอของคุณหรือไม่",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"อนุญาตให้ %s ใช้ NearLink หรือไม่",
             "attr":{
                 "priority":"translate"
@@ -267,14 +267,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"อนุญาตให้ %s อ่านรายการแอปที่ติดตั้งไว้หรือไม่",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"อนุญาตในครั้งนี้เท่านั้น",
             "attr":{
                 "priority":"translate"
@@ -302,11 +302,198 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"เนื้อหานี้คัดลอกมาจาก %s หากคุณเลือก ปฏิเสธ แอปนี้จะไม่สามารถเข้าถึงคลิปบอร์ดได้",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"แดชบอร์ด"
+        },
+        {
+            "name":"permission_manager",
+            "value":"ตัวจัดการการอนุญาต"
+        },
+        {
+            "name":"permission",
+            "value":"การอนุญาต"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"ค้นหาแอป"
+        },
+        {
+            "name":"allowed",
+            "value":"อนุญาตแล้ว"
+        },
+        {
+            "name":"banned",
+            "value":"ปฏิเสธแล้ว"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"อ่านและแก้ไข",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"อ่านอย่างเดียว",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"แก้ไขอย่างเดียว",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"ไฟล์ทั้งหมด",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"เปิดใช้งาน"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"อนุญาตในการตั้งค่า"
+        },
+        {
+            "name":"close",
+            "value":"ปิดใช้งาน"
+        },
+        {
+            "name":"microphone",
+            "value":"ไมโครโฟน"
+        },
+        {
+            "name":"close_microphone",
+            "value":"ปิดใช้งานไมโครโฟนหรือไม่"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"ไมโครโฟนปิดใช้งานอยู่"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"กล้องถ่ายรูป"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"ไมโครโฟน"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"รายชื่อ"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"ปฏิทิน"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"กิจกรรมการเคลื่อนไหวร่างกาย"
+        },
+        {
+            "name":"group_name_health",
+            "value":"เซ็นเซอร์ร่างกาย"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"การติดตามกิจกรรม"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"รายการแอป"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"บลูทูธ"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"คลิปบอร์ด"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"โฟลเดอร์"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"ไฟล์และโฟลเดอร์"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"ดรอปโซน"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"ความช่วยเหลือในการป้อนข้อมูล"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"การแบ่งปันหน้าจอ"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"การควบคุมอุปกรณ์"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"ดรอปโซน"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"ความช่วยเหลือในการป้อนข้อมูล"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"การแบ่งปันหน้าจอ"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"การควบคุมอุปกรณ์"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"การเชื่อมต่อ​อุ‍ปกรณ์"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"อนุญาตให้ %s ให้บริการช่วยเหลือการป้อนข้อมูลหรือไม่",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"โฟลเดอร์การดาวน์โหลด"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"โฟลเดอร์หน้าจอหลัก"
+        },
+        {
+            "name":"document_folder",
+            "value":"โฟลเดอร์เอกสาร"
+        },
+        {
+            "name":"confirm",
+            "value":"ยืนยัน"
         }
     ]
 }

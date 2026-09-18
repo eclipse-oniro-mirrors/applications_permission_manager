@@ -16,10 +16,11 @@
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
 import { Permission, PermissionGroup } from '../model/definition';
 import { PermissionGroupConfig } from '../model/typedef';
+import { DeviceUtil } from '../utils/deviceUtil';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.DISTRIBUTED_DATASYNC,
-  permissions: [Permission.DISTRIBUTED_DATASYNC],
+  permissions: [Permission.DISTRIBUTED_DATASYNC, Permission.ACCESS_BLUETOOTH, Permission.ACCESS_NEARLINK],
   icon: $r('app.media.ic_multi_device_vector'),
   title: '',
   reason: '',

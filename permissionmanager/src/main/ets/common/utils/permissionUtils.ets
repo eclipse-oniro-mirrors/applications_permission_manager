@@ -32,11 +32,64 @@ export class PermissionUtils {
       Log.info(`permissionRequestToggleStatus is ${result}.`);
       return result === abilityAccessCtrl.PermissionRequestToggleStatus.OPEN;
     } catch (error) {
-      Log.error(`getBundleResourceInfo faild, code: ${error.code}, message: ${error.message}.`);
+      Log.error(`getPermissionRequestToggleStatus failed, code: ${error.code}, message: ${error.message}.`);
       return false;
     }
   }
 
+  /**
+   * 设置权限的弹窗开关状态
+   * @param permission 权限
+   * @param enabled true: 应用请求权限时弹框询问; false: 不弹框直接授权
+   * return 设置是否成功
+   */
+  public static async setPermissionQueryEnabled(permission: Permission, enabled: boolean): Promise<boolean> {
+    let atManager = abilityAccessCtrl.createAtManager();
+    let status: abilityAccessCtrl.PermissionRequestToggleStatus =
+      abilityAccessCtrl.PermissionRequestToggleStatus.OPEN;
+    if (!enabled) {
+      status = abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED;
+    }
+    try {
+      await atManager.setPermissionRequestToggleStatus(permission, status);
+      Log.info(`SetPermissionRequestToggleStatus ${permission} to ${status} success.`);
+      return true;
+    } catch (error) {
+      Log.error(`SetPermissionRequestToggleStatus failed, code: ${error.code}, message: ${error.message}.`);
+      return false;
+    }
+  }
+
+  private static getGrantedLinkedPermissions(permission: Permission): Permission[] {
+    switch (permission) {
+      case Permission.READ_WHOLE_CALENDAR:
+        return [Permission.READ_CALENDAR];
+      case Permission.WRITE_WHOLE_CALENDAR:
+        return [Permission.WRITE_CALENDAR];
+      default:
+        return [];
+    }
+  }
+
+  private static async grantLinkedPermissions(
+    tokenId: number, linkedPermissions: Permission[], flag: number
+  ): Promise<void> {
+    if (!linkedPermissions.length) {
+      return;
+    }
+
+    let atManager = abilityAccessCtrl.createAtManager();
+    for (const linkedPermission of linkedPermissions) {
+      try {
+        await atManager.grantPermission(tokenId, linkedPermission, flag);
+      } catch (error) {
+        Log.error(
+          `Grant linked permission failed, permission: ${linkedPermission}, ` +
+          `code: ${error.code}, message: ${error.message}.`
+        );
+      }
+    }
+  }
   /**
    * 授予权限并返回操作结果
    * @param permission 操作权限
@@ -49,14 +102,22 @@ export class PermissionUtils {
   ): Promise<optionAndState> {
     try {
       let atManager = abilityAccessCtrl.createAtManager();
-      await atManager.grantUserGrantedPermission(tokenId, permission, flag);
+      await atManager.grantPermission(tokenId, permission, flag);
+      await PermissionUtils.grantLinkedPermissions(
+        tokenId,
+        PermissionUtils.getGrantedLinkedPermissions(permission),
+        flag
+      );
       Log.info(`grant permission success, permission: ${permission}.`);
       return {
         operationResult: Constants.RESULT_SUCCESS,
         permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
       }
     } catch (error) {
-      Log.error(`grant permission faild, permission: ${permission}, code: ${error.code}, message: ${error.message}.`);
+      Log.error(
+        `grant permission failed, permission: ${permission}, ` +
+        `code: ${error.code}, message: ${error.message}.`
+      );
       return {
         operationResult: Constants.RESULT_FAILURE,
         permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED
@@ -76,14 +137,14 @@ export class PermissionUtils {
   ): Promise<optionAndState> {
     try {
       let atManager = abilityAccessCtrl.createAtManager();
-      await atManager.revokeUserGrantedPermission(tokenId, permission, flag);
+      await atManager.revokePermission(tokenId, permission, flag, false);
       Log.info(`revoke permission success, permission: ${permission}.`);
       return {
         operationResult: Constants.RESULT_SUCCESS,
         permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED
       }
     } catch (error) {
-      Log.error(`revoke permission faild, permission: ${permission}, code: ${error.code}, message: ${error.message}.`);
+      Log.error(`revoke permission failed, permission: ${permission}, code: ${error.code}, message: ${error.message}.`);
       return {
         operationResult: Constants.RESULT_FAILURE,
         permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED

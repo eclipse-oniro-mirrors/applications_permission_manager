@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Privétoegang tot Foto's",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Om uw privacy te beschermen, krijgt %s slechts kort toegang tot uw locatie wanneer u op Toestaan tikt.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Om uw privacy te beschermen, krijgt %s slechts kort toegang tot Foto's wanneer u op Toestaan tikt.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Privétoegang tot locatie",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Om uw privacy te beschermen, krijgt %1$s%2$s slechts kort toegang tot uw locatie wanneer u op Toestaan tikt.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Om uw privacy te beschermen, krijgt %1$s%2$s slechts kort toegang tot Foto's wanneer u op Toestaan tikt.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Dashboard"
+        },
+        {
+            "name":"permission",
+            "value":"Toestemmingen"
+        },
+        {
+            "name":"allowed",
+            "value":"Toegestaan"
+        },
+        {
+            "name":"banned",
+            "value":"Geweigerd"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Lezen en wijzigen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Alleen-lezen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Alleen-wijzigen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Alle bestanden",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Iedere keer vragen",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Microfoon"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Camera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Microfoon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Contacten"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Agenda"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Fysieke activiteit"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Lichaamssensors"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Activiteits​tracking"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"App-lijst"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Mappen"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Apparaat​verbinding"
         }
     ]
 }

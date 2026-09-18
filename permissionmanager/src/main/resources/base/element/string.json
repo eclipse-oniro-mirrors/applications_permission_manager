@@ -29,7 +29,7 @@
             "value":" permissions"
         },
         {
-            "name":"textInput_placeholder",
+            "name":"text_input_placeholder",
             "value":"Search application"
         },
         {
@@ -92,6 +92,48 @@
             }
         },
         {
+            "name":"read_and_modify",
+            "value":"Read and modify",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Read only",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Modify only",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"All files",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"media_only",
+            "value":"Media only",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"selected_folders",
+            "value":"Only some folders",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
             "name":"ban",
             "value":"Deny",
             "attr":{
@@ -120,7 +162,7 @@
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"Allow this time only",
             "attr":{
                 "priority":"LT"
@@ -201,8 +243,44 @@
             "value":"Open"
         },
         {
+            "name":"go_to_settings",
+            "value":"Go to Settings"
+        },
+        {
             "name":"close",
             "value":"Close"
+        },
+        {
+            "name":"manual_setting_confirm_title",
+            "value":"Go to Settings to enable the permission"
+        },
+        {
+            "name":"manual_setting_confirm_message",
+            "value":"This permission must be enabled manually in Settings. After confirmation, the system Settings app will open."
+        },
+        {
+            "name":"manual_setting_target_app",
+            "value":"App"
+        },
+        {
+            "name":"manual_setting_target_permission",
+            "value":"Permission"
+        },
+        {
+            "name":"manual_setting_path_title",
+            "value":"Open the matching permission management page by following either path below"
+        },
+        {
+            "name":"manual_setting_path_primary_prefix",
+            "value":"Recommended path: Settings -> Privacy & Security -> "
+        },
+        {
+            "name":"manual_setting_path_secondary_prefix",
+            "value":"Alternative path: Settings -> Apps & Services -> "
+        },
+        {
+            "name":"manual_setting_confirm_tip",
+            "value":"After changing the permission, return to the app and verify the status again."
         },
         {
             "name":"camera",
@@ -261,82 +339,126 @@
             "value":"After it is turned off, all apps will not be able to use the camera properly to take photos, videos or perform face recognition. To restore data, turn on the camera switch."
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"Content copied from %s. If you choose Deny, this app won't be able to access the clipboard.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"If denied, this app won't be able to access the clipboard.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"groupName_location",
+            "name":"group_name_location",
             "value":"Location information"
         },
         {
-            "name":"groupName_camera",
+            "name":"group_name_camera",
             "value":"Camera"
         },
         {
-            "name":"groupName_microphone",
+            "name":"group_name_microphone",
             "value":"Microphone"
         },
         {
-            "name":"groupName_contacts",
+            "name":"group_name_contacts",
             "value":"Address book"
         },
         {
-            "name":"groupName_calendar",
+            "name":"group_name_calendar",
             "value":"Calendar"
         },
         {
-            "name":"groupName_sport",
-            "value":"Fitness"
+            "name":"group_name_sport",
+            "value":"Motion data"
         },
         {
-            "name":"groupName_health",
+            "name":"group_name_health",
             "value":"Body sensor"
         },
         {
-            "name":"groupName_other",
-            "value":"Other rights"
+            "name":"group_name_ads",
+            "value":"Cross-app association"
         },
         {
-            "name":"groupName_ADS",
-            "value":"Advertising tracking"
+            "name":"request_association_toggle",
+            "value":"Require apps to request association"
         },
         {
-            "name":"groupName_appList",
+            "name":"request_association_on",
+            "value":"App association is on. Apps need your consent to link their activity with other apps, providing personalized experiences."
+        },
+        {
+            "name":"request_association_off",
+            "value":"App association is off. Apps can link their activity with other apps without your consent, providing personalized experiences."
+        },
+        {
+            "name":"group_name_app_list",
             "value":"Read the list of installed apps"
         },
         {
-            "name":"groupName_bluetooth",
+            "name":"group_name_bluetooth",
             "value":"Bluetooth"
         },
         {
-            "name":"groupName_pasteboard",
+            "name":"group_name_pasteboard",
             "value":"Pasteboard"
         },
         {
-            "name":"groupName_folder",
+            "name":"group_name_folder",
             "value":"Folder"
         },
         {
-            "name":"groupName_nearLink",
+            "name":"group_name_documents_and_folder",
+            "value":"Files and folders"
+        },
+        {
+            "name":"group_name_near_link",
             "value":"NearLink"
         },
         {
-            "name":"groupName_screenCapture",
+            "name":"group_name_screen_capture",
             "value":"Screen capture"
         },
         {
+            "name":"group_name_float_view",
+            "value":"Floating window"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"Keyboard input assistance"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"Screen sharing"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"Control device"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Floating window"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"Keyboard input assistance"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"Screen sharing"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"Control device"
+        },
+        {
             "name":"multi_device_collaboration",
-            "value":"Multi-device collaboration"
+            "value":"Device discovery and connection"
         },
         {
             "name":"group_label_location",
@@ -416,14 +538,14 @@
             }
         },
         {
-            "name":"group_label_ADS",
-            "value":"Allow %s to track your activity in other apps?",
+            "name":"group_label_ads",
+            "value":"Allow %s to track your usage across apps?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"Allow %s to read the list of installed apps?",
             "attr":{
                 "priority":"LT"
@@ -469,15 +591,43 @@
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"Allow %s to use NearLink?",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"Allow %s to capture your screen?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"group_label_float_view",
+            "value":"Allow %s to display over other apps?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"Allow %s to assist keyboard input?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"group_label_screen_share",
+            "value":"Allow %s to share your screen?",
+            "attr":{
+                "priority":"LT"
+            }
+        },
+        {
+            "name":"group_label_control_device",
+            "value":"Allow %s to control your device?",
             "attr":{
                 "priority":"LT"
             }
@@ -543,11 +693,11 @@
             "value":"%s apps have been allowed to access files on your device."
         },
         {
-            "name":"enable_description_ADS",
-            "value":"%s apps have been allowed to create a profile or show you personalized ads based on your AD identifier."
+            "name":"enable_description_ads",
+            "value":"%s apps have been allowed to track your usage across apps using your identifier."
         },
         {
-            "name":"enable_description_appList",
+            "name":"enable_description_app_list",
             "value":"%s apps are allowed to read the list of installed apps on the local device."
         },
         {
@@ -563,12 +713,28 @@
             "value":"%s apps have been allowed to access files and folders."
         },
         {
-            "name":"enable_description_nearLink",
+            "name":"enable_description_near_link",
             "value":"%s apps have been allowed to access NearLink."
         },
         {
-            "name":"enable_description_screenCapture",
+            "name":"enable_description_screen_capture",
             "value":"%s apps have been allowed to use screenshots."
+        },
+        {
+            "name":"enable_description_float_view",
+            "value":"%s apps have been allowed to display over other apps."
+        },
+        {
+            "name":"enable_description_hook_input_event",
+            "value":"%s apps have been allowed to assist keyboard input."
+        },
+        {
+            "name":"enable_description_screen_share",
+            "value":"%s apps have been allowed to share your screen."
+        },
+        {
+            "name":"enable_description_control_device",
+            "value":"%s apps have been allowed to control the device."
         },
         {
             "name":"forbidden_description_location",
@@ -631,11 +797,11 @@
             "value":"Apps have been prevented from accessing files on your device."
         },
         {
-            "name":"forbidden_description_ADS",
-            "value":"Apps are prohibited from creating profiles or showing you personalized ads based on your AD identifier."
+            "name":"forbidden_description_ads",
+            "value":"Apps are prohibited from tracking your usage across apps using your identifier."
         },
         {
-            "name":"forbidden_description_appList",
+            "name":"forbidden_description_app_list",
             "value":"Apps are prohibited from reading the list of installed applications on the local device."
         },
         {
@@ -651,82 +817,122 @@
             "value":"Apps have been prevented from accessing files and folders."
         },
         {
-            "name":"forbidden_description_nearLink",
+            "name":"forbidden_description_near_link",
             "value":"Apps have been prohibited from accessing NearLink."
         },
         {
-            "name":"forbidden_description_screenCapture",
+            "name":"forbidden_description_screen_capture",
             "value":"Screenshots have been disabled."
+        },
+        {
+            "name":"forbidden_description_float_view",
+            "value":"Apps have been prohibited from displaying over other apps."
+        },
+        {
+            "name":"forbidden_description_hook_input_event",
+            "value":"Apps have been prohibited from assisting keyboard input."
+        },
+        {
+            "name":"forbidden_description_screen_share",
+            "value":"Apps have been prohibited from sharing your screen."
+        },
+        {
+            "name":"forbidden_description_control_device",
+            "value":"Apps have been prohibited from controlling the device."
         },
         {
             "name":"risk_warning",
             "value":"Risk application does not obtain this permission"
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Limited access to location",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Private access to Gallery",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"To protect your privacy, %s can only briefly access your location when you tap Allow.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"Download",
+            "name":"download",
             "value":"Download"
         },
         {
-            "name":"Desktop",
+            "name":"desktop",
             "value":"Desktop"
         },
         {
-            "name":"Document",
+            "name":"document",
             "value":"Document"
         },
         {
-            "name":"Download_folder",
+            "name":"download_folder",
             "value":"Download folder"
         },
         {
-            "name":"Desktop_folder",
+            "name":"desktop_folder",
             "value":"Desktop folder"
         },
         {
-            "name":"Document_folder",
+            "name":"document_folder",
             "value":"Document folder"
+        },
+        {
+            "name":"full_disk_folder",
+            "value":"Full disk"
+        },
+        {
+            "name":"allow_full_disk_access",
+            "value":"Allow full disk access"
+        },
+        {
+            "name":"allow_full_disk_access_desc",
+            "value":"This app will gain read and write access to all public disk files on this device."
+        },
+        {
+            "name":"confirm",
+            "value":"Confirm"
+        },
+        {
+            "name":"permission_fixed_by_admin_policy_title",
+            "value":"Permission cannot be modified"
+        },
+        {
+            "name":"permission_fixed_by_admin_policy_message",
+            "value":"This permission is set by the administrator and cannot be modified."
         }
     ]
 }

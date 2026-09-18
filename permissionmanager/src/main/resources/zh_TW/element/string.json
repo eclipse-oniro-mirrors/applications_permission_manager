@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"安全儲存圖片和影片",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"在您輕觸此按鈕時，僅允許「%s」存取位置。",
             "attr":{
                 "priority":"LT"
@@ -22,28 +22,28 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"在您輕觸此按鈕時，僅允許「%s」將圖片和影片儲存至圖片庫。",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"在您輕觸此按鈕時，僅允許「%1$s%2$s」存取位置。",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"在您輕觸此按鈕時，僅允許「%1$s%2$s」將圖片和影片儲存至圖片庫。",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"安全存取位置",
             "attr":{
                 "priority":"LT"
@@ -92,7 +92,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"允許「%s」存取廣告追蹤？",
             "attr":{
                 "priority":"translate"
@@ -120,7 +120,7 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"禁止後，將不再允許此應用程式存取剪貼簿。",
             "attr":{
                 "priority":"LT"
@@ -169,14 +169,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"允許「%s」讀取已安裝應用程式清單？",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"僅本次允許",
             "attr":{
                 "priority":"LT"
@@ -253,7 +253,7 @@
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"允許「%s」存取星閃？",
             "attr":{
                 "priority":"LT"
@@ -295,18 +295,236 @@
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"允許「%s」擷取您的螢幕畫面？",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"內容複製自「%s」。禁止後，將不再允許此應用程式存取剪貼簿。",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"權限存取記錄"
+        },
+        {
+            "name":"permission_manager",
+            "value":"權限管理"
+        },
+        {
+            "name":"application",
+            "value":"應用程式"
+        },
+        {
+            "name":"permission",
+            "value":"權限"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"搜尋應用程式"
+        },
+        {
+            "name":"allowed",
+            "value":"已允許"
+        },
+        {
+            "name":"banned",
+            "value":"已禁止"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"讀取和修改",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"僅讀取",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"僅修改",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"所有檔案",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_only",
+            "value":"僅媒體",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"啟用"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"前往設定"
+        },
+        {
+            "name":"close",
+            "value":"關閉"
+        },
+        {
+            "name":"microphone",
+            "value":"麥克風"
+        },
+        {
+            "name":"close_microphone",
+            "value":"關閉麥克風"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"麥克風未啟用"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"相機"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"麥克風"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"聯絡人"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"日曆"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"運動資料"
+        },
+        {
+            "name":"group_name_health",
+            "value":"身體感測器"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"跨應用程式關聯"
+        },
+        {
+            "name":"request_association_toggle",
+            "value":"要求應用程式請求關聯"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"讀取已安裝應用程式清單"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"藍牙"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"剪貼簿"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"資料夾"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"檔案和資料夾"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"星閃"
+        },
+        {
+            "name":"group_name_screen_capture",
+            "value":"螢幕截圖"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"懸浮視窗"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"鍵盤輸入輔助"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"螢幕共享"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"輔助操作"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"懸浮視窗"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"鍵盤輸入輔助"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"螢幕共享"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"輔助操作"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"裝置發現和連線"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"允許「%s」輔助鍵盤輸入？",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download",
+            "value":"下載"
+        },
+        {
+            "name":"desktop",
+            "value":"桌面"
+        },
+        {
+            "name":"document",
+            "value":"文件"
+        },
+        {
+            "name":"download_folder",
+            "value":"下載資料夾"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"桌面資料夾"
+        },
+        {
+            "name":"document_folder",
+            "value":"文件資料夾"
+        },
+        {
+            "name":"confirm",
+            "value":"確認"
         }
     ]
 }

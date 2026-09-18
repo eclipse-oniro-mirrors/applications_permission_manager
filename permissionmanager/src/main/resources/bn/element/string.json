@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"গ্যালারিতে প্রাইভেট অ্যাক্সেস",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"আপনি অনুমতি দিন ট্যাপ করলে আপনার গোপনীয়তা সুরক্ষিত রাখতে %s কেবল অল্প সময়ের জন্য আপনার অবস্থানে অ্যাক্সেস করতে পারবে।",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"আপনি অনুমতি দিন ট্যাপ করলে আপনার গোপনীয়তা সুরক্ষিত রাখতে %s কেবল অল্প সময়ের জন্য আপনার গ্যালারিতে অ্যাক্সেস করতে পারবে।",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"অবস্থানে প্রাইভেট অ্যাক্সেস",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"আপনি অনুমতি দিন অপশনটি ট্যাপ করলে আপনার গোপনীয়তা সুরক্ষিত রাখতে %1$s%2$s কেবল অল্প সময়ের জন্য আপনার অবস্থানে অ্যাক্সেস করতে পারবে।",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"আপনি অনুমতি দিন অপশনটি ট্যাপ করলে আপনার গোপনীয়তা সুরক্ষিত রাখতে %1$s%2$s কেবল অল্প সময়ের জন্য আপনার গ্যালারিতে অ্যাক্সেস করতে পারবে।",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"ড্যাশবোর্ড"
+        },
+        {
+            "name":"permission",
+            "value":"অনুমতিগুলি"
+        },
+        {
+            "name":"allowed",
+            "value":"অনুমতি দেওয়া হয়েছে"
+        },
+        {
+            "name":"banned",
+            "value":"প্রত্যাখ্যাত"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"রিড ও পরিবর্তন",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"কেবল রিড",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"কেবল পরিবর্তন",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"সব ফাইল",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"প্রতিবার জিজ্ঞাসা করুন",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"মাইক্রোফোন"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"ক্যামেরা"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"মাইক্রোফোন"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"পরিচিতিসমূহ"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"ক্যালেন্ডার"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"শারীরিক কার্যকলাপ"
+        },
+        {
+            "name":"group_name_health",
+            "value":"বডি সেন্সর"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"কার্যকলাপ ট্র্যাকিং"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"অ্যাপের তালিকা"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"ব্লুটুথ"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"ফোল্ডার"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"ডিভাইস সংযোগ"
         }
     ]
 }

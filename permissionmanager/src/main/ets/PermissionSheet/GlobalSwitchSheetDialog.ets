@@ -13,8 +13,7 @@
  * limitations under the License.
  */
 
-import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
-import { BusinessError } from '@ohos.base';
+import { Permissions } from '@ohos.abilityAccessCtrl';
 import audio from '@ohos.multimedia.audio';
 import camera from '@ohos.multimedia.camera';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
@@ -27,7 +26,8 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import { getCallerBundleInfo } from './PermissionStateSheetDialog';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import common from '@ohos.app.ability.common';
-import { PermissionGroup } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 
 
 let globalIsOn: boolean;
@@ -244,12 +244,13 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   grantUserGrantedPermission(accessTokenId: number, permission: Permissions, resolve: (value: number) => void) {
-    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
-      .then(() => {
-        resolve(0);
-      }).catch((error: BusinessError) => {
-      resolve(-1);
-      Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+    PermissionUtils.grantPermissionWithResult(
+      permission as Permission, Constants.PERMISSION_FLAG, accessTokenId
+    ).then((result) => {
+      resolve(result.operationResult === Constants.RESULT_SUCCESS ? 0 : -1);
+      if (result.operationResult !== Constants.RESULT_SUCCESS) {
+        Log.error('grantUserGrantedPermission failed. permission: ' + permission);
+      }
     })
   }
 
@@ -260,13 +261,13 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, resolve: (value: number) => void) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG
-    ).then(() => {
-      resolve(0);
-    }).catch((error: BusinessError) => {
-      resolve(-1);
-      Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+    PermissionUtils.revokePermissionWithResult(
+      permission as Permission, Constants.PERMISSION_FLAG, accessTokenId
+    ).then((result) => {
+      resolve(result.operationResult === Constants.RESULT_SUCCESS ? 0 : -1);
+      if (result.operationResult !== Constants.RESULT_SUCCESS) {
+        Log.error('revokeUserGrantedPermission failed. permission: ' + permission);
+      }
     })
   }
 

@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"गैलरी तक निजी पहुँच",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %s संक्षिप्त रूप से आपके स्थान तक पहुँच प्राप्त कर सकता है।",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %s आइटम सहेजने हेतु संक्षिप्त रूप से आपकी गैलरी तक पहुँच प्राप्त कर सकता है।",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"स्थान तक निजी पहुँच",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %1$s%2$s संक्षिप्त रूप से आपके स्थान तक पहुँच प्राप्त कर सकता है।",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %1$s%2$s आइटम सहेजने हेतु संक्षिप्त रूप से आपकी गैलरी तक पहुँच प्राप्त कर सकता है।",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"डैशबोर्ड"
+        },
+        {
+            "name":"permission",
+            "value":"अनुमतियाँ"
+        },
+        {
+            "name":"allowed",
+            "value":"अनुमति दी गई"
+        },
+        {
+            "name":"banned",
+            "value":"अस्वीकार किया गया"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"पढ़ें और संशोधित करें",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"केवल पढ़ें",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"केवल संशोधित करें",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"सभी फ़ाइलें",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"प्रत्येक बार पूछें",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"माइक्रोफ़ोन"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"कैमरा"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"माइक्रोफ़ोन"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"संपर्क"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"कैलेंडर"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"शारीरिक गतिविधि"
+        },
+        {
+            "name":"group_name_health",
+            "value":"शरीर संवेदक"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"गतिविधि ट्रैकिंग"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"ऐप सूची"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"ब्लूटूथ"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"फ़ोल्‍डर"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"डिवाइस कनेक्शन"
         }
     ]
 }

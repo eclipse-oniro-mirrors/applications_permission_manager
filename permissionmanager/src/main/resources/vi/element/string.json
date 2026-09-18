@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Quyền truy cập riêng tư vào Bộ sưu tập",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào vị trí của bạn khi bạn chạm vào Cho phép.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào Bộ sưu tập của bạn để lưu các mục khi bạn chạm vào Cho phép.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Hạn chế truy cập vào vị trí",
             "attr":{
                 "priority":"LT"
@@ -43,14 +43,14 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Để bảo vệ quyền riêng tư của bạn, %1$s%2$s chỉ có thể truy cập tạm thời vào vị trí của bạn khi bạn chạm vào Cho phép.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Để bảo vệ quyền riêng tư của bạn, %1$s%2$s chỉ có thể truy cập tạm thời vào Bộ sưu tập của bạn để lưu các mục khi bạn chạm vào Cho phép.",
             "attr":{
                 "priority":"LT"
@@ -141,7 +141,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"Cho phép %s theo dõi hoạt động của bạn trong các ứng dụng khác?",
             "attr":{
                 "priority":"translate"
@@ -190,21 +190,21 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"Nếu bị từ chối, ứng dụng này sẽ không thể truy cập bộ nhớ tạm.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"Cho phép %s chụp màn hình của bạn?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"Cho phép %s sử dụng NearLink?",
             "attr":{
                 "priority":"translate"
@@ -226,7 +226,7 @@
         },
         {
             "name":"allowed_only_during_use",
-            "value":"Cho phép khi sử dụng ứng dụng",
+            "value":"Cho phép khi dùng ứng dụng",
             "attr":{
                 "priority":"translate"
             }
@@ -267,14 +267,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"Cho phép %s đọc danh sách ứng dụng đã cài đặt?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"Chỉ cho phép lần này",
             "attr":{
                 "priority":"translate"
@@ -302,11 +302,198 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"Đã sao chép nội dung từ %s. Nếu bạn chọn Từ chối, ứng dụng này sẽ không thể truy cập bộ nhớ tạm.",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Bảng điều khiển"
+        },
+        {
+            "name":"permission_manager",
+            "value":"Trình quản lý quyền"
+        },
+        {
+            "name":"permission",
+            "value":"Quyền"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"Tìm kiếm ứng dụng"
+        },
+        {
+            "name":"allowed",
+            "value":"Cho phép"
+        },
+        {
+            "name":"banned",
+            "value":"Đã từ chối"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Đọc và sửa đổi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Chỉ đọc",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Chỉ sửa đổi",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Tất cả tệp tin",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"Bật"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"Cho phép trong Cài đặt"
+        },
+        {
+            "name":"close",
+            "value":"Tắt"
+        },
+        {
+            "name":"microphone",
+            "value":"Micrô"
+        },
+        {
+            "name":"close_microphone",
+            "value":"Tắt micrô?"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"Micrô đã tắt"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Máy ảnh"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Micrô"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Danh bạ"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Lịch"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Hoạt động thể chất"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Cảm biến cơ thể"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Theo dõi hoạt động"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Danh sách ứng dụng"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"Bộ nhớ tạm"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Thư mục"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"Tệp tin và thư mục"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"Hỗ trợ nhập liệu"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"Chia sẻ màn hình"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"Điều khiển thiết bị"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"Hỗ trợ nhập liệu"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"Chia sẻ màn hình"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"Điều khiển thiết bị"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Kết nối thiết bị"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"Cho phép %s cung cấp hỗ trợ nhập liệu?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"Thư mục Tải xuống"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"Thư mục Màn hình chính"
+        },
+        {
+            "name":"document_folder",
+            "value":"Thư mục Tài liệu"
+        },
+        {
+            "name":"confirm",
+            "value":"Xác nhận"
         }
     ]
 }

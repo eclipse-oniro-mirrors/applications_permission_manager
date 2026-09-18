@@ -20,7 +20,9 @@ enum DeviceType {
   DEFAULT = 'default',
   TWO_IN_ONE = '2in1',
   TABLET = 'tablet',
-  PHONE = 'phone'
+  PHONE = 'phone',
+  TV = 'tv',
+  WEARABLE = 'wearable'
 };
 
 export class DeviceUtil {
@@ -36,7 +38,20 @@ export class DeviceUtil {
   }
 
   public static isPhone(): boolean {
-    return deviceInfo.deviceType === DeviceType.PHONE;
+    return deviceInfo.deviceType === DeviceType.PHONE ||
+      deviceInfo.deviceType === DeviceType.DEFAULT;
+  }
+
+  public static isTv(): boolean {
+    return deviceInfo.deviceType === DeviceType.TV;
+  }
+
+  public static isWearable(): boolean {
+    return deviceInfo.deviceType === DeviceType.WEARABLE;
+  }
+
+  public static isDefault(): boolean {
+    return deviceInfo.deviceType === DeviceType.DEFAULT;
   }
 
   // 折叠屏

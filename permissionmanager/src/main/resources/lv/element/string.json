@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Privāta piekļuve lietotnei Galerija",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu atrašanās vietai, ja pieskaraties Atļaut.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu lietotnei Galerija, ja pieskaraties Atļaut.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Privāta piekļuve atrašanās vietai",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %1$s%2$s var tikai uz īsu brīdi piekļūt jūsu atrašanās vietai, kad pieskarieties pie Atļaut.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %1$s%2$s var tikai uz īsu brīdi piekļūt jūsu lietotnei Galerija, lai saglabātu vienumus, kad pieskarieties pie Atļaut.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Informācijas panelis"
+        },
+        {
+            "name":"permission",
+            "value":"Atļaujas"
+        },
+        {
+            "name":"allowed",
+            "value":"Atļauts"
+        },
+        {
+            "name":"banned",
+            "value":"Liegts"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Lasīt un mainīt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Tikai lasīt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Tikai mainīt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Visi faili",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Katru reizi jautāt",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofons"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Kamera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofons"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Kontakti"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalendārs"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Fiziskā aktivitāte"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Ķermeņa sensori"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Aktivitātes izsekošana"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Lietotņu saraksts"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Mapes"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Nomešanas zona"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Nomešanas zona"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Savienojums ar ierīci"
         }
     ]
 }

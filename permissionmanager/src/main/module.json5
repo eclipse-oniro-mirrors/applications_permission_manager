@@ -102,6 +102,13 @@
             },
             {
                 "icon": "$media:icon",
+                "name": "com.ohos.permissionmanager.OpenSettingAbility",
+                "srcEntry": "./ets/OpenSetting/OpenSettingAbility.ets",
+                "type": "sys/commonUI",
+                "exported": true
+            },
+            {
+                "icon": "$media:icon",
                 "name": "com.ohos.permissionmanager.GlobalSwitchSheetAbility",
                 "srcEntry": "./ets/PermissionSheet/GlobalSwitchSheetAbility.ets",
                 "type": "sys/commonUI",
@@ -117,6 +124,9 @@
             },
             {
                 "name": "ohos.permission.REVOKE_SENSITIVE_PERMISSIONS"
+            },
+            {
+                "name": "ohos.permission.DISABLE_PERMISSION_DIALOG"
             },
             {
                 "name": "ohos.permission.GET_BUNDLE_INFO"

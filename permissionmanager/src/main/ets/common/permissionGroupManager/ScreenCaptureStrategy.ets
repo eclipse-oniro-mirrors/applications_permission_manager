@@ -33,7 +33,7 @@ export class ScreenCaptureStrategy extends BasePermissionStrategy {
   }
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
-    return $r('app.string.group_label_screenCapture', appName);
+    return $r('app.string.group_label_screen_capture', appName);
   }
 
   public override isSupport(permission: Permission): boolean {

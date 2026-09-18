@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Személyes hozzáférés a Galériához",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a tartózkodási helyéhez, ha az Engedélyezés gombra koppint.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a Galériához a képek mentéséhez, ha az Engedélyezés gombra koppint.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Személyes hozzáférés a helyhez",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Az Ön személyes adatainak védelme érdekében a(z) %1$s%2$s csak rövid ideig férhet hozzá a tartózkodási helyéhez, ha az Engedélyezés gombra koppint.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Az Ön személyes adatainak védelme érdekében a(z) %1$s%2$s csak rövid ideig férhet hozzá a Galériához a képek mentéséhez, ha az Engedélyezés gombra koppint.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Kezelőpult"
+        },
+        {
+            "name":"permission",
+            "value":"Jogosultságok"
+        },
+        {
+            "name":"allowed",
+            "value":"Engedélyezett"
+        },
+        {
+            "name":"banned",
+            "value":"Elutasítva"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Olvasás és módosítás",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Csak olvasás",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Csak módosítás",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Összes fájl",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Mindig kérdezzen rá",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Kamera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Névjegyzék"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Naptár"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Testmozgás"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Testérzékelők"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Aktivitás​követő"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Alkalmazáslista"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Mappák"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Célterület"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Célterület"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Készülék​kapcsolat"
         }
     ]
 }

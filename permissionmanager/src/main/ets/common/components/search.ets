@@ -29,7 +29,7 @@ export struct textInput {
   build() {
     Column() {
       Flex({ alignContent: FlexAlign.Start }) {
-        TextInput({ placeholder: $r('app.string.textInput_placeholder') })
+        TextInput({ placeholder: $r('app.string.text_input_placeholder') })
           .backgroundColor($r('sys.color.comp_background_list_card'))
           .padding({ left: Constants.TEXTINPUT_PADDING_LEFT })
           .type(InputType.Normal)

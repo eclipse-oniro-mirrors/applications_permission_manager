@@ -20,10 +20,22 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import { BusinessError } from '@ohos.base';
 import { groups } from '../common/model/permissionGroup';
 import Constants from '../common/utils/constant';
-import { Log, verifyAccessToken, getGroupIdByPermission, supportPermission } from '../common/utils/utils';
+import { Log, verifyAccessToken } from '../common/utils/utils';
+import { buildGroupIds, collectSupportedUserPermissions } from '../common/utils/bundlePermissionCollector';
+import {
+  getDocumentsPermissionStatus,
+  getFolderGroupStatus,
+  getMergedDocumentsAndFolderStatus,
+  isDocumentsOrFolderPermission,
+  isFolderPermission,
+  shouldShowFolderPermissionSection,
+  updateFolderStatusByPermission
+} from '../common/utils/documentsPermissionUtils';
+import { isReadPermission, isReadWriteGroup, isWritePermission } from '../common/utils/permissionGroupUtils';
+import { resolveAppIcon, resolveAppLabel } from '../common/utils/resourceDisplayUtils';
 import { PermissionObj, AppInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { Permission } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
 
 @Entry
 @Component
@@ -36,7 +48,7 @@ struct appNamePlusPage {
   @State label: string = '';
   @State isTouch: string = '';
   @State isGranted: number = Constants.PERMISSION_ALLOW;
-  @State folderStatus: boolean[] = [false, false, false];
+  @State folderStatus: boolean[] = [false, false, false, false];
   @State reqUserPermissions: Permission[] = [];
   @State statusBarHeight: number = 0;
 
@@ -62,17 +74,7 @@ struct appNamePlusPage {
             .height(Constants.LISTITEM_ROW_HEIGHT)
           }
         }.onClick(() => {
-          GlobalContext.store('currentPermissionGroup', item.group);
-          this.getUIContext().getRouter().pushUrl({
-            url: 'pages/application-tertiary',
-            params: {
-              bundleName: this.applicationInfo.bundleName,
-              backTitle: item.groupName,
-              permission: item.permission,
-              status,
-              tokenId: this.applicationInfo.tokenId
-            }
-          });
+          this.openPermissionDetail(item, status);
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
@@ -99,65 +101,91 @@ struct appNamePlusPage {
     })
   }
 
-  async getReqUserPermissions(info: AppInfo) {
-    let acManager = abilityAccessCtrl.createAtManager();
-    if (info.permissions.length > 0) {
-      for (let j = 0; j < info.permissions.length; j++) {
-        let permission = info.permissions[j] as Permission;
-        let supportPermissions = supportPermission();
-        if (supportPermissions.indexOf(permission) == -1) {
-          continue;
-        }
-        try {
-          let flag = await acManager.getPermissionFlags(info.tokenId, permission);
-          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue;
-          }
-        } catch (err) {
-          Log.error('getPermissionFlags error: ' + JSON.stringify(err));
-        }
-        this.reqUserPermissions.push(permission);
-      }
-    }
-  }
-
   async initApplicationInfo(info: AppInfo) {
     Log.info(`labelResource: ` + JSON.stringify(info.labelResource));
-    let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
-
-    if (info.labelResource.id !== 0) {
-      info.label = await this.context.resourceManager.getStringValue(info.labelResource);
-    } else {
-      info.label = await resourceManager.getStringValue(info.labelId);
-    }
-
-    try {
-      if (info.iconResource.id !== 0) {
-        let iconDescriptor = this.context.resourceManager.getDrawableDescriptor(info.iconResource);
-        info.icon = iconDescriptor?.getPixelMap();
-      } else {
-        let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
-        info.icon = iconDescriptor?.getPixelMap();
-      }
-    } catch (error) {
-      Log.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
-    }
-
-    if (!info.icon) {
-      info.icon = $r('app.media.icon');
-    }
-
-    this.reqUserPermissions = [];
-    await this.getReqUserPermissions(info);
-    let groupIds: number[] = [];
-    for (let i = 0; i < this.reqUserPermissions.length; i++) {
-      let groupId = getGroupIdByPermission(this.reqUserPermissions[i])
-      if (groupIds.indexOf(groupId) == -1) {
-        groupIds.push(groupId);
-      }
-    }
+    info.label = await resolveAppLabel(this.context, info);
+    info.icon = resolveAppIcon(this.context, info);
+    this.reqUserPermissions = await collectSupportedUserPermissions(info.tokenId, info.permissions);
     info.permissions = this.reqUserPermissions;
-    info.groupId = groupIds;
+    info.groupId = buildGroupIds(this.reqUserPermissions);
+  }
+
+  private openPermissionDetail(item: PermissionObj, status: number): void {
+    GlobalContext.store('currentPermissionGroup', item.group);
+    this.getUIContext().getRouter().pushUrl({
+      url: 'pages/application-tertiary',
+      params: {
+        bundleName: this.applicationInfo.bundleName,
+        backTitle: item.groupName,
+        permission: item.permission,
+        status,
+        tokenId: this.applicationInfo.tokenId
+      }
+    });
+  }
+
+  /**
+   * Jump to the detail page of the target permission carried by the launch want,
+   * consumed once so returning to this page does not trigger it again.
+   */
+  private navigateToTargetPermission(): void {
+    let targetPermission = GlobalContext.load<string>('targetPermission');
+    if (!targetPermission) {
+      return;
+    }
+    GlobalContext.store('targetPermission', '');
+    for (let i = 0; i < this.allowedListItem.length; i++) {
+      if (this.allowedListItem[i].permission.indexOf(targetPermission) !== -1) {
+        Log.info(`application-secondary navigate to allowed permission: ${targetPermission}`);
+        this.openPermissionDetail(this.allowedListItem[i], Constants.PERMISSION_ALLOW);
+        return;
+      }
+    }
+    for (let i = 0; i < this.bannedListItem.length; i++) {
+      if (this.bannedListItem[i].permission.indexOf(targetPermission) !== -1) {
+        Log.info(`application-secondary navigate to banned permission: ${targetPermission}`);
+        this.openPermissionDetail(this.bannedListItem[i], Constants.PERMISSION_BAN);
+        return;
+      }
+    }
+    Log.error(`application-secondary target permission not found: ${targetPermission}`);
+  }
+
+  /**
+   * Get the merged document and folder permissions for the current application.
+   */
+  private getMergedDocumentsAndFolderPermissions(reqPermissions: Permission[]): Permission[] {
+    return reqPermissions.filter((permission) => isDocumentsOrFolderPermission(permission));
+  }
+
+  private shouldMergeDocumentsAndFolderPermissions(): boolean {
+    return shouldShowFolderPermissionSection();
+  }
+
+  /**
+   * Compute the two-state status of the merged documents-and-folders entry and sync folder
+   * selections.
+   */
+  private async getMergedDocumentsAndFolderGroupStatus(permissions: Permission[]): Promise<number> {
+    this.folderStatus = [false, false, false, false];
+    for (const permission of permissions) {
+      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+      if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED && isFolderPermission(permission)) {
+        updateFolderStatusByPermission(this.folderStatus, permission);
+      }
+    }
+    return getMergedDocumentsAndFolderStatus(this.applicationInfo.tokenId, permissions);
+  }
+
+  private async getStandaloneFolderGroupStatus(permissions: Permission[]): Promise<number> {
+    this.folderStatus = [false, false, false, false];
+    for (const permission of permissions) {
+      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+      if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        updateFolderStatusByPermission(this.folderStatus, permission);
+      }
+    }
+    return getFolderGroupStatus(permissions, this.folderStatus);
   }
 
   /**
@@ -172,11 +200,41 @@ struct appNamePlusPage {
 
     this.allowedListItem = [];
     this.bannedListItem = [];
+    let documentsAndFolderHandled = false;
 
     for (let i = 0; i < reqGroupIds.length; i++) {
       let id = reqGroupIds[i];
       let groupName = groups[id].groupName;
       let group = groups[id].name;
+      // Merge document and folder groups into one unified file permission entry on PC/tablet.
+      if (this.shouldMergeDocumentsAndFolderPermissions() &&
+        (group === PermissionGroup.DOCUMENTS || group === PermissionGroup.FOLDER)) {
+        // Run the merge logic only once to avoid duplicate handling.
+        if (documentsAndFolderHandled) {
+          continue;
+        }
+        documentsAndFolderHandled = true;
+        // Filter all document-related and folder-related permissions from the app request list.
+        let mergedPermissions = this.getMergedDocumentsAndFolderPermissions(reqPermissions);
+        if (mergedPermissions.length <= 0) {
+          continue;
+        }
+        // Compute the merged grant status and update the status of each specific folder.
+        let mergedStatus = await this.getMergedDocumentsAndFolderGroupStatus(mergedPermissions);
+        // Add the unified file permission entry to the allowed or banned list by merged status.
+        if (mergedStatus === Constants.PERMISSION_ALLOW) {
+          this.allowedListItem.push(
+            new PermissionObj($r('sys.string.ohos_desc_read_document'), mergedPermissions, PermissionGroup.DOCUMENTS)
+          );
+        } else {
+          this.bannedListItem.push(
+            new PermissionObj($r('sys.string.ohos_desc_read_document'), mergedPermissions, PermissionGroup.DOCUMENTS)
+          );
+        }
+        // Store each folder status in the global context for the permission detail page.
+        GlobalContext.store('folderStatus', this.folderStatus);
+        continue;
+      }
       let groupReqPermissions: Permissions[] = [];
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
@@ -185,19 +243,19 @@ struct appNamePlusPage {
         }
       }
       this.isGranted = group === 'LOCATION' ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
-      this.folderStatus = [false, false, false];
+      this.folderStatus = [false, false, false, false];
       await this.getStatus(groupReqPermissions, group);
 
       if (
-        this.isGranted === Constants.PERMISSION_ALLOW || this.isGranted === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE
+        (isReadWriteGroup(group) && this.isGranted !== Constants.PERMISSION_BAN) ||
+        ((group === PermissionGroup.DOCUMENTS || group === PermissionGroup.FOLDER) &&
+          this.isGranted !== Constants.PERMISSION_BAN) ||
+        this.isGranted === Constants.PERMISSION_ALLOW ||
+        this.isGranted === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE
       ) {
         this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissions, group));
       } else {
-        if (group === 'FOLDER' && this.folderStatus.includes(true)) {
-          this.allowedListItem.push(new PermissionObj(groupName, groupReqPermissions, group));
-        } else {
-          this.bannedListItem.push(new PermissionObj(groupName, groupReqPermissions, group));
-        }
+        this.bannedListItem.push(new PermissionObj(groupName, groupReqPermissions, group));
       }
 
       GlobalContext.store('folderStatus', this.folderStatus);
@@ -228,6 +286,46 @@ struct appNamePlusPage {
       GlobalContext.store('locationStatus', this.isGranted);
       return true;
     }
+    if (group === PermissionGroup.DOCUMENTS && !this.shouldMergeDocumentsAndFolderPermissions()) {
+      this.isGranted = getDocumentsPermissionStatus(this.applicationInfo.tokenId, groupReqPermissions as Permission[]);
+      return true;
+    }
+    if (group === PermissionGroup.FOLDER && !this.shouldMergeDocumentsAndFolderPermissions()) {
+      this.isGranted = await this.getStandaloneFolderGroupStatus(groupReqPermissions as Permission[]);
+      return true;
+    }
+    if (isReadWriteGroup(group)) {
+      let hasReadPermission = false;
+      let hasWritePermission = false;
+      let hasGrantedRead = false;
+      let hasGrantedWrite = false;
+      for (let i = 0; i < groupReqPermissions.length; i++) {
+        let permission = groupReqPermissions[i] as Permission;
+        let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+        if (isReadPermission(group, permission)) {
+          hasReadPermission = true;
+          if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+            hasGrantedRead = true;
+          }
+        }
+        if (isWritePermission(group, permission)) {
+          hasWritePermission = true;
+          if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+            hasGrantedWrite = true;
+          }
+        }
+      }
+      if (hasReadPermission && hasGrantedRead && hasWritePermission && hasGrantedWrite) {
+        this.isGranted = Constants.PERMISSION_ALLOW;
+      } else if (hasReadPermission && hasGrantedRead) {
+        this.isGranted = Constants.PERMISSION_ONLY_THIS_TIME;
+      } else if (hasWritePermission && hasGrantedWrite) {
+        this.isGranted = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE;
+      } else {
+        this.isGranted = Constants.PERMISSION_BAN;
+      }
+      return true;
+    }
     for (let i = 0; i < groupReqPermissions.length; i++) {
       let permission = groupReqPermissions[i];
       let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
@@ -245,6 +343,9 @@ struct appNamePlusPage {
           case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
             this.folderStatus[2] = true;
             break;
+          case Permission.ACCESS_USER_FULL_DISK:
+            this.folderStatus[3] = true;
+            break;
         }
       }
     }
@@ -255,7 +356,11 @@ struct appNamePlusPage {
    * Lifecycle function, triggered once when this page is displayed
    */
   onPageShow() {
-    this.initialPermissions();
+    this.initialPermissions().then(() => {
+      this.navigateToTargetPermission();
+    }).catch((error: BusinessError) => {
+      Log.error(`application-secondary initialPermissions failed: ${error?.code} ${error?.message}`);
+    });
     bundleManager.getApplicationInfo(
       this.applicationInfo.bundleName, bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT
     ).then(appInfo => {

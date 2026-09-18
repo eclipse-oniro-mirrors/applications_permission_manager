@@ -15,6 +15,7 @@
 
 import { backBar } from '../common/components/backBar';
 import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
+import { createPermissionFixedDialog } from '../common/components/permissionFixedDialog';
 import { textInput } from '../common/components/search';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
@@ -30,6 +31,7 @@ import { GlobalContext } from '../common/utils/globalContext';
 import Constants from '../common/utils/constant';
 import { permissionInfos } from '../common/model/permissionGroup';
 import { Permission } from '../common/model/definition';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -83,12 +85,19 @@ struct applicationItem {
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
   @State isFirst: boolean[] = [];
+  @State isFixedByAdminPolicy: boolean[] = [];
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
   @State selectedIndex: number = 0;
   @State permissionInfo: PermissionInfo | undefined = undefined;
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
+
+  // Controller for the admin-policy-fixed permission dialog. It is created by
+  // createPermissionFixedDialog and closed in the callback.
+  promptDialogController: CustomDialogController | null = createPermissionFixedDialog(() => {
+    this.promptDialogController?.close();
+  });
 
   @Builder ListItemLayout(item: ApplicationObj) {
     ListItem() {
@@ -120,8 +129,15 @@ struct applicationItem {
                 .padding({ right: 0 })
                 .width(Constants.AUTHORITY_TOGGLE_WIDTH)
                 .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
+                .enabled(!this.isFixedByAdminPolicy[item.index])
+                .opacity(this.isFixedByAdminPolicy[item.index] ? $r('sys.float.ohos_id_alpha_disabled') : 1)
                 .onChange((isOn: boolean) => {
                   if (item.permission === undefined) {
+                    return;
+                  }
+                  if (this.isFixedByAdminPolicy[item.index]) {
+                    this.promptDialogController?.open();
+                    this.toggleIsOn[item.index] = !isOn;
                     return;
                   }
                   if (this.isFirst[item.index] && isOn) {
@@ -155,13 +171,16 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   grantUserGrantedPermission(accessTokenId: number, permission: Permissions, index: number) {
-    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
-      // result: 0 Authorization succeeded; result: -1 Authorization failed
+    PermissionUtils.grantPermissionWithResult(
+      permission as Permission, Constants.PERMISSION_FLAG, accessTokenId
+    ).then((result) => {
+      if (result.operationResult !== Constants.RESULT_SUCCESS) {
+        throw new Error();
+      }
       this.toggleIsOn[index] = true;
       let num = this.toggleIsOn.filter(item => item === true).length;
       this.permissionNum = num;
-    }).catch((error: BusinessError) => {
+    }).catch((error: BusinessError | Error) => {
       this.toggleIsOn[index] = false;
       Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
     })
@@ -174,9 +193,12 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, index: number) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG).then(() => {
-      // result: 0 successfully cancel the authorization; result: -1 cancel the authorization failed
+    PermissionUtils.revokePermissionWithResult(
+      permission as Permission, Constants.PERMISSION_FLAG, accessTokenId
+    ).then((result) => {
+      if (result.operationResult !== Constants.RESULT_SUCCESS) {
+        throw new Error();
+      }
       this.toggleIsOn[index] = false;
       let num = this.toggleIsOn.filter(item => item === true).length;
       this.permissionNum = num;
@@ -220,10 +242,14 @@ struct applicationItem {
             }
           })
           this.isRisk[i] = false;
+          this.isFixedByAdminPolicy[i] = false;
           try {
             atManager.getPermissionFlags(bundleInfo.tokenId, this.list[0].permission).then(data => {
               if (data == Constants.PERMISSION_POLICY_FIXED) {
                 this.isRisk[i] = true;
+              }
+              if (data == Constants.PERMISSION_FIXED_BY_ADMIN_POLICY) {
+                this.isFixedByAdminPolicy[i] = true;
               }
             })
           } catch (err) {

@@ -29,7 +29,7 @@
             "value":"项权限"
         },
         {
-            "name":"textInput_placeholder",
+            "name":"text_input_placeholder",
             "value":"搜索应用"
         },
         {
@@ -92,6 +92,48 @@
             }
         },
         {
+            "name":"read_and_modify",
+            "value":"读取和修改",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"仅读取",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"仅修改",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"所有文件",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"media_only",
+            "value":"仅媒体",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"selected_folders",
+            "value":"仅部分文件夹",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
             "name":"ban",
             "value":"禁止",
             "attr":{
@@ -120,7 +162,7 @@
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"仅本次允许",
             "attr":{
                 "priority":"translate"
@@ -201,8 +243,44 @@
             "value":"开启"
         },
         {
+            "name":"go_to_settings",
+            "value":"前往设置"
+        },
+        {
             "name":"close",
             "value":"关闭"
+        },
+        {
+            "name":"manual_setting_confirm_title",
+            "value":"前往设置开启权限"
+        },
+        {
+            "name":"manual_setting_confirm_message",
+            "value":"该权限需要在系统“设置”中手动开启。确认后将切换到系统“设置”应用。"
+        },
+        {
+            "name":"manual_setting_target_app",
+            "value":"目标应用"
+        },
+        {
+            "name":"manual_setting_target_permission",
+            "value":"目标权限"
+        },
+        {
+            "name":"manual_setting_path_title",
+            "value":"请按以下路径进入对应权限管理界面"
+        },
+        {
+            "name":"manual_setting_path_primary_prefix",
+            "value":"推荐路径：设置 -> 隐私和安全 -> "
+        },
+        {
+            "name":"manual_setting_path_secondary_prefix",
+            "value":"备用路径：设置 -> 应用和元服务 -> "
+        },
+        {
+            "name":"manual_setting_confirm_tip",
+            "value":"完成授权后，请返回当前应用重新验证权限状态。"
         },
         {
             "name":"camera",
@@ -261,82 +339,126 @@
             "value":"关闭后，所有应用服务都将无法正常使用摄像头拍摄照片、视频或进行人脸识别。若需恢复，请打开摄像头开关。"
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"内容复制自“%s”。禁止后将不再允许此应用访问剪贴板。",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"禁止后将不再允许此应用访问剪贴板。",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"groupName_location",
+            "name":"group_name_location",
             "value":"位置信息"
         },
         {
-            "name":"groupName_camera",
+            "name":"group_name_camera",
             "value":"相机"
         },
         {
-            "name":"groupName_microphone",
+            "name":"group_name_microphone",
             "value":"麦克风"
         },
         {
-            "name":"groupName_contacts",
+            "name":"group_name_contacts",
             "value":"通讯录"
         },
         {
-            "name":"groupName_calendar",
+            "name":"group_name_calendar",
             "value":"日历"
         },
         {
-            "name":"groupName_sport",
-            "value":"健身运动"
+            "name":"group_name_sport",
+            "value":"运动数据"
         },
         {
-            "name":"groupName_health",
+            "name":"group_name_health",
             "value":"身体传感器"
         },
         {
-            "name":"groupName_other",
-            "value":"其他权限"
+            "name":"group_name_ads",
+            "value":"跨应用关联"
         },
         {
-            "name":"groupName_ADS",
-            "value":"广告跟踪"
+            "name":"request_association_toggle",
+            "value":"要求应用请求关联"
         },
         {
-            "name":"groupName_appList",
+            "name":"request_association_on",
+            "value":"应用关联已开启。应用需要你的同意才可关联其他应用的活动，提供个性化体验。"
+        },
+        {
+            "name":"request_association_off",
+            "value":"应用关联已关闭。应用无需你的同意即可关联其他应用的活动，提供个性化体验。"
+        },
+        {
+            "name":"group_name_app_list",
             "value":"读取已安装应用列表"
         },
         {
-            "name":"groupName_bluetooth",
+            "name":"group_name_bluetooth",
             "value":"蓝牙"
         },
         {
-            "name":"groupName_pasteboard",
+            "name":"group_name_pasteboard",
             "value":"剪贴板"
         },
         {
-            "name":"groupName_folder",
+            "name":"group_name_folder",
             "value":"文件夹"
         },
         {
-            "name":"groupName_nearLink",
+            "name":"group_name_documents_and_folder",
+            "value":"文件和文件夹"
+        },
+        {
+            "name":"group_name_near_link",
             "value":"星闪"
         },
         {
-            "name":"groupName_screenCapture",
+            "name":"group_name_screen_capture",
             "value":"截屏"
         },
         {
+            "name":"group_name_float_view",
+            "value":"悬浮窗"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"键盘输入辅助"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"屏幕共享"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"辅助操作"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"悬浮窗"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"键盘输入辅助"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"屏幕共享"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"辅助操作"
+        },
+        {
             "name":"multi_device_collaboration",
-            "value":"多设备协同"
+            "value":"设备发现和连接"
         },
         {
             "name":"group_label_location",
@@ -416,14 +538,14 @@
             }
         },
         {
-            "name":"group_label_ADS",
-            "value":"允许“%s”访问广告跟踪？",
+            "name":"group_label_ads",
+            "value":"允许“%s”进行跨应用关联？",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"允许“%s”读取已安装应用列表？",
             "attr":{
                 "priority":"translate"
@@ -469,15 +591,43 @@
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"允许“%s”访问星闪？",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"允许“%s”截取您的屏幕？",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_float_view",
+            "value":"允许“%s”显示在其他应用的上层？",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"允许“%s”辅助键盘输入？",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_screen_share",
+            "value":"允许“%s”共享您的屏幕？",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"group_label_control_device",
+            "value":"允许“%s”通过辅助功能控制设备？",
             "attr":{
                 "priority":"translate"
             }
@@ -543,11 +693,11 @@
             "value":"已允许%s个应用访问您设备上的文件。"
         },
         {
-            "name":"enable_description_ADS",
-            "value":"已允许%s个应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
+            "name":"enable_description_ads",
+            "value":"已允许%s个应用基于您的标识符进行跨应用关联。"
         },
         {
-            "name":"enable_description_appList",
+            "name":"enable_description_app_list",
             "value":"已允许%s个应用读取本机已安装的应用列表。"
         },
         {
@@ -563,12 +713,28 @@
             "value":"已允许%s个应用访问文件和文件夹。"
         },
         {
-            "name":"enable_description_nearLink",
+            "name":"enable_description_near_link",
             "value":"已允许%s个应用访问星闪。"
         },
         {
-            "name":"enable_description_screenCapture",
+            "name":"enable_description_screen_capture",
             "value":"已允许%s个应用使用截屏。"
+        },
+        {
+            "name":"enable_description_float_view",
+            "value":"已允许%s个应用显示在其他应用的上层。"
+        },
+        {
+            "name":"enable_description_hook_input_event",
+            "value":"已允许%s个应用辅助键盘输入。"
+        },
+        {
+            "name":"enable_description_screen_share",
+            "value":"已允许%s个应用共享您的屏幕。"
+        },
+        {
+            "name":"enable_description_control_device",
+            "value":"已允许%s个应用通过辅助功能控制设备。"
         },
         {
             "name":"forbidden_description_location",
@@ -631,11 +797,11 @@
             "value":"已禁止应用访问您设备上的文件。"
         },
         {
-            "name":"forbidden_description_ADS",
-            "value":"已禁止应用基于您的广告标识符创建个人资料或向你展示个性化广告。"
+            "name":"forbidden_description_ads",
+            "value":"已禁止应用基于您的标识符进行跨应用关联。"
         },
         {
-            "name":"forbidden_description_appList",
+            "name":"forbidden_description_app_list",
             "value":"已禁止应用读取本机已安装的应用列表。"
         },
         {
@@ -651,82 +817,122 @@
             "value":"已禁止应用访问文件和文件夹。"
         },
         {
-            "name":"forbidden_description_nearLink",
+            "name":"forbidden_description_near_link",
             "value":"已禁止应用访问星闪。"
         },
         {
-            "name":"forbidden_description_screenCapture",
+            "name":"forbidden_description_screen_capture",
             "value":"已禁止应用使用截屏。"
+        },
+        {
+            "name":"forbidden_description_float_view",
+            "value":"已禁止应用显示在其他应用的上层。"
+        },
+        {
+            "name":"forbidden_description_hook_input_event",
+            "value":"已禁止应用辅助键盘输入。"
+        },
+        {
+            "name":"forbidden_description_screen_share",
+            "value":"已禁止应用共享您的屏幕。"
+        },
+        {
+            "name":"forbidden_description_control_device",
+            "value":"已禁止应用通过辅助功能控制设备。"
         },
         {
             "name":"risk_warning",
             "value":"风险应用禁止获取该权限"
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"安全访问位置",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"安全保存图片和视频",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"仅允许“%s”在您点击此按钮时访问位置。",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"仅允许“%s”在您点击此按钮时保存图片和视频至图库。",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"仅允许“%1$s%2$s”在您点击此按钮时访问位置。",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"仅允许“%1$s%2$s”在您点击此按钮时保存图片和视频至图库。",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"Download",
+            "name":"download",
             "value":"下载"
         },
         {
-            "name":"Desktop",
+            "name":"desktop",
             "value":"桌面"
         },
         {
-            "name":"Document",
+            "name":"document",
             "value":"文档"
         },
         {
-            "name":"Download_folder",
+            "name":"download_folder",
             "value":"下载文件夹"
         },
         {
-            "name":"Desktop_folder",
+            "name":"desktop_folder",
             "value":"桌面文件夹"
         },
         {
-            "name":"Document_folder",
+            "name":"document_folder",
             "value":"文档文件夹"
+        },
+        {
+            "name":"full_disk_folder",
+            "value":"全盘"
+        },
+        {
+            "name":"allow_full_disk_access",
+            "value":"允许全盘访问"
+        },
+        {
+            "name":"allow_full_disk_access_desc",
+            "value":"本应用将获得此设备所有公共磁盘文件的读写权限"
+        },
+        {
+            "name":"confirm",
+            "value":"确认"
+        },
+        {
+            "name":"permission_fixed_by_admin_policy_title",
+            "value":"权限无法修改"
+        },
+        {
+            "name":"permission_fixed_by_admin_policy_message",
+            "value":"此权限由管理员设置，无法修改"
         }
     ]
 }

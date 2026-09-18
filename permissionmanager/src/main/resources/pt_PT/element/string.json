@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Acesso privado à Galeria",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Para proteger a sua privacidade, a aplicação %s apenas pode aceder momentaneamente à localização quando toca em Permitir.",
             "attr":{
                 "priority":"LT"
@@ -16,20 +16,20 @@
         },
         {
             "name":"allow",
-            "value":"Permitir",
+            "value":"Conceder",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Para proteger a sua privacidade, a aplicação %s apenas pode aceder momentaneamente à Galeria para guardar itens quando toca em Permitir.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Acesso limitado à localização",
             "attr":{
                 "priority":"LT"
@@ -43,14 +43,14 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Para proteger a sua privacidade, a aplicação %1$s%2$s apenas pode aceder momentaneamente à localização quando toca em Permitir.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Para proteger a sua privacidade, a aplicação %1$s%2$s apenas pode aceder momentaneamente à Galeria para guardar itens quando toca em Permitir.",
             "attr":{
                 "priority":"LT"
@@ -141,7 +141,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"Permitir a %s rastrear a atividade noutras aplicações?",
             "attr":{
                 "priority":"translate"
@@ -190,21 +190,21 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"Se escolher Negar, esta aplicação não poderá aceder à área de transferência.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"Permitir a %s capturar o ecrã?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"Permitir a %s utilizar o NearLink?",
             "attr":{
                 "priority":"translate"
@@ -267,14 +267,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"Permitir a %s ler a lista de aplicações instaladas?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"Permitir apenas esta vez",
             "attr":{
                 "priority":"translate"
@@ -302,11 +302,198 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"Conteúdo copiado da aplicação %s. Se escolher Negar, esta aplicação não poderá aceder à área de transferência.",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Permissões"
+        },
+        {
+            "name":"permission_manager",
+            "value":"Gestor de permissões"
+        },
+        {
+            "name":"permission",
+            "value":"Permissões"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"Procurar aplicações"
+        },
+        {
+            "name":"allowed",
+            "value":"Autorizadas"
+        },
+        {
+            "name":"banned",
+            "value":"Negadas"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Ler e modificar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Apenas ler",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Apenas modificar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Todos os ficheiros",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"Ativar"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"Definições"
+        },
+        {
+            "name":"close",
+            "value":"Desativar"
+        },
+        {
+            "name":"microphone",
+            "value":"Microfone"
+        },
+        {
+            "name":"close_microphone",
+            "value":"Desativar o microfone?"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"Microfone desativado"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Câmara"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Microfone"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Contactos"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Calendário"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Atividade física"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Sensores corporais"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Rastreamento de atividade"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Lista de aplicações"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"Área de transferência"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Pastas"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"Ficheiros e pastas"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Zona de descargas"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"Assistência de entrada"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"Partilha de ecrã"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"Controlo do dispositivo"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Zona de descargas"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"Assistência de entrada"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"Partilha de ecrã"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"Controlo do dispositivo"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Ligações do dispositivo"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"Permitir a %s fornecer assistência na introdução de dados?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"Pasta Transferências"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"Pasta Ecrã inicial"
+        },
+        {
+            "name":"document_folder",
+            "value":"Pasta Documentos"
+        },
+        {
+            "name":"confirm",
+            "value":"Confirmar"
         }
     ]
 }

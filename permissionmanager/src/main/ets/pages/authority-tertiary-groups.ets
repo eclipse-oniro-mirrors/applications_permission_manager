@@ -22,7 +22,16 @@ import { BusinessError } from '@ohos.base';
 import audio from '@ohos.multimedia.audio'
 import camera from '@ohos.multimedia.camera'
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
+import {
+  getDocumentsPermissionStatus,
+  getFolderGroupStatus,
+  getMergedDocumentsAndFolderStatus,
+  isFolderPermission,
+  shouldShowFolderPermissionSection,
+  updateFolderStatusByPermission
+} from '../common/utils/documentsPermissionUtils';
 import { Log, verifyAccessToken, indexValue, sortByName } from '../common/utils/utils';
+import { isReadPermission, isReadWriteGroup, isWritePermission } from '../common/utils/permissionGroupUtils';
 import { ApplicationObj, GroupInfo, RouterParams1, PermissionApplications, AppInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission, PermissionGroup } from '../common/model/definition';
@@ -30,6 +39,7 @@ import Constants from '../common/utils/constant';
 import common from '@ohos.app.ability.common';
 import { polymorphismGroup, globalGroup, groups } from '../common/model/permissionGroup';
 import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 
 const locationStatus: Resource[] = [
   $r('app.string.always_allow'),
@@ -49,6 +59,8 @@ struct locationInfoPage {
   @State polymorphismIsOn: Array<number> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
   @State statusBarHeight: number = 0;
+  @State refreshSignal: number = 0;
+
   aboutToAppear(): void {
     this.statusBarHeight = (AppStorage.get('STATUS_BAR_HEIGHT') as number) ?? 0
   }
@@ -66,7 +78,11 @@ struct locationInfoPage {
             }
             Row() {
               Column() {
-                applicationItem({ polymorphismIsOn: $polymorphismIsOn, folderStatusArray: $folderStatusArray })
+                applicationItem({
+                  polymorphismIsOn: $polymorphismIsOn,
+                  folderStatusArray: $folderStatusArray,
+                  refreshSignal: $refreshSignal
+                })
 
               }.width(Constants.FULL_WIDTH)
             }
@@ -82,6 +98,7 @@ struct locationInfoPage {
   }
 
   onPageShow() {
+    this.refreshSignal++;
     if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
       let bundleNames: string[] = [];
       this.list.forEach(permissionManager => {
@@ -108,7 +125,7 @@ struct locationInfoPage {
 
   getGroupStatus(res: bundleManager.BundleInfo, index: number) {
     this.polymorphismIsOn[index] = Constants.PERMISSION_BAN;
-    this.folderStatusArray[index] = [false, false, false];
+    this.folderStatusArray[index] = [false, false, false, false];
     let reqPermissions: string[] = [];
     res.reqPermissionDetails.forEach(item => {
       reqPermissions.push(item.name);
@@ -131,13 +148,19 @@ struct locationInfoPage {
         Log.error('change location status error: ' + JSON.stringify(err));
       }
     }
-    if (this.currentGroup === 'FOLDER') {
+    if (
+      this.currentGroup === 'FOLDER' ||
+      (this.currentGroup === PermissionGroup.DOCUMENTS && shouldShowFolderPermissionSection())
+    ) {
       for (let j = 0; j < this.list.length; j++) {
         if (reqPermissions.indexOf(this.list[j].permission) == -1) {
           continue;
         }
         let access = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission);
-        if (Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+        if (
+          Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED &&
+          isFolderPermission(this.list[j].permission as Permission)
+        ) {
           this.updateFolderStatus(index, j);
         }
       }
@@ -145,17 +168,7 @@ struct locationInfoPage {
   }
 
   updateFolderStatus(index: number, idx: number) {
-    switch (this.list[idx].permission) {
-      case Permission.READ_WRITE_DOWNLOAD_DIRECTORY:
-        this.folderStatusArray[index][0] = true;
-        break;
-      case Permission.READ_WRITE_DESKTOP_DIRECTORY:
-        this.folderStatusArray[index][1] = true;
-        break;
-      case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
-        this.folderStatusArray[index][2] = true;
-        break;
-    }
+    updateFolderStatusByPermission(this.folderStatusArray[index], this.list[idx].permission as Permission);
   }
 }
 
@@ -167,20 +180,193 @@ struct applicationItem {
   private isMuteSupported: boolean | undefined =
     (this.getUIContext().getRouter().getParams() as RouterParams1).isMuteSupported;
   @State globalIsOn: boolean = (this.getUIContext().getRouter().getParams() as RouterParams1).globalIsOn ?? true;
+  @State adsToggleOn: boolean =
+    (this.getUIContext().getRouter().getParams() as RouterParams1).adsToggleOn ?? false;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];
   @State isFirst: boolean[] = [];
+  // Aggregated permission group status array storing each app's overall grant state in
+  // the current group.
+  @State groupStatus: number[] = [];
   @State applicationList: ApplicationObj[] = []; // application info array
   @State searchResult: boolean = true; // search results
   @Link polymorphismIsOn: Array<number>;
   @Link folderStatusArray: Array<Array<boolean>>;
+  @Link @Watch('refreshApplicationStatus') refreshSignal: number;
   @State selectedIndex: number = 0;
   @State isTouch: string = '';
   @State groupInfo: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
   @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   scroller: Scroller = new Scroller();
+
+  /**
+   * Refresh each app's aggregated status in the current permission group when the page is shown
+   * again.
+   */
+  refreshApplicationStatus() {
+    this.applicationList.forEach((item: ApplicationObj) => {
+      let permissions: Permission[] = this.getApplicationPermissions(item.bundleName);
+      this.allBundleInfo.forEach((bundleInfo: AppInfo) => {
+        if (bundleInfo.bundleName === item.bundleName) {
+          this.getApplicationGroupStatus(bundleInfo, permissions).then((status: number) => {
+            this.groupStatus[item.index] = status;
+          })
+        }
+      })
+    })
+  }
+
+  /**
+   * Filter the actual permission list associated with the current permission group for the
+   * specified bundle name.
+   */
+  getApplicationPermissions(bundleName?: string): Permission[] {
+    let permissions: Permission[] = [];
+    this.list.forEach((data) => {
+      if (bundleName && data.bundleNames.includes(bundleName)) {
+        permissions.push(data.permission);
+      }
+    })
+    return permissions;
+  }
+
+  /**
+   * Determine whether the current display entry is the documents entry.
+   */
+  isDisplayDocumentsGroup(): boolean {
+    return this.currentGroup === PermissionGroup.DOCUMENTS;
+  }
+
+  /**
+   * Determine whether the current documents entry is the merged "documents and folders" entry.
+   */
+  isMergedDocumentsDisplayGroup(): boolean {
+    return this.isDisplayDocumentsGroup() && shouldShowFolderPermissionSection();
+  }
+
+  /**
+   * Determine whether the current documents entry represents the pure documents group only.
+   */
+  isPureDocumentsDisplayGroup(): boolean {
+    return this.isDisplayDocumentsGroup() && !this.isMergedDocumentsDisplayGroup();
+  }
+
+  /**
+   * Compute the aggregated authorization status for the specified app in the documents group.
+   */
+  getDocumentsGroupStatus(bundleInfo: AppInfo, permissions: Permission[]): number {
+    if (this.isMergedDocumentsDisplayGroup()) {
+      return getMergedDocumentsAndFolderStatus(bundleInfo.tokenId, permissions);
+    }
+    return getDocumentsPermissionStatus(bundleInfo.tokenId, permissions);
+  }
+
+  /**
+   * Compute the displayed status for the app in the folder group from the folder selection state
+   * array.
+   */
+  getFolderGroupStatus(index: number): number {
+    let permissions = this.getApplicationPermissions(this.applicationList[index]?.bundleName);
+    return getFolderGroupStatus(permissions, this.folderStatusArray[index]);
+  }
+
+  /**
+   * Convert the current app's permission group status to the text resource displayed on the page.
+   */
+  getGroupStatusText(index: number): ResourceStr {
+    if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
+      if (this.currentGroup === 'FOLDER') {
+        switch (this.getFolderGroupStatus(index)) {
+          case Constants.PERMISSION_ALLOW:
+            return $r('app.string.all_files');
+          case Constants.PERMISSION_FOLDER_MEDIA_ONLY:
+            return $r('app.string.selected_folders');
+          default:
+            return $r('app.string.ban');
+        }
+      }
+      return locationStatus[this.polymorphismIsOn[index]];
+    }
+    if (this.isMergedDocumentsDisplayGroup()) {
+      return this.groupStatus[index] === Constants.PERMISSION_ALLOW ? $r('app.string.allow') : $r('app.string.ban');
+    }
+    if (this.isPureDocumentsDisplayGroup()) {
+      switch (this.groupStatus[index]) {
+        case Constants.PERMISSION_ALLOW:
+          return $r('app.string.allow');
+        case Constants.PERMISSION_DOCUMENT_MEDIA_ONLY:
+          return $r('app.string.media_only');
+        default:
+          return $r('app.string.ban');
+      }
+    }
+    if (isReadWriteGroup(this.currentGroup)) {
+      switch (this.groupStatus[index]) {
+        case Constants.PERMISSION_ALLOW:
+          return $r('app.string.read_and_modify');
+        case Constants.PERMISSION_READ_ONLY:
+          return $r('app.string.read_only');
+        case Constants.PERMISSION_WRITE_ONLY:
+          return $r('app.string.modify_only');
+        default:
+          return $r('app.string.ban');
+      }
+    }
+    return this.groupStatus[index] === Constants.PERMISSION_ALLOW ? $r('app.string.allow') : $r('app.string.ban');
+  }
+
+  /**
+   * Compute the aggregated authorization status for the specified app in the current permission
+   * group, covering documents, split read/write groups, and regular groups.
+   */
+  async getApplicationGroupStatus(bundleInfo: AppInfo, permissions: Permission[]): Promise<number> {
+    if (permissions.length === 0) {
+      return Constants.PERMISSION_BAN;
+    }
+    if (this.isDisplayDocumentsGroup()) {
+      return this.getDocumentsGroupStatus(bundleInfo, permissions);
+    }
+    if (isReadWriteGroup(this.currentGroup)) {
+      let hasReadPermission = false;
+      let hasWritePermission = false;
+      let hasGrantedRead = false;
+      let hasGrantedWrite = false;
+      for (const permission of permissions) {
+        let access = await verifyAccessToken(bundleInfo.tokenId, permission);
+        if (isReadPermission(this.currentGroup, permission)) {
+          hasReadPermission = true;
+          if (Number(access) === Constants.PERMISSION_INDEX) {
+            hasGrantedRead = true;
+          }
+        }
+        if (isWritePermission(this.currentGroup, permission)) {
+          hasWritePermission = true;
+          if (Number(access) === Constants.PERMISSION_INDEX) {
+            hasGrantedWrite = true;
+          }
+        }
+      }
+      if (hasReadPermission && hasGrantedRead && hasWritePermission && hasGrantedWrite) {
+        return Constants.PERMISSION_ALLOW;
+      }
+      if (hasReadPermission && hasGrantedRead) {
+        return Constants.PERMISSION_READ_ONLY;
+      }
+      if (hasWritePermission && hasGrantedWrite) {
+        return Constants.PERMISSION_WRITE_ONLY;
+      }
+      return Constants.PERMISSION_BAN;
+    }
+    for (const permission of permissions) {
+      let access = await verifyAccessToken(bundleInfo.tokenId, permission);
+      if (Number(access) !== Constants.PERMISSION_INDEX) {
+        return Constants.PERMISSION_BAN;
+      }
+    }
+    return Constants.PERMISSION_ALLOW;
+  }
 
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: CustomContentDialog({
@@ -259,106 +445,43 @@ struct applicationItem {
                 }
               }.flexGrow(Constants.FLEX_GROW)
               .alignItems(HorizontalAlign.Start)
-              if (polymorphismGroup.indexOf(this.currentGroup) == -1) {
-                Toggle({ type: ToggleType.Switch, isOn: this.toggleIsOn[item.index] })
-                  .selectedColor($r('sys.color.icon_emphasize'))
-                  .switchPointColor($r('sys.color.comp_background_primary_contrary'))
-                  .padding({ right: 0 })
-                  .width(Constants.AUTHORITY_TOGGLE_WIDTH)
-                  .height(Constants.AUTHORITY_TOGGLE_HEIGHT)
-                  .onChange((isOn: boolean) => {
-                    if (item.permission === undefined) {
-                      return;
-                    }
-                    if (this.isFirst[item.index] && isOn) {
-                      this.isFirst[item.index] = false;
-                      return;
-                    }
-                    this.isFirst[item.index] = false;
-                    let _this = this;
-                    if (isOn) {
-                      let promises = this.list.map(it => new Promise<number>((resolve) => {
-                        _this.grantUserGrantedPermission(item.accessTokenId, it.permission, resolve);
-                      }));
-                      Promise.all(promises).then(() => {
-                        _this.toggleIsOn[item.index] = true;
-                        let num = _this.toggleIsOn.filter(item => item === true).length;
-                        _this.permissionNum = num;
-                      });
-                    } else {
-                      let promises = this.list.map(it => new Promise<number>((resolve) => {
-                        _this.revokeUserGrantedPermission(item.accessTokenId, it.permission, resolve);
-                      }));
-                      Promise.all(promises).then(() => {
-                        _this.toggleIsOn[item.index] = false;
-                        let num = _this.toggleIsOn.filter(item => item === true).length;
-                        _this.permissionNum = num;
-                      });
-                    }
-                  })
-              } else {
-                if (this.currentGroup === 'FOLDER') {
-                  Text() {
-                    if (this.folderStatusArray[item.index].includes(true)) {
-                      ForEach(this.folderStatusArray[item.index], (status: boolean, index) =>{
-                        if (status) {
-                          if (index !== this.folderStatusArray[item.index].indexOf(true)) {
-                            Span($r('app.string.separator'))
-                          }
-                          Span(index === 0 ? $r('app.string.Download') : index === 1 ? $r('app.string.Desktop') : $r('app.string.Document'))
-                        }
-                      })
-                    } else {
-                      Span($r('app.string.ban'))
-                    }
-                  }
-                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.font_secondary'))
-                    .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
-                } else {
-                  Text(locationStatus[this.polymorphismIsOn[item.index]])
-                    .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
-                    .fontColor($r('sys.color.font_secondary'))
-                    .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
-                }
-                SymbolGlyph($r('sys.symbol.chevron_forward'))
-                  .width(Constants.IMAGE_WIDTH)
-                  .height(Constants.IMAGE_HEIGHT)
-                  .fontSize(Constants.FONT_SIZE_18_vp)
-                  .fontColor([$r('sys.color.icon_tertiary')])
-                  .fontWeight(FontWeight.Medium)
-              }
+              Text(this.getGroupStatusText(item.index))
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                .fontColor($r('sys.color.font_secondary'))
+                .margin({ right: Constants.AUTHORITY_IMAGE_MARGIN_RIGHT })
+              SymbolGlyph($r('sys.symbol.chevron_forward'))
+                .width(Constants.IMAGE_WIDTH)
+                .height(Constants.IMAGE_HEIGHT)
+                .fontSize(Constants.FONT_SIZE_18_vp)
+                .fontColor([$r('sys.color.icon_tertiary')])
+                .fontWeight(FontWeight.Medium)
             }
             .width(Constants.FULL_WIDTH)
             .height(Constants.AUTHORITY_ROW_HEIGHT)
             .constraintSize({ minHeight: Constants.AUTHORITY_CONSTRAINTSIZE_MINHEIGHT })
           }
         }.onClick(() => {
-          if (polymorphismGroup.indexOf(this.currentGroup) !== -1) {
-            let permissions: string[] = [];
-            this.list.forEach(data => {
-              if (data.bundleNames.includes(item.bundleName as string)) {
-                permissions.push(data.permission);
-              }
-            })
-            this.allBundleInfo.forEach(bundleInfo => {
-              if (bundleInfo.bundleName === item.bundleName) {
-                GlobalContext.store('applicationInfo', bundleInfo);
-              }
-            })
-            GlobalContext.store('folderStatus', this.folderStatusArray[item.index]);
-            GlobalContext.store('locationStatus', this.polymorphismIsOn[item.index]);
-            this.getUIContext().getRouter().pushUrl({
-              url: 'pages/application-tertiary',
-              params: {
-                bundleName: item.bundleName,
-                backTitle: this.backTitle,
-                permission: permissions,
-                status: Constants.PERMISSION_BAN,
-                tokenId: item.accessTokenId
-              }
-            });
-          }
+          let permissions = this.getApplicationPermissions(item.bundleName);
+          this.allBundleInfo.forEach(bundleInfo => {
+            if (bundleInfo.bundleName === item.bundleName) {
+              GlobalContext.store('applicationInfo', bundleInfo);
+            }
+          })
+          GlobalContext.store('folderStatus', this.folderStatusArray[item.index]);
+          GlobalContext.store('locationStatus', this.polymorphismIsOn[item.index]);
+          this.getUIContext().getRouter().pushUrl({
+            url: 'pages/application-tertiary',
+            params: {
+              bundleName: item.bundleName,
+              backTitle: this.backTitle,
+              permission: permissions,
+              status: this.currentGroup === PermissionGroup.LOCATION ?
+                this.polymorphismIsOn[item.index] :
+                (polymorphismGroup.indexOf(this.currentGroup) !== -1 ?
+                  this.getFolderGroupStatus(item.index) : this.groupStatus[item.index]),
+              tokenId: item.accessTokenId
+            }
+          });
         })
       }
     }.padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
@@ -378,7 +501,7 @@ struct applicationItem {
       if (event === undefined) {
         return;
       }
-      if (event.type === TouchType.Down && polymorphismGroup.indexOf(this.currentGroup) !== -1) {
+      if (event.type === TouchType.Down) {
         this.isTouch = item.bundleName ? item.bundleName : '';
       }
       if (event.type === TouchType.Up) {
@@ -402,7 +525,9 @@ struct applicationItem {
         return sum.length;
       }
     } else {
-      return this.permissionNum;
+      return this.groupStatus.filter((status) => {
+        return status !== undefined && status !== Constants.PERMISSION_BAN;
+      }).length;
     }
   }
 
@@ -413,12 +538,13 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   grantUserGrantedPermission(accessTokenId: number, permission: Permissions, resolve: (value: number) => void) {
-    abilityAccessCtrl.createAtManager().grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG)
-    .then(() => {
-      resolve(0);
-    }).catch((error: BusinessError) => {
-      resolve(-1);
-      Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+    PermissionUtils.grantPermissionWithResult(
+      permission as Permission, Constants.PERMISSION_FLAG, accessTokenId
+    ).then((result) => {
+      resolve(result.operationResult === Constants.RESULT_SUCCESS ? 0 : -1);
+      if (result.operationResult !== Constants.RESULT_SUCCESS) {
+        Log.error('grantUserGrantedPermission failed. permission: ' + permission);
+      }
     })
   }
 
@@ -429,13 +555,13 @@ struct applicationItem {
    * @param {Number} index Array index to modify permission status
    */
   revokeUserGrantedPermission(accessTokenId: number, permission: Permissions, resolve: (value: number) => void) {
-    abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(
-      accessTokenId, permission, Constants.PERMISSION_FLAG
-    ).then(() => {
-      resolve(0);
-    }).catch((error: BusinessError) => {
-      resolve(-1);
-      Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
+    PermissionUtils.revokePermissionWithResult(
+      permission as Permission, Constants.PERMISSION_FLAG, accessTokenId
+    ).then((result) => {
+      resolve(result.operationResult === Constants.RESULT_SUCCESS ? 0 : -1);
+      if (result.operationResult !== Constants.RESULT_SUCCESS) {
+        Log.error('revokeUserGrantedPermission failed. permission: ' + permission);
+      }
     })
   }
 
@@ -470,6 +596,12 @@ struct applicationItem {
     if (globalGroup.indexOf(this.currentGroup) !== -1) {
       this.globalListen();
     }
+
+    if (this.currentGroup === PermissionGroup.ADS) {
+      PermissionUtils.isPermissionQueryEnabled(Permission.APP_TRACKING_CONSENT).then((enabled: boolean) => {
+        this.adsToggleOn = enabled;
+      })
+    }
   }
 
   aboutToDisappear() {
@@ -478,7 +610,7 @@ struct applicationItem {
     this.dialogController = null;
   }
 
-  getApplicationList(bundleInfo: AppInfo, i: number) {
+  async getApplicationList(bundleInfo: AppInfo, i: number) {
     this.applicationList.push(
       new ApplicationObj(
         bundleInfo.label,
@@ -502,29 +634,8 @@ struct applicationItem {
     } catch (err) {
       Log.error('getPermissionFlags error: ' + JSON.stringify(err));
     }
-    // 0: have permission; -1: no permission
-    let boole = true;
-    this.permissionNum++;
-    for (let j = 0; j < this.list.length; j++) {
-      if (bundleInfo.permissions.indexOf(this.list[j].permission) == -1) {
-        continue;
-      }
-      verifyAccessToken(bundleInfo.tokenId, this.list[j].permission).then((access) => {
-        if (Number(access) === Constants.PERMISSION_INDEX) {
-          if (boole) {
-            this.toggleIsOn[i] = true;
-            this.isFirst[i] = true;
-          }
-        } else {
-          if (boole) {
-            this.permissionNum--;
-          }
-          boole = false;
-          this.toggleIsOn[i] = false;
-          this.isFirst[i] = false;
-        }
-      });
-    }
+    let permissions = this.getApplicationPermissions(bundleInfo.bundleName);
+    this.groupStatus[i] = await this.getApplicationGroupStatus(bundleInfo, permissions);
   }
 
   globalListen() {
@@ -593,8 +704,42 @@ struct applicationItem {
             .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
             .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
           }
+          if (this.currentGroup === PermissionGroup.ADS) {
+            Row() {
+              Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
+                Text($r('app.string.request_association_toggle'))
+                  .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE).fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Medium)
+                Row() {
+                  Toggle({ type: ToggleType.Switch, isOn: this.adsToggleOn })
+                    .selectedColor($r('sys.color.icon_emphasize'))
+                    .switchPointColor($r('sys.color.comp_background_primary_contrary'))
+                    .padding({ right: 0 })
+                    .onChange((isOn: boolean) => {
+                      PermissionUtils.setPermissionQueryEnabled(Permission.APP_TRACKING_CONSENT, isOn)
+                        .then((success: boolean) => {
+                          if (success) {
+                            this.adsToggleOn = isOn;
+                          }
+                        })
+                    })
+                }.clip(true)
+              }.height(Constants.LISTITEM_ROW_HEIGHT)
+              .padding({ left: Constants.DEFAULT_PADDING_START, right: Constants.DEFAULT_PADDING_END })
+            }.padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+            .backgroundColor($r('sys.color.comp_background_list_card'))
+            .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
+            .margin({ top: Constants.TERTIARY_ROW_MARGIN_TOP })
+          }
           Flex({ justifyContent: FlexAlign.Start }) {
-            if (this.globalIsOn) {
+            if (this.currentGroup === PermissionGroup.ADS) {
+              Text(this.adsToggleOn ?
+                $r('app.string.request_association_on') :
+                $r('app.string.request_association_off'))
+                .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
+                .fontColor($r('sys.color.font_secondary'))
+                .margin({ top: Constants.AUTHORITY_TEXT_MARGIN_TOP })
+            } else if (this.globalIsOn) {
               if (this.getGrantApplicationNumber() > 0) {
                 Text(
                   this.groupInfo.enableDescription ?

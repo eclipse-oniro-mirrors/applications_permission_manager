@@ -14,8 +14,9 @@
  */
 
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
-import { Permission, PermissionGroup } from '../model/definition';
+import { Permission, PermissionGroup, ButtonStatus } from '../model/definition';
 import { PermissionGroupConfig } from '../model/typedef';
+import { DeviceUtil } from '../utils/deviceUtil';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.CAMERA,
@@ -33,5 +34,14 @@ export class CameraStrategy extends BasePermissionStrategy {
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
     return $r('app.string.group_label_camera', appName);
+  }
+
+  public override getButtonList(): ButtonStatus[] {
+    return [ButtonStatus.DENY, ButtonStatus.ALLOW];
+  }
+
+  public override isSupport(permission: Permission): boolean {
+    return DeviceUtil.isPhone() || DeviceUtil.isTablet() || DeviceUtil.isPC() ||
+     DeviceUtil.isTv() || DeviceUtil.isWearable();
   }
 }
