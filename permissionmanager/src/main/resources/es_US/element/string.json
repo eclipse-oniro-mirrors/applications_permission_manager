@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Acceso restringido a Galería",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu ubicación si presionas Permitir.",
             "attr":{
                 "priority":"translate"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu Galería para guardar elementos si presionas Permitir.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Acceso restringido a ubicaciones",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu ubicación si presionas Permitir.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu Galería para guardar elementos si presionas Permitir.",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Panel"
+        },
+        {
+            "name":"permission",
+            "value":"Permisos"
+        },
+        {
+            "name":"allowed",
+            "value":"Con permiso"
+        },
+        {
+            "name":"banned",
+            "value":"Denegado"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Leer y modificar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Solo leer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Solo modificar",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Todos los archivos",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Preguntar cada vez",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Micrófono"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Cámara"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Micrófono"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Contactos"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Calendario"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Actividad física"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Sensores corporales"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Seguimiento de actividades"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Lista de aplicaciones"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Carpetas"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Notificaciones flotantes"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Notificaciones flotantes"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Conexión de dispositivos"
         }
     ]
 }

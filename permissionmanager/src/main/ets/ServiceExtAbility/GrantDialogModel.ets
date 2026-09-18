@@ -17,7 +17,7 @@ import { BaseModel } from '../common/base/BaseModel';
 import { Want } from '@kit.AbilityKit';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission, PermissionGroup, ButtonStatus, PermissionOption } from '../common/model/definition';
-import { Log, titleTrim, supportPermission } from '../common/utils/utils';
+import { Log, titleTrim } from '../common/utils/utils';
 import {
   Property, CallerAppInfo, PermissionGroupConfig, PermissionWithOption, optionAndState
 } from '../common/model/typedef';
@@ -32,6 +32,7 @@ import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 import Constants from '../common/utils/constant';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 
 const BG_COLOR = '#00000000';
 const THIS_TIME_FLAG = [ButtonStatus.THIS_TIME_ONLY, ButtonStatus.ALLOW_THIS_TIME];
@@ -113,6 +114,8 @@ export class GrantDialogModel extends BaseModel {
     reqPermsState.forEach((state, idx) => {
       if (state === Constants.PASS_OPER) {
         grantResult[idx] = abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
+      } else if (state === Constants.INVALID_OPER) {
+        grantResult[idx] = Constants.INVALID_OPER;
       }
     })
     return grantResult;
@@ -158,11 +161,16 @@ export class GrantDialogModel extends BaseModel {
       if (!needRefresh) {
         return;
       }
+      let state: number = Constants.SETTING_OPER;
+      if (permissionWithOption.permissionOption === PermissionOption.GRANT) {
+        state = Constants.PASS_OPER;
+      } else if (permissionWithOption.permissionOption === PermissionOption.SKIP) {
+        state = Constants.INVALID_OPER;
+      }
       for (let index = 0; index < reqPerms.length; index++) {
         if (reqPerms[index] === permissionWithOption.permission) {
-          reqPermsState[index] = permissionWithOption.permissionOption === PermissionOption.GRANT ?
-            Constants.PASS_OPER : Constants.SETTING_OPER;
-          grantResult[index] = reqPermsState[index];
+          reqPermsState[index] = state;
+          grantResult[index] = state;
         }
       }
     })
@@ -206,8 +214,7 @@ export class GrantDialogModel extends BaseModel {
    * return
    */
   private needHandlePermission(permission: Permission, state: number): boolean {
-    let supportPermissions = supportPermission();
-    if (supportPermissions.includes(permission) && state === Constants.DYNAMIC_OPER) {
+    if (PermissionGroupManager.getInstance().isPermissionSupported(permission) && state === Constants.DYNAMIC_OPER) {
       return true;
     } else {
       return false;
@@ -385,7 +392,6 @@ export class GrantDialogModel extends BaseModel {
     let flag: number =
       THIS_TIME_FLAG.includes(buttonStatus) ? Constants.PERMISSION_ALLOW_THIS_TIME : Constants.PERMISSION_FLAG;
     Log.info(`clickHandle, group: ${groupConfig.groupName}, buttonStatus: ${buttonStatus}.`);
-    let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
     let reportPermissions: Permission[] = [];
     let permissionWithOptionList: PermissionWithOption[] = [];
 
@@ -402,69 +408,15 @@ export class GrantDialogModel extends BaseModel {
         permissionWithOptionList.push(permissionWithOption);
       }
       if (permissionOption === PermissionOption.GRANT) {
-        result = await this.grantPermissionWithResult(permission, flag, callerAppInfo.tokenId, atManager);
+        result = await PermissionUtils.grantPermissionWithResult(permission, flag, callerAppInfo.tokenId);
       }
       if (permissionOption === PermissionOption.REVOKE) {
-        result = await this.revokePermissionWithResult(permission, flag, callerAppInfo.tokenId, atManager);
+        result = await PermissionUtils.revokePermissionWithResult(permission, flag, callerAppInfo.tokenId);
       }
       Log.info(`permission: ${permission}, opt: ${permissionOption}, result: ${result.operationResult}.`);
       if (result.operationResult === Constants.RESULT_SUCCESS && permissionOption !== PermissionOption.SKIP) {
         reportPermissions.push(permission);
         this.writeToGrantResult(permission, callerAppInfo, result.permissionState);
-      }
-    }
-  }
-
-  /**
-   * 授予权限并返回操作结果
-   * @param permission 操作权限
-   * @param flag 授权flag
-   * @param tokenId 应用token
-   * @param atManager atManager对象
-   * return
-   */
-  private async grantPermissionWithResult(
-    permission: Permission, flag: number, tokenId: number, atManager: abilityAccessCtrl.AtManager
-  ): Promise<optionAndState> {
-    try {
-      await atManager.grantUserGrantedPermission(tokenId, permission, flag);
-      Log.info(`grant permission success, permission: ${permission}.`);
-      return {
-        operationResult: Constants.RESULT_SUCCESS,
-        permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED
-      }
-    } catch (error) {
-      Log.error(`grant permission faild, permission: ${permission}, code: ${error.code}, message: ${error.message}.`);
-      return {
-        operationResult: Constants.RESULT_FAILURE,
-        permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED
-      }
-    }
-  }
-
-  /**
-   * 撤销权限并返回操作结果
-   * @param permission 操作权限
-   * @param flag 授权flag
-   * @param tokenId 应用token
-   * @param atManager atManager对象
-   * return
-   */
-  private async revokePermissionWithResult(
-    permission: Permission, flag: number, tokenId: number, atManager: abilityAccessCtrl.AtManager
-  ): Promise<optionAndState> {
-    try {
-      await atManager.revokeUserGrantedPermission(tokenId, permission, flag);
-      Log.info(`revoke permission success, permission: ${permission}.`);
-      return {
-        operationResult: Constants.RESULT_SUCCESS,
-        permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED
-      }
-    } catch (error) {
-      Log.error(`revoke permission faild, permission: ${permission}, code: ${error.code}, message: ${error.message}.`);
-      return {
-        operationResult: Constants.RESULT_FAILURE,
-        permissionState: abilityAccessCtrl.GrantStatus.PERMISSION_DENIED
       }
     }
   }

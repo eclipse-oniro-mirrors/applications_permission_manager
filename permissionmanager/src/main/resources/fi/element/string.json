@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Gallerian yksityinen käyttöoikeus",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Tietosuojan suojaamisen takia voi %s hetkellisesti käyttää sijaintitietoa, kun valitset Salli.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Tietosuojan suojaamisen takia voi %s hetkellisesti käyttää Galleriaa kohteiden tallentamiseen, kun valitset Salli.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Sijainnin yksityinen käyttöoikeus",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Tietosuojan suojaamisen takia %1$s%2$s voi hetkellisesti käyttää sijaintitietoa, kun valitset Salli.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Tietosuojan suojaamisen takia %1$s%2$s voi hetkellisesti käyttää Galleriaa kohteiden tallentamiseen, kun valitset Salli.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Koontinäyttö"
+        },
+        {
+            "name":"permission",
+            "value":"Luvat"
+        },
+        {
+            "name":"allowed",
+            "value":"Sallittu"
+        },
+        {
+            "name":"banned",
+            "value":"Estetty"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Luku ja muokkaus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Vain luku",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Vain muokkaus",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Kaikki tiedostot",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Kysy joka kerta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofoni"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Kamera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofoni"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Yhteystiedot"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalenteri"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Fyysinen aktiivisuus"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Kehoanturit"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Aktiivisuuden seuranta"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Sovellusluettelo"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Kansiot"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Laitteen yhteys"
         }
     ]
 }

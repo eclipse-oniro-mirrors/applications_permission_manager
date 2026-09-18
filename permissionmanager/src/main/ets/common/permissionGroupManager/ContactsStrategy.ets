@@ -16,19 +16,18 @@
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
 import { ButtonStatus, Permission, PermissionGroup, PermissionOption } from '../model/definition';
 import { CallerAppInfo, PermissionGroupConfig } from '../model/typedef';
-
-const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
-  groupName: PermissionGroup.CONTACTS,
-  permissions: [Permission.READ_CONTACTS, Permission.WRITE_CONTACTS],
-  icon: $r('app.media.ic_public_contacts_group'),
-  title: '',
-  reason: '',
-  buttonList: []
-})
+import { DeviceUtil } from '../utils/deviceUtil';
 
 export class ContactsStrategy extends BasePermissionStrategy {
   public override getPermissionGroupConfig(): PermissionGroupConfig {
-    return groupConfig;
+    return new PermissionGroupConfig({
+      groupName: PermissionGroup.CONTACTS,
+      permissions: [Permission.READ_CONTACTS, Permission.WRITE_CONTACTS],
+      icon: $r('app.media.ic_public_contacts_group'),
+      title: '',
+      reason: '',
+      buttonList: []
+    });
   }
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
@@ -52,21 +51,19 @@ export class ContactsStrategy extends BasePermissionStrategy {
     return message;
   }
 
+  public override isSupport(permission: Permission): boolean {
+    return DeviceUtil.isPhone() || DeviceUtil.isTablet() || DeviceUtil.isPC() || DeviceUtil.isWearable();
+  }
+
   public override grantHandle(
     permission: Permission, callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
   ): PermissionOption {
-    if (this.isPermissionPendingGrant(permission, callerAppInfo)) {
-      return PermissionOption.GRANT;
-    }
-    return PermissionOption.SKIP;
+    return this.isPermissionPendingGrant(permission, callerAppInfo) ? PermissionOption.GRANT : PermissionOption.SKIP;
   }
 
   public override denyHandle(
     permission: Permission, callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
   ): PermissionOption {
-    if (this.isPermissionPendingGrant(permission, callerAppInfo)) {
-      return PermissionOption.REVOKE;
-    }
-    return PermissionOption.SKIP;
+    return this.isPermissionPendingGrant(permission, callerAppInfo) ? PermissionOption.REVOKE : PermissionOption.SKIP;
   }
 }

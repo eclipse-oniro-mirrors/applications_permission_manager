@@ -23,7 +23,7 @@ import { Param, DialogInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
 import { PermissionType } from '../common/model/definition';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
-import deviceInfo from '@ohos.deviceInfo';
+import { DeviceUtil } from '../common/utils/deviceUtil';
 
 const RESOURCE_TYPE: number = 10003;
 
@@ -235,10 +235,10 @@ struct SecurityDialog {
   @State isWearable: boolean = false;
   @State securityParams: Array<Param> = [
     new Param(
-      $r('app.media.ic_location'), $r('app.string.SecurityTitle_location'), 'app.string.SecurityText_location'
+      $r('app.media.ic_location'), $r('app.string.security_title_location'), 'app.string.security_text_location'
     ),
     new Param(
-      $r('app.media.rawfile'), $r('app.string.SecurityTitle_mediaFiles'), 'app.string.SecurityText_mediaFiles'
+      $r('app.media.rawfile'), $r('app.string.security_title_media_files'), 'app.string.security_text_media_files'
     )
   ]
   dialogControllerForWearable: CustomDialogController | null = new CustomDialogController({
@@ -328,7 +328,7 @@ struct SecurityDialog {
     Log.info('onAboutToAppear.');
     await this.GetAppName();
     this.index = this.want?.parameters?.['ohos.user.security.type'] as number;
-    if (deviceInfo.deviceType === 'wearable') {
+    if (DeviceUtil.isWearable()) {
       this.dialogControllerForWearable?.open();
       this.isWearable = true;
     } else {

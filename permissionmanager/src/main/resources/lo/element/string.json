@@ -2,7 +2,7 @@
     "string":[
         {
             "name":"group_label_health",
-            "value":"ອະນຸຍາດໃຫ້ %s ເຂົ້າເຖິງຂໍ້ມູນເຊັນເຊີບໍ?",
+            "value":"ອະນຸຍາດໃຫ້ %s ​ເຂົ້າເຖິງຂໍ້ມູນເຊັນເຊີບໍ?",
             "attr":{
                 "priority":"translate"
             }
@@ -65,7 +65,7 @@
         },
         {
             "name":"always_allow",
-            "value":"ອະນຸຍາດ​ສະ​ເໝີ",
+            "value":"ອະ​ນຸ​ຍາດ​ຕະຫຼອດ​ເວ​ລາ",
             "attr":{
                 "priority":"translate"
             }
@@ -85,7 +85,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"ອະນຸຍາດໃຫ້ %s ຕິດຕາມກິດຈະກຳຂອງທ່ານຢູ່ໃນແອັບອື່ນໆບໍ?",
             "attr":{
                 "priority":"translate"
@@ -93,7 +93,7 @@
         },
         {
             "name":"ban",
-            "value":"ປະ​ຕິ​ເສດ",
+            "value":"ປະຕິເສດ",
             "attr":{
                 "priority":"translate"
             }
@@ -134,21 +134,21 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"ຖ້າປະຕິເສດແລ້ວ, ແອັບນີ້ຈະບໍ່ສາມາດເຂົ້າເຖິງຄລິບບອດໄດ້.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"ອະນຸຍາດໃຫ້ %s ແຄັບເຈີໜ້າຈໍຂອງທ່ານບໍ?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"ອະນຸຍາດໃຫ້ %s ນຳໃຊ້ NearLink ບໍ?",
             "attr":{
                 "priority":"translate"
@@ -211,21 +211,21 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"ອະນຸຍາດໃຫ້ %s ອ່ານລາຍການແອັບທີ່ຕິດຕັ້ງແລ້ວບໍ?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"ການເຂົ້າເຖິງທີ່ຕັ້ງແບບຈຳກັດ",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"ອະນຸຍາດ​ຄັ້ງນີ້ເທົ່ານັ້ນ",
             "attr":{
                 "priority":"translate"
@@ -253,35 +253,35 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"ເນື້ອຫາໄດ້ອັດສຳເນົາຈາກ %s. ຖ້າທ່ານເລືອກປະຕິເສດ, ແອັບນີ້ຈະບໍ່ສາມາດເຂົ້າເຖິງຄລິບບອດໄດ້.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %1$s%2$s ສາມາດເຂົ້າເຖິງທີ່ຕັ້ງຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"ການເຂົ້າເຖິງແກເລີຣີແບບສ່ວນຕົວ",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %1$s%2$s ສາມາດເຂົ້າເຖິງແກເລີຣີຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເພື່ອບັນທຶກລາຍການເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %s ສາມາດເຂົ້າເຖິງທີ່ຕັ້ງຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
             "attr":{
                 "priority":"translate"
@@ -295,7 +295,7 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"ເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, %s ສາມາດເຂົ້າເຖິງແກເລີຣີຂອງທ່ານໄດ້ພຽງສັ້ນໆ ເພື່ອບັນທຶກລາຍການເມື່ອທ່ານແຕະ ອະນຸຍາດ ເທົ່ານັ້ນ.",
             "attr":{
                 "priority":"translate"
@@ -307,6 +307,89 @@
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_manager",
+            "value":"ຕົວ​ຈັດການ​ການ​ອະນຸຍາດ"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"ແອັບຊອກຫາ"
+        },
+        {
+            "name":"open",
+            "value":"ເປີດໃຊ້ງານ"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"ອະນຸຍາດໃນການຕັ້ງຄ່າ"
+        },
+        {
+            "name":"close",
+            "value":"ປິດໃຊ້ງານ"
+        },
+        {
+            "name":"close_microphone",
+            "value":"ປິດໃຊ້ງານໄມໂຄຣ​ໂຟນບໍ?"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"ປິດໃຊ້ງານໄມໂຄຣໂຟນແລ້ວ"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"ຄລິບບອດ"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"ໄຟລ໌ ແລະ ໂຟລເດີ"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"ການຊ່ວຍປ້ອນຂໍ້ມູນ"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"ການແຊຣ໌ໜ້າຈໍ"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"ການຄວບຄຸມອຸປະກອນ"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"ການຊ່ວຍປ້ອນຂໍ້ມູນ"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"ການແຊຣ໌ໜ້າຈໍ"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"ການຄວບຄຸມອຸປະກອນ"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"ອະນຸຍາດໃຫ້ %s ໃຫ້ການຊ່ວຍເຫຼືອໃນການປ້ອນຂໍ້ມູນບໍ?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"ໂຟລເດີການດາວໂຫລດ"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"ໂຟລເດີໜ້າຈໍຫຼັກ"
+        },
+        {
+            "name":"document_folder",
+            "value":"ໂຟລເດີເອກະສານ"
+        },
+        {
+            "name":"confirm",
+            "value":"ຢືນຢັນ"
         }
     ]
 }

@@ -14,8 +14,9 @@
  */
 
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
-import { Permission, PermissionGroup } from '../model/definition';
+import { Permission, PermissionGroup, ButtonStatus } from '../model/definition';
 import { PermissionGroupConfig } from '../model/typedef';
+import { DeviceUtil } from '../utils/deviceUtil';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.MICROPHONE,
@@ -33,5 +34,9 @@ export class MicrophoneStrategy extends BasePermissionStrategy {
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
     return $r('app.string.group_label_microphone', appName);
+  }
+
+  public override getButtonList(): ButtonStatus[] {
+    return [ButtonStatus.DENY, ButtonStatus.ALLOW];
   }
 }

@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Контрольований доступ до додатка \"Галерея\"",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%s\" зможе отримати доступ до розташування на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%s\" зможе отримати доступ до додатка \"Галерея\" для збереження вмісту на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Контрольований доступ до розташування",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%1$s\" %2$s зможе отримати доступ до розташування на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Щоб захистити вашу конфіденційність, додаток \"%1$s\" %2$s зможе отримати доступ до додатка \"Галерея\" для збереження вмісту на короткий період після того, як ви торкнетеся кнопки \"Дозволити\".",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Інформаційна панель"
+        },
+        {
+            "name":"permission",
+            "value":"Дозволи"
+        },
+        {
+            "name":"allowed",
+            "value":"Дозволено"
+        },
+        {
+            "name":"banned",
+            "value":"Заборонено"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Читання й змінення",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Тільки читання",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Тільки змінення",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Усі файли",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Запитувати щоразу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Мікрофон"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Камера"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Мікрофон"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Контакти"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Календар"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Фізична активність"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Датчики на тілі"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Відстеження активності"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Список додатків"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Папки"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Підключення пристроїв"
         }
     ]
 }

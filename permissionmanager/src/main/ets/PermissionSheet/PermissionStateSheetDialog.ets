@@ -23,7 +23,6 @@ import {
   PermissionDialogReturn,
   verifyAccessToken } from '../common/utils/utils';
 import { AppInfo, CallerBundleInfo,
-  CheckboxInfo,
   MediaDocObj,
   WantInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
@@ -32,6 +31,9 @@ import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { groups, showSubPermissionsGroup } from '../common/model/permissionGroup';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog'
+import { PermissionUtils } from '../common/utils/permissionUtils';
+import { getFolderCheckboxInfo } from '../common/utils/documentsPermissionUtils';
+import { isReadWriteGroup, isReadPermission, isWritePermission } from '../common/utils/permissionGroupUtils';
 
 let session: UIExtensionContentSession;
 let terminating: boolean = false;
@@ -79,11 +81,11 @@ export function getCallerBundleInfo(want: WantInfo): CallerBundleInfo {
 @Entry({ useSharedStorage: true })
 @Component
 struct PermissionStateSheetDialog {
-  private context = this.getUIContext().getHostContext() as common.ServiceExtensionContext;
+  private context = this.getUIContext().getHostContext() as common.ServiceExtensionContext | undefined;
   @LocalStorageLink('want') want: Want | null = null;
   @LocalStorageLink('session') session: UIExtensionContentSession = {} as UIExtensionContentSession;
   @State applicationInfo: AppInfo | undefined = undefined;
-  @State folderStatus: boolean[] = [false, false, false];
+  @State folderStatus: boolean[] = [false, false, false, false];
   @State reqUserPermissions: Permission[] = [];
   @State bundleName: string = '';
   @State isGranted: number = Constants.PERMISSION_ALLOW;
@@ -106,7 +108,7 @@ struct PermissionStateSheetDialog {
     cornerRadius: {topLeft: 32, topRight: 32, bottomLeft: 0, bottomRight: 0},
     cancel: () => {
       ReportDialogResult(this.reqUserPermissions, this.applicationInfo?.tokenId ?? 0);
-      this.context.terminateSelf();
+      this.context?.terminateSelf();
       this.dialogController?.close();
     }
   });
@@ -128,6 +130,10 @@ struct PermissionStateSheetDialog {
 
   }
 
+  private terminateSelfSafely(): void {
+    this.context?.terminateSelf();
+  }
+
   async aboutToAppear() {
     session = this.session;
     terminating = false;
@@ -136,7 +142,7 @@ struct PermissionStateSheetDialog {
     Log.info('PermissionStateSheetDialog GetAppInfo finished, terminating=' + terminating);
 
     if (!this.applicationInfo) {
-      this.context.terminateSelf();
+      this.terminateSelfSafely();
     }
 
     if (this.dialogController !== null && terminating == false) {
@@ -182,7 +188,7 @@ struct PermissionStateSheetDialog {
           Log.error('permission ' + wantPermission + ' not claimed by ' + this.bundleName + ' in module.json');
           PermissionDialogException(Constants.ERR_PERMISSIONS_NOT_IN_CONFIG, session);
           terminating = true;
-          this.context.terminateSelf();
+          this.terminateSelfSafely();
           return;
         }
         permissionGrantMap.set(appPermissions[idx].name,
@@ -202,7 +208,7 @@ struct PermissionStateSheetDialog {
         if (terminating == false) {
           PermissionDialogException(Constants.ERR_PERMISSIONS_ALL_GRANTED, session);
           terminating = true;
-          this.context.terminateSelf();
+          this.terminateSelfSafely();
         }
       }
       return info;
@@ -226,7 +232,7 @@ struct PermissionStateSheetDialog {
     if (groupName == null) {
       terminating = true;
       PermissionDialogException(Constants.ERR_PERMISSIONS_NOT_SAME_GROUP, session);
-      this.context.terminateSelf();
+      this.terminateSelfSafely();
     }
     this.currentGroup = groupName!;
     // check app infos, check if permissions are claimed , check if permissions are granted
@@ -244,16 +250,22 @@ struct PermissionStateSheetDialog {
 
   async initApplicationInfo(info: AppInfo) {
     Log.info('labelResource: ' + JSON.stringify(info.labelResource));
+    if (!this.context) {
+      Log.error('InitApplicationInfo failed: host context is undefined.');
+      return;
+    }
     let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
+    const labelResourceId = info.labelResource?.id ?? 0;
+    const iconResourceId = info.iconResource?.id ?? 0;
 
-    if (info.labelResource.id !== 0) {
+    if (labelResourceId !== 0) {
       info.label = await this.context.resourceManager.getStringValue(info.labelResource);
     } else {
       info.label = await resourceManager.getStringValue(info.labelId);
     }
 
     try {
-      if (info.iconResource.id !== 0) {
+      if (iconResourceId !== 0) {
         let iconDescriptor = this.context.resourceManager.getDrawableDescriptor(info.iconResource);
         info.icon = iconDescriptor?.getPixelMap();
       } else {
@@ -302,6 +314,38 @@ struct PermissionStateSheetDialog {
       GlobalContext.store('locationStatus', this.isGranted);
       return true;
     }
+    if (isReadWriteGroup(group)) {
+      let hasReadPermission = false;
+      let hasWritePermission = false;
+      let hasGrantedRead = false;
+      let hasGrantedWrite = false;
+      for (let i = 0; i < groupReqPermissions.length; i++) {
+        let permission = groupReqPermissions[i] as Permission;
+        let res = await verifyAccessToken(this.applicationInfo!.tokenId, permission);
+        if (isReadPermission(group, permission)) {
+          hasReadPermission = true;
+          if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+            hasGrantedRead = true;
+          }
+        }
+        if (isWritePermission(group, permission)) {
+          hasWritePermission = true;
+          if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+            hasGrantedWrite = true;
+          }
+        }
+      }
+      if (hasReadPermission && hasGrantedRead && hasWritePermission && hasGrantedWrite) {
+        this.isGranted = Constants.PERMISSION_ALLOW;
+      } else if (hasReadPermission && hasGrantedRead) {
+        this.isGranted = Constants.PERMISSION_READ_ONLY;
+      } else if (hasWritePermission && hasGrantedWrite) {
+        this.isGranted = Constants.PERMISSION_WRITE_ONLY;
+      } else {
+        this.isGranted = Constants.PERMISSION_BAN;
+      }
+      return true;
+    }
     for (let i = 0; i < groupReqPermissions.length; i++) {
       let permission = groupReqPermissions[i];
       let res = await verifyAccessToken(this.applicationInfo!.tokenId, permission);
@@ -318,6 +362,9 @@ struct PermissionStateSheetDialog {
             break;
           case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
             this.folderStatus[2] = true;
+            break;
+          case Permission.ACCESS_USER_FULL_DISK:
+            this.folderStatus[3] = true;
             break;
         }
       }
@@ -349,7 +396,7 @@ struct PermissionStateSheetDialog {
         }
       }
       this.isGranted = group === 'LOCATION' ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
-      this.folderStatus = [false, false, false];
+      this.folderStatus = [false, false, false, false];
       await this.getStatus(groupReqPermissions, group);
 
       GlobalContext.store('folderStatus', this.folderStatus);
@@ -391,16 +438,15 @@ struct mediaDocumentItem {
    * @param {String} permission permission name
    */
   async grantUserGrantedPermission(accessTokenId: number, permission: Permissions): Promise<boolean> {
-    Log.info('granting permission ' + permission);
-    try {
-      await abilityAccessCtrl.createAtManager()
-        .grantUserGrantedPermission(accessTokenId, permission, Constants.PERMISSION_FLAG);
+    let result = await PermissionUtils.grantPermissionWithResult(
+      permission as Permission, Constants.PERMISSION_FLAG, accessTokenId
+    );
+    if (result.operationResult === Constants.RESULT_SUCCESS) {
       Log.info('grantUserGrantedPermission ' + permission + ' success.');
       return true;
-    } catch (e) {
-      Log.error('grantUserGrantedPermission failed. Cause: ' + JSON.stringify(e));
-      return false;
     }
+    Log.error('grantUserGrantedPermission failed. permission: ' + permission);
+    return false;
   }
 
   /**
@@ -411,14 +457,23 @@ struct mediaDocumentItem {
   async revokeUserGrantedPermission(
     accessTokenId: number, permission: Permissions, flag: number
   ): Promise<boolean> {
-    try {
-      await abilityAccessCtrl.createAtManager().revokeUserGrantedPermission(accessTokenId, permission, flag);
+    let result = await PermissionUtils.revokePermissionWithResult(
+      permission as Permission, flag, accessTokenId
+    );
+    if (result.operationResult === Constants.RESULT_SUCCESS) {
       Log.info('revokeUserGrantedPermission ' + permission + ' success');
       return true;
-    } catch (error) {
-      Log.error('revokeUserGrantedPermission failed. Cause: ' + JSON.stringify(error));
-      return false;
     }
+    Log.error('revokeUserGrantedPermission failed. permission: ' + permission);
+    return false;
+  }
+
+  getReadablePermissions(): Permission[] {
+    return this.permissions.filter((permission) => isReadPermission(this.currentGroup, permission));
+  }
+
+  getWritablePermissions(): Permission[] {
+    return this.permissions.filter((permission) => isWritePermission(this.currentGroup, permission));
   }
 
   onPageShow(): void {
@@ -428,8 +483,40 @@ struct mediaDocumentItem {
   async refreshStatus() {
     Log.info('Refresh permission status');
     let isGranted = this.currentGroup === 'LOCATION' ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
-    let folderStatus = [false, false, false];
+    let folderStatus = [false, false, false, false];
     let atManager = abilityAccessCtrl.createAtManager();
+    if (isReadWriteGroup(this.currentGroup)) {
+      let hasReadPermission = false;
+      let hasWritePermission = false;
+      let hasGrantedRead = false;
+      let hasGrantedWrite = false;
+      for (let i = 0; i < this.permissions.length; i++) {
+        let permission = this.permissions[i];
+        let res = atManager.verifyAccessTokenSync(this.tokenId, permission);
+        if (isReadPermission(this.currentGroup, permission)) {
+          hasReadPermission = true;
+          if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+            hasGrantedRead = true;
+          }
+        }
+        if (isWritePermission(this.currentGroup, permission)) {
+          hasWritePermission = true;
+          if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
+            hasGrantedWrite = true;
+          }
+        }
+      }
+      if (hasReadPermission && hasGrantedRead && hasWritePermission && hasGrantedWrite) {
+        await this.refreshSelected(Constants.PERMISSION_ALLOW);
+      } else if (hasReadPermission && hasGrantedRead) {
+        await this.refreshSelected(Constants.PERMISSION_READ_ONLY);
+      } else if (hasWritePermission && hasGrantedWrite) {
+        await this.refreshSelected(Constants.PERMISSION_WRITE_ONLY);
+      } else {
+        await this.refreshSelected(Constants.PERMISSION_BAN);
+      }
+      return;
+    }
     for (let i = 0; i < this.permissions.length; i++) {
       let permission = this.permissions[i];
       if (this.currentGroup === 'LOCATION') {
@@ -449,6 +536,9 @@ struct mediaDocumentItem {
             break;
           case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
             folderStatus[2] = true;
+            break;
+          case Permission.ACCESS_USER_FULL_DISK:
+            folderStatus[3] = true;
             break;
         }
       }
@@ -499,7 +589,7 @@ struct mediaDocumentItem {
         if (flag === Constants.PERMISSION_DEFAULT && terminating == false) {
           PermissionDialogException(Constants.ERR_PERMISSIONS_FLAG_DEFAULT, session);
           terminating = true;
-          this.context.terminateSelf();
+          this.context?.terminateSelf();
           return;
         }
       }
@@ -508,23 +598,10 @@ struct mediaDocumentItem {
     }
   }
 
-  getCheckboxInfo(permission: Permissions): CheckboxInfo {
-    switch (permission) {
-      case Permission.READ_WRITE_DOWNLOAD_DIRECTORY:
-        return new CheckboxInfo($r('app.string.Download_folder'), 0);
-      case Permission.READ_WRITE_DESKTOP_DIRECTORY:
-        return new CheckboxInfo($r('app.string.Desktop_folder'), 1);
-      case Permission.READ_WRITE_DOCUMENTS_DIRECTORY:
-        return new CheckboxInfo($r('app.string.Document_folder'), 2);
-      default:
-        return new CheckboxInfo($r('app.string.Download_folder'), 0);
-    }
-  }
-
   getMediaDocList() {
     Log.info('current group ' + this.currentGroup);
     Log.info('current permissions ' + this.permissions);
-
+    this.mediaDocListItem = [];
     if (this.currentGroup == 'PASTEBOARD') {
       this.mediaDocListItem.push(
         new MediaDocObj($r('app.string.per_use_query'), this.permissions, Constants.PERMISSION_ONLY_THIS_TIME)
@@ -552,6 +629,28 @@ struct mediaDocumentItem {
         );
       } else {
         this.noForeground = true;
+      }
+    } else if (isReadWriteGroup(this.currentGroup)) {
+      let readPermissions = this.getReadablePermissions();
+      let writePermissions = this.getWritablePermissions();
+      if (readPermissions.length > 0 && writePermissions.length > 0) {
+        this.mediaDocListItem.push(
+          new MediaDocObj(
+            $r('app.string.read_and_modify'),
+            [...readPermissions, ...writePermissions],
+            Constants.PERMISSION_ALLOW
+          )
+        );
+      }
+      if (readPermissions.length > 0) {
+        this.mediaDocListItem.push(
+          new MediaDocObj($r('app.string.read_only'), readPermissions, Constants.PERMISSION_READ_ONLY)
+        );
+      }
+      if (writePermissions.length > 0) {
+        this.mediaDocListItem.push(
+          new MediaDocObj($r('app.string.modify_only'), writePermissions, Constants.PERMISSION_WRITE_ONLY)
+        );
       }
     } else {
       this.mediaDocListItem.push(
@@ -633,13 +732,13 @@ struct mediaDocumentItem {
   }
 
   async grantFolderPermission(permission: Permissions): Promise<void> {
-    if (this.folderStatus[this.getCheckboxInfo(permission).index]) {
+    if (this.folderStatus[getFolderCheckboxInfo(permission as Permission).index]) {
       if (await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG)) {
-        this.folderStatus[this.getCheckboxInfo(permission).index] = false;
+        this.folderStatus[getFolderCheckboxInfo(permission as Permission).index] = false;
       }
     } else {
       if (await this.grantUserGrantedPermission(this.tokenId, permission)) {
-        this.folderStatus[this.getCheckboxInfo(permission).index] = true;
+        this.folderStatus[getFolderCheckboxInfo(permission as Permission).index] = true;
       }
     }
     let allGranted = true;
@@ -655,8 +754,32 @@ struct mediaDocumentItem {
     }
   }
 
+  async applyReadWritePermissionStatus(status: number) {
+    this.selected = status;
+    let grantedPermissions: Permission[] = [];
+    if (status === Constants.PERMISSION_ALLOW) {
+      grantedPermissions = [...this.getReadablePermissions(), ...this.getWritablePermissions()];
+    } else if (status === Constants.PERMISSION_READ_ONLY) {
+      grantedPermissions = this.getReadablePermissions();
+    } else if (status === Constants.PERMISSION_WRITE_ONLY) {
+      grantedPermissions = this.getWritablePermissions();
+    }
+    for (const permission of this.permissions) {
+      if (grantedPermissions.includes(permission)) {
+        await this.grantUserGrantedPermission(this.tokenId, permission);
+      } else {
+        await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG);
+      }
+    }
+  }
+
   async grantOtherPermissions(item: MediaDocObj): Promise<boolean> {
     this.selected = item.index;
+    if (isReadWriteGroup(this.currentGroup)) {
+      await this.applyReadWritePermissionStatus(item.index);
+      ReportDialogResult(this.permissions, this.tokenId);
+      return true;
+    }
     for (const permission of item.permissions) {
       Log.info('item click index:' + item.index);
       if (item.index === Constants.PERMISSION_ALLOW) {
@@ -782,13 +905,13 @@ struct mediaDocumentItem {
               ListItem() {
                 Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
                   Row() {
-                    Text(this.getCheckboxInfo(permission).label)
+                    Text(getFolderCheckboxInfo(permission as Permission).label)
                       .fontSize(Constants.TEXT_MIDDLE_FONT_SIZE)
                       .fontColor($r('sys.color.font_primary'))
                       .fontWeight(FontWeight.Medium)
                       .flexGrow(Constants.FLEX_GROW)
                     Checkbox()
-                      .select(this.folderStatus[this.getCheckboxInfo(permission).index])
+                      .select(this.folderStatus[getFolderCheckboxInfo(permission as Permission).index])
                       .hitTestBehavior(HitTestMode.None)
                   }
                   .width(Constants.FULL_WIDTH)
@@ -903,16 +1026,17 @@ struct mediaDocumentItem {
                 .selectedColor($r('sys.color.icon_emphasize'))
                 .switchPointColor($r('sys.color.comp_background_primary_contrary'))
                 .onChange((isOn: boolean) => {
-                  let acManager = abilityAccessCtrl.createAtManager()
                   if (isOn) {
-                    acManager.grantUserGrantedPermission(this.tokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
-                    .then(() => {
-                      this.accurateIsOn = true
+                    PermissionUtils.grantPermissionWithResult(
+                      Permission.LOCATION, Constants.PERMISSION_FLAG, this.tokenId
+                    ).then((result) => {
+                      this.accurateIsOn = result.operationResult === Constants.RESULT_SUCCESS;
                     })
                   } else {
-                    acManager.revokeUserGrantedPermission(this.tokenId, Permission.LOCATION, Constants.PERMISSION_FLAG)
-                    .then(() => {
-                      this.accurateIsOn = false
+                    PermissionUtils.revokePermissionWithResult(
+                      Permission.LOCATION, Constants.PERMISSION_FLAG, this.tokenId
+                    ).then((result) => {
+                      this.accurateIsOn = result.operationResult !== Constants.RESULT_SUCCESS;
                     })
                   }
                 })

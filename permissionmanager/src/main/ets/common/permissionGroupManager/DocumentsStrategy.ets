@@ -16,6 +16,7 @@
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
 import { Permission, PermissionGroup } from '../model/definition';
 import { PermissionGroupConfig } from '../model/typedef';
+import { DeviceUtil } from '../utils/deviceUtil';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.DOCUMENTS,
@@ -33,5 +34,8 @@ export class DocumentsStrategy extends BasePermissionStrategy {
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
     return $r('app.string.group_label_document', appName);
+  }
+  public override isSupport(permission: Permission): boolean {
+    return DeviceUtil.isPhone() || DeviceUtil.isTablet() || DeviceUtil.isPC();
   }
 }

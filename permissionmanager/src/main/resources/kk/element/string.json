@@ -1,28 +1,28 @@
 {
     "string":[
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Құпиялықты қорғау үшін %1$s%2$s сіз «Рұқсат ету» түймесін түрткенде ғана орналасқан жеріңізге қысқа уақыт бойы қатынаса алады.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Галереяға жеке қатынасу",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Құпиялығыңызды қорғау үшін %1$s%2$s сіз «Рұқсат ету» түймесін түрткенде элементтерді сақтау үшін «Галерея» қолданбаңызға қысқа уақыт бойы ғана қатынаса алады.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Құпиялықты қорғау үшін %s сіз «Рұқсат ету» түймесін түрткенде ғана орналасқан жеріңізге қысқа уақыт бойы қатынаса алады.",
             "attr":{
                 "priority":"LT"
@@ -36,14 +36,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Құпиялығыңызды қорғау үшін %s сіз «Рұқсат ету» түймесін түрткенде элементтерді сақтау үшін «Галерея» қолданбаңызға қысқа уақыт бойы ғана қатынаса алады.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Орынға жеке қатынасу",
             "attr":{
                 "priority":"LT"
@@ -55,6 +55,117 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Бақылау тақтасы"
+        },
+        {
+            "name":"permission",
+            "value":"Рұқсаттар"
+        },
+        {
+            "name":"allowed",
+            "value":"Рұқсат етілген"
+        },
+        {
+            "name":"banned",
+            "value":"Тыйым салынған"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Оқу және өзгерту",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Тек оқу",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Тек өзгерту",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Барлық файлдар",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Үнемі сұрау",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Микрофон"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Камера"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Микрофон"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Контактілер"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Күнтізбе"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Физикалық әрекет"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Дене сенсорлары"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Әрекетті бақылау"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Қолданбалар тізімі"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Қалталар"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Табыстау аймағы"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Табыстау аймағы"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Құрылғы байланысы"
         }
     ]
 }

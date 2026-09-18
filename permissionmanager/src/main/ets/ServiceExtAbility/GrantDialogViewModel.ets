@@ -50,7 +50,6 @@ export class GrantDialogViewModel extends BaseViewModel<GrantDialogModel, GrantD
       model.terminateWithResult(intention.context, this.win, this.callerAppInfo);
     }
     viewState.grantGroups.forEach((groupConfig) => {
-      Log.info(`group: ${groupConfig.groupName}.`);
       if (groupConfig.title === '') {
         Log.error(`get resource faild, terminate.`);
         model.terminateWithResult(intention.context, this.win, this.callerAppInfo);

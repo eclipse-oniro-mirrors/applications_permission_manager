@@ -16,19 +16,23 @@
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
 import { ButtonStatus, Permission, PermissionGroup, PermissionOption } from '../model/definition';
 import { CallerAppInfo, PermissionGroupConfig } from '../model/typedef';
-
-const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
-  groupName: PermissionGroup.CALENDAR,
-  permissions: [Permission.READ_CALENDAR, Permission.WRITE_CALENDAR, Permission.READ_WHOLE_CALENDAR, Permission.WRITE_WHOLE_CALENDAR],
-  icon: $r('app.media.ic_public_calendar'),
-  title: '',
-  reason: '',
-  buttonList: []
-})
+import { DeviceUtil } from '../utils/deviceUtil';
 
 export class CalendarStrategy extends BasePermissionStrategy {
   public override getPermissionGroupConfig(): PermissionGroupConfig {
-    return groupConfig;
+    return new PermissionGroupConfig({
+      groupName: PermissionGroup.CALENDAR,
+      permissions: [
+        Permission.READ_CALENDAR,
+        Permission.WRITE_CALENDAR,
+        Permission.READ_WHOLE_CALENDAR,
+        Permission.WRITE_WHOLE_CALENDAR
+      ],
+      icon: $r('app.media.ic_public_calendar'),
+      title: '',
+      reason: '',
+      buttonList: []
+    });
   }
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
@@ -37,9 +41,9 @@ export class CalendarStrategy extends BasePermissionStrategy {
 
   public override getReadAndWrite(permissions: Set<Permission>): ResourceStr {
     let message: ResourceStr = '';
-    let isRead: boolean = permissions.has(Permission.READ_CALENDAR);
-    let isWrite: boolean = permissions.has(Permission.WRITE_CALENDAR);
-
+    let isRead: boolean = permissions.has(Permission.READ_CALENDAR) || permissions.has(Permission.READ_WHOLE_CALENDAR);
+    let isWrite: boolean = permissions.has(Permission.WRITE_CALENDAR) ||
+      permissions.has(Permission.WRITE_WHOLE_CALENDAR);
     if (isRead) {
       message = $r('sys.string.ohos_lab_read_calendar');
     }
@@ -52,21 +56,35 @@ export class CalendarStrategy extends BasePermissionStrategy {
     return message;
   }
 
+  public override isSupport(permission: Permission): boolean {
+    return DeviceUtil.isPhone() ||
+      DeviceUtil.isTablet() ||
+      DeviceUtil.isPC() ||
+      DeviceUtil.isWearable() ||
+      DeviceUtil.isTv();
+  }
+
   public override grantHandle(
     permission: Permission, callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
   ): PermissionOption {
-    if (this.isPermissionPendingGrant(permission, callerAppInfo)) {
-      return PermissionOption.GRANT;
+    if (permission === Permission.READ_CALENDAR && callerAppInfo.reqPerms.includes(Permission.READ_WHOLE_CALENDAR)) {
+      return PermissionOption.SKIP;
     }
-    return PermissionOption.SKIP;
+    if (permission === Permission.WRITE_CALENDAR && callerAppInfo.reqPerms.includes(Permission.WRITE_WHOLE_CALENDAR)) {
+      return PermissionOption.SKIP;
+    }
+    return this.isPermissionPendingGrant(permission, callerAppInfo) ? PermissionOption.GRANT : PermissionOption.SKIP;
   }
 
   public override denyHandle(
     permission: Permission, callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
   ): PermissionOption {
-    if (this.isPermissionPendingGrant(permission, callerAppInfo)) {
+    if (permission === Permission.READ_CALENDAR && callerAppInfo.reqPerms.includes(Permission.READ_WHOLE_CALENDAR)) {
       return PermissionOption.REVOKE;
     }
-    return PermissionOption.SKIP;
+    if (permission === Permission.WRITE_CALENDAR && callerAppInfo.reqPerms.includes(Permission.WRITE_WHOLE_CALENDAR)) {
+      return PermissionOption.REVOKE;
+    }
+    return this.isPermissionPendingGrant(permission, callerAppInfo) ? PermissionOption.REVOKE : PermissionOption.SKIP;
   }
 }

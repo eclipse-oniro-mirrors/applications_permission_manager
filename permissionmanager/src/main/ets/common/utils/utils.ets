@@ -18,9 +18,7 @@ import i18n from '@ohos.i18n';
 import hilog from '@ohos.hilog';
 import {
   permissionInfos,
-  groups,
-  userGrantPermissions,
-  only2in1AndTabletSupportedPermissions
+  groups
 } from '../model/permissionGroup';
 import { Permission, PermissionGroup } from '../model/definition';
 import Constants from '../utils/constant';
@@ -32,8 +30,8 @@ import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSessi
 import uiExtensionHost from '@ohos.uiExtensionHost';
 import window from '@ohos.window';
 import rpc from '@ohos.rpc';
-import { deviceInfo } from '@kit.BasicServicesKit';
 import { GlobalContext } from './globalContext';
+import { DeviceUtil } from './deviceUtil';
 
 const TAG = 'PermissionManager_Log ';
 
@@ -299,16 +297,6 @@ export function getFontSizeScale(): boolean {
     Log.error('getFontSizeScale error: ' + JSON.stringify(error));
     return false;
   }
-}
-
-export function supportPermission(): Permission[] {
-  if (deviceInfo.deviceType === '2in1' || deviceInfo.deviceType === 'tablet') {
-    return userGrantPermissions;
-  }
-  let supportGroup: Permission[] = [];
-  supportGroup =
-    userGrantPermissions.filter(permission => only2in1AndTabletSupportedPermissions.includes(permission) === false);
-  return supportGroup;
 }
 
 export function destruction(want: Want | null, typeData: number) {

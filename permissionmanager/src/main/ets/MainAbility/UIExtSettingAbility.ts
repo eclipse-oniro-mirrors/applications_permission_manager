@@ -22,6 +22,7 @@ import { window } from '@kit.ArkUI';
 
 const USER_ID = 100;
 let callerBundleName: string;
+let extensionWindowProxy: ReturnType<UIExtensionContentSession['getUIExtensionWindowProxy']> | undefined;
 const TAG: string = 'UIExtSettingAbility :';
 
 export default class UIExtSettingAbility extends UIExtensionAbility {
@@ -29,15 +30,24 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
     console.log(TAG + ' onCreate');
   }
 
+  private updateStatusBarHeight(area: window.AvoidArea): void {
+    const statusBarHeight = px2vp(area.topRect.height);
+    AppStorage.setOrCreate('STATUS_BAR_HEIGHT', statusBarHeight);
+    console.log(TAG, JSON.stringify(statusBarHeight));
+  }
+
   onSessionCreate(want: Want, session: UIExtensionContentSession): void {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
     try {
       const extensionWindow = session.getUIExtensionWindowProxy();
-      const area = extensionWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
-      const statusBarHeight = px2vp(area.topRect.height);
-      AppStorage.setOrCreate('STATUS_BAR_HEIGHT', statusBarHeight);
-      console.log(TAG, JSON.stringify(statusBarHeight));
+      extensionWindowProxy = extensionWindow;
+      this.updateStatusBarHeight(extensionWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM));
+      extensionWindow.on('avoidAreaChange', (info) => {
+        if (info.type === window.AvoidAreaType.TYPE_SYSTEM) {
+          this.updateStatusBarHeight(info.area);
+        }
+      });
     } catch (error) {
       console.error(TAG, 'onSessionCreate error.code: ' + error?.code + ' error.message: ' + error?.message);
       // TODO: Implement error handling.
@@ -53,7 +63,7 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
 
     if (callerBundleName) {
       globalThis.currentApp = callerBundleName;
-      this.getSperifiedApplication(callerBundleName);
+      this.getSpecifiedApplication(callerBundleName);
     } else {
       globalThis.currentApp = 'all';
       this.getAllApplications();
@@ -89,6 +99,8 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
 
   onSessionDestroy(): void {
     try {
+      extensionWindowProxy?.off('avoidAreaChange');
+      extensionWindowProxy = undefined;
       bundleMonitor.off('add');
       bundleMonitor.off('remove');
       bundleMonitor.off('update');
@@ -152,7 +164,7 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
     }
   }
 
-  getSperifiedApplication(bundleName:string): void {
+  getSpecifiedApplication(bundleName:string): void {
     const flag =
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
       bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
@@ -180,9 +192,11 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
           'language': ''
         };
         GlobalContext.store('applicationInfo', info);
-        globalThis.windowStage?.setUIContent(this.context, 'pages/application-secondary', null);
+        // loadContent exists on both WindowStage and UIExtensionContentSession;
+        // setUIContent does not exist on UIExtensionContentSession.
+        globalThis.windowStage?.loadContent('pages/application-secondary');
       }).catch((error) => {
-        console.log(TAG + 'Special branch getBundleInfo failed:' + JSON.stringify(error));
+        console.error(TAG + 'Special branch getBundleInfo failed:' + JSON.stringify(error));
         this.context.terminateSelf();
       });
     } catch (error) {

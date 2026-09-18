@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"גישה פרטית ל'גלריה'",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"כדי להגן על פרטיותך, %s יוכל לגשת למיקום שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"כדי להגן על פרטיותך, %s יוכל לגשת ל'גלריה' שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"גישה פרטית למיקום",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"כדי להגן על פרטיותך, %1$s%2$s יוכל לגשת למיקום שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"כדי להגן על פרטיותך, %1$s%2$s יוכל לגשת ל'גלריה' שלך רק לזמן קצר כדי לשמור פריטים כאשר תקיש על 'אפשר'.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"לוח מחוונים"
+        },
+        {
+            "name":"permission",
+            "value":"הרשאות"
+        },
+        {
+            "name":"allowed",
+            "value":"מותר"
+        },
+        {
+            "name":"banned",
+            "value":"סורב"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"לקרוא ולשנות",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"לקרוא בלבד",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"לשנות בלבד",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"כל הקבצים",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"שאל בכל פעם",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"מיקרופון"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"מצלמה"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"מיקרופון"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"אנשי קשר"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"לוח שנה"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"פעילות פיזית"
+        },
+        {
+            "name":"group_name_health",
+            "value":"חיישני גוף"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"מעקב אחר פעילות"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"רשימת יישומים"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"תיקיות"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"‏NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"חיבור ההתקן"
         }
     ]
 }

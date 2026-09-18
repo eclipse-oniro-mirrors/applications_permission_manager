@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Приватен пристап до Галерија",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата локација кога ќе допрете Дозволи.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата Галерија за да зачува ставки кога ќе допрете Дозволи.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Приватен пристап до локацијата",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"За да се заштити вашата приватност, %1$s%2$s може само кратко да пристапи до вашата локација кога ќе допрете Дозволи.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"За да се заштити вашата приватност, %1$s%2$s може само кратко да пристапи до вашата Галерија за да зачува ставки кога ќе допрете Дозволи.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Контролна табла"
+        },
+        {
+            "name":"permission",
+            "value":"Дозволи"
+        },
+        {
+            "name":"allowed",
+            "value":"Дозволено"
+        },
+        {
+            "name":"banned",
+            "value":"Одбиено"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Читање и изменување",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Само за читање",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Само за изменување",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Сите датотеки",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Прашувај секој пат",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Микрофон"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Камера"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Микрофон"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Контакти"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Календар"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Физичка активност"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Сензори на телото"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Следење активности"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Список на апликации"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Папки"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Област за спуштање"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Област за спуштање"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Поврзување на уредот"
         }
     ]
 }

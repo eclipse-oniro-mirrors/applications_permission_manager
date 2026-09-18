@@ -14,8 +14,8 @@
  */
 
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
-import { Permission, PermissionGroup } from '../model/definition';
-import { PermissionGroupConfig } from '../model/typedef';
+import { Permission, PermissionGroup, PermissionOption } from '../model/definition';
+import { PermissionGroupConfig, PermissionWithOption } from '../model/typedef';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.GET_INSTALLED_BUNDLE_LIST,
@@ -32,6 +32,16 @@ export class GetInstalledBundleListStrategy extends BasePermissionStrategy {
   }
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
-    return $r('app.string.group_label_appList', appName);
+    return $r('app.string.group_label_app_list', appName);
   }
+
+  public override async preProcessingPermission(
+    permission: Permission, tokenId: number
+  ): Promise<PermissionWithOption[]> {
+    if (!groupConfig.permissions.includes(permission)) {
+      return [];
+    }
+    return [{ permission, permissionOption: PermissionOption.SKIP }];
+  }
+
 }

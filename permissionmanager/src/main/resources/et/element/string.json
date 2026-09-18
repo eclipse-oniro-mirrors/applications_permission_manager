@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Privaatne juurdepääs Galeriile",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel teie asukohale ligi vaid lühiajaliselt.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel üksuste salvestamiseks Galeriile ligi vaid lühiajaliselt.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Privaatne juurdepääs asukohale",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Rakendus %1$s%2$s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel teie asukohale ligi vaid lühiajaliselt.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Rakendus %1$s%2$s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel üksuste salvestamiseks Galeriile ligi vaid lühiajaliselt.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Armatuurlaud"
+        },
+        {
+            "name":"permission",
+            "value":"Õigused"
+        },
+        {
+            "name":"allowed",
+            "value":"Lubatud"
+        },
+        {
+            "name":"banned",
+            "value":"Keelatud"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Lubatud lugeda ja muuta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Kirjutuskaitstud",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Lubatud ainult muuta",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Kõik failid",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Küsi iga kord",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Kaamera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Kontaktid"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalender"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Kehaline aktiivsus"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Kehaandurid"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Tegevuse jälgimine"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Rakenduseloend"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Kaustad"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Kukutustsoon"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Kukutustsoon"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Seadme ühendus"
         }
     ]
 }

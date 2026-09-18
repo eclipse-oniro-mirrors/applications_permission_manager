@@ -7,6 +7,7 @@
     "pages/application-tertiary",
     "pages/authority-tertiary-groups",
     "pages/permission-access-record",
+    "pages/manual-setting-confirm",
     "pages/dialogPlus",
     "pages/globalSwitch",
     "pages/securityDialog",

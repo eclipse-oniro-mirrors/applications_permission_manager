@@ -1,28 +1,28 @@
 {
     "string":[
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %1$s%2$s អាចចូលប្រើទីតាំងរបស់អ្នកតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"ការចូលប្រើវិចិត្រសាលលក្ខណៈឯកជន",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %1$s%2$s អាចចូលប្រើវិចិត្រសាលរបស់អ្នកដើម្បីរក្សាទុកធាតុនានាតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %s អាចចូលប្រើទីតាំងរបស់អ្នកតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
             "attr":{
                 "priority":"LT"
@@ -36,14 +36,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %s អាចចូលប្រើវិចិត្រសាលរបស់អ្នកដើម្បីរក្សាទុកធាតុនានាតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"ការចូលប្រើទីតាំងលក្ខណៈឯកជន",
             "attr":{
                 "priority":"LT"
@@ -55,6 +55,117 @@
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"ផ្ទាំងគ្រប់គ្រង"
+        },
+        {
+            "name":"permission",
+            "value":"ការអនុញ្ញាត"
+        },
+        {
+            "name":"allowed",
+            "value":"បានអនុញ្ញាត"
+        },
+        {
+            "name":"banned",
+            "value":"បានបដិសេធ"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"អាន និងកែសម្រួល",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"បានតែអាន",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"បានតែកែសម្រួល",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"ឯកសារទាំងអស់",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"សួររាល់ដង",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"មីក្រូហ្វូន"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"កាមេរ៉ា"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"មីក្រូហ្វូន"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"ទំនាក់ទំនង"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"ប្រតិទិន"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"សកម្មភាពរាងកាយ"
+        },
+        {
+            "name":"group_name_health",
+            "value":"ឧបករណ៍ចាប់សញ្ញាណរាងកាយ"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"ការតាមដានសកម្មភាព"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"បញ្ជីកម្មវិធី"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"ប៊្លូធូស"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"ថតដាក់ឯកសារ"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"ការតភ្ជាប់ឧបករណ៍"
         }
     ]
 }

@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Privat åtkomst till Galleri",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"För att skydda din sekretess kan %s bara kortvarigt komma åt din plats när du trycker på Tillåt.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"För att skydda din sekretess kan %s bara kortvarigt komma åt ditt Galleri för att spara objekt när du trycker på Tillåt.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Privat åtkomst till plats",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"För att skydda din sekretess kan %1$s%2$s bara kortvarigt komma åt din plats när du trycker på Tillåt.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"För att skydda din sekretess kan %1$s%2$s bara kortvarigt komma åt ditt Galleri för att spara objekt när du trycker på Tillåt.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Instrumentpanelen"
+        },
+        {
+            "name":"permission",
+            "value":"Behörigheter"
+        },
+        {
+            "name":"allowed",
+            "value":"Tillåten"
+        },
+        {
+            "name":"banned",
+            "value":"Avvisad"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Läsa och ändra",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Endast läsa",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Endast ändra",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Alla filer",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Fråga varje gång",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Kamera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofon"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Kontakter"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalender"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Fysisk aktivitet"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Kropps​sensorer"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Aktivitets​spårning"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Applista"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Mappar"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzon"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzon"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Enhets​anslutning"
         }
     ]
 }

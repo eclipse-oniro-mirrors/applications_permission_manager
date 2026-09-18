@@ -22,7 +22,7 @@ import display from '@ohos.display';
 import { BusinessError } from '@ohos.base';
 import Constants from '../common/utils/constant';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
-import deviceInfo from '@ohos.deviceInfo';
+import { DeviceUtil } from '../common/utils/deviceUtil';
 
 let terminating: boolean = false;
 let state: boolean = false;
@@ -33,7 +33,7 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
 
   onCreate(launchParam: AbilityConstant.LaunchParam): void {
     Log.info('PermissionStateSheetAbility on create');
-    if (deviceInfo.deviceType === 'wearable') {
+    if (DeviceUtil.isWearable()) {
       this.context.terminateSelf();
       Log.info('PermissionStateSheetAbility terminateSelf');
       return;
@@ -68,7 +68,7 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
           this.context.terminateSelf();
           return false;
         }
-        return this.loadContentAndSetColor(storage);
+        return this.loadContentAndSetColor(storage, 'PermissionSheet/PermissionStateSheetDialog');
       })
       .then((result: boolean) => {
         Log.info('PermissionStateSheetAbility load content result: ' + result);
@@ -126,24 +126,26 @@ export default class PermissionStateSheetAbility extends UIExtensionAbility {
     this.subWindowForHost = null;
   }
 
-  async loadContentAndSetColor(storage: LocalStorage): Promise<boolean> {
+  async loadContentAndSetColor(storage: LocalStorage, pagePath: string): Promise<boolean> {
     if (!this.subWindowForHost) {
       Log.error('Failed to load the content because subwindow is null');
       return false;
     }
     try {
-      await this.subWindowForHost.loadContent('PermissionSheet/PermissionStateSheetDialog', storage);
+      await this.subWindowForHost.loadContent(pagePath, storage);
       Log.info('Succeeded in loading the content');
       try {
-        this.subWindowForHost.setWindowBackgroundColor('#00000000');
+        this.subWindowForHost?.setWindowBackgroundColor('#00000000');
       } catch (error) {
         Log.error(`setWindowBackgroundColor failed, error code ${JSON.stringify(error)}`);
       }
-      return true;
-    } catch (error) {
-      Log.error('Failed to load the content. Cause:' + JSON.stringify(error));
+    } catch (err) {
+      // The load failure must propagate to the caller, otherwise a blank modal window
+      // is shown and can never be closed.
+      Log.error('Failed to load the content. Cause:' + JSON.stringify(err));
       return false;
     }
+    return true;
   }
 
   async createSubWindow(session: UIExtensionContentSession, storage: LocalStorage): Promise<void> {

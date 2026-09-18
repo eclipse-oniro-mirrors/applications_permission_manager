@@ -17,6 +17,7 @@ import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
 import { Permission, PermissionGroup, ButtonStatus, PermissionOption } from '../model/definition';
 import { CallerAppInfo, PermissionGroupConfig } from '../model/typedef';
 import Constants from '../utils/constant';
+import { DeviceUtil } from '../utils/deviceUtil';
 
 const fuzzyMarks = [Constants.LOCATION_FUZZY, Constants.LOCATION_BOTH_FUZZY, Constants.LOCATION_BOTH_PRECISE];
 const preciseMarks = [Constants.LOCATION_UPGRADE, Constants.LOCATION_BOTH_PRECISE];
@@ -45,14 +46,19 @@ export class LocationStrategy extends BasePermissionStrategy {
   }
 
   public override getButtonList(): ButtonStatus[] {
-    return [ButtonStatus.ALLOW_ONLY_DURING_USE, ButtonStatus.ALLOW_THIS_TIME, ButtonStatus.CANCEL];
+    if (DeviceUtil.isPC()) {
+      return [ButtonStatus.ALWAYS_ALLOW, ButtonStatus.THIS_TIME_ONLY, ButtonStatus.DENY];
+    }
+    return [ButtonStatus.ALLOW_ONLY_DURING_USE, ButtonStatus.THIS_TIME_ONLY, ButtonStatus.DENY];
   }
 
   public override grantHandle(
     permission: Permission, callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
   ): PermissionOption {
     let opt: PermissionOption = PermissionOption.SKIP;
-    if (permission === Permission.APPROXIMATELY_LOCATION) {
+    if (permission === Permission.LOCATION_IN_BACKGROUND) {
+      opt = this.handleBackgroundLocationGrant(buttonStatus);
+    } else if (permission === Permission.APPROXIMATELY_LOCATION) {
       opt = this.handleFuzzyLocationGrant(callerAppInfo, locationFlag, buttonStatus);
     } else if (permission === Permission.LOCATION) {
       opt = this.handlePreciseLocationGrant(callerAppInfo, locationFlag, buttonStatus);
@@ -75,11 +81,22 @@ export class LocationStrategy extends BasePermissionStrategy {
   private handleFuzzyLocationGrant(
     callerAppInfo: CallerAppInfo, locationFlag: number, buttonStatus: ButtonStatus
   ): PermissionOption {
-    if (fuzzyMarks.includes(locationFlag)) {
+    if (this.isPcAlwaysAllow(buttonStatus) || fuzzyMarks.includes(locationFlag)) {
       return PermissionOption.GRANT;
     } else {
       return PermissionOption.SKIP;
     }
+  }
+
+  private handleBackgroundLocationGrant(buttonStatus: ButtonStatus): PermissionOption {
+    if (this.isPcAlwaysAllow(buttonStatus)) {
+      return PermissionOption.GRANT;
+    }
+    return PermissionOption.SKIP;
+  }
+
+  private isPcAlwaysAllow(buttonStatus: ButtonStatus): boolean {
+    return DeviceUtil.isPC() && buttonStatus === ButtonStatus.ALWAYS_ALLOW;
   }
 
   private handlePreciseLocationGrant(

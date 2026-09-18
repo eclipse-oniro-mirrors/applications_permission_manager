@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"갤러리에 비공개 액세스",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"개인 정보 보호를 위해 %s 앱은 허용을 탭할 때만 위치에 잠시 액세스할 수 있습니다.",
             "attr":{
                 "priority":"translate"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"개인 정보 보호를 위해 %s 앱은 허용을 탭할 때만 항목을 저장하기 위해 갤러리에 잠시 액세스할 수 있습니다.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"위치에 제한된 액세스",
             "attr":{
                 "priority":"LT"
@@ -43,14 +43,14 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"개인 정보 보호를 위해 %1$s 앱(%2$s)은 허용을 탭할 때만 위치에 잠시 액세스할 수 있습니다.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"개인 정보 보호를 위해 %1$s 앱(%2$s)은 허용을 탭할 때만 항목을 저장하기 위해 갤러리에 잠시 액세스할 수 있습니다.",
             "attr":{
                 "priority":"LT"
@@ -141,7 +141,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"%s의 다른 앱에 대한 활동 추적을 허용하시겠습니까?",
             "attr":{
                 "priority":"translate"
@@ -190,21 +190,21 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"거부되면 이 앱은 클립보드에 액세스할 수 없습니다.",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"%s의 화면 캡처를 허용하시겠습니까?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"%s의 NearLink 사용을 허용하시겠습니까?",
             "attr":{
                 "priority":"translate"
@@ -267,14 +267,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"%s에서 설치된 앱 목록을 읽도록 허용하시겠습니까?",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"이번만 허용",
             "attr":{
                 "priority":"translate"
@@ -302,11 +302,198 @@
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"콘텐츠가 %s에서 복사되었습니다. 거부를 선택하면 이 앱은 클립보드에 액세스할 수 없습니다.",
             "attr":{
                 "priority":"translate"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"대시보드"
+        },
+        {
+            "name":"permission_manager",
+            "value":"권한 관리자"
+        },
+        {
+            "name":"permission",
+            "value":"권한"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"앱 검색"
+        },
+        {
+            "name":"allowed",
+            "value":"허용됨"
+        },
+        {
+            "name":"banned",
+            "value":"거부됨"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"읽기 및 수정",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"읽기 전용",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"수정 전용",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"모든 파일",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"실행"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"설정에서 허용"
+        },
+        {
+            "name":"close",
+            "value":"종료"
+        },
+        {
+            "name":"microphone",
+            "value":"마이크"
+        },
+        {
+            "name":"close_microphone",
+            "value":"마이크를 종료하시겠습니까?"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"마이크 종료됨"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"카메라"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"마이크"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"주소록"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"캘린더"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"신체 활동"
+        },
+        {
+            "name":"group_name_health",
+            "value":"신체 센서"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"활동 추적"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"앱 목록"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"블루투스"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"클립보드"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"폴더"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"파일 및 폴더"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"드롭존"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"입력 지원"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"화면 공유"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"장치 제어"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"드롭존"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"입력 지원"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"화면 공유"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"장치 제어"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"장치 연결"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"%s에서 입력 지원을 제공하도록 허용하시겠습니까?",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download_folder",
+            "value":"다운로드 폴더"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"홈 화면 폴더"
+        },
+        {
+            "name":"document_folder",
+            "value":"문서 폴더"
+        },
+        {
+            "name":"confirm",
+            "value":"확인"
         }
     ]
 }

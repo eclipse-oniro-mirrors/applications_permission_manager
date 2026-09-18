@@ -16,7 +16,6 @@
 import { backBar } from '../common/components/backBar';
 import { alphabetIndexerComponent } from '../common/components/alphabeticalIndex';
 import { textInput } from '../common/components/search';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import display from '@ohos.display';
 import common from '@ohos.app.ability.common';
 import { groups, globalGroup, showSubPermissionsGroup } from '../common/model/permissionGroup';
@@ -25,13 +24,24 @@ import {
   indexValue,
   addLocalTag,
   sortByName,
-  supportPermission,
   getPermissionGroup,
   getGroupIdByPermission,
   getPermissionGroupByName
 } from '../common/utils/utils';
+import {
+  supportPermission,
+  buildAppInfoFromBundleInfo,
+  collectSupportedUserPermissions,
+  getRequestedPermissions
+} from '../common/utils/bundlePermissionCollector';
+import {
+  isDocumentsOrFolderPermission,
+  shouldShowFolderPermissionSection
+} from '../common/utils/documentsPermissionUtils';
+import { resolveAppIcon, resolveAppLabel } from '../common/utils/resourceDisplayUtils';
 import { AppInfo, PermissionApplications, GroupPermission, GroupInfo } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
+import { PermissionUtils } from '../common/utils/permissionUtils';
 import { Permission, PermissionGroup } from '../common/model/definition';
 import { GlobalDialogModel } from '../GlobalExtAbility/GlobalDialogModel';
 import Constants from '../common/utils/constant';
@@ -47,6 +57,15 @@ import bundleManager from '@ohos.bundle.bundleManager';
 @Entry({ useSharedStorage: true })
 @Component
 struct authorityManagementPage {
+  /**
+   * Merge document and folder permissions into the same display group on the permission
+   * management page.
+   */
+  private getDisplayGroup(group: PermissionGroup): PermissionGroup {
+    return shouldShowFolderPermissionSection() && group === PermissionGroup.FOLDER ?
+      PermissionGroup.DOCUMENTS : group;
+  }
+
   @Builder ListItemLayout(item: GroupPermission) {
     ListItem() {
       Row() {
@@ -73,17 +92,27 @@ struct authorityManagementPage {
             .height(Constants.MANAGEMENT_ROW_HEIGHT)
           }
         }.onClick(() => {
-          if (item.group === 'OTHER' || showSubPermissionsGroup.indexOf(item.group) !== -1) {
+          if (showSubPermissionsGroup.indexOf(item.group) !== -1) {
             this.getUIContext().getRouter().pushUrl({
               url: 'pages/authority-secondary',
               params: { list: this.allPermissionApplications, backTitle: item.groupName, group: item.group }
             })
           } else {
             let dataList = this.allPermissionApplications.filter((ele) => {
+              if (item.group === PermissionGroup.DOCUMENTS) {
+                return isDocumentsOrFolderPermission(ele.permission);
+              }
               return ele.groupName === item.group;
             })
             GlobalContext.store('currentPermissionGroup', item.group);
-            if (globalGroup.indexOf(item.group) == -1) {
+            if (item.group === PermissionGroup.ADS) {
+              PermissionUtils.isPermissionQueryEnabled(Permission.APP_TRACKING_CONSENT).then((enabled: boolean) => {
+                this.getUIContext().getRouter().pushUrl({
+                  url: 'pages/authority-tertiary-groups',
+                  params: { list: dataList, backTitle: item.groupName, adsToggleOn: enabled }
+                })
+              })
+            } else if (globalGroup.indexOf(item.group) == -1) {
               this.getUIContext().getRouter().pushUrl({
                 url: 'pages/authority-tertiary-groups',
                 params: { list: dataList, backTitle: item.groupName }
@@ -207,25 +236,46 @@ struct authorityManagementPage {
    * Get permission group information
    */
   getAllGroupPermission() {
+    let supportedPermissions: Permission[] = supportPermission();
     groups.forEach((item) => {
-      if (item.isShow) {
-        this.allGroups.push(item.name);
+      // Only show groups supported on the current device.
+      if (item.isShow && this.hasSupportedPermission(item.permissions, supportedPermissions)) {
+        let displayGroup = this.getDisplayGroup(item.name);
+        if (this.allGroups.indexOf(displayGroup) === -1) {
+          this.allGroups.push(displayGroup);
+        }
       }
     })
     this.allUserPermissions.forEach((userPermission: Permission) => {
       let groupId = getGroupIdByPermission(userPermission);
-      if (this.allGroups.indexOf(groups[groupId].name) == -1) {
-        this.allGroups.push(groups[groupId].name);
+      let displayGroup = this.getDisplayGroup(groups[groupId].name);
+      if (this.allGroups.indexOf(displayGroup) == -1) {
+        this.allGroups.push(displayGroup);
       }
-    })
-    // Permission layout
+    })    // Permission layout
     for (let i = 0; i < this.allGroups.length; i++) {
       let group = getPermissionGroupByName(this.allGroups[i]);
+      let displayName: ResourceStr = group.groupName;
+      if (this.allGroups[i] === PermissionGroup.DOCUMENTS && shouldShowFolderPermissionSection()) {
+        displayName = $r('app.string.group_name_documents_and_folder');
+      }
       let gp: GroupPermission = new GroupPermission(
-        this.allGroups[i], group.permissions, group.groupName, group.icon, group.isShow
+        this.allGroups[i], group.permissions, displayName, group.icon, group.isShow
       );
       this.allGroupPermission.push(gp);
     }
+  }
+
+  /**
+   * Check whether any permission of the group is supported on the current device.
+   */
+  private hasSupportedPermission(permissions: Permission[], supportedPermissions: Permission[]): boolean {
+    for (let permission of permissions) {
+      if (supportedPermissions.indexOf(permission) !== -1) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -234,64 +284,22 @@ struct authorityManagementPage {
    */
   async deduplicationPermissions(info: bundleManager.BundleInfo) {
     Log.info('allBundleInfo start: ' + info.name);
-    let reqPermissions: Permission[] = [];
-    info.reqPermissionDetails.forEach(item => {
-      reqPermissions.push(item.name as Permission);
-    })
-    let reqPermissionsLen = reqPermissions.length;
-    let reqUserPermissions: Permission[] = [];
-    let acManager = abilityAccessCtrl.createAtManager()
-    if (reqPermissionsLen > 0) {
-      for (let j = 0; j < reqPermissions.length; j++) {
-        let permission = reqPermissions[j];
-        if ((permission == Permission.LOCATION) && !reqPermissions.includes(Permission.APPROXIMATELY_LOCATION)) {
-          continue;
-        }
-        try {
-          let flag = await acManager.getPermissionFlags(info.appInfo.accessTokenId, permission);
-          if (flag == Constants.PERMISSION_SYSTEM_FIXED) {
-            continue;
-          }
-        } catch (err) {
-          Log.error('getPermissionFlags error: ' + JSON.stringify(err));
-        }
-        let supportPermissions = supportPermission();
-        if (supportPermissions.indexOf(permission) != -1) {
-          reqUserPermissions.push(permission);
-          if (this.allUserPermissions.indexOf(permission) == -1) {
-            this.allUserPermissions.push(permission);
-          }
-        }
+    let reqPermissions: Permission[] = getRequestedPermissions(info);
+    let reqUserPermissions: Permission[] = await collectSupportedUserPermissions(
+      info.appInfo.accessTokenId,
+      reqPermissions,
+      true
+    );
+    for (const permission of reqUserPermissions) {
+      if (this.allUserPermissions.indexOf(permission) === -1) {
+        this.allUserPermissions.push(permission);
       }
     }
     this.getAllBundleInfo(info, reqUserPermissions);
   }
 
   getAllBundleInfo(info: bundleManager.BundleInfo, reqUserPermissions: Permission[]) {
-    let groupIds: number[] = [];
-    for (let i = 0; i < reqUserPermissions.length; i++) {
-      let groupId = getGroupIdByPermission(reqUserPermissions[i])
-      if (groupIds.indexOf(groupId) == -1) {
-        groupIds.push(groupId);
-      }
-    }
-
-    let ap: AppInfo = new AppInfo(
-      info.name,
-      info.targetVersion,
-      info.appInfo.accessTokenId,
-      '',
-      info.appInfo.iconId,
-      info.appInfo.iconResource,
-      info.appInfo.label,
-      info.appInfo.labelId,
-      info.appInfo.labelResource,
-      reqUserPermissions,
-      groupIds,
-      '',
-      '',
-      ''
-    );
+    let ap: AppInfo = buildAppInfoFromBundleInfo(info, reqUserPermissions);
     Log.info('allBundleInfo.push: ' + info.name);
     this.allBundleInfo.push(ap);
   }
@@ -309,21 +317,7 @@ struct authorityManagementPage {
       ' labelId: ' + info.labelId
     );
 
-    const labelResourceId = info.labelResource?.id ?? 0;
-    if (labelResourceId === 0 && (info.labelId === undefined || info.labelId === 0)) {
-      addLocalTag(info);
-      return;
-    }
-    try {
-      if (labelResourceId !== 0) {
-        info.label = await this.context.resourceManager.getStringValue(info.labelResource);
-      } else {
-        let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
-        info.label = await resourceManager.getStringValue(info.labelId);
-      }
-    } catch (error) {
-      Log.error('getStringValue promise error is ' + error);
-    }
+    info.label = await resolveAppLabel(this.context, info, info.label);
     addLocalTag(info);
   }
 
@@ -339,33 +333,14 @@ struct authorityManagementPage {
       ' iconId: ' + info.iconId
     );
 
-    const iconResourceId = info.iconResource?.id ?? 0;
-    if (iconResourceId === 0 && (info.iconId === undefined || info.iconId === 0)) {
-      info.icon = $r('app.media.icon');
-      return;
-    }
-    try {
-      if (iconResourceId !== 0) {
-        let iconDescriptor = this.context.resourceManager.getDrawableDescriptor(info.iconResource);
-        info.icon = iconDescriptor?.getPixelMap();
-      } else {
-        let resourceManager = this.context.createBundleContext(info.bundleName).resourceManager;
-        let iconDescriptor = resourceManager.getDrawableDescriptor(info.iconId);
-        info.icon = iconDescriptor?.getPixelMap();
-      }
-    } catch (error) {
-      Log.error(`getDrawableDescriptor failed, error code: ${error.code}, message: ${error.message}.`);
-    }
-    if (!info.icon) {
-      info.icon = $r('app.media.icon');
-    }
+    info.icon = resolveAppIcon(this.context, info);
   }
 
   /**
    * Lifecycle function, executed when the page is initialized
    */
   aboutToAppear() {
-      this.statusBarHeight = AppStorage.get('STATUS_BAR_HEIGHT') as number
+    this.statusBarHeight = (AppStorage.get('STATUS_BAR_HEIGHT') as number) ?? 0
     this.getAllBundlePermissions();
     try {
       let dis = display.getDefaultDisplaySync();
@@ -382,15 +357,12 @@ struct authorityManagementPage {
     let fixedGroup: GroupPermission[] = [];
     let extraGroup: GroupPermission[] = [];
     let changeGroup: GroupPermission[] = [];
-    let otherGroup: GroupPermission[] = [];
 
     allGroup.forEach(group => {
       if (fixedName.indexOf(group.group) !== -1) {
         fixedGroup.push(group);
       } else if (extraName.includes(group.group)) {
         extraGroup.push(group);
-      } else if (group.group == 'OTHER') {
-        otherGroup.push(group);
       } else {
         changeGroup.push(group);
       }
@@ -400,8 +372,6 @@ struct authorityManagementPage {
       return fixedGroup;
     } else if (order == Constants.CHANGE_GROUP) {
       return changeGroup;
-    } else if (order == Constants.OTHER_GROUP) {
-      return otherGroup;
     } else if (order == Constants.EXTRA_GROUP) {
       return extraGroup;
     }
@@ -492,24 +462,6 @@ struct authorityManagementPage {
                                         })
                                       }
                                     }
-
-                                    ListItem() {
-                                      List() {
-                                        ForEach(
-                                          this.getPermissionGroup(this.allGroupPermission, Constants.OTHER_GROUP),
-                                          (item: GroupPermission) => { this.ListItemLayout(item) },
-                                          (item: GroupPermission) => JSON.stringify(item)
-                                        )
-                                      }.backgroundColor($r('sys.color.comp_background_list_card'))
-                                      .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
-                                      .padding(Constants.LIST_PADDING_TOP)
-                                      .divider({
-                                        strokeWidth: Constants.DIVIDER,
-                                        color: $r('sys.color.comp_divider'),
-                                        startMargin: Constants.DIVIDER_MARGIN_RIGHT_PERMISSION,
-                                        endMargin: Constants.DEFAULT_MARGIN_END
-                                      })
-                                    }.margin({ bottom: Constants.AUTHORITY_ROW_MARGIN_BOTTOM })
                                   }.height(Constants.FULL_HEIGHT)
                                   .borderRadius($r('sys.float.ohos_id_corner_radius_card'))
                                   .clip(true)

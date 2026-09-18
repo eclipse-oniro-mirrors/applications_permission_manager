@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"པར་རིས་དང་བརྙན་ཟློས་བདེ་འཇགས་ངང་ཉར་ཚགས་བྱེད་པ།",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"༼%s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་རྡེབ་སྐབས་ཁོ་ནར་གནས་ཡུལ་ལ་ལྟ་སྤྱོད་བྱ་ཆོག",
             "attr":{
                 "priority":"translate"
@@ -22,28 +22,28 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"༼%s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་རྡེབ་སྐབས་ཁོ་ནར་པར་མཛོད་དུ་འདྲ་པར་དང་བརྙན་ཟློས་ཉར་ཚགས་ཁོ་ན་བྱ་ཆོག",
             "attr":{
                 "priority":"translate"
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"༼%1$s%2$s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་འདིར་རྡེབ་སྐབས་ཁོ་ནར་གནས་ཡུལ་ལ་ལྟ་སྤྱོད་བྱ་ཆོག",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"༼%1$s%2$s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་འདིར་རྡེབ་སྐབས་ཁོ་ནར་པར་མཛོད་དུ་འདྲ་པར་དང་བརྙན་ཟློས་ཉར་ཚགས་ཁོ་ན་བྱ་ཆོག",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"གནས་ཡུལ་ལ་བདེ་འཇགས་ངང་ལྟ་སྤྱོད།",
             "attr":{
                 "priority":"LT"
@@ -79,7 +79,7 @@
         },
         {
             "name":"always_allow",
-            "value":"ནམ་ཡང་ཆོག་པ།",
+            "value":"ནམ་ཡང་ཆོག",
             "attr":{
                 "priority":"LT"
             }
@@ -92,7 +92,7 @@
             }
         },
         {
-            "name":"group_label_ADS",
+            "name":"group_label_ads",
             "value":"༼%s༽ཡིས་བརྡ་ཁྱབ་རྗེས་འདེད་ལ་ལྟ་སྤྱོད་བྱ་ཆོག་པར་བྱེད་དམ།",
             "attr":{
                 "priority":"translate"
@@ -100,7 +100,7 @@
         },
         {
             "name":"ban",
-            "value":"མི་ཆོག",
+            "value":"བཀག་འགོག",
             "attr":{
                 "priority":"LT"
             }
@@ -120,7 +120,7 @@
             }
         },
         {
-            "name":"pasteBoard_desc",
+            "name":"paste_board_desc",
             "value":"བཀག་འགོག་བྱས་རྗེས་ཉེར་སྤྱོད་དེས་དྲས་སྦྱར་པང་ལ་ལྟ་སྤྱོད་བྱ་མི་ཆོག",
             "attr":{
                 "priority":"LT"
@@ -149,7 +149,7 @@
         },
         {
             "name":"per_inquiry",
-            "value":"ཐེངས་རེར་བློ་འདྲི་བ།",
+            "value":"ཐེངས་རེ་རེར་འདྲི་རྩད་བྱེད།",
             "attr":{
                 "priority":"LT"
             }
@@ -169,14 +169,14 @@
             }
         },
         {
-            "name":"group_label_appList",
+            "name":"group_label_app_list",
             "value":"༼%s༽ཡིས་སྒྲིག་འཇུག་བྱས་ཟིན་པའི་ཉེར་སྤྱོད་རེའུ་མིག་ཀློག་ལེན་བྱ་ཆོག་པར་བྱེད་དམ།",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"This_time_only",
+            "name":"this_time_only",
             "value":"ཐེངས་འདི་ཁ་ོནར་ཆོག་པ།",
             "attr":{
                 "priority":"LT"
@@ -253,7 +253,7 @@
             }
         },
         {
-            "name":"group_label_nearLink",
+            "name":"group_label_near_link",
             "value":"༼%s༽ཡིས་སྐར་ཆེམ་ལ་ལྟ་སྤྱོད་བྱ་ཆོག་པར་བྱེད་ཀྱི་ཡིན་ནམ།",
             "attr":{
                 "priority":"LT"
@@ -295,18 +295,132 @@
             }
         },
         {
-            "name":"group_label_screenCapture",
+            "name":"group_label_screen_capture",
             "value":"༼%s༽ཡིས་ཁྱེད་ཀྱི་བརྙན་ཡོལ་གཅོད་ལེན་བྱ་ཆོག་པར་བྱེད་དམ།",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"pasteBoard_app",
+            "name":"paste_board_app",
             "value":"ནང་དོན་༼%s༽ལས་འདྲ་བཤུས་བྱས། བཀག་རྗེས་ཉེར་སྤྱོད་དེས་དྲས་སྦྱར་པང་ལ་ལྟ་སྤྱོད་བྱ་མི་ཆོག",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_manager",
+            "value":"དབང་ཚད་དོ་དམ།"
+        },
+        {
+            "name":"application",
+            "value":"ཉེར་སྤྱོད་བྱ་རིམ།"
+        },
+        {
+            "name":"text_input_placeholder",
+            "value":"ཉེར་སྤྱོད་བཤེར་འཚོལ།"
+        },
+        {
+            "name":"media_only",
+            "value":"སྨྱན་གཟུགས་ཁོ་ན།",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"open",
+            "value":"ཁ་འབྱེད།"
+        },
+        {
+            "name":"go_to_settings",
+            "value":"སྒྲིག་འགོད་བྱེད་དུ་འགྲོ།"
+        },
+        {
+            "name":"close",
+            "value":"ཁ་རྒྱག"
+        },
+        {
+            "name":"close_microphone",
+            "value":"སྐད་སྦུག་ཁ་རྒྱག་པ།"
+        },
+        {
+            "name":"global_title_microphone",
+            "value":"སྐད་སྦུག་ཁ་ཕྱེ་མེད།"
+        },
+        {
+            "name":"request_association_toggle",
+            "value":"ཉེར་སྤྱོད་ཀྱིས་འབྲེལ་འཛུགས་རེ་ཞུ་བྱ་དགོས་པ།"
+        },
+        {
+            "name":"group_name_pasteboard",
+            "value":"དྲས་སྦྱར་པང་།"
+        },
+        {
+            "name":"group_name_documents_and_folder",
+            "value":"ཡིག་ཆ་དང་ཡིག་ཁུག"
+        },
+        {
+            "name":"group_name_screen_capture",
+            "value":"ཡོལ་པར་ལེན་པ།"
+        },
+        {
+            "name":"group_name_hook_input_event",
+            "value":"མཐེབ་གཞོང་ནང་འཇུག་གི་རམ་འདེགས།"
+        },
+        {
+            "name":"group_name_screen_share",
+            "value":"བརྙན་ཡོལ་མཉམ་སྤྱོད།"
+        },
+        {
+            "name":"group_name_control_device",
+            "value":"རམ་འདེགས་སྒྲིག་བཀོལ།"
+        },
+        {
+            "name":"permission_label_hook_input_event",
+            "value":"མཐེབ་གཞོང་ནང་འཇུག་གི་རམ་འདེགས།"
+        },
+        {
+            "name":"permission_label_screen_share",
+            "value":"བརྙན་ཡོལ་མཉམ་སྤྱོད།"
+        },
+        {
+            "name":"permission_label_control_device",
+            "value":"རམ་འདེགས་སྒྲིག་བཀོལ།"
+        },
+        {
+            "name":"group_label_hook_input_event",
+            "value":"༼%s༽རམ་འདེགས་མཐེབ་གཞོང་གིས་ནང་འཇུག་བྱ་ཆོག་གམ།",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"download",
+            "value":"ཕབ་ལེན།"
+        },
+        {
+            "name":"desktop",
+            "value":"ཅོག་ངོས།"
+        },
+        {
+            "name":"document",
+            "value":"ཡིག་ཚགས།"
+        },
+        {
+            "name":"download_folder",
+            "value":"ཕབ་ལེན་བྱས་པའི་ཡིག་ཁུག"
+        },
+        {
+            "name":"desktop_folder",
+            "value":"ཅོག་ངོས་ཀྱི་ཡིག་ཁུག"
+        },
+        {
+            "name":"document_folder",
+            "value":"ཡིག་ཚགས་ཀྱི་ཡིག་ཁུག"
+        },
+        {
+            "name":"confirm",
+            "value":"གཏན་འཁེལ།"
         }
     ]
 }

@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Pribadong access sa Gallery",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Para protektahan ang privacy mo, maa-access lang ni %s ang lokasyon mo kapag i-tap mo ang Payagan.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Para protektahan ang privacy mo, maa-access lang ni %s ang Gallery mo kapag i-tap mo ang Payagan.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Pribadong access sa lokasyon",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Para protektahan ang privacy mo, panandaliang maa-access lang ng %1$s%2$s ang lokasyon mo kapag na-tap mo ang Payagan.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Para protektahan ang privacy mo, panandaliang maa-access lang ng %1$s%2$s ang Gallery mo para mag-save ng mga item kapag na-tap mo ang Payagan.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Dashboard"
+        },
+        {
+            "name":"permission",
+            "value":"Mga Pahintulot"
+        },
+        {
+            "name":"allowed",
+            "value":"Pinapayagan"
+        },
+        {
+            "name":"banned",
+            "value":"Tinanggihan"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Basahin at baguhin",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Basahin lang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Baguhin lang",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Lahat ng file",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Tanungin sa bawat pagkakataon",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikropono"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Camera"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikropono"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Mga Contact"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalen​daryo"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Pisikal na aktibidad"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Mga sensor ng katawan"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Pag-track ng gawain"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Listahan ng app"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Mga Folder"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Koneksyon ng device"
         }
     ]
 }

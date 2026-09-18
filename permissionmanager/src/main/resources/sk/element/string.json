@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Súkromný prístup ku Galérii",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"Aby sa chránilo vaše súkromie, aplikácia %s môže k vašej polohe pristupovať len krátky čas po ťuknutí na možnosť Povoliť.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"Aby sa chránilo vaše súkromie, aplikácia %s môže k vašej Galérii pristupovať len krátky čas po ťuknutí na možnosť Povoliť, aby uložila položky.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Súkromný prístup k polohe",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"Aby sa chránilo vaše súkromie, aplikácia %1$s%2$s môže k vašej polohe pristupovať len krátky čas po ťuknutí na možnosť Povoliť.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"Aby sa chránilo vaše súkromie, aplikácia %1$s%2$s môže k vašej Galérii pristupovať len krátky čas po ťuknutí na možnosť Povoliť, aby uložila položky.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Ovládací panel"
+        },
+        {
+            "name":"permission",
+            "value":"Povolenia"
+        },
+        {
+            "name":"allowed",
+            "value":"Povolené"
+        },
+        {
+            "name":"banned",
+            "value":"Zakázané"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Čítanie aj úprava",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Len čítanie",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Len úprava",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Všetky súbory",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Vždy sa pýtať",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Mikrofón"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Fotoaparát"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Mikrofón"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Kontakty"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Kalendár"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Fyzická aktivita"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Telesné snímače"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Sledovanie aktivity"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Zoznam aplikácií"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Priečinky"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Pripojenie k zariadeniu"
         }
     ]
 }

@@ -14,9 +14,12 @@
  */
 
 import { BasePermissionStrategy } from '../base/BasePermissionStrategy';
-import { Permission, PermissionGroup, ButtonStatus } from '../model/definition';
-import { CallerAppInfo, PermissionGroupConfig } from '../model/typedef';
+import { Permission, PermissionGroup, ButtonStatus, PermissionOption } from '../model/definition';
+import { CallerAppInfo, PermissionGroupConfig, PermissionWithOption } from '../model/typedef';
 import common from '@ohos.app.ability.common';
+import Constants from '../utils/constant';
+import { DeviceUtil } from '../utils/deviceUtil';
+import { PermissionUtils } from '../utils/permissionUtils';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.PASTEBOARD,
@@ -37,7 +40,20 @@ export class PasteboardStrategy extends BasePermissionStrategy {
   }
 
   public override getButtonList(): ButtonStatus[] {
-    return [ButtonStatus.DENY, ButtonStatus.THIS_TIME_ONLY];
+    return [ButtonStatus.THIS_TIME_ONLY, ButtonStatus.ALWAYS_ALLOW, ButtonStatus.DENY];
+  }
+
+  public override async preProcessingPermission(
+    permission: Permission, tokenId: number
+  ): Promise<PermissionWithOption[]> {
+    if (!DeviceUtil.isPC() || !groupConfig.permissions.includes(permission)) {
+      return [];
+    }
+    let result = await PermissionUtils.grantPermissionWithResult(permission, Constants.PERMISSION_FLAG, tokenId);
+    if (result.operationResult !== Constants.RESULT_SUCCESS) {
+      return [];
+    }
+    return [{ permission, permissionOption: PermissionOption.GRANT }];
   }
 
   public override getReasonByPermission(
@@ -48,9 +64,10 @@ export class PasteboardStrategy extends BasePermissionStrategy {
     pasteBoardName: string
   ): ResourceStr {
     if (pasteBoardName) {
-      return $r('app.string.pasteBoard_app', pasteBoardName);
+      return $r('app.string.paste_board_app', pasteBoardName);
     } else {
-      return $r('app.string.pasteBoard_desc');
+      return $r('app.string.paste_board_desc');
     }
   }
+
 }

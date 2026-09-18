@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"دسترسی خصوصی به «گالری»",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"برای حفاظت از حریم خصوصی شما، %s فقط زمانی که روی گزینه «اجازه دادن» ضربه بزنید، به‌مدت کوتاهی می‌تواند به موقعیت مکانی شما دسترسی داشته باشد.",
             "attr":{
                 "priority":"LT"
@@ -16,20 +16,20 @@
         },
         {
             "name":"allow",
-            "value":"اجازه دادن",
+            "value":"مجاز باشد",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"برای حفاظت از حریم خصوصی شما، %s فقط زمانی که روی گزینه «اجازه دادن» ضربه بزنید، به‌مدت کوتاهی می‌تواند به «گالری» شما برای ذخیره کردن موارد دسترسی داشته باشد.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"دسترسی خصوصی به موقعیت مکانی",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"برای حفاظت از حریم خصوصی شما، %1$s%2$s فقط زمانی که روی گزینه «اجازه دادن» ضربه بزنید، به‌مدت کوتاهی می‌تواند به موقعیت مکانی شما دسترسی داشته باشد.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"برای حفاظت از حریم خصوصی شما، %1$s%2$s فقط زمانی که روی گزینه «اجازه دادن» ضربه بزنید، به‌مدت کوتاهی می‌تواند به «گالری» شما برای ذخیره کردن موارد دسترسی داشته باشد.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"داشبورد"
+        },
+        {
+            "name":"permission",
+            "value":"مجوزها"
+        },
+        {
+            "name":"allowed",
+            "value":"مجاز"
+        },
+        {
+            "name":"banned",
+            "value":"غیرمجاز"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"خواندن و اصلاح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"فقط خواندنی",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"فقط اصلاح",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"همۀ فایل‌ها",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"هر بار پرسیده شود",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"میکروفن"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"دوربین"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"میکروفن"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"مخاطبین"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"تقویم"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"فعالیت جسمانی"
+        },
+        {
+            "name":"group_name_health",
+            "value":"حسگرهای بدن"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"ردیابی فعالیت"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"لیست برنامه‌ها"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"بلوتوث"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"پوشه‌ها"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"‏NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"اتصال دستگاه"
         }
     ]
 }

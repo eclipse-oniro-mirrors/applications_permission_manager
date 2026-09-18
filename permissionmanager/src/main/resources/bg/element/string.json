@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"Личен достъп до „Галерия“",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"За защита на поверителността ви %s може само за кратко да получи достъп до местоположението ви, когато докоснете „Позволи“.",
             "attr":{
                 "priority":"LT"
@@ -16,20 +16,20 @@
         },
         {
             "name":"allow",
-            "value":"Позволи",
+            "value":"Разрешаване",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"За защита на поверителността ви %s може само за кратко да получи достъп до вашата „Галерия“ за запис на елементи, когато докоснете „Позволи“.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"Личен достъп до местоположението",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"За защита на поверителността ви %1$s%2$s може само за кратко да получи достъп до местоположението ви, когато докоснете „Позволи“.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"За защита на поверителността ви %1$s%2$s може само за кратко да получи достъп до вашата „Галерия“ за запис на елементи, когато докоснете „Позволи“.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"Табло"
+        },
+        {
+            "name":"permission",
+            "value":"Разрешения"
+        },
+        {
+            "name":"allowed",
+            "value":"Разрешено"
+        },
+        {
+            "name":"banned",
+            "value":"Отказано"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"Четене и променяне",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"Само четене",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"Само променяне",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"Всички файлове",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"Питане всеки път",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"Микрофон"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"Камера"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"Микрофон"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"Контакти"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"Календар"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"Физическа активност"
+        },
+        {
+            "name":"group_name_health",
+            "value":"Сензори за тяло"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"Проследяване активност"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"Списък с приложения"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"Папки"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Зона за пускане"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Зона за пускане"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"Връзка с устройства"
         }
     ]
 }

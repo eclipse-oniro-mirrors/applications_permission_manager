@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,24 +19,23 @@ import { PermissionGroupConfig } from '../model/typedef';
 import { DeviceUtil } from '../utils/deviceUtil';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
-  groupName: PermissionGroup.DOWNLOAD_DIRECTORY,
-  permissions: [Permission.READ_WRITE_DOWNLOAD_DIRECTORY],
-  icon: $r('app.media.ic_public_folder'),
+  groupName: PermissionGroup.CUSTOM_SCREEN_RECORDING,
+  permissions: [Permission.CUSTOM_SCREEN_RECORDING],
+  icon: $r('app.media.screen_share'),
   title: '',
   reason: '',
   buttonList: []
 })
 
-export class DownloadDirectoryStrategy extends BasePermissionStrategy {
+export class ScreenShareStrategy extends BasePermissionStrategy {
   public override getPermissionGroupConfig(): PermissionGroupConfig {
     return groupConfig;
   }
 
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
-    return $r('app.string.group_label_download_folder', appName);
+    return $r('app.string.group_label_screen_share', appName);
   }
-
   public override isSupport(permission: Permission): boolean {
-    return DeviceUtil.isPC() || DeviceUtil.isTablet();
+    return DeviceUtil.isPC();
   }
 }

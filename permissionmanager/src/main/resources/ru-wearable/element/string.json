@@ -1,21 +1,21 @@
 {
     "string":[
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"В целях обеспечения конфиденциаль\u200bности после нажатия кнопки Разрешить приложению %1$s (%2$s) будет предоставлен ограниченный доступ к вашим геоданным.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"В целях обеспечения конфиденциаль\u200bности после нажатия кнопки Разрешить приложению %1$s (%2$s) будет предоставлен ограниченный доступ к Галерее для сохранения данных.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"В целях обеспечения конфиденциаль\u200bности после нажатия кнопки Разрешить приложению %s будет предоставлен ограниченный доступ к Галерее для сохранения данных.",
             "attr":{
                 "priority":"LT"

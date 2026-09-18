@@ -1,14 +1,14 @@
 {
     "string":[
         {
-            "name":"SecurityTitle_mediaFiles",
+            "name":"security_title_media_files",
             "value":"პირადი წვდომა გალერეაზე",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityDescription_location",
+            "name":"security_description_location",
             "value":"თქვენივე კონფიდენციალურობის დასაცავად, %s შეძლებს თქვენს მდებარეობაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
                 "priority":"LT"
@@ -22,14 +22,14 @@
             }
         },
         {
-            "name":"SecurityDescription_mediaFiles",
+            "name":"security_description_media_files",
             "value":"თქვენი კონფიდენციალურობის დასაცავად, %s შეძლებს ელემენტების შესანახად გალერეაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityTitle_location",
+            "name":"security_title_location",
             "value":"პირადი წვდომა მდებარეობაზე",
             "attr":{
                 "priority":"LT"
@@ -43,18 +43,129 @@
             }
         },
         {
-            "name":"SecurityText_location",
+            "name":"security_text_location",
             "value":"თქვენივე კონფიდენციალურობის დასაცავად %1$s%2$s შეძლებს თქვენს მდებარეობაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
                 "priority":"LT"
             }
         },
         {
-            "name":"SecurityText_mediaFiles",
+            "name":"security_text_media_files",
             "value":"თქვენი კონფიდენციალურობის დასაცავად, %1$s%2$s შეძლებს ელემენტების შესანახად გალერეაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
                 "priority":"LT"
             }
+        },
+        {
+            "name":"permission_access_record",
+            "value":"ხელსაწყოთა პანელი"
+        },
+        {
+            "name":"permission",
+            "value":"ნებართვები"
+        },
+        {
+            "name":"allowed",
+            "value":"დაშვებული"
+        },
+        {
+            "name":"banned",
+            "value":"უარყოფილია"
+        },
+        {
+            "name":"read_and_modify",
+            "value":"წაკითხვა და შეცვლა",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"read_only",
+            "value":"მხოლოდ წაკითხვა",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"modify_only",
+            "value":"მხოლოდ შეცვლა",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"all_files",
+            "value":"ყველა ფაილი",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"per_use_query",
+            "value":"შემეკითხოს ყოველ ჯერზე",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"microphone",
+            "value":"მიკროფონი"
+        },
+        {
+            "name":"group_name_camera",
+            "value":"კამერა"
+        },
+        {
+            "name":"group_name_microphone",
+            "value":"მიკროფონი"
+        },
+        {
+            "name":"group_name_contacts",
+            "value":"კონტაქტები"
+        },
+        {
+            "name":"group_name_calendar",
+            "value":"კალენდა​რი"
+        },
+        {
+            "name":"group_name_sport",
+            "value":"ფიზიკური აქტივობა"
+        },
+        {
+            "name":"group_name_health",
+            "value":"სხეულის სენსორები"
+        },
+        {
+            "name":"group_name_ads",
+            "value":"აქტივობაზე თვალის დევნება"
+        },
+        {
+            "name":"group_name_app_list",
+            "value":"აპების სია"
+        },
+        {
+            "name":"group_name_bluetooth",
+            "value":"Bluetooth"
+        },
+        {
+            "name":"group_name_folder",
+            "value":"საქაღალდეები"
+        },
+        {
+            "name":"group_name_near_link",
+            "value":"NearLink"
+        },
+        {
+            "name":"group_name_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"permission_label_float_view",
+            "value":"Dropzone"
+        },
+        {
+            "name":"multi_device_collaboration",
+            "value":"მოწყობილობის კავშირი"
         }
     ]
 }

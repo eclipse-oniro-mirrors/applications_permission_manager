@@ -15,9 +15,9 @@
 
 import extension from '@ohos.app.ability.ServiceExtensionAbility';
 import display from '@ohos.display';
-import deviceInfo from '@ohos.deviceInfo';
 import { Want } from '@kit.AbilityKit';
 import { Log } from '../common/utils/utils';
+import { DeviceUtil } from '../common/utils/deviceUtil';
 import { GrantDialogModel } from './GrantDialogModel';
 import { GlobalContext } from '../common/utils/globalContext';
 
@@ -37,7 +37,7 @@ export default class ServiceExtensionAbility extends extension {
   */
   onRequest(want: Want, startId: number): void {
     Log.info('ServiceExtensionAbility onRequest. start id is ' + startId);
-    if (deviceInfo.deviceType === 'wearable') {
+    if (DeviceUtil.isWearable()) {
       this.context.terminateSelf();
       Log.info('ServiceExtensionAbility terminateSelf');
       return;
