@@ -32,7 +32,30 @@ export class PermissionUtils {
       Log.info(`permissionRequestToggleStatus is ${result}.`);
       return result === abilityAccessCtrl.PermissionRequestToggleStatus.OPEN;
     } catch (error) {
-      Log.error(`getBundleResourceInfo faild, code: ${error.code}, message: ${error.message}.`);
+      Log.error(`getPermissionRequestToggleStatus failed, code: ${error.code}, message: ${error.message}.`);
+      return false;
+    }
+  }
+
+  /**
+   * 设置权限的弹窗开关状态
+   * @param permission 权限
+   * @param enabled true: 应用请求权限时弹框询问; false: 不弹框直接授权
+   * return 设置是否成功
+   */
+  public static async setPermissionQueryEnabled(permission: Permission, enabled: boolean): Promise<boolean> {
+    let atManager = abilityAccessCtrl.createAtManager();
+    let status: abilityAccessCtrl.PermissionRequestToggleStatus =
+      abilityAccessCtrl.PermissionRequestToggleStatus.OPEN;
+    if (!enabled) {
+      status = abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED;
+    }
+    try {
+      await atManager.setPermissionRequestToggleStatus(permission, status);
+      Log.info(`SetPermissionRequestToggleStatus ${permission} to ${status} success.`);
+      return true;
+    } catch (error) {
+      Log.error(`SetPermissionRequestToggleStatus failed, code: ${error.code}, message: ${error.message}.`);
       return false;
     }
   }

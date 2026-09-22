@@ -403,19 +403,22 @@ export class RouterParams1 {
   public group: string
   public globalIsOn: boolean
   public isMuteSupported?: boolean
+  public adsToggleOn?: boolean
 
   constructor(
     list: PermissionApplications[],
     backTitle: ResourceStr,
     group: string,
     globalIsOn: boolean,
-    isMuteSupported?: boolean
+    isMuteSupported?: boolean,
+    adsToggleOn?: boolean
   ) {
     this.list = list
     this.backTitle = backTitle
     this.group = group
     this.globalIsOn = globalIsOn
     this.isMuteSupported = isMuteSupported
+    this.adsToggleOn = adsToggleOn
   }
 }
 

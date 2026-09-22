@@ -311,6 +311,18 @@
             "value":"广告跟踪"
         },
         {
+            "name":"request_association_toggle",
+            "value":"要求应用请求关联"
+        },
+        {
+            "name":"request_association_on",
+            "value":"应用关联已开启。应用需要你的同意才可关联其他应用的活动，提供个性化体验。"
+        },
+        {
+            "name":"request_association_off",
+            "value":"应用关联已关闭。应用无需你的同意即可关联其他应用的活动，提供个性化体验。"
+        },
+        {
             "name":"groupName_appList",
             "value":"读取已安装应用列表"
         },
