@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Siekiant apsaugoti jūsų privatumą, %s gali tik trumpam pasiekti jūsų buvimo vietą, kai bakstelėjate „Leisti“.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Siekiant apsaugoti jūsų privatumą, %s gali tik trumpam pasiekti jūsų Galeriją, kad įrašytų elementus, kai bakstelėjate „Leisti“.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Prietaisų skydelis"
+            "value":"Prietaisų skydelis",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Leidimai"
+            "value":"Leidimai",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Leidžiama"
+            "value":"Leidžiama",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Nesuteikta"
+            "value":"Nesuteikta",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Skaityti ir keisti",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Tik skaityti",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Tik keisti",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Visi failai",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Kaskart klausti",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Mikrofonas"
+            "value":"Mikrofonas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Kamera"
+            "value":"Kamera",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofonas"
+            "value":"Mikrofonas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Adresinė"
+            "value":"Adresinė",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Kalendorius"
+            "value":"Kalendorius",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Fizinė veikla"
+            "value":"Fizinė veikla",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Kūno jutikliai"
+            "value":"Kūno jutikliai",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Veiklos sekimas"
+            "value":"Veiklos sekimas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Programėlių sąrašas"
+            "value":"Programėlių sąrašas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"„Bluetooth“"
+            "value":"„Bluetooth“",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Aplankai"
+            "value":"Aplankai",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"„NearLink“"
+            "value":"„NearLink“",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"„Dropzone“"
+            "value":"„Dropzone“",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"„Dropzone“"
+            "value":"„Dropzone“",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Įrenginio ryšys"
+            "value":"Įrenginio ryšys",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

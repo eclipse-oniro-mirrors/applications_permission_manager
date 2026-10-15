@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"כדי להגן על פרטיותך, %s יוכל לגשת למיקום שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"כדי להגן על פרטיותך, %s יוכל לגשת ל'גלריה' שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"לוח מחוונים"
+            "value":"לוח מחוונים",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"הרשאות"
+            "value":"הרשאות",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"מותר"
+            "value":"מותר",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"סורב"
+            "value":"סורב",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"לקרוא ולשנות",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"לקרוא בלבד",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"לשנות בלבד",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"כל הקבצים",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"שאל בכל פעם",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"מיקרופון"
+            "value":"מיקרופון",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"מצלמה"
+            "value":"מצלמה",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"מיקרופון"
+            "value":"מיקרופון",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"אנשי קשר"
+            "value":"אנשי קשר",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"לוח שנה"
+            "value":"לוח שנה",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"פעילות פיזית"
+            "value":"פעילות פיזית",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"חיישני גוף"
+            "value":"חיישני גוף",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"מעקב אחר פעילות"
+            "value":"מעקב אחר פעילות",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"רשימת יישומים"
+            "value":"רשימת יישומים",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"תיקיות"
+            "value":"תיקיות",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"‏NearLink"
+            "value":"‏NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"חיבור ההתקן"
+            "value":"חיבור ההתקן",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

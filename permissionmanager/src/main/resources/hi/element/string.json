@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %s संक्षिप्त रूप से आपके स्थान तक पहुँच प्राप्त कर सकता है।",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"आपकी गोपनीयता की सुरक्षा के लिए, आपके द्वारा 'अनुमति दें' पर टैप किए जाने पर ही %s आइटम सहेजने हेतु संक्षिप्त रूप से आपकी गैलरी तक पहुँच प्राप्त कर सकता है।",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"डैशबोर्ड"
+            "value":"डैशबोर्ड",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"अनुमतियाँ"
+            "value":"अनुमतियाँ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"अनुमति दी गई"
+            "value":"अनुमति दी गई",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"अस्वीकार किया गया"
+            "value":"अस्वीकार किया गया",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"पढ़ें और संशोधित करें",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"केवल पढ़ें",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"केवल संशोधित करें",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"सभी फ़ाइलें",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"प्रत्येक बार पूछें",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"माइक्रोफ़ोन"
+            "value":"माइक्रोफ़ोन",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"कैमरा"
+            "value":"कैमरा",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"माइक्रोफ़ोन"
+            "value":"माइक्रोफ़ोन",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"संपर्क"
+            "value":"संपर्क",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"कैलेंडर"
+            "value":"कैलेंडर",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"शारीरिक गतिविधि"
+            "value":"शारीरिक गतिविधि",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"शरीर संवेदक"
+            "value":"शरीर संवेदक",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"गतिविधि ट्रैकिंग"
+            "value":"गतिविधि ट्रैकिंग",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"ऐप सूची"
+            "value":"ऐप सूची",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"ब्लूटूथ"
+            "value":"ब्लूटूथ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"फ़ोल्‍डर"
+            "value":"फ़ोल्‍डर",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"डिवाइस कनेक्शन"
+            "value":"डिवाइस कनेक्शन",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

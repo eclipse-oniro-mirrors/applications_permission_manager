@@ -25,7 +25,7 @@
             "name":"security_description_location",
             "value":"Калі вы націснеце «Дазволіць», то для абароны прыватнасці праграма «%s» зможа атрымліваць доступ да вашага месцазнаходжання толькі на кароткі час.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -39,7 +39,7 @@
             "name":"security_description_media_files",
             "value":"Калі вы націснеце «Дазволіць», то для абароны прыватнасці праграма «%s» зможа атрымліваць доступ да Галерэі для захоўвання элементаў толькі на кароткі час.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Панэль кіравання"
+            "value":"Панэль кіравання",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Дазволы"
+            "value":"Дазволы",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Дазволена"
+            "value":"Дазволена",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Адмоўлена"
+            "value":"Адмоўлена",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Счытваць і змяняць",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Толькі счытваць",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Толькі змяняць",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Усе файлы",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Пытаць кожны раз",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Мікрафон"
+            "value":"Мікрафон",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Камера"
+            "value":"Камера",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Мікрафон"
+            "value":"Мікрафон",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Кантакты"
+            "value":"Кантакты",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Каляндар"
+            "value":"Каляндар",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Фізічная актыўнасць"
+            "value":"Фізічная актыўнасць",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Нацельныя датчыкі"
+            "value":"Нацельныя датчыкі",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Адсочванне дзеянняў"
+            "value":"Адсочванне дзеянняў",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Спіс праграм"
+            "value":"Спіс праграм",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Папкі"
+            "value":"Папкі",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Падключэнне прылад"
+            "value":"Падключэнне прылад",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

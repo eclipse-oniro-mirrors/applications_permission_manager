@@ -161,7 +161,6 @@ function buildDialogContentsAreaComp(params: DialogInfo) {
         .orphanCharOptimization(true)
     }
   }
-  .clip(true)
 }
 
 @CustomDialog

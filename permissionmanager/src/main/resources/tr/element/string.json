@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Gizliliğinizi korumak için, İzin veriyorum düğmesine dokunduğunuzda %s, konumunuza yalnızca kısa bir süreliğine erişebilir.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Gizliliğinizi korumak için, İzin veriyorum düğmesine dokunduğunuzda %s, Galeri'ye yalnızca kısa bir süreliğine öğeleri kaydetmek için erişebilir.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"group_label_health",
             "value":"%s uygulamasının vücut sensörü verilerine erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"%s uygulamasının panodan içerik kopyalamasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"Kesin konum: Açık",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"%s uygulamasının kişilerinize erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"Bu uygulamanın kesin konumunuza erişmesine izin verilir. Bu kapalıyken, bu uygulama yalnızca yaklaşık konumunuza erişebilir. Bu özelliği desteklemeyen bazı uygulamalar konum alamayabilir.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"Kesin konum devre dışı bırakıldığında uygulama yalnızca yaklaşık konumunuzu alabilir.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"%s uygulamasının Bluetooth'u kullanmasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"Kesin konum",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"%s uygulamasının diğer cihazlarla iş birliği yapmasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"Her zaman izin ver",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"%s uygulamasının cihazınızdaki dosyalara erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"%s uygulamasının yaklaşık konumunuza erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"%s uygulamasının diğer uygulamalardaki aktivitelerinizi takip etmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"Reddet",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"%s uygulamasının cihazınızdaki \"Belgeler\" klasörüne erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Her defasında sor",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"%s uygulamasının takviminize erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"Kesin konum: Kapalı",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"%s uygulamasının kamerayı kullanmasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"Reddedilmesi halinde bu uygulama panoya erişemez.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"%s uygulamasının ekran görüntüsü almasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"%s uygulamasının NearLink'i kullanmasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"Sadece bu seferlik izin ver",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"%s uygulamasının fiziksel aktivite verilerinize erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"Uygulamayı kullanırken izin ver",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"%s uygulamasının cihazınızdaki \"Başlangıç ekranı\" klasörüne erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"Her defasında sor",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"%s uygulamasının cihazınızdaki görsellere ve videolara erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"%s uygulamasının cihazınızdaki \"İndirilenler\" klasörüne erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"%s uygulamasının konum erişimi yaklaşık konumdan kesin konuma değiştirilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"%s uygulamasına yüklü uygulamaların listesini okuma izni verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"Sadece bu seferlik izin ver",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"%s uygulamasının konumunuza erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"%s uygulamasının mikrofonu kullanmasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"%s uygulamasının cihazınızdaki müzik ve ses dosyalarına erişmesine izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"%s uygulamasından içerik kopyalandı. Reddet seçimini yaparsanız bu uygulama panoya erişemez.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"Pano"
+            "value":"Pano",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"İzin yöneticisi"
+            "value":"İzin yöneticisi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"İzinler"
+            "value":"İzinler",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"Uygulama arayın"
+            "value":"Uygulama arayın",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"İzin verilenler"
+            "value":"İzin verilenler",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Reddedildi"
+            "value":"Reddedildi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Oku ve değiştir",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Salt okunur",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Yalnızca değiştir",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Tüm dosyalar",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"Etkinleştir"
+            "value":"Etkinleştir",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"Ayarlar bölümünden izin ver"
+            "value":"Ayarlar bölümünden izin ver",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"Devre dışı bırak"
+            "value":"Devre dışı bırak",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"Mikrofon devre dışı bırakılsın mı?"
+            "value":"Mikrofon devre dışı bırakılsın mı?",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"Mikrofon devre dışı bırakıldı"
+            "value":"Mikrofon devre dışı bırakıldı",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Kamera"
+            "value":"Kamera",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Kişiler"
+            "value":"Kişiler",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Takvim"
+            "value":"Takvim",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Fiziksel aktivite"
+            "value":"Fiziksel aktivite",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Vücut sensörleri"
+            "value":"Vücut sensörleri",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Aktivite takibi"
+            "value":"Aktivite takibi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Uygulama listesi"
+            "value":"Uygulama listesi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"Pano"
+            "value":"Pano",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Klasörler"
+            "value":"Klasörler",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"Dosyalar ve klasörler"
+            "value":"Dosyalar ve klasörler",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Bırakma bölgesi"
+            "value":"Bırakma bölgesi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"Giriş yardımı"
+            "value":"Giriş yardımı",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"Ekran paylaşımı"
+            "value":"Ekran paylaşımı",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"Cihaz kontrolü"
+            "value":"Cihaz kontrolü",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Bırakma bölgesi"
+            "value":"Bırakma bölgesi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"Giriş yardımı"
+            "value":"Giriş yardımı",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"Ekran paylaşımı"
+            "value":"Ekran paylaşımı",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"Cihaz kontrolü"
+            "value":"Cihaz kontrolü",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Cihaz bağlantısı"
+            "value":"Cihaz bağlantısı",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"%s uygulamasının giriş yardımı sağlamasına izin verilsin mi?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"İndirilenler klasörü"
+            "value":"İndirilenler klasörü",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"Başlangıç ekranı klasörü"
+            "value":"Başlangıç ekranı klasörü",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"Belgeler klasörü"
+            "value":"Belgeler klasörü",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"Onayla"
+            "value":"Onayla",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

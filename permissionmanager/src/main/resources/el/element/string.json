@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Για να προστατεύσει το απόρρητό σας, η εφαρμογή %s μπορεί μόνο για σύντομο χρονικό διάστημα να έχει πρόσβαση στην τοποθεσία σας όταν πατήσετε Να επιτραπεί.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Για να προστατεύσει το απόρρητό σας, η εφαρμογή %s μπορεί μόνο για σύντομο χρονικό διάστημα να έχει πρόσβαση στη Συλλογή σας για να αποθηκεύσει στοιχεία όταν πατήσετε Να επιτραπεί.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Πίνακας εργαλείων"
+            "value":"Πίνακας εργαλείων",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Άδειες"
+            "value":"Άδειες",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Επιτρεπόμενες"
+            "value":"Επιτρεπόμενες",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Δεν επιτράπηκαν"
+            "value":"Δεν επιτράπηκαν",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Ανάγνωση και τροποποίηση",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Μόνο για ανάγνωση",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Μόνο για τροποποίηση",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Όλα τα αρχεία",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Ερώτηση κάθε φορά",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Μικρόφωνο"
+            "value":"Μικρόφωνο",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Κάμερα"
+            "value":"Κάμερα",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Μικρόφωνο"
+            "value":"Μικρόφωνο",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Επαφές"
+            "value":"Επαφές",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Ημερολ."
+            "value":"Ημερολ.",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Σωματική δραστηριότητα"
+            "value":"Σωματική δραστηριότητα",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Αισθητήρες σώματος"
+            "value":"Αισθητήρες σώματος",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Παρακολούθηση δραστηριότητας"
+            "value":"Παρακολούθηση δραστηριότητας",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Λίστα εφαρμογών"
+            "value":"Λίστα εφαρμογών",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Φάκελοι"
+            "value":"Φάκελοι",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Ζώνη απόθεσης"
+            "value":"Ζώνη απόθεσης",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Ζώνη απόθεσης"
+            "value":"Ζώνη απόθεσης",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Σύνδεση συσκευής"
+            "value":"Σύνδεση συσκευής",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

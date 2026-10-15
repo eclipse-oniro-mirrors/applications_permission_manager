@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Pour protéger votre vie privée, %s ne peut accéder brièvement à vos informations de localisation que lorsque vous touchez Autoriser.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Pour protéger votre vie privée, %s ne peut accéder brièvement à Galerie pour enregistrer des éléments que lorsque vous touchez Autoriser.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"group_label_health",
             "value":"Autoriser %s à accéder aux données des capteurs corporels ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"Autoriser %s à copier le contenu du presse-papier ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"Localisation précise : activée",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"Autoriser %s à accéder à vos contacts ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"Autoriser cette application à accéder à vos informations précises de localisation. Lorsque cette option est désactivée, l'application ne peut accéder qu'à vos informations approximatives de localisation. Certaines applications qui ne prennent pas en charge cette fonctionnalité peuvent ne pas obtenir de localisation.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"Les informations approximatives de localisation sont accessibles si les informations précises de localisation ne le sont pas.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"Autoriser %s à utiliser le Bluetooth ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"Informations précises de localisation",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"Autoriser %s à collaborer avec d'autres appareils ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"Autoriser tout le temps",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"Autoriser %s à accéder aux fichiers de votre appareil ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"Autoriser %s à accéder à votre localisation approximative ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"Autoriser %s à suivre votre activité dans d'autres applications ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"Refuser",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"Autoriser %s à accéder au dossier \"Documents\" de votre appareil ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Demander à chaque fois",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"Autoriser %s à accéder à votre agenda ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"Localisation précise : désactivée",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"Autoriser %s à utiliser l'appareil photo ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"Si l'accès est refusé, cette application ne pourra pas accéder au presse-papier.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"Autoriser %s à capturer votre écran ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"Autoriser %s à utiliser NearLink ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"Autoriser cette fois seulement",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"Autoriser %s à accéder à vos données d'activité physique ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"Autoriser lors de l'utilisation de l'application",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"Autoriser %s à accéder au dossier \"Écran d'accueil\" de votre appareil ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"Demander chaque fois",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"Autoriser %s à accéder aux images et aux vidéos de votre appareil ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"Autoriser %s à accéder au dossier \"Téléchargements\" de votre appareil ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"Changer l'accès à la localisation de %s d'approximative à précise ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"Autoriser %s à lire la liste des applications installées ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"Autoriser cette fois uniquement",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"Autoriser %s à accéder à votre localisation ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"Autoriser %s à utiliser le microphone ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"Autoriser %s à accéder aux fichiers audio et musique de votre appareil ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"Contenu copié depuis %s. Si vous sélectionnez Refuser, cette application ne pourra pas accéder au presse-papier.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"Tableau de bord"
+            "value":"Tableau de bord",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"Gestion des autorisations"
+            "value":"Gestion des autorisations",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Autorisations"
+            "value":"Autorisations",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"Rechercher des applications"
+            "value":"Rechercher des applications",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Accès autorisé"
+            "value":"Accès autorisé",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Accès interdit"
+            "value":"Accès interdit",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Lecture et modification",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Lecture seule",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Modification seule",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Tous les fichiers",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"Activer"
+            "value":"Activer",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"Autoriser dans Paramètres"
+            "value":"Autoriser dans Paramètres",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"Désactiver"
+            "value":"Désactiver",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"Micro"
+            "value":"Micro",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"Désactiver le micro ?"
+            "value":"Désactiver le micro ?",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"Micro désactivé"
+            "value":"Micro désactivé",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Appareil photo"
+            "value":"Appareil photo",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Micro"
+            "value":"Micro",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Contacts"
+            "value":"Contacts",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Agenda"
+            "value":"Agenda",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Activité physique"
+            "value":"Activité physique",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Capteurs corporels"
+            "value":"Capteurs corporels",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Suivi d'activité"
+            "value":"Suivi d'activité",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Liste des applications installées"
+            "value":"Liste des applications installées",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"Presse-papier"
+            "value":"Presse-papier",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Dossiers"
+            "value":"Dossiers",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"Fichiers et dossiers"
+            "value":"Fichiers et dossiers",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Gestion des fenêtres flottantes"
+            "value":"Gestion des fenêtres flottantes",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"Aide à la saisie"
+            "value":"Aide à la saisie",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"Partage d'écran"
+            "value":"Partage d'écran",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"Contrôle de l'appareil"
+            "value":"Contrôle de l'appareil",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Gestion des fenêtres flottantes"
+            "value":"Gestion des fenêtres flottantes",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"Aide à la saisie"
+            "value":"Aide à la saisie",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"Partage d'écran"
+            "value":"Partage d'écran",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"Contrôle de l'appareil"
+            "value":"Contrôle de l'appareil",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Connexion d'appareils"
+            "value":"Connexion d'appareils",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"Autoriser %s à fournir une aide à la saisie ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"Dossier Téléchargements"
+            "value":"Dossier Téléchargements",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"Dossier Écran d'accueil"
+            "value":"Dossier Écran d'accueil",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"Dossier Documents"
+            "value":"Dossier Documents",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"Confirmer"
+            "value":"Confirmer",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

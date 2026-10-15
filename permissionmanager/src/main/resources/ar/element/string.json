@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"لحماية خصوصيتك، سيتمكن تطبيق %s من الوصول إلى موقعك لفترة وجيزة فقط عند النقر على «سماح».",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"لحماية خصوصيتك، سيتمكن تطبيق %s من الوصول إلى المعرض لحفظ العناصر لفترة وجيزة فقط عند النقر على «سماح».",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"close_exact_position",
             "value":"عندما يكون الموقع الدقيق مغلق، سيتمكن التطبيق من الحصول على موقعك التقريبي فقط.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"الموقع الدقيق",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"السماح دومًا",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"رفض",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"السؤال في كل مرة",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"السماح لمرة واحدة فقط",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"السؤال في كل مرة",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"السماح لمرة واحدة فقط",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_health",
             "value":"هل تسمح لتطبيق %s بالوصول إلى بيانات مستشعرات الجسم؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"هل تسمح لتطبيق %s بنسخ المحتوى من الحافظة؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"الموقع الدقيق: مُشغّل",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى جهات الاتصال الخاصة بك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"السماح لهذا التطبيق بالوصول إلى موقعك الدقيق. عند إغلاق هذا الخيار، يمكن لهذا التطبيق الوصول إلى موقعك التقريبي فقط. بعض التطبيقات التي لا تدعم هذه الميزة قد تفشل في الحصول على أي موقع.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"هل تسمح لتطبيق \"%s\" باستخدام البلوتوث؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"هل تسمح لتطبيق \"%s\" بالتعاون مع الأجهزة الأخرى؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى الملفات على جهازك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"هل تسمح لتطبيق %s بالوصول إلى الموقع التقريبي؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"هل تسمح لتطبيق \"%s\" بتتبع أنشطتك في التطبيقات الأخرى؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى مجلد المستندات على جهازك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى التقويم؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"الموقع الدقيق: مغلق",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"هل تسمح لتطبيق %s باستخدام الكاميرا؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"إذا رفضت منح هذا الإذن، فلن يتمكن هذا التطبيق من الوصول إلى الحافظة.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"هل تسمح لتطبيق \"%s\" بالتقاط لقطة لشاشتك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"هل تسمح لتطبيق \"%s\" باستخدام ميزة NearLink؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى بيانات نشاطك البدني؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"السماح أثناء استخدام التطبيق فقط",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى مجلد الشاشة الرئيسية على جهازك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى الصور والفيديوهات على جهازك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى مجلد التنزيلات على جهازك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"هل تريد تغيير الوصول إلى الموقع في تطبيق %s من الوصول التقريبي إلى الوصول الدقيق؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"هل تسمح لتطبيق \"%s\" بقراءة قائمة التطبيقات المُثبتّة؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"هل تسمح لتطبيق %s بالوصول إلى موقعك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"هل تسمح لتطبيق %s باستخدام الميكروفون؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"هل تسمح لتطبيق \"%s\" بالوصول إلى ملفات الموسيقى والصوتيات على جهازك؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"تم نسخ المحتوى من تطبيق \"%s\". إذا اخترت \"رفض\"، فلن يتمكن هذا التطبيق من الوصول إلى الحافظة.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"شاشة التحكم بالأذونات"
+            "value":"شاشة التحكم بالأذونات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"مدير الأذونات"
+            "value":"مدير الأذونات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"الأذونات"
+            "value":"الأذونات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"البحث عن تطبيق"
+            "value":"البحث عن تطبيق",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"التطبيقات المسموح لها"
+            "value":"التطبيقات المسموح لها",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"المرفوضة"
+            "value":"المرفوضة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"القراءة والتعديل",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"القراءة فقط",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"التعديل فقط",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"جميع الملفات",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"تشغيل"
+            "value":"تشغيل",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"الإعدادات"
+            "value":"الإعدادات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"إيقاف التشغيل"
+            "value":"إيقاف التشغيل",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"الميكروفون"
+            "value":"الميكروفون",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"هل تريد إيقاف تشغيل الميكروفون؟"
+            "value":"هل تريد إيقاف تشغيل الميكروفون؟",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"الميكروفون مغلق"
+            "value":"الميكروفون مغلق",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"الكاميرا"
+            "value":"الكاميرا",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"الميكروفون"
+            "value":"الميكروفون",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"جهات الاتصال"
+            "value":"جهات الاتصال",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"التقويم"
+            "value":"التقويم",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"النشاط البدني"
+            "value":"النشاط البدني",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"مستشعرات الجسم"
+            "value":"مستشعرات الجسم",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"تتبع الأنشطة"
+            "value":"تتبع الأنشطة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"قائمة التطبيقات"
+            "value":"قائمة التطبيقات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"البلوتوث"
+            "value":"البلوتوث",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"الحافظة"
+            "value":"الحافظة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"المجلدات"
+            "value":"المجلدات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"الملفات والمجلدات"
+            "value":"الملفات والمجلدات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"النوافذ العائمة"
+            "value":"النوافذ العائمة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"المساعدة في الإدخال"
+            "value":"المساعدة في الإدخال",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"مشاركة الشاشة"
+            "value":"مشاركة الشاشة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"التحكم بالجهاز"
+            "value":"التحكم بالجهاز",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"النوافذ العائمة"
+            "value":"النوافذ العائمة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"المساعدة في الإدخال"
+            "value":"المساعدة في الإدخال",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"مشاركة الشاشة"
+            "value":"مشاركة الشاشة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"التحكم بالجهاز"
+            "value":"التحكم بالجهاز",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"الاتصال بالأجهزة"
+            "value":"الاتصال بالأجهزة",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"هل تريد السماح لتطبيق %s بتوفير المساعدة في الإدخال؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"مجلد التنزيلات"
+            "value":"مجلد التنزيلات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"مجلد الشاشة الرئيسية"
+            "value":"مجلد الشاشة الرئيسية",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"مجلد المستندات"
+            "value":"مجلد المستندات",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"تأكيد"
+            "value":"تأكيد",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }
