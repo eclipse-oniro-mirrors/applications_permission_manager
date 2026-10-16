@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата локација кога ќе допрете Дозволи.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата Галерија за да зачува ставки кога ќе допрете Дозволи.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Контролна табла"
+            "value":"Контролна табла",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Дозволи"
+            "value":"Дозволи",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Дозволено"
+            "value":"Дозволено",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Одбиено"
+            "value":"Одбиено",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Читање и изменување",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Само за читање",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Само за изменување",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Сите датотеки",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Прашувај секој пат",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Микрофон"
+            "value":"Микрофон",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Камера"
+            "value":"Камера",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Микрофон"
+            "value":"Микрофон",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Контакти"
+            "value":"Контакти",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Календар"
+            "value":"Календар",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Физичка активност"
+            "value":"Физичка активност",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Сензори на телото"
+            "value":"Сензори на телото",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Следење активности"
+            "value":"Следење активности",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Список на апликации"
+            "value":"Список на апликации",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Папки"
+            "value":"Папки",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Област за спуштање"
+            "value":"Област за спуштање",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Област за спуштање"
+            "value":"Област за спуштање",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Поврзување на уредот"
+            "value":"Поврзување на уредот",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

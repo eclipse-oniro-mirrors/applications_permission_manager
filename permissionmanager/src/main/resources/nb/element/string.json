@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til posisjonen din når du trykker på Tillat.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til ditt Galleri for å lagre filer når du trykker på Tillat.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Instrumentbord"
+            "value":"Instrumentbord",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Tillatelser"
+            "value":"Tillatelser",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Tillatt"
+            "value":"Tillatt",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Avvist"
+            "value":"Avvist",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Les og modifiser",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Bare lese",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Bare modifiser",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Alle filer",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Spør hver gang",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Kamera"
+            "value":"Kamera",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Kontakter"
+            "value":"Kontakter",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Kalender"
+            "value":"Kalender",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Fysisk aktivitet"
+            "value":"Fysisk aktivitet",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Kroppssensorer"
+            "value":"Kroppssensorer",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Aktivitets​sporing"
+            "value":"Aktivitets​sporing",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"App-liste"
+            "value":"App-liste",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Mapper"
+            "value":"Mapper",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Enhets​tilkobling"
+            "value":"Enhets​tilkobling",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

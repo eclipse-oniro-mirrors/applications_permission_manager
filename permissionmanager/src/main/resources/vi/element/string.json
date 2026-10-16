@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào vị trí của bạn khi bạn chạm vào Cho phép.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào Bộ sưu tập của bạn để lưu các mục khi bạn chạm vào Cho phép.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"group_label_health",
             "value":"Cho phép %s truy cập dữ liệu cảm biến cơ thể?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"Cho phép %s sao chép nội dung từ bộ nhớ tạm?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"Vị trí chính xác: Đang bật",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"Cho phép %s truy cập danh bạ?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"Cho phép ứng dụng này truy cập vị trí chính xác của bạn. Khi tắt chức năng này, ứng dụng này chỉ truy cập được vị trí gần đúng của bạn. Một số ứng dụng không hỗ trợ tính năng này có thể không nhận được bất kỳ thông tin vị trí nào.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"Khi tùy chọn Vị trí chính xác bị tắt, ứng dụng chỉ có thể nhận được vị trí gần đúng của bạn.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"Cho phép %s sử dụng Bluetooth?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"Vị trí chính xác",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"Cho phép %s phối hợp với các thiết bị khác?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"Luôn cho phép",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"Cho phép %s truy cập các tệp tin trên thiết bị của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"Cho phép %s truy cập vị trí gần đúng của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"Cho phép %s theo dõi hoạt động của bạn trong các ứng dụng khác?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"Từ chối",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"Cho phép %s truy cập thư mục \"Tài liệu\" trên thiết bị của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Luôn hỏi",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"Cho phép %s truy cập lịch của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"Vị trí chính xác: Đã tắt",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"Cho phép %s sử dụng máy ảnh?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"Nếu bị từ chối, ứng dụng này sẽ không thể truy cập bộ nhớ tạm.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"Cho phép %s chụp màn hình của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"Cho phép %s sử dụng NearLink?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"Chỉ cho phép lần này",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"Cho phép %s truy cập dữ liệu về hoạt động thể chất?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"Cho phép khi dùng ứng dụng",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"Cho phép %s truy cập thư mục \"Màn hình chính\" trên thiết bị của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"Luôn hỏi",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"Cho phép %s truy cập hình ảnh và video trên thiết bị của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"Cho phép %s truy cập thư mục \"Tải xuống\" trên thiết bị của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"Thay đổi quyền truy cập vị trí của %s từ gần đúng thành chính xác?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"Cho phép %s đọc danh sách ứng dụng đã cài đặt?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"Chỉ cho phép lần này",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"Cho phép %s truy cập vị trí của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"Cho phép %s sử dụng micrô?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"Cho phép %s truy cập nhạc và tệp tin âm thanh trên thiết bị của bạn?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"Đã sao chép nội dung từ %s. Nếu bạn chọn Từ chối, ứng dụng này sẽ không thể truy cập bộ nhớ tạm.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"Bảng điều khiển"
+            "value":"Bảng điều khiển",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"Trình quản lý quyền"
+            "value":"Trình quản lý quyền",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Quyền"
+            "value":"Quyền",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"Tìm kiếm ứng dụng"
+            "value":"Tìm kiếm ứng dụng",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Cho phép"
+            "value":"Cho phép",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Đã từ chối"
+            "value":"Đã từ chối",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Đọc và sửa đổi",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Chỉ đọc",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Chỉ sửa đổi",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Tất cả tệp tin",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"Bật"
+            "value":"Bật",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"Cho phép trong Cài đặt"
+            "value":"Cho phép trong Cài đặt",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"Tắt"
+            "value":"Tắt",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"Micrô"
+            "value":"Micrô",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"Tắt micrô?"
+            "value":"Tắt micrô?",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"Micrô đã tắt"
+            "value":"Micrô đã tắt",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Máy ảnh"
+            "value":"Máy ảnh",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Micrô"
+            "value":"Micrô",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Danh bạ"
+            "value":"Danh bạ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Lịch"
+            "value":"Lịch",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Hoạt động thể chất"
+            "value":"Hoạt động thể chất",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Cảm biến cơ thể"
+            "value":"Cảm biến cơ thể",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Theo dõi hoạt động"
+            "value":"Theo dõi hoạt động",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Danh sách ứng dụng"
+            "value":"Danh sách ứng dụng",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"Bộ nhớ tạm"
+            "value":"Bộ nhớ tạm",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Thư mục"
+            "value":"Thư mục",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"Tệp tin và thư mục"
+            "value":"Tệp tin và thư mục",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"Hỗ trợ nhập liệu"
+            "value":"Hỗ trợ nhập liệu",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"Chia sẻ màn hình"
+            "value":"Chia sẻ màn hình",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"Điều khiển thiết bị"
+            "value":"Điều khiển thiết bị",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"Hỗ trợ nhập liệu"
+            "value":"Hỗ trợ nhập liệu",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"Chia sẻ màn hình"
+            "value":"Chia sẻ màn hình",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"Điều khiển thiết bị"
+            "value":"Điều khiển thiết bị",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Kết nối thiết bị"
+            "value":"Kết nối thiết bị",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"Cho phép %s cung cấp hỗ trợ nhập liệu?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"Thư mục Tải xuống"
+            "value":"Thư mục Tải xuống",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"Thư mục Màn hình chính"
+            "value":"Thư mục Màn hình chính",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"Thư mục Tài liệu"
+            "value":"Thư mục Tài liệu",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"Xác nhận"
+            "value":"Xác nhận",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"‏«%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئورۇن ئۇچۇرىنى ئوقۇيالايدۇ.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"‏«%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئامبارغا رەسىم ۋە سىن ساقلىيالايدۇ.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
@@ -60,367 +60,442 @@
             "name":"get_the_exact_position",
             "value":"بۇ ئەپنىڭ ئېنىق ئورۇن بەلگىلىشىگە رۇخسەت قىلىنىدۇ. بۇ ئېتىك ھالەتتە ئەپ پەقەت تەخمىنىي ئورۇن ئۇچۇرىنى ئىگىلەيدۇ. بۇ ئىقتىدارنى قوللىمايدىغان ئەپلەر ئورۇن بەلگىلىيەلمەسلىكى مۇمكىن.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"ئېنىق ئورۇننى ئەتسىڭىز، بۇ ئەپ تەخمىنىي ئورۇن ئۇچۇرىڭىزنىلا ئوقۇيالايدۇ.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"ئېنىق ئورۇن",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"ئىزچىل رۇخسەت",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"‏«%s» تەخمىنىي ئورۇن ئۇچۇرىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"‏«%s» ئۈچۈن ئېلان ئىزلاش ئىجازىتى كېرەك، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"چەكلەش",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"‏«%s» «پۈتۈك» قىسقۇچىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"ئىزچىل سوراش",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"چەكلىسىڭىز، بۇ ئەپ كېسىش تاختىسىنى زىيارەت قىلالمايدۇ.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"بۇ قېتىم رۇخسەت",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"ئىشلەتكەندە رۇخسەت",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"‏«%s» «ئۈستەليۈزى» قىسقۇچىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"ئىزچىل سوراش",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"‏«%s» «چۈشۈرۈلمە» قىسقۇچىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"‏«%s» نىڭ ئورۇن ئىجازىتى «تەخمىنىي ئورۇن» دىن «ئېنىق ئورۇن» غا ئۆزگىرىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"‏«%s» نىڭ قاچىلىغان ئەپ تىزىملىكىنى ئوقۇشىغا رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"بۇ قېتىم رۇخسەت",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_health",
             "value":"‏«%s» بەدەن سەزگۈچ ئارقىلىق بەدەن ئۇچۇرىنى ئوقۇيدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"‏«%s» نىڭ كېسىش تاختىسىدىن مەزمۇن كۆچۈرۈشىگە رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"ئېنىق ئورۇن: ئوچۇق",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"‏«%s» نىڭ ئالاقىداش ئىشلىتىشىگە رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"‏«%s» نىڭ كۆكچىش ئىشلىتىشىگە رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"‏«%s» نىڭ كۆپ ئۈسكۈنە ھەمكارلىقىغا رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"‏«%s» نىڭ ھۆججەت زىيارەت قىلىشىغا رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"‏«%s» نىڭ كالېندار ئىشلىتىشىگە رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"ئېنىق ئورۇن: ئېتىك",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"‏«%s» كامېرا ئىشلىتىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"‏«%s» نىڭ «ئۇچقۇن» ئىشلىتىشىگە رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"‏«%s» چېنىقىش ئۇچۇرىنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"‏«%s» نىڭ رەسىم ۋە سىن زىيارەت قىلىشىغا رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"‏«%s» ئورۇن ئۇچۇرىڭىزنى زىيارەت قىلىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"‏«%s» مىكروفون ئىشلىتىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"‏«%s» نىڭ مۇزىكا ۋە ئاۋاز ھۆججىتى ئوقۇشىغا رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"‏«%s» ئېكران تۇتىدۇ، رۇخسەتمۇ؟",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"بۇ مەزمۇن «%s» دىن كەلگەن. چەكلىسىڭىز، بۇ ئەپ كېسىش تاختىسىنى زىيارەت قىلالمايدۇ.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
             "name":"permission_manager",
-            "value":"ئىجازەت باشقۇرۇش"
+            "value":"ئىجازەت باشقۇرۇش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"application",
-            "value":"ئەپ"
+            "value":"ئەپ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"ئەپ ئىزدەش"
+            "value":"ئەپ ئىزدەش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"media_only",
             "value":"پەقەت مېدىيا",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"ئېچىش"
+            "value":"ئېچىش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"تەڭشەك"
+            "value":"تەڭشەك",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"ئېتىش"
+            "value":"ئېتىش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"مىكروفوننى ئېتىش"
+            "value":"مىكروفوننى ئېتىش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"مىكروفون ئېتىك"
+            "value":"مىكروفون ئېتىك",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"request_association_toggle",
-            "value":"باغلاشنى سوراش"
+            "value":"باغلاشنى سوراش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"كېسىش تاختىسى"
+            "value":"كېسىش تاختىسى",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"ھۆججەت ۋە قىسقۇچ"
+            "value":"ھۆججەت ۋە قىسقۇچ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_capture",
-            "value":"ئېكران تۇتۇش"
+            "value":"ئېكران تۇتۇش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"كىرگۈزگۈچ ئىجازىتى"
+            "value":"كىرگۈزگۈچ ئىجازىتى",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"ئېكران ئورتاقلىشىش"
+            "value":"ئېكران ئورتاقلىشىش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"ئۈسكۈنە تىزگىنلەش"
+            "value":"ئۈسكۈنە تىزگىنلەش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"كىرگۈزگۈچ ئىجازىتى"
+            "value":"كىرگۈزگۈچ ئىجازىتى",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"ئېكران ئورتاقلىشىش"
+            "value":"ئېكران ئورتاقلىشىش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"ئۈسكۈنە تىزگىنلەش"
+            "value":"ئۈسكۈنە تىزگىنلەش",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"‏«%s» ئۈچۈن كىرگۈزگۈچ ئىجازىتى كېرەك",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download",
-            "value":"چۈشۈرۈلمە"
+            "value":"چۈشۈرۈلمە",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop",
-            "value":"ئۈستەليۈزى"
+            "value":"ئۈستەليۈزى",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document",
-            "value":"پۈتۈك"
+            "value":"پۈتۈك",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"download_folder",
-            "value":"چۈشۈرۈلمە قىسقۇچ"
+            "value":"چۈشۈرۈلمە قىسقۇچ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"ئۈستەليۈزى قىسقۇچى"
+            "value":"ئۈستەليۈزى قىسقۇچى",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"پۈتۈك قىسقۇچ"
+            "value":"پۈتۈك قىسقۇچ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"جەزملەش"
+            "value":"جەزملەش",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

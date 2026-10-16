@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel teie asukohale ligi vaid lühiajaliselt.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel üksuste salvestamiseks Galeriile ligi vaid lühiajaliselt.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Armatuurlaud"
+            "value":"Armatuurlaud",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Õigused"
+            "value":"Õigused",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Lubatud"
+            "value":"Lubatud",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Keelatud"
+            "value":"Keelatud",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Lubatud lugeda ja muuta",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Kirjutuskaitstud",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Lubatud ainult muuta",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Kõik failid",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Küsi iga kord",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Kaamera"
+            "value":"Kaamera",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Kontaktid"
+            "value":"Kontaktid",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Kalender"
+            "value":"Kalender",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Kehaline aktiivsus"
+            "value":"Kehaline aktiivsus",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Kehaandurid"
+            "value":"Kehaandurid",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Tegevuse jälgimine"
+            "value":"Tegevuse jälgimine",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Rakenduseloend"
+            "value":"Rakenduseloend",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Kaustad"
+            "value":"Kaustad",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Kukutustsoon"
+            "value":"Kukutustsoon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Kukutustsoon"
+            "value":"Kukutustsoon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Seadme ühendus"
+            "value":"Seadme ühendus",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Aby sa chránilo vaše súkromie, aplikácia %s môže k vašej polohe pristupovať len krátky čas po ťuknutí na možnosť Povoliť.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Aby sa chránilo vaše súkromie, aplikácia %s môže k vašej Galérii pristupovať len krátky čas po ťuknutí na možnosť Povoliť, aby uložila položky.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Ovládací panel"
+            "value":"Ovládací panel",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Povolenia"
+            "value":"Povolenia",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Povolené"
+            "value":"Povolené",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Zakázané"
+            "value":"Zakázané",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Čítanie aj úprava",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Len čítanie",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Len úprava",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Všetky súbory",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Vždy sa pýtať",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Mikrofón"
+            "value":"Mikrofón",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Fotoaparát"
+            "value":"Fotoaparát",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofón"
+            "value":"Mikrofón",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Kontakty"
+            "value":"Kontakty",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Kalendár"
+            "value":"Kalendár",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Fyzická aktivita"
+            "value":"Fyzická aktivita",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Telesné snímače"
+            "value":"Telesné snímače",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Sledovanie aktivity"
+            "value":"Sledovanie aktivity",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Zoznam aplikácií"
+            "value":"Zoznam aplikácií",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Priečinky"
+            "value":"Priečinky",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Pripojenie k zariadeniu"
+            "value":"Pripojenie k zariadeniu",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

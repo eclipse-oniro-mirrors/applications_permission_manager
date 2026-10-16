@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses lokasi Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses Galeri Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"group_label_health",
             "value":"Izinkan %s untuk mengakses data sensor tubuh?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"Izinkan %s untuk menyalin konten dari papan klip?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"Lokasi presisi: Hidup",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"Izinkan %s untuk mengakses kontak Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"Izinkan aplikasi ini untuk mengakses lokasi tepat Anda. Dengan ini dimatikan, aplikasi ini hanya dapat mengakses lokasi perkiraan Anda. Beberapa aplikasi yang tidak mendukung fitur ini dapat gagal mendapatkan lokasi apa pun.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"Ketika Lokasi presisi dinonaktifkan, aplikasi hanya dapat memperoleh lokasi perkiraan Anda.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"Izinkan %s untuk menggunakan Bluetooth?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"Lokasi yang tepat",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"Izinkan %s untuk berkolaborasi dengan perangkat Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"Selalu izinkan",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"Izinkan %s untuk mengakses file di perangkat Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"Izinkan %s untuk mengakses lokasi perkiraan Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"Izinkan %s untuk melacak aktivitas Anda di aplikasi lainnya?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"Tolak",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"Izinkan %s untuk mengakses folder \"Dokumen\" di perangkat Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Selalu tanyakan",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"Izinkan %s untuk mengakses kalender Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"Lokasi presisi: Mati",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"Izinkan %s untuk menggunakan kamera?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"Jika ditolak, aplikasi ini tidak akan dapat mengakses papan klip.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"Izinkan %s untuk menangkap layar Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"Izinkan %s untuk menggunakan NearLink?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"Izinkan kali ini saja",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"Izinkan %s untuk mengakses data aktivitas fisik Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"Izinkan saat menggunakan aplikasi",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"Izinkan %s untuk mengakses folder \"Layar beranda\" di perangkat Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"Selalu tanyakan",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"Izinkan %s untuk mengakses gambar dan video di perangkat Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"Izinkan %s untuk mengakses folder \"Unduhan\" di perangkat Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"Ubah akses lokasi %s dari perkiraan menjadi tepat?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"Izinkan %s untuk membaca daftar aplikasi terpasang?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"Izinkan kali ini saja",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"Izinkan %s mengakses lokasi Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"Izinkan %s untuk menggunakan mikrofon?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"Izinkan %s untuk mengakses file musik dan audio di perangkat Anda?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"Konten disalin dari %s. Jika Anda memilih Tolak, aplikasi ini tidak akan dapat mengakses papan klip.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"Dasbor"
+            "value":"Dasbor",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"Pengelola izin"
+            "value":"Pengelola izin",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Izin"
+            "value":"Izin",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"Cari aplikasi"
+            "value":"Cari aplikasi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Diizinkan"
+            "value":"Diizinkan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Ditolak"
+            "value":"Ditolak",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Baca & ubah",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Baca saja",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Ubah saja",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Semua file",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"Aktifkan"
+            "value":"Aktifkan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"Izinkan di Pengaturan"
+            "value":"Izinkan di Pengaturan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"Nonaktifkan"
+            "value":"Nonaktifkan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"Nonaktifkan mikrofon?"
+            "value":"Nonaktifkan mikrofon?",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"Mikrofon dinonaktifkan"
+            "value":"Mikrofon dinonaktifkan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Kamera"
+            "value":"Kamera",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Kontak"
+            "value":"Kontak",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Kalender"
+            "value":"Kalender",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Aktivitas fisik"
+            "value":"Aktivitas fisik",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Sensor tubuh"
+            "value":"Sensor tubuh",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Pelacakan aktivitas"
+            "value":"Pelacakan aktivitas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Daftar aplikasi"
+            "value":"Daftar aplikasi",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"Papan klip"
+            "value":"Papan klip",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Folder"
+            "value":"Folder",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"File & folder"
+            "value":"File & folder",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"Bantuan masukan"
+            "value":"Bantuan masukan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"Berbagi layar"
+            "value":"Berbagi layar",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"Kontrol perangkat"
+            "value":"Kontrol perangkat",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"Bantuan masukan"
+            "value":"Bantuan masukan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"Berbagi layar"
+            "value":"Berbagi layar",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"Kontrol perangkat"
+            "value":"Kontrol perangkat",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Koneksi perangkat"
+            "value":"Koneksi perangkat",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"Izinkan %s untuk menyediakan bantuan masukan?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"Folder Unduhan"
+            "value":"Folder Unduhan",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"Folder layar beranda"
+            "value":"Folder layar beranda",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"Folder Dokumen"
+            "value":"Folder Dokumen",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"Konfirmasi"
+            "value":"Konfirmasi",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

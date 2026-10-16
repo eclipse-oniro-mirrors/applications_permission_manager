@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu ubicación si pulsas Permitir.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu Galería para guardar elementos si pulsas Permitir.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"group_label_health",
             "value":"¿Permitir que %s acceda a los datos de los sensores corporales?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"¿Permitir que %s copie contenido del portapapeles?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"Ubicación precisa: Activada",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"¿Permitir que %s acceda a tus contactos?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"Permite que esta aplicación acceda a tu ubicación precisa. Cuando esta opción esté desactivada, la aplicación solo podrá acceder a la ubicación aproximada. Es posible que algunas aplicaciones que no admiten esta función no puedan obtener ninguna ubicación.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"Cuando se deshabilite Ubicación precisa, la aplicación solo podrá obtener tu ubicación aproximada.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"¿Permitir que %s use Bluetooth?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"Ubicación precisa",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"¿Permitir que %s colabore con otros dispositivos?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"Permitir todo el tiempo",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"¿Permitir que %s acceda a los archivos del dispositivo?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"¿Permitir que %s acceda a la ubicación aproximada?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"¿Permitir que %s realice un seguimiento de tu actividad en otras aplicaciones?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"Denegar",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"¿Permitir que %s acceda a la carpeta “Documentos” del dispositivo?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Preguntar cada vez",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"¿Permitir que %s acceda a tu calendario?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"Ubicación precisa: Desactivada",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"¿Permitir que %s use la cámara?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"Si deniegas el acceso, esta aplicación no podrá acceder al portapapeles.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"¿Permitir que %s capture la pantalla?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"¿Permitir que %s use NearLink?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"Permitir solo esta vez",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"¿Permitir que %s acceda a tus datos de actividad física?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"Permitir mientras se usa la aplicación",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"¿Permitir que %s acceda a la carpeta “Pantalla principal” del dispositivo?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"Preguntar cada vez",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"¿Permitir que %s acceda a las imágenes y vídeos del dispositivo?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"¿Permitir que %s acceda a la carpeta “Descargas” del dispositivo?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"¿Quieres cambiar el acceso a la ubicación de %s de aproximado a preciso?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"¿Permitir que %s lea la lista de aplicaciones instaladas?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"Permitir solo esta vez",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"¿Permitir que %s acceda a tu ubicación?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"¿Permitir que %s use el micrófono?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"¿Permitir que %s acceda a los archivos de música y audio del dispositivo?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"Contenido copiado de %s. Si seleccionas Denegar, esta aplicación no podrá acceder al portapapeles.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"Panel"
+            "value":"Panel",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"Gestor de permisos"
+            "value":"Gestor de permisos",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Permisos"
+            "value":"Permisos",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"Buscar aplicaciones"
+            "value":"Buscar aplicaciones",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Con permiso"
+            "value":"Con permiso",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Denegado"
+            "value":"Denegado",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Leer y modificar",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Solo leer",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Solo modificar",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Todos los archivos",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"Habilitar"
+            "value":"Habilitar",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"Permitir en Ajustes"
+            "value":"Permitir en Ajustes",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"Deshabilitar"
+            "value":"Deshabilitar",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"Micrófono"
+            "value":"Micrófono",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"¿Deshabilitar el micrófono?"
+            "value":"¿Deshabilitar el micrófono?",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"Micrófono deshabilitado"
+            "value":"Micrófono deshabilitado",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Cámara"
+            "value":"Cámara",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Micrófono"
+            "value":"Micrófono",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Contactos"
+            "value":"Contactos",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Calendario"
+            "value":"Calendario",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Actividad física"
+            "value":"Actividad física",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Sensores corporales"
+            "value":"Sensores corporales",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Seguimiento de actividades"
+            "value":"Seguimiento de actividades",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Lista de aplicaciones"
+            "value":"Lista de aplicaciones",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"Portapapeles"
+            "value":"Portapapeles",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Carpetas"
+            "value":"Carpetas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"Archivos y carpetas"
+            "value":"Archivos y carpetas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Notificaciones flotantes"
+            "value":"Notificaciones flotantes",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"Asistencia de introducción de texto"
+            "value":"Asistencia de introducción de texto",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"Pantalla compartida"
+            "value":"Pantalla compartida",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"Control de dispositivos"
+            "value":"Control de dispositivos",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Notificaciones flotantes"
+            "value":"Notificaciones flotantes",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"Asistencia de introducción de texto"
+            "value":"Asistencia de introducción de texto",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"Pantalla compartida"
+            "value":"Pantalla compartida",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"Control de dispositivos"
+            "value":"Control de dispositivos",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Conexión de dispositivos"
+            "value":"Conexión de dispositivos",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"¿Permitir que %s proporcione asistencia de introducción de texto?",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"Carpeta Descargas"
+            "value":"Carpeta Descargas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"Carpeta Pantalla principal"
+            "value":"Carpeta Pantalla principal",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"Carpeta Documentos"
+            "value":"Carpeta Documentos",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"Confirmar"
+            "value":"Confirmar",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

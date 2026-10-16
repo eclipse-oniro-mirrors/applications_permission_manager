@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงตำแหน่งของคุณได้เพียงชั่วครู่เมื่อคุณแตะ อนุญาต",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงแกลเลอรีของคุณได้เพียงชั่วครู่เพื่อบันทึกรายการต่าง ๆ เมื่อคุณแตะ อนุญาต",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"group_label_health",
             "value":"อนุญาตให้ %s เข้าถึงข้อมูลเซ็นเซอร์ร่างกายหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"อนุญาตให้ %s คัดลอกเนื้อหาจากคลิปบอร์ดหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"ตำแหน่งที่แม่นยำ: เปิด",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"อนุญาตให้ %s เข้าถึงรายชื่อของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"อนุญาตให้แอปนี้เข้าถึงตำแหน่งที่แม่นยำของคุณ เมื่อปิดใช้งาน แอปนี้จะสามารถเข้าถึงตำแหน่งโดยประมาณของคุณได้เท่านั้น แอปบางแอปที่ไม่รองรับฟีเจอร์นี้อาจล้มเหลวในการระบุตำแหน่ง",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"เมื่อปิดใช้งานตำแหน่งที่แม่นยำ แอปจะได้รับเฉพาะตำแหน่งโดยประมาณของคุณเท่านั้น",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"อนุญาตให้ %s ใช้บลูทูธหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"ตำแหน่งที่แม่นยำ",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"อนุญาตให้ %s ทำงานร่วมกับอุปกรณ์อื่น ๆ หรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"อนุญาตตลอดเวลา",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"อนุญาตให้ %s เข้าถึงไฟล์บนอุปกรณ์ของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"อนุญาตให้ %s เข้าถึงตำแหน่งโดยประมาณของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"อนุญาตให้ %s ติดตามกิจกรรมของคุณในแอปอื่นหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"ปฏิเสธ",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"อนุญาตให้ %s เข้าถึงโฟลเดอร์ \"เอกสาร\" บนอุปกรณ์ของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"ถามทุกครั้ง",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"อนุญาตให้ %s เข้าถึงปฏิทินของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"ตำแหน่งที่แม่นยำ: ปิด",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"อนุญาตให้%sใช้กล้องถ่ายรูปหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"หากปฏิเสธ แอปนี้จะไม่สามารถเข้าถึงคลิปบอร์ดได้",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"อนุญาตให้ %s จับภาพหน้าจอของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"อนุญาตให้ %s ใช้ NearLink หรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"อนุญาตเฉพาะครั้งนี้เท่านั้น",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"อนุญาตให้ %s เข้าถึงข้อมูลกิจกรรมการเคลื่อนไหวร่างกายของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"อนุญาตขณะใช้งานแอป",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"อนุญาตให้ %s เข้าถึงโฟลเดอร์ \"หน้าจอหลัก\" บนอุปกรณ์ของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"ถามในแต่ละครั้ง",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"อนุญาตให้ %s เข้าถึงรูปภาพและวิดีโอบนอุปกรณ์ของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"อนุญาตให้ %s เข้าถึงโฟลเดอร์ \"การดาวน์โหลด\" บนอุปกรณ์ของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"เปลี่ยนการเข้าถึงตำแหน่งของ %s จากตำแหน่งโดยประมาณเป็นตำแหน่งที่แม่นยำหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"อนุญาตให้ %s อ่านรายการแอปที่ติดตั้งไว้หรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"อนุญาตในครั้งนี้เท่านั้น",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"อนุญาตให้ %s เข้าถึงตำแหน่งของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"อนุญาตให้ %s ใช้ไมโครโฟนหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"อนุญาตให้ %s เข้าถึงไฟล์เพลงและเสียงบนอุปกรณ์ของคุณหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"เนื้อหานี้คัดลอกมาจาก %s หากคุณเลือก ปฏิเสธ แอปนี้จะไม่สามารถเข้าถึงคลิปบอร์ดได้",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"แดชบอร์ด"
+            "value":"แดชบอร์ด",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"ตัวจัดการการอนุญาต"
+            "value":"ตัวจัดการการอนุญาต",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"การอนุญาต"
+            "value":"การอนุญาต",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"ค้นหาแอป"
+            "value":"ค้นหาแอป",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"อนุญาตแล้ว"
+            "value":"อนุญาตแล้ว",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"ปฏิเสธแล้ว"
+            "value":"ปฏิเสธแล้ว",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"อ่านและแก้ไข",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"อ่านอย่างเดียว",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"แก้ไขอย่างเดียว",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"ไฟล์ทั้งหมด",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"เปิดใช้งาน"
+            "value":"เปิดใช้งาน",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"อนุญาตในการตั้งค่า"
+            "value":"อนุญาตในการตั้งค่า",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"ปิดใช้งาน"
+            "value":"ปิดใช้งาน",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"ไมโครโฟน"
+            "value":"ไมโครโฟน",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"ปิดใช้งานไมโครโฟนหรือไม่"
+            "value":"ปิดใช้งานไมโครโฟนหรือไม่",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"ไมโครโฟนปิดใช้งานอยู่"
+            "value":"ไมโครโฟนปิดใช้งานอยู่",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"กล้องถ่ายรูป"
+            "value":"กล้องถ่ายรูป",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"ไมโครโฟน"
+            "value":"ไมโครโฟน",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"รายชื่อ"
+            "value":"รายชื่อ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"ปฏิทิน"
+            "value":"ปฏิทิน",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"กิจกรรมการเคลื่อนไหวร่างกาย"
+            "value":"กิจกรรมการเคลื่อนไหวร่างกาย",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"เซ็นเซอร์ร่างกาย"
+            "value":"เซ็นเซอร์ร่างกาย",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"การติดตามกิจกรรม"
+            "value":"การติดตามกิจกรรม",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"รายการแอป"
+            "value":"รายการแอป",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"บลูทูธ"
+            "value":"บลูทูธ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"คลิปบอร์ด"
+            "value":"คลิปบอร์ด",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"โฟลเดอร์"
+            "value":"โฟลเดอร์",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"ไฟล์และโฟลเดอร์"
+            "value":"ไฟล์และโฟลเดอร์",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"ดรอปโซน"
+            "value":"ดรอปโซน",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"ความช่วยเหลือในการป้อนข้อมูล"
+            "value":"ความช่วยเหลือในการป้อนข้อมูล",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"การแบ่งปันหน้าจอ"
+            "value":"การแบ่งปันหน้าจอ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"การควบคุมอุปกรณ์"
+            "value":"การควบคุมอุปกรณ์",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"ดรอปโซน"
+            "value":"ดรอปโซน",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"ความช่วยเหลือในการป้อนข้อมูล"
+            "value":"ความช่วยเหลือในการป้อนข้อมูล",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"การแบ่งปันหน้าจอ"
+            "value":"การแบ่งปันหน้าจอ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"การควบคุมอุปกรณ์"
+            "value":"การควบคุมอุปกรณ์",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"การเชื่อมต่อ​อุ‍ปกรณ์"
+            "value":"การเชื่อมต่อ​อุ‍ปกรณ์",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"อนุญาตให้ %s ให้บริการช่วยเหลือการป้อนข้อมูลหรือไม่",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"โฟลเดอร์การดาวน์โหลด"
+            "value":"โฟลเดอร์การดาวน์โหลด",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"โฟลเดอร์หน้าจอหลัก"
+            "value":"โฟลเดอร์หน้าจอหลัก",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"โฟลเดอร์เอกสาร"
+            "value":"โฟลเดอร์เอกสาร",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"ยืนยัน"
+            "value":"ยืนยัน",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

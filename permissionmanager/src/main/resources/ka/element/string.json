@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"თქვენივე კონფიდენციალურობის დასაცავად, %s შეძლებს თქვენს მდებარეობაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"თქვენი კონფიდენციალურობის დასაცავად, %s შეძლებს ელემენტების შესანახად გალერეაზე მხოლოდ ხანმოკლე წვდომას, როცა შეეხებით ღილაკს „დაშვება“.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"ხელსაწყოთა პანელი"
+            "value":"ხელსაწყოთა პანელი",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"ნებართვები"
+            "value":"ნებართვები",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"დაშვებული"
+            "value":"დაშვებული",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"უარყოფილია"
+            "value":"უარყოფილია",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"წაკითხვა და შეცვლა",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"მხოლოდ წაკითხვა",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"მხოლოდ შეცვლა",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"ყველა ფაილი",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"შემეკითხოს ყოველ ჯერზე",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"მიკროფონი"
+            "value":"მიკროფონი",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"კამერა"
+            "value":"კამერა",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"მიკროფონი"
+            "value":"მიკროფონი",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"კონტაქტები"
+            "value":"კონტაქტები",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"კალენდა​რი"
+            "value":"კალენდა​რი",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"ფიზიკური აქტივობა"
+            "value":"ფიზიკური აქტივობა",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"სხეულის სენსორები"
+            "value":"სხეულის სენსორები",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"აქტივობაზე თვალის დევნება"
+            "value":"აქტივობაზე თვალის დევნება",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"აპების სია"
+            "value":"აპების სია",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"საქაღალდეები"
+            "value":"საქაღალდეები",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"მოწყობილობის კავშირი"
+            "value":"მოწყობილობის კავშირი",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

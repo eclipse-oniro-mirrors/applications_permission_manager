@@ -25,7 +25,7 @@
             "name":"security_description_location",
             "value":"Құпиялықты қорғау үшін %s сіз «Рұқсат ету» түймесін түрткенде ғана орналасқан жеріңізге қысқа уақыт бойы қатынаса алады.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -39,7 +39,7 @@
             "name":"security_description_media_files",
             "value":"Құпиялығыңызды қорғау үшін %s сіз «Рұқсат ету» түймесін түрткенде элементтерді сақтау үшін «Галерея» қолданбаңызға қысқа уақыт бойы ғана қатынаса алады.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Бақылау тақтасы"
+            "value":"Бақылау тақтасы",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Рұқсаттар"
+            "value":"Рұқсаттар",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Рұқсат етілген"
+            "value":"Рұқсат етілген",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Тыйым салынған"
+            "value":"Тыйым салынған",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Оқу және өзгерту",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Тек оқу",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Тек өзгерту",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Барлық файлдар",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Үнемі сұрау",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Микрофон"
+            "value":"Микрофон",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Камера"
+            "value":"Камера",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Микрофон"
+            "value":"Микрофон",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Контактілер"
+            "value":"Контактілер",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Күнтізбе"
+            "value":"Күнтізбе",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Физикалық әрекет"
+            "value":"Физикалық әрекет",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Дене сенсорлары"
+            "value":"Дене сенсорлары",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Әрекетті бақылау"
+            "value":"Әрекетті бақылау",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Қолданбалар тізімі"
+            "value":"Қолданбалар тізімі",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Қалталар"
+            "value":"Қалталар",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Табыстау аймағы"
+            "value":"Табыстау аймағы",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Табыстау аймағы"
+            "value":"Табыстау аймағы",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Құрылғы байланысы"
+            "value":"Құрылғы байланысы",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

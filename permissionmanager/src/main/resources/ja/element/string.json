@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"プライバシー保護のため、[許可]をタップした場合、%sは位置情報に短時間だけアクセスできます。",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"プライバシー保護のため、[許可]をタップした場合、%sはギャラリーに短時間だけアクセスしてアイテムを保存できます。",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -60,440 +60,554 @@
             "name":"group_label_health",
             "value":"%sによる、ボディセンサーデータへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
             "value":"%sによる、クリップボードの内容のコピーを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_on",
             "value":"正確な位置情報：オン",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_contacts",
             "value":"%sによる、連絡先へのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"get_the_exact_position",
             "value":"このアプリが正確な位置情報にアクセスすることを許可します。これがオフの場合、このアプリは、おおよその位置情報のみにアクセスできます。この機能をサポートしていない一部のアプリでは、位置情報を取得できない場合があります。",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"close_exact_position",
             "value":"正確な位置情報が無効な場合、アプリはおよその位置情報のみを取得できます。",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_bluetooth",
             "value":"%sによる、Bluetoothの使用を許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location",
             "value":"正確な位置情報",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_distributed_datasync",
             "value":"%sによる、その他デバイスとのコラボを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"always_allow",
             "value":"常に許可",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document",
             "value":"%sによる、このデバイスのファイルへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"access_general_location",
             "value":"%sによる、おおよその位置情報へのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_ads",
             "value":"%sによる、その他アプリでのアクティビティの追跡を許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"ban",
             "value":"拒否",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_document_folder",
             "value":"%sによる、デバイスの[文書]フォルダへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"毎回確認",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_calendar",
             "value":"%sによる、カレンダーへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"precise_location_off",
             "value":"正確な位置情報：オフ",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_camera",
             "value":"%sによる、カメラの使用を許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
             "value":"拒否された場合、このアプリはクリップボードにアクセスできなくなります。",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_screen_capture",
             "value":"%sによる、画面のキャプチャを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
             "value":"%sによる、NearLinkの使用を許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allow_this_time",
             "value":"今回のみ許可",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_sport",
             "value":"%sによる、身体活動データへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"allowed_only_during_use",
             "value":"アプリ使用中に許可",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_desktop_folder",
             "value":"%sによる、デバイスの[ホーム画面]フォルダへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_inquiry",
             "value":"毎回確認",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_image_and_videos",
             "value":"%sによる、デバイス上の画像とビデオへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_download_folder",
             "value":"%sによる、デバイスの[ダウンロード]フォルダへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"fuzzy_to_exact",
             "value":"%sの位置情報へのアクセスをおおよその位置から正確な位置に変更しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_app_list",
             "value":"%sによる、インストール済みアプリ一覧の読み取りを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"this_time_only",
             "value":"今回のみ許可",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_location",
             "value":"%sによる、位置情報へのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
             "value":"%sによる、マイクの使用を許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"group_label_audios",
             "value":"%sによる、デバイス上の音楽とオーディオファイルへのアクセスを許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"paste_board_app",
             "value":"内容が%sからコピーされました。[拒否]を選択すると、このアプリはクリップボードにアクセスできなくなります。",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"permission_access_record",
-            "value":"ダッシュボード"
+            "value":"ダッシュボード",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_manager",
-            "value":"権限マネージャー"
+            "value":"権限マネージャー",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"権限"
+            "value":"権限",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"text_input_placeholder",
-            "value":"アプリを検索"
+            "value":"アプリを検索",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"許可"
+            "value":"許可",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"拒否"
+            "value":"拒否",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"読み取りと変更",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"読み取りのみ",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"変更のみ",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"すべてのファイル",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"有効化"
+            "value":"有効化",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"go_to_settings",
-            "value":"[設定]で許可"
+            "value":"[設定]で許可",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close",
-            "value":"無効化"
+            "value":"無効化",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"microphone",
-            "value":"マイク"
+            "value":"マイク",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"close_microphone",
-            "value":"マイクを無効にしますか？"
+            "value":"マイクを無効にしますか？",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"global_title_microphone",
-            "value":"マイクが無効"
+            "value":"マイクが無効",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"カメラ"
+            "value":"カメラ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"マイク"
+            "value":"マイク",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"連絡先"
+            "value":"連絡先",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"カレンダー"
+            "value":"カレンダー",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"身体活動"
+            "value":"身体活動",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"ボディセンサー"
+            "value":"ボディセンサー",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"アクティビティ追跡"
+            "value":"アクティビティ追跡",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"アプリ一覧"
+            "value":"アプリ一覧",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"クリップボード"
+            "value":"クリップボード",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"フォルダ"
+            "value":"フォルダ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"ファイルとフォルダ"
+            "value":"ファイルとフォルダ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"ドロップゾーン"
+            "value":"ドロップゾーン",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"入力支援"
+            "value":"入力支援",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_screen_share",
-            "value":"画面共有"
+            "value":"画面共有",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_control_device",
-            "value":"デバイス制御"
+            "value":"デバイス制御",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"ドロップゾーン"
+            "value":"ドロップゾーン",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"入力支援"
+            "value":"入力支援",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"画面共有"
+            "value":"画面共有",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_control_device",
-            "value":"デバイス制御"
+            "value":"デバイス制御",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"デバイスの接続"
+            "value":"デバイスの接続",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_label_hook_input_event",
             "value":"%sに入力アシスタントの提供を許可しますか？",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"download_folder",
-            "value":"ダウンロードフォルダ"
+            "value":"ダウンロードフォルダ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"desktop_folder",
-            "value":"ホーム画面のフォルダ"
+            "value":"ホーム画面のフォルダ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"document_folder",
-            "value":"文書フォルダ"
+            "value":"文書フォルダ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"confirm",
-            "value":"確認"
+            "value":"確認",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

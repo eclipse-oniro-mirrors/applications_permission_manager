@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Da se zaščiti vaša zasebnost, lahko aplikacija %s do vaše lokacije dostopi le za kratek čas, ko se dotaknete možnosti Dovoli.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Da se zaščiti vaša zasebnost, lahko aplikacija %s do aplikacije Galerija dostopi le za kratek čas in shrani elemente, ko se dotaknete možnosti Dovoli.",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Nadzorna plošča"
+            "value":"Nadzorna plošča",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Dovoljenja"
+            "value":"Dovoljenja",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Dovoljeno"
+            "value":"Dovoljeno",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Zavrnjeno"
+            "value":"Zavrnjeno",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Preberi in spremeni",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Samo preberi",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Samo spremeni",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Vse datoteke",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Vedno vprašaj",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Kamera"
+            "value":"Kamera",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofon"
+            "value":"Mikrofon",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Stiki"
+            "value":"Stiki",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Koledar"
+            "value":"Koledar",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Telesna dejavnost"
+            "value":"Telesna dejavnost",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Tipala za telo"
+            "value":"Tipala za telo",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Sledenje dejavnosti"
+            "value":"Sledenje dejavnosti",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Seznam aplikacij"
+            "value":"Seznam aplikacij",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Mape"
+            "value":"Mape",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Spustno območje"
+            "value":"Spustno območje",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Spustno območje"
+            "value":"Spustno območje",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Povezovanje naprav"
+            "value":"Povezovanje naprav",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

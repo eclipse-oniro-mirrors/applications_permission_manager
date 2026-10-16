@@ -25,7 +25,7 @@
             "name":"security_description_location",
             "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %s អាចចូលប្រើទីតាំងរបស់អ្នកតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -39,7 +39,7 @@
             "name":"security_description_media_files",
             "value":"ដើម្បីការពារឯកជនភាពរបស់អ្នក %s អាចចូលប្រើវិចិត្រសាលរបស់អ្នកដើម្បីរក្សាទុកធាតុនានាតែមួយភ្លែតប៉ុណ្ណោះ នៅពេលអ្នកប៉ះ \"អនុញ្ញាត\"។",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"ផ្ទាំងគ្រប់គ្រង"
+            "value":"ផ្ទាំងគ្រប់គ្រង",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"ការអនុញ្ញាត"
+            "value":"ការអនុញ្ញាត",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"បានអនុញ្ញាត"
+            "value":"បានអនុញ្ញាត",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"បានបដិសេធ"
+            "value":"បានបដិសេធ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"អាន និងកែសម្រួល",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"បានតែអាន",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"បានតែកែសម្រួល",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"ឯកសារទាំងអស់",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"សួររាល់ដង",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"មីក្រូហ្វូន"
+            "value":"មីក្រូហ្វូន",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"កាមេរ៉ា"
+            "value":"កាមេរ៉ា",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"មីក្រូហ្វូន"
+            "value":"មីក្រូហ្វូន",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"ទំនាក់ទំនង"
+            "value":"ទំនាក់ទំនង",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"ប្រតិទិន"
+            "value":"ប្រតិទិន",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"សកម្មភាពរាងកាយ"
+            "value":"សកម្មភាពរាងកាយ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"ឧបករណ៍ចាប់សញ្ញាណរាងកាយ"
+            "value":"ឧបករណ៍ចាប់សញ្ញាណរាងកាយ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"ការតាមដានសកម្មភាព"
+            "value":"ការតាមដានសកម្មភាព",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"បញ្ជីកម្មវិធី"
+            "value":"បញ្ជីកម្មវិធី",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"ប៊្លូធូស"
+            "value":"ប៊្លូធូស",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"ថតដាក់ឯកសារ"
+            "value":"ថតដាក់ឯកសារ",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Dropzone"
+            "value":"Dropzone",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"ការតភ្ជាប់ឧបករណ៍"
+            "value":"ការតភ្ជាប់ឧបករណ៍",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }

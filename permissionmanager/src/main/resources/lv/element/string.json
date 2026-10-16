@@ -11,7 +11,7 @@
             "name":"security_description_location",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu atrašanās vietai, ja pieskaraties Atļaut.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -25,7 +25,7 @@
             "name":"security_description_media_files",
             "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu lietotnei Galerija, ja pieskaraties Atļaut.",
             "attr":{
-                "priority":"LT"
+                "translatable":false
             }
         },
         {
@@ -58,114 +58,171 @@
         },
         {
             "name":"permission_access_record",
-            "value":"Informācijas panelis"
+            "value":"Informācijas panelis",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission",
-            "value":"Atļaujas"
+            "value":"Atļaujas",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"allowed",
-            "value":"Atļauts"
+            "value":"Atļauts",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"banned",
-            "value":"Liegts"
+            "value":"Liegts",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"read_and_modify",
             "value":"Lasīt un mainīt",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"read_only",
             "value":"Tikai lasīt",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"modify_only",
             "value":"Tikai mainīt",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"all_files",
             "value":"Visi faili",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"per_use_query",
             "value":"Katru reizi jautāt",
             "attr":{
-                "priority":"translate"
+                "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"Mikrofons"
+            "value":"Mikrofons",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_camera",
-            "value":"Kamera"
+            "value":"Kamera",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_microphone",
-            "value":"Mikrofons"
+            "value":"Mikrofons",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_contacts",
-            "value":"Kontakti"
+            "value":"Kontakti",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_calendar",
-            "value":"Kalendārs"
+            "value":"Kalendārs",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_sport",
-            "value":"Fiziskā aktivitāte"
+            "value":"Fiziskā aktivitāte",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_health",
-            "value":"Ķermeņa sensori"
+            "value":"Ķermeņa sensori",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_ads",
-            "value":"Aktivitātes izsekošana"
+            "value":"Aktivitātes izsekošana",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_app_list",
-            "value":"Lietotņu saraksts"
+            "value":"Lietotņu saraksts",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"Bluetooth"
+            "value":"Bluetooth",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_folder",
-            "value":"Mapes"
+            "value":"Mapes",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_near_link",
-            "value":"NearLink"
+            "value":"NearLink",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"group_name_float_view",
-            "value":"Nomešanas zona"
+            "value":"Nomešanas zona",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"permission_label_float_view",
-            "value":"Nomešanas zona"
+            "value":"Nomešanas zona",
+            "attr":{
+                "translatable":false
+            }
         },
         {
             "name":"multi_device_collaboration",
-            "value":"Savienojums ar ierīci"
+            "value":"Savienojums ar ierīci",
+            "attr":{
+                "translatable":false
+            }
         }
     ]
 }
