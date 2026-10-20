@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Per proteggere la tua privacy, %s può accedere solo brevemente alla tua posizione quando tocchi Consenti.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Consenti",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Per proteggere la tua privacy, %s può accedere solo brevemente alla tua Galleria per salvare gli elementi quando tocchi Consenti.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -282,7 +268,7 @@
         },
         {
             "name":"group_label_location",
-            "value":"Vuoi consentire a %s di accedere alla posizione?",
+            "value":"Vuoi consentire a %s di accedere alla tua posizione?",
             "attr":{
                 "translatable":false
             }

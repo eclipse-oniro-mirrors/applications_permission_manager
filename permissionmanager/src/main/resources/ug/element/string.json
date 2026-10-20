@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"‏«%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئورۇن ئۇچۇرىنى ئوقۇيالايدۇ.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"رۇخسەت",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"‏«%s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتىلا ئامبارغا رەسىم ۋە سىن ساقلىيالايدۇ.",
-            "attr":{
-                "translatable":false
             }
         },
         {

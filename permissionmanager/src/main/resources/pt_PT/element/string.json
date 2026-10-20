@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Para proteger a sua privacidade, a aplicação %s apenas pode aceder momentaneamente à localização quando toca em Permitir.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
-            "value":"Conceder",
+            "value":"Permitir",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Para proteger a sua privacidade, a aplicação %s apenas pode aceder momentaneamente à Galeria para guardar itens quando toca em Permitir.",
-            "attr":{
-                "translatable":false
             }
         },
         {

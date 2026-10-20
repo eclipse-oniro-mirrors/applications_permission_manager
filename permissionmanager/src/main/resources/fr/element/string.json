@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Pour protéger votre vie privée, %s ne peut accéder brièvement à vos informations de localisation que lorsque vous touchez Autoriser.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Autoriser",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Pour protéger votre vie privée, %s ne peut accéder brièvement à Galerie pour enregistrer des éléments que lorsque vous touchez Autoriser.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -65,7 +51,7 @@
         },
         {
             "name":"group_label_pasteboard",
-            "value":"Autoriser %s à copier le contenu du presse-papier ?",
+            "value":"Autoriser %s à copier le contenu du presse-papiers ?",
             "attr":{
                 "translatable":false
             }
@@ -86,7 +72,7 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Autoriser cette application à accéder à vos informations précises de localisation. Lorsque cette option est désactivée, l'application ne peut accéder qu'à vos informations approximatives de localisation. Certaines applications qui ne prennent pas en charge cette fonctionnalité peuvent ne pas obtenir de localisation.",
+            "value":"Autoriser cette application à accéder à votre localisation précise. Lorsque cette option est désactivée, l'application ne peut accéder qu'à votre localisation approximative. Certaines applications qui ne prennent pas en charge cette fonctionnalité peuvent ne pas obtenir de localisation.",
             "attr":{
                 "translatable":false
             }
@@ -121,7 +107,7 @@
         },
         {
             "name":"always_allow",
-            "value":"Autoriser tout le temps",
+            "value":"Toujours autoriser",
             "attr":{
                 "translatable":false
             }
@@ -163,7 +149,7 @@
         },
         {
             "name":"per_use_query",
-            "value":"Demander à chaque fois",
+            "value":"Demander chaque fois",
             "attr":{
                 "translatable":false
             }
@@ -289,7 +275,7 @@
         },
         {
             "name":"group_label_microphone",
-            "value":"Autoriser %s à utiliser le microphone ?",
+            "value":"Autoriser %s à utiliser le microphone ?",
             "attr":{
                 "translatable":false
             }

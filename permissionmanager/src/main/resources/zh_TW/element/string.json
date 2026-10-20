@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"在您輕觸此按鈕時，僅允許「%s」存取位置。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"允許",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"在您輕觸此按鈕時，僅允許「%s」將圖片和影片儲存至圖片庫。",
-            "attr":{
-                "translatable":false
             }
         },
         {

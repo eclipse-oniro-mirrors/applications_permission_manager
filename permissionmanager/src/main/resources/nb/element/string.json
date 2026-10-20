@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til posisjonen din når du trykker på Tillat.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Tillat",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"For å beskytte personvernet ditt, kan %s bare få kort tilgang til ditt Galleri for å lagre filer når du trykker på Tillat.",
-            "attr":{
-                "translatable":false
             }
         },
         {

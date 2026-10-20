@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Pentru a vă proteja confidențialitatea, %s vă va putea accesa locația doar pentru scurt timp atunci când veți atinge Permitere.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Permiteți",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Pentru a vă proteja confidențialitatea, %s vă va putea accesa Galeria pentru a salva elemente doar când veți atinge Permitere.",
-            "attr":{
-                "translatable":false
             }
         },
         {

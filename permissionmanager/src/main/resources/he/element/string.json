@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"כדי להגן על פרטיותך, %s יוכל לגשת למיקום שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"אפשר",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"כדי להגן על פרטיותך, %s יוכל לגשת ל'גלריה' שלך רק לזמן קצר כאשר תקיש על 'אפשר'.",
-            "attr":{
-                "translatable":false
             }
         },
         {

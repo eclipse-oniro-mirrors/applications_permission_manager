@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses lokasi anda secara ringkas apabila anda mengetik Benarkan.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Benarkan",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Untuk melindungi privasi anda, %s hanya boleh mengakses Galeri anda secara ringkas untuk menyimpan item apabila anda mengetik Benarkan.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -72,7 +58,7 @@
         },
         {
             "name":"always_allow",
-            "value":"Benarkan setiap masa",
+            "value":"Sentiasa benarkan",
             "attr":{
                 "translatable":false
             }
@@ -142,7 +128,7 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Benarkan aplikasi ini mengakses lokasi tepat anda. Apabila ciri ini dimatikan, aplikasi ini hanya boleh mengakses lokasi anggaran anda. Sesetengah aplikasi yang tidak menyokong ciri ini mungkin gagal mendapatkan sebarang lokasi.",
+            "value":"Benarkan aplikasi ini mengakses lokasi tepat anda. Apabila ciri ini dimatikan, aplikasi ini hanya boleh mengakses lokasi anggaran anda. Sesetengah aplikasi yang tidak menyokong ciri ini mungkin gagal mendapat sebarang lokasi.",
             "attr":{
                 "translatable":false
             }

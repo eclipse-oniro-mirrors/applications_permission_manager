@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu ubicación si pulsas Permitir.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Permitir",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Para proteger tu privacidad, %s solo podrá acceder brevemente a tu Galería para guardar elementos si pulsas Permitir.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -121,7 +107,7 @@
         },
         {
             "name":"always_allow",
-            "value":"Permitir todo el tiempo",
+            "value":"Permitir siempre",
             "attr":{
                 "translatable":false
             }

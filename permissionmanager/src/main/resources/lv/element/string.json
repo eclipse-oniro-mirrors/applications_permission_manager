@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu atrašanās vietai, ja pieskaraties Atļaut.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Atļaut",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Lai aizsargātu jūsu konfidencialitāti, %s var tikai īsi piekļūt jūsu lietotnei Galerija, ja pieskaraties Atļaut.",
-            "attr":{
-                "translatable":false
             }
         },
         {

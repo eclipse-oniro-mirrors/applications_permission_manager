@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a tartózkodási helyéhez, ha az Engedélyezés gombra koppint.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Engedélyezés",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Az Ön személyes adatainak védelme érdekében %s csak rövid ideig férhet hozzá a Galériához a képek mentéséhez, ha az Engedélyezés gombra koppint.",
-            "attr":{
-                "translatable":false
             }
         },
         {

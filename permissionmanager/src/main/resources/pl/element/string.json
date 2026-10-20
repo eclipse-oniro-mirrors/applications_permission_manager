@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Aby chronić prywatność użytkownika, aplikacja %s może uzyskać dostęp do lokalizacji tylko na chwilę po dotknięciu opcji Zezwalaj.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Zezwól",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Aby chronić prywatność użytkownika, aplikacja %s może uzyskać dostęp do Galerii użytkownika tylko na chwilę po dotknięciu opcji Zezwalaj.",
-            "attr":{
-                "translatable":false
             }
         },
         {

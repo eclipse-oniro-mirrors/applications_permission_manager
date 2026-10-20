@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"För att skydda din sekretess kan %s bara kortvarigt komma åt din plats när du trycker på Tillåt.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Tillåt",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"För att skydda din sekretess kan %s bara kortvarigt komma åt ditt Galleri för att spara objekt när du trycker på Tillåt.",
-            "attr":{
-                "translatable":false
             }
         },
         {

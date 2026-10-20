@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Gizliliğinizi korumak için, İzin veriyorum düğmesine dokunduğunuzda %s, konumunuza yalnızca kısa bir süreliğine erişebilir.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
-            "value":"İzin ver",
+            "value":"İzin veriyorum",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Gizliliğinizi korumak için, İzin veriyorum düğmesine dokunduğunuzda %s, Galeri'ye yalnızca kısa bir süreliğine öğeleri kaydetmek için erişebilir.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -86,7 +72,7 @@
         },
         {
             "name":"get_the_exact_position",
-            "value":"Bu uygulamanın kesin konumunuza erişmesine izin verilir. Bu kapalıyken, bu uygulama yalnızca yaklaşık konumunuza erişebilir. Bu özelliği desteklemeyen bazı uygulamalar konum alamayabilir.",
+            "value":"Uygulamanın kesin konumunuza erişmesine izin verilir. Bu kapalıyken, bu uygulama yalnızca yaklaşık konumunuza erişebilir. Bu özelliği desteklemeyen bazı uygulamalar konum alamayabilir.",
             "attr":{
                 "translatable":false
             }

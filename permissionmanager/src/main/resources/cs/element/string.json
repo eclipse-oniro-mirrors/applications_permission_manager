@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší poloze jen krátce, když klepnete na možnost Povolit.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Povolit",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"V zájmu ochrany vašeho soukromí může mít %s přístup k vaší galerii jen krátce, když klepnete na možnost Povolit.",
-            "attr":{
-                "translatable":false
             }
         },
         {

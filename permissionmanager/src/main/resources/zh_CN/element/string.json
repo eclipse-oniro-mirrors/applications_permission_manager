@@ -1240,20 +1240,6 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"仅允许“%s”在您点击此按钮时访问位置。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"仅允许“%s”在您点击此按钮时保存图片和视频至图库。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"security_text_location",
             "value":"仅允许“%1$s%2$s”在您点击此按钮时访问位置。",
             "attr":{

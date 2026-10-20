@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Radi zaštite vaše privatnosti, aplikacija %s može samo nakratko da pristupi vašoj lokaciji kada dodirnete opciju Dozvoli.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Dozvoli",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Radi zaštite vaše privatnosti, aplikacija %s može samo nakratko da pristupi vašoj Galeriji radi čuvanja stavki kada dodirnete opciju Dozvoli.",
-            "attr":{
-                "translatable":false
             }
         },
         {

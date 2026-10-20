@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Radi zaštite privatnosti aplikacija %s može samo nakratko pristupiti vašoj lokaciji kada dodirnete opciju Dopusti.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Dopusti",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Radi zaštite privatnosti aplikacija %s može samo nakratko pristupiti aplikaciji Galerija kako bi spremila stavke kada dodirnete opciju Dopusti.",
-            "attr":{
-                "translatable":false
             }
         },
         {
