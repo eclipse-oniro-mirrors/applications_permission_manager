@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата локација кога ќе допрете Дозволи.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Дозволи",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"За да се заштити вашата приватност, %s може само кратко да пристапи до вашата Галерија за да зачува ставки кога ќе допрете Дозволи.",
-            "attr":{
-                "translatable":false
             }
         },
         {

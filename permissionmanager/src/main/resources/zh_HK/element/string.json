@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"僅允許「%s」在您輕觸此按鈕時存取位置。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"允許",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"僅允許「%s」在您輕觸此按鈕時儲存圖片和影片至圖片庫。",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -114,7 +100,7 @@
         },
         {
             "name":"per_use_query",
-            "value":"每次使用詢問",
+            "value":"每次使用時詢問",
             "attr":{
                 "translatable":false
             }
@@ -149,7 +135,7 @@
         },
         {
             "name":"per_inquiry",
-            "value":"每次詢問",
+            "value":"每次均詢問",
             "attr":{
                 "translatable":false
             }
@@ -184,7 +170,7 @@
         },
         {
             "name":"group_label_health",
-            "value":"允許「%s」使用感應器來取得您的身體數據？",
+            "value":"允許「%s」使用感應器獲取你的身體數據？",
             "attr":{
                 "translatable":false
             }
@@ -247,7 +233,7 @@
         },
         {
             "name":"group_label_camera",
-            "value":"允許「%s」存取您的相機？",
+            "value":"允許「%s」存取你的相機？",
             "attr":{
                 "translatable":false
             }
@@ -275,14 +261,14 @@
         },
         {
             "name":"group_label_location",
-            "value":"允許「%s」存取您的位置？",
+            "value":"允許「%s」存取你的位置？",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
-            "value":"允許「%s」存取您的麥克風？",
+            "value":"允許「%s」存取你的麥克風？",
             "attr":{
                 "translatable":false
             }

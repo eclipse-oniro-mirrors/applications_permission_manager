@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"プライバシー保護のため、[許可]をタップした場合、%sは位置情報に短時間だけアクセスできます。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"許可",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"プライバシー保護のため、[許可]をタップした場合、%sはギャラリーに短時間だけアクセスしてアイテムを保存できます。",
-            "attr":{
-                "translatable":false
             }
         },
         {

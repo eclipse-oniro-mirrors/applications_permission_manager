@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel teie asukohale ligi vaid lühiajaliselt.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Luba",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Rakendus %s pääseb teie privaatsuse kaitsmiseks valiku Luba puudutamisel üksuste salvestamiseks Galeriile ligi vaid lühiajaliselt.",
-            "attr":{
-                "translatable":false
             }
         },
         {

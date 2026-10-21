@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Para proteger sua privacidade, %s só poderá acessar brevemente sua localização quando você tocar em Permitir.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Permitir",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Para proteger sua privacidade, %s só poderá acessar brevemente a sua Galeria para salvar itens quando você tocar em Permitir.",
-            "attr":{
-                "translatable":false
             }
         },
         {

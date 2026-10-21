@@ -1240,20 +1240,6 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"To protect your privacy, %s can only briefly access your location when you tap Allow.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"security_text_location",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow.",
             "attr":{

@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Da se zaščiti vaša zasebnost, lahko aplikacija %s do vaše lokacije dostopi le za kratek čas, ko se dotaknete možnosti Dovoli.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Dovoli",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Da se zaščiti vaša zasebnost, lahko aplikacija %s do aplikacije Galerija dostopi le za kratek čas in shrani elemente, ko se dotaknete možnosti Dovoli.",
-            "attr":{
-                "translatable":false
             }
         },
         {

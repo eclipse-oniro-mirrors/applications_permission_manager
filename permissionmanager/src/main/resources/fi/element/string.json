@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Tietosuojan suojaamisen takia voi %s hetkellisesti käyttää sijaintitietoa, kun valitset Salli.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Salli",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Tietosuojan suojaamisen takia voi %s hetkellisesti käyttää Galleriaa kohteiden tallentamiseen, kun valitset Salli.",
-            "attr":{
-                "translatable":false
             }
         },
         {

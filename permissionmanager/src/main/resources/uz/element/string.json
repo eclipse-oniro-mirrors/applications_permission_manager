@@ -22,24 +22,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Ruxsat tugmasini bosganingizda, maxfiyligingizni himoyalash uchun %s joylashuv axborotingizga faqat qisqa vaqtga kira oladi.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Ruxsat",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Ruxsat tugmasini bosganingizda, elementlarni saqlash uchun %s Galereyaga faqat qisqa vaqtga kira oladi.",
-            "attr":{
-                "translatable":false
             }
         },
         {

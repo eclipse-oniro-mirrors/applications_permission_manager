@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"༼%s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་རྡེབ་སྐབས་ཁོ་ནར་གནས་ཡུལ་ལ་ལྟ་སྤྱོད་བྱ་ཆོག",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"ཆོག་པ།",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"༼%s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་རྡེབ་སྐབས་ཁོ་ནར་པར་མཛོད་དུ་འདྲ་པར་དང་བརྙན་ཟློས་ཉར་ཚགས་ཁོ་ན་བྱ་ཆོག",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -79,7 +65,7 @@
         },
         {
             "name":"always_allow",
-            "value":"ནམ་ཡང་ཆོག",
+            "value":"ནམ་ཡང་ཆོག་པ།",
             "attr":{
                 "translatable":false
             }
@@ -100,7 +86,7 @@
         },
         {
             "name":"ban",
-            "value":"བཀག་འགོག",
+            "value":"མི་ཆོག",
             "attr":{
                 "translatable":false
             }
@@ -149,7 +135,7 @@
         },
         {
             "name":"per_inquiry",
-            "value":"ཐེངས་རེ་རེར་འདྲི་རྩད་བྱེད།",
+            "value":"ཐེངས་རེར་བློ་འདྲི་བ།",
             "attr":{
                 "translatable":false
             }

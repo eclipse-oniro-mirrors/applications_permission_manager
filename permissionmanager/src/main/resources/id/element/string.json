@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses lokasi Anda secara singkat ketika Anda mengetuk Izinkan.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Izinkan",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Untuk melindungi privasi Anda, %s hanya dapat mengakses Galeri Anda secara singkat ketika Anda mengetuk Izinkan.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -107,7 +93,7 @@
         },
         {
             "name":"precise_location",
-            "value":"Lokasi yang tepat",
+            "value":"Lokasi presisi",
             "attr":{
                 "translatable":false
             }
@@ -282,7 +268,7 @@
         },
         {
             "name":"group_label_location",
-            "value":"Izinkan %s mengakses lokasi Anda?",
+            "value":"Izinkan %s untuk mengakses lokasi Anda?",
             "attr":{
                 "translatable":false
             }

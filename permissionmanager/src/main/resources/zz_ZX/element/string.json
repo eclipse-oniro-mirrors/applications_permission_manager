@@ -2,45 +2,31 @@
     "string":[
         {
             "name":"security_title_media_files",
-            "value":"[TS_950813]_Private access to Gallery"
-        },
-        {
-            "name":"security_description_location",
-            "value":"[TS_950727]_To protect your privacy, %s can only briefly access your location when you tap Allow.",
-            "attr":{
-                "translatable":false
-            }
+            "value":"[TS_1261576]_Private access to Gallery"
         },
         {
             "name":"allow",
-            "value":"[TW_948684]_Allow"
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"[TS_950753]_To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow.",
-            "attr":{
-                "translatable":false
-            }
+            "value":"[TS_950769]_Allow"
         },
         {
             "name":"security_text_location",
-            "value":"[TS_1015861]_To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow."
+            "value":"[TS_1261622]_To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow."
         },
         {
             "name":"security_text_media_files",
-            "value":"[TS_1015860]_To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow."
+            "value":"[TS_1261629]_To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow."
         },
         {
             "name":"security_title_location",
-            "value":"[TS_975804]_Limited access to location"
+            "value":"[TS_1261627]_Limited access to location"
         },
         {
             "name":"cancel",
-            "value":"[TS_900639]_Cancel"
+            "value":"[TS_950731]_Cancel"
         },
         {
             "name":"get_the_exact_position",
-            "value":"[TS_878181]_Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location.",
+            "value":"[TS_950720]_Allow this app to access your precise location. When this is off, this app can only access your approximate location. Some apps that don't support this feature may fail to get any location.",
             "attr":{
                 "translatable":false
             }
@@ -54,14 +40,14 @@
         },
         {
             "name":"precise_location",
-            "value":"[TS_873116]_Precise location",
+            "value":"[TS_950788]_Precise location",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"always_allow",
-            "value":"[TS_899712]_Allow all the time",
+            "value":"[TS_950695]_Always allow",
             "attr":{
                 "translatable":false
             }
@@ -75,14 +61,14 @@
         },
         {
             "name":"group_label_ads",
-            "value":"[TS_950779]_Allow %s to track your activity in other apps?",
+            "value":"[TS_1261632]_Allow %s to track your usage across apps?",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"ban",
-            "value":"[TS_878605]_Deny",
+            "value":"[TS_950815]_Deny",
             "attr":{
                 "translatable":false
             }
@@ -96,14 +82,14 @@
         },
         {
             "name":"per_use_query",
-            "value":"[TW_948656]_Ask each time",
+            "value":"[TS_950801]_Ask each time",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"paste_board_desc",
-            "value":"[TS_950781]_If denied, this app won't be able to access the clipboard.",
+            "value":"[TS_1261616]_If denied, this app won't be able to access the clipboard.",
             "attr":{
                 "translatable":false
             }
@@ -117,7 +103,7 @@
         },
         {
             "name":"allowed_only_during_use",
-            "value":"[TS_878622]_Allow while using the app",
+            "value":"[TS_950834]_Allow while using the app",
             "attr":{
                 "translatable":false
             }
@@ -131,7 +117,7 @@
         },
         {
             "name":"per_inquiry",
-            "value":"[TV_1057591]_Ask each time",
+            "value":"[TS_950826]_Ask each time",
             "attr":{
                 "translatable":false
             }
@@ -152,28 +138,28 @@
         },
         {
             "name":"group_label_app_list",
-            "value":"[TS_950708]_Allow %s to read the list of installed apps?",
+            "value":"[TS_1261561]_Allow %s to read the list of installed apps?",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"this_time_only",
-            "value":"[TS_950778]_Allow this time only",
+            "value":"[TS_1261612]_Allow this time only",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_label_health",
-            "value":"[TS_942385]_Allow %s to access body sensor data?",
+            "value":"[TS_950699]_Allow %s to access body sensor data?",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_label_pasteboard",
-            "value":"[TS_953166]_Allow %s to copy content from the clipboard?",
+            "value":"[TS_950739]_Allow %s to copy content from the clipboard?",
             "attr":{
                 "translatable":false
             }
@@ -229,14 +215,14 @@
         },
         {
             "name":"group_label_camera",
-            "value":"[TS_942366]_Allow %s to use the camera?",
+            "value":"[TS_950817]_Allow %s to use the camera?",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_label_near_link",
-            "value":"[TS_950761]_Allow %s to use NearLink?",
+            "value":"[TS_1261559]_Allow %s to use NearLink?",
             "attr":{
                 "translatable":false
             }
@@ -257,14 +243,14 @@
         },
         {
             "name":"group_label_location",
-            "value":"[TS_942379]_Allow %s to access your location?",
+            "value":"[TS_950793]_Allow %s to access your location?",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_label_microphone",
-            "value":"[TS_942373]_Allow %s to use the microphone?",
+            "value":"[TS_950757]_Allow %s to use the microphone?",
             "attr":{
                 "translatable":false
             }
@@ -278,14 +264,14 @@
         },
         {
             "name":"group_label_screen_capture",
-            "value":"[TS_988622]_Allow %s to capture your screen?",
+            "value":"[TS_1261640]_Allow %s to capture your screen?",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"paste_board_app",
-            "value":"[TS_950726]_Content copied from %s. If you choose Deny, this app won't be able to access the clipboard.",
+            "value":"[TS_1261626]_Content copied from %s. If you choose Deny, this app won't be able to access the clipboard.",
             "attr":{
                 "translatable":false
             }
@@ -306,21 +292,21 @@
         },
         {
             "name":"group_name_microphone",
-            "value":"[TW_948647]_Microphone",
+            "value":"[TS_1261570]_Microphone",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"desktop_folder",
-            "value":"[TS_899642]_Home screen folder",
+            "value":"[TS_1261578]_Desktop folder",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_calendar",
-            "value":"[TW_948653]_Calendar",
+            "value":"[TS_1261574]_Calendar",
             "attr":{
                 "translatable":false
             }
@@ -341,21 +327,21 @@
         },
         {
             "name":"permission_manager",
-            "value":"[TS_876490]_Permission manager",
+            "value":"[TS_950705]_Permission manager",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_bluetooth",
-            "value":"[TW_948597]_Bluetooth",
+            "value":"[TS_1261579]_Bluetooth",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"document",
-            "value":"[TV_1057619]_Documents",
+            "value":"[TS_1261617]_Document",
             "attr":{
                 "translatable":false
             }
@@ -369,14 +355,14 @@
         },
         {
             "name":"group_name_camera",
-            "value":"[TW_948618]_Camera",
+            "value":"[TS_1261571]_Camera",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_sport",
-            "value":"[TW_948594]_Physical activity",
+            "value":"[TS_1261611]_Motion data",
             "attr":{
                 "translatable":false
             }
@@ -411,7 +397,7 @@
         },
         {
             "name":"group_name_ads",
-            "value":"[TW_948590]_Activity tracking",
+            "value":"[TS_1261645]_Cross-app association",
             "attr":{
                 "translatable":false
             }
@@ -425,21 +411,21 @@
         },
         {
             "name":"permission",
-            "value":"[TW_948661]_Permissions",
+            "value":"[TS_950690]_Permissions",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"close",
-            "value":"[TS_900626]_Disable",
+            "value":"[TS_950719]_Close",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"enable_description_ads",
-            "value":"[TS_950754]_%s apps have been allowed to create a profile or show you personalized ads based on your AD identifier.",
+            "value":"[TS_1261595]_%s apps have been allowed to track your usage across apps using your identifier.",
             "attr":{
                 "translatable":false
             }
@@ -467,7 +453,7 @@
         },
         {
             "name":"group_name_folder",
-            "value":"[TW_948668]_Folders",
+            "value":"[TS_1261610]_Folder",
             "attr":{
                 "translatable":false
             }
@@ -509,14 +495,14 @@
         },
         {
             "name":"global_title_microphone",
-            "value":"[TS_900634]_Microphone disabled",
+            "value":"[TS_950818]_Microphone not turned on",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"forbidden_description_ads",
-            "value":"[TS_950833]_Apps are prohibited from creating profiles or showing you personalized ads based on your AD identifier.",
+            "value":"[TS_1261585]_Apps are prohibited from tracking your usage across apps using your identifier.",
             "attr":{
                 "translatable":false
             }
@@ -572,7 +558,7 @@
         },
         {
             "name":"permission_access_record",
-            "value":"[TW_948600]_Dashboard",
+            "value":"[TS_950701]_Permission access record",
             "attr":{
                 "translatable":false
             }
@@ -628,7 +614,7 @@
         },
         {
             "name":"group_name_app_list",
-            "value":"[TW_948595]_App list",
+            "value":"[TS_1261596]_Read the list of installed apps",
             "attr":{
                 "translatable":false
             }
@@ -642,21 +628,21 @@
         },
         {
             "name":"download_folder",
-            "value":"[TS_899653]_Downloads folder",
+            "value":"[TS_1261573]_Download folder",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"microphone",
-            "value":"[TW_948647]_Microphone",
+            "value":"[TS_950710]_Microphone",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_health",
-            "value":"[TW_948620]_Body sensors",
+            "value":"[TS_1261599]_Body sensor",
             "attr":{
                 "translatable":false
             }
@@ -698,7 +684,7 @@
         },
         {
             "name":"group_name_contacts",
-            "value":"[TW_948679]_Contacts",
+            "value":"[TS_1261580]_Address book",
             "attr":{
                 "translatable":false
             }
@@ -719,28 +705,28 @@
         },
         {
             "name":"allowed",
-            "value":"[TW_948607]_Allowed",
+            "value":"[TS_950738]_ALLOWED",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"open",
-            "value":"[TS_900623]_Enable",
+            "value":"[TS_950832]_Open",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"forbidden_description_app_list",
-            "value":"[TS_950703]_Apps are prohibited from reading the list of installed applications on the local device.",
+            "value":"[TS_1261607]_Apps are prohibited from reading the list of installed applications on the local device.",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_location",
-            "value":"[TS_950772]_Location information",
+            "value":"[TS_1261619]_Location information",
             "attr":{
                 "translatable":false
             }
@@ -768,14 +754,14 @@
         },
         {
             "name":"multi_device_collaboration",
-            "value":"[TW_999030]_Device connection",
+            "value":"[TS_950795]_Device discovery and connection",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"close_microphone",
-            "value":"[TS_900632]_Disable the microphone?",
+            "value":"[TS_950689]_Turn off the microphone",
             "attr":{
                 "translatable":false
             }
@@ -789,7 +775,7 @@
         },
         {
             "name":"application",
-            "value":"[TV_1230070]_Apps",
+            "value":"[TS_950819]_Applications",
             "attr":{
                 "translatable":false
             }
@@ -817,7 +803,7 @@
         },
         {
             "name":"banned",
-            "value":"[TW_948678]_Denied",
+            "value":"[TS_950773]_BANNED",
             "attr":{
                 "translatable":false
             }
@@ -838,7 +824,7 @@
         },
         {
             "name":"document_folder",
-            "value":"[TS_899646]_Documents folder",
+            "value":"[TS_1261589]_Document folder",
             "attr":{
                 "translatable":false
             }
@@ -873,7 +859,7 @@
         },
         {
             "name":"desktop",
-            "value":"[TV_1057620]_Home screen",
+            "value":"[TS_1261567]_Desktop",
             "attr":{
                 "translatable":false
             }
@@ -922,7 +908,7 @@
         },
         {
             "name":"enable_description_near_link",
-            "value":"[TS_950746]_%s apps have been allowed to access NearLink.",
+            "value":"[TS_1261635]_%s apps have been allowed to access NearLink.",
             "attr":{
                 "translatable":false
             }
@@ -950,7 +936,7 @@
         },
         {
             "name":"enable_description_app_list",
-            "value":"[TS_950744]_%s apps are allowed to read the list of installed apps on the local device.",
+            "value":"[TS_1261613]_%s apps are allowed to read the list of installed apps on the local device.",
             "attr":{
                 "translatable":false
             }
@@ -971,182 +957,371 @@
         },
         {
             "name":"download",
-            "value":"[TV_1057558]_Downloads",
+            "value":"[TS_1261636]_Download",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_near_link",
-            "value":"[TW_948612]_NearLink",
+            "value":"[TS_1261609]_NearLink",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"text_input_placeholder",
-            "value":"[TS_873107]_Search apps",
+            "value":"[TS_1261572]_Search application",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_pasteboard",
-            "value":"[TS_981386]_Clipboard",
+            "value":"[TS_1261623]_Pasteboard",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"forbidden_description_near_link",
-            "value":"[TS_950728]_Apps have been prohibited from accessing NearLink.",
+            "value":"[TS_1261644]_Apps have been prohibited from accessing NearLink.",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"enable_description_screen_capture",
-            "value":"[TS_995261]_%s apps have been allowed to use screenshots.",
+            "value":"[TS_1261603]_%s apps have been allowed to use screenshots.",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_screen_capture",
-            "value":"[TV_1057489]_Screen capture",
+            "value":"[TS_1261597]_Screen capture",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"forbidden_description_screen_capture",
-            "value":"[TS_995263]_Screenshots have been disabled.",
+            "value":"[TS_1261608]_Screenshots have been disabled.",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"read_and_modify",
-            "value":"[TW_1058460]_Read & modify",
+            "value":"[TS_1261587]_Read and modify",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"read_only",
-            "value":"[TW_1058461]_Read only",
+            "value":"[TS_1261575]_Read only",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"modify_only",
-            "value":"[TW_1058458]_Modify only",
+            "value":"[TS_1261565]_Modify only",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"all_files",
-            "value":"[TW_948634]_All files",
+            "value":"[TS_1261641]_All files",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"media_only",
-            "value":"[TV_1057454]_Media only",
+            "value":"[TS_1261591]_Media only",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"go_to_settings",
-            "value":"[TS_1133457]_Allow in Settings",
+            "value":"[TS_1261620]_Go to Settings",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"request_association_toggle",
-            "value":"[TV_1057597]_Require consent to track",
+            "value":"[TS_1261560]_Require apps to request association",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_documents_and_folder",
-            "value":"[TS_1204625]_Files & folders",
+            "value":"[TS_1261605]_Files and folders",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_float_view",
-            "value":"[TW_948642]_Dropzone",
+            "value":"[TS_1261643]_Floating window",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_hook_input_event",
-            "value":"[TS_1123443]_Input assistance",
+            "value":"[TS_1261593]_Keyboard input assistance",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_screen_share",
-            "value":"[TS_1123435]_Screen sharing",
+            "value":"[TS_1261628]_Screen sharing",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_name_control_device",
-            "value":"[TS_1198530]_Device control",
+            "value":"[TS_1261588]_Control device",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"permission_label_float_view",
-            "value":"[TW_948642]_Dropzone",
+            "value":"[TS_1261604]_Floating window",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"permission_label_hook_input_event",
-            "value":"[TS_1123443]_Input assistance",
+            "value":"[TS_1261602]_Keyboard input assistance",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"permission_label_screen_share",
-            "value":"[TS_1123435]_Screen sharing",
+            "value":"[TS_1261639]_Screen sharing",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"permission_label_control_device",
-            "value":"[TS_1198530]_Device control",
+            "value":"[TS_1261615]_Control device",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"group_label_hook_input_event",
-            "value":"[TS_1133403]_Allow %s to provide input assistance?",
+            "value":"[TS_1261566]_Allow %s to assist keyboard input?",
             "attr":{
                 "translatable":false
             }
         },
         {
             "name":"confirm",
-            "value":"[TS_1184600]_Confirm",
+            "value":"[TS_1261569]_Confirm",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"selected_folders",
+            "value":"[TS_1261600]_Only some folders",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_path_primary_prefix",
+            "value":"[TS_1261601]_Recommended path: Settings -> Privacy & Security -> ",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"allow_full_disk_access_desc",
+            "value":"[TS_1261598]_This app will gain read and write access to all public disk files on this device.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"allow_full_disk_access",
+            "value":"[TS_1261577]_Allow full disk access",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"enable_description_float_view",
+            "value":"[TS_1261606]_%s apps have been allowed to display over other apps.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_confirm_tip",
+            "value":"[TS_1261614]_After changing the permission, return to the app and verify the status again.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"forbidden_description_hook_input_event",
+            "value":"[TS_1261631]_Apps have been prohibited from assisting keyboard input.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_confirm_title",
+            "value":"[TS_1261638]_Go to Settings to enable the permission",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"enable_description_screen_share",
+            "value":"[TS_1261618]_%s apps have been allowed to share your screen.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"enable_description_hook_input_event",
+            "value":"[TS_1261564]_%s apps have been allowed to assist keyboard input.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"forbidden_description_control_device",
+            "value":"[TS_1261633]_Apps have been prohibited from controlling the device.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"request_association_on",
+            "value":"[TS_1261621]_App association is on. Apps need your consent to link their activity with other apps, providing personalized experiences.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"forbidden_description_screen_share",
+            "value":"[TS_1261581]_Apps have been prohibited from sharing your screen.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_confirm_message",
+            "value":"[TS_1261592]_This permission must be enabled manually in Settings. After confirmation, the system Settings app will open.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"request_association_off",
+            "value":"[TS_1261582]_App association is off. Apps can link their activity with other apps without your consent, providing personalized experiences.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"group_label_screen_share",
+            "value":"[TS_1261630]_Allow %s to share your screen?",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"permission_fixed_by_admin_policy_title",
+            "value":"[TS_1261634]_Permission cannot be modified",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"group_label_control_device",
+            "value":"[TS_1261624]_Allow %s to control your device?",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_path_title",
+            "value":"[TS_1261562]_Open the matching permission management page by following either path below",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_target_app",
+            "value":"[TS_1261568]_App",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_path_secondary_prefix",
+            "value":"[TS_1261590]_Alternative path: Settings -> Apps & Services -> ",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"permission_fixed_by_admin_policy_message",
+            "value":"[TS_1261637]_This permission is set by the administrator and cannot be modified.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"manual_setting_target_permission",
+            "value":"[TS_1261594]_Permission",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"full_disk_folder",
+            "value":"[TS_1261642]_Full disk",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"enable_description_control_device",
+            "value":"[TS_1261625]_%s apps have been allowed to control the device.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"forbidden_description_float_view",
+            "value":"[TS_1261563]_Apps have been prohibited from displaying over other apps.",
+            "attr":{
+                "translatable":false
+            }
+        },
+        {
+            "name":"group_label_float_view",
+            "value":"[TS_1261583]_Allow %s to display over other apps?",
             "attr":{
                 "translatable":false
             }

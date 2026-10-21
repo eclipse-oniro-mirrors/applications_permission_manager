@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào vị trí của bạn khi bạn chạm vào Cho phép.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Cho phép",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Để bảo vệ quyền riêng tư của bạn, %s chỉ có thể truy cập tạm thời vào Bộ sưu tập của bạn để lưu các mục khi bạn chạm vào Cho phép.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -226,7 +212,7 @@
         },
         {
             "name":"allowed_only_during_use",
-            "value":"Cho phép khi dùng ứng dụng",
+            "value":"Cho phép khi sử dụng ứng dụng",
             "attr":{
                 "translatable":false
             }

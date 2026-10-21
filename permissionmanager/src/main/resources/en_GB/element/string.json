@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"To protect your privacy, %s can only briefly access your location when you tap Allow.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Allow",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"To protect your privacy, %s can only briefly access your Gallery to save items when you tap Allow.",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -121,7 +107,7 @@
         },
         {
             "name":"always_allow",
-            "value":"Allow all the time",
+            "value":"Always allow",
             "attr":{
                 "translatable":false
             }

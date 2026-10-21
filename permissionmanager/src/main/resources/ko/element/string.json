@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"개인 정보 보호를 위해 %s 앱은 허용을 탭할 때만 위치에 잠시 액세스할 수 있습니다.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"허용",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"개인 정보 보호를 위해 %s 앱은 허용을 탭할 때만 항목을 저장하기 위해 갤러리에 잠시 액세스할 수 있습니다.",
-            "attr":{
-                "translatable":false
             }
         },
         {

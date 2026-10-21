@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"Para protektahan ang privacy mo, maa-access lang ni %s ang lokasyon mo kapag i-tap mo ang Payagan.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"Payagan",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"Para protektahan ang privacy mo, maa-access lang ni %s ang Gallery mo kapag i-tap mo ang Payagan.",
-            "attr":{
-                "translatable":false
             }
         },
         {

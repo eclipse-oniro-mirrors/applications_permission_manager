@@ -8,24 +8,10 @@
             }
         },
         {
-            "name":"security_description_location",
-            "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงตำแหน่งของคุณได้เพียงชั่วครู่เมื่อคุณแตะ อนุญาต",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allow",
             "value":"อนุญาต",
             "attr":{
                 "priority":"LT"
-            }
-        },
-        {
-            "name":"security_description_media_files",
-            "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %s จะสามารถเข้าถึงแกลเลอรีของคุณได้เพียงชั่วครู่เพื่อบันทึกรายการต่าง ๆ เมื่อคุณแตะ อนุญาต",
-            "attr":{
-                "translatable":false
             }
         },
         {
@@ -121,7 +107,7 @@
         },
         {
             "name":"always_allow",
-            "value":"อนุญาตตลอดเวลา",
+            "value":"อนุญาตเสมอ",
             "attr":{
                 "translatable":false
             }
@@ -184,7 +170,7 @@
         },
         {
             "name":"group_label_camera",
-            "value":"อนุญาตให้%sใช้กล้องถ่ายรูปหรือไม่",
+            "value":"อนุญาตให้ %s ใช้กล้องถ่ายรูปหรือไม่",
             "attr":{
                 "translatable":false
             }
