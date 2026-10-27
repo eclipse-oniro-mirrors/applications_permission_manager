@@ -39,19 +39,7 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
   onSessionCreate(want: Want, session: UIExtensionContentSession): void {
     // Main window is created, set main page for this ability
     console.log(TAG + 'MainAbility onWindowStageCreate.');
-    try {
-      const extensionWindow = session.getUIExtensionWindowProxy();
-      extensionWindowProxy = extensionWindow;
-      this.updateStatusBarHeight(extensionWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM));
-      extensionWindow.on('avoidAreaChange', (info) => {
-        if (info.type === window.AvoidAreaType.TYPE_SYSTEM) {
-          this.updateStatusBarHeight(info.area);
-        }
-      });
-    } catch (error) {
-      console.error(TAG, 'onSessionCreate error.code: ' + error?.code + ' error.message: ' + error?.message);
-      // TODO: Implement error handling.
-    }
+    this.initWindowAvoidArea(session);
     globalThis.windowStage = session;
     globalThis.isUIExtensionMode = true;
     globalThis.refresh = false;
@@ -68,33 +56,42 @@ export default class UIExtSettingAbility extends UIExtensionAbility {
       globalThis.currentApp = 'all';
       this.getAllApplications();
     }
+    this.registerBundleMonitor();
+  }
 
+  private initWindowAvoidArea(session: UIExtensionContentSession): void {
     try {
-      bundleMonitor.on('add', (bundleChangeInfo) => {
-        console.log(`${TAG} bundleMonitor.add: ${JSON.stringify(bundleChangeInfo)}`);
-        if (globalThis.currentApp === 'all') {
-          this.getAllApplications();
-          globalThis.refresh = true;
-        }
-      });
-      bundleMonitor.on('remove', (bundleChangeInfo) => {
-        console.log(`${TAG} bundleMonitor.remove: ${JSON.stringify(bundleChangeInfo)}`);
-        if (globalThis.currentApp === 'all') {
-          this.getAllApplications();
-          globalThis.refresh = true;
-        }
-      });
-      bundleMonitor.on('update', (bundleChangeInfo) => {
-        console.log(`${TAG} bundleMonitor.update: ${JSON.stringify(bundleChangeInfo)}`);
-        if (globalThis.currentApp === 'all') {
-          this.getAllApplications();
-          globalThis.refresh = true;
+      const extensionWindow = session.getUIExtensionWindowProxy();
+      extensionWindowProxy = extensionWindow;
+      this.updateStatusBarHeight(extensionWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM));
+      extensionWindow.on('avoidAreaChange', (info) => {
+        if (info.type === window.AvoidAreaType.TYPE_SYSTEM) {
+          this.updateStatusBarHeight(info.area);
         }
       });
     } catch (error) {
+      console.error(TAG, 'onSessionCreate error.code: ' + error?.code + ' error.message: ' + error?.message);
+      // TODO: Implement error handling.
+    }
+  }
+
+  private handleBundleChange(eventType: bundleMonitor.BundleChangedEvent,
+    bundleChangeInfo: bundleMonitor.BundleChangedInfo): void {
+    console.log(`${TAG} bundleMonitor.${eventType}: ${JSON.stringify(bundleChangeInfo)}`);
+    if (globalThis.currentApp === 'all') {
+      this.getAllApplications();
+      globalThis.refresh = true;
+    }
+  }
+
+  private registerBundleMonitor(): void {
+    try {
+      bundleMonitor.on('add', (info) => this.handleBundleChange('add', info));
+      bundleMonitor.on('remove', (info) => this.handleBundleChange('remove', info));
+      bundleMonitor.on('update', (info) => this.handleBundleChange('update', info));
+    } catch (error) {
       console.error(TAG + 'bundleMonitor failed.');
     }
-
   }
 
   onSessionDestroy(): void {
