@@ -21,7 +21,7 @@ import { BusinessError } from '@ohos.base';
 import { groups } from '../common/model/permissionGroup';
 import Constants from '../common/utils/constant';
 import { Log, verifyAccessToken } from '../common/utils/utils';
-import { buildGroupIds, collectSupportedUserPermissions } from '../common/utils/bundlePermissionCollector';
+import { buildGroupIds, collectSupportedUserPermissions } from '../common/permissionGroupManager/bundlePermissionCollector';
 import {
   getDocumentsPermissionStatus,
   getFolderGroupStatus,

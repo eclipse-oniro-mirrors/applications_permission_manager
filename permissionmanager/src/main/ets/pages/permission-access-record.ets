@@ -26,7 +26,7 @@ import {
   collectSupportedUserPermissions,
   getRequestedPermissions,
   shouldCollectUserPermission
-} from '../common/utils/bundlePermissionCollector';
+} from '../common/permissionGroupManager/bundlePermissionCollector';
 import {
   StringObj,
   AppInfoSimple,
