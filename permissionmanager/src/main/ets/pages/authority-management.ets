@@ -33,7 +33,7 @@ import {
   buildAppInfoFromBundleInfo,
   collectSupportedUserPermissions,
   getRequestedPermissions
-} from '../common/utils/bundlePermissionCollector';
+} from '../common/permissionGroupManager/bundlePermissionCollector';
 import {
   isDocumentsOrFolderPermission,
   shouldShowFolderPermissionSection

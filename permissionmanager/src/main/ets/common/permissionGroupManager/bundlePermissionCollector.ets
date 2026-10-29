@@ -18,9 +18,9 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import { AppInfo } from '../model/typedef';
 import { Permission } from '../model/definition';
 import { userGrantPermissions } from '../model/permissionGroup';
-import Constants from './constant';
-import { getGroupIdByPermission, Log } from './utils';
-import { PermissionGroupManager } from '../permissionGroupManager/PermissionGroupManager';
+import Constants from '../utils/constant';
+import { getGroupIdByPermission, Log } from '../utils/utils';
+import { PermissionGroupManager } from './PermissionGroupManager';
 
 /**
  * Get the permissions that are supported for user management on the current device.
