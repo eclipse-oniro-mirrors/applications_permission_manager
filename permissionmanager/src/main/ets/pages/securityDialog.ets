@@ -25,8 +25,6 @@ import { PermissionType } from '../common/model/definition';
 import bundleResourceManager from '@ohos.bundle.bundleResourceManager';
 import { DeviceUtil } from '../common/utils/deviceUtil';
 
-const RESOURCE_TYPE: number = 10003;
-
 @Extend(Text)
 function titleText(isWearable: boolean) {
   .fontWeight(FontWeight.Bold)
@@ -144,7 +142,7 @@ function buildDialogContentsAreaComp(params: DialogInfo) {
       Text($r(
         params.securityParams[params.index].description,
         params.appName,
-        params.appIndex === 0 ? '' : String(params.appIndex)
+        ''
       ))
         .textAlign(params.isWearable ? TextAlign.Center : TextAlign.Start)
         .fontColor($r('sys.color.font_primary'))
@@ -363,32 +361,20 @@ struct SecurityDialog {
       const cloneInfo = await bundleManager.getAppCloneIdentity(uid);
       Log.info(`getAppCloneIdentity: ${JSON.stringify(cloneInfo)}.`);
       this.appIndex = cloneInfo.appIndex;
-      await this.getSelfName(cloneInfo);
+      this.getBundleLabel(cloneInfo);
     } catch (err) {
       Log.error(`get appName failed: ${JSON.stringify(err)}.`);
     };
   }
 
-  async getSelfName(cloneInfo: bundleManager.AppCloneIdentity) {
+  getBundleLabel(cloneInfo: bundleManager.AppCloneIdentity) {
     try {
-      const data = await bundleManager.getApplicationInfo(cloneInfo.bundleName,
-        bundleManager.ApplicationFlag.GET_APPLICATION_INFO_DEFAULT);
-      data.labelResource.params = [];
-      data.labelResource.type = RESOURCE_TYPE;
-      this.appName = data.labelResource;
-    } catch (err) {
-      Log.error(`getSelfName failed. err is ${JSON.stringify(err)}.`);
-    };
-  }
-
-  getCloneName(cloneInfo: bundleManager.AppCloneIdentity) {
-    try {
-      let resourceFlag = bundleResourceManager.ResourceFlag.GET_RESOURCE_INFO_ALL;
+      let resourceFlag = bundleResourceManager.ResourceFlag.GET_RESOURCE_INFO_WITH_LABEL;
       let resourceInfo =
         bundleResourceManager.getBundleResourceInfo(cloneInfo.bundleName, resourceFlag, cloneInfo.appIndex);
       this.appName = resourceInfo?.label;
     } catch (err) {
-      Log.error(`getCloneName failed. err is ${JSON.stringify(err)}.`);
+      Log.error(`getBundleLabel failed. err is ${JSON.stringify(err)}.`);
     };
   }
 }
