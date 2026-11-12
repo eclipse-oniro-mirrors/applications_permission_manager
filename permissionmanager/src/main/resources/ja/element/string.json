@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"ギャラリーへのプライベートアクセス",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"位置情報へのアクセス制限",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"プライバシー保護のため、[許可]をタップした場合、%1$s%2$sは位置情報に短時間だけアクセスできます。",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"プライバシー保護のため、[許可]をタップした場合、%1$s%2$sはギャラリーに短時間だけアクセスしてアイテムを保存できます。",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

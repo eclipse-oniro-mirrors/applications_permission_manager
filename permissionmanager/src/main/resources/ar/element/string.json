@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"الوصول الخاص إلى المعرض",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"الوصول المحدود إلى الموقع",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"لحماية خصوصيتك، سيتمكن تطبيق %1$s%2$s من الوصول إلى موقعك لفترة وجيزة فقط عند النقر على \"سماح\".",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"لحماية خصوصيتك، سيتمكن تطبيق %1$s%2$s من الوصول إلى المعرض لحفظ العناصر لفترة وجيزة فقط عند النقر على \"سماح\".",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

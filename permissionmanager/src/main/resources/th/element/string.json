@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"การเข้าถึงแกลเลอรีแบบรักษาความเป็นส่วนตัว",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"การเข้าถึงตำแหน่งแบบจำกัด",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %1$s%2$s จะสามารถเข้าถึงตำแหน่งของคุณได้เพียงชั่วครู่เมื่อคุณแตะ อนุญาต",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"เพื่อปกป้องความเป็นส่วนตัวของคุณ %1$s%2$s จะสามารถเข้าถึงแกลเลอรีของคุณได้เพียงชั่วครู่เพื่อบันทึกรายการต่าง ๆ เมื่อคุณแตะ อนุญาต",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

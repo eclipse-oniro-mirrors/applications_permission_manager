@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"Ограниченный доступ к Галерее",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"Ограниченный доступ к геоданным",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"В целях обеспечения конфиденциальности после нажатия кнопки Разрешить приложению %1$s (%2$s) будет предоставлен ограниченный доступ к вашим геоданным.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"В целях обеспечения конфиденциальности после нажатия кнопки Разрешить приложению %1$s (%2$s) будет предоставлен ограниченный доступ к Галерее для сохранения данных.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

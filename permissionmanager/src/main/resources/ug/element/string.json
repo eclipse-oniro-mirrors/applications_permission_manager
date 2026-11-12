@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"بىخەتەر رەسىم ۋە سىن ساقلاش ئىجازىتى",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -16,23 +16,23 @@
         },
         {
             "name":"security_text_location",
-            "value":"‏«%1$s %2$s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتا ئورۇن ئۇچۇرىنى ئوقۇيالايدۇ.",
+            "value":"\u200f«%1$s %2$s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتا ئورۇن ئۇچۇرىنى ئوقۇيالايدۇ.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
-            "value":"‏«%1$s %2$s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتا ئامبارغا رەسىم ۋە سىن ساقلىيالايدۇ.",
+            "value":"\u200f«%1$s %2$s» پەقەت سىز رۇخسەت كۇنۇپكىسىنى چەككەن ۋاقىتتا ئامبارغا رەسىم ۋە سىن ساقلىيالايدۇ.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_title_location",
             "value":"بىخەتەر ئورۇن ئىجازىتى",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

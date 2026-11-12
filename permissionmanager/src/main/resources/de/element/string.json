@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"Privater Zugriff auf Galerie",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"Eingeschränkter Zugriff auf den Standort",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"Um Ihre Privatsphäre zu schützen, kann %1$s%2$s nur kurz auf Ihren Standort zugreifen, wenn Sie auf Zulassen tippen.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"Um Ihre Privatsphäre zu schützen, kann %1$s%2$s nur kurz auf Ihre Galerie zugreifen, um Elemente zu speichern, wenn Sie auf Zulassen tippen.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

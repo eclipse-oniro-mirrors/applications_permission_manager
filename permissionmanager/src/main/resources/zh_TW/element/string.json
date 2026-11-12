@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"安全儲存圖片和影片",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,21 +18,21 @@
             "name":"security_text_location",
             "value":"在您輕觸此按鈕時，僅允許「%1$s%2$s」存取位置。",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"在您輕觸此按鈕時，僅允許「%1$s%2$s」將圖片和影片儲存至圖片庫。",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_title_location",
             "value":"安全存取位置",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
