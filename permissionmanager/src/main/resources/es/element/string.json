@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"Acceso restringido a Galería",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"Acceso limitado a ubicación",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu ubicación si pulsas Permitir.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"Para proteger tu privacidad, %1$s%2$s solo podrá acceder brevemente a tu Galería para guardar elementos si pulsas Permitir.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"པར་རིས་དང་བརྙན་ཟློས་བདེ་འཇགས་ངང་ཉར་ཚགས་བྱེད་པ།",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,21 +18,21 @@
             "name":"security_text_location",
             "value":"༼%1$s%2$s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་འདིར་རྡེབ་སྐབས་ཁོ་ནར་གནས་ཡུལ་ལ་ལྟ་སྤྱོད་བྱ་ཆོག",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"༼%1$s%2$s༽ཡིས་ཁྱེད་ཀྱིས་གནོན་མཐེབ་འདིར་རྡེབ་སྐབས་ཁོ་ནར་པར་མཛོད་དུ་འདྲ་པར་དང་བརྙན་ཟློས་ཉར་ཚགས་ཁོ་ན་བྱ་ཆོག",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_title_location",
             "value":"གནས་ཡུལ་ལ་བདེ་འཇགས་ངང་ལྟ་སྤྱོད།",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

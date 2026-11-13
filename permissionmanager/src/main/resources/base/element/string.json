@@ -1229,28 +1229,28 @@
             "name":"security_title_location",
             "value":"Limited access to location",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_title_media_files",
             "value":"Private access to Gallery",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_location",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your location when you tap Allow.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"To protect your privacy, %1$s%2$s can only briefly access your Gallery to save items when you tap Allow.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

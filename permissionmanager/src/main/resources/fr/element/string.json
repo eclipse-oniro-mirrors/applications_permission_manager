@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"Accès privé à Galerie",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"Accès limité à la localisation",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,7 +32,7 @@
             "name":"security_text_location",
             "value":"Pour protéger votre vie privée, %1$s%2$s ne peut accéder brièvement à vos informations de localisation que lorsque vous touchez Autoriser.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

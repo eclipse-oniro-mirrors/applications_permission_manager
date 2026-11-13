@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"Accesso privato alla Galleria",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"Accesso limitato alla posizione",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"Per proteggere la tua privacy, %1$s%2$s può accedere solo brevemente alla tua posizione quando tocchi Consenti.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"Per proteggere la tua privacy, %1$s%2$s può accedere solo brevemente alla tua Galleria per salvare gli elementi quando tocchi Consenti.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

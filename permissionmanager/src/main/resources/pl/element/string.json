@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"Dostęp do Galerii z zachowaniem prywatności",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"Ograniczony dostęp do lokalizacji",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"Aby chronić Twoją prywatność, aplikacja %1$s%2$s może uzyskać dostęp do lokalizacji tylko na chwilę po dotknięciu opcji Zezwól.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"Aby chronić prywatność użytkownika, aplikacja %1$s%2$s może uzyskać dostęp do Twojej Galerii tylko na chwilę po dotknięciu opcji Zezwól.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {

@@ -4,7 +4,7 @@
             "name":"security_title_media_files",
             "value":"Akses privat ke Galeri",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -18,7 +18,7 @@
             "name":"security_title_location",
             "value":"Akses terbatas ke lokasi",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
@@ -32,14 +32,14 @@
             "name":"security_text_location",
             "value":"Untuk melindungi privasi Anda, %1$s%2$s hanya dapat mengakses lokasi Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
             "name":"security_text_media_files",
             "value":"Untuk melindungi privasi Anda, %1$s%2$s hanya dapat mengakses Galeri Anda secara singkat ketika Anda mengetuk Izinkan.",
             "attr":{
-                "priority":"LT"
+                "priority":"translate"
             }
         },
         {
