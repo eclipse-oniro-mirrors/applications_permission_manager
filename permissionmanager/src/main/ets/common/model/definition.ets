@@ -47,9 +47,13 @@ export enum Permission {
   ACCESS_USER_FULL_DISK = 'ohos.permission.ACCESS_USER_FULL_DISK',
   ACCESS_NEARLINK = 'ohos.permission.ACCESS_NEARLINK',
   CUSTOM_SCREEN_CAPTURE = 'ohos.permission.CUSTOM_SCREEN_CAPTURE',
+  ONSCREEN_AWARENESS = 'ohos.permission.ONSCREEN_AWARENESS',
+  WINDOW_CAPTURE = 'ohos.permission.WINDOW_CAPTURE',
   FLOAT_VIEW = 'ohos.permission.FLOAT_VIEW',
   CUSTOM_SCREEN_RECORDING = 'ohos.permission.CUSTOM_SCREEN_RECORDING',
   HOOK_KEY_EVENT = 'ohos.permission.HOOK_KEY_EVENT',
+  HOOK_INPUT_EVENT = 'ohos.permission.HOOK_INPUT_EVENT',
+  INPUT_RECORDING = 'ohos.permission.INPUT_RECORDING',
   CONTROL_DEVICE = 'ohos.permission.CONTROL_DEVICE'
 }
 

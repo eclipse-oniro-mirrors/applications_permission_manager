@@ -16,12 +16,14 @@ import common from '@ohos.app.ability.common';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { BusinessError } from '@ohos.base';
+import bundleManager from '@ohos.bundle.bundleManager';
 import { GlobalContext } from '../common/utils/globalContext';
-import { getPermissionLabel, Log } from '../common/utils/utils';
-import { AppInfo } from '../common/model/typedef';
+import { getPermissionGroup, Log } from '../common/utils/utils';
+import { AppInfo, GroupInfo } from '../common/model/typedef';
 import { Permission } from '../common/model/definition';
 import Constants from '../common/utils/constant';
-import { getTextFromResource, resolveAppLabel } from '../common/utils/resourceDisplayUtils';
+import { getTextFromResource, getPermissionReason, resolveAppLabel } from '../common/utils/resourceDisplayUtils';
+import { PermissionGroupManager } from '../common/permissionGroupManager/PermissionGroupManager';
 
 const PERMISSION_MANAGER_BUNDLE_NAME: string = 'com.ohos.permissionmanager';
 const PERMISSION_MANAGER_MAIN_ABILITY: string = `${PERMISSION_MANAGER_BUNDLE_NAME}.MainAbility`;
@@ -33,6 +35,9 @@ struct ManualSettingConfirmPage {
   @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo');
   @State targetPermission: Permission = GlobalContext.load('manualSettingTargetPermission') as Permission;
   @State applicationLabel: string = '';
+  @State permissionReason: string = '';
+  @State groupInfo: GroupInfo = getPermissionGroup(GlobalContext.load('manualSettingTargetPermission') as Permission);
+  @State groupTitle: ResourceStr = '';
   private hasOpenedDialog: boolean = false;
 
   dialogController: CustomDialogController | null = new CustomDialogController({
@@ -72,6 +77,9 @@ struct ManualSettingConfirmPage {
     }
     this.hasOpenedDialog = true;
     await this.initApplicationLabel();
+    this.groupTitle = PermissionGroupManager.getInstance().getGroupTitleByPermission(this.targetPermission,
+      this.getApplicationLabel());
+    this.initPermissionReason();
     this.dialogController?.open();
   }
 
@@ -81,6 +89,26 @@ struct ManualSettingConfirmPage {
       return;
     }
     this.applicationLabel = await resolveAppLabel(this.context, this.applicationInfo);
+  }
+
+  private initPermissionReason(): void {
+    let bundleName = this.applicationInfo?.bundleName;
+    if (!bundleName) {
+      return;
+    }
+    this.permissionReason = getPermissionReason(this.context, bundleName, this.targetPermission);
+    if (this.permissionReason) {
+      return;
+    }
+    try {
+      let permissionDef = bundleManager.getPermissionDefSync(this.targetPermission);
+      if (permissionDef?.descriptionId > 0) {
+        this.permissionReason = this.context.resourceManager.getStringSync(permissionDef.descriptionId);
+      }
+    } catch (error) {
+      let businessError = error as BusinessError;
+      Log.error(`ManualSettingConfirmPage init permission reason failed: ${businessError.code} ${businessError.message}`);
+    }
   }
 
   private goToPermissionDetail(): void {
@@ -106,14 +134,10 @@ struct ManualSettingConfirmPage {
     return this.applicationLabel || this.applicationInfo?.label || this.applicationInfo?.bundleName || '';
   }
 
-  private getPermissionDisplayName(): ResourceStr {
-    return getPermissionLabel(this.targetPermission);
-  }
-
   private getPrimaryPathText(): string {
     let prefix: string = getTextFromResource(this.context, $r('app.string.manual_setting_path_primary_prefix'));
-    let permissionName: string = getTextFromResource(this.context, this.getPermissionDisplayName());
-    return `${prefix}${permissionName} -> ${this.getApplicationLabel()}`;
+    let groupName: string = getTextFromResource(this.context, this.groupInfo.groupName);
+    return `${prefix}${groupName} -> ${this.getApplicationLabel()}`;
   }
 
   private getSecondaryPathText(): string {
@@ -149,17 +173,24 @@ struct ManualSettingConfirmPage {
   @Builder
   private buildDialogContent() {
     Column({ space: 12 }) {
-      Text($r('app.string.manual_setting_confirm_title'))
+      Image(this.groupInfo.icon)
+        .width(Constants.DIALOG_ICON_WIDTH)
+        .height(Constants.DIALOG_ICON_HEIGHT)
+        .fillColor($r('sys.color.font_primary'))
+
+      Text(this.groupTitle)
         .fontSize(22)
         .fontWeight(FontWeight.Bold)
         .width('100%')
         .textAlign(TextAlign.Center)
 
-      Text($r('app.string.manual_setting_confirm_message'))
-        .fontSize(14)
-        .fontColor($r('sys.color.font_secondary'))
-        .width('100%')
-        .textAlign(TextAlign.Center)
+      if (this.permissionReason !== '') {
+        Text(this.permissionReason)
+          .fontSize(14)
+          .fontColor($r('sys.color.font_secondary'))
+          .width('100%')
+          .textAlign(TextAlign.Center)
+      }
 
       Column({ space: 10 }) {
         Row() {
@@ -178,7 +209,7 @@ struct ManualSettingConfirmPage {
             .fontSize(14)
             .fontWeight(FontWeight.Medium)
             .width(88)
-          Text(this.getPermissionDisplayName())
+          Text(this.groupInfo.groupName)
             .fontSize(14)
             .layoutWeight(1)
         }

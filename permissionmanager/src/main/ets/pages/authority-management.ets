@@ -25,7 +25,6 @@ import {
   addLocalTag,
   sortByName,
   getPermissionGroup,
-  getGroupIdByPermission,
   getPermissionGroupByName
 } from '../common/utils/utils';
 import {
@@ -247,14 +246,16 @@ struct authorityManagementPage {
       }
     })
     this.allUserPermissions.forEach((userPermission: Permission) => {
-      let groupId = getGroupIdByPermission(userPermission);
-      let displayGroup = this.getDisplayGroup(groups[groupId].name);
+      let displayGroup = this.getDisplayGroup(getPermissionGroup(userPermission).name);
       if (this.allGroups.indexOf(displayGroup) == -1) {
         this.allGroups.push(displayGroup);
       }
     })    // Permission layout
     for (let i = 0; i < this.allGroups.length; i++) {
       let group = getPermissionGroupByName(this.allGroups[i]);
+      if (!group) {
+        continue;
+      }
       let displayName: ResourceStr = group.groupName;
       if (this.allGroups[i] === PermissionGroup.DOCUMENTS && shouldShowFolderPermissionSection()) {
         displayName = $r('app.string.group_name_documents_and_folder');
@@ -532,7 +533,7 @@ struct applicationItem {
                 .fontWeight(FontWeight.Medium)
                 .fontColor($r('sys.color.font_primary'))
                 .flexGrow(Constants.FLEX_GROW)
-              Text(String(item.groupId.length))
+              Text(String(item.groupNames.length))
                 .fontSize(Constants.TEXT_SMALL_FONT_SIZE)
                 .fontColor($r('sys.color.font_secondary'))
               Text($r('app.string.right'))

@@ -611,13 +611,14 @@ struct applicationItem {
   }
 
   async getApplicationList(bundleInfo: AppInfo, i: number) {
+    let targetPermission: Permission = this.list.length > 0 ? this.list[0].permission : '' as Permission;
     this.applicationList.push(
       new ApplicationObj(
         bundleInfo.label,
         bundleInfo.icon,
         i,
         bundleInfo.tokenId,
-        this.list[0].permission,
+        targetPermission,
         bundleInfo.zhTag,
         bundleInfo.indexTag,
         bundleInfo.language,
@@ -625,7 +626,7 @@ struct applicationItem {
     );
     this.isRisk[i] = false;
     try {
-      abilityAccessCtrl.createAtManager().getPermissionFlags(bundleInfo.tokenId, this.list[0].permission)
+      abilityAccessCtrl.createAtManager().getPermissionFlags(bundleInfo.tokenId, targetPermission)
         .then(data => {
           if (data == Constants.PERMISSION_POLICY_FIXED) {
             this.isRisk[i] = true;

@@ -20,7 +20,7 @@ import { DeviceUtil } from '../utils/deviceUtil';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.HOOK_INPUT_EVENT,
-  permissions: [Permission.HOOK_KEY_EVENT],
+  permissions: [Permission.HOOK_KEY_EVENT, Permission.HOOK_INPUT_EVENT, Permission.INPUT_RECORDING],
   icon: $r('app.media.ic_public_keyboard'),
   title: '',
   reason: '',

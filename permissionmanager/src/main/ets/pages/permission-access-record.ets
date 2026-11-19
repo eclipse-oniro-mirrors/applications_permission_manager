@@ -22,7 +22,7 @@ import Constants from '../common/utils/constant';
 import { Log, getPermissionGroup } from '../common/utils/utils';
 import {
   supportPermission,
-  buildGroupIds,
+  buildGroupNames,
   collectSupportedUserPermissions,
   getRequestedPermissions,
   shouldCollectUserPermission
@@ -36,7 +36,7 @@ import {
   AppGroupRecordInfo
 } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { Permission } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
 
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -182,7 +182,7 @@ struct permissionRecordPage {
                   permissionApplication.icon,
                   permissionApplication.groupName,
                   permissionApplication.reqUserPermissions,
-                  permissionApplication.groupIds
+                  permissionApplication.groupKeys
                 )
                 GlobalContext.store('applicationInfo', info);
                 this.getUIContext().getRouter().pushUrl({ url: 'pages/application-secondary' });
@@ -311,7 +311,7 @@ struct permissionRecordPage {
                   item.icon,
                   item.groupName,
                   item.reqUserPermissions,
-                  item.groupIds
+                  item.groupKeys
                 );
                 GlobalContext.store('applicationInfo', info);
                 this.getUIContext().getRouter().pushUrl({ url: 'pages/application-secondary' });
@@ -556,8 +556,8 @@ struct permissionRecordPage {
     })
   }
 
-  getAppGroupIds(): number[] {
-    return buildGroupIds(this.reqUserPermissions);
+  getAppGroupNames(): PermissionGroup[] {
+    return buildGroupNames(this.reqUserPermissions);
   }
 
   createAppRecordInfo(info: bundleManager.BundleInfo): AppRecordInfo {
@@ -571,7 +571,7 @@ struct permissionRecordPage {
       this.reqUserPermissions,
       this.permissionGroups,
       this.groupNames,
-      this.getAppGroupIds(),
+      this.getAppGroupNames(),
       this.appLastTime
     );
   }

@@ -20,7 +20,7 @@ import { DeviceUtil } from '../utils/deviceUtil';
 
 const groupConfig: PermissionGroupConfig = new PermissionGroupConfig({
   groupName: PermissionGroup.CUSTOM_SCREEN_CAPTURE,
-  permissions: [Permission.CUSTOM_SCREEN_CAPTURE],
+  permissions: [Permission.CUSTOM_SCREEN_CAPTURE, Permission.ONSCREEN_AWARENESS, Permission.WINDOW_CAPTURE],
   icon: $r('app.media.ic_public_screen_capture'),
   title: '',
   reason: '',

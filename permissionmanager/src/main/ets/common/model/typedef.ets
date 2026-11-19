@@ -30,7 +30,7 @@ export class AppInfo {
   public labelId: number
   public labelResource: Resource
   public permissions: Permission[]
-  public groupId: number[]
+  public groupNames: PermissionGroup[]
   public zhTag: string
   public indexTag: string
   public language: string
@@ -46,7 +46,7 @@ export class AppInfo {
     labelId: number,
     labelResource: Resource,
     permissions: Permission[],
-    groupId: number[],
+    groupNames: PermissionGroup[],
     zhTag: string,
     indexTag: string,
     language: string
@@ -61,7 +61,7 @@ export class AppInfo {
     this.labelId = labelId
     this.labelResource = labelResource
     this.permissions = permissions
-    this.groupId = groupId
+    this.groupNames = groupNames
     this.zhTag = zhTag
     this.indexTag = indexTag
     this.language = language
@@ -192,7 +192,7 @@ export class AppInfoSimple {
   public icon: ResourceStr | PixelMap
   public label: ResourceStr
   public permissions: Array<string>
-  public groupId: Array<number>
+  public groupNames: Array<PermissionGroup>
 
   constructor(
     bundleName: string,
@@ -201,7 +201,7 @@ export class AppInfoSimple {
     icon: ResourceStr | PixelMap,
     label: ResourceStr,
     permissions: Array<string>,
-    groupId: Array<number>
+    groupNames: Array<PermissionGroup>
   ) {
     this.bundleName = bundleName
     this.api = api
@@ -209,7 +209,7 @@ export class AppInfoSimple {
     this.icon = icon
     this.label = label
     this.permissions = permissions
-    this.groupId = groupId
+    this.groupNames = groupNames
   }
 }
 
@@ -246,23 +246,17 @@ export class OtherPermission {
 export class PermissionInfo {
   public permissionName: Permission
   public groupName: PermissionGroup
-  public label: ResourceStr
-  public groupId: number
   public enableDescription?: string
   public forbiddenDescription?: ResourceStr
 
   constructor(
     permissionName: Permission,
     groupName: PermissionGroup,
-    label: ResourceStr,
-    groupId: number,
     enableDescription?: string,
     forbiddenDescription?: ResourceStr
   ) {
     this.permissionName = permissionName;
     this.groupName = groupName;
-    this.label = label;
-    this.groupId = groupId;
     this.enableDescription = enableDescription;
     this.forbiddenDescription = forbiddenDescription;
   }
@@ -317,7 +311,7 @@ export class AppRecordInfo {
   public reqUserPermissions: string[]
   public permissions: AppGroupRecordInfo[]
   public groupNames: ResourceStr[]
-  public groupIds: number[]
+  public groupKeys: PermissionGroup[]
   public appLastTime: number
 
   constructor(
@@ -328,7 +322,7 @@ export class AppRecordInfo {
     reqUserPermissions: string[],
     permissions: AppGroupRecordInfo[],
     groupNames: ResourceStr[],
-    groupIds: number[],
+    groupKeys: PermissionGroup[],
     appLastTime: number
   ) {
     this.groupName = groupName
@@ -339,7 +333,7 @@ export class AppRecordInfo {
     this.reqUserPermissions = reqUserPermissions
     this.permissions = permissions
     this.groupNames = groupNames
-    this.groupIds = groupIds
+    this.groupKeys = groupKeys
     this.appLastTime = appLastTime
   }
 }

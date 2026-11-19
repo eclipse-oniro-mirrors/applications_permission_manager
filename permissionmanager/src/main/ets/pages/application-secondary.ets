@@ -18,10 +18,10 @@ import common from '@ohos.app.ability.common';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { BusinessError } from '@ohos.base';
-import { groups } from '../common/model/permissionGroup';
+import { groupInfoMap } from '../common/model/permissionGroup';
 import Constants from '../common/utils/constant';
 import { Log, verifyAccessToken } from '../common/utils/utils';
-import { buildGroupIds, collectSupportedUserPermissions } from '../common/permissionGroupManager/bundlePermissionCollector';
+import { buildGroupNames, collectSupportedUserPermissions } from '../common/permissionGroupManager/bundlePermissionCollector';
 import {
   getDocumentsPermissionStatus,
   getFolderGroupStatus,
@@ -107,7 +107,7 @@ struct appNamePlusPage {
     info.icon = resolveAppIcon(this.context, info);
     this.reqUserPermissions = await collectSupportedUserPermissions(info.tokenId, info.permissions);
     info.permissions = this.reqUserPermissions;
-    info.groupId = buildGroupIds(this.reqUserPermissions);
+    info.groupNames = buildGroupNames(this.reqUserPermissions);
   }
 
   private openPermissionDetail(item: PermissionObj, status: number): void {
@@ -192,20 +192,27 @@ struct appNamePlusPage {
    * Initialize permission status information and group permission information
    */
   async initialPermissions() {
-    if (this.bundleName && !this.applicationInfo.groupId.length) {
+    if (!this.applicationInfo) {
+      Log.error('initialPermissions applicationInfo is missing');
+      return;
+    }
+    if (this.bundleName && !this.applicationInfo.groupNames.length) {
       await this.initApplicationInfo(this.applicationInfo);
     }
     let reqPermissions = this.applicationInfo.permissions;
-    let reqGroupIds = this.applicationInfo.groupId;
+    let reqGroupNames = this.applicationInfo.groupNames;
 
     this.allowedListItem = [];
     this.bannedListItem = [];
     let documentsAndFolderHandled = false;
 
-    for (let i = 0; i < reqGroupIds.length; i++) {
-      let id = reqGroupIds[i];
-      let groupName = groups[id].groupName;
-      let group = groups[id].name;
+    for (let i = 0; i < reqGroupNames.length; i++) {
+      let groupInfo = groupInfoMap.get(reqGroupNames[i]);
+      if (!groupInfo) {
+        continue;
+      }
+      let groupName = groupInfo.groupName;
+      let group = groupInfo.name;
       // Merge document and folder groups into one unified file permission entry on PC/tablet.
       if (this.shouldMergeDocumentsAndFolderPermissions() &&
         (group === PermissionGroup.DOCUMENTS || group === PermissionGroup.FOLDER)) {
@@ -238,7 +245,7 @@ struct appNamePlusPage {
       let groupReqPermissions: Permissions[] = [];
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
-        if (groups[id].permissions.indexOf(permission) != -1) {
+        if (groupInfo.permissions.indexOf(permission) != -1) {
           groupReqPermissions.push(permission);
         }
       }

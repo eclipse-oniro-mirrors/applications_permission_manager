@@ -16,10 +16,10 @@
 import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { AppInfo } from '../model/typedef';
-import { Permission } from '../model/definition';
-import { userGrantPermissions } from '../model/permissionGroup';
+import { Permission, PermissionGroup } from '../model/definition';
+import { userGrantPermissions, permissionInfos } from '../model/permissionGroup';
 import Constants from '../utils/constant';
-import { getGroupIdByPermission, Log } from '../utils/utils';
+import { Log } from '../utils/utils';
 import { PermissionGroupManager } from './PermissionGroupManager';
 
 /**
@@ -94,17 +94,17 @@ export async function collectSupportedUserPermissions(
 }
 
 /**
- * Build a deduplicated permission group ID array from the permission list.
+ * Build a deduplicated permission group name array from the permission list.
  */
-export function buildGroupIds(permissions: Permission[]): number[] {
-  let groupIds: number[] = [];
+export function buildGroupNames(permissions: Permission[]): PermissionGroup[] {
+  let groupNames: PermissionGroup[] = [];
   for (const permission of permissions) {
-    let groupId = getGroupIdByPermission(permission);
-    if (groupIds.indexOf(groupId) === -1) {
-      groupIds.push(groupId);
+    let permissionInfo = permissionInfos.get(permission);
+    if (permissionInfo && groupNames.indexOf(permissionInfo.groupName) === -1) {
+      groupNames.push(permissionInfo.groupName);
     }
   }
-  return groupIds;
+  return groupNames;
 }
 
 /**
@@ -125,7 +125,7 @@ export function buildAppInfoFromBundleInfo(
     info.appInfo.labelId,
     info.appInfo.labelResource,
     reqUserPermissions,
-    buildGroupIds(reqUserPermissions),
+    buildGroupNames(reqUserPermissions),
     '',
     '',
     ''

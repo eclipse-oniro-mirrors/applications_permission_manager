@@ -146,7 +146,14 @@ export default class OpenSettingAbility extends UIExtensionAbility {
       return;
     }
     let tokenId = applicationInfo.tokenId;
-    let grantStatus = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(tokenId, targetPermissionValue);
+    let grantStatus: number;
+    try {
+      grantStatus = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(tokenId, targetPermissionValue);
+    } catch (error) {
+      let businessError = error as BusinessError;
+      Log.error(`OpenSettingAbility verifyAccessToken failed, code: ${businessError.code}, message: ${businessError.message}`);
+      grantStatus = abilityAccessCtrl.GrantStatus.PERMISSION_DENIED;
+    }
     if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
       Log.info(`OpenSettingAbility target permission is already granted: ${targetPermission}`);
       returnManualSettingErrorCode(session, Constants.MANUAL_SETTING_ALREADY_GRANTED);

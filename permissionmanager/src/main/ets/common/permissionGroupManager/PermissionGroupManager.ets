@@ -38,6 +38,7 @@ import { Permission, PermissionGroup, PermissionOption, ButtonStatus, ClickOptio
 import { PermissionGroupConfig, CallerAppInfo, PermissionWithOption } from '../model/typedef';
 import { permissionInfos } from '../model/permissionGroup';
 import { Log } from '../utils/utils';
+import Constants from '../utils/constant';
 import common from '@ohos.app.ability.common';
 
 export class PermissionGroupManager {
@@ -121,6 +122,26 @@ export class PermissionGroupManager {
     }
     Log.error(`can not find permissionGroup, permission: ${permission}`);
     return undefined;
+  }
+
+  /**
+   * 获取权限组弹窗标题
+   * @param permission 权限
+   * @param appName 应用名
+   * return
+   */
+  public getGroupTitleByPermission(permission: Permission, appName: string): ResourceStr {
+    let permissionInfo = permissionInfos.get(permission);
+    if (permissionInfo) {
+      const groupHandle = this.permissionStrategies.get(permissionInfo.groupName);
+      if (groupHandle) {
+        return groupHandle.getGroupTitle(appName, Constants.LOCATION_NONE);
+      }
+      Log.error(`can not find strategy, group: ${permissionInfo.groupName}`);
+      return '';
+    }
+    Log.error(`can not find permissionGroup, permission: ${permission}`);
+    return '';
   }
 
   /**

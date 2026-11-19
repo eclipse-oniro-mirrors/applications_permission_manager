@@ -31,7 +31,7 @@ import {
   shouldShowFolderPermissionSection,
   updateFolderStatusByPermission
 } from '../common/utils/documentsPermissionUtils';
-import { Log, getPermissionLabel } from '../common/utils/utils';
+import { Log, getPermissionGroup } from '../common/utils/utils';
 import { isReadPermission, isReadWriteGroup, isWritePermission } from '../common/utils/permissionGroupUtils';
 import { resolveAppLabel } from '../common/utils/resourceDisplayUtils';
 import Constants from '../common/utils/constant';
@@ -456,8 +456,7 @@ struct mediaDocumentItem {
         if (idx > 0) {
           this.permissionLabels.push($r('app.string.and'))
         }
-        let label = getPermissionLabel(permission)
-        this.permissionLabels.push(label);
+        this.permissionLabels.push(getPermissionGroup(permission).groupName)
       })
     }
     let hasReason = false;

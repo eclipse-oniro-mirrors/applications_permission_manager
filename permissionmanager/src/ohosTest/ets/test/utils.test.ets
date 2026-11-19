@@ -19,14 +19,12 @@ import {
   Log,
   verifyAccessToken,
   titleTrim,
-  getPermissionLabel,
   getPermissionGroup,
   getPermissionGroupByName,
-  getGroupIdByPermission,
   checkPermissionGroup,
-  getFontSizeScale,
-  supportPermission
+  getFontSizeScale
 } from '../../../main/ets/common/utils/utils';
+import { supportPermission } from '../../../main/ets/common/permissionGroupManager/bundlePermissionCollector';
 import { abilityAccessCtrl, bundleManager } from '@kit.AbilityKit';
 
 export default function utilsTest() {
@@ -68,16 +66,6 @@ export default function utilsTest() {
       expect(title).assertEqual(testUri);
     })
 
-    it('UtilsTest_004', TestType.FUNCTION, () => {
-      Log.info(`UtilsTest_004 begin`);
-      let testUri = Permission.MICROPHONE;
-      let label = getPermissionLabel(testUri);
-      expect(JSON.stringify(label)).assertEqual(JSON.stringify($r('sys.string.ohos_lab_microphone')));
-      let testUri1 = '';
-      let label1 = getPermissionLabel(testUri1 as Permission);
-      expect(label1).assertEqual('');
-    })
-
     it('UtilsTest_005', TestType.FUNCTION, () => {
       Log.info(`UtilsTest_005 begin`);
       let testUri = Permission.MICROPHONE;
@@ -92,20 +80,10 @@ export default function utilsTest() {
       Log.info(`UtilsTest_006 begin`);
       let testGroup = 'MICROPHONE';
       let groupInfo = getPermissionGroupByName(testGroup);
-      expect(groupInfo.name).assertEqual(testGroup);
+      expect(groupInfo?.name).assertEqual(testGroup);
       let testGroup1 = '';
       let groupInfo1 = getPermissionGroupByName(testGroup1);
-      expect(groupInfo1.name).assertEqual('LOCATION');
-    })
-
-    it('UtilsTest_007', TestType.FUNCTION, () => {
-      Log.info(`UtilsTest_007 begin`);
-      let testUri = Permission.MICROPHONE;
-      let groupId = getGroupIdByPermission(testUri);
-      expect(groupId).assertEqual(2);
-      let testUri1 = '';
-      let groupId1 = getGroupIdByPermission(testUri1 as Permission);
-      expect(groupId1).assertEqual(-1);
+      expect(groupInfo1).assertUndefined();
     })
 
     it('UtilsTest_010', TestType.FUNCTION, () => {
@@ -131,6 +109,28 @@ export default function utilsTest() {
       Log.info(`UtilsTest_013 begin`);
       let support = supportPermission();
       expect(support).assertContain(Permission.CAMERA);
+    })
+
+    // Screen capture group: CUSTOM_SCREEN_CAPTURE / ONSCREEN_AWARENESS / WINDOW_CAPTURE belong to one group.
+    it('UtilsTest_014', TestType.FUNCTION, () => {
+      Log.info(`UtilsTest_014 begin`);
+      expect(checkPermissionGroup([Permission.WINDOW_CAPTURE])).assertEqual('CUSTOM_SCREEN_CAPTURE');
+      expect(checkPermissionGroup([Permission.ONSCREEN_AWARENESS])).assertEqual('CUSTOM_SCREEN_CAPTURE');
+      let groupInfo = getPermissionGroup(Permission.WINDOW_CAPTURE);
+      expect(groupInfo.permissions).assertContain(Permission.CUSTOM_SCREEN_CAPTURE);
+      expect(groupInfo.permissions).assertContain(Permission.ONSCREEN_AWARENESS);
+      expect(groupInfo.permissions).assertContain(Permission.WINDOW_CAPTURE);
+    })
+
+    // Keyboard input assistance group: HOOK_KEY_EVENT / HOOK_INPUT_EVENT / INPUT_RECORDING belong to one group.
+    it('UtilsTest_015', TestType.FUNCTION, () => {
+      Log.info(`UtilsTest_015 begin`);
+      expect(checkPermissionGroup([Permission.HOOK_INPUT_EVENT])).assertEqual('HOOK_INPUT_EVENT');
+      expect(checkPermissionGroup([Permission.INPUT_RECORDING])).assertEqual('HOOK_INPUT_EVENT');
+      let groupInfo = getPermissionGroup(Permission.INPUT_RECORDING);
+      expect(groupInfo.permissions).assertContain(Permission.HOOK_KEY_EVENT);
+      expect(groupInfo.permissions).assertContain(Permission.HOOK_INPUT_EVENT);
+      expect(groupInfo.permissions).assertContain(Permission.INPUT_RECORDING);
     })
   })
 }
