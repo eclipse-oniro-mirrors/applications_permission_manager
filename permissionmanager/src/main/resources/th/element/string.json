@@ -526,34 +526,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"ดรอปโซน",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"ความช่วยเหลือในการป้อนข้อมูล",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"การแบ่งปันหน้าจอ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"การควบคุมอุปกรณ์",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"การเชื่อมต่อ​อุ‍ปกรณ์",
             "attr":{

@@ -197,13 +197,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"Зона за пускане",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"Връзка с устройства",
             "attr":{

@@ -526,34 +526,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"Gestion des fenêtres flottantes",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"Aide à la saisie",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"Partage d'écran",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"Contrôle de l'appareil",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"Connexion d'appareils",
             "attr":{

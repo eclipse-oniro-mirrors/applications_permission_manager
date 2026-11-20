@@ -71,13 +71,6 @@
             }
         },
         {
-            "name":"separator",
-            "value":", ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"and",
             "value":" and ",
             "attr":{
@@ -323,57 +316,29 @@
             }
         },
         {
-            "name":"manual_setting_confirm_title",
-            "value":"Go to Settings to enable the permission",
+            "name":"manual_settings_hook_input_dialog_desc_second",
+            "value":"To grant access, go to Settings > Privacy > Permission management > Keyboard input assistance.",
             "attr":{
                 "translatable":false
             }
         },
         {
-            "name":"manual_setting_confirm_message",
-            "value":"This permission must be enabled manually in Settings. After confirmation, the system Settings app will open.",
+            "name":"manual_settings_screen_share_dialog_desc_second",
+            "value":"To grant access, go to Settings > Privacy > Permission management > Screen sharing.",
             "attr":{
                 "translatable":false
             }
         },
         {
-            "name":"manual_setting_target_app",
-            "value":"App",
+            "name":"manual_settings_control_device_dialog_desc_second",
+            "value":"To grant access, go to Settings > Privacy > Permission management > Control device.",
             "attr":{
                 "translatable":false
             }
         },
         {
-            "name":"manual_setting_target_permission",
-            "value":"Permission",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_title",
-            "value":"Open the matching permission management page by following either path below",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_primary_prefix",
-            "value":"Recommended path: Settings -> Privacy & Security -> ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_secondary_prefix",
-            "value":"Alternative path: Settings -> Apps & Services -> ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_confirm_tip",
-            "value":"After changing the permission, return to the app and verify the status again.",
+            "name":"manual_settings_folder_dialog_desc_second",
+            "value":"To grant access, go to Settings > Privacy > Permission management > Files and folders.",
             "attr":{
                 "translatable":false
             }
@@ -645,34 +610,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"Floating window",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"Keyboard input assistance",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"Screen sharing",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"Control device",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"Device discovery and connection",
             "attr":{
@@ -876,22 +813,8 @@
             }
         },
         {
-            "name":"enable_description_read_contacts",
-            "value":"%s apps have been allowed to read data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"enable_description_write_contacts",
             "value":"%s apps have been allowed to modify data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows the app to delete contact data.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"enable_description_read_calendar",
-            "value":"%s apps have been allowed to read all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive.",
             "attr":{
                 "translatable":false
             }
@@ -1058,22 +981,8 @@
             }
         },
         {
-            "name":"forbidden_description_read_contacts",
-            "value":"Apps are prohibited from reading data about contacts stored on your device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"forbidden_description_write_contacts",
             "value":"Apps are prohibited from modifying data about contacts stored on the device, including how often you communicate with specific individuals by making phone calls, sending emails, or otherwise. This permission allows the app to delete contact data.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"forbidden_description_read_calendar",
-            "value":"Apps are prohibited from reading all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive.",
             "attr":{
                 "translatable":false
             }

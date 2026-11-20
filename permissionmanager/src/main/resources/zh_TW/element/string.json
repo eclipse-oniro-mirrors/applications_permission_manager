@@ -554,34 +554,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"懸浮視窗",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"鍵盤輸入輔助",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"螢幕共享",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"輔助操作",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"裝置發現和連線",
             "attr":{

@@ -134,7 +134,7 @@ struct appNameItem {
         continue;
       }
       this.calendarListItem.push(
-        new CalendarObj(permissionInfo.permissionName, permissionInfo.groupName, permissionInfo.label, i)
+        new CalendarObj(permissionInfo.permissionName, permissionInfo.groupName, permissionsList[0].groupName, i)
       );
     }
   }

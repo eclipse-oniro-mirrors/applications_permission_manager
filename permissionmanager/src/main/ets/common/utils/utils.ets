@@ -18,7 +18,7 @@ import i18n from '@ohos.i18n';
 import hilog from '@ohos.hilog';
 import {
   permissionInfos,
-  groups
+  groupInfoMap
 } from '../model/permissionGroup';
 import { Permission, PermissionGroup } from '../model/definition';
 import Constants from '../utils/constant';
@@ -167,28 +167,18 @@ export function sortByName(appArray: Array<AppInfo | ApplicationObj>): Array<App
 }
 
 /**
- * Get permission label
- * @param {String} permission name
- */
-export function getPermissionLabel(permission: Permission): ResourceStr {
-  let permissionInfo = permissionInfos.get(permission);
-  if (!permissionInfo) {
-    return '';
-  }
-  return permissionInfo.label;
-}
-
-/**
  * Get the corresponding permission group id according to the permission
  * @param {String} permission app name id
  * @return {GroupInfo} group
  */
+const EMPTY_GROUP_INFO: GroupInfo = new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
+
 export function getPermissionGroup(permission: Permission): GroupInfo {
   let permissionInfo = permissionInfos.get(permission);
   if (!permissionInfo) {
-    return new GroupInfo(PermissionGroup.OTHER, '', '', '', [], '', [], [], false);
+    return EMPTY_GROUP_INFO;
   }
-  return groups[permissionInfo.groupId];
+  return groupInfoMap.get(permissionInfo.groupName) ?? EMPTY_GROUP_INFO;
 }
 
 /**
@@ -196,26 +186,8 @@ export function getPermissionGroup(permission: Permission): GroupInfo {
  * @param {String} group name
  * @return {GroupInfo} group
  */
-export function getPermissionGroupByName(name: string): GroupInfo {
-  for (let i = 0; i < groups.length; i++) {
-    if (groups[i].name === name) {
-      return groups[i];
-    }
-  }
-  return groups[0];
-}
-
-/**
- * Obtain the permission group ID by permission name
- * @param {String} permission name
- * @return {number} groupId
- */
-export function getGroupIdByPermission(permission: Permission): number {
-  let permissionInfo = permissionInfos.get(permission);
-  if (!permissionInfo) {
-    return -1;
-  }
-  return permissionInfo.groupId;
+export function getPermissionGroupByName(name: string): GroupInfo | undefined {
+  return groupInfoMap.get(name as PermissionGroup);
 }
 
 export function PermissionDialogException(code: number, session: UIExtensionContentSession): void {

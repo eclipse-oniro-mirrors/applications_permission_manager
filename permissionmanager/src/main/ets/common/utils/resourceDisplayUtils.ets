@@ -14,9 +14,10 @@
  */
 
 import common from '@ohos.app.ability.common';
+import bundleManager from '@ohos.bundle.bundleManager';
 import { Permission } from '../model/definition';
 import { AppInfo } from '../model/typedef';
-import { getPermissionLabel, Log } from './utils';
+import { Log } from './utils';
 
 /**
  * Safely convert a resource object to a string and return an empty string when the resource is
@@ -88,5 +89,32 @@ export function resolveAppIcon(
   } catch (error) {
     Log.error('ResolveAppIcon error: ' + JSON.stringify(error));
     return fallbackIcon;
+  }
+}
+
+/**
+ * Get the use reason of a specified permission configured by the application, returning an empty
+ * string when the permission is not declared or no reason is configured.
+ */
+export function getPermissionReason(
+  context: common.UIAbilityContext,
+  bundleName: string,
+  permission: Permission
+): string {
+  if (!bundleName || !permission) {
+    return '';
+  }
+  try {
+    let bundleInfo = bundleManager.getBundleInfoSync(bundleName,
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION);
+    let detail = bundleInfo.reqPermissionDetails.find(item => item.name === permission);
+    if (!detail || detail.reasonId <= 0) {
+      return '';
+    }
+    let moduleContext = context.createModuleContext(bundleInfo.name, detail.moduleName);
+    return moduleContext.resourceManager.getStringSync(detail.reasonId);
+  } catch (error) {
+    Log.error('GetPermissionReason error: ' + JSON.stringify(error));
+    return '';
   }
 }

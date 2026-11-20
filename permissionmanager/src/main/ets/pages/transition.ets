@@ -14,11 +14,82 @@
  */
 
 import Constants from '../common/utils/constant';
+import common from '@ohos.app.ability.common';
+import window from '@ohos.window';
+import bundleManager from '@ohos.bundle.bundleManager';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import { GlobalContext } from '../common/utils/globalContext';
+import { Permission } from '../common/model/definition';
+import { RouterParams3, AppInfo } from '../common/model/typedef';
+import { getPermissionGroup, addLocalTag, Log } from '../common/utils/utils';
+import {
+  getRequestedPermissions,
+  buildAppInfoFromBundleInfo
+} from '../common/permissionGroupManager/bundlePermissionCollector';
+import { resolveAppLabel, resolveAppIcon } from '../common/utils/resourceDisplayUtils';
+
 const ICON_SIZE = 150;
 
 @Entry
 @Component
 struct Transition {
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+
+  aboutToAppear(): void {
+    let targetPermission = GlobalContext.load<string>('targetPermission');
+    if (!targetPermission) {
+      return;
+    }
+    GlobalContext.store('targetPermission', '');
+    this.buildApplicationDetailPage(targetPermission);
+  }
+
+  /**
+   * Build the application data of the target permission and load the application
+   * permission detail page directly, so only one page transition is visible.
+   */
+  private async buildApplicationDetailPage(targetPermission: string): Promise<void> {
+    const flag =
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
+      bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION;
+    let bundleName: string = GlobalContext.load<string>('bundleName');
+    try {
+      let displayPermission: Permission = targetPermission as Permission;
+      let group = getPermissionGroup(displayPermission);
+      let bundleInfo = await bundleManager.getBundleInfo(bundleName, flag);
+      let reqPermissions: Permission[] = getRequestedPermissions(bundleInfo);
+      let matched: Permission[] = reqPermissions.filter((permission: Permission) => permission === displayPermission);
+      if (!matched.length) {
+        Log.error(`Transition target permission is not declared by bundle: ${targetPermission}`);
+        this.context.terminateSelf();
+        return;
+      }
+      let info: AppInfo = buildAppInfoFromBundleInfo(bundleInfo, matched);
+      info.label = await resolveAppLabel(this.context, info);
+      info.icon = resolveAppIcon(this.context, info);
+      addLocalTag(info);
+      let status: number = Constants.PERMISSION_BAN;
+      try {
+        let grantStatus = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(info.tokenId, displayPermission);
+        status = grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
+          Constants.PERMISSION_ALLOW : Constants.PERMISSION_BAN;
+      } catch (error) {
+        Log.error(`Transition verifyAccessToken failed: ${JSON.stringify(error)}`);
+      }
+      GlobalContext.store('applicationInfo', info);
+      GlobalContext.store('currentPermissionGroup', group.name);
+      GlobalContext.store('applicationTertiaryParams',
+        new RouterParams3(bundleName, group.groupName, matched, status, info.tokenId));
+      let winStage = globalThis.windowStage as window.WindowStage;
+      winStage.loadContent('pages/application-tertiary').catch((error: Error) => {
+        Log.error(`Transition loadContent failed: ${JSON.stringify(error)}`);
+        this.context.terminateSelf();
+      });
+    } catch (error) {
+      Log.error(`Transition buildApplicationDetailPage failed: ${JSON.stringify(error)}`);
+      this.context.terminateSelf();
+    }
+  }
 
   build() {
     Flex({ justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {

@@ -89,6 +89,7 @@ export abstract class BasePermissionStrategy {
     return [ButtonStatus.DENY, ButtonStatus.ALLOW];
   }
 
+
   /**
    * 区分设备是否支持
    * @param permission 权限

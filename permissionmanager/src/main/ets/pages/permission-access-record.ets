@@ -22,7 +22,7 @@ import Constants from '../common/utils/constant';
 import { Log, getPermissionGroup } from '../common/utils/utils';
 import {
   supportPermission,
-  buildGroupIds,
+  buildGroupNames,
   collectSupportedUserPermissions,
   getRequestedPermissions,
   shouldCollectUserPermission
@@ -36,7 +36,7 @@ import {
   AppGroupRecordInfo
 } from '../common/model/typedef';
 import { GlobalContext } from '../common/utils/globalContext';
-import { Permission } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
 
 @Extend(Image)function customizeImage(width: number, height: number) {
   .objectFit(ImageFit.Contain)
@@ -49,6 +49,7 @@ import { Permission } from '../common/model/definition';
 @Component
 struct permissionRecordPage {
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  private tabsController: TabsController = new TabsController();
   @State isVertical: boolean = GlobalContext.load('isVertical');
   @State allBundleInfo: AppInfo[] = GlobalContext.load('allBundleInfo');
   @State groups: GroupRecordInfo[] = [];
@@ -58,7 +59,6 @@ struct permissionRecordPage {
   @State applicationIndex: number = -1;
   @State strings: StringObj = new StringObj('', '');
   @State currentIndex: number = 0;
-  @State show: boolean = false;
   @State isTouch: string = '';
   @State reqUserRecords: privacyManager.PermissionUsedRecord[] = [];
   @State reqUserPermissions: Permission[] = [];
@@ -134,7 +134,7 @@ struct permissionRecordPage {
         }.onClick(() => {
           this.permissionIndex = this.permissionIndex == index ? -1 : index
           this.permissionApplications = this.applicationInfos.filter((appInfo) => {
-            return appInfo.groupNames.includes(item.groupName);
+            return appInfo.groupKeys.includes(item.name as PermissionGroup);
           })
         })
         .padding({ left: $r('sys.float.ohos_id_card_margin_start'), right: $r('sys.float.ohos_id_card_margin_end') })
@@ -182,7 +182,7 @@ struct permissionRecordPage {
                   permissionApplication.icon,
                   permissionApplication.groupName,
                   permissionApplication.reqUserPermissions,
-                  permissionApplication.groupIds
+                  permissionApplication.groupKeys
                 )
                 GlobalContext.store('applicationInfo', info);
                 this.getUIContext().getRouter().pushUrl({ url: 'pages/application-secondary' });
@@ -311,7 +311,7 @@ struct permissionRecordPage {
                   item.icon,
                   item.groupName,
                   item.reqUserPermissions,
-                  item.groupIds
+                  item.groupKeys
                 );
                 GlobalContext.store('applicationInfo', info);
                 this.getUIContext().getRouter().pushUrl({ url: 'pages/application-secondary' });
@@ -379,7 +379,7 @@ struct permissionRecordPage {
                   .padding({ top: Constants.SUBTITLE_PADDING_TOP, bottom: Constants.SUBTITLE_PADDING_BOTTOM })
                   if (this.groups.length) {
                     Stack() {
-                      Tabs() {
+                      Tabs({ controller: this.tabsController }) {
                         TabContent() {
                           Row() {
                             Column() {
@@ -406,15 +406,13 @@ struct permissionRecordPage {
                             Column() {
                               Scroll() {
                                 Row() {
-                                  if (this.show) {
-                                    List() {
-                                      ForEach(this.applicationInfos, (item: AppRecordInfo, index) => {
-                                        this.ApplicationListItemLayout(item, index as number)
-                                      }, (item: AppRecordInfo) => JSON.stringify(item))
-                                    }
-                                    .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
-                                    .height(Constants.FULL_HEIGHT)
+                                  List() {
+                                    ForEach(this.applicationInfos, (item: AppRecordInfo, index) => {
+                                      this.ApplicationListItemLayout(item, index as number)
+                                    }, (item: AppRecordInfo) => JSON.stringify(item))
                                   }
+                                  .padding({ top: Constants.LIST_PADDING_TOP, bottom: Constants.LIST_PADDING_BOTTOM })
+                                  .height(Constants.FULL_HEIGHT)
                                 }.padding({
                                   left: Constants.MANAGEMENT_ROW_PADDING_LEFT,
                                   right: Constants.MANAGEMENT_ROW_PADDING_RIGHT,
@@ -430,8 +428,13 @@ struct permissionRecordPage {
                       .barWidth(Constants.BAR_WIDTH)
                       .onChange((index) => {
                         this.currentIndex = index;
-                        if (!this.show) {
-                          this.show = true;
+                      })
+                      .onAppear(() => {
+                        try {
+                          this.tabsController.preloadItems([1]);
+                        } catch (error) {
+                          let businessError = error as BusinessError;
+                          Log.error(`preloadItems failed, code: ${businessError.code}, message: ${businessError.message}`);
                         }
                       })
                     }.height(Constants.FULL_HEIGHT)
@@ -556,8 +559,8 @@ struct permissionRecordPage {
     })
   }
 
-  getAppGroupIds(): number[] {
-    return buildGroupIds(this.reqUserPermissions);
+  getAppGroupNames(): PermissionGroup[] {
+    return buildGroupNames(this.reqUserPermissions);
   }
 
   createAppRecordInfo(info: bundleManager.BundleInfo): AppRecordInfo {
@@ -571,7 +574,7 @@ struct permissionRecordPage {
       this.reqUserPermissions,
       this.permissionGroups,
       this.groupNames,
-      this.getAppGroupIds(),
+      this.getAppGroupNames(),
       this.appLastTime
     );
   }
@@ -602,20 +605,19 @@ struct permissionRecordPage {
     return this.createAppRecordInfo(info);
   }
 
-  getInfo(record: privacyManager.BundleUsedRecord, sortFlag: boolean) {
+  async getInfo(record: privacyManager.BundleUsedRecord, sortFlag: boolean): Promise<boolean> {
     try {
-      bundleManager.getBundleInfo(record.bundleName, bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
-        bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION).then(async (info): Promise<boolean> => {
-          let appInfo = await this.buildAppRecordInfo(record, info);
-          if (!appInfo) {
-            return false;
-          }
-          this.applicationInfos.push(appInfo);
-          if (sortFlag) {
-            this.sortApplicationInfos();
-          }
-          return true;
-        })
+      let info = await bundleManager.getBundleInfo(record.bundleName,
+        bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION |
+        bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_REQUESTED_PERMISSION);
+      let appInfo = await this.buildAppRecordInfo(record, info);
+      if (!appInfo) {
+        return false;
+      }
+      this.applicationInfos.push(appInfo);
+      if (sortFlag) {
+        this.sortApplicationInfos();
+      }
       return true;
     } catch (error) {
       Log.error('getBundleInfo error in getInfo: ' + JSON.stringify(error));
@@ -662,7 +664,7 @@ struct permissionRecordPage {
       } catch (e) {
         continue;
       }
-      this.getInfo(record, (i + 1) == records.bundleRecords.length);
+      await this.getInfo(record, (i + 1) == records.bundleRecords.length);
       for (let j = 0; j < record.permissionRecords.length; j++) {
         let permissionRecord = record.permissionRecords[j];
         // Only records with successful accesses are displayed; rejected-only or grant-only rows are skipped.

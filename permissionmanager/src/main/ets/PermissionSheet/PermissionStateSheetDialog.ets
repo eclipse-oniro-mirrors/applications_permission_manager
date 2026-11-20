@@ -18,7 +18,7 @@ import common from '@ohos.app.ability.common';
 import { BusinessError } from '@ohos.base';
 import {
   checkPermissionGroup,
-  getGroupIdByPermission, getPermissionLabel, Log,
+  getPermissionGroup, Log,
   PermissionDialogException,
   PermissionDialogReturn,
   verifyAccessToken } from '../common/utils/utils';
@@ -28,12 +28,13 @@ import { AppInfo, CallerBundleInfo,
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission, PermissionGroup } from '../common/model/definition';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
-import { groups, showSubPermissionsGroup } from '../common/model/permissionGroup';
+import { groups, groupInfoMap, showSubPermissionsGroup } from '../common/model/permissionGroup';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog'
 import { PermissionUtils } from '../common/utils/permissionUtils';
 import { getFolderCheckboxInfo } from '../common/utils/documentsPermissionUtils';
 import { isReadWriteGroup, isReadPermission, isWritePermission } from '../common/utils/permissionGroupUtils';
+import { buildGroupNames } from '../common/permissionGroupManager/bundlePermissionCollector';
 
 let session: UIExtensionContentSession;
 let terminating: boolean = false;
@@ -280,15 +281,8 @@ struct PermissionStateSheetDialog {
       info.icon = $r('app.media.icon');
     }
 
-    let groupIds: number[] = [];
-    for (let i = 0; i < this.reqUserPermissions.length; i++) {
-      let groupId = getGroupIdByPermission(this.reqUserPermissions[i]);
-      if (groupIds.indexOf(groupId) == -1) {
-        groupIds.push(groupId);
-      }
-    }
     info.permissions = this.reqUserPermissions;
-    info.groupId = groupIds;
+    info.groupNames = buildGroupNames(this.reqUserPermissions);
   }
 
   async getStatus(groupReqPermissions: Permissions[], group: string) {
@@ -376,21 +370,28 @@ struct PermissionStateSheetDialog {
    * Initialize permission status information and group permission information
    */
   async initialPermissions() {
-    if (this.bundleName && !this.applicationInfo?.groupId.length) {
-      await this.initApplicationInfo(this.applicationInfo!);
+    if (!this.applicationInfo) {
+      Log.error('initialPermissions applicationInfo is missing');
+      return;
     }
-    let reqPermissions = this.applicationInfo!.permissions;
-    let reqGroupIds = this.applicationInfo!.groupId;
+    if (this.bundleName && !this.applicationInfo.groupNames.length) {
+      await this.initApplicationInfo(this.applicationInfo);
+    }
+    let reqPermissions = this.applicationInfo.permissions;
+    let reqGroupNames = this.applicationInfo.groupNames;
 
-    for (let i = 0; i < reqGroupIds.length; i++) {
-      let id = reqGroupIds[i];
-      let groupName = groups[id].groupName;
-      let group = groups[id].name;
+    for (let i = 0; i < reqGroupNames.length; i++) {
+      let groupInfo = groupInfoMap.get(reqGroupNames[i]);
+      if (!groupInfo) {
+        continue;
+      }
+      let groupName = groupInfo.groupName;
+      let group = groupInfo.name;
       let groupReqPermissions: Permissions[] = [];
 
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
-        if (groups[id].permissions.indexOf(permission) != -1) {
+        if (groupInfo.permissions.indexOf(permission) != -1) {
           groupReqPermissions.push(permission);
           this.groupName = groupName;
         }
@@ -669,8 +670,7 @@ struct mediaDocumentItem {
         if (idx > 0) {
           this.permissionLabels.push($r('app.string.and'));
         }
-        let label = getPermissionLabel(permission);
-        this.permissionLabels.push(label);
+        this.permissionLabels.push(getPermissionGroup(permission).groupName);
       });
     }
     let hasReason = false;

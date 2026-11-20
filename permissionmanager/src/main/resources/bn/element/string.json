@@ -197,13 +197,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"Dropzone",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"ডিভাইস সংযোগ",
             "attr":{

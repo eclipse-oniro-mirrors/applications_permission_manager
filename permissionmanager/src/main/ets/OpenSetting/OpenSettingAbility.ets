@@ -19,6 +19,7 @@ import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import { BusinessError } from '@ohos.base';
 import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
+import window from '@ohos.window';
 import { DeviceUtil } from '../common/utils/deviceUtil';
 import { Log } from '../common/utils/utils';
 import Constants from '../common/utils/constant';
@@ -60,7 +61,8 @@ function getTargetPermission(want: Want): string {
 
 function returnManualSettingErrorCode(session: UIExtensionContentSession, code: number): void {
   session.terminateSelfWithResult({
-    resultCode: code === Constants.MANUAL_SETTING_USER_OPENED ? 0 : -1,
+    resultCode: code === Constants.MANUAL_SETTING_USER_OPENED ||
+      code === Constants.MANUAL_SETTING_ALREADY_GRANTED ? 1 : 0,
     want: {
       parameters: {
         'ohos.open.setting.result_code': code,
@@ -146,7 +148,14 @@ export default class OpenSettingAbility extends UIExtensionAbility {
       return;
     }
     let tokenId = applicationInfo.tokenId;
-    let grantStatus = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(tokenId, targetPermissionValue);
+    let grantStatus: number;
+    try {
+      grantStatus = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(tokenId, targetPermissionValue);
+    } catch (error) {
+      let businessError = error as BusinessError;
+      Log.error(`OpenSettingAbility verifyAccessToken failed, code: ${businessError.code}, message: ${businessError.message}`);
+      grantStatus = abilityAccessCtrl.GrantStatus.PERMISSION_DENIED;
+    }
     if (grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
       Log.info(`OpenSettingAbility target permission is already granted: ${targetPermission}`);
       returnManualSettingErrorCode(session, Constants.MANUAL_SETTING_ALREADY_GRANTED);
@@ -160,13 +169,24 @@ export default class OpenSettingAbility extends UIExtensionAbility {
     // would break its onNewWant routing (UIExtensionContentSession has no setUIContent).
     globalThis.openSettingSession = session;
     try {
-      session.setWindowBackgroundColor('#00000000');
       await session.loadContent('pages/manual-setting-confirm');
     } catch (error) {
       let businessError = error as BusinessError;
       Log.error(`OpenSettingAbility load manual setting confirm failed: ${businessError.code} ${businessError.message}`);
       returnManualSettingErrorCode(session, Constants.MANUAL_SETTING_USER_REJECTED);
+      return;
     }
+    try {
+      session.setWindowBackgroundColor('#00000000');
+    } catch (error) {
+      let businessError = error as BusinessError;
+      Log.error(`OpenSettingAbility set window background failed, code: ${businessError.code}, message: ${businessError.message}`);
+    }
+    window.getLastWindow(this.context).then((win) => {
+      win.setBackdropBlurStyle(window.BlurStyle.THICK);
+    }).catch((error: BusinessError) => {
+      Log.error(`OpenSettingAbility set backdrop blur failed, code: ${error.code}, message: ${error.message}`);
+    });
   }
 
   onSessionCreate(want: Want, session: UIExtensionContentSession): void {
