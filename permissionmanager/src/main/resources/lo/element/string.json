@@ -379,27 +379,6 @@
             }
         },
         {
-            "name":"permission_label_hook_input_event",
-            "value":"ການຊ່ວຍປ້ອນຂໍ້ມູນ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"ການແຊຣ໌ໜ້າຈໍ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"ການຄວບຄຸມອຸປະກອນ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"group_label_hook_input_event",
             "value":"ອະນຸຍາດໃຫ້ %s ໃຫ້ການຊ່ວຍເຫຼືອໃນການປ້ອນຂໍ້ມູນບໍ?",
             "attr":{

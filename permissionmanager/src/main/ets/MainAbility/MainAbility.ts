@@ -76,7 +76,11 @@ export default class MainAbility extends UIAbility {
       return;
     }
 
-    if (callerBundleName) {
+    let launchTargetPermission = GlobalContext.load<string>('targetPermission');
+    if (launchTargetPermission) {
+      globalThis.currentApp = 'all';
+      this.loadPage('pages/transition');
+    } else if (callerBundleName) {
       globalThis.currentApp = callerBundleName;
       this.getSpecifiedApplication(callerBundleName);
     } else {
@@ -119,6 +123,13 @@ export default class MainAbility extends UIAbility {
 
     let bundleName = want.parameters?.bundleName ? want.parameters.bundleName : 'all';
     this.updateLaunchParams(want as Want);
+    let newTargetPermission = GlobalContext.load<string>('targetPermission');
+    if (newTargetPermission) {
+      console.log(TAG + 'MainAbility onNewWant. navigate to permission group');
+      globalThis.currentApp = 'all';
+      this.loadPage('pages/transition');
+      return;
+    }
     if (globalThis.currentApp === 'all') {
       if (globalThis.currentApp !== bundleName) {
         console.log(TAG + 'MainAbility onNewWant. all -> app');
@@ -254,7 +265,7 @@ export default class MainAbility extends UIAbility {
         'labelId': bundleInfo.appInfo.labelId,
         'labelResource': bundleInfo.appInfo.labelResource,
         'permissions': reqPermissions,
-        'groupId': [],
+        'groupNames': [],
         'zhTag': '',
         'indexTag': '',
         'language': ''

@@ -20,13 +20,19 @@ import bundleManager from '@ohos.bundle.bundleManager';
 import { GlobalContext } from '../common/utils/globalContext';
 import { getPermissionGroup, Log } from '../common/utils/utils';
 import { AppInfo, GroupInfo } from '../common/model/typedef';
-import { Permission } from '../common/model/definition';
+import { Permission, PermissionGroup } from '../common/model/definition';
 import Constants from '../common/utils/constant';
-import { getTextFromResource, getPermissionReason, resolveAppLabel } from '../common/utils/resourceDisplayUtils';
+import { DeviceUtil } from '../common/utils/deviceUtil';
+import { getPermissionReason, resolveAppLabel } from '../common/utils/resourceDisplayUtils';
 import { PermissionGroupManager } from '../common/permissionGroupManager/PermissionGroupManager';
 
 const PERMISSION_MANAGER_BUNDLE_NAME: string = 'com.ohos.permissionmanager';
 const PERMISSION_MANAGER_MAIN_ABILITY: string = `${PERMISSION_MANAGER_BUNDLE_NAME}.MainAbility`;
+const DIALOG_WIDTH_DEFAULT: string = '405vp';
+const DIALOG_HEIGHT_DEFAULT: string = '285vp';
+const TITLE_ICON_PANEL_SIZE: number = 32;
+const TITLE_ICON_SIZE: number = 20;
+const TITLE_ICON_OFFSET: number = 6;
 
 @Entry
 @Component
@@ -45,7 +51,7 @@ struct ManualSettingConfirmPage {
       contentBuilder: () => {
         this.buildDialogContent();
       },
-      contentAreaPadding: { right: 0 },
+      contentAreaPadding: { left: 0, right: 0, top: 0, bottom: 0 },
       buttons: [
         {
           value: $r('app.string.cancel'),
@@ -67,8 +73,10 @@ struct ManualSettingConfirmPage {
     autoCancel: false,
     customStyle: false,
     isModal: true,
-    width: '99%',
-    height: '99%'
+    alignment: DialogAlignment.Center,
+    maskColor: '#00000000',
+    width: DIALOG_WIDTH_DEFAULT as Dimension,
+    height: DIALOG_HEIGHT_DEFAULT as Dimension
   });
 
   async aboutToAppear(): Promise<void> {
@@ -113,13 +121,14 @@ struct ManualSettingConfirmPage {
 
   private goToPermissionDetail(): void {
     this.dialogController?.close();
-    Log.info(`ManualSettingConfirmPage goToPermissionDetail bundle=${this.applicationInfo?.bundleName}, permission=${this.targetPermission}`);
+    let redirectPermission: Permission = this.targetPermission;
+    Log.info(`ManualSettingConfirmPage goToPermissionDetail bundle=${this.applicationInfo?.bundleName}, permission=${this.targetPermission}, redirect=${redirectPermission}`);
     this.context.startAbility({
       bundleName: PERMISSION_MANAGER_BUNDLE_NAME,
       abilityName: PERMISSION_MANAGER_MAIN_ABILITY,
       parameters: {
         bundleName: this.applicationInfo?.bundleName ?? '',
-        targetPermission: this.targetPermission
+        targetPermission: redirectPermission
       }
     }).then(() => {
       Log.info('ManualSettingConfirmPage start permission manager success');
@@ -134,15 +143,19 @@ struct ManualSettingConfirmPage {
     return this.applicationLabel || this.applicationInfo?.label || this.applicationInfo?.bundleName || '';
   }
 
-  private getPrimaryPathText(): string {
-    let prefix: string = getTextFromResource(this.context, $r('app.string.manual_setting_path_primary_prefix'));
-    let groupName: string = getTextFromResource(this.context, this.groupInfo.groupName);
-    return `${prefix}${groupName} -> ${this.getApplicationLabel()}`;
-  }
-
-  private getSecondaryPathText(): string {
-    let prefix: string = getTextFromResource(this.context, $r('app.string.manual_setting_path_secondary_prefix'));
-    return `${prefix}${this.getApplicationLabel()}`;
+  private getJumpPathText(): ResourceStr {
+    switch (this.groupInfo.name) {
+      case PermissionGroup.HOOK_INPUT_EVENT:
+        return $r('app.string.manual_settings_hook_input_dialog_desc_second');
+      case PermissionGroup.CUSTOM_SCREEN_RECORDING:
+        return $r('app.string.manual_settings_screen_share_dialog_desc_second');
+      case PermissionGroup.CONTROL_DEVICE:
+        return $r('app.string.manual_settings_control_device_dialog_desc_second');
+      case PermissionGroup.FOLDER:
+        return $r('app.string.manual_settings_folder_dialog_desc_second');
+      default:
+        return '';
+    }
   }
 
   private returnManualSettingResult(code: number): void {
@@ -151,7 +164,7 @@ struct ManualSettingConfirmPage {
     let session = globalThis.openSettingSession as UIExtensionContentSession;
     if (typeof session?.terminateSelfWithResult === 'function') {
       session.terminateSelfWithResult({
-        resultCode: code === Constants.MANUAL_SETTING_USER_OPENED ? 0 : -1,
+        resultCode: code === Constants.MANUAL_SETTING_USER_OPENED ? 1 : 0,
         want: {
           parameters: {
             'ohos.open.setting.result_code': code,
@@ -173,80 +186,51 @@ struct ManualSettingConfirmPage {
   @Builder
   private buildDialogContent() {
     Column({ space: 12 }) {
-      Image(this.groupInfo.icon)
-        .width(Constants.DIALOG_ICON_WIDTH)
-        .height(Constants.DIALOG_ICON_HEIGHT)
-        .fillColor($r('sys.color.font_primary'))
+      Column({ space: 12 }) {
+        Column() {
+          Image(this.groupInfo.icon)
+            .width(TITLE_ICON_SIZE)
+            .height(TITLE_ICON_SIZE)
+            .fillColor($r('sys.color.font_primary'))
+            .offset({ x: TITLE_ICON_OFFSET, y: TITLE_ICON_OFFSET })
+        }
+        .width(TITLE_ICON_PANEL_SIZE)
+        .height(TITLE_ICON_PANEL_SIZE)
+        .backgroundColor($r('sys.color.ohos_id_color_panel_bg'))
 
-      Text(this.groupTitle)
-        .fontSize(22)
-        .fontWeight(FontWeight.Bold)
-        .width('100%')
-        .textAlign(TextAlign.Center)
-
-      if (this.permissionReason !== '') {
-        Text(this.permissionReason)
-          .fontSize(14)
-          .fontColor($r('sys.color.font_secondary'))
-          .width('100%')
+        Text(this.groupTitle)
+          .fontSize($r('sys.float.Title_S'))
+          .fontWeight(FontWeight.Bold)
           .textAlign(TextAlign.Center)
+          .maxLines(3)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
       }
-
-      Column({ space: 10 }) {
-        Row() {
-          Text($r('app.string.manual_setting_target_app'))
-            .fontSize(14)
-            .fontWeight(FontWeight.Medium)
-            .width(88)
-          Text(this.getApplicationLabel())
-            .fontSize(14)
-            .layoutWeight(1)
-        }
-        .width('100%')
-
-        Row() {
-          Text($r('app.string.manual_setting_target_permission'))
-            .fontSize(14)
-            .fontWeight(FontWeight.Medium)
-            .width(88)
-          Text(this.groupInfo.groupName)
-            .fontSize(14)
-            .layoutWeight(1)
-        }
-        .width('100%')
-      }
+      .alignItems(HorizontalAlign.Center)
       .width('100%')
-      .padding(14)
-      .backgroundColor($r('sys.color.comp_background_secondary'))
-      .borderRadius(16)
+      .padding({ top: 12, bottom: 12 })
 
-      Text($r('app.string.manual_setting_path_title'))
-        .fontSize(15)
-        .fontWeight(FontWeight.Medium)
-        .width('100%')
-        .textAlign(TextAlign.Start)
+      Column() {
+        if (this.permissionReason !== '') {
+          Text(this.permissionReason)
+            .fontSize($r('sys.float.Body_L'))
+            .fontWeight(FontWeight.Medium)
+            .fontColor($r('sys.color.font_primary'))
+            .textAlign(TextAlign.Center)
+        }
 
-      Text(this.getPrimaryPathText())
-        .fontSize(14)
-        .width('100%')
-        .textAlign(TextAlign.Start)
-
-      Text(this.getSecondaryPathText())
-        .fontSize(14)
-        .width('100%')
-        .textAlign(TextAlign.Start)
-
-      Text($r('app.string.manual_setting_confirm_tip'))
-        .fontSize(12)
-        .fontColor($r('sys.color.font_secondary'))
-        .width('100%')
-        .textAlign(TextAlign.Start)
+        Text(this.getJumpPathText())
+          .fontSize($r('sys.float.Body_L'))
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r('sys.color.font_primary'))
+          .textAlign(TextAlign.Center)
+          .margin({ top: this.permissionReason !== '' ? 8 : 0 })
+      }
+      .alignItems(HorizontalAlign.Center)
+      .width('100%')
     }
     .width('100%')
-    .height('100%')
     .alignItems(HorizontalAlign.Start)
-    .padding({ left: 12, right: 12, top: 12, bottom: 0 })
-    .constraintSize({ maxWidth: 1200 })
+    .padding({ left: 24, right: 24, top: 24, bottom: 0 })
   }
 
   build() {

@@ -53,8 +53,10 @@ let audioVolumeGroupManager: audio.AudioVolumeGroupManager;
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1).backTitle;
-  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1).list;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1)?.backTitle
+    ?? GlobalContext.load('permissionGroupBackTitle');
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1)?.list
+    ?? GlobalContext.load('permissionGroupList');
   @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State polymorphismIsOn: Array<number> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
@@ -175,13 +177,15 @@ struct locationInfoPage {
 @Component
 struct applicationItem {
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1).backTitle;
-  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1).list;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1)?.backTitle
+    ?? GlobalContext.load('permissionGroupBackTitle');
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1)?.list
+    ?? GlobalContext.load('permissionGroupList');
   private isMuteSupported: boolean | undefined =
-    (this.getUIContext().getRouter().getParams() as RouterParams1).isMuteSupported;
-  @State globalIsOn: boolean = (this.getUIContext().getRouter().getParams() as RouterParams1).globalIsOn ?? true;
+    (this.getUIContext().getRouter().getParams() as RouterParams1)?.isMuteSupported;
+  @State globalIsOn: boolean = (this.getUIContext().getRouter().getParams() as RouterParams1)?.globalIsOn ?? true;
   @State adsToggleOn: boolean =
-    (this.getUIContext().getRouter().getParams() as RouterParams1).adsToggleOn ?? false;
+    (this.getUIContext().getRouter().getParams() as RouterParams1)?.adsToggleOn ?? false;
   @State permissionNum: number = Constants.PERMISSION_NUM; // permission num
   @State toggleIsOn: boolean[] = []; // toggle switch state array
   @State isRisk: boolean[] = [];

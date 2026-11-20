@@ -407,27 +407,6 @@
             }
         },
         {
-            "name":"permission_label_hook_input_event",
-            "value":"كىرگۈزگۈچ ئىجازىتى",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"ئېكران ئورتاقلىشىش",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"ئۈسكۈنە تىزگىنلەش",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"group_label_hook_input_event",
             "value":"‏«%s» ئۈچۈن كىرگۈزگۈچ ئىجازىتى كېرەك",
             "attr":{

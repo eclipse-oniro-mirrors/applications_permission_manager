@@ -71,13 +71,6 @@
             }
         },
         {
-            "name":"separator",
-            "value":"、",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"and",
             "value":"和",
             "attr":{
@@ -323,57 +316,29 @@
             }
         },
         {
-            "name":"manual_setting_confirm_title",
-            "value":"前往设置开启权限",
+            "name":"manual_settings_hook_input_dialog_desc_second",
+            "value":"需前往“设置”>“隐私”>“权限管理”>“键盘输入辅助”中开启此权限。",
             "attr":{
                 "translatable":false
             }
         },
         {
-            "name":"manual_setting_confirm_message",
-            "value":"该权限需要在系统“设置”中手动开启。确认后将切换到系统“设置”应用。",
+            "name":"manual_settings_screen_share_dialog_desc_second",
+            "value":"需前往“设置”>“隐私”>“权限管理”>“屏幕共享”中开启此权限。",
             "attr":{
                 "translatable":false
             }
         },
         {
-            "name":"manual_setting_target_app",
-            "value":"目标应用",
+            "name":"manual_settings_control_device_dialog_desc_second",
+            "value":"需前往“设置”>“隐私”>“权限管理”>“辅助操作”中开启此权限。",
             "attr":{
                 "translatable":false
             }
         },
         {
-            "name":"manual_setting_target_permission",
-            "value":"目标权限",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_title",
-            "value":"请按以下路径进入对应权限管理界面",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_primary_prefix",
-            "value":"推荐路径：设置 -> 隐私和安全 -> ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_secondary_prefix",
-            "value":"备用路径：设置 -> 应用和元服务 -> ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_confirm_tip",
-            "value":"完成授权后，请返回当前应用重新验证权限状态。",
+            "name":"manual_settings_folder_dialog_desc_second",
+            "value":"需前往“设置”>“隐私”>“权限管理”>“文件和文件夹”中开启此权限。",
             "attr":{
                 "translatable":false
             }
@@ -645,34 +610,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"悬浮窗",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"键盘输入辅助",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"屏幕共享",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"辅助操作",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"设备发现和连接",
             "attr":{
@@ -876,22 +813,8 @@
             }
         },
         {
-            "name":"enable_description_read_contacts",
-            "value":"已允许%s个应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"enable_description_write_contacts",
             "value":"已允许%s个应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"enable_description_read_calendar",
-            "value":"已允许%s个应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。",
             "attr":{
                 "translatable":false
             }
@@ -1058,22 +981,8 @@
             }
         },
         {
-            "name":"forbidden_description_read_contacts",
-            "value":"已禁止应用读取设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用保存您的联系人数据，而恶意应用可能会在您不知情的情况下分享联系人数据。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"forbidden_description_write_contacts",
             "value":"已禁止应用修改设备上存储的联系人的相关数据，包括您通过打电话、发送电子邮件或以其他方式与特定个人通信的频率。此权限可让应用删除联系人数据。",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"forbidden_description_read_calendar",
-            "value":"已禁止应用读取设备上存储的所有日历活动，包括朋友或同事的活动。此权限可让该应用分享或保存您的日历数据，而不论这些数据是否属于机密或敏感内容。",
             "attr":{
                 "translatable":false
             }

@@ -526,34 +526,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"Zon jatuh",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"Bantuan input",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"Perkongsian skrin",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"Kawalan peranti",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"Sambungan peranti",
             "attr":{

@@ -319,13 +319,6 @@
             }
         },
         {
-            "name":"forbidden_description_read_calendar",
-            "value":"[TS_950812]_Apps are prohibited from reading all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"permission_manager",
             "value":"[TS_950705]_Permission manager",
             "attr":{
@@ -550,13 +543,6 @@
             }
         },
         {
-            "name":"forbidden_description_read_contacts",
-            "value":"[TS_950798]_Apps are prohibited from reading data about contacts stored on your device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"permission_access_record",
             "value":"[TS_950701]_Permission access record",
             "attr":{
@@ -697,13 +683,6 @@
             }
         },
         {
-            "name":"enable_description_read_calendar",
-            "value":"[TS_950786]_%s apps have been allowed to read all calendar activities stored on the device, including those of friends or colleagues. This permission allows the app to share or save your calendar data, regardless of whether it is confidential or sensitive.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"allowed",
             "value":"[TS_950738]_ALLOWED",
             "attr":{
@@ -830,13 +809,6 @@
             }
         },
         {
-            "name":"separator",
-            "value":"[TS_950696]_, ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"risk_warning",
             "value":"[TS_950686]_Risk application does not obtain this permission",
             "attr":{
@@ -867,13 +839,6 @@
         {
             "name":"visits",
             "value":"[TS_950838]_Number of visits: %s",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"enable_description_read_contacts",
-            "value":"[TS_950704]_%s apps have been allowed to read data about contacts stored on the device, including how often you communicate with specific individuals by calling, sending emails, or otherwise. This permission allows an app to save your contact data, which a malicious app may share without your knowledge.",
             "attr":{
                 "translatable":false
             }
@@ -1096,34 +1061,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"[TS_1261604]_Floating window",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"[TS_1261602]_Keyboard input assistance",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"[TS_1261639]_Screen sharing",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"[TS_1261615]_Control device",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"group_label_hook_input_event",
             "value":"[TS_1261566]_Allow %s to assist keyboard input?",
             "attr":{
@@ -1140,13 +1077,6 @@
         {
             "name":"selected_folders",
             "value":"[TS_1261600]_Only some folders",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_primary_prefix",
-            "value":"[TS_1261601]_Recommended path: Settings -> Privacy & Security -> ",
             "attr":{
                 "translatable":false
             }
@@ -1173,22 +1103,8 @@
             }
         },
         {
-            "name":"manual_setting_confirm_tip",
-            "value":"[TS_1261614]_After changing the permission, return to the app and verify the status again.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"forbidden_description_hook_input_event",
             "value":"[TS_1261631]_Apps have been prohibited from assisting keyboard input.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_confirm_title",
-            "value":"[TS_1261638]_Go to Settings to enable the permission",
             "attr":{
                 "translatable":false
             }
@@ -1229,13 +1145,6 @@
             }
         },
         {
-            "name":"manual_setting_confirm_message",
-            "value":"[TS_1261592]_This permission must be enabled manually in Settings. After confirmation, the system Settings app will open.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"request_association_off",
             "value":"[TS_1261582]_App association is off. Apps can link their activity with other apps without your consent, providing personalized experiences.",
             "attr":{
@@ -1264,36 +1173,8 @@
             }
         },
         {
-            "name":"manual_setting_path_title",
-            "value":"[TS_1261562]_Open the matching permission management page by following either path below",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_target_app",
-            "value":"[TS_1261568]_App",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_path_secondary_prefix",
-            "value":"[TS_1261590]_Alternative path: Settings -> Apps & Services -> ",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"permission_fixed_by_admin_policy_message",
             "value":"[TS_1261637]_This permission is set by the administrator and cannot be modified.",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"manual_setting_target_permission",
-            "value":"[TS_1261594]_Permission",
             "attr":{
                 "translatable":false
             }

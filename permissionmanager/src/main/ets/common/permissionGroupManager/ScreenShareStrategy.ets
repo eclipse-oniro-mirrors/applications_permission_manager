@@ -35,6 +35,7 @@ export class ScreenShareStrategy extends BasePermissionStrategy {
   public override getGroupTitle(appName: string, locationFlag: number): ResourceStr {
     return $r('app.string.group_label_screen_share', appName);
   }
+
   public override isSupport(permission: Permission): boolean {
     return DeviceUtil.isPC();
   }

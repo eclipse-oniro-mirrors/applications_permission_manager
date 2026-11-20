@@ -198,18 +198,18 @@ struct authorityManagementPage {
     }
     this.getAllGroupPermission();
     this.getAllPermissionApplications();
-    this.getLabelAndIcon();
+    await this.getLabelAndIcon();
     GlobalContext.store('allBundleInfo', this.allBundleInfo);
   }
 
   /**
    * Get all permission label
    */
-  getLabelAndIcon() {
-    this.allBundleInfo.forEach((bundleInfo: AppInfo) => {
-      this.updateAppLabel(bundleInfo);
-      this.updateAppIcon(bundleInfo);
-    })
+  async getLabelAndIcon(): Promise<void> {
+    await Promise.all(this.allBundleInfo.map(async (bundleInfo: AppInfo) => {
+      await this.updateAppLabel(bundleInfo);
+      await this.updateAppIcon(bundleInfo);
+    }));
   }
 
   /**

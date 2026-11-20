@@ -526,34 +526,6 @@
             }
         },
         {
-            "name":"permission_label_float_view",
-            "value":"Zona de descargas",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_hook_input_event",
-            "value":"Assistência de entrada",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_screen_share",
-            "value":"Partilha de ecrã",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
-            "name":"permission_label_control_device",
-            "value":"Controlo do dispositivo",
-            "attr":{
-                "translatable":false
-            }
-        },
-        {
             "name":"multi_device_collaboration",
             "value":"Ligações do dispositivo",
             "attr":{
