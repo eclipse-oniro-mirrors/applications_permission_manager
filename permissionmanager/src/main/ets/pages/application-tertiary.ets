@@ -59,12 +59,12 @@ function isPureDocumentsDisplayGroup(currentGroup: string): boolean {
 @Entry
 @Component
 struct mediaDocumentPage {
-  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams3)?.backTitle
-    ?? (GlobalContext.load('applicationTertiaryParams') as RouterParams3).backTitle;
-  private permissions: Permission[] = (this.getUIContext().getRouter().getParams() as RouterParams3)?.permission
-    ?? (GlobalContext.load('applicationTertiaryParams') as RouterParams3).permission;
-  private tokenId: number = (this.getUIContext().getRouter().getParams() as RouterParams3)?.tokenId
-    ?? (GlobalContext.load('applicationTertiaryParams') as RouterParams3).tokenId;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams3)?.backTitle ??
+    (GlobalContext.load('applicationTertiaryParams') as RouterParams3).backTitle;
+  private permissions: Permission[] = (this.getUIContext().getRouter().getParams() as RouterParams3)?.permission ??
+    (GlobalContext.load('applicationTertiaryParams') as RouterParams3).permission;
+  private tokenId: number = (this.getUIContext().getRouter().getParams() as RouterParams3)?.tokenId ??
+    (GlobalContext.load('applicationTertiaryParams') as RouterParams3).tokenId;
   @State currentGroup: string = GlobalContext.load('currentPermissionGroup');
   @State folderStatus: boolean[] = GlobalContext.load('folderStatus');
   @State refresh: boolean = false;
@@ -226,14 +226,14 @@ struct mediaDocumentPage {
 @Component
 struct mediaDocumentItem {
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams3)?.backTitle
-    ?? (GlobalContext.load('applicationTertiaryParams') as RouterParams3).backTitle;
-  private bundleName: string = (this.getUIContext().getRouter().getParams() as RouterParams3)?.bundleName
-    ?? (GlobalContext.load('applicationTertiaryParams') as RouterParams3).bundleName;
-  private permissions: Permission[] = (this.getUIContext().getRouter().getParams() as RouterParams3)?.permission
-    ?? (GlobalContext.load('applicationTertiaryParams') as RouterParams3).permission;
-  private status: number = (this.getUIContext().getRouter().getParams() as RouterParams3)?.status
-    ?? (GlobalContext.load('applicationTertiaryParams') as RouterParams3).status;
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams3)?.backTitle ??
+    (GlobalContext.load('applicationTertiaryParams') as RouterParams3).backTitle;
+  private bundleName: string = (this.getUIContext().getRouter().getParams() as RouterParams3)?.bundleName ??
+    (GlobalContext.load('applicationTertiaryParams') as RouterParams3).bundleName;
+  private permissions: Permission[] = (this.getUIContext().getRouter().getParams() as RouterParams3)?.permission ??
+    (GlobalContext.load('applicationTertiaryParams') as RouterParams3).permission;
+  private status: number = (this.getUIContext().getRouter().getParams() as RouterParams3)?.status ??
+    (GlobalContext.load('applicationTertiaryParams') as RouterParams3).status;
   @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State applicationInfo: AppInfo = GlobalContext.load('applicationInfo');
   @Link folderStatus: boolean[];
