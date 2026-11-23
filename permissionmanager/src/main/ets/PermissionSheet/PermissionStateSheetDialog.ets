@@ -30,7 +30,7 @@ import { Permission, PermissionGroup } from '../common/model/definition';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { groups, groupInfoMap, showSubPermissionsGroup } from '../common/model/permissionGroup';
 import UIExtensionContentSession from '@ohos.app.ability.UIExtensionContentSession';
-import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog'
+import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import { PermissionUtils } from '../common/utils/permissionUtils';
 import { getFolderCheckboxInfo } from '../common/utils/documentsPermissionUtils';
 import { isReadWriteGroup, isReadPermission, isWritePermission } from '../common/utils/permissionGroupUtils';

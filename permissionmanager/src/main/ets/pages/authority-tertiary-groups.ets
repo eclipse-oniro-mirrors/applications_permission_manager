@@ -19,8 +19,8 @@ import { textInput } from '../common/components/search';
 import bundleManager from '@ohos.bundle.bundleManager';
 import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
-import audio from '@ohos.multimedia.audio'
-import camera from '@ohos.multimedia.camera'
+import audio from '@ohos.multimedia.audio';
+import camera from '@ohos.multimedia.camera';
 import { CustomContentDialog } from '@ohos.arkui.advanced.Dialog';
 import {
   getDocumentsPermissionStatus,
@@ -53,10 +53,10 @@ let audioVolumeGroupManager: audio.AudioVolumeGroupManager;
 @Entry
 @Component
 struct locationInfoPage {
-  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1)?.backTitle
-    ?? GlobalContext.load('permissionGroupBackTitle');
-  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1)?.list
-    ?? GlobalContext.load('permissionGroupList');
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1)?.backTitle ??
+    GlobalContext.load('permissionGroupBackTitle');
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1)?.list ??
+    GlobalContext.load('permissionGroupList');
   @State currentGroup: PermissionGroup = GlobalContext.load('currentPermissionGroup');
   @State polymorphismIsOn: Array<number> = [];
   @State folderStatusArray: Array<Array<boolean>> = [[]];
@@ -177,10 +177,10 @@ struct locationInfoPage {
 @Component
 struct applicationItem {
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1)?.backTitle
-    ?? GlobalContext.load('permissionGroupBackTitle');
-  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1)?.list
-    ?? GlobalContext.load('permissionGroupList');
+  private backTitle: ResourceStr = (this.getUIContext().getRouter().getParams() as RouterParams1)?.backTitle ??
+    GlobalContext.load('permissionGroupBackTitle');
+  private list: PermissionApplications[] = (this.getUIContext().getRouter().getParams() as RouterParams1)?.list ??
+    GlobalContext.load('permissionGroupList');
   private isMuteSupported: boolean | undefined =
     (this.getUIContext().getRouter().getParams() as RouterParams1)?.isMuteSupported;
   @State globalIsOn: boolean = (this.getUIContext().getRouter().getParams() as RouterParams1)?.globalIsOn ?? true;
