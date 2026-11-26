@@ -17,7 +17,7 @@ import { backBar } from '../common/components/backBar';
 import { createPermissionFixedDialog } from '../common/components/permissionFixedDialog';
 import common from '@ohos.app.ability.common';
 import bundleManager from '@ohos.bundle.bundleManager';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { BusinessError } from '@ohos.base';
 import { showSubPermissionsGroup } from '../common/model/permissionGroup';
 import {
@@ -135,7 +135,7 @@ struct mediaDocumentPage {
       let hasGrantedWrite = false;
       for (let i = 0; i < this.permissions.length; i++) {
         let permission = this.permissions[i];
-        let res = atManager.verifyAccessTokenSync(this.tokenId, permission);
+        let res = atManager.verifyAccessTokenSync(this.tokenId, permission as Permissions);
         if (isReadPermission(this.currentGroup, permission)) {
           hasReadPermission = true;
           if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
@@ -165,7 +165,7 @@ struct mediaDocumentPage {
       if (this.currentGroup === 'LOCATION') {
         continue;
       }
-      let res = atManager.verifyAccessTokenSync(this.tokenId, permission);
+      let res = atManager.verifyAccessTokenSync(this.tokenId, permission as Permissions);
       if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         isGranted = Constants.PERMISSION_BAN;
       }
@@ -195,7 +195,7 @@ struct mediaDocumentPage {
     if (this.currentGroup === 'PASTEBOARD') {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
-        acManager.getPermissionFlags(this.tokenId, Permission.READ_PASTEBOARD).then(flag => {
+        acManager.getPermissionFlags(this.tokenId, Permission.READ_PASTEBOARD as Permissions).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
@@ -205,15 +205,19 @@ struct mediaDocumentPage {
     if (this.currentGroup === 'LOCATION') {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
-        let fuzzyState = acManager.verifyAccessTokenSync(this.tokenId, Permission.APPROXIMATELY_LOCATION);
+        let fuzzyState = acManager.verifyAccessTokenSync(
+          this.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions
+        );
         fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.selected = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
-        let accurateStatus = acManager.verifyAccessTokenSync(this.tokenId, Permission.LOCATION);
+        let accurateStatus = acManager.verifyAccessTokenSync(this.tokenId, Permission.LOCATION as Permissions);
         this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
-        let backgroundState = acManager.verifyAccessTokenSync(this.tokenId, Permission.LOCATION_IN_BACKGROUND);
+        let backgroundState = acManager.verifyAccessTokenSync(
+          this.tokenId, Permission.LOCATION_IN_BACKGROUND as Permissions
+        );
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.selected = Constants.PERMISSION_ALLOW : null;
-        acManager.getPermissionFlags(this.tokenId, Permission.APPROXIMATELY_LOCATION ).then(flag => {
+        acManager.getPermissionFlags(this.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
@@ -504,11 +508,13 @@ struct mediaDocumentItem {
           this.version = res.versionName;
           accessTokenId = res.appInfo.accessTokenId;
           let acManager = abilityAccessCtrl.createAtManager();
-          let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION);
+          let accurateStatus = acManager.verifyAccessTokenSync(
+            res.appInfo.accessTokenId, Permission.LOCATION as Permissions
+          );
           this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
           let getFlagPermission =
             this.currentGroup === 'LOCATION' ? Permission.APPROXIMATELY_LOCATION : this.permissions[0];
-          acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission).then((flag) => {
+          acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission as Permissions).then((flag) => {
             Log.info(`getPermissionFlags success, data->${JSON.stringify(flag)}`);
             this.isRisk = (flag & Constants.PERMISSION_POLICY_FIXED) !== 0;
             this.isFixedByAdminPolicy = (flag & Constants.PERMISSION_FIXED_BY_ADMIN_POLICY) !== 0;

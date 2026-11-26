@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import bundleManager from '@ohos.bundle.bundleManager';
 import { AppInfo } from '../model/typedef';
 import { Permission, PermissionGroup } from '../model/definition';
@@ -58,7 +58,7 @@ export async function shouldCollectUserPermission(
     return false;
   }
   try {
-    let flag = await abilityAccessCtrl.createAtManager().getPermissionFlags(tokenId, permission);
+    let flag = await abilityAccessCtrl.createAtManager().getPermissionFlags(tokenId, permission as Permissions);
     // Include the permission only when it is not granted with the system-fixed flag.
     return (flag & Constants.PERMISSION_SYSTEM_FIXED) === 0;
   } catch (err) {

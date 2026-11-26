@@ -15,7 +15,7 @@
 
 import bundleManager from '@ohos.bundle.bundleManager';
 import common from '@ohos.app.ability.common';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import privacyManager from '@ohos.privacyManager';
 import { backBar } from '../common/components/backBar';
 import Constants from '../common/utils/constant';
@@ -679,7 +679,9 @@ struct permissionRecordPage {
           continue;
         }
         try {
-          let reqFlag = await acManager.getPermissionFlags(record.tokenId, permissionRecord.permissionName);
+          let reqFlag = await acManager.getPermissionFlags(
+            record.tokenId, permissionRecord.permissionName as Permissions
+          );
           if (reqFlag == Constants.PERMISSION_SYSTEM_FIXED) {
             continue;
           }
@@ -696,7 +698,7 @@ struct permissionRecordPage {
               group.groupName,
               group.label,
               group.icon,
-              group.permissions,
+              group.permissions as Permissions[],
               permissionRecord.accessCount,
               lastTime);
             groupArray.push(groupRecord);

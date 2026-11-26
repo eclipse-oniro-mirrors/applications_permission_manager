@@ -161,6 +161,9 @@ struct ManualSettingConfirmPage {
   private returnManualSettingResult(code: number): void {
     // Read the session from the dedicated key. Do not check globalThis.isUIExtensionMode:
     // starting MainAbility of this process may reset it before this callback runs.
+    // Destroy the carrier window first: if the session termination fails afterwards,
+    // the session callbacks may never fire and the full-screen window would leak.
+    globalThis.manualSettingDestroyCarrier?.();
     let session = globalThis.openSettingSession as UIExtensionContentSession;
     if (typeof session?.terminateSelfWithResult === 'function') {
       session.terminateSelfWithResult({

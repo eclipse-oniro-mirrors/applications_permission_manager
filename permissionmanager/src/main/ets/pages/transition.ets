@@ -17,7 +17,7 @@ import Constants from '../common/utils/constant';
 import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
 import bundleManager from '@ohos.bundle.bundleManager';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { GlobalContext } from '../common/utils/globalContext';
 import { Permission } from '../common/model/definition';
 import { RouterParams3, AppInfo } from '../common/model/typedef';
@@ -70,7 +70,9 @@ struct Transition {
       addLocalTag(info);
       let status: number = Constants.PERMISSION_BAN;
       try {
-        let grantStatus = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(info.tokenId, displayPermission);
+        let grantStatus = abilityAccessCtrl.createAtManager().verifyAccessTokenSync(
+          info.tokenId, displayPermission as Permissions
+        );
         status = grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           Constants.PERMISSION_ALLOW : Constants.PERMISSION_BAN;
       } catch (error) {

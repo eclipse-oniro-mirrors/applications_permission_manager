@@ -225,12 +225,12 @@ struct applicationItem {
               bundleInfo.icon,
               i,
               bundleInfo.tokenId,
-              this.list[0].permission,
+              this.list[0].permission as Permissions,
               bundleInfo.zhTag,
               bundleInfo.indexTag,
               bundleInfo.language) // Get the first letter in the returned initials array
           );
-          verifyAccessToken(bundleInfo.tokenId, this.list[0].permission).then(data => {
+          verifyAccessToken(bundleInfo.tokenId, this.list[0].permission as Permissions).then(data => {
             // 0: have permission; -1: no permission
             if (data === Constants.PERMISSION_INDEX) {
               this.toggleIsOn[i] = true;
@@ -244,7 +244,7 @@ struct applicationItem {
           this.isRisk[i] = false;
           this.isFixedByAdminPolicy[i] = false;
           try {
-            atManager.getPermissionFlags(bundleInfo.tokenId, this.list[0].permission).then(data => {
+            atManager.getPermissionFlags(bundleInfo.tokenId, this.list[0].permission as Permissions).then(data => {
               if (data == Constants.PERMISSION_POLICY_FIXED) {
                 this.isRisk[i] = true;
               }

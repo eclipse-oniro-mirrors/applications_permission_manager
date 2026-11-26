@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 import { CheckboxInfo } from '../model/typedef';
 import { Permission } from '../model/definition';
 import Constants from './constant';
@@ -114,7 +114,7 @@ export function getDocumentsPermissionStatus(tokenId: number, permissions: Permi
   let hasGrantedDocument = false;
   let hasGrantedMedia = false;
   for (const permission of permissions) {
-    let access = atManager.verifyAccessTokenSync(tokenId, permission);
+    let access = atManager.verifyAccessTokenSync(tokenId, permission as Permissions);
     if (access !== abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
       continue;
     }
@@ -142,7 +142,7 @@ export function getDocumentsPermissionStatus(tokenId: number, permissions: Permi
 export function getMergedDocumentsAndFolderStatus(tokenId: number, permissions: Permission[]): number {
   let atManager = abilityAccessCtrl.createAtManager();
   for (const permission of permissions) {
-    let access = atManager.verifyAccessTokenSync(tokenId, permission);
+    let access = atManager.verifyAccessTokenSync(tokenId, permission as Permissions);
     if (access === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
       return Constants.PERMISSION_ALLOW;
     }
@@ -156,7 +156,7 @@ export function getMergedDocumentsAndFolderStatus(tokenId: number, permissions: 
 export function getMergedDocumentsStatus(tokenId: number, permissions: Permission[]): number {
   let atManager = abilityAccessCtrl.createAtManager();
   for (const permission of getDocumentsPermissions(permissions)) {
-    let access = atManager.verifyAccessTokenSync(tokenId, permission);
+    let access = atManager.verifyAccessTokenSync(tokenId, permission as Permissions);
     if (access === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
       return Constants.PERMISSION_ALLOW;
     }

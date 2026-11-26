@@ -17,6 +17,7 @@ import { BaseModel } from '../common/base/BaseModel';
 import { audio } from '@kit.AudioKit';
 import { camera } from '@kit.CameraKit';
 import { abilityAccessCtrl, bundleManager } from '@kit.AbilityKit';
+import { Permissions } from '@ohos.abilityAccessCtrl';
 import { Log } from '../common/utils/utils';
 import { PermissionGroup } from '../common/model/definition';
 import { PermissionApplications } from '../common/model/typedef';
@@ -122,7 +123,8 @@ export class GlobalDialogModel extends BaseModel {
       let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag);
       let atManager = abilityAccessCtrl.createAtManager();
       let status =
-        atManager.verifyAccessTokenSync(bundleInfo.appInfo.accessTokenId, 'ohos.permission.MICROPHONE_CONTROL');
+        atManager.verifyAccessTokenSync(
+          bundleInfo.appInfo.accessTokenId, 'ohos.permission.MICROPHONE_CONTROL' as Permissions);
       if (status === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
         Log.info('permission status is denied.');
         return false;
