@@ -169,7 +169,7 @@ struct appNamePlusPage {
   private async getMergedDocumentsAndFolderGroupStatus(permissions: Permission[]): Promise<number> {
     this.folderStatus = [false, false, false, false];
     for (const permission of permissions) {
-      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission as Permissions);
       if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED && isFolderPermission(permission)) {
         updateFolderStatusByPermission(this.folderStatus, permission);
       }
@@ -180,7 +180,7 @@ struct appNamePlusPage {
   private async getStandaloneFolderGroupStatus(permissions: Permission[]): Promise<number> {
     this.folderStatus = [false, false, false, false];
     for (const permission of permissions) {
-      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission as Permissions);
       if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         updateFolderStatusByPermission(this.folderStatus, permission);
       }
@@ -246,7 +246,7 @@ struct appNamePlusPage {
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
         if (groupInfo.permissions.indexOf(permission) != -1) {
-          groupReqPermissions.push(permission);
+          groupReqPermissions.push(permission as Permissions);
         }
       }
       this.isGranted = group === 'LOCATION' ? Constants.PERMISSION_BAN : Constants.PERMISSION_ALLOW;
@@ -274,17 +274,18 @@ struct appNamePlusPage {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
         let fuzzyState = acManager.verifyAccessTokenSync(
-          this.applicationInfo.tokenId, Permission.APPROXIMATELY_LOCATION
+          this.applicationInfo.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions
         );
         fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.isGranted = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
         let backgroundState = acManager.verifyAccessTokenSync(
-          this.applicationInfo.tokenId, Permission.LOCATION_IN_BACKGROUND
+          this.applicationInfo.tokenId, Permission.LOCATION_IN_BACKGROUND as Permissions
         );
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.isGranted = Constants.PERMISSION_ALLOW : null;
-        await acManager.getPermissionFlags(this.applicationInfo.tokenId, Permission.APPROXIMATELY_LOCATION )
-        .then(flag => {
+        await acManager.getPermissionFlags(
+          this.applicationInfo.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions
+        ).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.isGranted = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
@@ -308,7 +309,7 @@ struct appNamePlusPage {
       let hasGrantedWrite = false;
       for (let i = 0; i < groupReqPermissions.length; i++) {
         let permission = groupReqPermissions[i] as Permission;
-        let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+        let res = await verifyAccessToken(this.applicationInfo.tokenId, permission as Permissions);
         if (isReadPermission(group, permission)) {
           hasReadPermission = true;
           if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
@@ -335,7 +336,7 @@ struct appNamePlusPage {
     }
     for (let i = 0; i < groupReqPermissions.length; i++) {
       let permission = groupReqPermissions[i];
-      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission);
+      let res = await verifyAccessToken(this.applicationInfo.tokenId, permission as Permissions);
       if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         this.isGranted = Constants.PERMISSION_BAN;
       }

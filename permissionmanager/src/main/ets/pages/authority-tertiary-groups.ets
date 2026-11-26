@@ -135,14 +135,18 @@ struct locationInfoPage {
     let acManager = abilityAccessCtrl.createAtManager();
     if (this.currentGroup === 'LOCATION' && reqPermissions.includes(Permission.APPROXIMATELY_LOCATION)) {
       try {
-        let fuzzyState = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.APPROXIMATELY_LOCATION);
+        let fuzzyState = acManager.verifyAccessTokenSync(
+          res.appInfo.accessTokenId, Permission.APPROXIMATELY_LOCATION as Permissions
+        );
         fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.polymorphismIsOn[index] = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
         let backgroundState =
-          acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION_IN_BACKGROUND);
+          acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION_IN_BACKGROUND as Permissions);
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.polymorphismIsOn[index] = Constants.PERMISSION_ALLOW : null;
-        acManager.getPermissionFlags(res.appInfo.accessTokenId, Permission.APPROXIMATELY_LOCATION ).then(flag => {
+        acManager.getPermissionFlags(
+          res.appInfo.accessTokenId, Permission.APPROXIMATELY_LOCATION as Permissions
+        ).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ?
             this.polymorphismIsOn[index] = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
@@ -158,7 +162,7 @@ struct locationInfoPage {
         if (reqPermissions.indexOf(this.list[j].permission) == -1) {
           continue;
         }
-        let access = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission);
+        let access = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, this.list[j].permission as Permissions);
         if (
           Number(access) === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED &&
           isFolderPermission(this.list[j].permission as Permission)
@@ -338,7 +342,7 @@ struct applicationItem {
       let hasGrantedRead = false;
       let hasGrantedWrite = false;
       for (const permission of permissions) {
-        let access = await verifyAccessToken(bundleInfo.tokenId, permission);
+        let access = await verifyAccessToken(bundleInfo.tokenId, permission as Permissions);
         if (isReadPermission(this.currentGroup, permission)) {
           hasReadPermission = true;
           if (Number(access) === Constants.PERMISSION_INDEX) {
@@ -364,7 +368,7 @@ struct applicationItem {
       return Constants.PERMISSION_BAN;
     }
     for (const permission of permissions) {
-      let access = await verifyAccessToken(bundleInfo.tokenId, permission);
+      let access = await verifyAccessToken(bundleInfo.tokenId, permission as Permissions);
       if (Number(access) !== Constants.PERMISSION_INDEX) {
         return Constants.PERMISSION_BAN;
       }
@@ -622,7 +626,7 @@ struct applicationItem {
         bundleInfo.icon,
         i,
         bundleInfo.tokenId,
-        targetPermission,
+        targetPermission as Permissions,
         bundleInfo.zhTag,
         bundleInfo.indexTag,
         bundleInfo.language,
@@ -630,7 +634,7 @@ struct applicationItem {
     );
     this.isRisk[i] = false;
     try {
-      abilityAccessCtrl.createAtManager().getPermissionFlags(bundleInfo.tokenId, targetPermission)
+      abilityAccessCtrl.createAtManager().getPermissionFlags(bundleInfo.tokenId, targetPermission as Permissions)
         .then(data => {
           if (data == Constants.PERMISSION_POLICY_FIXED) {
             this.isRisk[i] = true;

@@ -17,7 +17,7 @@ import { Permission } from '../model/definition';
 import { optionAndState } from '../model/typedef';
 import { Log } from '../utils/utils';
 import Constants from '../utils/constant';
-import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import abilityAccessCtrl, { Permissions } from '@ohos.abilityAccessCtrl';
 
 export class PermissionUtils {
   /**
@@ -28,7 +28,7 @@ export class PermissionUtils {
   public static async isPermissionQueryEnabled(permission: Permission): Promise<boolean> {
     let atManager = abilityAccessCtrl.createAtManager();
     try {
-      let result = await atManager.getPermissionRequestToggleStatus(permission);
+      let result = await atManager.getPermissionRequestToggleStatus(permission as Permissions);
       Log.info(`permissionRequestToggleStatus is ${result}.`);
       return result === abilityAccessCtrl.PermissionRequestToggleStatus.OPEN;
     } catch (error) {
@@ -51,7 +51,7 @@ export class PermissionUtils {
       status = abilityAccessCtrl.PermissionRequestToggleStatus.CLOSED;
     }
     try {
-      await atManager.setPermissionRequestToggleStatus(permission, status);
+      await atManager.setPermissionRequestToggleStatus(permission as Permissions, status);
       Log.info(`SetPermissionRequestToggleStatus ${permission} to ${status} success.`);
       return true;
     } catch (error) {
@@ -81,7 +81,7 @@ export class PermissionUtils {
     let atManager = abilityAccessCtrl.createAtManager();
     for (const linkedPermission of linkedPermissions) {
       try {
-        await atManager.grantPermission(tokenId, linkedPermission, flag);
+        await atManager.grantPermission(tokenId, linkedPermission as Permissions, flag);
       } catch (error) {
         Log.error(
           `Grant linked permission failed, permission: ${linkedPermission}, ` +
@@ -102,7 +102,7 @@ export class PermissionUtils {
   ): Promise<optionAndState> {
     try {
       let atManager = abilityAccessCtrl.createAtManager();
-      await atManager.grantPermission(tokenId, permission, flag);
+      await atManager.grantPermission(tokenId, permission as Permissions, flag);
       await PermissionUtils.grantLinkedPermissions(
         tokenId,
         PermissionUtils.getGrantedLinkedPermissions(permission),
@@ -137,7 +137,7 @@ export class PermissionUtils {
   ): Promise<optionAndState> {
     try {
       let atManager = abilityAccessCtrl.createAtManager();
-      await atManager.revokePermission(tokenId, permission, flag, false);
+      await atManager.revokePermission(tokenId, permission as Permissions, flag, false);
       Log.info(`revoke permission success, permission: ${permission}.`);
       return {
         operationResult: Constants.RESULT_SUCCESS,

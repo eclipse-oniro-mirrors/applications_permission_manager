@@ -108,7 +108,7 @@ struct PermissionStateSheetDialog {
     autoCancel: false,
     cornerRadius: {topLeft: 32, topRight: 32, bottomLeft: 0, bottomRight: 0},
     cancel: () => {
-      ReportDialogResult(this.reqUserPermissions, this.applicationInfo?.tokenId ?? 0);
+      ReportDialogResult(this.reqUserPermissions as Permissions[], this.applicationInfo?.tokenId ?? 0);
       this.context?.terminateSelf();
       this.dialogController?.close();
     }
@@ -194,7 +194,7 @@ struct PermissionStateSheetDialog {
         }
         permissionGrantMap.set(appPermissions[idx].name,
           abilityAccessCtrl.createAtManager().verifyAccessTokenSync(
-            bundleInfo.appInfo.accessTokenId, wantPermission));
+            bundleInfo.appInfo.accessTokenId, wantPermission as Permissions));
       }
       // check if all permissions are already granted
       let permissionsAllGranted = true;
@@ -290,16 +290,18 @@ struct PermissionStateSheetDialog {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
         let fuzzyState = acManager.verifyAccessTokenSync(
-          this.applicationInfo?.tokenId, Permission.APPROXIMATELY_LOCATION
+          this.applicationInfo?.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions
         );
         fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.isGranted = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
-        let backgroundState =
-          acManager.verifyAccessTokenSync(this.applicationInfo?.tokenId, Permission.LOCATION_IN_BACKGROUND);
+        let backgroundState = acManager.verifyAccessTokenSync(
+          this.applicationInfo?.tokenId, Permission.LOCATION_IN_BACKGROUND as Permissions
+        );
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.isGranted = Constants.PERMISSION_ALLOW : null;
-        await acManager.getPermissionFlags(this.applicationInfo?.tokenId, Permission.APPROXIMATELY_LOCATION )
-        .then(flag => {
+        await acManager.getPermissionFlags(
+          this.applicationInfo?.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions
+        ).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.isGranted = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
@@ -315,7 +317,7 @@ struct PermissionStateSheetDialog {
       let hasGrantedWrite = false;
       for (let i = 0; i < groupReqPermissions.length; i++) {
         let permission = groupReqPermissions[i] as Permission;
-        let res = await verifyAccessToken(this.applicationInfo!.tokenId, permission);
+        let res = await verifyAccessToken(this.applicationInfo!.tokenId, permission as Permissions);
         if (isReadPermission(group, permission)) {
           hasReadPermission = true;
           if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
@@ -342,7 +344,7 @@ struct PermissionStateSheetDialog {
     }
     for (let i = 0; i < groupReqPermissions.length; i++) {
       let permission = groupReqPermissions[i];
-      let res = await verifyAccessToken(this.applicationInfo!.tokenId, permission);
+      let res = await verifyAccessToken(this.applicationInfo!.tokenId, permission as Permissions);
       if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         this.isGranted = Constants.PERMISSION_BAN;
       }
@@ -392,7 +394,7 @@ struct PermissionStateSheetDialog {
       for (let j = 0; j < reqPermissions.length; j++) {
         let permission = reqPermissions[j];
         if (groupInfo.permissions.indexOf(permission) != -1) {
-          groupReqPermissions.push(permission);
+          groupReqPermissions.push(permission as Permissions);
           this.groupName = groupName;
         }
       }
@@ -493,7 +495,7 @@ struct mediaDocumentItem {
       let hasGrantedWrite = false;
       for (let i = 0; i < this.permissions.length; i++) {
         let permission = this.permissions[i];
-        let res = atManager.verifyAccessTokenSync(this.tokenId, permission);
+        let res = atManager.verifyAccessTokenSync(this.tokenId, permission as Permissions);
         if (isReadPermission(this.currentGroup, permission)) {
           hasReadPermission = true;
           if (res === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
@@ -523,7 +525,7 @@ struct mediaDocumentItem {
       if (this.currentGroup === 'LOCATION') {
         continue;
       }
-      let res = atManager.verifyAccessTokenSync(this.tokenId, permission);
+      let res = atManager.verifyAccessTokenSync(this.tokenId, permission as Permissions);
       if (res != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         isGranted = Constants.PERMISSION_BAN;
       }
@@ -553,7 +555,7 @@ struct mediaDocumentItem {
     if (this.currentGroup === 'PASTEBOARD') {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
-        acManager.getPermissionFlags(this.tokenId, Permission.READ_PASTEBOARD).then(flag => {
+        acManager.getPermissionFlags(this.tokenId, Permission.READ_PASTEBOARD as Permissions).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
         });
       } catch (err) {
@@ -562,15 +564,19 @@ struct mediaDocumentItem {
     } else if (this.currentGroup === 'LOCATION') {
       try {
         let acManager = abilityAccessCtrl.createAtManager();
-        let fuzzyState = acManager.verifyAccessTokenSync(this.tokenId, Permission.APPROXIMATELY_LOCATION);
+        let fuzzyState = acManager.verifyAccessTokenSync(
+          this.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions
+        );
         fuzzyState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.selected = Constants.PERMISSION_ALLOWED_ONLY_DURING_USE : null;
-        let accurateStatus = acManager.verifyAccessTokenSync(this.tokenId, Permission.LOCATION);
+        let accurateStatus = acManager.verifyAccessTokenSync(this.tokenId, Permission.LOCATION as Permissions);
         this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
-        let backgroundState = acManager.verifyAccessTokenSync(this.tokenId, Permission.LOCATION_IN_BACKGROUND);
+        let backgroundState = acManager.verifyAccessTokenSync(
+          this.tokenId, Permission.LOCATION_IN_BACKGROUND as Permissions
+        );
         backgroundState === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED ?
           this.selected = Constants.PERMISSION_ALLOW : null;
-        acManager.getPermissionFlags(this.tokenId, Permission.APPROXIMATELY_LOCATION).then(flag => {
+        acManager.getPermissionFlags(this.tokenId, Permission.APPROXIMATELY_LOCATION as Permissions).then(flag => {
           flag === Constants.PERMISSION_ALLOW_THIS_TIME ? this.selected = Constants.PERMISSION_ONLY_THIS_TIME : null;
         })
       } catch (err) {
@@ -585,7 +591,7 @@ struct mediaDocumentItem {
     try {
       for (const permission of this.permissions) {
         let acManager = abilityAccessCtrl.createAtManager();
-        let flag = await acManager.getPermissionFlags(this.tokenId, permission);
+        let flag = await acManager.getPermissionFlags(this.tokenId, permission as Permissions);
         Log.error('permission Flag is ' + flag);
         if (flag === Constants.PERMISSION_DEFAULT && terminating == false) {
           PermissionDialogException(Constants.ERR_PERMISSIONS_FLAG_DEFAULT, session);
@@ -712,12 +718,14 @@ struct mediaDocumentItem {
         this.api = res.targetVersion;
         this.version = res.versionName;
         let acManager = abilityAccessCtrl.createAtManager();
-        let accurateStatus = acManager.verifyAccessTokenSync(res.appInfo.accessTokenId, Permission.LOCATION);
+        let accurateStatus = acManager.verifyAccessTokenSync(
+          res.appInfo.accessTokenId, Permission.LOCATION as Permissions
+        );
         this.accurateIsOn = (accurateStatus == abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) ? true : false;
         try {
           let getFlagPermission =
             this.currentGroup === 'LOCATION' ? Permission.APPROXIMATELY_LOCATION : this.permissions[0];
-          let flag = await acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission);
+          let flag = await acManager.getPermissionFlags(res.appInfo.accessTokenId, getFlagPermission as Permissions);
           Log.info(`getPermissionFlags success, data->${JSON.stringify(flag)}`);
           this.isRisk = (flag == Constants.PERMISSION_POLICY_FIXED) ? true : false;
           if (flag === Constants.PERMISSION_ALLOW_THIS_TIME) {
@@ -743,14 +751,14 @@ struct mediaDocumentItem {
     }
     let allGranted = true;
     for (const permission of this.permissions) {
-      if (getCurrentPermissionState(this.tokenId, permission) !==
+      if (getCurrentPermissionState(this.tokenId, permission as Permissions) !==
         abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
         allGranted = false;
         break;
       }
     }
     if (allGranted) {
-      ReportDialogResult(this.permissions, this.tokenId);
+      ReportDialogResult(this.permissions as Permissions[], this.tokenId);
     }
   }
 
@@ -766,9 +774,9 @@ struct mediaDocumentItem {
     }
     for (const permission of this.permissions) {
       if (grantedPermissions.includes(permission)) {
-        await this.grantUserGrantedPermission(this.tokenId, permission);
+        await this.grantUserGrantedPermission(this.tokenId, permission as Permissions);
       } else {
-        await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG);
+        await this.revokeUserGrantedPermission(this.tokenId, permission as Permissions, Constants.PERMISSION_FLAG);
       }
     }
   }
@@ -777,36 +785,36 @@ struct mediaDocumentItem {
     this.selected = item.index;
     if (isReadWriteGroup(this.currentGroup)) {
       await this.applyReadWritePermissionStatus(item.index);
-      ReportDialogResult(this.permissions, this.tokenId);
+      ReportDialogResult(this.permissions as Permissions[], this.tokenId);
       return true;
     }
     for (const permission of item.permissions) {
       Log.info('item click index:' + item.index);
       if (item.index === Constants.PERMISSION_ALLOW) {
         if (permission !== Permission.LOCATION) {
-          await this.grantUserGrantedPermission(this.tokenId, permission);
+          await this.grantUserGrantedPermission(this.tokenId, permission as Permissions);
         }
       } else if (item.index === Constants.PERMISSION_BAN) {
         if (permission == Permission.LOCATION && this.accurateIsOn) {
-          await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG);
+          await this.revokeUserGrantedPermission(this.tokenId, permission as Permissions, Constants.PERMISSION_FLAG);
           this.accurateIsOn = false;
         } else {
-          await this.revokeUserGrantedPermission(this.tokenId, permission, Constants.PERMISSION_FLAG);
+          await this.revokeUserGrantedPermission(this.tokenId, permission as Permissions, Constants.PERMISSION_FLAG);
         }
       } else if (item.index === Constants.PERMISSION_ONLY_THIS_TIME) {
         if (permission !== Permission.LOCATION) {
           await this.revokeUserGrantedPermission(
-            this.tokenId, permission, Constants.PERMISSION_ALLOW_THIS_TIME
+            this.tokenId, permission as Permissions, Constants.PERMISSION_ALLOW_THIS_TIME
           );
         }
       } else if (item.index === Constants.PERMISSION_ALLOWED_ONLY_DURING_USE) {
-        await this.grantUserGrantedPermission(this.tokenId, permission);
+        await this.grantUserGrantedPermission(this.tokenId, permission as Permissions);
         await this.revokeUserGrantedPermission(
-          this.tokenId, Permission.LOCATION_IN_BACKGROUND, Constants.PERMISSION_FLAG
+          this.tokenId, Permission.LOCATION_IN_BACKGROUND as Permissions, Constants.PERMISSION_FLAG
         );
       }
     }
-    ReportDialogResult(this.permissions, this.tokenId);
+    ReportDialogResult(this.permissions as Permissions[], this.tokenId);
     return true;
   }
 

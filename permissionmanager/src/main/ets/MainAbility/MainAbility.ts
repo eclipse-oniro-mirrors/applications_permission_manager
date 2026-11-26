@@ -18,6 +18,7 @@ import bundleMonitor from '@ohos.bundle.bundleMonitor';
 import account_osAccount from '@ohos.account.osAccount';
 import { BundleInfoUtils, GlobalContext } from '../common/utils/globalContext';
 import { abilityAccessCtrl, bundleManager, Want } from '@kit.AbilityKit';
+import { Permissions } from '@ohos.abilityAccessCtrl';
 import { window } from '@kit.ArkUI';
 
 const TAG = 'PermissionManager_Log:';
@@ -196,7 +197,8 @@ export default class MainAbility extends UIAbility {
       let bundleInfo = bundleManager.getBundleInfoForSelfSync(flag);
       let atManager = abilityAccessCtrl.createAtManager();
       let status =
-        atManager.verifyAccessTokenSync(bundleInfo.appInfo.accessTokenId, 'ohos.permission.GET_INSTALLED_BUNDLE_LIST');
+        atManager.verifyAccessTokenSync(
+          bundleInfo.appInfo.accessTokenId, 'ohos.permission.GET_INSTALLED_BUNDLE_LIST' as Permissions);
       if (status === abilityAccessCtrl.GrantStatus.PERMISSION_DENIED) {
         console.log(TAG + 'permission status is denied.');
         return false;
